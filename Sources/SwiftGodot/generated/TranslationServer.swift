@@ -21,22 +21,25 @@ import Musl
 
 /// The server responsible for language translations.
 /// 
-/// The server that manages all language translations. Translations can be added to or removed from it.
+/// The translation server is the API backend that manages all language translations.
+/// 
+/// Translations are stored in ``TranslationDomain``s, which can be accessed by name. The most commonly used translation domain is the main translation domain. It always exists and can be accessed using an empty ``StringName``. The translation server provides wrapper methods for accessing the main translation domain directly, without having to fetch the translation domain first. Custom translation domains are mainly for advanced usages like editor plugins. Names starting with `godot.` are reserved for engine internals.
+/// 
 open class TranslationServer: Object {
     /// The shared instance of this class
-    public static var shared: TranslationServer = {
-        return withUnsafePointer (to: &TranslationServer.godotClassName.content) { ptr in
-            TranslationServer (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: TranslationServer {
+        return withUnsafePointer(to: &TranslationServer.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("TranslationServer")
+    private static var className = StringName("TranslationServer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
-    /// If `true`, enables the use of pseudolocalization. See ``ProjectSettings/internationalization/pseudolocalization/usePseudolocalization`` for details.
+    /// If `true`, enables the use of pseudolocalization on the main translation domain. See ``ProjectSettings/internationalization/pseudolocalization/usePseudolocalization`` for details.
     static public var pseudolocalizationEnabled: Bool {
         get {
             return is_pseudolocalization_enabled ()
@@ -49,8 +52,8 @@ open class TranslationServer: Object {
     }
     
     /* Methods */
-    fileprivate static var method_set_locale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_locale")
+    fileprivate static let method_set_locale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_locale")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -79,8 +82,8 @@ open class TranslationServer: Object {
         
     }
     
-    fileprivate static var method_get_locale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_locale")
+    fileprivate static let method_get_locale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_locale")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -100,8 +103,8 @@ open class TranslationServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_tool_locale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tool_locale")
+    fileprivate static let method_get_tool_locale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tool_locale")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -121,8 +124,8 @@ open class TranslationServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_compare_locales: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compare_locales")
+    fileprivate static let method_compare_locales: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compare_locales")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878152881)!
@@ -153,25 +156,28 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_standardize_locale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("standardize_locale")
+    fileprivate static let method_standardize_locale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("standardize_locale")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4216441673)!
             }
             
         }
         
     }()
     
-    /// Returns a `locale` string standardized to match known locales (e.g. `en-US` would be matched to `en_US`).
-    public static func standardizeLocale(_ locale: String) -> String {
+    /// Returns a `locale` string standardized to match known locales (e.g. `en-US` would be matched to `en_US`). If `addDefaults` is `true`, the locale may have a default script or country added.
+    public static func standardizeLocale(_ locale: String, addDefaults: Bool = false) -> String {
         let _result = GString ()
         let locale = GString(locale)
         withUnsafePointer(to: locale.content) { pArg0 in
-            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
-                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_standardize_locale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+            withUnsafePointer(to: addDefaults) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_standardize_locale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    }
+                    
                 }
                 
             }
@@ -181,8 +187,8 @@ open class TranslationServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_all_languages: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_all_languages")
+    fileprivate static let method_get_all_languages: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_all_languages")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -199,8 +205,8 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_language_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language_name")
+    fileprivate static let method_get_language_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language_name")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -227,8 +233,8 @@ open class TranslationServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_all_scripts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_all_scripts")
+    fileprivate static let method_get_all_scripts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_all_scripts")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -245,8 +251,8 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_script_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_name")
+    fileprivate static let method_get_script_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_name")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -273,8 +279,8 @@ open class TranslationServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_all_countries: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_all_countries")
+    fileprivate static let method_get_all_countries: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_all_countries")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -291,8 +297,8 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_country_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_country_name")
+    fileprivate static let method_get_country_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_country_name")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -319,8 +325,8 @@ open class TranslationServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_locale_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_locale_name")
+    fileprivate static let method_get_locale_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_locale_name")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -347,18 +353,21 @@ open class TranslationServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_translate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("translate")
+    fileprivate static let method_translate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("translate")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 58037827)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1829228469)!
             }
             
         }
         
     }()
     
-    /// Returns the current locale's translation for the given message (key) and context.
+    /// Returns the current locale's translation for the given message and context.
+    /// 
+    /// > Note: This method always uses the main translation domain.
+    /// 
     public static func translate(message: StringName, context: StringName = StringName ("")) -> StringName {
         let _result: StringName = StringName ()
         withUnsafePointer(to: message.content) { pArg0 in
@@ -377,20 +386,22 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_translate_plural: GDExtensionMethodBindPtr = {
-        let methodName = StringName("translate_plural")
+    fileprivate static let method_translate_plural: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("translate_plural")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1333931916)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 229954002)!
             }
             
         }
         
     }()
     
-    /// Returns the current locale's translation for the given message (key), plural message and context.
+    /// Returns the current locale's translation for the given message, plural message and context.
     /// 
     /// The number `n` is the number or quantity of the plural object. It will be used to guide the translation system to fetch the correct plural form for the selected language.
+    /// 
+    /// > Note: This method always uses the main translation domain.
     /// 
     public static func translatePlural(message: StringName, pluralMessage: StringName, n: Int32, context: StringName = StringName ("")) -> StringName {
         let _result: StringName = StringName ()
@@ -416,8 +427,8 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_add_translation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_translation")
+    fileprivate static let method_add_translation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_translation")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1466479800)!
@@ -427,7 +438,7 @@ open class TranslationServer: Object {
         
     }()
     
-    /// Adds a ``Translation`` resource.
+    /// Adds a translation to the main translation domain.
     public static func addTranslation(_ translation: Translation?) {
         withUnsafePointer(to: translation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -442,8 +453,8 @@ open class TranslationServer: Object {
         
     }
     
-    fileprivate static var method_remove_translation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_translation")
+    fileprivate static let method_remove_translation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_translation")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1466479800)!
@@ -453,7 +464,7 @@ open class TranslationServer: Object {
         
     }()
     
-    /// Removes the given translation from the server.
+    /// Removes the given translation from the main translation domain.
     public static func removeTranslation(_ translation: Translation?) {
         withUnsafePointer(to: translation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -468,8 +479,8 @@ open class TranslationServer: Object {
         
     }
     
-    fileprivate static var method_get_translation_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_translation_object")
+    fileprivate static let method_get_translation_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_translation_object")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2065240175)!
@@ -479,10 +490,7 @@ open class TranslationServer: Object {
         
     }()
     
-    /// Returns the ``Translation`` instance based on the `locale` passed in.
-    /// 
-    /// It will return `null` if there is no ``Translation`` instance that matches the `locale`.
-    /// 
+    /// Returns the ``Translation`` instance that best matches `locale` in the main translation domain. Returns `null` if there are no matches.
     public static func getTranslationObject(locale: String) -> Translation? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         let locale = GString(locale)
@@ -496,11 +504,94 @@ open class TranslationServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_has_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_domain")
+        return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if a translation domain with the specified name exists.
+    public static func hasDomain(_ domain: StringName) -> Bool {
+        var _result: Bool = false
+        withUnsafePointer(to: domain.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_has_domain, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_or_add_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_or_add_domain")
+        return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 397200075)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the translation domain with the specified name. An empty translation domain will be created and added if it does not exist.
+    public static func getOrAddDomain(_ domain: StringName) -> TranslationDomain? {
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: domain.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_get_or_add_domain, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_remove_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_domain")
+        return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Removes the translation domain with the specified name.
+    /// 
+    /// > Note: Trying to remove the main translation domain is an error.
+    /// 
+    public static func removeDomain(_ domain: StringName) {
+        withUnsafePointer(to: domain.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_remove_domain, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -510,14 +601,14 @@ open class TranslationServer: Object {
         
     }()
     
-    /// Clears the server from all translations.
+    /// Removes all translations from the main translation domain.
     public static func clear() {
         gi.object_method_bind_ptrcall(method_clear, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_loaded_locales: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_loaded_locales")
+    fileprivate static let method_get_loaded_locales: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_loaded_locales")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -534,8 +625,8 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_is_pseudolocalization_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_pseudolocalization_enabled")
+    fileprivate static let method_is_pseudolocalization_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_pseudolocalization_enabled")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -552,8 +643,8 @@ open class TranslationServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_pseudolocalization_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pseudolocalization_enabled")
+    fileprivate static let method_set_pseudolocalization_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pseudolocalization_enabled")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -578,8 +669,8 @@ open class TranslationServer: Object {
         
     }
     
-    fileprivate static var method_reload_pseudolocalization: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reload_pseudolocalization")
+    fileprivate static let method_reload_pseudolocalization: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reload_pseudolocalization")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -589,14 +680,14 @@ open class TranslationServer: Object {
         
     }()
     
-    /// Reparses the pseudolocalization options and reloads the translation.
+    /// Reparses the pseudolocalization options and reloads the translation for the main translation domain.
     public static func reloadPseudolocalization() {
         gi.object_method_bind_ptrcall(method_reload_pseudolocalization, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
         
     }
     
-    fileprivate static var method_pseudolocalize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pseudolocalize")
+    fileprivate static let method_pseudolocalize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pseudolocalize")
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965194235)!
@@ -607,6 +698,9 @@ open class TranslationServer: Object {
     }()
     
     /// Returns the pseudolocalized string based on the `message` passed in.
+    /// 
+    /// > Note: This method always uses the main translation domain.
+    /// 
     public static func pseudolocalize(message: StringName) -> StringName {
         let _result: StringName = StringName ()
         withUnsafePointer(to: message.content) { pArg0 in

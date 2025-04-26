@@ -26,7 +26,7 @@ import Musl
 /// See ``OccluderInstance3D``'s documentation for instructions on setting up occlusion culling.
 /// 
 open class ArrayOccluder3D: Occluder3D {
-    fileprivate static var className = StringName("ArrayOccluder3D")
+    private static var className = StringName("ArrayOccluder3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -62,8 +62,8 @@ open class ArrayOccluder3D: Occluder3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_arrays")
+    fileprivate static let method_set_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_arrays")
         return withUnsafePointer(to: &ArrayOccluder3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3233972621)!
@@ -75,6 +75,7 @@ open class ArrayOccluder3D: Occluder3D {
     
     /// Sets ``indices`` and ``vertices``, while updating the final occluder only once after both values are set.
     public final func setArrays(vertices: PackedVector3Array, indices: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: indices.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -91,8 +92,8 @@ open class ArrayOccluder3D: Occluder3D {
         
     }
     
-    fileprivate static var method_set_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertices")
+    fileprivate static let method_set_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertices")
         return withUnsafePointer(to: &ArrayOccluder3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 334873810)!
@@ -104,6 +105,7 @@ open class ArrayOccluder3D: Occluder3D {
     
     @inline(__always)
     fileprivate final func set_vertices(_ vertices: PackedVector3Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -117,8 +119,8 @@ open class ArrayOccluder3D: Occluder3D {
         
     }
     
-    fileprivate static var method_set_indices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_indices")
+    fileprivate static let method_set_indices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_indices")
         return withUnsafePointer(to: &ArrayOccluder3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -130,6 +132,7 @@ open class ArrayOccluder3D: Occluder3D {
     
     @inline(__always)
     fileprivate final func set_indices(_ indices: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: indices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

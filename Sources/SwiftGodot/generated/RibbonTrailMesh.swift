@@ -26,7 +26,7 @@ import Musl
 /// This primitive mesh is usually used for particle trails.
 /// 
 open class RibbonTrailMesh: PrimitiveMesh {
-    fileprivate static var className = StringName("RibbonTrailMesh")
+    private static var className = StringName("RibbonTrailMesh")
     override open class var godotClassName: StringName { className }
     public enum Shape: Int64, CaseIterable {
         /// Gives the mesh a single flat face.
@@ -98,7 +98,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
         
     }
     
-    /// Determines the size of the ribbon along its length. The size of a particular section segment is obtained by multiplying the baseline ``size`` by the value of this curve at the given distance. For values smaller than `0`, the faces will be inverted.
+    /// Determines the size of the ribbon along its length. The size of a particular section segment is obtained by multiplying the baseline ``size`` by the value of this curve at the given distance. For values smaller than `0`, the faces will be inverted. Should be a unit ``Curve``.
     final public var curve: Curve? {
         get {
             return get_curve ()
@@ -111,8 +111,8 @@ open class RibbonTrailMesh: PrimitiveMesh {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -124,6 +124,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -137,8 +138,8 @@ open class RibbonTrailMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -150,13 +151,14 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sections")
+    fileprivate static let method_set_sections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sections")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -168,6 +170,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_sections(_ sections: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sections) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -181,8 +184,8 @@ open class RibbonTrailMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_sections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sections")
+    fileprivate static let method_get_sections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sections")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -194,13 +197,14 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_sections() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_sections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_section_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_section_length")
+    fileprivate static let method_set_section_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_section_length")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -212,6 +216,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_section_length(_ sectionLength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sectionLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -225,8 +230,8 @@ open class RibbonTrailMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_section_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_section_length")
+    fileprivate static let method_get_section_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_section_length")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -238,13 +243,14 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_section_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_section_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_section_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_section_segments")
+    fileprivate static let method_set_section_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_section_segments")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -256,6 +262,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_section_segments(_ sectionSegments: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sectionSegments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -269,8 +276,8 @@ open class RibbonTrailMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_section_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_section_segments")
+    fileprivate static let method_get_section_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_section_segments")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -282,13 +289,14 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_section_segments() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_section_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve")
+    fileprivate static let method_set_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -300,6 +308,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_curve(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -313,8 +322,8 @@ open class RibbonTrailMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve")
+    fileprivate static let method_get_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -326,13 +335,14 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_curve() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shape")
+    fileprivate static let method_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shape")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1684440262)!
@@ -344,6 +354,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_shape(_ shape: RibbonTrailMesh.Shape) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -357,8 +368,8 @@ open class RibbonTrailMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shape")
+    fileprivate static let method_get_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shape")
         return withUnsafePointer(to: &RibbonTrailMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1317484155)!
@@ -370,6 +381,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_shape() -> RibbonTrailMesh.Shape {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RibbonTrailMesh.Shape (rawValue: _result)!

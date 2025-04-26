@@ -29,14 +29,14 @@ import Musl
 /// 
 open class NativeMenu: Object {
     /// The shared instance of this class
-    public static var shared: NativeMenu = {
-        return withUnsafePointer (to: &NativeMenu.godotClassName.content) { ptr in
-            NativeMenu (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: NativeMenu {
+        return withUnsafePointer(to: &NativeMenu.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("NativeMenu")
+    private static var className = StringName("NativeMenu")
     override open class var godotClassName: StringName { className }
     public enum Feature: Int64, CaseIterable {
         /// ``NativeMenu`` supports native global main menu.
@@ -67,8 +67,8 @@ open class NativeMenu: Object {
     }
     
     /* Methods */
-    fileprivate static var method_has_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_feature")
+    fileprivate static let method_has_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_feature")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1708975490)!
@@ -97,8 +97,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_has_system_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_system_menu")
+    fileprivate static let method_has_system_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_system_menu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 718213027)!
@@ -127,8 +127,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_system_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_menu")
+    fileprivate static let method_get_system_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_menu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 469707506)!
@@ -157,8 +157,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_system_menu_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_menu_name")
+    fileprivate static let method_get_system_menu_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_menu_name")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1281499290)!
@@ -187,8 +187,8 @@ open class NativeMenu: Object {
         return _result.description
     }
     
-    fileprivate static var method_create_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_menu")
+    fileprivate static let method_create_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_menu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -208,8 +208,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_has_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_menu")
+    fileprivate static let method_has_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_menu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -238,8 +238,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_free_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("free_menu")
+    fileprivate static let method_free_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("free_menu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -267,8 +267,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2440833711)!
@@ -297,8 +297,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_popup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup")
+    fileprivate static let method_popup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2450610377)!
@@ -329,8 +329,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_interface_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_interface_direction")
+    fileprivate static let method_set_interface_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_interface_direction")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -361,8 +361,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_popup_open_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_popup_open_callback")
+    fileprivate static let method_set_popup_open_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_popup_open_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3379118538)!
@@ -393,8 +393,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_get_popup_open_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_popup_open_callback")
+    fileprivate static let method_get_popup_open_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_popup_open_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3170603026)!
@@ -406,7 +406,7 @@ open class NativeMenu: Object {
     
     /// Returns global menu open callback.
     /// 
-    /// b]Note:** This method is implemented only on macOS.
+    /// > Note: This method is implemented only on macOS.
     /// 
     public static func getPopupOpenCallback(rid: RID) -> Callable {
         let _result: Callable = Callable ()
@@ -423,8 +423,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_set_popup_close_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_popup_close_callback")
+    fileprivate static let method_set_popup_close_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_popup_close_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3379118538)!
@@ -438,7 +438,7 @@ open class NativeMenu: Object {
     /// 
     /// > Note: The OS can simulate menu opening to track menu item changes and global shortcuts, in which case the corresponding close callback is not triggered. Use ``isOpened(rid:)`` to check if the menu is currently opened.
     /// 
-    /// > Note: This method is implemented only on macOS.
+    /// > Note: This method is implemented on macOS and Windows.
     /// 
     public static func setPopupCloseCallback(rid: RID, callback: Callable) {
         withUnsafePointer(to: rid.content) { pArg0 in
@@ -457,8 +457,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_get_popup_close_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_popup_close_callback")
+    fileprivate static let method_get_popup_close_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_popup_close_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3170603026)!
@@ -470,7 +470,7 @@ open class NativeMenu: Object {
     
     /// Returns global menu close callback.
     /// 
-    /// b]Note:** This method is implemented only on macOS.
+    /// > Note: This method is implemented on macOS and Windows.
     /// 
     public static func getPopupCloseCallback(rid: RID) -> Callable {
         let _result: Callable = Callable ()
@@ -487,8 +487,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_set_minimum_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_minimum_width")
+    fileprivate static let method_set_minimum_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_minimum_width")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -519,8 +519,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_get_minimum_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimum_width")
+    fileprivate static let method_get_minimum_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimum_width")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -549,8 +549,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_is_opened: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_opened")
+    fileprivate static let method_is_opened: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_opened")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -579,8 +579,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_submenu_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_submenu_item")
+    fileprivate static let method_add_submenu_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_submenu_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1002030223)!
@@ -624,11 +624,11 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_item")
+    fileprivate static let method_add_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2553375659)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 980552939)!
             }
             
         }
@@ -681,11 +681,11 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_check_item")
+    fileprivate static let method_add_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_check_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2553375659)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 980552939)!
             }
             
         }
@@ -738,11 +738,11 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_icon_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_item")
+    fileprivate static let method_add_icon_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2987595282)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1372188274)!
             }
             
         }
@@ -798,11 +798,11 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_icon_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_check_item")
+    fileprivate static let method_add_icon_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_check_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2987595282)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1372188274)!
             }
             
         }
@@ -858,11 +858,11 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_radio_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_radio_check_item")
+    fileprivate static let method_add_radio_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_radio_check_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2553375659)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 980552939)!
             }
             
         }
@@ -917,11 +917,11 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_icon_radio_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_radio_check_item")
+    fileprivate static let method_add_icon_radio_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_radio_check_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2987595282)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1372188274)!
             }
             
         }
@@ -979,11 +979,11 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_multistate_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_multistate_item")
+    fileprivate static let method_add_multistate_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_multistate_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1558592568)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2674635658)!
             }
             
         }
@@ -1046,8 +1046,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_add_separator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_separator")
+    fileprivate static let method_add_separator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_separator")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 448810126)!
@@ -1081,8 +1081,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_find_item_index_with_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_item_index_with_text")
+    fileprivate static let method_find_item_index_with_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_item_index_with_text")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1362438794)!
@@ -1115,8 +1115,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_find_item_index_with_tag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_item_index_with_tag")
+    fileprivate static let method_find_item_index_with_tag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_item_index_with_tag")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1260085030)!
@@ -1148,8 +1148,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_find_item_index_with_submenu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_item_index_with_submenu")
+    fileprivate static let method_find_item_index_with_submenu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_item_index_with_submenu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 893635918)!
@@ -1181,8 +1181,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_is_item_checked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_checked")
+    fileprivate static let method_is_item_checked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_checked")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3120086654)!
@@ -1214,8 +1214,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_is_item_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_checkable")
+    fileprivate static let method_is_item_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_checkable")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3120086654)!
@@ -1247,8 +1247,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_is_item_radio_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_radio_checkable")
+    fileprivate static let method_is_item_radio_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_radio_checkable")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3120086654)!
@@ -1282,8 +1282,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_item_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_callback")
+    fileprivate static let method_get_item_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639989698)!
@@ -1315,8 +1315,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_item_key_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_key_callback")
+    fileprivate static let method_get_item_key_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_key_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639989698)!
@@ -1348,8 +1348,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_item_tag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_tag")
+    fileprivate static let method_get_item_tag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_tag")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4069510997)!
@@ -1381,8 +1381,8 @@ open class NativeMenu: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_text")
+    fileprivate static let method_get_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_text")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1464764419)!
@@ -1414,8 +1414,8 @@ open class NativeMenu: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_item_submenu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_submenu")
+    fileprivate static let method_get_item_submenu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_submenu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1066463050)!
@@ -1447,8 +1447,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_item_accelerator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_accelerator")
+    fileprivate static let method_get_item_accelerator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_accelerator")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 316800700)!
@@ -1480,8 +1480,8 @@ open class NativeMenu: Object {
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_is_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_disabled")
+    fileprivate static let method_is_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_disabled")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3120086654)!
@@ -1515,8 +1515,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_is_item_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_hidden")
+    fileprivate static let method_is_item_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_hidden")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3120086654)!
@@ -1550,8 +1550,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_tooltip")
+    fileprivate static let method_get_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_tooltip")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1464764419)!
@@ -1583,8 +1583,8 @@ open class NativeMenu: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_item_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_state")
+    fileprivate static let method_get_item_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_state")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -1616,8 +1616,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_item_max_states: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_max_states")
+    fileprivate static let method_get_item_max_states: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_max_states")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -1649,8 +1649,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_get_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_icon")
+    fileprivate static let method_get_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_icon")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3391850701)!
@@ -1679,11 +1679,11 @@ open class NativeMenu: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_item_indentation_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_indentation_level")
+    fileprivate static let method_get_item_indentation_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_indentation_level")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -1715,8 +1715,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_set_item_checked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_checked")
+    fileprivate static let method_set_item_checked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_checked")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -1750,8 +1750,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_checkable")
+    fileprivate static let method_set_item_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_checkable")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -1785,8 +1785,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_radio_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_radio_checkable")
+    fileprivate static let method_set_item_radio_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_radio_checkable")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -1822,8 +1822,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_callback")
+    fileprivate static let method_set_item_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2779810226)!
@@ -1859,8 +1859,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_hover_callbacks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_hover_callbacks")
+    fileprivate static let method_set_item_hover_callbacks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_hover_callbacks")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2779810226)!
@@ -1896,8 +1896,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_key_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_key_callback")
+    fileprivate static let method_set_item_key_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_key_callback")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2779810226)!
@@ -1933,8 +1933,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_tag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_tag")
+    fileprivate static let method_set_item_tag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_tag")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2706844827)!
@@ -1968,8 +1968,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_text")
+    fileprivate static let method_set_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_text")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4153150897)!
@@ -2004,8 +2004,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_submenu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_submenu")
+    fileprivate static let method_set_item_submenu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_submenu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2310537182)!
@@ -2039,8 +2039,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_accelerator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_accelerator")
+    fileprivate static let method_set_item_accelerator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_accelerator")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 786300043)!
@@ -2074,8 +2074,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_disabled")
+    fileprivate static let method_set_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_disabled")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -2109,8 +2109,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_hidden")
+    fileprivate static let method_set_item_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_hidden")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -2144,8 +2144,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_tooltip")
+    fileprivate static let method_set_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_tooltip")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4153150897)!
@@ -2180,8 +2180,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_state")
+    fileprivate static let method_set_item_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_state")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -2215,8 +2215,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_max_states: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_max_states")
+    fileprivate static let method_set_item_max_states: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_max_states")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -2250,8 +2250,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon")
+    fileprivate static let method_set_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1388763257)!
@@ -2287,8 +2287,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_set_item_indentation_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_indentation_level")
+    fileprivate static let method_set_item_indentation_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_indentation_level")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -2322,8 +2322,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_get_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_count")
+    fileprivate static let method_get_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_count")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -2352,8 +2352,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_is_system_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_system_menu")
+    fileprivate static let method_is_system_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_system_menu")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -2382,8 +2382,8 @@ open class NativeMenu: Object {
         return _result
     }
     
-    fileprivate static var method_remove_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_item")
+    fileprivate static let method_remove_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_item")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -2416,8 +2416,8 @@ open class NativeMenu: Object {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!

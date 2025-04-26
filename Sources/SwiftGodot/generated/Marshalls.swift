@@ -24,18 +24,18 @@ import Musl
 /// Provides data transformation and encoding utility functions.
 open class Marshalls: Object {
     /// The shared instance of this class
-    public static var shared: Marshalls = {
-        return withUnsafePointer (to: &Marshalls.godotClassName.content) { ptr in
-            Marshalls (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: Marshalls {
+        return withUnsafePointer(to: &Marshalls.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("Marshalls")
+    private static var className = StringName("Marshalls")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_variant_to_base64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("variant_to_base64")
+    fileprivate static let method_variant_to_base64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("variant_to_base64")
         return withUnsafePointer(to: &Marshalls.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3876248563)!
@@ -67,8 +67,8 @@ open class Marshalls: Object {
         return _result.description
     }
     
-    fileprivate static var method_base64_to_variant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("base64_to_variant")
+    fileprivate static let method_base64_to_variant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("base64_to_variant")
         return withUnsafePointer(to: &Marshalls.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 218087648)!
@@ -103,8 +103,8 @@ open class Marshalls: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_raw_to_base64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("raw_to_base64")
+    fileprivate static let method_raw_to_base64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("raw_to_base64")
         return withUnsafePointer(to: &Marshalls.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3999417757)!
@@ -130,8 +130,8 @@ open class Marshalls: Object {
         return _result.description
     }
     
-    fileprivate static var method_base64_to_raw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("base64_to_raw")
+    fileprivate static let method_base64_to_raw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("base64_to_raw")
         return withUnsafePointer(to: &Marshalls.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659035735)!
@@ -158,8 +158,8 @@ open class Marshalls: Object {
         return _result
     }
     
-    fileprivate static var method_utf8_to_base64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("utf8_to_base64")
+    fileprivate static let method_utf8_to_base64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("utf8_to_base64")
         return withUnsafePointer(to: &Marshalls.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1703090593)!
@@ -186,8 +186,8 @@ open class Marshalls: Object {
         return _result.description
     }
     
-    fileprivate static var method_base64_to_utf8: GDExtensionMethodBindPtr = {
-        let methodName = StringName("base64_to_utf8")
+    fileprivate static let method_base64_to_utf8: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("base64_to_utf8")
         return withUnsafePointer(to: &Marshalls.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1703090593)!

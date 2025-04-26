@@ -32,14 +32,14 @@ import Musl
 /// - ``joyConnectionChanged``
 open class Input: Object {
     /// The shared instance of this class
-    public static var shared: Input = {
-        return withUnsafePointer (to: &Input.godotClassName.content) { ptr in
-            Input (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: Input {
+        return withUnsafePointer(to: &Input.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("Input")
+    private static var className = StringName("Input")
     override open class var godotClassName: StringName { className }
     public enum MouseMode: Int64, CaseIterable {
         /// Makes the mouse cursor visible if it is hidden.
@@ -55,6 +55,8 @@ open class Input: Object {
         case confined = 3 // MOUSE_MODE_CONFINED
         /// Confines the mouse cursor to the game window, and make it hidden.
         case confinedHidden = 4 // MOUSE_MODE_CONFINED_HIDDEN
+        /// Max value of the ``Input/MouseMode``.
+        case max = 5 // MOUSE_MODE_MAX
     }
     
     public enum CursorShape: Int64, CaseIterable {
@@ -154,8 +156,8 @@ open class Input: Object {
     }
     
     /* Methods */
-    fileprivate static var method_is_anything_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_anything_pressed")
+    fileprivate static let method_is_anything_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_anything_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -172,8 +174,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_key_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_key_pressed")
+    fileprivate static let method_is_key_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_key_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1938909964)!
@@ -204,8 +206,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_physical_key_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_physical_key_pressed")
+    fileprivate static let method_is_physical_key_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_physical_key_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1938909964)!
@@ -236,8 +238,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_key_label_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_key_label_pressed")
+    fileprivate static let method_is_key_label_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_key_label_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1938909964)!
@@ -263,8 +265,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_mouse_button_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_mouse_button_pressed")
+    fileprivate static let method_is_mouse_button_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_mouse_button_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1821097125)!
@@ -290,8 +292,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_joy_button_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_joy_button_pressed")
+    fileprivate static let method_is_joy_button_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_joy_button_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 787208542)!
@@ -320,8 +322,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_action_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action_pressed")
+    fileprivate static let method_is_action_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1558498928)!
@@ -355,8 +357,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_action_just_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action_just_pressed")
+    fileprivate static let method_is_action_just_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action_just_pressed")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1558498928)!
@@ -396,8 +398,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_is_action_just_released: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action_just_released")
+    fileprivate static let method_is_action_just_released: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action_just_released")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1558498928)!
@@ -433,8 +435,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_action_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_strength")
+    fileprivate static let method_get_action_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_strength")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 801543509)!
@@ -466,8 +468,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_action_raw_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_raw_strength")
+    fileprivate static let method_get_action_raw_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_raw_strength")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 801543509)!
@@ -499,8 +501,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_axis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_axis")
+    fileprivate static let method_get_axis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_axis")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1958752504)!
@@ -532,8 +534,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_vector: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vector")
+    fileprivate static let method_get_vector: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vector")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2479607902)!
@@ -576,8 +578,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_add_joy_mapping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_joy_mapping")
+    fileprivate static let method_add_joy_mapping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_joy_mapping")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1168363258)!
@@ -606,8 +608,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_remove_joy_mapping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_joy_mapping")
+    fileprivate static let method_remove_joy_mapping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_joy_mapping")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -617,7 +619,10 @@ open class Input: Object {
         
     }()
     
-    /// Removes all mappings from the internal database that match the given GUID.
+    /// Removes all mappings from the internal database that match the given GUID. All currently connected joypads that use this GUID will become unmapped.
+    /// 
+    /// On Android, Godot will map to an internal fallback mapping.
+    /// 
     public static func removeJoyMapping(guid: String) {
         let guid = GString(guid)
         withUnsafePointer(to: guid.content) { pArg0 in
@@ -633,8 +638,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_is_joy_known: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_joy_known")
+    fileprivate static let method_is_joy_known: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_joy_known")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
@@ -660,8 +665,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_joy_axis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joy_axis")
+    fileprivate static let method_get_joy_axis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joy_axis")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4063175957)!
@@ -690,8 +695,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_joy_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joy_name")
+    fileprivate static let method_get_joy_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joy_name")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 990163283)!
@@ -717,8 +722,8 @@ open class Input: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_joy_guid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joy_guid")
+    fileprivate static let method_get_joy_guid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joy_guid")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -728,7 +733,10 @@ open class Input: Object {
         
     }()
     
-    /// Returns an SDL2-compatible device GUID on platforms that use gamepad remapping, e.g. `030000004c050000c405000000010000`. Returns `"Default Gamepad"` otherwise. Godot uses the <a href="https://github.com/gabomdq/SDL_GameControllerDB">SDL2 game controller database</a> to determine gamepad names and mappings based on this GUID.
+    /// Returns an SDL2-compatible device GUID on platforms that use gamepad remapping, e.g. `030000004c050000c405000000010000`. Returns an empty string if it cannot be found. Godot uses the <a href="https://github.com/gabomdq/SDL_GameControllerDB">SDL2 game controller database</a> to determine gamepad names and mappings based on this GUID.
+    /// 
+    /// On Windows, all XInput joypad GUIDs will be overridden by Godot to `__XINPUT_DEVICE__`, because their mappings are the same.
+    /// 
     public static func getJoyGuid(device: Int32) -> String {
         let _result = GString ()
         withUnsafePointer(to: device) { pArg0 in
@@ -744,8 +752,8 @@ open class Input: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_joy_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joy_info")
+    fileprivate static let method_get_joy_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joy_info")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3485342025)!
@@ -757,9 +765,13 @@ open class Input: Object {
     
     /// Returns a dictionary with extra platform-specific information about the device, e.g. the raw gamepad name from the OS or the Steam Input index.
     /// 
-    /// On Windows the dictionary contains the following fields:
+    /// On Windows, the dictionary contains the following fields:
     /// 
-    /// `xinput_index`: The index of the controller in the XInput system.
+    /// `xinput_index`: The index of the controller in the XInput system. Undefined for DirectInput devices.
+    /// 
+    /// `vendor_id`: The USB vendor ID of the device.
+    /// 
+    /// `product_id`: The USB product ID of the device.
     /// 
     /// On Linux:
     /// 
@@ -771,8 +783,10 @@ open class Input: Object {
     /// 
     /// `steam_input_index`: The Steam Input gamepad index, if the device is not a Steam Input device this key won't be present.
     /// 
-    public static func getJoyInfo(device: Int32) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    /// > Note: The returned dictionary is always empty on Web, iOS, Android, and macOS.
+    /// 
+    public static func getJoyInfo(device: Int32) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -786,8 +800,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_should_ignore_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("should_ignore_device")
+    fileprivate static let method_should_ignore_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("should_ignore_device")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
@@ -819,8 +833,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_connected_joypads: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connected_joypads")
+    fileprivate static let method_get_connected_joypads: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connected_joypads")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -830,15 +844,15 @@ open class Input: Object {
         
     }()
     
-    /// Returns an ``GArray`` containing the device IDs of all currently connected joypads.
-    public static func getConnectedJoypads() -> VariantCollection<Int64> {
+    /// Returns an ``VariantArray`` containing the device IDs of all currently connected joypads.
+    public static func getConnectedJoypads() -> TypedArray<Int64> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_connected_joypads, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<Int64>(content: _result)
+        return TypedArray<Int64>(takingOver: _result)
     }
     
-    fileprivate static var method_get_joy_vibration_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joy_vibration_strength")
+    fileprivate static let method_get_joy_vibration_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joy_vibration_strength")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3114997196)!
@@ -864,8 +878,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_joy_vibration_duration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joy_vibration_duration")
+    fileprivate static let method_get_joy_vibration_duration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joy_vibration_duration")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4025615559)!
@@ -891,8 +905,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_start_joy_vibration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("start_joy_vibration")
+    fileprivate static let method_start_joy_vibration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start_joy_vibration")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2576575033)!
@@ -931,8 +945,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_stop_joy_vibration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop_joy_vibration")
+    fileprivate static let method_stop_joy_vibration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop_joy_vibration")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -957,8 +971,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_vibrate_handheld: GDExtensionMethodBindPtr = {
-        let methodName = StringName("vibrate_handheld")
+    fileprivate static let method_vibrate_handheld: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("vibrate_handheld")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 544894297)!
@@ -999,8 +1013,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_get_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity")
+    fileprivate static let method_get_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1014,14 +1028,16 @@ open class Input: Object {
     /// 
     /// > Note: This method only works on Android and iOS. On other platforms, it always returns ``Vector3/zero``.
     /// 
+    /// > Note: For Android, ``ProjectSettings/inputDevices/sensors/enableGravity`` must be enabled.
+    /// 
     public static func getGravity() -> Vector3 {
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(method_get_gravity, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_accelerometer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_accelerometer")
+    fileprivate static let method_get_accelerometer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_accelerometer")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1037,14 +1053,16 @@ open class Input: Object {
     /// 
     /// > Note: This method only works on Android and iOS. On other platforms, it always returns ``Vector3/zero``.
     /// 
+    /// > Note: For Android, ``ProjectSettings/inputDevices/sensors/enableAccelerometer`` must be enabled.
+    /// 
     public static func getAccelerometer() -> Vector3 {
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(method_get_accelerometer, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_magnetometer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_magnetometer")
+    fileprivate static let method_get_magnetometer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_magnetometer")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1058,14 +1076,16 @@ open class Input: Object {
     /// 
     /// > Note: This method only works on Android and iOS. On other platforms, it always returns ``Vector3/zero``.
     /// 
+    /// > Note: For Android, ``ProjectSettings/inputDevices/sensors/enableMagnetometer`` must be enabled.
+    /// 
     public static func getMagnetometer() -> Vector3 {
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(method_get_magnetometer, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_gyroscope: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gyroscope")
+    fileprivate static let method_get_gyroscope: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gyroscope")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1079,14 +1099,16 @@ open class Input: Object {
     /// 
     /// > Note: This method only works on Android and iOS. On other platforms, it always returns ``Vector3/zero``.
     /// 
+    /// > Note: For Android, ``ProjectSettings/inputDevices/sensors/enableGyroscope`` must be enabled.
+    /// 
     public static func getGyroscope() -> Vector3 {
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(method_get_gyroscope, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity")
+    fileprivate static let method_set_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -1114,8 +1136,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_set_accelerometer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_accelerometer")
+    fileprivate static let method_set_accelerometer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_accelerometer")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -1143,8 +1165,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_set_magnetometer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_magnetometer")
+    fileprivate static let method_set_magnetometer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_magnetometer")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -1172,8 +1194,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_set_gyroscope: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gyroscope")
+    fileprivate static let method_set_gyroscope: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gyroscope")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -1201,8 +1223,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_get_last_mouse_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_mouse_velocity")
+    fileprivate static let method_get_last_mouse_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_mouse_velocity")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1497962370)!
@@ -1219,8 +1241,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_last_mouse_screen_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_mouse_screen_velocity")
+    fileprivate static let method_get_last_mouse_screen_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_mouse_screen_velocity")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1497962370)!
@@ -1237,8 +1259,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_get_mouse_button_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mouse_button_mask")
+    fileprivate static let method_get_mouse_button_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mouse_button_mask")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2512161324)!
@@ -1255,8 +1277,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_set_mouse_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mouse_mode")
+    fileprivate static let method_set_mouse_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mouse_mode")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2228490894)!
@@ -1281,8 +1303,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_get_mouse_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mouse_mode")
+    fileprivate static let method_get_mouse_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mouse_mode")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 965286182)!
@@ -1299,8 +1321,8 @@ open class Input: Object {
         return Input.MouseMode (rawValue: _result)!
     }
     
-    fileprivate static var method_warp_mouse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("warp_mouse")
+    fileprivate static let method_warp_mouse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("warp_mouse")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1330,8 +1352,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_action_press: GDExtensionMethodBindPtr = {
-        let methodName = StringName("action_press")
+    fileprivate static let method_action_press: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("action_press")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1713091165)!
@@ -1364,8 +1386,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_action_release: GDExtensionMethodBindPtr = {
-        let methodName = StringName("action_release")
+    fileprivate static let method_action_release: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("action_release")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -1390,8 +1412,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_set_default_cursor_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_cursor_shape")
+    fileprivate static let method_set_default_cursor_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_cursor_shape")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2124816902)!
@@ -1421,8 +1443,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_get_current_cursor_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_cursor_shape")
+    fileprivate static let method_get_current_cursor_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_cursor_shape")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3455658929)!
@@ -1439,8 +1461,8 @@ open class Input: Object {
         return Input.CursorShape (rawValue: _result)!
     }
     
-    fileprivate static var method_set_custom_mouse_cursor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_mouse_cursor")
+    fileprivate static let method_set_custom_mouse_cursor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_mouse_cursor")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 703945977)!
@@ -1482,8 +1504,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_parse_input_event: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse_input_event")
+    fileprivate static let method_parse_input_event: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse_input_event")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3754044979)!
@@ -1494,8 +1516,6 @@ open class Input: Object {
     }()
     
     /// Feeds an ``InputEvent`` to the game. Can be used to artificially trigger input events from code. Also generates ``Node/_input(event:)`` calls.
-    /// 
-    /// **Example:**
     /// 
     /// > Note: Calling this function has no influence on the operating system. So for example sending an ``InputEventMouseMotion`` will not move the OS mouse cursor to the specified position (use ``warpMouse(position:)`` instead) and sending [kbd]Alt/Cmd + Tab[/kbd] as ``InputEventKey`` won't toggle between active windows.
     /// 
@@ -1513,8 +1533,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_set_use_accumulated_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_accumulated_input")
+    fileprivate static let method_set_use_accumulated_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_accumulated_input")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1539,8 +1559,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_is_using_accumulated_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_accumulated_input")
+    fileprivate static let method_is_using_accumulated_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_accumulated_input")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -1557,8 +1577,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_flush_buffered_events: GDExtensionMethodBindPtr = {
-        let methodName = StringName("flush_buffered_events")
+    fileprivate static let method_flush_buffered_events: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("flush_buffered_events")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1577,8 +1597,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_set_emulate_mouse_from_touch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emulate_mouse_from_touch")
+    fileprivate static let method_set_emulate_mouse_from_touch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emulate_mouse_from_touch")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1603,8 +1623,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_is_emulating_mouse_from_touch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_emulating_mouse_from_touch")
+    fileprivate static let method_is_emulating_mouse_from_touch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_emulating_mouse_from_touch")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1621,8 +1641,8 @@ open class Input: Object {
         return _result
     }
     
-    fileprivate static var method_set_emulate_touch_from_mouse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emulate_touch_from_mouse")
+    fileprivate static let method_set_emulate_touch_from_mouse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emulate_touch_from_mouse")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1647,8 +1667,8 @@ open class Input: Object {
         
     }
     
-    fileprivate static var method_is_emulating_touch_from_mouse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_emulating_touch_from_mouse")
+    fileprivate static let method_is_emulating_touch_from_mouse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_emulating_touch_from_mouse")
         return withUnsafePointer(to: &Input.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!

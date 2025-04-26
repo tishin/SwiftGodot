@@ -19,14 +19,14 @@ import Musl
 #endif
 
 
-/// Represents a GLTF buffer view.
+/// Represents a glTF buffer view.
 /// 
-/// GLTFBufferView is a data structure representing GLTF a `bufferView` that would be found in the `"bufferViews"` array. A buffer is a blob of binary data. A buffer view is a slice of a buffer that can be used to identify and extract data from the buffer.
+/// GLTFBufferView is a data structure representing a glTF `bufferView` that would be found in the `"bufferViews"` array. A buffer is a blob of binary data. A buffer view is a slice of a buffer that can be used to identify and extract data from the buffer.
 /// 
 /// Most custom uses of buffers only need to use the ``buffer``, ``byteLength``, and ``byteOffset``. The ``byteStride`` and ``indices`` properties are for more advanced use cases such as interleaved mesh data encoded for the GPU.
 /// 
 open class GLTFBufferView: Resource {
-    fileprivate static var className = StringName("GLTFBufferView")
+    private static var className = StringName("GLTFBufferView")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -79,7 +79,7 @@ open class GLTFBufferView: Resource {
         
     }
     
-    /// True if the GLTFBufferView's OpenGL GPU buffer type is an `ELEMENT_ARRAY_BUFFER` used for vertex indices (integer constant `34963`). False if the buffer type is any other value. See <a href="https://github.com/KhronosGroup/glTF-Tutorials/blob/master/gltfTutorial/gltfTutorial_005_BuffersBufferViewsAccessors.md">Buffers, BufferViews, and Accessors</a> for possible values. This property is set on import and used on export.
+    /// `true` if the GLTFBufferView's OpenGL GPU buffer type is an `ELEMENT_ARRAY_BUFFER` used for vertex indices (integer constant `34963`). `false` if the buffer type is any other value. See <a href="https://github.com/KhronosGroup/glTF-Tutorials/blob/master/gltfTutorial/gltfTutorial_005_BuffersBufferViewsAccessors.md">Buffers, BufferViews, and Accessors</a> for possible values. This property is set on import and used on export.
     final public var indices: Bool {
         get {
             return get_indices ()
@@ -91,7 +91,7 @@ open class GLTFBufferView: Resource {
         
     }
     
-    /// True if the GLTFBufferView's OpenGL GPU buffer type is an `ARRAY_BUFFER` used for vertex attributes (integer constant `34962`). False if the buffer type is any other value. See <a href="https://github.com/KhronosGroup/glTF-Tutorials/blob/master/gltfTutorial/gltfTutorial_005_BuffersBufferViewsAccessors.md">Buffers, BufferViews, and Accessors</a> for possible values. This property is set on import and used on export.
+    /// `true` if the GLTFBufferView's OpenGL GPU buffer type is an `ARRAY_BUFFER` used for vertex attributes (integer constant `34962`). `false` if the buffer type is any other value. See <a href="https://github.com/KhronosGroup/glTF-Tutorials/blob/master/gltfTutorial/gltfTutorial_005_BuffersBufferViewsAccessors.md">Buffers, BufferViews, and Accessors</a> for possible values. This property is set on import and used on export.
     final public var vertexAttributes: Bool {
         get {
             return get_vertex_attributes ()
@@ -104,8 +104,8 @@ open class GLTFBufferView: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_load_buffer_view_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_buffer_view_data")
+    fileprivate static let method_load_buffer_view_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_buffer_view_data")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3945446907)!
@@ -117,6 +117,7 @@ open class GLTFBufferView: Resource {
     
     /// Loads the buffer view data from the buffer referenced by this buffer view in the given ``GLTFState``. Interleaved data with a byte stride is not yet supported by this method. The data is returned as a ``PackedByteArray``.
     public final func loadBufferViewData(state: GLTFState?) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -131,8 +132,8 @@ open class GLTFBufferView: Resource {
         return _result
     }
     
-    fileprivate static var method_get_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer")
+    fileprivate static let method_get_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -144,13 +145,14 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func get_buffer() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFBufferView.method_get_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_buffer")
+    fileprivate static let method_set_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_buffer")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -162,6 +164,7 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func set_buffer(_ buffer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: buffer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -175,8 +178,8 @@ open class GLTFBufferView: Resource {
         
     }
     
-    fileprivate static var method_get_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_byte_offset")
+    fileprivate static let method_get_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_byte_offset")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -188,13 +191,14 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func get_byte_offset() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_byte_offset")
+    fileprivate static let method_set_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_byte_offset")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -206,6 +210,7 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func set_byte_offset(_ byteOffset: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: byteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -219,8 +224,8 @@ open class GLTFBufferView: Resource {
         
     }
     
-    fileprivate static var method_get_byte_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_byte_length")
+    fileprivate static let method_get_byte_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_byte_length")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -232,13 +237,14 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func get_byte_length() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_byte_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_byte_length")
+    fileprivate static let method_set_byte_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_byte_length")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -250,6 +256,7 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func set_byte_length(_ byteLength: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: byteLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -263,8 +270,8 @@ open class GLTFBufferView: Resource {
         
     }
     
-    fileprivate static var method_get_byte_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_byte_stride")
+    fileprivate static let method_get_byte_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_byte_stride")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -276,13 +283,14 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func get_byte_stride() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_stride, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_byte_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_byte_stride")
+    fileprivate static let method_set_byte_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_byte_stride")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -294,6 +302,7 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func set_byte_stride(_ byteStride: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: byteStride) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -307,8 +316,8 @@ open class GLTFBufferView: Resource {
         
     }
     
-    fileprivate static var method_get_indices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_indices")
+    fileprivate static let method_get_indices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_indices")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -320,13 +329,14 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func get_indices() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GLTFBufferView.method_get_indices, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_indices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_indices")
+    fileprivate static let method_set_indices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_indices")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -338,6 +348,7 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func set_indices(_ indices: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: indices) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -351,8 +362,8 @@ open class GLTFBufferView: Resource {
         
     }
     
-    fileprivate static var method_get_vertex_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_attributes")
+    fileprivate static let method_get_vertex_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_attributes")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -364,13 +375,14 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func get_vertex_attributes() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GLTFBufferView.method_get_vertex_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vertex_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_attributes")
+    fileprivate static let method_set_vertex_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_attributes")
         return withUnsafePointer(to: &GLTFBufferView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -382,6 +394,7 @@ open class GLTFBufferView: Resource {
     
     @inline(__always)
     fileprivate final func set_vertex_attributes(_ isAttributes: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: isAttributes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

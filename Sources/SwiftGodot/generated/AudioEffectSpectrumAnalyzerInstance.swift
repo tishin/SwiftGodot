@@ -23,10 +23,10 @@ import Musl
 /// 
 /// The runtime part of an ``AudioEffectSpectrumAnalyzer``, which can be used to query the magnitude of a frequency range on its host bus.
 /// 
-/// An instance of this class can be acquired with ``AudioServer/getBusEffectInstance(busIdx:effectIdx:channel:)``.
+/// An instance of this class can be obtained with ``AudioServer/getBusEffectInstance(busIdx:effectIdx:channel:)``.
 /// 
 open class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
-    fileprivate static var className = StringName("AudioEffectSpectrumAnalyzerInstance")
+    private static var className = StringName("AudioEffectSpectrumAnalyzerInstance")
     override open class var godotClassName: StringName { className }
     public enum MagnitudeMode: Int64, CaseIterable {
         /// Use the average value across the frequency range as magnitude.
@@ -36,8 +36,8 @@ open class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
     }
     
     /* Methods */
-    fileprivate static var method_get_magnitude_for_frequency_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_magnitude_for_frequency_range")
+    fileprivate static let method_get_magnitude_for_frequency_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_magnitude_for_frequency_range")
         return withUnsafePointer(to: &AudioEffectSpectrumAnalyzerInstance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 797993915)!
@@ -52,6 +52,7 @@ open class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
     /// `mode` determines how the frequency range will be processed. See ``AudioEffectSpectrumAnalyzerInstance/MagnitudeMode``.
     /// 
     public final func getMagnitudeForFrequencyRange(fromHz: Double, toHz: Double, mode: AudioEffectSpectrumAnalyzerInstance.MagnitudeMode = .max) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: fromHz) { pArg0 in
             withUnsafePointer(to: toHz) { pArg1 in

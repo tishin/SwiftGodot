@@ -26,7 +26,7 @@ import Musl
 /// **Performance:** Primitive shapes, especially ``SphereShape3D``, are fast to check collisions against. ``ConvexPolygonShape3D`` and ``HeightMapShape3D`` are slower, and ``ConcavePolygonShape3D`` is the slowest.
 /// 
 open class Shape3D: Resource {
-    fileprivate static var className = StringName("Shape3D")
+    private static var className = StringName("Shape3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -62,8 +62,8 @@ open class Shape3D: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_custom_solver_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_solver_bias")
+    fileprivate static let method_set_custom_solver_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_solver_bias")
         return withUnsafePointer(to: &Shape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -75,6 +75,7 @@ open class Shape3D: Resource {
     
     @inline(__always)
     fileprivate final func set_custom_solver_bias(_ bias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -88,8 +89,8 @@ open class Shape3D: Resource {
         
     }
     
-    fileprivate static var method_get_custom_solver_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_solver_bias")
+    fileprivate static let method_get_custom_solver_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_solver_bias")
         return withUnsafePointer(to: &Shape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -101,13 +102,14 @@ open class Shape3D: Resource {
     
     @inline(__always)
     fileprivate final func get_custom_solver_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Shape3D.method_get_custom_solver_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_margin")
+    fileprivate static let method_set_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_margin")
         return withUnsafePointer(to: &Shape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -119,6 +121,7 @@ open class Shape3D: Resource {
     
     @inline(__always)
     fileprivate final func set_margin(_ margin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -132,8 +135,8 @@ open class Shape3D: Resource {
         
     }
     
-    fileprivate static var method_get_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_margin")
+    fileprivate static let method_get_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_margin")
         return withUnsafePointer(to: &Shape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -145,13 +148,14 @@ open class Shape3D: Resource {
     
     @inline(__always)
     fileprivate final func get_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Shape3D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_debug_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_debug_mesh")
+    fileprivate static let method_get_debug_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_debug_mesh")
         return withUnsafePointer(to: &Shape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1605880883)!
@@ -163,9 +167,10 @@ open class Shape3D: Resource {
     
     /// Returns the ``ArrayMesh`` used to draw the debug collision for this ``Shape3D``.
     public final func getDebugMesh() -> ArrayMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Shape3D.method_get_debug_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

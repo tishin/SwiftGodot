@@ -30,7 +30,7 @@ import Musl
 /// > Note: This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).
 /// 
 open class PlaceholderTexture2DArray: PlaceholderTextureLayered {
-    fileprivate static var className = StringName("PlaceholderTexture2DArray")
+    private static var className = StringName("PlaceholderTexture2DArray")
     override open class var godotClassName: StringName { className }
 }
 

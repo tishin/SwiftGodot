@@ -23,13 +23,13 @@ import Musl
 /// 
 /// A sequence of Ogg packets.
 open class OggPacketSequence: Resource {
-    fileprivate static var className = StringName("OggPacketSequence")
+    private static var className = StringName("OggPacketSequence")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /// Contains the raw packets that make up this OggPacketSequence.
-    final public var packetData: VariantCollection<GArray> {
+    final public var packetData: TypedArray<VariantArray> {
         get {
             return get_packet_data ()
         }
@@ -65,8 +65,8 @@ open class OggPacketSequence: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_packet_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_packet_data")
+    fileprivate static let method_set_packet_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_packet_data")
         return withUnsafePointer(to: &OggPacketSequence.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -77,7 +77,8 @@ open class OggPacketSequence: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func set_packet_data(_ packetData: VariantCollection<GArray>) {
+    fileprivate final func set_packet_data(_ packetData: TypedArray<VariantArray>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: packetData.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -91,8 +92,8 @@ open class OggPacketSequence: Resource {
         
     }
     
-    fileprivate static var method_get_packet_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_data")
+    fileprivate static let method_get_packet_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_data")
         return withUnsafePointer(to: &OggPacketSequence.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -103,14 +104,15 @@ open class OggPacketSequence: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func get_packet_data() -> VariantCollection<GArray> {
+    fileprivate final func get_packet_data() -> TypedArray<VariantArray> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(OggPacketSequence.method_get_packet_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GArray>(content: _result)
+        return TypedArray<VariantArray>(takingOver: _result)
     }
     
-    fileprivate static var method_set_packet_granule_positions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_packet_granule_positions")
+    fileprivate static let method_set_packet_granule_positions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_packet_granule_positions")
         return withUnsafePointer(to: &OggPacketSequence.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3709968205)!
@@ -122,6 +124,7 @@ open class OggPacketSequence: Resource {
     
     @inline(__always)
     fileprivate final func set_packet_granule_positions(_ granulePositions: PackedInt64Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: granulePositions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -135,8 +138,8 @@ open class OggPacketSequence: Resource {
         
     }
     
-    fileprivate static var method_get_packet_granule_positions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_granule_positions")
+    fileprivate static let method_get_packet_granule_positions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_granule_positions")
         return withUnsafePointer(to: &OggPacketSequence.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 235988956)!
@@ -148,13 +151,14 @@ open class OggPacketSequence: Resource {
     
     @inline(__always)
     fileprivate final func get_packet_granule_positions() -> PackedInt64Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
         gi.object_method_bind_ptrcall(OggPacketSequence.method_get_packet_granule_positions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_sampling_rate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sampling_rate")
+    fileprivate static let method_set_sampling_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sampling_rate")
         return withUnsafePointer(to: &OggPacketSequence.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -166,6 +170,7 @@ open class OggPacketSequence: Resource {
     
     @inline(__always)
     fileprivate final func set_sampling_rate(_ samplingRate: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: samplingRate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -179,8 +184,8 @@ open class OggPacketSequence: Resource {
         
     }
     
-    fileprivate static var method_get_sampling_rate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sampling_rate")
+    fileprivate static let method_get_sampling_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sampling_rate")
         return withUnsafePointer(to: &OggPacketSequence.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -192,13 +197,14 @@ open class OggPacketSequence: Resource {
     
     @inline(__always)
     fileprivate final func get_sampling_rate() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OggPacketSequence.method_get_sampling_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_length")
+    fileprivate static let method_get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_length")
         return withUnsafePointer(to: &OggPacketSequence.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -210,6 +216,7 @@ open class OggPacketSequence: Resource {
     
     /// The length of this stream, in seconds.
     public final func getLength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OggPacketSequence.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

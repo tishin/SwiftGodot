@@ -28,11 +28,11 @@ import Musl
 /// Ogg Vorbis requires more CPU to decode than ``ResourceImporterWAV``. If you need to play a lot of simultaneous sounds, it's recommended to use WAV for those sounds instead, especially if targeting low-end devices.
 /// 
 open class ResourceImporterOggVorbis: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterOggVorbis")
+    private static var className = StringName("ResourceImporterOggVorbis")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_load_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_from_buffer")
+    fileprivate static let method_load_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_from_buffer")
         return withUnsafePointer(to: &ResourceImporterOggVorbis.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 354904730)!
@@ -42,10 +42,10 @@ open class ResourceImporterOggVorbis: ResourceImporter {
         
     }()
     
-    /// This method loads audio data from a PackedByteArray buffer into an AudioStreamOggVorbis object.
-    public static func loadFromBuffer(_ buffer: PackedByteArray) -> AudioStreamOggVorbis? {
+    /// Creates a new ``AudioStreamOggVorbis`` instance from the given buffer. The buffer must contain Ogg Vorbis data.
+    public static func loadFromBuffer(streamData: PackedByteArray) -> AudioStreamOggVorbis? {
         var _result = UnsafeRawPointer (bitPattern: 0)
-        withUnsafePointer(to: buffer.content) { pArg0 in
+        withUnsafePointer(to: streamData.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     gi.object_method_bind_ptrcall(method_load_from_buffer, nil, pArgs, &_result)
@@ -55,11 +55,11 @@ open class ResourceImporterOggVorbis: ResourceImporter {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_load_from_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_from_file")
+    fileprivate static let method_load_from_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_from_file")
         return withUnsafePointer(to: &ResourceImporterOggVorbis.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 797568536)!
@@ -69,7 +69,7 @@ open class ResourceImporterOggVorbis: ResourceImporter {
         
     }()
     
-    /// This method loads audio data from a file into an AudioStreamOggVorbis object. The file path is provided as a string.
+    /// Creates a new ``AudioStreamOggVorbis`` instance from the given file path. The file must be in Ogg Vorbis format.
     public static func loadFromFile(path: String) -> AudioStreamOggVorbis? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         let path = GString(path)
@@ -83,7 +83,7 @@ open class ResourceImporterOggVorbis: ResourceImporter {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

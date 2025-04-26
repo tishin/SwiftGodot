@@ -26,7 +26,7 @@ import Musl
 /// It can be set to update another Node's position, rotation and/or scale. It can use either global or local coordinates.
 /// 
 open class RemoteTransform3D: Node3D {
-    fileprivate static var className = StringName("RemoteTransform3D")
+    private static var className = StringName("RemoteTransform3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -92,8 +92,8 @@ open class RemoteTransform3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_remote_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_remote_node")
+    fileprivate static let method_set_remote_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_remote_node")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -105,6 +105,7 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_remote_node(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -118,8 +119,8 @@ open class RemoteTransform3D: Node3D {
         
     }
     
-    fileprivate static var method_get_remote_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_remote_node")
+    fileprivate static let method_get_remote_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_remote_node")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -131,13 +132,14 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_remote_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_remote_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_force_update_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_update_cache")
+    fileprivate static let method_force_update_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_update_cache")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -149,12 +151,13 @@ open class RemoteTransform3D: Node3D {
     
     /// ``RemoteTransform3D`` caches the remote node. It may not notice if the remote node disappears; ``forceUpdateCache()`` forces it to update the cache again.
     public final func forceUpdateCache() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RemoteTransform3D.method_force_update_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_use_global_coordinates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_global_coordinates")
+    fileprivate static let method_set_use_global_coordinates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_global_coordinates")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -166,6 +169,7 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_use_global_coordinates(_ useGlobalCoordinates: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useGlobalCoordinates) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -179,8 +183,8 @@ open class RemoteTransform3D: Node3D {
         
     }
     
-    fileprivate static var method_get_use_global_coordinates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_global_coordinates")
+    fileprivate static let method_get_use_global_coordinates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_global_coordinates")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -192,13 +196,14 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_use_global_coordinates() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_use_global_coordinates, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_update_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_update_position")
+    fileprivate static let method_set_update_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_update_position")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -210,6 +215,7 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_update_position(_ updateRemotePosition: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: updateRemotePosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -223,8 +229,8 @@ open class RemoteTransform3D: Node3D {
         
     }
     
-    fileprivate static var method_get_update_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_update_position")
+    fileprivate static let method_get_update_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_update_position")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -236,13 +242,14 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_update_position() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_update_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_update_rotation")
+    fileprivate static let method_set_update_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_update_rotation")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -254,6 +261,7 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_update_rotation(_ updateRemoteRotation: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: updateRemoteRotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -267,8 +275,8 @@ open class RemoteTransform3D: Node3D {
         
     }
     
-    fileprivate static var method_get_update_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_update_rotation")
+    fileprivate static let method_get_update_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_update_rotation")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -280,13 +288,14 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_update_rotation() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_update_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_update_scale")
+    fileprivate static let method_set_update_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_update_scale")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -298,6 +307,7 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_update_scale(_ updateRemoteScale: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: updateRemoteScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -311,8 +321,8 @@ open class RemoteTransform3D: Node3D {
         
     }
     
-    fileprivate static var method_get_update_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_update_scale")
+    fileprivate static let method_get_update_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_update_scale")
         return withUnsafePointer(to: &RemoteTransform3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -324,6 +334,7 @@ open class RemoteTransform3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_update_scale() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

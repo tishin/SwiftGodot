@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A container that keeps its child controls within the area of a ``StyleBox``. Useful for giving controls an outline.
 open class PanelContainer: Container {
-    fileprivate static var className = StringName("PanelContainer")
+    private static var className = StringName("PanelContainer")
     override open class var godotClassName: StringName { className }
 }
 

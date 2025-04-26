@@ -23,7 +23,7 @@ import Musl
 /// 
 /// InputEventFromWindow represents events specifically received by windows. This includes mouse events, keyboard events in focused windows or touch screen actions.
 open class InputEventFromWindow: InputEvent {
-    fileprivate static var className = StringName("InputEventFromWindow")
+    private static var className = StringName("InputEventFromWindow")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class InputEventFromWindow: InputEvent {
     }
     
     /* Methods */
-    fileprivate static var method_set_window_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_window_id")
+    fileprivate static let method_set_window_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_window_id")
         return withUnsafePointer(to: &InputEventFromWindow.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -54,6 +54,7 @@ open class InputEventFromWindow: InputEvent {
     
     @inline(__always)
     fileprivate final func set_window_id(_ id: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class InputEventFromWindow: InputEvent {
         
     }
     
-    fileprivate static var method_get_window_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_window_id")
+    fileprivate static let method_get_window_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_window_id")
         return withUnsafePointer(to: &InputEventFromWindow.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -80,6 +81,7 @@ open class InputEventFromWindow: InputEvent {
     
     @inline(__always)
     fileprivate final func get_window_id() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(InputEventFromWindow.method_get_window_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

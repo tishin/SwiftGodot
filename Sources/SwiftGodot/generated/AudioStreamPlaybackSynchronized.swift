@@ -20,7 +20,7 @@ import Musl
 
 
 open class AudioStreamPlaybackSynchronized: AudioStreamPlayback {
-    fileprivate static var className = StringName("AudioStreamPlaybackSynchronized")
+    private static var className = StringName("AudioStreamPlaybackSynchronized")
     override open class var godotClassName: StringName { className }
 }
 

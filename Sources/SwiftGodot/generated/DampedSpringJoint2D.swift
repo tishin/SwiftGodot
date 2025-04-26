@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A physics joint that connects two 2D physics bodies with a spring-like force. This resembles a spring that always wants to stretch to a given length.
 open class DampedSpringJoint2D: Joint2D {
-    fileprivate static var className = StringName("DampedSpringJoint2D")
+    private static var className = StringName("DampedSpringJoint2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -77,8 +77,8 @@ open class DampedSpringJoint2D: Joint2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_length")
+    fileprivate static let method_set_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_length")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -90,6 +90,7 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func set_length(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -103,8 +104,8 @@ open class DampedSpringJoint2D: Joint2D {
         
     }
     
-    fileprivate static var method_get_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_length")
+    fileprivate static let method_get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_length")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -116,13 +117,14 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func get_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rest_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rest_length")
+    fileprivate static let method_set_rest_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rest_length")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -134,6 +136,7 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func set_rest_length(_ restLength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: restLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -147,8 +150,8 @@ open class DampedSpringJoint2D: Joint2D {
         
     }
     
-    fileprivate static var method_get_rest_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rest_length")
+    fileprivate static let method_get_rest_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rest_length")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -160,13 +163,14 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func get_rest_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_rest_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stiffness")
+    fileprivate static let method_set_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stiffness")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -178,6 +182,7 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func set_stiffness(_ stiffness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stiffness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -191,8 +196,8 @@ open class DampedSpringJoint2D: Joint2D {
         
     }
     
-    fileprivate static var method_get_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stiffness")
+    fileprivate static let method_get_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stiffness")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -204,13 +209,14 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func get_stiffness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_damping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_damping")
+    fileprivate static let method_set_damping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_damping")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -222,6 +228,7 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func set_damping(_ damping: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: damping) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -235,8 +242,8 @@ open class DampedSpringJoint2D: Joint2D {
         
     }
     
-    fileprivate static var method_get_damping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_damping")
+    fileprivate static let method_get_damping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_damping")
         return withUnsafePointer(to: &DampedSpringJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -248,6 +255,7 @@ open class DampedSpringJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func get_damping() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_damping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

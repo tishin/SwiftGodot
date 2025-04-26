@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This class is used by various XR interfaces to generate VRS textures that can be used to speed up rendering.
 open class XRVRS: Object {
-    fileprivate static var className = StringName("XRVRS")
+    private static var className = StringName("XRVRS")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -52,9 +52,21 @@ open class XRVRS: Object {
         
     }
     
+    /// The render region that the VRS texture will be scaled to when generated.
+    final public var vrsRenderRegion: Rect2i {
+        get {
+            return get_vrs_render_region ()
+        }
+        
+        set {
+            set_vrs_render_region (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_get_vrs_min_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_min_radius")
+    fileprivate static let method_get_vrs_min_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_min_radius")
         return withUnsafePointer(to: &XRVRS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -66,13 +78,14 @@ open class XRVRS: Object {
     
     @inline(__always)
     fileprivate final func get_vrs_min_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vrs_min_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_min_radius")
+    fileprivate static let method_set_vrs_min_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_min_radius")
         return withUnsafePointer(to: &XRVRS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -84,6 +97,7 @@ open class XRVRS: Object {
     
     @inline(__always)
     fileprivate final func set_vrs_min_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -97,8 +111,8 @@ open class XRVRS: Object {
         
     }
     
-    fileprivate static var method_get_vrs_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_strength")
+    fileprivate static let method_get_vrs_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_strength")
         return withUnsafePointer(to: &XRVRS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -110,13 +124,14 @@ open class XRVRS: Object {
     
     @inline(__always)
     fileprivate final func get_vrs_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vrs_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_strength")
+    fileprivate static let method_set_vrs_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_strength")
         return withUnsafePointer(to: &XRVRS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -128,6 +143,7 @@ open class XRVRS: Object {
     
     @inline(__always)
     fileprivate final func set_vrs_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -141,8 +157,54 @@ open class XRVRS: Object {
         
     }
     
-    fileprivate static var method_make_vrs_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_vrs_texture")
+    fileprivate static let method_get_vrs_render_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_render_region")
+        return withUnsafePointer(to: &XRVRS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 410525958)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_vrs_render_region() -> Rect2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Rect2i = Rect2i ()
+        gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_render_region, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_vrs_render_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_render_region")
+        return withUnsafePointer(to: &XRVRS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1763793166)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_vrs_render_region(_ renderRegion: Rect2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: renderRegion) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(XRVRS.method_set_vrs_render_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_make_vrs_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_vrs_texture")
         return withUnsafePointer(to: &XRVRS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3647044786)!
@@ -157,6 +219,7 @@ open class XRVRS: Object {
     /// The result will be cached, requesting a VRS texture with unchanged parameters and settings will return the cached RID.
     /// 
     public final func makeVrsTexture(targetSize: Vector2, eyeFoci: PackedVector2Array) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: targetSize) { pArg0 in
             withUnsafePointer(to: eyeFoci.content) { pArg1 in

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A horizontal slider, used to adjust a value by moving a grabber along a horizontal axis. It is a ``Range``-based control and goes from left (min) to right (max).
 open class HSlider: Slider {
-    fileprivate static var className = StringName("HSlider")
+    private static var className = StringName("HSlider")
     override open class var godotClassName: StringName { className }
 }
 

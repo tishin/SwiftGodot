@@ -21,9 +21,9 @@ import Musl
 
 /// A helper to handle dictionaries which look like JSONRPC documents.
 /// 
-/// <a href="https://www.jsonrpc.org/">JSON-RPC</a> is a standard which wraps a method call in a ``JSON`` object. The object has a particular structure and identifies which method is called, the parameters to that function, and carries an ID to keep track of responses. This class implements that standard on top of ``GDictionary``; you will have to convert between a ``GDictionary`` and ``JSON`` with other functions.
+/// <a href="https://www.jsonrpc.org/">JSON-RPC</a> is a standard which wraps a method call in a ``JSON`` object. The object has a particular structure and identifies which method is called, the parameters to that function, and carries an ID to keep track of responses. This class implements that standard on top of ``VariantDictionary``; you will have to convert between a ``VariantDictionary`` and ``JSON`` with other functions.
 open class JSONRPC: Object {
-    fileprivate static var className = StringName("JSONRPC")
+    private static var className = StringName("JSONRPC")
     override open class var godotClassName: StringName { className }
     public enum ErrorCode: Int64, CaseIterable {
         /// The request could not be parsed as it was not valid by JSON standard (``JSON/parse(jsonText:keepText:)`` failed).
@@ -39,8 +39,8 @@ open class JSONRPC: Object {
     }
     
     /* Methods */
-    fileprivate static var method_set_scope: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scope")
+    fileprivate static let method_set_scope: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scope")
         return withUnsafePointer(to: &JSONRPC.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2572618360)!
@@ -52,6 +52,7 @@ open class JSONRPC: Object {
     
     /// 
     public final func setScope(_ scope: String, target: Object?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let scope = GString(scope)
         withUnsafePointer(to: scope.content) { pArg0 in
             withUnsafePointer(to: target?.handle) { pArg1 in
@@ -69,8 +70,8 @@ open class JSONRPC: Object {
         
     }
     
-    fileprivate static var method_process_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("process_action")
+    fileprivate static let method_process_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("process_action")
         return withUnsafePointer(to: &JSONRPC.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2963479484)!
@@ -87,6 +88,7 @@ open class JSONRPC: Object {
     /// `action`: The action to be run, as a Dictionary in the form of a JSON-RPC request or notification.
     /// 
     public final func processAction(_ action: Variant?, recurse: Bool = false) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: recurse) { pArg1 in
@@ -104,8 +106,8 @@ open class JSONRPC: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_process_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("process_string")
+    fileprivate static let method_process_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("process_string")
         return withUnsafePointer(to: &JSONRPC.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1703090593)!
@@ -117,6 +119,7 @@ open class JSONRPC: Object {
     
     /// 
     public final func processString(action: String) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let action = GString(action)
         withUnsafePointer(to: action.content) { pArg0 in
@@ -132,8 +135,8 @@ open class JSONRPC: Object {
         return _result.description
     }
     
-    fileprivate static var method_make_request: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_request")
+    fileprivate static let method_make_request: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_request")
         return withUnsafePointer(to: &JSONRPC.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3423508980)!
@@ -151,8 +154,9 @@ open class JSONRPC: Object {
     /// 
     /// - `id`: Uniquely identifies this request. The server is expected to send a response with the same ID.
     /// 
-    public final func makeRequest(method: String, params: Variant?, id: Variant?) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func makeRequest(method: String, params: Variant?, id: Variant?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         let method = GString(method)
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: params.content) { pArg1 in
@@ -173,8 +177,8 @@ open class JSONRPC: Object {
         return _result
     }
     
-    fileprivate static var method_make_response: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_response")
+    fileprivate static let method_make_response: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_response")
         return withUnsafePointer(to: &JSONRPC.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5053918)!
@@ -190,8 +194,9 @@ open class JSONRPC: Object {
     /// 
     /// - `id`: The ID of the request this response is targeted to.
     /// 
-    public final func makeResponse(result: Variant?, id: Variant?) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func makeResponse(result: Variant?, id: Variant?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: result.content) { pArg0 in
             withUnsafePointer(to: id.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -208,8 +213,8 @@ open class JSONRPC: Object {
         return _result
     }
     
-    fileprivate static var method_make_notification: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_notification")
+    fileprivate static let method_make_notification: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_notification")
         return withUnsafePointer(to: &JSONRPC.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2949127017)!
@@ -225,8 +230,9 @@ open class JSONRPC: Object {
     /// 
     /// - `params`: An array or dictionary of parameters being passed to the method.
     /// 
-    public final func makeNotification(method: String, params: Variant?) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func makeNotification(method: String, params: Variant?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         let method = GString(method)
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: params.content) { pArg1 in
@@ -244,8 +250,8 @@ open class JSONRPC: Object {
         return _result
     }
     
-    fileprivate static var method_make_response_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_response_error")
+    fileprivate static let method_make_response_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_response_error")
         return withUnsafePointer(to: &JSONRPC.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 928596297)!
@@ -263,8 +269,9 @@ open class JSONRPC: Object {
     /// 
     /// - `id`: The request this error is a response to.
     /// 
-    public final func makeResponseError(code: Int32, message: String, id: Variant?) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func makeResponseError(code: Int32, message: String, id: Variant?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: code) { pArg0 in
             let message = GString(message)
             withUnsafePointer(to: message.content) { pArg1 in

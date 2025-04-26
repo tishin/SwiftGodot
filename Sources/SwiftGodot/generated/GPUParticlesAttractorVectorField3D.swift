@@ -30,7 +30,7 @@ import Musl
 /// > Note: Particle attractors only affect ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
-    fileprivate static var className = StringName("GPUParticlesAttractorVectorField3D")
+    private static var className = StringName("GPUParticlesAttractorVectorField3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -63,8 +63,8 @@ open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &GPUParticlesAttractorVectorField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -76,6 +76,7 @@ open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -89,8 +90,8 @@ open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &GPUParticlesAttractorVectorField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -102,13 +103,14 @@ open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GPUParticlesAttractorVectorField3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &GPUParticlesAttractorVectorField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1188404210)!
@@ -120,6 +122,7 @@ open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: Texture3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -133,8 +136,8 @@ open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &GPUParticlesAttractorVectorField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373985333)!
@@ -146,9 +149,10 @@ open class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
     
     @inline(__always)
     fileprivate final func get_texture() -> Texture3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GPUParticlesAttractorVectorField3D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

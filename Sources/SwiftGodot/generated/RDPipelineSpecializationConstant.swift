@@ -26,7 +26,7 @@ import Musl
 /// This object is used by ``RenderingDevice``.
 /// 
 open class RDPipelineSpecializationConstant: RefCounted {
-    fileprivate static var className = StringName("RDPipelineSpecializationConstant")
+    private static var className = StringName("RDPipelineSpecializationConstant")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -56,8 +56,8 @@ open class RDPipelineSpecializationConstant: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_value")
+    fileprivate static let method_set_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_value")
         return withUnsafePointer(to: &RDPipelineSpecializationConstant.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1114965689)!
@@ -69,6 +69,7 @@ open class RDPipelineSpecializationConstant: RefCounted {
     
     @inline(__always)
     fileprivate final func set_value(_ value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -82,8 +83,8 @@ open class RDPipelineSpecializationConstant: RefCounted {
         
     }
     
-    fileprivate static var method_get_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_value")
+    fileprivate static let method_get_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_value")
         return withUnsafePointer(to: &RDPipelineSpecializationConstant.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1214101251)!
@@ -95,13 +96,14 @@ open class RDPipelineSpecializationConstant: RefCounted {
     
     @inline(__always)
     fileprivate final func get_value() -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_get_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_constant_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constant_id")
+    fileprivate static let method_set_constant_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constant_id")
         return withUnsafePointer(to: &RDPipelineSpecializationConstant.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -113,6 +115,7 @@ open class RDPipelineSpecializationConstant: RefCounted {
     
     @inline(__always)
     fileprivate final func set_constant_id(_ constantId: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: constantId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -126,8 +129,8 @@ open class RDPipelineSpecializationConstant: RefCounted {
         
     }
     
-    fileprivate static var method_get_constant_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant_id")
+    fileprivate static let method_get_constant_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant_id")
         return withUnsafePointer(to: &RDPipelineSpecializationConstant.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -139,6 +142,7 @@ open class RDPipelineSpecializationConstant: RefCounted {
     
     @inline(__always)
     fileprivate final func get_constant_id() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_get_constant_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

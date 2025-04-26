@@ -32,7 +32,7 @@ import Musl
 /// > Note: In C#, reference-counted objects will not be freed instantly after they are no longer in use. Instead, garbage collection will run periodically and will free reference-counted objects that are no longer in use. This means that unused ones will remain in memory for a while before being removed.
 /// 
 open class RefCounted: Object {
-    fileprivate static var className = StringName("RefCounted")
+    private static var className = StringName("RefCounted")
     override open class var godotClassName: StringName { className }
     public required init () {
         super.init ()
@@ -41,13 +41,11 @@ open class RefCounted: Object {
     
     public required init(nativeHandle: UnsafeRawPointer) {
         super.init (nativeHandle: nativeHandle)
-        reference()
-        ownsHandle = true
     }
     
     /* Methods */
-    fileprivate static var method_init_ref: GDExtensionMethodBindPtr = {
-        let methodName = StringName("init_ref")
+    fileprivate static let method_init_ref: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("init_ref")
         return withUnsafePointer(to: &RefCounted.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -62,13 +60,14 @@ open class RefCounted: Object {
     /// Returns whether the initialization was successful.
     /// 
     public final func initRef() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RefCounted.method_init_ref, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_reference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reference")
+    fileprivate static let method_reference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reference")
         return withUnsafePointer(to: &RefCounted.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -84,13 +83,14 @@ open class RefCounted: Object {
     /// 
     @discardableResult /* discardable per discardableList: RefCounted, reference */ 
     public final func reference() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RefCounted.method_reference, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_unreference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unreference")
+    static let method_unreference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unreference")
         return withUnsafePointer(to: &RefCounted.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -106,13 +106,14 @@ open class RefCounted: Object {
     /// 
     @discardableResult /* discardable per discardableList: RefCounted, unreference */ 
     public final func unreference() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RefCounted.method_unreference, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_reference_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_reference_count")
+    fileprivate static let method_get_reference_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_reference_count")
         return withUnsafePointer(to: &RefCounted.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -124,9 +125,20 @@ open class RefCounted: Object {
     
     /// Returns the current reference count.
     public final func getReferenceCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RefCounted.method_get_reference_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
+    }
+    
+    /// Internal API
+    public final override func _macroRcRef() {
+        reference()
+    }
+    
+    /// Internal API
+    public final override func _macroRcUnref() {
+        unreference()
     }
     
 }

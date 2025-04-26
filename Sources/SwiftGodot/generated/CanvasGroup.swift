@@ -28,7 +28,7 @@ import Musl
 /// > Note: Since ``CanvasGroup`` and ``CanvasItem/clipChildren`` both utilize the backbuffer, children of a ``CanvasGroup`` who have their ``CanvasItem/clipChildren`` set to anything other than ``CanvasItem/ClipChildrenMode/disabled`` will not function correctly.
 /// 
 open class CanvasGroup: Node2D {
-    fileprivate static var className = StringName("CanvasGroup")
+    private static var className = StringName("CanvasGroup")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -70,8 +70,8 @@ open class CanvasGroup: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_fit_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fit_margin")
+    fileprivate static let method_set_fit_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fit_margin")
         return withUnsafePointer(to: &CanvasGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -83,6 +83,7 @@ open class CanvasGroup: Node2D {
     
     @inline(__always)
     fileprivate final func set_fit_margin(_ fitMargin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fitMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class CanvasGroup: Node2D {
         
     }
     
-    fileprivate static var method_get_fit_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fit_margin")
+    fileprivate static let method_get_fit_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fit_margin")
         return withUnsafePointer(to: &CanvasGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -109,13 +110,14 @@ open class CanvasGroup: Node2D {
     
     @inline(__always)
     fileprivate final func get_fit_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CanvasGroup.method_get_fit_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_clear_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clear_margin")
+    fileprivate static let method_set_clear_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clear_margin")
         return withUnsafePointer(to: &CanvasGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -127,6 +129,7 @@ open class CanvasGroup: Node2D {
     
     @inline(__always)
     fileprivate final func set_clear_margin(_ clearMargin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clearMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -140,8 +143,8 @@ open class CanvasGroup: Node2D {
         
     }
     
-    fileprivate static var method_get_clear_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clear_margin")
+    fileprivate static let method_get_clear_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clear_margin")
         return withUnsafePointer(to: &CanvasGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -153,13 +156,14 @@ open class CanvasGroup: Node2D {
     
     @inline(__always)
     fileprivate final func get_clear_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CanvasGroup.method_get_clear_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_mipmaps")
+    fileprivate static let method_set_use_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_mipmaps")
         return withUnsafePointer(to: &CanvasGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -171,6 +175,7 @@ open class CanvasGroup: Node2D {
     
     @inline(__always)
     fileprivate final func set_use_mipmaps(_ useMipmaps: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useMipmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +189,8 @@ open class CanvasGroup: Node2D {
         
     }
     
-    fileprivate static var method_is_using_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_mipmaps")
+    fileprivate static let method_is_using_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_mipmaps")
         return withUnsafePointer(to: &CanvasGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -197,6 +202,7 @@ open class CanvasGroup: Node2D {
     
     @inline(__always)
     fileprivate final func is_using_mipmaps() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CanvasGroup.method_is_using_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

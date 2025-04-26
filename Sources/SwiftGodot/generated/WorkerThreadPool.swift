@@ -33,18 +33,18 @@ import Musl
 /// 
 open class WorkerThreadPool: Object {
     /// The shared instance of this class
-    public static var shared: WorkerThreadPool = {
-        return withUnsafePointer (to: &WorkerThreadPool.godotClassName.content) { ptr in
-            WorkerThreadPool (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: WorkerThreadPool {
+        return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("WorkerThreadPool")
+    private static var className = StringName("WorkerThreadPool")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_add_task: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_task")
+    fileprivate static let method_add_task: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_task")
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3745067146)!
@@ -82,8 +82,8 @@ open class WorkerThreadPool: Object {
         return _result
     }
     
-    fileprivate static var method_is_task_completed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_task_completed")
+    fileprivate static let method_is_task_completed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_task_completed")
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -112,8 +112,8 @@ open class WorkerThreadPool: Object {
         return _result
     }
     
-    fileprivate static var method_wait_for_task_completion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("wait_for_task_completion")
+    fileprivate static let method_wait_for_task_completion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("wait_for_task_completion")
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844576869)!
@@ -146,8 +146,8 @@ open class WorkerThreadPool: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_add_group_task: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_group_task")
+    fileprivate static let method_add_group_task: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_group_task")
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1801953219)!
@@ -193,8 +193,8 @@ open class WorkerThreadPool: Object {
         return _result
     }
     
-    fileprivate static var method_is_group_task_completed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_group_task_completed")
+    fileprivate static let method_is_group_task_completed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_group_task_completed")
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -223,8 +223,8 @@ open class WorkerThreadPool: Object {
         return _result
     }
     
-    fileprivate static var method_get_group_processed_element_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_group_processed_element_count")
+    fileprivate static let method_get_group_processed_element_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_group_processed_element_count")
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -253,8 +253,8 @@ open class WorkerThreadPool: Object {
         return _result
     }
     
-    fileprivate static var method_wait_for_group_task_completion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("wait_for_group_task_completion")
+    fileprivate static let method_wait_for_group_task_completion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("wait_for_group_task_completion")
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!

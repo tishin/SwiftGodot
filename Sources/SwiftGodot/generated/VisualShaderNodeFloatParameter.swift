@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translated to `uniform float` in the shader language.
 open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
-    fileprivate static var className = StringName("VisualShaderNodeFloatParameter")
+    private static var className = StringName("VisualShaderNodeFloatParameter")
     override open class var godotClassName: StringName { className }
     public enum Hint: Int64, CaseIterable {
         /// No hint used.
@@ -112,8 +112,8 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     }
     
     /* Methods */
-    fileprivate static var method_set_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hint")
+    fileprivate static let method_set_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hint")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3712586466)!
@@ -125,6 +125,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_hint(_ hint: VisualShaderNodeFloatParameter.Hint) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -138,8 +139,8 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hint")
+    fileprivate static let method_get_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hint")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3042240429)!
@@ -151,13 +152,14 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_hint() -> VisualShaderNodeFloatParameter.Hint {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeFloatParameter.Hint (rawValue: _result)!
     }
     
-    fileprivate static var method_set_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min")
+    fileprivate static let method_set_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -169,6 +171,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_min(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -182,8 +185,8 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min")
+    fileprivate static let method_get_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -195,13 +198,14 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_min() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max")
+    fileprivate static let method_set_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -213,6 +217,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_max(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -226,8 +231,8 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max")
+    fileprivate static let method_get_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -239,13 +244,14 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_max() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_step")
+    fileprivate static let method_set_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_step")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -257,6 +263,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_step(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -270,8 +277,8 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_step")
+    fileprivate static let method_get_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_step")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -283,13 +290,14 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_default_value_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_value_enabled")
+    fileprivate static let method_set_default_value_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_value_enabled")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -301,6 +309,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_default_value_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -314,8 +323,8 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_is_default_value_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_default_value_enabled")
+    fileprivate static let method_is_default_value_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_default_value_enabled")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -327,13 +336,14 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func is_default_value_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_is_default_value_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_value")
+    fileprivate static let method_set_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_value")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -345,6 +355,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_default_value(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -358,8 +369,8 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_value")
+    fileprivate static let method_get_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_value")
         return withUnsafePointer(to: &VisualShaderNodeFloatParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -371,6 +382,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_default_value() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_default_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

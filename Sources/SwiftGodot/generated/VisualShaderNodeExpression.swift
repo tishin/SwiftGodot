@@ -26,7 +26,7 @@ import Musl
 /// The provided code is directly injected into the graph's matching shader function (`vertex`, `fragment`, or `light`), so it cannot be used to declare functions, varyings, uniforms, or global constants. See ``VisualShaderNodeGlobalExpression`` for such global definitions.
 /// 
 open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
-    fileprivate static var className = StringName("VisualShaderNodeExpression")
+    private static var className = StringName("VisualShaderNodeExpression")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
     }
     
     /* Methods */
-    fileprivate static var method_set_expression: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_expression")
+    fileprivate static let method_set_expression: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_expression")
         return withUnsafePointer(to: &VisualShaderNodeExpression.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -57,6 +57,7 @@ open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
     
     @inline(__always)
     fileprivate final func set_expression(_ expression: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let expression = GString(expression)
         withUnsafePointer(to: expression.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -71,8 +72,8 @@ open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
         
     }
     
-    fileprivate static var method_get_expression: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_expression")
+    fileprivate static let method_get_expression: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_expression")
         return withUnsafePointer(to: &VisualShaderNodeExpression.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -84,6 +85,7 @@ open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
     
     @inline(__always)
     fileprivate final func get_expression() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VisualShaderNodeExpression.method_get_expression, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

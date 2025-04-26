@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Class representing a cylindrical ``PrimitiveMesh``. This class can be used to create cones by setting either the ``topRadius`` or ``bottomRadius`` properties to `0.0`.
 open class CylinderMesh: PrimitiveMesh {
-    fileprivate static var className = StringName("CylinderMesh")
+    private static var className = StringName("CylinderMesh")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -119,8 +119,8 @@ open class CylinderMesh: PrimitiveMesh {
     }
     
     /* Methods */
-    fileprivate static var method_set_top_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_top_radius")
+    fileprivate static let method_set_top_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_top_radius")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -132,6 +132,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_top_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -145,8 +146,8 @@ open class CylinderMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_top_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_top_radius")
+    fileprivate static let method_get_top_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_top_radius")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -158,13 +159,14 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_top_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CylinderMesh.method_get_top_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bottom_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bottom_radius")
+    fileprivate static let method_set_bottom_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bottom_radius")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -176,6 +178,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_bottom_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -189,8 +192,8 @@ open class CylinderMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_bottom_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bottom_radius")
+    fileprivate static let method_get_bottom_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bottom_radius")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -202,13 +205,14 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_bottom_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CylinderMesh.method_get_bottom_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_height")
+    fileprivate static let method_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_height")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -220,6 +224,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_height(_ height: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -233,8 +238,8 @@ open class CylinderMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_height")
+    fileprivate static let method_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_height")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -246,13 +251,14 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_height() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CylinderMesh.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_radial_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_radial_segments")
+    fileprivate static let method_set_radial_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_radial_segments")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -264,6 +270,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_radial_segments(_ segments: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -277,8 +284,8 @@ open class CylinderMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_radial_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_radial_segments")
+    fileprivate static let method_get_radial_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_radial_segments")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -290,13 +297,14 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_radial_segments() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CylinderMesh.method_get_radial_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rings")
+    fileprivate static let method_set_rings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rings")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -308,6 +316,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_rings(_ rings: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -321,8 +330,8 @@ open class CylinderMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_rings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rings")
+    fileprivate static let method_get_rings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rings")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -334,13 +343,14 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_rings() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CylinderMesh.method_get_rings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cap_top: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cap_top")
+    fileprivate static let method_set_cap_top: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cap_top")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -352,6 +362,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_cap_top(_ capTop: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: capTop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -365,8 +376,8 @@ open class CylinderMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_is_cap_top: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_cap_top")
+    fileprivate static let method_is_cap_top: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_cap_top")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -378,13 +389,14 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func is_cap_top() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CylinderMesh.method_is_cap_top, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cap_bottom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cap_bottom")
+    fileprivate static let method_set_cap_bottom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cap_bottom")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -396,6 +408,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_cap_bottom(_ capBottom: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: capBottom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -409,8 +422,8 @@ open class CylinderMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_is_cap_bottom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_cap_bottom")
+    fileprivate static let method_is_cap_bottom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_cap_bottom")
         return withUnsafePointer(to: &CylinderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -422,6 +435,7 @@ open class CylinderMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func is_cap_bottom() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CylinderMesh.method_is_cap_bottom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

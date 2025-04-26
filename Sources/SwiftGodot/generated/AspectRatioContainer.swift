@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A container type that arranges its child controls in a way that preserves their proportions automatically when the container is resized. Useful when a container has a dynamic size and the child nodes must adjust their sizes accordingly without losing their aspect ratios.
 open class AspectRatioContainer: Container {
-    fileprivate static var className = StringName("AspectRatioContainer")
+    private static var className = StringName("AspectRatioContainer")
     override open class var godotClassName: StringName { className }
     public enum StretchMode: Int64, CaseIterable {
         /// The height of child controls is automatically adjusted based on the width of the container.
@@ -100,8 +100,8 @@ open class AspectRatioContainer: Container {
     }
     
     /* Methods */
-    fileprivate static var method_set_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ratio")
+    fileprivate static let method_set_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ratio")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -113,6 +113,7 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func set_ratio(_ ratio: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -126,8 +127,8 @@ open class AspectRatioContainer: Container {
         
     }
     
-    fileprivate static var method_get_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ratio")
+    fileprivate static let method_get_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ratio")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -139,13 +140,14 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func get_ratio() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_stretch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stretch_mode")
+    fileprivate static let method_set_stretch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stretch_mode")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1876743467)!
@@ -157,6 +159,7 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func set_stretch_mode(_ stretchMode: AspectRatioContainer.StretchMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stretchMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -170,8 +173,8 @@ open class AspectRatioContainer: Container {
         
     }
     
-    fileprivate static var method_get_stretch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stretch_mode")
+    fileprivate static let method_get_stretch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stretch_mode")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3416449033)!
@@ -183,13 +186,14 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func get_stretch_mode() -> AspectRatioContainer.StretchMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AspectRatioContainer.StretchMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_alignment_horizontal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alignment_horizontal")
+    fileprivate static let method_set_alignment_horizontal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alignment_horizontal")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2147829016)!
@@ -201,6 +205,7 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func set_alignment_horizontal(_ alignmentHorizontal: AspectRatioContainer.AlignmentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignmentHorizontal.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -214,8 +219,8 @@ open class AspectRatioContainer: Container {
         
     }
     
-    fileprivate static var method_get_alignment_horizontal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alignment_horizontal")
+    fileprivate static let method_get_alignment_horizontal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alignment_horizontal")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3838875429)!
@@ -227,13 +232,14 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func get_alignment_horizontal() -> AspectRatioContainer.AlignmentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_alignment_horizontal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AspectRatioContainer.AlignmentMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_alignment_vertical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alignment_vertical")
+    fileprivate static let method_set_alignment_vertical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alignment_vertical")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2147829016)!
@@ -245,6 +251,7 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func set_alignment_vertical(_ alignmentVertical: AspectRatioContainer.AlignmentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignmentVertical.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -258,8 +265,8 @@ open class AspectRatioContainer: Container {
         
     }
     
-    fileprivate static var method_get_alignment_vertical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alignment_vertical")
+    fileprivate static let method_get_alignment_vertical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alignment_vertical")
         return withUnsafePointer(to: &AspectRatioContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3838875429)!
@@ -271,6 +278,7 @@ open class AspectRatioContainer: Container {
     
     @inline(__always)
     fileprivate final func get_alignment_vertical() -> AspectRatioContainer.AlignmentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_alignment_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AspectRatioContainer.AlignmentMode (rawValue: _result)!

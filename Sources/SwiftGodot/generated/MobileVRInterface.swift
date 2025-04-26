@@ -27,8 +27,10 @@ import Musl
 /// 
 /// You can initialize this interface as follows:
 /// 
+/// > Note: For Android, ``ProjectSettings/inputDevices/sensors/enableAccelerometer``, ``ProjectSettings/inputDevices/sensors/enableGravity``, ``ProjectSettings/inputDevices/sensors/enableGyroscope`` and ``ProjectSettings/inputDevices/sensors/enableMagnetometer`` must be enabled.
+/// 
 open class MobileVRInterface: XRInterface {
-    fileprivate static var className = StringName("MobileVRInterface")
+    private static var className = StringName("MobileVRInterface")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -160,8 +162,8 @@ open class MobileVRInterface: XRInterface {
     }
     
     /* Methods */
-    fileprivate static var method_set_eye_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_eye_height")
+    fileprivate static let method_set_eye_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_eye_height")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -173,6 +175,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_eye_height(_ eyeHeight: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: eyeHeight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -186,8 +189,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_eye_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_eye_height")
+    fileprivate static let method_get_eye_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_eye_height")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -199,13 +202,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_eye_height() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_eye_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_iod: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_iod")
+    fileprivate static let method_set_iod: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_iod")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -217,6 +221,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_iod(_ iod: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: iod) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -230,8 +235,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_iod: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_iod")
+    fileprivate static let method_get_iod: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_iod")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -243,13 +248,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_iod() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_iod, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_display_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_display_width")
+    fileprivate static let method_set_display_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_display_width")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -261,6 +267,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_display_width(_ displayWidth: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: displayWidth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -274,8 +281,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_display_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_display_width")
+    fileprivate static let method_get_display_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_display_width")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -287,13 +294,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_display_width() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_display_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_display_to_lens: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_display_to_lens")
+    fileprivate static let method_set_display_to_lens: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_display_to_lens")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -305,6 +313,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_display_to_lens(_ displayToLens: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: displayToLens) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -318,8 +327,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_display_to_lens: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_display_to_lens")
+    fileprivate static let method_get_display_to_lens: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_display_to_lens")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -331,13 +340,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_display_to_lens() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_display_to_lens, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset_rect")
+    fileprivate static let method_set_offset_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset_rect")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -349,6 +359,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_offset_rect(_ offsetRect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offsetRect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -362,8 +373,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_offset_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset_rect")
+    fileprivate static let method_get_offset_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset_rect")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -375,13 +386,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_offset_rect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_offset_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_oversample: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_oversample")
+    fileprivate static let method_set_oversample: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_oversample")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -393,6 +405,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_oversample(_ oversample: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oversample) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -406,8 +419,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_oversample: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_oversample")
+    fileprivate static let method_get_oversample: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_oversample")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -419,13 +432,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_oversample() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_oversample, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_k1: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_k1")
+    fileprivate static let method_set_k1: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_k1")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -437,6 +451,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_k1(_ k: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: k) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -450,8 +465,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_k1: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_k1")
+    fileprivate static let method_get_k1: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_k1")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -463,13 +478,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_k1() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_k1, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_k2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_k2")
+    fileprivate static let method_set_k2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_k2")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -481,6 +497,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_k2(_ k: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: k) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -494,8 +511,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_k2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_k2")
+    fileprivate static let method_get_k2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_k2")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -507,13 +524,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_k2() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_k2, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_vrs_min_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_min_radius")
+    fileprivate static let method_get_vrs_min_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_min_radius")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -525,13 +543,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_vrs_min_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vrs_min_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_min_radius")
+    fileprivate static let method_set_vrs_min_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_min_radius")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -543,6 +562,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_vrs_min_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -556,8 +576,8 @@ open class MobileVRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_vrs_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_strength")
+    fileprivate static let method_get_vrs_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_strength")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -569,13 +589,14 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_vrs_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MobileVRInterface.method_get_vrs_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vrs_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_strength")
+    fileprivate static let method_set_vrs_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_strength")
         return withUnsafePointer(to: &MobileVRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -587,6 +608,7 @@ open class MobileVRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_vrs_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

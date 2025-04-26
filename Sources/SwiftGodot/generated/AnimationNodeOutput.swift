@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A node created automatically in an ``AnimationNodeBlendTree`` that outputs the final animation.
 open class AnimationNodeOutput: AnimationNode {
-    fileprivate static var className = StringName("AnimationNodeOutput")
+    private static var className = StringName("AnimationNodeOutput")
     override open class var godotClassName: StringName { className }
 }
 

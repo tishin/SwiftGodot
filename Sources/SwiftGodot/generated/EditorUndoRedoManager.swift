@@ -44,7 +44,7 @@ import Musl
 /// - ``historyChanged``
 /// - ``versionChanged``
 open class EditorUndoRedoManager: Object {
-    fileprivate static var className = StringName("EditorUndoRedoManager")
+    private static var className = StringName("EditorUndoRedoManager")
     override open class var godotClassName: StringName { className }
     public enum SpecialHistory: Int64, CaseIterable {
         /// Global history not associated with any scene, but with external resources etc.
@@ -56,8 +56,8 @@ open class EditorUndoRedoManager: Object {
     }
     
     /* Methods */
-    fileprivate static var method_create_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_action")
+    fileprivate static let method_create_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_action")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2107025470)!
@@ -76,6 +76,7 @@ open class EditorUndoRedoManager: Object {
     /// The way undo operation are ordered in actions is dictated by `backwardUndoOps`. When `backwardUndoOps` is `false` undo option are ordered in the same order they were added. Which means the first operation to be added will be the first to be undone.
     /// 
     public final func createAction(name: String, mergeMode: UndoRedo.MergeMode = .disable, customContext: Object? = nil, backwardUndoOps: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: mergeMode.rawValue) { pArg1 in
@@ -99,8 +100,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_commit_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("commit_action")
+    fileprivate static let method_commit_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("commit_action")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3216645846)!
@@ -110,8 +111,9 @@ open class EditorUndoRedoManager: Object {
         
     }()
     
-    /// Commit the action. If `execute` is true (default), all "do" methods/properties are called/set when this function is called.
+    /// Commits the action. If `execute` is `true` (default), all "do" methods/properties are called/set when this function is called.
     public final func commitAction(execute: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: execute) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -125,8 +127,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_is_committing_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_committing_action")
+    fileprivate static let method_is_committing_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_committing_action")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -138,13 +140,14 @@ open class EditorUndoRedoManager: Object {
     
     /// Returns `true` if the ``EditorUndoRedoManager`` is currently committing the action, i.e. running its "do" method or property change (see ``commitAction(execute:)``).
     public final func isCommittingAction() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_is_committing_action, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_force_fixed_history: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_fixed_history")
+    fileprivate static let method_force_fixed_history: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_fixed_history")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -159,12 +162,13 @@ open class EditorUndoRedoManager: Object {
     /// This method should only be used when absolutely necessary, otherwise it might cause invalid history state. For most of complex cases, the `custom_context` parameter of ``createAction(name:mergeMode:customContext:backwardUndoOps:)`` is sufficient.
     /// 
     public final func forceFixedHistory() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_force_fixed_history, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_add_do_method: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_do_method")
+    fileprivate static let method_add_do_method: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_do_method")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1517810467)!
@@ -179,10 +183,11 @@ open class EditorUndoRedoManager: Object {
     /// If this is the first operation, the `object` will be used to deduce target undo history.
     /// 
     public final func addDoMethod(object: Object?, method: StringName, _ arguments: Variant?...) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let object = Variant(object)
+        let object = object.toVariant()
         withUnsafePointer(to: object.content) { pArg0 in
-            let method = Variant(method)
+            let method = method.toVariant()
             withUnsafePointer(to: method.content) { pArg1 in
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -227,8 +232,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_add_undo_method: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_undo_method")
+    fileprivate static let method_add_undo_method: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_undo_method")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1517810467)!
@@ -243,10 +248,11 @@ open class EditorUndoRedoManager: Object {
     /// If this is the first operation, the `object` will be used to deduce target undo history.
     /// 
     public final func addUndoMethod(object: Object?, method: StringName, _ arguments: Variant?...) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let object = Variant(object)
+        let object = object.toVariant()
         withUnsafePointer(to: object.content) { pArg0 in
-            let method = Variant(method)
+            let method = method.toVariant()
             withUnsafePointer(to: method.content) { pArg1 in
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -291,8 +297,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_add_do_property: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_do_property")
+    fileprivate static let method_add_do_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_do_property")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1017172818)!
@@ -307,6 +313,7 @@ open class EditorUndoRedoManager: Object {
     /// If this is the first operation, the `object` will be used to deduce target undo history.
     /// 
     public final func addDoProperty(object: Object?, property: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: value.content) { pArg2 in
@@ -326,8 +333,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_add_undo_property: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_undo_property")
+    fileprivate static let method_add_undo_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_undo_property")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1017172818)!
@@ -342,6 +349,7 @@ open class EditorUndoRedoManager: Object {
     /// If this is the first operation, the `object` will be used to deduce target undo history.
     /// 
     public final func addUndoProperty(object: Object?, property: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: value.content) { pArg2 in
@@ -361,8 +369,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_add_do_reference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_do_reference")
+    fileprivate static let method_add_do_reference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_do_reference")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3975164845)!
@@ -374,6 +382,7 @@ open class EditorUndoRedoManager: Object {
     
     /// Register a reference for "do" that will be erased if the "do" history is lost. This is useful mostly for new nodes created for the "do" call. Do not use for resources.
     public final func addDoReference(object: Object?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -387,8 +396,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_add_undo_reference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_undo_reference")
+    fileprivate static let method_add_undo_reference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_undo_reference")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3975164845)!
@@ -400,6 +409,7 @@ open class EditorUndoRedoManager: Object {
     
     /// Register a reference for "undo" that will be erased if the "undo" history is lost. This is useful mostly for nodes removed with the "do" call (not the "undo" call!).
     public final func addUndoReference(object: Object?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -413,8 +423,8 @@ open class EditorUndoRedoManager: Object {
         
     }
     
-    fileprivate static var method_get_object_history_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_object_history_id")
+    fileprivate static let method_get_object_history_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_object_history_id")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1107568780)!
@@ -426,6 +436,7 @@ open class EditorUndoRedoManager: Object {
     
     /// Returns the history ID deduced from the given `object`. It can be used with ``getHistoryUndoRedo(id:)``.
     public final func getObjectHistoryId(object: Object?) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -440,8 +451,8 @@ open class EditorUndoRedoManager: Object {
         return _result
     }
     
-    fileprivate static var method_get_history_undo_redo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_history_undo_redo")
+    fileprivate static let method_get_history_undo_redo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_history_undo_redo")
         return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2417974513)!
@@ -458,6 +469,7 @@ open class EditorUndoRedoManager: Object {
     /// Best used with ``getObjectHistoryId(object:)``. This method is only provided in case you need some more advanced methods of ``UndoRedo`` (but keep in mind that directly operating on the ``UndoRedo`` object might affect editor's stability).
     /// 
     public final func getHistoryUndoRedo(id: Int32) -> UndoRedo? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -469,7 +481,42 @@ open class EditorUndoRedoManager: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_clear_history: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_history")
+        return withUnsafePointer(to: &EditorUndoRedoManager.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2020603371)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Clears the given undo history. You can clear history for a specific scene, global history, or for all scenes at once if `id` is ``SpecialHistory/invalidHistory``.
+    /// 
+    /// If `increaseVersion` is `true`, the undo history version will be increased, marking it as unsaved. Useful for operations that modify the scene, but don't support undo.
+    /// 
+    /// > Note: If you want to mark an edited scene as unsaved without clearing its history, use ``EditorInterface/markSceneAsUnsaved()`` instead.
+    /// 
+    public final func clearHistory(id: Int32 = -99, increaseVersion: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: increaseVersion) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_clear_history, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
     // Signals 

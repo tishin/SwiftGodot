@@ -26,7 +26,7 @@ import Musl
 /// Returns `0.0` if `x` is smaller than `edge0` and `1.0` if `x` is larger than `edge1`. Otherwise, the return value is interpolated between `0.0` and `1.0` using Hermite polynomials.
 /// 
 open class VisualShaderNodeSmoothStep: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeSmoothStep")
+    private static var className = StringName("VisualShaderNodeSmoothStep")
     override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar type.
@@ -63,8 +63,8 @@ open class VisualShaderNodeSmoothStep: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_op_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_op_type")
+    fileprivate static let method_set_op_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_op_type")
         return withUnsafePointer(to: &VisualShaderNodeSmoothStep.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2427426148)!
@@ -76,6 +76,7 @@ open class VisualShaderNodeSmoothStep: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_op_type(_ opType: VisualShaderNodeSmoothStep.OpType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: opType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -89,8 +90,8 @@ open class VisualShaderNodeSmoothStep: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_op_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_op_type")
+    fileprivate static let method_get_op_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_op_type")
         return withUnsafePointer(to: &VisualShaderNodeSmoothStep.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 359640855)!
@@ -102,6 +103,7 @@ open class VisualShaderNodeSmoothStep: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_op_type() -> VisualShaderNodeSmoothStep.OpType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeSmoothStep.method_get_op_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeSmoothStep.OpType (rawValue: _result)!

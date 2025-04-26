@@ -23,7 +23,7 @@ import Musl
 /// 
 /// By changing various properties of this object, such as the start and target position, you can configure path queries to the ``NavigationServer3D``.
 open class NavigationPathQueryParameters3D: RefCounted {
-    fileprivate static var className = StringName("NavigationPathQueryParameters3D")
+    private static var className = StringName("NavigationPathQueryParameters3D")
     override open class var godotClassName: StringName { className }
     public enum PathfindingAlgorithm: Int64, CaseIterable {
         /// The path query uses the default A* pathfinding algorithm.
@@ -35,6 +35,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         case corridorfunnel = 0 // PATH_POSTPROCESSING_CORRIDORFUNNEL
         /// Centers every path position in the middle of the traveled navigation mesh polygon edge. This creates better paths for tile- or gridbased layouts that restrict the movement to the cells center.
         case edgecentered = 1 // PATH_POSTPROCESSING_EDGECENTERED
+        /// Applies no postprocessing and returns the raw path corridor as found by the pathfinding algorithm.
+        case none = 2 // PATH_POSTPROCESSING_NONE
     }
     
     public struct PathMetadataFlags: OptionSet, CustomDebugStringConvertible {
@@ -179,8 +181,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_pathfinding_algorithm: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pathfinding_algorithm")
+    fileprivate static let method_set_pathfinding_algorithm: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pathfinding_algorithm")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 394560454)!
@@ -192,6 +194,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_pathfinding_algorithm(_ pathfindingAlgorithm: NavigationPathQueryParameters3D.PathfindingAlgorithm) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pathfindingAlgorithm.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -205,8 +208,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_pathfinding_algorithm: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pathfinding_algorithm")
+    fileprivate static let method_get_pathfinding_algorithm: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pathfinding_algorithm")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3398491350)!
@@ -218,13 +221,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_pathfinding_algorithm() -> NavigationPathQueryParameters3D.PathfindingAlgorithm {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_pathfinding_algorithm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NavigationPathQueryParameters3D.PathfindingAlgorithm (rawValue: _result)!
     }
     
-    fileprivate static var method_set_path_postprocessing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_postprocessing")
+    fileprivate static let method_set_path_postprocessing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_postprocessing")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2267362344)!
@@ -236,6 +240,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_path_postprocessing(_ pathPostprocessing: NavigationPathQueryParameters3D.PathPostProcessing) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pathPostprocessing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -249,8 +254,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_path_postprocessing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_postprocessing")
+    fileprivate static let method_get_path_postprocessing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_postprocessing")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3883858360)!
@@ -262,13 +267,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_path_postprocessing() -> NavigationPathQueryParameters3D.PathPostProcessing {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_path_postprocessing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NavigationPathQueryParameters3D.PathPostProcessing (rawValue: _result)!
     }
     
-    fileprivate static var method_set_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_map")
+    fileprivate static let method_set_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_map")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -280,6 +286,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_map(_ map: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -293,8 +300,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_map")
+    fileprivate static let method_get_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_map")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -306,13 +313,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_map() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_start_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_start_position")
+    fileprivate static let method_set_start_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_start_position")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -324,6 +332,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_start_position(_ startPosition: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: startPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -337,8 +346,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_start_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_start_position")
+    fileprivate static let method_get_start_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_start_position")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -350,13 +359,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_start_position() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_start_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_target_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_position")
+    fileprivate static let method_set_target_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_position")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -368,6 +378,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_target_position(_ targetPosition: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: targetPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -381,8 +392,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_target_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_position")
+    fileprivate static let method_get_target_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_position")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -394,13 +405,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_target_position() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_target_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_layers")
+    fileprivate static let method_set_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_layers")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -412,6 +424,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_navigation_layers(_ navigationLayers: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: navigationLayers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -425,8 +438,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_layers")
+    fileprivate static let method_get_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_layers")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -438,13 +451,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_navigation_layers() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_navigation_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_metadata_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_metadata_flags")
+    fileprivate static let method_set_metadata_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_metadata_flags")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2713846708)!
@@ -456,6 +470,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_metadata_flags(_ flags: NavigationPathQueryParameters3D.PathMetadataFlags) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -469,8 +484,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_metadata_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_metadata_flags")
+    fileprivate static let method_get_metadata_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_metadata_flags")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1582332802)!
@@ -482,13 +497,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_metadata_flags() -> NavigationPathQueryParameters3D.PathMetadataFlags {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: NavigationPathQueryParameters3D.PathMetadataFlags = NavigationPathQueryParameters3D.PathMetadataFlags ()
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_metadata_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_simplify_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_simplify_path")
+    fileprivate static let method_set_simplify_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_simplify_path")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -500,6 +516,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_simplify_path(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -513,8 +530,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_simplify_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_simplify_path")
+    fileprivate static let method_get_simplify_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_simplify_path")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -526,13 +543,14 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_simplify_path() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_simplify_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_simplify_epsilon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_simplify_epsilon")
+    fileprivate static let method_set_simplify_epsilon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_simplify_epsilon")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -544,6 +562,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_simplify_epsilon(_ epsilon: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: epsilon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -557,8 +576,8 @@ open class NavigationPathQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_simplify_epsilon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_simplify_epsilon")
+    fileprivate static let method_get_simplify_epsilon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_simplify_epsilon")
         return withUnsafePointer(to: &NavigationPathQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -570,6 +589,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_simplify_epsilon() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_simplify_epsilon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Accept an unsigned integer scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeUIntFunc: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeUIntFunc")
+    private static var className = StringName("VisualShaderNodeUIntFunc")
     override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Negates the `x` using `-(x)`.
@@ -50,8 +50,8 @@ open class VisualShaderNodeUIntFunc: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_function")
+    fileprivate static let method_set_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_function")
         return withUnsafePointer(to: &VisualShaderNodeUIntFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2273148961)!
@@ -63,6 +63,7 @@ open class VisualShaderNodeUIntFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_function(_ `func`: VisualShaderNodeUIntFunc.Function) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -76,8 +77,8 @@ open class VisualShaderNodeUIntFunc: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_function")
+    fileprivate static let method_get_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_function")
         return withUnsafePointer(to: &VisualShaderNodeUIntFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4187123296)!
@@ -89,6 +90,7 @@ open class VisualShaderNodeUIntFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_function() -> VisualShaderNodeUIntFunc.Function {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeUIntFunc.method_get_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeUIntFunc.Function (rawValue: _result)!

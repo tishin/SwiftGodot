@@ -26,7 +26,7 @@ import Musl
 /// > Note: This class has known issues and isn't designed to provide realistic 3D vehicle physics. If you want advanced vehicle physics, you may need to write your own physics integration using another ``PhysicsBody3D`` class.
 /// 
 open class VehicleWheel3D: Node3D {
-    fileprivate static var className = StringName("VehicleWheel3D")
+    private static var className = StringName("VehicleWheel3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -159,7 +159,7 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    /// This value defines the stiffness of the suspension. Use a value lower than 50 for an off-road car, a value between 50 and 100 for a race car and try something around 200 for something like a Formula 1 car.
+    /// The stiffness of the suspension, measured in Newtons per millimeter (N/mm), or megagrams per second squared (Mg/s²). Use a value lower than 50 for an off-road car, a value between 50 and 100 for a race car and try something around 200 for something like a Formula 1 car.
     final public var suspensionStiffness: Double {
         get {
             return get_suspension_stiffness ()
@@ -183,7 +183,7 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    /// The damping applied to the spring when the spring is being compressed. This value should be between 0.0 (no damping) and 1.0. A value of 0.0 means the car will keep bouncing as the spring keeps its energy. A good value for this is around 0.3 for a normal car, 0.5 for a race car.
+    /// The damping applied to the suspension spring when being compressed, meaning when the wheel is moving up relative to the vehicle. It is measured in Newton-seconds per millimeter (N⋅s/mm), or megagrams per second (Mg/s). This value should be between 0.0 (no damping) and 1.0, but may be more. A value of 0.0 means the car will keep bouncing as the spring keeps its energy. A good value for this is around 0.3 for a normal car, 0.5 for a race car.
     final public var dampingCompression: Double {
         get {
             return get_damping_compression ()
@@ -195,7 +195,7 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    /// The damping applied to the spring when relaxing. This value should be between 0.0 (no damping) and 1.0. This value should always be slightly higher than the ``dampingCompression`` property. For a ``dampingCompression`` value of 0.3, try a relaxation value of 0.5.
+    /// The damping applied to the suspension spring when rebounding or extending, meaning when the wheel is moving down relative to the vehicle. It is measured in Newton-seconds per millimeter (N⋅s/mm), or megagrams per second (Mg/s). This value should be between 0.0 (no damping) and 1.0, but may be more. This value should always be slightly higher than the ``dampingCompression`` property. For a ``dampingCompression`` value of 0.3, try a relaxation value of 0.5.
     final public var dampingRelaxation: Double {
         get {
             return get_damping_relaxation ()
@@ -208,8 +208,8 @@ open class VehicleWheel3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_radius")
+    fileprivate static let method_set_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_radius")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -221,6 +221,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_radius(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -234,8 +235,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_radius")
+    fileprivate static let method_get_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_radius")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -247,13 +248,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_suspension_rest_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_suspension_rest_length")
+    fileprivate static let method_set_suspension_rest_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_suspension_rest_length")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -265,6 +267,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_suspension_rest_length(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -278,8 +281,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_suspension_rest_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_suspension_rest_length")
+    fileprivate static let method_get_suspension_rest_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_suspension_rest_length")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -291,13 +294,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_suspension_rest_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_rest_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_suspension_travel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_suspension_travel")
+    fileprivate static let method_set_suspension_travel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_suspension_travel")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -309,6 +313,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_suspension_travel(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -322,8 +327,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_suspension_travel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_suspension_travel")
+    fileprivate static let method_get_suspension_travel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_suspension_travel")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -335,13 +340,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_suspension_travel() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_travel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_suspension_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_suspension_stiffness")
+    fileprivate static let method_set_suspension_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_suspension_stiffness")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -353,6 +359,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_suspension_stiffness(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -366,8 +373,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_suspension_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_suspension_stiffness")
+    fileprivate static let method_get_suspension_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_suspension_stiffness")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -379,13 +386,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_suspension_stiffness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_suspension_max_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_suspension_max_force")
+    fileprivate static let method_set_suspension_max_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_suspension_max_force")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -397,6 +405,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_suspension_max_force(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -410,8 +419,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_suspension_max_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_suspension_max_force")
+    fileprivate static let method_get_suspension_max_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_suspension_max_force")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -423,13 +432,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_suspension_max_force() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_max_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_damping_compression: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_damping_compression")
+    fileprivate static let method_set_damping_compression: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_damping_compression")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -441,6 +451,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_damping_compression(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -454,8 +465,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_damping_compression: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_damping_compression")
+    fileprivate static let method_get_damping_compression: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_damping_compression")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -467,13 +478,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_damping_compression() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_damping_compression, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_damping_relaxation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_damping_relaxation")
+    fileprivate static let method_set_damping_relaxation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_damping_relaxation")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -485,6 +497,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_damping_relaxation(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -498,8 +511,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_damping_relaxation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_damping_relaxation")
+    fileprivate static let method_get_damping_relaxation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_damping_relaxation")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -511,13 +524,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_damping_relaxation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_damping_relaxation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_as_traction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_as_traction")
+    fileprivate static let method_set_use_as_traction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_as_traction")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -529,6 +543,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_use_as_traction(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -542,8 +557,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_is_used_as_traction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_used_as_traction")
+    fileprivate static let method_is_used_as_traction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_used_as_traction")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -555,13 +570,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func is_used_as_traction() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_used_as_traction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_as_steering: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_as_steering")
+    fileprivate static let method_set_use_as_steering: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_as_steering")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -573,6 +589,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_use_as_steering(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -586,8 +603,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_is_used_as_steering: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_used_as_steering")
+    fileprivate static let method_is_used_as_steering: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_used_as_steering")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -599,13 +616,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func is_used_as_steering() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_used_as_steering, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_friction_slip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_friction_slip")
+    fileprivate static let method_set_friction_slip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_friction_slip")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -617,6 +635,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_friction_slip(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -630,8 +649,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_friction_slip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_friction_slip")
+    fileprivate static let method_get_friction_slip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_friction_slip")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -643,13 +662,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_friction_slip() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_friction_slip, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_in_contact: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_in_contact")
+    fileprivate static let method_is_in_contact: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_in_contact")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -661,13 +681,14 @@ open class VehicleWheel3D: Node3D {
     
     /// Returns `true` if this wheel is in contact with a surface.
     public final func isInContact() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_in_contact, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_contact_body: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_body")
+    fileprivate static let method_get_contact_body: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_body")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 151077316)!
@@ -682,13 +703,52 @@ open class VehicleWheel3D: Node3D {
     /// Returns `null` if the wheel is not in contact with a surface, or the contact body is not a ``PhysicsBody3D``.
     /// 
     public final func getContactBody() -> Node3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_body, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_roll_influence: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_roll_influence")
+    fileprivate static let method_get_contact_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_point")
+        return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the point of the suspension's collision in world space if the wheel is in contact. If the wheel isn't in contact with anything, returns the maximum point of the wheel's ray cast in world space, which is defined by `wheel_rest_length + wheel_radius`.
+    public final func getContactPoint() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector3 = Vector3 ()
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_contact_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_normal")
+        return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the normal of the suspension's collision in world space if the wheel is in contact. If the wheel isn't in contact with anything, returns a vector pointing directly along the suspension axis toward the vehicle in world space.
+    public final func getContactNormal() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector3 = Vector3 ()
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_roll_influence: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_roll_influence")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -700,6 +760,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_roll_influence(_ rollInfluence: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rollInfluence) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -713,8 +774,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_roll_influence: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_roll_influence")
+    fileprivate static let method_get_roll_influence: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_roll_influence")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -726,13 +787,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_roll_influence() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_roll_influence, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_skidinfo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skidinfo")
+    fileprivate static let method_get_skidinfo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skidinfo")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -744,13 +806,14 @@ open class VehicleWheel3D: Node3D {
     
     /// Returns a value between 0.0 and 1.0 that indicates whether this wheel is skidding. 0.0 is skidding (the wheel has lost grip, e.g. icy terrain), 1.0 means not skidding (the wheel has full grip, e.g. dry asphalt road).
     public final func getSkidinfo() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_skidinfo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rpm: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rpm")
+    fileprivate static let method_get_rpm: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rpm")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -762,13 +825,14 @@ open class VehicleWheel3D: Node3D {
     
     /// Returns the rotational speed of the wheel in revolutions per minute.
     public final func getRpm() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_rpm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_engine_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_engine_force")
+    fileprivate static let method_set_engine_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_engine_force")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -780,6 +844,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_engine_force(_ engineForce: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: engineForce) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -793,8 +858,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_engine_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_engine_force")
+    fileprivate static let method_get_engine_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_engine_force")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -806,13 +871,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_engine_force() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_engine_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_brake: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_brake")
+    fileprivate static let method_set_brake: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_brake")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -824,6 +890,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_brake(_ brake: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: brake) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -837,8 +904,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_brake: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_brake")
+    fileprivate static let method_get_brake: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_brake")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -850,13 +917,14 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_brake() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_brake, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_steering: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_steering")
+    fileprivate static let method_set_steering: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_steering")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -868,6 +936,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_steering(_ steering: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: steering) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -881,8 +950,8 @@ open class VehicleWheel3D: Node3D {
         
     }
     
-    fileprivate static var method_get_steering: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_steering")
+    fileprivate static let method_get_steering: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_steering")
         return withUnsafePointer(to: &VehicleWheel3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -894,6 +963,7 @@ open class VehicleWheel3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_steering() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_steering, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

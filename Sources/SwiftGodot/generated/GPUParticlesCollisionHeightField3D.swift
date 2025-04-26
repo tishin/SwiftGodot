@@ -32,7 +32,7 @@ import Musl
 /// > Note: Particle collision only affects ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
-    fileprivate static var className = StringName("GPUParticlesCollisionHeightField3D")
+    private static var className = StringName("GPUParticlesCollisionHeightField3D")
     override open class var godotClassName: StringName { className }
     public enum Resolution: Int64, CaseIterable {
         /// Generate a 256×256 heightmap. Intended for small-scale scenes, or larger scenes with no distant particles.
@@ -112,9 +112,26 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         
     }
     
+    /// The visual layers to account for when updating the heightmap. Only ``MeshInstance3D``s whose ``VisualInstance3D/layers`` match with this ``heightfieldMask`` will be included in the heightmap collision update. By default, all 20 user-visible layers are taken into account for updating the heightmap collision.
+    /// 
+    /// > Note: Since the ``heightfieldMask`` allows for 32 layers to be stored in total, there are an additional 12 layers that are only used internally by the engine and aren't exposed in the editor. Setting ``heightfieldMask`` using a script allows you to toggle those reserved layers, which can be useful for editor plugins.
+    /// 
+    /// To adjust ``heightfieldMask`` more easily using a script, use ``getHeightfieldMaskValue(layerNumber:)`` and ``setHeightfieldMaskValue(layerNumber:value:)``.
+    /// 
+    final public var heightfieldMask: UInt32 {
+        get {
+            return get_heightfield_mask ()
+        }
+        
+        set {
+            set_heightfield_mask (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -126,6 +143,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -139,8 +157,8 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -152,13 +170,14 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_resolution")
+    fileprivate static let method_set_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_resolution")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1009996517)!
@@ -170,6 +189,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_resolution(_ resolution: GPUParticlesCollisionHeightField3D.Resolution) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: resolution.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -183,8 +203,8 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resolution")
+    fileprivate static let method_get_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resolution")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1156065644)!
@@ -196,13 +216,14 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_resolution() -> GPUParticlesCollisionHeightField3D.Resolution {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_resolution, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GPUParticlesCollisionHeightField3D.Resolution (rawValue: _result)!
     }
     
-    fileprivate static var method_set_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_update_mode")
+    fileprivate static let method_set_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_update_mode")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 673680859)!
@@ -214,6 +235,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_update_mode(_ updateMode: GPUParticlesCollisionHeightField3D.UpdateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: updateMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -227,8 +249,8 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_update_mode")
+    fileprivate static let method_get_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_update_mode")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1998141380)!
@@ -240,13 +262,118 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_update_mode() -> GPUParticlesCollisionHeightField3D.UpdateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GPUParticlesCollisionHeightField3D.UpdateMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_follow_camera_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_follow_camera_enabled")
+    fileprivate static let method_set_heightfield_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightfield_mask")
+        return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_heightfield_mask(_ heightfieldMask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: heightfieldMask) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_heightfield_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_heightfield_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heightfield_mask")
+        return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_heightfield_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt32 = 0
+        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_heightfield_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_heightfield_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightfield_mask_value")
+        return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Based on `value`, enables or disables the specified layer in the ``heightfieldMask``, given a `layerNumber` between `1` and `20`, inclusive.
+    public final func setHeightfieldMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: layerNumber) { pArg0 in
+            withUnsafePointer(to: value) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_heightfield_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_heightfield_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heightfield_mask_value")
+        return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the specified layer of the ``heightfieldMask`` is enabled, given a `layerNumber` between `1` and `20`, inclusive.
+    public final func getHeightfieldMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: layerNumber) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_heightfield_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_set_follow_camera_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_follow_camera_enabled")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -258,6 +385,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_follow_camera_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -271,8 +399,8 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_is_follow_camera_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_follow_camera_enabled")
+    fileprivate static let method_is_follow_camera_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_follow_camera_enabled")
         return withUnsafePointer(to: &GPUParticlesCollisionHeightField3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -284,6 +412,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func is_follow_camera_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_is_follow_camera_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

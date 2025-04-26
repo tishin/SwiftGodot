@@ -38,7 +38,7 @@ import Musl
 /// - ``sizeChanged``
 /// - ``guiFocusChanged``
 open class Viewport: Node {
-    fileprivate static var className = StringName("Viewport")
+    private static var className = StringName("Viewport")
     override open class var godotClassName: StringName { className }
     public enum PositionalShadowAtlasQuadrantSubdiv: Int64, CaseIterable {
         /// This quadrant will not be used.
@@ -66,8 +66,30 @@ open class Viewport: Node {
         case fsr = 1 // SCALING_3D_MODE_FSR
         /// Use AMD FidelityFX Super Resolution 2.2 upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using FSR2. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` will use FSR2 at native resolution as a TAA solution.
         case fsr2 = 2 // SCALING_3D_MODE_FSR2
+        /// Use the <a href="https://developer.apple.com/documentation/metalfx/mtlfxspatialscaler#overview">MetalFX spatial upscaler</a> for the viewport's 3D buffer.
+        /// 
+        /// The amount of scaling can be set using ``scaling3dScale``.
+        /// 
+        /// Values less than `1.0` will be result in the viewport being upscaled using MetalFX. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` disables scaling.
+        /// 
+        /// More information: <a href="https://developer.apple.com/documentation/metalfx">MetalFX</a>.
+        /// 
+        /// > Note: Only supported when the Metal rendering driver is in use, which limits this scaling mode to macOS and iOS.
+        /// 
+        case metalfxSpatial = 3 // SCALING_3D_MODE_METALFX_SPATIAL
+        /// Use the <a href="https://developer.apple.com/documentation/metalfx/mtlfxtemporalscaler#overview">MetalFX temporal upscaler</a> for the viewport's 3D buffer.
+        /// 
+        /// The amount of scaling can be set using ``scaling3dScale``. To determine the minimum input scale, use the ``RenderingDevice/limitGet(limit:)`` method with ``RenderingDevice/Limit/metalfxTemporalScalerMinScale``.
+        /// 
+        /// Values less than `1.0` will be result in the viewport being upscaled using MetalFX. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` will use MetalFX at native resolution as a TAA solution.
+        /// 
+        /// More information: <a href="https://developer.apple.com/documentation/metalfx">MetalFX</a>.
+        /// 
+        /// > Note: Only supported when the Metal rendering driver is in use, which limits this scaling mode to macOS and iOS.
+        /// 
+        case metalfxTemporal = 4 // SCALING_3D_MODE_METALFX_TEMPORAL
         /// Represents the size of the ``Viewport/Scaling3DMode`` enum.
-        case max = 3 // SCALING_3D_MODE_MAX
+        case max = 5 // SCALING_3D_MODE_MAX
     }
     
     public enum MSAA: Int64, CaseIterable {
@@ -81,6 +103,21 @@ open class Viewport: Node {
         case msaa8x = 3 // MSAA_8X
         /// Represents the size of the ``Viewport/MSAA`` enum.
         case max = 4 // MSAA_MAX
+    }
+    
+    public enum AnisotropicFiltering: Int64, CaseIterable {
+        /// Anisotropic filtering is disabled.
+        case disabled = 0 // ANISOTROPY_DISABLED
+        /// Use 2× anisotropic filtering.
+        case anisotropy2x = 1 // ANISOTROPY_2X
+        /// Use 4× anisotropic filtering. This is the default value.
+        case anisotropy4x = 2 // ANISOTROPY_4X
+        /// Use 8× anisotropic filtering.
+        case anisotropy8x = 3 // ANISOTROPY_8X
+        /// Use 16× anisotropic filtering.
+        case anisotropy16x = 4 // ANISOTROPY_16X
+        /// Represents the size of the ``Viewport/AnisotropicFiltering`` enum.
+        case max = 5 // ANISOTROPY_MAX
     }
     
     public enum ScreenSpaceAA: Int64, CaseIterable {
@@ -124,6 +161,9 @@ open class Viewport: Node {
         /// Objects are displayed semi-transparent with additive blending so you can see where they are drawing over top of one another. A higher overdraw means you are wasting performance on drawing pixels that are being hidden behind others.
         case overdraw = 3 // DEBUG_DRAW_OVERDRAW
         /// Objects are displayed as wireframe models.
+        /// 
+        /// > Note: ``RenderingServer/setDebugGenerateWireframes(generate:)`` must be called before loading any meshes for wireframes to be visible when using the Compatibility renderer.
+        /// 
         case wireframe = 4 // DEBUG_DRAW_WIREFRAME
         /// Objects are displayed without lighting information and their textures replaced by normal mapping.
         case normalBuffer = 5 // DEBUG_DRAW_NORMAL_BUFFER
@@ -369,7 +409,10 @@ open class Viewport: Node {
         
     }
     
-    /// The multisample anti-aliasing mode for 2D/Canvas rendering. A higher number results in smoother edges at the cost of significantly worse performance. A value of 2 or 4 is best unless targeting very high-end systems. This has no effect on shader-induced aliasing or texture aliasing.
+    /// The multisample antialiasing mode for 2D/Canvas rendering. A higher number results in smoother edges at the cost of significantly worse performance. A value of ``Viewport/MSAA/msaa2x`` or ``Viewport/MSAA/msaa4x`` is best unless targeting very high-end systems. This has no effect on shader-induced aliasing or texture aliasing.
+    /// 
+    /// See also ``ProjectSettings/rendering/antiAliasing/quality/msaa2d`` and ``RenderingServer/viewportSetMsaa2d(viewport:msaa:)``.
+    /// 
     final public var msaa2d: Viewport.MSAA {
         get {
             return get_msaa_2d ()
@@ -381,7 +424,10 @@ open class Viewport: Node {
         
     }
     
-    /// The multisample anti-aliasing mode for 3D rendering. A higher number results in smoother edges at the cost of significantly worse performance. A value of 2 or 4 is best unless targeting very high-end systems. See also bilinear scaling 3d ``scaling3dMode`` for supersampling, which provides higher quality but is much more expensive. This has no effect on shader-induced aliasing or texture aliasing.
+    /// The multisample antialiasing mode for 3D rendering. A higher number results in smoother edges at the cost of significantly worse performance. A value of ``Viewport/MSAA/msaa2x`` or ``Viewport/MSAA/msaa4x`` is best unless targeting very high-end systems. See also bilinear scaling 3D ``scaling3dMode`` for supersampling, which provides higher quality but is much more expensive. This has no effect on shader-induced aliasing or texture aliasing.
+    /// 
+    /// See also ``ProjectSettings/rendering/antiAliasing/quality/msaa3d`` and ``RenderingServer/viewportSetMsaa3d(viewport:msaa:)``.
+    /// 
     final public var msaa3d: Viewport.MSAA {
         get {
             return get_msaa_3d ()
@@ -394,6 +440,9 @@ open class Viewport: Node {
     }
     
     /// Sets the screen-space antialiasing method used. Screen-space antialiasing works by selectively blurring edges in a post-process shader. It differs from MSAA which takes multiple coverage samples while rendering objects. Screen-space AA methods are typically faster than MSAA and will smooth out specular aliasing, but tend to make scenes appear blurry.
+    /// 
+    /// See also ``ProjectSettings/rendering/antiAliasing/quality/screenSpaceAa`` and ``RenderingServer/viewportSetScreenSpaceAa(viewport:mode:)``.
+    /// 
     final public var screenSpaceAa: Viewport.ScreenSpaceAA {
         get {
             return get_screen_space_aa ()
@@ -405,9 +454,11 @@ open class Viewport: Node {
         
     }
     
-    /// Enables Temporal Anti-Aliasing for this viewport. TAA works by jittering the camera and accumulating the images of the last rendered frames, motion vector rendering is used to account for camera and object motion.
+    /// Enables temporal antialiasing for this viewport. TAA works by jittering the camera and accumulating the images of the last rendered frames, motion vector rendering is used to account for camera and object motion.
     /// 
     /// > Note: The implementation is not complete yet, some visual instances such as particles and skinned meshes may show artifacts.
+    /// 
+    /// See also ``ProjectSettings/rendering/antiAliasing/quality/useTaa`` and ``RenderingServer/viewportSetUseTaa(viewport:enable:)``.
     /// 
     final public var useTaa: Bool {
         get {
@@ -420,9 +471,11 @@ open class Viewport: Node {
         
     }
     
-    /// If `true`, uses a fast post-processing filter to make banding significantly less visible in 3D. 2D rendering is _not_ affected by debanding unless the ``Environment/backgroundMode`` is ``Environment/BGMode/canvas``. See also ``ProjectSettings/rendering/antiAliasing/quality/useDebanding``.
+    /// If `true`, uses a fast post-processing filter to make banding significantly less visible in 3D. 2D rendering is _not_ affected by debanding unless the ``Environment/backgroundMode`` is ``Environment/BGMode/canvas``.
     /// 
     /// In some cases, debanding may introduce a slightly noticeable dithering pattern. It's recommended to enable debanding only when actually needed since the dithering pattern will make lossless-compressed screenshots larger.
+    /// 
+    /// See also ``ProjectSettings/rendering/antiAliasing/quality/useDebanding`` and ``RenderingServer/viewportSetUseDebanding(viewport:enable:)``.
     /// 
     final public var useDebanding: Bool {
         get {
@@ -483,7 +536,7 @@ open class Viewport: Node {
     
     /// If `true`, 2D rendering will use an high dynamic range (HDR) format framebuffer matching the bit depth of the 3D framebuffer. When using the Forward+ renderer this will be an `RGBA16` framebuffer, while when using the Mobile renderer it will be an `RGB10_A2` framebuffer. Additionally, 2D rendering will take place in linear color space and will be converted to sRGB space immediately before blitting to the screen (if the Viewport is attached to the screen). Practically speaking, this means that the end result of the Viewport will not be clamped into the `0-1` range and can be used in 3D rendering without color space adjustments. This allows 2D rendering to take advantage of effects requiring high dynamic range (e.g. 2D glow) as well as substantially improves the appearance of effects requiring highly detailed gradients.
     /// 
-    /// > Note: This setting will have no effect when using the GL Compatibility renderer as the GL Compatibility renderer always renders in low dynamic range for performance reasons.
+    /// > Note: This setting will have no effect when using the Compatibility renderer, which always renders in low dynamic range for performance reasons.
     /// 
     final public var useHdr2d: Bool {
         get {
@@ -496,7 +549,7 @@ open class Viewport: Node {
         
     }
     
-    /// Sets scaling 3d mode. Bilinear scaling renders at different resolution to either undersample or supersample the viewport. FidelityFX Super Resolution 1.0, abbreviated to FSR, is an upscaling technology that produces high quality images at fast framerates by using a spatially aware upscaling algorithm. FSR is slightly more expensive than bilinear, but it produces significantly higher image quality. FSR should be used where possible.
+    /// Sets scaling 3D mode. Bilinear scaling renders at different resolution to either undersample or supersample the viewport. FidelityFX Super Resolution 1.0, abbreviated to FSR, is an upscaling technology that produces high quality images at fast framerates by using a spatially aware upscaling algorithm. FSR is slightly more expensive than bilinear, but it produces significantly higher image quality. FSR should be used where possible.
     /// 
     /// To control this property on the root viewport, set the ``ProjectSettings/rendering/scaling3d/mode`` project setting.
     /// 
@@ -543,6 +596,25 @@ open class Viewport: Node {
         
         set {
             set_texture_mipmap_bias (newValue)
+        }
+        
+    }
+    
+    /// Sets the maximum number of samples to take when using anisotropic filtering on textures (as a power of two). A higher sample count will result in sharper textures at oblique angles, but is more expensive to compute. A value of `0` forcibly disables anisotropic filtering, even on materials where it is enabled.
+    /// 
+    /// The anisotropic filtering level also affects decals and light projectors if they are configured to use anisotropic filtering. See ``ProjectSettings/rendering/textures/decals/filter`` and ``ProjectSettings/rendering/textures/lightProjectors/filter``.
+    /// 
+    /// > Note: In 3D, for this setting to have an effect, set ``BaseMaterial3D/textureFilter`` to ``BaseMaterial3D/TextureFilter/linearWithMipmapsAnisotropic`` or ``BaseMaterial3D/TextureFilter/nearestWithMipmapsAnisotropic`` on materials.
+    /// 
+    /// > Note: In 2D, for this setting to have an effect, set ``CanvasItem/textureFilter`` to ``CanvasItem/TextureFilter/linearWithMipmapsAnisotropic`` or ``CanvasItem/TextureFilter/nearestWithMipmapsAnisotropic`` on the ``CanvasItem`` node displaying the texture (or in ``CanvasTexture``). However, anisotropic filtering is rarely useful in 2D, so only enable it for textures in 2D if it makes a meaningful visual difference.
+    /// 
+    final public var anisotropicFilteringLevel: Viewport.AnisotropicFiltering {
+        get {
+            return get_anisotropic_filtering_level ()
+        }
+        
+        set {
+            set_anisotropic_filtering_level (newValue)
         }
         
     }
@@ -873,8 +945,8 @@ open class Viewport: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_world_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_world_2d")
+    fileprivate static let method_set_world_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_world_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2736080068)!
@@ -886,6 +958,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_world_2d(_ world2d: World2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: world2d?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -899,8 +972,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_world_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_world_2d")
+    fileprivate static let method_get_world_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_world_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339128592)!
@@ -912,13 +985,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_world_2d() -> World2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_get_world_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_find_world_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_world_2d")
+    fileprivate static let method_find_world_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_world_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339128592)!
@@ -930,13 +1004,14 @@ open class Viewport: Node {
     
     /// Returns the first valid ``World2D`` for this viewport, searching the ``world2d`` property of itself and any Viewport ancestor.
     public final func findWorld2d() -> World2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_find_world_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_canvas_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_canvas_transform")
+    fileprivate static let method_set_canvas_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_canvas_transform")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761652528)!
@@ -948,6 +1023,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_canvas_transform(_ xform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -961,8 +1037,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_canvas_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_canvas_transform")
+    fileprivate static let method_get_canvas_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_canvas_transform")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
@@ -974,13 +1050,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_canvas_transform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         gi.object_method_bind_ptrcall(Viewport.method_get_canvas_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_global_canvas_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_canvas_transform")
+    fileprivate static let method_set_global_canvas_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_canvas_transform")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761652528)!
@@ -992,6 +1069,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_global_canvas_transform(_ xform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1005,8 +1083,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_global_canvas_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_canvas_transform")
+    fileprivate static let method_get_global_canvas_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_canvas_transform")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
@@ -1018,13 +1096,36 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_global_canvas_transform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         gi.object_method_bind_ptrcall(Viewport.method_get_global_canvas_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_final_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_final_transform")
+    fileprivate static let method_get_stretch_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stretch_transform")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the automatically computed 2D stretch transform, taking the ``Viewport``'s stretch settings into account. The final value is multiplied by ``Window/contentScaleFactor``, but only for the root viewport. If this method is called on a ``SubViewport`` (e.g., in a scene tree with ``SubViewportContainer`` and ``SubViewport``), the scale factor of the root window will not be applied. Using ``Transform2D/getScale()`` on the returned value, this can be used to compensate for scaling when zooming a ``Camera2D`` node, or to scale down a ``TextureRect`` to be pixel-perfect regardless of the automatically computed scale factor.
+    /// 
+    /// > Note: Due to how pixel scaling works, the returned transform's X and Y scale may differ slightly, even when ``Window/contentScaleAspect`` is set to a mode that preserves the pixels' aspect ratio. If ``Window/contentScaleAspect`` is ``Window/ContentScaleAspect/ignore``, the X and Y scale may differ _significantly_.
+    /// 
+    public final func getStretchTransform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Transform2D = Transform2D ()
+        gi.object_method_bind_ptrcall(Viewport.method_get_stretch_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_final_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_final_transform")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
@@ -1036,13 +1137,14 @@ open class Viewport: Node {
     
     /// Returns the transform from the viewport's coordinate system to the embedder's coordinate system.
     public final func getFinalTransform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         gi.object_method_bind_ptrcall(Viewport.method_get_final_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_screen_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_transform")
+    fileprivate static let method_get_screen_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_transform")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
@@ -1054,13 +1156,14 @@ open class Viewport: Node {
     
     /// Returns the transform from the Viewport's coordinates to the screen coordinates of the containing window manager window.
     public final func getScreenTransform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         gi.object_method_bind_ptrcall(Viewport.method_get_screen_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_visible_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_rect")
+    fileprivate static let method_get_visible_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_rect")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -1072,13 +1175,14 @@ open class Viewport: Node {
     
     /// Returns the visible rectangle in global screen coordinates.
     public final func getVisibleRect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(Viewport.method_get_visible_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transparent_background: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transparent_background")
+    fileprivate static let method_set_transparent_background: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transparent_background")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1090,6 +1194,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_transparent_background(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1103,8 +1208,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_has_transparent_background: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_transparent_background")
+    fileprivate static let method_has_transparent_background: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_transparent_background")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1116,13 +1221,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func has_transparent_background() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_has_transparent_background, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_hdr_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_hdr_2d")
+    fileprivate static let method_set_use_hdr_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_hdr_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1134,6 +1240,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_use_hdr_2d(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1147,8 +1254,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_using_hdr_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_hdr_2d")
+    fileprivate static let method_is_using_hdr_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_hdr_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1160,13 +1267,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_using_hdr_2d() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_using_hdr_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_msaa_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msaa_2d")
+    fileprivate static let method_set_msaa_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msaa_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3330258708)!
@@ -1178,6 +1286,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_msaa_2d(_ msaa: Viewport.MSAA) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msaa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1191,8 +1300,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_msaa_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msaa_2d")
+    fileprivate static let method_get_msaa_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msaa_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2542055527)!
@@ -1204,13 +1313,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_msaa_2d() -> Viewport.MSAA {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_msaa_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.MSAA (rawValue: _result)!
     }
     
-    fileprivate static var method_set_msaa_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msaa_3d")
+    fileprivate static let method_set_msaa_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msaa_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3330258708)!
@@ -1222,6 +1332,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_msaa_3d(_ msaa: Viewport.MSAA) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msaa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1235,8 +1346,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_msaa_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msaa_3d")
+    fileprivate static let method_get_msaa_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msaa_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2542055527)!
@@ -1248,13 +1359,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_msaa_3d() -> Viewport.MSAA {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_msaa_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.MSAA (rawValue: _result)!
     }
     
-    fileprivate static var method_set_screen_space_aa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_screen_space_aa")
+    fileprivate static let method_set_screen_space_aa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_screen_space_aa")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3544169389)!
@@ -1266,6 +1378,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_screen_space_aa(_ screenSpaceAa: Viewport.ScreenSpaceAA) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: screenSpaceAa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1279,8 +1392,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_screen_space_aa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_space_aa")
+    fileprivate static let method_get_screen_space_aa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_space_aa")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1390814124)!
@@ -1292,13 +1405,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_screen_space_aa() -> Viewport.ScreenSpaceAA {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_screen_space_aa, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.ScreenSpaceAA (rawValue: _result)!
     }
     
-    fileprivate static var method_set_use_taa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_taa")
+    fileprivate static let method_set_use_taa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_taa")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1310,6 +1424,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_use_taa(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1323,8 +1438,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_using_taa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_taa")
+    fileprivate static let method_is_using_taa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_taa")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1336,13 +1451,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_using_taa() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_using_taa, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_debanding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_debanding")
+    fileprivate static let method_set_use_debanding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_debanding")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1354,6 +1470,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_use_debanding(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1367,8 +1484,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_using_debanding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_debanding")
+    fileprivate static let method_is_using_debanding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_debanding")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1380,13 +1497,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_using_debanding() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_using_debanding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_occlusion_culling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_occlusion_culling")
+    fileprivate static let method_set_use_occlusion_culling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_occlusion_culling")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1398,6 +1516,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_use_occlusion_culling(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1411,8 +1530,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_using_occlusion_culling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_occlusion_culling")
+    fileprivate static let method_is_using_occlusion_culling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_occlusion_culling")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1424,13 +1543,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_using_occlusion_culling() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_using_occlusion_culling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_debug_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_debug_draw")
+    fileprivate static let method_set_debug_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_debug_draw")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1970246205)!
@@ -1442,6 +1562,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_debug_draw(_ debugDraw: Viewport.DebugDraw) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: debugDraw.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1455,8 +1576,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_debug_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_debug_draw")
+    fileprivate static let method_get_debug_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_debug_draw")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 579191299)!
@@ -1468,13 +1589,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_debug_draw() -> Viewport.DebugDraw {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_debug_draw, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.DebugDraw (rawValue: _result)!
     }
     
-    fileprivate static var method_get_render_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_info")
+    fileprivate static let method_get_render_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_info")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 481977019)!
@@ -1486,6 +1608,7 @@ open class Viewport: Node {
     
     /// Returns rendering statistics of the given type. See ``Viewport/RenderInfoType`` and ``Viewport/RenderInfo`` for options.
     public final func getRenderInfo(type: Viewport.RenderInfoType, info: Viewport.RenderInfo) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: info.rawValue) { pArg1 in
@@ -1503,8 +1626,8 @@ open class Viewport: Node {
         return _result
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1746695840)!
@@ -1518,14 +1641,17 @@ open class Viewport: Node {
     /// 
     /// > Note: When trying to store the current texture (e.g. in a file), it might be completely black or outdated if used too early, especially when used in e.g. ``Node/_ready()``. To make sure the texture you get is correct, you can await [signal RenderingServer.frame_post_draw] signal.
     /// 
+    /// > Note: When ``useHdr2d`` is `true` the returned texture will be an HDR image encoded in linear space.
+    /// 
     public final func getTexture() -> ViewportTexture? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_physics_object_picking: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_object_picking")
+    fileprivate static let method_set_physics_object_picking: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_object_picking")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1537,6 +1663,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_physics_object_picking(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1550,8 +1677,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_physics_object_picking: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_object_picking")
+    fileprivate static let method_get_physics_object_picking: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_object_picking")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -1563,13 +1690,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_physics_object_picking() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_physics_object_picking_sort: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_object_picking_sort")
+    fileprivate static let method_set_physics_object_picking_sort: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_object_picking_sort")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1581,6 +1709,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_physics_object_picking_sort(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1594,8 +1723,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_physics_object_picking_sort: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_object_picking_sort")
+    fileprivate static let method_get_physics_object_picking_sort: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_object_picking_sort")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -1607,13 +1736,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_physics_object_picking_sort() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking_sort, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_physics_object_picking_first_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_object_picking_first_only")
+    fileprivate static let method_set_physics_object_picking_first_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_object_picking_first_only")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1625,6 +1755,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_physics_object_picking_first_only(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1638,8 +1769,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_physics_object_picking_first_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_object_picking_first_only")
+    fileprivate static let method_get_physics_object_picking_first_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_object_picking_first_only")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -1651,13 +1782,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_physics_object_picking_first_only() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking_first_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_viewport_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_viewport_rid")
+    fileprivate static let method_get_viewport_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_viewport_rid")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -1669,13 +1801,14 @@ open class Viewport: Node {
     
     /// Returns the viewport's RID from the ``RenderingServer``.
     public final func getViewportRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(Viewport.method_get_viewport_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_push_text_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_text_input")
+    fileprivate static let method_push_text_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_text_input")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1687,6 +1820,7 @@ open class Viewport: Node {
     
     /// Helper method which calls the `set_text()` method on the currently focused ``Control``, provided that it is defined (e.g. if the focused Control is ``Button`` or ``LineEdit``).
     public final func pushTextInput(text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1701,8 +1835,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_push_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_input")
+    fileprivate static let method_push_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_input")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3644664830)!
@@ -1735,6 +1869,7 @@ open class Viewport: Node {
     /// If none of the methods handle the event and ``physicsObjectPicking`` is `true`, the event is used for physics object picking.
     /// 
     public final func pushInput(event: InputEvent?, inLocalCoords: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: inLocalCoords) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1751,8 +1886,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_push_unhandled_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_unhandled_input")
+    fileprivate static let method_push_unhandled_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_unhandled_input")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3644664830)!
@@ -1781,6 +1916,7 @@ open class Viewport: Node {
     /// > Note: This method doesn't propagate input events to embedded ``Window``s or ``SubViewport``s.
     /// 
     public final func pushUnhandledInput(event: InputEvent?, inLocalCoords: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: inLocalCoords) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1797,8 +1933,50 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_mouse_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mouse_position")
+    fileprivate static let method_notify_mouse_entered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("notify_mouse_entered")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Inform the Viewport that the mouse has entered its area. Use this function before sending an ``InputEventMouseButton`` or ``InputEventMouseMotion`` to the ``Viewport`` with ``Viewport/pushInput(event:inLocalCoords:)``. See also ``notifyMouseExited()``.
+    /// 
+    /// > Note: In most cases, it is not necessary to call this function because ``SubViewport`` nodes that are children of ``SubViewportContainer`` are notified automatically. This is only necessary when interacting with viewports in non-default ways, for example as textures in ``TextureRect`` or with an ``Area3D`` that forwards input events.
+    /// 
+    public final func notifyMouseEntered() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Viewport.method_notify_mouse_entered, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_notify_mouse_exited: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("notify_mouse_exited")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Inform the Viewport that the mouse has left its area. Use this function when the node that displays the viewport notices the mouse has left the area of the displayed viewport. See also ``notifyMouseEntered()``.
+    /// 
+    /// > Note: In most cases, it is not necessary to call this function because ``SubViewport`` nodes that are children of ``SubViewportContainer`` are notified automatically. This is only necessary when interacting with viewports in non-default ways, for example as textures in ``TextureRect`` or with an ``Area3D`` that forwards input events.
+    /// 
+    public final func notifyMouseExited() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Viewport.method_notify_mouse_exited, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_get_mouse_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mouse_position")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1810,13 +1988,14 @@ open class Viewport: Node {
     
     /// Returns the mouse's position in this ``Viewport`` using the coordinate system of this ``Viewport``.
     public final func getMousePosition() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Viewport.method_get_mouse_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_warp_mouse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("warp_mouse")
+    fileprivate static let method_warp_mouse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("warp_mouse")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1831,6 +2010,7 @@ open class Viewport: Node {
     /// > Note: ``warpMouse(position:)`` is only supported on Windows, macOS and Linux. It has no effect on Android, iOS and Web.
     /// 
     public final func warpMouse(position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1844,8 +2024,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_update_mouse_cursor_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_mouse_cursor_state")
+    fileprivate static let method_update_mouse_cursor_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_mouse_cursor_state")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1857,12 +2037,31 @@ open class Viewport: Node {
     
     /// Force instantly updating the display based on the current mouse cursor position. This includes updating the mouse cursor shape and sending necessary [signal Control.mouse_entered], [signal CollisionObject2D.mouse_entered], [signal CollisionObject3D.mouse_entered] and [signal Window.mouse_entered] signals and their respective `mouse_exited` counterparts.
     public final func updateMouseCursorState() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Viewport.method_update_mouse_cursor_state, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_gui_get_drag_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("gui_get_drag_data")
+    fileprivate static let method_gui_cancel_drag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gui_cancel_drag")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Cancels the drag operation that was previously started through ``Control/_getDragData(atPosition:)`` or forced with ``Control/forceDrag(data:preview:)``.
+    public final func guiCancelDrag() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Viewport.method_gui_cancel_drag, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_gui_get_drag_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gui_get_drag_data")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1214101251)!
@@ -1874,13 +2073,14 @@ open class Viewport: Node {
     
     /// Returns the drag data from the GUI, that was previously returned by ``Control/_getDragData(atPosition:)``.
     public final func guiGetDragData() -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         gi.object_method_bind_ptrcall(Viewport.method_gui_get_drag_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_gui_is_dragging: GDExtensionMethodBindPtr = {
-        let methodName = StringName("gui_is_dragging")
+    fileprivate static let method_gui_is_dragging: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gui_is_dragging")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1890,18 +2090,19 @@ open class Viewport: Node {
         
     }()
     
-    /// Returns `true` if the viewport is currently performing a drag operation.
+    /// Returns `true` if a drag operation is currently ongoing and where the drop action could happen in this viewport.
     /// 
     /// Alternative to ``Node/notificationDragBegin`` and ``Node/notificationDragEnd`` when you prefer polling the value.
     /// 
     public final func guiIsDragging() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_gui_is_dragging, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_gui_is_drag_successful: GDExtensionMethodBindPtr = {
-        let methodName = StringName("gui_is_drag_successful")
+    fileprivate static let method_gui_is_drag_successful: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gui_is_drag_successful")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1913,13 +2114,14 @@ open class Viewport: Node {
     
     /// Returns `true` if the drag operation is successful.
     public final func guiIsDragSuccessful() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_gui_is_drag_successful, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_gui_release_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("gui_release_focus")
+    fileprivate static let method_gui_release_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gui_release_focus")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1931,12 +2133,13 @@ open class Viewport: Node {
     
     /// Removes the focus from the currently focused ``Control`` within this viewport. If no ``Control`` has the focus, does nothing.
     public final func guiReleaseFocus() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Viewport.method_gui_release_focus, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_gui_get_focus_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("gui_get_focus_owner")
+    fileprivate static let method_gui_get_focus_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gui_get_focus_owner")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -1946,15 +2149,16 @@ open class Viewport: Node {
         
     }()
     
-    /// Returns the ``Control`` having the focus within this viewport. If no ``Control`` has the focus, returns null.
+    /// Returns the currently focused ``Control`` within this viewport. If no ``Control`` is focused, returns `null`.
     public final func guiGetFocusOwner() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_gui_get_focus_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_gui_get_hovered_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("gui_get_hovered_control")
+    fileprivate static let method_gui_get_hovered_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gui_get_hovered_control")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -1964,18 +2168,19 @@ open class Viewport: Node {
         
     }()
     
-    /// Returns the ``Control`` that the mouse is currently hovering over in this viewport. If no ``Control`` has the cursor, returns null.
+    /// Returns the ``Control`` that the mouse is currently hovering over in this viewport. If no ``Control`` has the cursor, returns `null`.
     /// 
     /// Typically the leaf ``Control`` node or deepest level of the subtree which claims hover. This is very useful when used together with ``Node/isAncestorOf(node:)`` to find if the mouse is within a control tree.
     /// 
     public final func guiGetHoveredControl() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_gui_get_hovered_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_disable_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_input")
+    fileprivate static let method_set_disable_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_input")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1987,6 +2192,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_disable_input(_ disable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: disable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2000,8 +2206,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_input_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_input_disabled")
+    fileprivate static let method_is_input_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_input_disabled")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2013,13 +2219,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_input_disabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_input_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_positional_shadow_atlas_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_positional_shadow_atlas_size")
+    fileprivate static let method_set_positional_shadow_atlas_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_positional_shadow_atlas_size")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2031,6 +2238,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_positional_shadow_atlas_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2044,8 +2252,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_positional_shadow_atlas_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_positional_shadow_atlas_size")
+    fileprivate static let method_get_positional_shadow_atlas_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_positional_shadow_atlas_size")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2057,13 +2265,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_positional_shadow_atlas_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_positional_shadow_atlas_16_bits: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_positional_shadow_atlas_16_bits")
+    fileprivate static let method_set_positional_shadow_atlas_16_bits: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_positional_shadow_atlas_16_bits")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2075,6 +2284,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_positional_shadow_atlas_16_bits(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2088,8 +2298,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_positional_shadow_atlas_16_bits: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_positional_shadow_atlas_16_bits")
+    fileprivate static let method_get_positional_shadow_atlas_16_bits: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_positional_shadow_atlas_16_bits")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2101,13 +2311,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_positional_shadow_atlas_16_bits() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_16_bits, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_snap_controls_to_pixels: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_snap_controls_to_pixels")
+    fileprivate static let method_set_snap_controls_to_pixels: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_snap_controls_to_pixels")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2119,6 +2330,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_snap_controls_to_pixels(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2132,8 +2344,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_snap_controls_to_pixels_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_snap_controls_to_pixels_enabled")
+    fileprivate static let method_is_snap_controls_to_pixels_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_snap_controls_to_pixels_enabled")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2145,13 +2357,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_snap_controls_to_pixels_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_snap_controls_to_pixels_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_snap_2d_transforms_to_pixel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_snap_2d_transforms_to_pixel")
+    fileprivate static let method_set_snap_2d_transforms_to_pixel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_snap_2d_transforms_to_pixel")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2163,6 +2376,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_snap_2d_transforms_to_pixel(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2176,8 +2390,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_snap_2d_transforms_to_pixel_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_snap_2d_transforms_to_pixel_enabled")
+    fileprivate static let method_is_snap_2d_transforms_to_pixel_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_snap_2d_transforms_to_pixel_enabled")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2189,13 +2403,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_snap_2d_transforms_to_pixel_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_snap_2d_transforms_to_pixel_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_snap_2d_vertices_to_pixel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_snap_2d_vertices_to_pixel")
+    fileprivate static let method_set_snap_2d_vertices_to_pixel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_snap_2d_vertices_to_pixel")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2207,6 +2422,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_snap_2d_vertices_to_pixel(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2220,8 +2436,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_snap_2d_vertices_to_pixel_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_snap_2d_vertices_to_pixel_enabled")
+    fileprivate static let method_is_snap_2d_vertices_to_pixel_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_snap_2d_vertices_to_pixel_enabled")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2233,13 +2449,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_snap_2d_vertices_to_pixel_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_snap_2d_vertices_to_pixel_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_positional_shadow_atlas_quadrant_subdiv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_positional_shadow_atlas_quadrant_subdiv")
+    fileprivate static let method_set_positional_shadow_atlas_quadrant_subdiv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_positional_shadow_atlas_quadrant_subdiv")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2596956071)!
@@ -2252,6 +2469,7 @@ open class Viewport: Node {
     @inline(__always)
     /// Sets the number of subdivisions to use in the specified quadrant. A higher number of subdivisions allows you to have more shadows in the scene at once, but reduces the quality of the shadows. A good practice is to have quadrants with a varying number of subdivisions and to have as few subdivisions as possible.
     fileprivate final func set_positional_shadow_atlas_quadrant_subdiv(_ quadrant: Int32, _ subdiv: Viewport.PositionalShadowAtlasQuadrantSubdiv) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: quadrant) { pArg0 in
             withUnsafePointer(to: subdiv.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2268,8 +2486,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_positional_shadow_atlas_quadrant_subdiv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_positional_shadow_atlas_quadrant_subdiv")
+    fileprivate static let method_get_positional_shadow_atlas_quadrant_subdiv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_positional_shadow_atlas_quadrant_subdiv")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2676778355)!
@@ -2282,6 +2500,7 @@ open class Viewport: Node {
     @inline(__always)
     /// Returns the positional shadow atlas quadrant subdivision of the specified quadrant.
     fileprivate final func get_positional_shadow_atlas_quadrant_subdiv(_ quadrant: Int32) -> Viewport.PositionalShadowAtlasQuadrantSubdiv {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: quadrant) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2296,8 +2515,8 @@ open class Viewport: Node {
         return Viewport.PositionalShadowAtlasQuadrantSubdiv (rawValue: _result)!
     }
     
-    fileprivate static var method_set_input_as_handled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_as_handled")
+    fileprivate static let method_set_input_as_handled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_as_handled")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2312,12 +2531,13 @@ open class Viewport: Node {
     /// > Note: This does not affect the methods in ``Input``, only the way events are propagated.
     /// 
     public final func setInputAsHandled() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Viewport.method_set_input_as_handled, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_input_handled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_input_handled")
+    fileprivate static let method_is_input_handled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_input_handled")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2334,13 +2554,14 @@ open class Viewport: Node {
     /// If ``handleInputLocally`` is set to `false`, this method will try finding the first parent viewport that is set to handle input locally, and return its value for ``isInputHandled()`` instead.
     /// 
     public final func isInputHandled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_input_handled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_handle_input_locally: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_handle_input_locally")
+    fileprivate static let method_set_handle_input_locally: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_handle_input_locally")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2352,6 +2573,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_handle_input_locally(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2365,8 +2587,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_handling_input_locally: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_handling_input_locally")
+    fileprivate static let method_is_handling_input_locally: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_handling_input_locally")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2378,13 +2600,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_handling_input_locally() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_handling_input_locally, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_default_canvas_item_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_canvas_item_texture_filter")
+    fileprivate static let method_set_default_canvas_item_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_canvas_item_texture_filter")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2815160100)!
@@ -2396,6 +2619,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_default_canvas_item_texture_filter(_ mode: Viewport.DefaultCanvasItemTextureFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2409,8 +2633,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_default_canvas_item_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_canvas_item_texture_filter")
+    fileprivate static let method_get_default_canvas_item_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_canvas_item_texture_filter")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 896601198)!
@@ -2422,13 +2646,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_default_canvas_item_texture_filter() -> Viewport.DefaultCanvasItemTextureFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_default_canvas_item_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.DefaultCanvasItemTextureFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_embedding_subwindows: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_embedding_subwindows")
+    fileprivate static let method_set_embedding_subwindows: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_embedding_subwindows")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2440,6 +2665,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_embedding_subwindows(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2453,8 +2679,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_embedding_subwindows: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_embedding_subwindows")
+    fileprivate static let method_is_embedding_subwindows: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_embedding_subwindows")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2466,13 +2692,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_embedding_subwindows() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_embedding_subwindows, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_embedded_subwindows: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_embedded_subwindows")
+    fileprivate static let method_get_embedded_subwindows: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_embedded_subwindows")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -2486,14 +2713,15 @@ open class Viewport: Node {
     /// 
     /// > Note: ``Window``s inside other viewports will not be listed.
     /// 
-    public final func getEmbeddedSubwindows() -> ObjectCollection<Window> {
+    public final func getEmbeddedSubwindows() -> TypedArray<Window?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Viewport.method_get_embedded_subwindows, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<Window>(content: _result)
+        return TypedArray<Window?>(takingOver: _result)
     }
     
-    fileprivate static var method_set_canvas_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_canvas_cull_mask")
+    fileprivate static let method_set_canvas_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_canvas_cull_mask")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2505,6 +2733,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_canvas_cull_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2518,8 +2747,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_canvas_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_canvas_cull_mask")
+    fileprivate static let method_get_canvas_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_canvas_cull_mask")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2531,13 +2760,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_canvas_cull_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(Viewport.method_get_canvas_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_canvas_cull_mask_bit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_canvas_cull_mask_bit")
+    fileprivate static let method_set_canvas_cull_mask_bit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_canvas_cull_mask_bit")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -2549,6 +2779,7 @@ open class Viewport: Node {
     
     /// Set/clear individual bits on the rendering layer mask. This simplifies editing this ``Viewport``'s layers.
     public final func setCanvasCullMaskBit(layer: UInt32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2565,8 +2796,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_canvas_cull_mask_bit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_canvas_cull_mask_bit")
+    fileprivate static let method_get_canvas_cull_mask_bit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_canvas_cull_mask_bit")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -2578,6 +2809,7 @@ open class Viewport: Node {
     
     /// Returns an individual bit on the rendering layer mask.
     public final func getCanvasCullMaskBit(layer: UInt32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2592,8 +2824,8 @@ open class Viewport: Node {
         return _result
     }
     
-    fileprivate static var method_set_default_canvas_item_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_canvas_item_texture_repeat")
+    fileprivate static let method_set_default_canvas_item_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_canvas_item_texture_repeat")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1658513413)!
@@ -2605,6 +2837,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_default_canvas_item_texture_repeat(_ mode: Viewport.DefaultCanvasItemTextureRepeat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2618,8 +2851,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_default_canvas_item_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_canvas_item_texture_repeat")
+    fileprivate static let method_get_default_canvas_item_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_canvas_item_texture_repeat")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4049774160)!
@@ -2631,13 +2864,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_default_canvas_item_texture_repeat() -> Viewport.DefaultCanvasItemTextureRepeat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_default_canvas_item_texture_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.DefaultCanvasItemTextureRepeat (rawValue: _result)!
     }
     
-    fileprivate static var method_set_sdf_oversize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdf_oversize")
+    fileprivate static let method_set_sdf_oversize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdf_oversize")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2574159017)!
@@ -2649,6 +2883,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_sdf_oversize(_ oversize: Viewport.SDFOversize) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oversize.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2662,8 +2897,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_sdf_oversize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdf_oversize")
+    fileprivate static let method_get_sdf_oversize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdf_oversize")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2631427510)!
@@ -2675,13 +2910,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_sdf_oversize() -> Viewport.SDFOversize {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_sdf_oversize, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.SDFOversize (rawValue: _result)!
     }
     
-    fileprivate static var method_set_sdf_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdf_scale")
+    fileprivate static let method_set_sdf_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdf_scale")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1402773951)!
@@ -2693,6 +2929,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_sdf_scale(_ scale: Viewport.SDFScale) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2706,8 +2943,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_sdf_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdf_scale")
+    fileprivate static let method_get_sdf_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdf_scale")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3162688184)!
@@ -2719,13 +2956,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_sdf_scale() -> Viewport.SDFScale {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_sdf_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.SDFScale (rawValue: _result)!
     }
     
-    fileprivate static var method_set_mesh_lod_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mesh_lod_threshold")
+    fileprivate static let method_set_mesh_lod_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mesh_lod_threshold")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2737,6 +2975,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_mesh_lod_threshold(_ pixels: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2750,8 +2989,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_mesh_lod_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh_lod_threshold")
+    fileprivate static let method_get_mesh_lod_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh_lod_threshold")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2763,13 +3002,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_mesh_lod_threshold() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Viewport.method_get_mesh_lod_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_as_audio_listener_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_as_audio_listener_2d")
+    fileprivate static let method_set_as_audio_listener_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_as_audio_listener_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2781,6 +3021,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_as_audio_listener_2d(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2794,8 +3035,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_audio_listener_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_audio_listener_2d")
+    fileprivate static let method_is_audio_listener_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_audio_listener_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2807,13 +3048,33 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_audio_listener_2d() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_audio_listener_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_camera_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_2d")
+    fileprivate static let method_get_audio_listener_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_audio_listener_2d")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1840977180)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the currently active 2D audio listener. Returns `null` if there are no active 2D audio listeners, in which case the active 2D camera will be treated as listener.
+    public final func getAudioListener2d() -> AudioListener2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_audio_listener_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_get_camera_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_2d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3551466917)!
@@ -2823,15 +3084,16 @@ open class Viewport: Node {
         
     }()
     
-    /// Returns the currently active 2D camera. Returns null if there are no active cameras.
+    /// Returns the currently active 2D camera. Returns `null` if there are no active cameras.
     public final func getCamera2d() -> Camera2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_get_camera_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_world_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_world_3d")
+    fileprivate static let method_set_world_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_world_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1400875337)!
@@ -2843,6 +3105,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_world_3d(_ world3d: World3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: world3d?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2856,8 +3119,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_world_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_world_3d")
+    fileprivate static let method_get_world_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_world_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 317588385)!
@@ -2869,13 +3132,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_world_3d() -> World3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_get_world_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_find_world_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_world_3d")
+    fileprivate static let method_find_world_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_world_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 317588385)!
@@ -2887,13 +3151,14 @@ open class Viewport: Node {
     
     /// Returns the first valid ``World3D`` for this viewport, searching the ``world3d`` property of itself and any Viewport ancestor.
     public final func findWorld3d() -> World3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_find_world_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_use_own_world_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_own_world_3d")
+    fileprivate static let method_set_use_own_world_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_own_world_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2905,6 +3170,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_use_own_world_3d(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2918,8 +3184,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_using_own_world_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_own_world_3d")
+    fileprivate static let method_is_using_own_world_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_own_world_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2931,13 +3197,33 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_using_own_world_3d() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_using_own_world_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_camera_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_3d")
+    fileprivate static let method_get_audio_listener_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_audio_listener_3d")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3472246991)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the currently active 3D audio listener. Returns `null` if there are no active 3D audio listeners, in which case the active 3D camera will be treated as listener.
+    public final func getAudioListener3d() -> AudioListener3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_audio_listener_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_get_camera_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2285090890)!
@@ -2949,13 +3235,14 @@ open class Viewport: Node {
     
     /// Returns the currently active 3D camera.
     public final func getCamera3d() -> Camera3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_get_camera_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_as_audio_listener_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_as_audio_listener_3d")
+    fileprivate static let method_set_as_audio_listener_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_as_audio_listener_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2967,6 +3254,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_as_audio_listener_3d(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2980,8 +3268,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_audio_listener_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_audio_listener_3d")
+    fileprivate static let method_is_audio_listener_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_audio_listener_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2993,13 +3281,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_audio_listener_3d() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_audio_listener_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_disable_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_3d")
+    fileprivate static let method_set_disable_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_3d")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3011,6 +3300,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_disable_3d(_ disable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: disable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3024,8 +3314,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_3d_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_3d_disabled")
+    fileprivate static let method_is_3d_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_3d_disabled")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3037,13 +3327,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_3d_disabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_3d_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_xr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_xr")
+    fileprivate static let method_set_use_xr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_xr")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3055,6 +3346,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_use_xr(_ use: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: use) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3068,8 +3360,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_is_using_xr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_xr")
+    fileprivate static let method_is_using_xr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_xr")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -3081,13 +3373,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func is_using_xr() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Viewport.method_is_using_xr, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scaling_3d_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scaling_3d_mode")
+    fileprivate static let method_set_scaling_3d_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scaling_3d_mode")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1531597597)!
@@ -3099,6 +3392,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_scaling_3d_mode(_ scaling3dMode: Viewport.Scaling3DMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scaling3dMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3112,8 +3406,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_scaling_3d_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scaling_3d_mode")
+    fileprivate static let method_get_scaling_3d_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scaling_3d_mode")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2597660574)!
@@ -3125,13 +3419,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_scaling_3d_mode() -> Viewport.Scaling3DMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_scaling_3d_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.Scaling3DMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_scaling_3d_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scaling_3d_scale")
+    fileprivate static let method_set_scaling_3d_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scaling_3d_scale")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3143,6 +3438,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_scaling_3d_scale(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3156,8 +3452,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_scaling_3d_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scaling_3d_scale")
+    fileprivate static let method_get_scaling_3d_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scaling_3d_scale")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3169,13 +3465,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_scaling_3d_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Viewport.method_get_scaling_3d_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fsr_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fsr_sharpness")
+    fileprivate static let method_set_fsr_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fsr_sharpness")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3187,6 +3484,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_fsr_sharpness(_ fsrSharpness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fsrSharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3200,8 +3498,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_fsr_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fsr_sharpness")
+    fileprivate static let method_get_fsr_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fsr_sharpness")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3213,13 +3511,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_fsr_sharpness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Viewport.method_get_fsr_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_mipmap_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_mipmap_bias")
+    fileprivate static let method_set_texture_mipmap_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_mipmap_bias")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3231,6 +3530,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_texture_mipmap_bias(_ textureMipmapBias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: textureMipmapBias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3244,8 +3544,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_texture_mipmap_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_mipmap_bias")
+    fileprivate static let method_get_texture_mipmap_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_mipmap_bias")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3257,13 +3557,60 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_texture_mipmap_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Viewport.method_get_texture_mipmap_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vrs_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_mode")
+    fileprivate static let method_set_anisotropic_filtering_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anisotropic_filtering_level")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3445583046)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_anisotropic_filtering_level(_ anisotropicFilteringLevel: Viewport.AnisotropicFiltering) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: anisotropicFilteringLevel.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Viewport.method_set_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_anisotropic_filtering_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_anisotropic_filtering_level")
+        return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3991528932)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_anisotropic_filtering_level() -> Viewport.AnisotropicFiltering {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(Viewport.method_get_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return Viewport.AnisotropicFiltering (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_vrs_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_mode")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2749867817)!
@@ -3275,6 +3622,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_vrs_mode(_ mode: Viewport.VRSMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3288,8 +3636,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_vrs_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_mode")
+    fileprivate static let method_get_vrs_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_mode")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 349660525)!
@@ -3301,13 +3649,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_vrs_mode() -> Viewport.VRSMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_vrs_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.VRSMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_vrs_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_update_mode")
+    fileprivate static let method_set_vrs_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_update_mode")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3182412319)!
@@ -3319,6 +3668,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_vrs_update_mode(_ mode: Viewport.VRSUpdateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3332,8 +3682,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_vrs_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_update_mode")
+    fileprivate static let method_get_vrs_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_update_mode")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2255951583)!
@@ -3345,13 +3695,14 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_vrs_update_mode() -> Viewport.VRSUpdateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Viewport.method_get_vrs_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Viewport.VRSUpdateMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_vrs_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_texture")
+    fileprivate static let method_set_vrs_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_texture")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -3363,6 +3714,7 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func set_vrs_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3376,8 +3728,8 @@ open class Viewport: Node {
         
     }
     
-    fileprivate static var method_get_vrs_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_texture")
+    fileprivate static let method_get_vrs_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_texture")
         return withUnsafePointer(to: &Viewport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -3389,9 +3741,10 @@ open class Viewport: Node {
     
     @inline(__always)
     fileprivate final func get_vrs_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Viewport.method_get_vrs_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

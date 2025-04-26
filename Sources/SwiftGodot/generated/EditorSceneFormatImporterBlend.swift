@@ -32,7 +32,7 @@ import Musl
 /// Internally, the EditorSceneFormatImporterBlend uses the Blender glTF "Use Original" mode to reference external textures.
 /// 
 open class EditorSceneFormatImporterBlend: EditorSceneFormatImporter {
-    fileprivate static var className = StringName("EditorSceneFormatImporterBlend")
+    private static var className = StringName("EditorSceneFormatImporterBlend")
     override open class var godotClassName: StringName { className }
 }
 

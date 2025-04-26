@@ -32,14 +32,14 @@ import Musl
 /// - ``fallbackChanged``
 open class ThemeDB: Object {
     /// The shared instance of this class
-    public static var shared: ThemeDB = {
-        return withUnsafePointer (to: &ThemeDB.godotClassName.content) { ptr in
-            ThemeDB (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: ThemeDB {
+        return withUnsafePointer(to: &ThemeDB.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("ThemeDB")
+    private static var className = StringName("ThemeDB")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -114,8 +114,8 @@ open class ThemeDB: Object {
     }
     
     /* Methods */
-    fileprivate static var method_get_default_theme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_theme")
+    fileprivate static let method_get_default_theme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_theme")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 754276358)!
@@ -129,11 +129,11 @@ open class ThemeDB: Object {
     public static func getDefaultTheme() -> Theme? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_default_theme, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_project_theme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_project_theme")
+    fileprivate static let method_get_project_theme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_project_theme")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 754276358)!
@@ -150,11 +150,11 @@ open class ThemeDB: Object {
     public static func getProjectTheme() -> Theme? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_project_theme, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_fallback_base_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fallback_base_scale")
+    fileprivate static let method_set_fallback_base_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fallback_base_scale")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -179,8 +179,8 @@ open class ThemeDB: Object {
         
     }
     
-    fileprivate static var method_get_fallback_base_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fallback_base_scale")
+    fileprivate static let method_get_fallback_base_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fallback_base_scale")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -197,8 +197,8 @@ open class ThemeDB: Object {
         return _result
     }
     
-    fileprivate static var method_set_fallback_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fallback_font")
+    fileprivate static let method_set_fallback_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fallback_font")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1262170328)!
@@ -223,8 +223,8 @@ open class ThemeDB: Object {
         
     }
     
-    fileprivate static var method_get_fallback_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fallback_font")
+    fileprivate static let method_get_fallback_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fallback_font")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3656929885)!
@@ -238,11 +238,11 @@ open class ThemeDB: Object {
     fileprivate static func get_fallback_font() -> Font? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_fallback_font, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_fallback_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fallback_font_size")
+    fileprivate static let method_set_fallback_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fallback_font_size")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -267,8 +267,8 @@ open class ThemeDB: Object {
         
     }
     
-    fileprivate static var method_get_fallback_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fallback_font_size")
+    fileprivate static let method_get_fallback_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fallback_font_size")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -285,8 +285,8 @@ open class ThemeDB: Object {
         return _result
     }
     
-    fileprivate static var method_set_fallback_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fallback_icon")
+    fileprivate static let method_set_fallback_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fallback_icon")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -311,8 +311,8 @@ open class ThemeDB: Object {
         
     }
     
-    fileprivate static var method_get_fallback_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fallback_icon")
+    fileprivate static let method_get_fallback_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fallback_icon")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 255860311)!
@@ -326,11 +326,11 @@ open class ThemeDB: Object {
     fileprivate static func get_fallback_icon() -> Texture2D? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_fallback_icon, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_fallback_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fallback_stylebox")
+    fileprivate static let method_set_fallback_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fallback_stylebox")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2797200388)!
@@ -355,8 +355,8 @@ open class ThemeDB: Object {
         
     }
     
-    fileprivate static var method_get_fallback_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fallback_stylebox")
+    fileprivate static let method_get_fallback_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fallback_stylebox")
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 496040854)!
@@ -370,7 +370,7 @@ open class ThemeDB: Object {
     fileprivate static func get_fallback_stylebox() -> StyleBox? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_fallback_stylebox, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

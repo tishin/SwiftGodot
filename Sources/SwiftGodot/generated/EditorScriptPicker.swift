@@ -26,7 +26,7 @@ import Musl
 /// > Note: You must set the ``scriptOwner`` for the custom context menu items to work.
 /// 
 open class EditorScriptPicker: EditorResourcePicker {
-    fileprivate static var className = StringName("EditorScriptPicker")
+    private static var className = StringName("EditorScriptPicker")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class EditorScriptPicker: EditorResourcePicker {
     }
     
     /* Methods */
-    fileprivate static var method_set_script_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_script_owner")
+    fileprivate static let method_set_script_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_script_owner")
         return withUnsafePointer(to: &EditorScriptPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -57,6 +57,7 @@ open class EditorScriptPicker: EditorResourcePicker {
     
     @inline(__always)
     fileprivate final func set_script_owner(_ ownerNode: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class EditorScriptPicker: EditorResourcePicker {
         
     }
     
-    fileprivate static var method_get_script_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_owner")
+    fileprivate static let method_get_script_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_owner")
         return withUnsafePointer(to: &EditorScriptPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3160264692)!
@@ -83,9 +84,10 @@ open class EditorScriptPicker: EditorResourcePicker {
     
     @inline(__always)
     fileprivate final func get_script_owner() -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorScriptPicker.method_get_script_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

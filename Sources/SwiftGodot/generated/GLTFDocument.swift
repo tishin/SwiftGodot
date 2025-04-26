@@ -23,12 +23,12 @@ import Musl
 /// 
 /// GLTFDocument supports reading data from a glTF file, buffer, or Godot scene. This data can then be written to the filesystem, buffer, or used to create a Godot scene.
 /// 
-/// All of the data in a GLTF scene is stored in the ``GLTFState`` class. GLTFDocument processes state objects, but does not contain any scene data itself. GLTFDocument has member variables to store export configuration settings such as the image format, but is otherwise stateless. Multiple scenes can be processed with the same settings using the same GLTFDocument object and different ``GLTFState`` objects.
+/// All of the data in a glTF scene is stored in the ``GLTFState`` class. GLTFDocument processes state objects, but does not contain any scene data itself. GLTFDocument has member variables to store export configuration settings such as the image format, but is otherwise stateless. Multiple scenes can be processed with the same settings using the same GLTFDocument object and different ``GLTFState`` objects.
 /// 
 /// GLTFDocument can be extended with arbitrary functionality by extending the ``GLTFDocumentExtension`` class and registering it with GLTFDocument via ``registerGltfDocumentExtension(_:firstPriority:)``. This allows for custom data to be imported and exported.
 /// 
 open class GLTFDocument: Resource {
-    fileprivate static var className = StringName("GLTFDocument")
+    private static var className = StringName("GLTFDocument")
     override open class var godotClassName: StringName { className }
     public enum RootNodeMode: Int64, CaseIterable {
         /// Treat the Godot scene's root node as the root node of the glTF file, and mark it as the single root node via the `GODOT_single_root` glTF extension. This will be parsed the same as ``RootNodeMode/keepRoot`` if the implementation does not support `GODOT_single_root`.
@@ -42,7 +42,7 @@ open class GLTFDocument: Resource {
     
     /* Properties */
     
-    /// The user-friendly name of the export image format. This is used when exporting the GLTF file, including writing to a file and writing to a byte array.
+    /// The user-friendly name of the export image format. This is used when exporting the glTF file, including writing to a file and writing to a byte array.
     /// 
     /// By default, Godot allows the following options: "None", "PNG", "JPEG", "Lossless WebP", and "Lossy WebP". Support for more image formats can be added in ``GLTFDocumentExtension`` classes.
     /// 
@@ -85,8 +85,8 @@ open class GLTFDocument: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_image_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_image_format")
+    fileprivate static let method_set_image_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_image_format")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -98,6 +98,7 @@ open class GLTFDocument: Resource {
     
     @inline(__always)
     fileprivate final func set_image_format(_ imageFormat: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let imageFormat = GString(imageFormat)
         withUnsafePointer(to: imageFormat.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -112,8 +113,8 @@ open class GLTFDocument: Resource {
         
     }
     
-    fileprivate static var method_get_image_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_image_format")
+    fileprivate static let method_get_image_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_image_format")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -125,13 +126,14 @@ open class GLTFDocument: Resource {
     
     @inline(__always)
     fileprivate final func get_image_format() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(GLTFDocument.method_get_image_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_lossy_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lossy_quality")
+    fileprivate static let method_set_lossy_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lossy_quality")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -143,6 +145,7 @@ open class GLTFDocument: Resource {
     
     @inline(__always)
     fileprivate final func set_lossy_quality(_ lossyQuality: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lossyQuality) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -156,8 +159,8 @@ open class GLTFDocument: Resource {
         
     }
     
-    fileprivate static var method_get_lossy_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lossy_quality")
+    fileprivate static let method_get_lossy_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lossy_quality")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -169,13 +172,14 @@ open class GLTFDocument: Resource {
     
     @inline(__always)
     fileprivate final func get_lossy_quality() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GLTFDocument.method_get_lossy_quality, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_root_node_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_root_node_mode")
+    fileprivate static let method_set_root_node_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_node_mode")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 463633402)!
@@ -187,6 +191,7 @@ open class GLTFDocument: Resource {
     
     @inline(__always)
     fileprivate final func set_root_node_mode(_ rootNodeMode: GLTFDocument.RootNodeMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rootNodeMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -200,8 +205,8 @@ open class GLTFDocument: Resource {
         
     }
     
-    fileprivate static var method_get_root_node_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_node_mode")
+    fileprivate static let method_get_root_node_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_node_mode")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 948057992)!
@@ -213,13 +218,14 @@ open class GLTFDocument: Resource {
     
     @inline(__always)
     fileprivate final func get_root_node_mode() -> GLTFDocument.RootNodeMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GLTFDocument.method_get_root_node_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GLTFDocument.RootNodeMode (rawValue: _result)!
     }
     
-    fileprivate static var method_append_from_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("append_from_file")
+    fileprivate static let method_append_from_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_from_file")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866380864)!
@@ -229,11 +235,12 @@ open class GLTFDocument: Resource {
         
     }()
     
-    /// Takes a path to a GLTF file and imports the data at that file path to the given ``GLTFState`` object through the `state` parameter.
+    /// Takes a path to a glTF file and imports the data at that file path to the given ``GLTFState`` object through the `state` parameter.
     /// 
     /// > Note: The `basePath` tells ``appendFromFile(path:state:flags:basePath:)`` where to find dependencies and can be empty.
     /// 
     public final func appendFromFile(path: String, state: GLTFState?, flags: UInt32 = 0, basePath: String = "") -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -259,8 +266,8 @@ open class GLTFDocument: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_append_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("append_from_buffer")
+    fileprivate static let method_append_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_from_buffer")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1616081266)!
@@ -270,11 +277,12 @@ open class GLTFDocument: Resource {
         
     }()
     
-    /// Takes a ``PackedByteArray`` defining a GLTF and imports the data to the given ``GLTFState`` object through the `state` parameter.
+    /// Takes a ``PackedByteArray`` defining a glTF and imports the data to the given ``GLTFState`` object through the `state` parameter.
     /// 
     /// > Note: The `basePath` tells ``appendFromBuffer(bytes:basePath:state:flags:)`` where to find dependencies and can be empty.
     /// 
     public final func appendFromBuffer(bytes: PackedByteArray, basePath: String, state: GLTFState?, flags: UInt32 = 0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: bytes.content) { pArg0 in
             let basePath = GString(basePath)
@@ -299,8 +307,8 @@ open class GLTFDocument: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_append_from_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("append_from_scene")
+    fileprivate static let method_append_from_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_from_scene")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1622574258)!
@@ -312,6 +320,7 @@ open class GLTFDocument: Resource {
     
     /// Takes a Godot Engine scene node and exports it and its descendants to the given ``GLTFState`` object through the `state` parameter.
     public final func appendFromScene(node: Node?, state: GLTFState?, flags: UInt32 = 0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: state?.handle) { pArg1 in
@@ -332,8 +341,8 @@ open class GLTFDocument: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_generate_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_scene")
+    fileprivate static let method_generate_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_scene")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 596118388)!
@@ -348,6 +357,7 @@ open class GLTFDocument: Resource {
     /// The `bakeFps` parameter overrides the bake_fps in `state`.
     /// 
     public final func generateScene(state: GLTFState?, bakeFps: Double = 30, trimming: Bool = false, removeImmutableTracks: Bool = true) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: bakeFps) { pArg1 in
@@ -368,11 +378,11 @@ open class GLTFDocument: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_generate_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_buffer")
+    fileprivate static let method_generate_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_buffer")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 741783455)!
@@ -382,8 +392,9 @@ open class GLTFDocument: Resource {
         
     }()
     
-    /// Takes a ``GLTFState`` object through the `state` parameter and returns a GLTF ``PackedByteArray``.
+    /// Takes a ``GLTFState`` object through the `state` parameter and returns a glTF ``PackedByteArray``.
     public final func generateBuffer(state: GLTFState?) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -398,8 +409,8 @@ open class GLTFDocument: Resource {
         return _result
     }
     
-    fileprivate static var method_write_to_filesystem: GDExtensionMethodBindPtr = {
-        let methodName = StringName("write_to_filesystem")
+    fileprivate static let method_write_to_filesystem: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("write_to_filesystem")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1784551478)!
@@ -414,6 +425,7 @@ open class GLTFDocument: Resource {
     /// > Note: The extension of the glTF file determines if it is a .glb binary file or a .gltf text file.
     /// 
     public final func writeToFilesystem(state: GLTFState?, path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: state?.handle) { pArg0 in
             let path = GString(path)
@@ -432,8 +444,75 @@ open class GLTFDocument: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_register_gltf_document_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_gltf_document_extension")
+    fileprivate static let method_import_object_model_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("import_object_model_property")
+        return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1206708632)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Determines a mapping between the given glTF Object Model `jsonPointer` and the corresponding Godot node path(s) in the generated Godot scene. The details of this mapping are returned in a ``GLTFObjectModelProperty`` object. Additional mappings can be supplied via the ``GLTFDocumentExtension/_exportObjectModelProperty(state:nodePath:godotNode:gltfNodeIndex:targetObject:targetDepth:)`` callback method.
+    public static func importObjectModelProperty(state: GLTFState?, jsonPointer: String) -> GLTFObjectModelProperty? {
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: state?.handle) { pArg0 in
+            let jsonPointer = GString(jsonPointer)
+            withUnsafePointer(to: jsonPointer.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_import_object_model_property, nil, pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_export_object_model_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("export_object_model_property")
+        return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 314209806)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Determines a mapping between the given Godot `nodePath` and the corresponding glTF Object Model JSON pointer(s) in the generated glTF file. The details of this mapping are returned in a ``GLTFObjectModelProperty`` object. Additional mappings can be supplied via the ``GLTFDocumentExtension/_importObjectModelProperty(state:splitJsonPointer:partialPaths:)`` callback method.
+    public static func exportObjectModelProperty(state: GLTFState?, nodePath: NodePath, godotNode: Node?, gltfNodeIndex: Int32) -> GLTFObjectModelProperty? {
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: state?.handle) { pArg0 in
+            withUnsafePointer(to: nodePath.content) { pArg1 in
+                withUnsafePointer(to: godotNode?.handle) { pArg2 in
+                    withUnsafePointer(to: gltfNodeIndex) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(method_export_object_model_property, nil, pArgs, &_result)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_register_gltf_document_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_gltf_document_extension")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3752678331)!
@@ -443,7 +522,7 @@ open class GLTFDocument: Resource {
         
     }()
     
-    /// Registers the given ``GLTFDocumentExtension`` instance with GLTFDocument. If `firstPriority` is true, this extension will be run first. Otherwise, it will be run last.
+    /// Registers the given ``GLTFDocumentExtension`` instance with GLTFDocument. If `firstPriority` is `true`, this extension will be run first. Otherwise, it will be run last.
     /// 
     /// > Note: Like GLTFDocument itself, all GLTFDocumentExtension classes must be stateless in order to function properly. If you need to store data, use the `set_additional_data` and `get_additional_data` methods in ``GLTFState`` or ``GLTFNode``.
     /// 
@@ -464,8 +543,8 @@ open class GLTFDocument: Resource {
         
     }
     
-    fileprivate static var method_unregister_gltf_document_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unregister_gltf_document_extension")
+    fileprivate static let method_unregister_gltf_document_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unregister_gltf_document_extension")
         return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684415758)!
@@ -488,6 +567,27 @@ open class GLTFDocument: Resource {
         }
         
         
+    }
+    
+    fileprivate static let method_get_supported_gltf_extensions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_supported_gltf_extensions")
+        return withUnsafePointer(to: &GLTFDocument.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a list of all support glTF extensions, including extensions supported directly by the engine, and extensions supported by user plugins registering ``GLTFDocumentExtension`` classes.
+    /// 
+    /// > Note: If this method is run before a GLTFDocumentExtension is registered, its extensions won't be included in the list. Be sure to only run this method after all extensions are registered. If you run this when the engine starts, consider waiting a frame before calling this method to ensure all extensions are registered.
+    /// 
+    public static func getSupportedGltfExtensions() -> PackedStringArray {
+        let _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(method_get_supported_gltf_extensions, nil, nil, &_result.content)
+        return _result
     }
     
 }

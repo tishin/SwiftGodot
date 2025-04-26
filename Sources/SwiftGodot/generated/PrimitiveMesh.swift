@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Base class for all primitive meshes. Handles applying a ``Material`` to a primitive mesh. Examples include ``BoxMesh``, ``CapsuleMesh``, ``CylinderMesh``, ``PlaneMesh``, ``PrismMesh``, and ``SphereMesh``.
 open class PrimitiveMesh: Mesh {
-    fileprivate static var className = StringName("PrimitiveMesh")
+    private static var className = StringName("PrimitiveMesh")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -95,14 +95,28 @@ open class PrimitiveMesh: Mesh {
     }
     
     /* Methods */
-    /// Override this method to customize how this primitive mesh should be generated. Should return an ``GArray`` where each element is another Array of values required for the mesh (see the ``Mesh.ArrayType`` constants).
+    fileprivate static let method__create_mesh_array: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_create_mesh_array")
+        return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Override this method to customize how this primitive mesh should be generated. Should return an ``VariantArray`` where each element is another Array of values required for the mesh (see the ``Mesh.ArrayType`` constants).
     @_documentation(visibility: public)
-    open func _createMeshArray() -> GArray {
-        return GArray ()
+    open func _createMeshArray() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantArray = VariantArray ()
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method__create_mesh_array, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -114,6 +128,7 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func set_material(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -127,8 +142,8 @@ open class PrimitiveMesh: Mesh {
         
     }
     
-    fileprivate static var method_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material")
+    fileprivate static let method_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -140,13 +155,14 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func get_material() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_mesh_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh_arrays")
+    fileprivate static let method_get_mesh_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh_arrays")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -156,16 +172,19 @@ open class PrimitiveMesh: Mesh {
         
     }()
     
-    /// Returns mesh arrays used to constitute surface of ``Mesh``. The result can be passed to ``ArrayMesh/addSurfaceFromArrays(primitive:arrays:blendShapes:lods:flags:)`` to create a new surface. For example:
+    /// Returns the mesh arrays used to make up the surface of this primitive mesh.
     /// 
-    public final func getMeshArrays() -> GArray {
-        let _result: GArray = GArray ()
+    /// **Example:** Pass the result to ``ArrayMesh/addSurfaceFromArrays(primitive:arrays:blendShapes:lods:flags:)`` to create a new surface:
+    /// 
+    public final func getMeshArrays() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_mesh_arrays, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_aabb")
+    fileprivate static let method_set_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_aabb")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 259215842)!
@@ -177,6 +196,7 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func set_custom_aabb(_ aabb: AABB) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -190,8 +210,8 @@ open class PrimitiveMesh: Mesh {
         
     }
     
-    fileprivate static var method_get_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_aabb")
+    fileprivate static let method_get_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_aabb")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -203,13 +223,14 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func get_custom_aabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_custom_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_flip_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flip_faces")
+    fileprivate static let method_set_flip_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flip_faces")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -221,6 +242,7 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func set_flip_faces(_ flipFaces: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flipFaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -234,8 +256,8 @@ open class PrimitiveMesh: Mesh {
         
     }
     
-    fileprivate static var method_get_flip_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flip_faces")
+    fileprivate static let method_get_flip_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flip_faces")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -247,13 +269,14 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func get_flip_faces() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_flip_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_add_uv2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_add_uv2")
+    fileprivate static let method_set_add_uv2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_add_uv2")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -265,6 +288,7 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func set_add_uv2(_ addUv2: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: addUv2) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -278,8 +302,8 @@ open class PrimitiveMesh: Mesh {
         
     }
     
-    fileprivate static var method_get_add_uv2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_add_uv2")
+    fileprivate static let method_get_add_uv2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_add_uv2")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -291,13 +315,14 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func get_add_uv2() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_add_uv2, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_uv2_padding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv2_padding")
+    fileprivate static let method_set_uv2_padding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv2_padding")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -309,6 +334,7 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func set_uv2_padding(_ uv2Padding: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: uv2Padding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -322,8 +348,8 @@ open class PrimitiveMesh: Mesh {
         
     }
     
-    fileprivate static var method_get_uv2_padding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv2_padding")
+    fileprivate static let method_get_uv2_padding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv2_padding")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -335,13 +361,14 @@ open class PrimitiveMesh: Mesh {
     
     @inline(__always)
     fileprivate final func get_uv2_padding() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_uv2_padding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_request_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_update")
+    fileprivate static let method_request_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_update")
         return withUnsafePointer(to: &PrimitiveMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -353,11 +380,12 @@ open class PrimitiveMesh: Mesh {
     
     /// Request an update of this primitive mesh based on its properties.
     public final func requestUpdate() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(PrimitiveMesh.method_request_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_create_mesh_array":
@@ -373,9 +401,10 @@ open class PrimitiveMesh: Mesh {
 // Support methods for proxies
 func _PrimitiveMesh_proxy_create_mesh_array (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PrimitiveMesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PrimitiveMesh else { return }
     let ret = swiftObject._createMeshArray ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Array
-    ret.content = GArray.zero
+    ret.content = VariantArray.zero
 }
 

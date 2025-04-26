@@ -26,11 +26,11 @@ import Musl
 /// > Note: This is an internal rendering server object, do not instantiate this from script.
 /// 
 open class RenderSceneBuffers: RefCounted {
-    fileprivate static var className = StringName("RenderSceneBuffers")
+    private static var className = StringName("RenderSceneBuffers")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_configure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("configure")
+    fileprivate static let method_configure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("configure")
         return withUnsafePointer(to: &RenderSceneBuffers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3072623270)!
@@ -42,6 +42,7 @@ open class RenderSceneBuffers: RefCounted {
     
     /// This method is called by the rendering server when the associated viewports configuration is changed. It will discard the old buffers and recreate the internal buffers used.
     public final func configure(config: RenderSceneBuffersConfiguration?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: config?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

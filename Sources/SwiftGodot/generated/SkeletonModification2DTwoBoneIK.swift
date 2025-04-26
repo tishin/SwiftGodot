@@ -26,7 +26,7 @@ import Musl
 /// TwoBoneIK is great for arms, legs, and really any joints that can be represented by just two bones that bend to reach a target. This solver is more lightweight than ``SkeletonModification2DFABRIK``, but gives similar, natural looking results.
 /// 
 open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
-    fileprivate static var className = StringName("SkeletonModification2DTwoBoneIK")
+    private static var className = StringName("SkeletonModification2DTwoBoneIK")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -67,7 +67,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    /// If `true`, the bones in the modification will blend outward as opposed to inwards when contracting. If `false`, the bones will bend inwards when contracting.
+    /// If `true`, the bones in the modification will bend outward as opposed to inwards when contracting. If `false`, the bones will bend inwards when contracting.
     final public var flipBendDirection: Bool {
         get {
             return get_flip_bend_direction ()
@@ -80,8 +80,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_node")
+    fileprivate static let method_set_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_node")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -93,6 +93,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_target_node(_ targetNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -106,8 +107,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_node")
+    fileprivate static let method_get_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_node")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -119,13 +120,14 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_target_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_target_minimum_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_minimum_distance")
+    fileprivate static let method_set_target_minimum_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_minimum_distance")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -137,6 +139,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_target_minimum_distance(_ minimumDistance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minimumDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -150,8 +153,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_target_minimum_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_minimum_distance")
+    fileprivate static let method_get_target_minimum_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_minimum_distance")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -163,13 +166,14 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_target_minimum_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_minimum_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_target_maximum_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_maximum_distance")
+    fileprivate static let method_set_target_maximum_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_maximum_distance")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -181,6 +185,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_target_maximum_distance(_ maximumDistance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maximumDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -194,8 +199,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_target_maximum_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_maximum_distance")
+    fileprivate static let method_get_target_maximum_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_maximum_distance")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -207,13 +212,14 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_target_maximum_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_maximum_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_flip_bend_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flip_bend_direction")
+    fileprivate static let method_set_flip_bend_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flip_bend_direction")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -225,6 +231,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_flip_bend_direction(_ flipDirection: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flipDirection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -238,8 +245,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_flip_bend_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flip_bend_direction")
+    fileprivate static let method_get_flip_bend_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flip_bend_direction")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -251,13 +258,14 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_flip_bend_direction() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_flip_bend_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_joint_one_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_one_bone2d_node")
+    fileprivate static let method_set_joint_one_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_one_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -269,6 +277,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Sets the ``Bone2D`` node that is being used as the first bone in the TwoBoneIK modification.
     public final func setJointOneBone2dNode(_ bone2dNode: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bone2dNode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -282,8 +291,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_joint_one_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_one_bone2d_node")
+    fileprivate static let method_get_joint_one_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_one_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -295,13 +304,14 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Returns the ``Bone2D`` node that is being used as the first bone in the TwoBoneIK modification.
     public final func getJointOneBone2dNode() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_one_bone2d_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_joint_one_bone_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_one_bone_idx")
+    fileprivate static let method_set_joint_one_bone_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_one_bone_idx")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -313,6 +323,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Sets the index of the ``Bone2D`` node that is being used as the first bone in the TwoBoneIK modification.
     public final func setJointOneBoneIdx(_ boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -326,8 +337,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_joint_one_bone_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_one_bone_idx")
+    fileprivate static let method_get_joint_one_bone_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_one_bone_idx")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -339,13 +350,14 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Returns the index of the ``Bone2D`` node that is being used as the first bone in the TwoBoneIK modification.
     public final func getJointOneBoneIdx() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_one_bone_idx, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_joint_two_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_two_bone2d_node")
+    fileprivate static let method_set_joint_two_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_two_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -357,6 +369,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Sets the ``Bone2D`` node that is being used as the second bone in the TwoBoneIK modification.
     public final func setJointTwoBone2dNode(_ bone2dNode: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bone2dNode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -370,8 +383,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_joint_two_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_two_bone2d_node")
+    fileprivate static let method_get_joint_two_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_two_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -383,13 +396,14 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Returns the ``Bone2D`` node that is being used as the second bone in the TwoBoneIK modification.
     public final func getJointTwoBone2dNode() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_two_bone2d_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_joint_two_bone_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_two_bone_idx")
+    fileprivate static let method_set_joint_two_bone_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_two_bone_idx")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -401,6 +415,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Sets the index of the ``Bone2D`` node that is being used as the second bone in the TwoBoneIK modification.
     public final func setJointTwoBoneIdx(_ boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -414,8 +429,8 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_joint_two_bone_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_two_bone_idx")
+    fileprivate static let method_get_joint_two_bone_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_two_bone_idx")
         return withUnsafePointer(to: &SkeletonModification2DTwoBoneIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -427,6 +442,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     
     /// Returns the index of the ``Bone2D`` node that is being used as the second bone in the TwoBoneIK modification.
     public final func getJointTwoBoneIdx() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_two_bone_idx, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

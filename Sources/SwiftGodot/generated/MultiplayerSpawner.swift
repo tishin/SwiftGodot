@@ -34,7 +34,7 @@ import Musl
 /// - ``despawned``
 /// - ``spawned``
 open class MultiplayerSpawner: Node {
-    fileprivate static var className = StringName("MultiplayerSpawner")
+    private static var className = StringName("MultiplayerSpawner")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -51,7 +51,7 @@ open class MultiplayerSpawner: Node {
         
     }
     
-    /// Maximum nodes that is allowed to be spawned by this spawner. Includes both spawnable scenes and custom spawns.
+    /// Maximum number of nodes allowed to be spawned by this spawner. Includes both spawnable scenes and custom spawns.
     /// 
     /// When set to `0` (the default), there is no limit.
     /// 
@@ -66,7 +66,7 @@ open class MultiplayerSpawner: Node {
         
     }
     
-    /// Method called on all peers when for every custom ``spawn(data:)`` requested by the authority. Will receive the `data` parameter, and should return a ``Node`` that is not in the scene tree.
+    /// Method called on all peers when a custom ``spawn(data:)`` is requested by the authority. Will receive the `data` parameter, and should return a ``Node`` that is not in the scene tree.
     /// 
     /// > Note: The returned node should **not** be added to the scene with ``Node/addChild(node:forceReadableName:`internal`:)``. This is done automatically.
     /// 
@@ -82,8 +82,8 @@ open class MultiplayerSpawner: Node {
     }
     
     /* Methods */
-    fileprivate static var method_add_spawnable_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_spawnable_scene")
+    fileprivate static let method_add_spawnable_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_spawnable_scene")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -95,6 +95,7 @@ open class MultiplayerSpawner: Node {
     
     /// Adds a scene path to spawnable scenes, making it automatically replicated from the multiplayer authority to other peers when added as children of the node pointed by ``spawnPath``.
     public final func addSpawnableScene(path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -109,8 +110,8 @@ open class MultiplayerSpawner: Node {
         
     }
     
-    fileprivate static var method_get_spawnable_scene_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spawnable_scene_count")
+    fileprivate static let method_get_spawnable_scene_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spawnable_scene_count")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -122,13 +123,14 @@ open class MultiplayerSpawner: Node {
     
     /// Returns the count of spawnable scene paths.
     public final func getSpawnableSceneCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawnable_scene_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_spawnable_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spawnable_scene")
+    fileprivate static let method_get_spawnable_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spawnable_scene")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -140,6 +142,7 @@ open class MultiplayerSpawner: Node {
     
     /// Returns the spawnable scene path by index.
     public final func getSpawnableScene(index: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -154,8 +157,8 @@ open class MultiplayerSpawner: Node {
         return _result.description
     }
     
-    fileprivate static var method_clear_spawnable_scenes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_spawnable_scenes")
+    fileprivate static let method_clear_spawnable_scenes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_spawnable_scenes")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -167,12 +170,13 @@ open class MultiplayerSpawner: Node {
     
     /// Clears all spawnable scenes. Does not despawn existing instances on remote peers.
     public final func clearSpawnableScenes() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(MultiplayerSpawner.method_clear_spawnable_scenes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_spawn: GDExtensionMethodBindPtr = {
-        let methodName = StringName("spawn")
+    fileprivate static let method_spawn: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("spawn")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1991184589)!
@@ -187,6 +191,7 @@ open class MultiplayerSpawner: Node {
     /// > Note: Spawnable scenes are spawned automatically. ``spawn(data:)`` is only needed for custom spawns.
     /// 
     public final func spawn(data: Variant?) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -198,11 +203,11 @@ open class MultiplayerSpawner: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_spawn_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spawn_path")
+    fileprivate static let method_get_spawn_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spawn_path")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -214,13 +219,14 @@ open class MultiplayerSpawner: Node {
     
     @inline(__always)
     fileprivate final func get_spawn_path() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_spawn_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_spawn_path")
+    fileprivate static let method_set_spawn_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_spawn_path")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -232,6 +238,7 @@ open class MultiplayerSpawner: Node {
     
     @inline(__always)
     fileprivate final func set_spawn_path(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -245,8 +252,8 @@ open class MultiplayerSpawner: Node {
         
     }
     
-    fileprivate static var method_get_spawn_limit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spawn_limit")
+    fileprivate static let method_get_spawn_limit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spawn_limit")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -258,13 +265,14 @@ open class MultiplayerSpawner: Node {
     
     @inline(__always)
     fileprivate final func get_spawn_limit() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_limit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_spawn_limit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_spawn_limit")
+    fileprivate static let method_set_spawn_limit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_spawn_limit")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -276,6 +284,7 @@ open class MultiplayerSpawner: Node {
     
     @inline(__always)
     fileprivate final func set_spawn_limit(_ limit: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: limit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -289,8 +298,8 @@ open class MultiplayerSpawner: Node {
         
     }
     
-    fileprivate static var method_get_spawn_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spawn_function")
+    fileprivate static let method_get_spawn_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spawn_function")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1307783378)!
@@ -302,13 +311,14 @@ open class MultiplayerSpawner: Node {
     
     @inline(__always)
     fileprivate final func get_spawn_function() -> Callable {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: Callable = Callable ()
         gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_spawn_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_spawn_function")
+    fileprivate static let method_set_spawn_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_spawn_function")
         return withUnsafePointer(to: &MultiplayerSpawner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -320,6 +330,7 @@ open class MultiplayerSpawner: Node {
     
     @inline(__always)
     fileprivate final func set_spawn_function(_ spawnFunction: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spawnFunction.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -334,7 +345,7 @@ open class MultiplayerSpawner: Node {
     }
     
     // Signals 
-    /// Emitted when a spawnable scene or custom spawn was despawned by the multiplayer authority. Only called on puppets.
+    /// Emitted when a spawnable scene or custom spawn was despawned by the multiplayer authority. Only called on remote peers.
     ///
     /// To connect to this signal, reference this property and call the
     /// 
@@ -350,7 +361,7 @@ open class MultiplayerSpawner: Node {
     /// ```
     public var despawned: SignalWithArguments<Node?> { SignalWithArguments<Node?> (target: self, signalName: "despawned") }
     
-    /// Emitted when a spawnable scene or custom spawn was spawned by the multiplayer authority. Only called on puppets.
+    /// Emitted when a spawnable scene or custom spawn was spawned by the multiplayer authority. Only called on remote peers.
     ///
     /// To connect to this signal, reference this property and call the
     /// 

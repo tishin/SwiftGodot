@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A texture-based nine-patch ``StyleBox``, in a way similar to ``NinePatchRect``. This stylebox performs a 3×3 scaling of a texture, where only the center cell is fully stretched. This makes it possible to design bordered styles regardless of the stylebox's size.
 open class StyleBoxTexture: StyleBox {
-    fileprivate static var className = StringName("StyleBoxTexture")
+    private static var className = StringName("StyleBoxTexture")
     override open class var godotClassName: StringName { className }
     public enum AxisStretchMode: Int64, CaseIterable {
         /// Stretch the stylebox's texture. This results in visible distortion unless the texture size matches the stylebox's size perfectly.
@@ -189,11 +189,11 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    /// Species a sub-region of the texture to use.
+    /// The region to use from the ``texture``.
     /// 
-    /// This is equivalent to first wrapping the texture in an ``AtlasTexture`` with the same region.
+    /// This is equivalent to first wrapping the ``texture`` in an ``AtlasTexture`` with the same region.
     /// 
-    /// If empty (`Rect2(0, 0, 0, 0)`), the whole texture will be used.
+    /// If empty (`Rect2(0, 0, 0, 0)`), the whole ``texture`` is used.
     /// 
     final public var regionRect: Rect2 {
         get {
@@ -231,8 +231,8 @@ open class StyleBoxTexture: StyleBox {
     }
     
     /* Methods */
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -244,6 +244,7 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -257,8 +258,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -270,13 +271,14 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(StyleBoxTexture.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_margin")
+    fileprivate static let method_set_texture_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_margin")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4290182280)!
@@ -289,6 +291,7 @@ open class StyleBoxTexture: StyleBox {
     @inline(__always)
     /// Sets the margin to `size` pixels for the specified ``Side``.
     fileprivate final func set_texture_margin(_ margin: Side, _ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -305,8 +308,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_set_texture_margin_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_margin_all")
+    fileprivate static let method_set_texture_margin_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_margin_all")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -318,6 +321,7 @@ open class StyleBoxTexture: StyleBox {
     
     /// Sets the margin to `size` pixels for all sides.
     public final func setTextureMarginAll(size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -331,8 +335,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_get_texture_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_margin")
+    fileprivate static let method_get_texture_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_margin")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2869120046)!
@@ -345,6 +349,7 @@ open class StyleBoxTexture: StyleBox {
     @inline(__always)
     /// Returns the margin size of the specified ``Side``.
     fileprivate final func get_texture_margin(_ margin: Side) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -359,8 +364,8 @@ open class StyleBoxTexture: StyleBox {
         return _result
     }
     
-    fileprivate static var method_set_expand_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_expand_margin")
+    fileprivate static let method_set_expand_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_expand_margin")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4290182280)!
@@ -373,6 +378,7 @@ open class StyleBoxTexture: StyleBox {
     @inline(__always)
     /// Sets the expand margin to `size` pixels for the specified ``Side``.
     fileprivate final func set_expand_margin(_ margin: Side, _ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -389,8 +395,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_set_expand_margin_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_expand_margin_all")
+    fileprivate static let method_set_expand_margin_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_expand_margin_all")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -402,6 +408,7 @@ open class StyleBoxTexture: StyleBox {
     
     /// Sets the expand margin to `size` pixels for all sides.
     public final func setExpandMarginAll(size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -415,8 +422,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_get_expand_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_expand_margin")
+    fileprivate static let method_get_expand_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_expand_margin")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2869120046)!
@@ -429,6 +436,7 @@ open class StyleBoxTexture: StyleBox {
     @inline(__always)
     /// Returns the expand margin size of the specified ``Side``.
     fileprivate final func get_expand_margin(_ margin: Side) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -443,8 +451,8 @@ open class StyleBoxTexture: StyleBox {
         return _result
     }
     
-    fileprivate static var method_set_region_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_region_rect")
+    fileprivate static let method_set_region_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_region_rect")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -456,6 +464,7 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func set_region_rect(_ region: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: region) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -469,8 +478,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_get_region_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_region_rect")
+    fileprivate static let method_get_region_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_region_rect")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -482,13 +491,14 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func get_region_rect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(StyleBoxTexture.method_get_region_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_draw_center: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_center")
+    fileprivate static let method_set_draw_center: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_center")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -500,6 +510,7 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func set_draw_center(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -513,8 +524,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_is_draw_center_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_draw_center_enabled")
+    fileprivate static let method_is_draw_center_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_draw_center_enabled")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -526,13 +537,14 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func is_draw_center_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(StyleBoxTexture.method_is_draw_center_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_modulate")
+    fileprivate static let method_set_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_modulate")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -544,6 +556,7 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func set_modulate(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -557,8 +570,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_get_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modulate")
+    fileprivate static let method_get_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modulate")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -570,13 +583,14 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func get_modulate() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(StyleBoxTexture.method_get_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_h_axis_stretch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_h_axis_stretch_mode")
+    fileprivate static let method_set_h_axis_stretch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_h_axis_stretch_mode")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2965538783)!
@@ -588,6 +602,7 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func set_h_axis_stretch_mode(_ mode: StyleBoxTexture.AxisStretchMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -601,8 +616,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_get_h_axis_stretch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_axis_stretch_mode")
+    fileprivate static let method_get_h_axis_stretch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_axis_stretch_mode")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3807744063)!
@@ -614,13 +629,14 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func get_h_axis_stretch_mode() -> StyleBoxTexture.AxisStretchMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(StyleBoxTexture.method_get_h_axis_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return StyleBoxTexture.AxisStretchMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_v_axis_stretch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_axis_stretch_mode")
+    fileprivate static let method_set_v_axis_stretch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_axis_stretch_mode")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2965538783)!
@@ -632,6 +648,7 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func set_v_axis_stretch_mode(_ mode: StyleBoxTexture.AxisStretchMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -645,8 +662,8 @@ open class StyleBoxTexture: StyleBox {
         
     }
     
-    fileprivate static var method_get_v_axis_stretch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_axis_stretch_mode")
+    fileprivate static let method_get_v_axis_stretch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_axis_stretch_mode")
         return withUnsafePointer(to: &StyleBoxTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3807744063)!
@@ -658,6 +675,7 @@ open class StyleBoxTexture: StyleBox {
     
     @inline(__always)
     fileprivate final func get_v_axis_stretch_mode() -> StyleBoxTexture.AxisStretchMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(StyleBoxTexture.method_get_v_axis_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return StyleBoxTexture.AxisStretchMode (rawValue: _result)!

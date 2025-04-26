@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``pressed``
 open class ButtonGroup: Resource {
-    fileprivate static var className = StringName("ButtonGroup")
+    private static var className = StringName("ButtonGroup")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -49,8 +49,8 @@ open class ButtonGroup: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_pressed_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pressed_button")
+    fileprivate static let method_get_pressed_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pressed_button")
         return withUnsafePointer(to: &ButtonGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3886434893)!
@@ -62,13 +62,14 @@ open class ButtonGroup: Resource {
     
     /// Returns the current pressed button.
     public final func getPressedButton() -> BaseButton? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ButtonGroup.method_get_pressed_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_buttons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buttons")
+    fileprivate static let method_get_buttons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buttons")
         return withUnsafePointer(to: &ButtonGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -78,15 +79,16 @@ open class ButtonGroup: Resource {
         
     }()
     
-    /// Returns an ``GArray`` of ``Button``s who have this as their ``ButtonGroup`` (see ``BaseButton/buttonGroup``).
-    public final func getButtons() -> ObjectCollection<BaseButton> {
+    /// Returns an ``VariantArray`` of ``Button``s who have this as their ``ButtonGroup`` (see ``BaseButton/buttonGroup``).
+    public final func getButtons() -> TypedArray<BaseButton?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(ButtonGroup.method_get_buttons, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<BaseButton>(content: _result)
+        return TypedArray<BaseButton?>(takingOver: _result)
     }
     
-    fileprivate static var method_set_allow_unpress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_unpress")
+    fileprivate static let method_set_allow_unpress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_unpress")
         return withUnsafePointer(to: &ButtonGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -98,6 +100,7 @@ open class ButtonGroup: Resource {
     
     @inline(__always)
     fileprivate final func set_allow_unpress(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -111,8 +114,8 @@ open class ButtonGroup: Resource {
         
     }
     
-    fileprivate static var method_is_allow_unpress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_allow_unpress")
+    fileprivate static let method_is_allow_unpress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_allow_unpress")
         return withUnsafePointer(to: &ButtonGroup.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -124,6 +127,7 @@ open class ButtonGroup: Resource {
     
     @inline(__always)
     fileprivate final func is_allow_unpress() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ButtonGroup.method_is_allow_unpress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

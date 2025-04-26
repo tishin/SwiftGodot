@@ -26,7 +26,7 @@ import Musl
 /// See also ``ResourceImporterScene``, which is used for more advanced 3D formats such as glTF.
 /// 
 open class ResourceImporterOBJ: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterOBJ")
+    private static var className = StringName("ResourceImporterOBJ")
     override open class var godotClassName: StringName { className }
 }
 

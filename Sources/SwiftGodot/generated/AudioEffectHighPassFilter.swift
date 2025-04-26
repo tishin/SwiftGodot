@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Cuts frequencies lower than the ``AudioEffectFilter/cutoffHz`` and allows higher frequencies to pass.
 open class AudioEffectHighPassFilter: AudioEffectFilter {
-    fileprivate static var className = StringName("AudioEffectHighPassFilter")
+    private static var className = StringName("AudioEffectHighPassFilter")
     override open class var godotClassName: StringName { className }
 }
 

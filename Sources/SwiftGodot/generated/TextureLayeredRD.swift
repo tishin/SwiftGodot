@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Base class for ``Texture2DArrayRD``, ``TextureCubemapRD`` and ``TextureCubemapArrayRD``. Cannot be used directly, but contains all the functions necessary for accessing the derived resource types.
 open class TextureLayeredRD: TextureLayered {
-    fileprivate static var className = StringName("TextureLayeredRD")
+    private static var className = StringName("TextureLayeredRD")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class TextureLayeredRD: TextureLayered {
     }
     
     /* Methods */
-    fileprivate static var method_set_texture_rd_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_rd_rid")
+    fileprivate static let method_set_texture_rd_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_rd_rid")
         return withUnsafePointer(to: &TextureLayeredRD.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -54,6 +54,7 @@ open class TextureLayeredRD: TextureLayered {
     
     @inline(__always)
     fileprivate final func set_texture_rd_rid(_ textureRdRid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: textureRdRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class TextureLayeredRD: TextureLayered {
         
     }
     
-    fileprivate static var method_get_texture_rd_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_rd_rid")
+    fileprivate static let method_get_texture_rd_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_rd_rid")
         return withUnsafePointer(to: &TextureLayeredRD.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -80,6 +81,7 @@ open class TextureLayeredRD: TextureLayered {
     
     @inline(__always)
     fileprivate final func get_texture_rd_rid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(TextureLayeredRD.method_get_texture_rd_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

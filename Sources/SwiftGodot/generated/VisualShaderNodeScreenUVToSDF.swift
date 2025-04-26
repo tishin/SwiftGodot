@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translates to `screen_uv_to_sdf(uv)` in the shader language. If the UV port isn't connected, `SCREEN_UV` is used instead.
 open class VisualShaderNodeScreenUVToSDF: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeScreenUVToSDF")
+    private static var className = StringName("VisualShaderNodeScreenUVToSDF")
     override open class var godotClassName: StringName { className }
 }
 

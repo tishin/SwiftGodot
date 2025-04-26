@@ -21,20 +21,20 @@ import Musl
 
 /// A singleton that manages the unique identifiers of all resources within a project.
 /// 
-/// Resource UIDs (Unique IDentifiers) allow the engine to keep references between resources intact, even if files can renamed or moved. They can be accessed with `uid://`.
+/// Resource UIDs (Unique IDentifiers) allow the engine to keep references between resources intact, even if files are renamed or moved. They can be accessed with `uid://`.
 /// 
 /// ``ResourceUID`` keeps track of all registered resource UIDs in a project, generates new UIDs, and converts between their string and integer representations.
 /// 
 open class ResourceUID: Object {
     /// The shared instance of this class
-    public static var shared: ResourceUID = {
-        return withUnsafePointer (to: &ResourceUID.godotClassName.content) { ptr in
-            ResourceUID (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: ResourceUID {
+        return withUnsafePointer(to: &ResourceUID.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("ResourceUID")
+    private static var className = StringName("ResourceUID")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// The value to use for an invalid UID, for example if the resource could not be loaded.
@@ -43,8 +43,8 @@ open class ResourceUID: Object {
     /// 
     public static let invalidId = -1
     /* Methods */
-    fileprivate static var method_id_to_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("id_to_text")
+    fileprivate static let method_id_to_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("id_to_text")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -70,8 +70,8 @@ open class ResourceUID: Object {
         return _result.description
     }
     
-    fileprivate static var method_text_to_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("text_to_id")
+    fileprivate static let method_text_to_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("text_to_id")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -98,8 +98,8 @@ open class ResourceUID: Object {
         return _result
     }
     
-    fileprivate static var method_create_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_id")
+    fileprivate static let method_create_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_id")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -119,8 +119,8 @@ open class ResourceUID: Object {
         return _result
     }
     
-    fileprivate static var method_has_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_id")
+    fileprivate static let method_has_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_id")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -146,8 +146,8 @@ open class ResourceUID: Object {
         return _result
     }
     
-    fileprivate static var method_add_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_id")
+    fileprivate static let method_add_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_id")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -179,8 +179,8 @@ open class ResourceUID: Object {
         
     }
     
-    fileprivate static var method_set_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_id")
+    fileprivate static let method_set_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_id")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -212,8 +212,8 @@ open class ResourceUID: Object {
         
     }
     
-    fileprivate static var method_get_id_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_id_path")
+    fileprivate static let method_get_id_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_id_path")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -242,8 +242,8 @@ open class ResourceUID: Object {
         return _result.description
     }
     
-    fileprivate static var method_remove_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_id")
+    fileprivate static let method_remove_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_id")
         return withUnsafePointer(to: &ResourceUID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!

@@ -30,7 +30,7 @@ import Musl
 /// > Note: Particle collision only affects ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
-    fileprivate static var className = StringName("GPUParticlesCollisionBox3D")
+    private static var className = StringName("GPUParticlesCollisionBox3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -48,8 +48,8 @@ open class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &GPUParticlesCollisionBox3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -61,6 +61,7 @@ open class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -74,8 +75,8 @@ open class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &GPUParticlesCollisionBox3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -87,6 +88,7 @@ open class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GPUParticlesCollisionBox3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

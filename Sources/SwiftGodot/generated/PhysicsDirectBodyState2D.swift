@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Provides direct access to a physics body in the ``PhysicsServer2D``, allowing safe changes to physics properties. This object is passed via the direct state callback of ``RigidBody2D``, and is intended for changing the direct state of that body. See ``RigidBody2D/_integrateForces(state:)``.
 open class PhysicsDirectBodyState2D: Object {
-    fileprivate static var className = StringName("PhysicsDirectBodyState2D")
+    private static var className = StringName("PhysicsDirectBodyState2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -141,8 +141,8 @@ open class PhysicsDirectBodyState2D: Object {
     }
     
     /* Methods */
-    fileprivate static var method_get_total_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_gravity")
+    fileprivate static let method_get_total_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_gravity")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -154,13 +154,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_total_gravity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_total_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_total_linear_damp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_linear_damp")
+    fileprivate static let method_get_total_linear_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_linear_damp")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -172,13 +173,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_total_linear_damp() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_total_linear_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_total_angular_damp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_angular_damp")
+    fileprivate static let method_get_total_angular_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_angular_damp")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -190,13 +192,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_total_angular_damp() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_total_angular_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_center_of_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_center_of_mass")
+    fileprivate static let method_get_center_of_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_center_of_mass")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -208,13 +211,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_center_of_mass() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_center_of_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_center_of_mass_local: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_center_of_mass_local")
+    fileprivate static let method_get_center_of_mass_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_center_of_mass_local")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -226,13 +230,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_center_of_mass_local() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_center_of_mass_local, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_inverse_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inverse_mass")
+    fileprivate static let method_get_inverse_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inverse_mass")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -244,13 +249,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_inverse_mass() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_inverse_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_inverse_inertia: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inverse_inertia")
+    fileprivate static let method_get_inverse_inertia: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inverse_inertia")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -262,13 +268,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_inverse_inertia() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_inverse_inertia, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_linear_velocity")
+    fileprivate static let method_set_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_linear_velocity")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -280,6 +287,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func set_linear_velocity(_ velocity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -293,8 +301,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_get_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_linear_velocity")
+    fileprivate static let method_get_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_linear_velocity")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -306,13 +314,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_linear_velocity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_angular_velocity")
+    fileprivate static let method_set_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_angular_velocity")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -324,6 +333,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func set_angular_velocity(_ velocity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -337,8 +347,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_get_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_angular_velocity")
+    fileprivate static let method_get_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_angular_velocity")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -350,13 +360,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_angular_velocity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transform")
+    fileprivate static let method_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transform")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761652528)!
@@ -368,6 +379,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func set_transform(_ transform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -381,8 +393,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transform")
+    fileprivate static let method_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transform")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
@@ -394,13 +406,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_transform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_velocity_at_local_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_velocity_at_local_position")
+    fileprivate static let method_get_velocity_at_local_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_velocity_at_local_position")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2656412154)!
@@ -412,6 +425,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the body's velocity at the given relative position, including both translation and rotation.
     public final func getVelocityAtLocalPosition(_ localPosition: Vector2) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: localPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -426,8 +440,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_apply_central_impulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_central_impulse")
+    fileprivate static let method_apply_central_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_central_impulse")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -444,6 +458,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// This is equivalent to using ``applyImpulse(_:position:)`` at the body's center of mass.
     /// 
     public final func applyCentralImpulse(_ impulse: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: impulse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -457,8 +472,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_apply_torque_impulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_torque_impulse")
+    fileprivate static let method_apply_torque_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_torque_impulse")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -475,6 +490,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// > Note: ``inverseInertia`` is required for this to work. To have ``inverseInertia``, an active ``CollisionShape2D`` must be a child of the node, or you can manually set ``inverseInertia``.
     /// 
     public final func applyTorqueImpulse(_ impulse: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: impulse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -488,8 +504,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_apply_impulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_impulse")
+    fileprivate static let method_apply_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_impulse")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288681949)!
@@ -506,6 +522,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// `position` is the offset from the body origin in global coordinates.
     /// 
     public final func applyImpulse(_ impulse: Vector2, position: Vector2 = Vector2 (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: impulse) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -522,8 +539,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_apply_central_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_central_force")
+    fileprivate static let method_apply_central_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_central_force")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3862383994)!
@@ -538,6 +555,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// This is equivalent to using ``applyForce(_:position:)`` at the body's center of mass.
     /// 
     public final func applyCentralForce(_ force: Vector2 = Vector2 (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -551,8 +569,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_apply_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_force")
+    fileprivate static let method_apply_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_force")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288681949)!
@@ -567,6 +585,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// `position` is the offset from the body origin in global coordinates.
     /// 
     public final func applyForce(_ force: Vector2, position: Vector2 = Vector2 (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -583,8 +602,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_apply_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_torque")
+    fileprivate static let method_apply_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_torque")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -599,6 +618,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// > Note: ``inverseInertia`` is required for this to work. To have ``inverseInertia``, an active ``CollisionShape2D`` must be a child of the node, or you can manually set ``inverseInertia``.
     /// 
     public final func applyTorque(_ torque: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -612,8 +632,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_add_constant_central_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_constant_central_force")
+    fileprivate static let method_add_constant_central_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_constant_central_force")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3862383994)!
@@ -628,6 +648,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// This is equivalent to using ``addConstantForce(_:position:)`` at the body's center of mass.
     /// 
     public final func addConstantCentralForce(_ force: Vector2 = Vector2 (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -641,8 +662,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_add_constant_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_constant_force")
+    fileprivate static let method_add_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_constant_force")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288681949)!
@@ -657,6 +678,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// `position` is the offset from the body origin in global coordinates.
     /// 
     public final func addConstantForce(_ force: Vector2, position: Vector2 = Vector2 (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -673,8 +695,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_add_constant_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_constant_torque")
+    fileprivate static let method_add_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_constant_torque")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -686,6 +708,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Adds a constant rotational force without affecting position that keeps being applied over time until cleared with `constant_torque = 0`.
     public final func addConstantTorque(_ torque: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -699,8 +722,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_set_constant_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constant_force")
+    fileprivate static let method_set_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constant_force")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -715,6 +738,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// See ``addConstantForce(_:position:)`` and ``addConstantCentralForce(_:)``.
     /// 
     public final func setConstantForce(_ force: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -728,8 +752,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_get_constant_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant_force")
+    fileprivate static let method_get_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant_force")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -744,13 +768,14 @@ open class PhysicsDirectBodyState2D: Object {
     /// See ``addConstantForce(_:position:)`` and ``addConstantCentralForce(_:)``.
     /// 
     public final func getConstantForce() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_constant_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_constant_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constant_torque")
+    fileprivate static let method_set_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constant_torque")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -765,6 +790,7 @@ open class PhysicsDirectBodyState2D: Object {
     /// See ``addConstantTorque(_:)``.
     /// 
     public final func setConstantTorque(_ torque: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -778,8 +804,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_get_constant_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant_torque")
+    fileprivate static let method_get_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant_torque")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -794,13 +820,14 @@ open class PhysicsDirectBodyState2D: Object {
     /// See ``addConstantTorque(_:)``.
     /// 
     public final func getConstantTorque() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_constant_torque, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sleep_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sleep_state")
+    fileprivate static let method_set_sleep_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sleep_state")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -812,6 +839,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func set_sleep_state(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -825,8 +853,8 @@ open class PhysicsDirectBodyState2D: Object {
         
     }
     
-    fileprivate static var method_is_sleeping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sleeping")
+    fileprivate static let method_is_sleeping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sleeping")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -838,13 +866,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func is_sleeping() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_is_sleeping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_contact_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_count")
+    fileprivate static let method_get_contact_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_count")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -859,13 +888,14 @@ open class PhysicsDirectBodyState2D: Object {
     /// > Note: By default, this returns 0 unless bodies are configured to monitor contacts. See ``RigidBody2D/contactMonitor``.
     /// 
     public final func getContactCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_contact_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_contact_local_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_local_position")
+    fileprivate static let method_get_contact_local_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_local_position")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -877,6 +907,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the position of the contact point on the body in the global coordinate system.
     public final func getContactLocalPosition(contactIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -891,8 +922,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_local_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_local_normal")
+    fileprivate static let method_get_contact_local_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_local_normal")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -904,6 +935,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the local normal at the contact point.
     public final func getContactLocalNormal(contactIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -918,8 +950,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_local_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_local_shape")
+    fileprivate static let method_get_contact_local_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_local_shape")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -931,6 +963,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the local shape index of the collision.
     public final func getContactLocalShape(contactIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -945,8 +978,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_local_velocity_at_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_local_velocity_at_position")
+    fileprivate static let method_get_contact_local_velocity_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_local_velocity_at_position")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -958,6 +991,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the velocity vector at the body's contact point.
     public final func getContactLocalVelocityAtPosition(contactIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -972,8 +1006,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_collider: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_collider")
+    fileprivate static let method_get_contact_collider: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_collider")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 495598643)!
@@ -985,6 +1019,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the collider's ``RID``.
     public final func getContactCollider(contactIdx: Int32) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -999,8 +1034,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_collider_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_collider_position")
+    fileprivate static let method_get_contact_collider_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_collider_position")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -1012,6 +1047,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the position of the contact point on the collider in the global coordinate system.
     public final func getContactColliderPosition(contactIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1026,8 +1062,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_collider_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_collider_id")
+    fileprivate static let method_get_contact_collider_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_collider_id")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1039,6 +1075,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the collider's object id.
     public final func getContactColliderId(contactIdx: Int32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1053,8 +1090,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_collider_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_collider_object")
+    fileprivate static let method_get_contact_collider_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_collider_object")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3332903315)!
@@ -1066,6 +1103,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the collider object. This depends on how it was created (will return a scene node if such was used to create it).
     public final func getContactColliderObject(contactIdx: Int32) -> Object? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1077,11 +1115,11 @@ open class PhysicsDirectBodyState2D: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_contact_collider_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_collider_shape")
+    fileprivate static let method_get_contact_collider_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_collider_shape")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1093,6 +1131,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the collider's shape index.
     public final func getContactColliderShape(contactIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1107,8 +1146,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_collider_velocity_at_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_collider_velocity_at_position")
+    fileprivate static let method_get_contact_collider_velocity_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_collider_velocity_at_position")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -1120,6 +1159,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the velocity vector at the collider's contact point.
     public final func getContactColliderVelocityAtPosition(contactIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1134,8 +1174,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_contact_impulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contact_impulse")
+    fileprivate static let method_get_contact_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contact_impulse")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -1147,6 +1187,7 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the impulse created by the contact.
     public final func getContactImpulse(contactIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1161,8 +1202,8 @@ open class PhysicsDirectBodyState2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_step")
+    fileprivate static let method_get_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_step")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1174,13 +1215,14 @@ open class PhysicsDirectBodyState2D: Object {
     
     @inline(__always)
     fileprivate final func get_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_integrate_forces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("integrate_forces")
+    fileprivate static let method_integrate_forces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("integrate_forces")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1192,12 +1234,13 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Updates the body's linear and angular velocity by applying gravity and damping for the equivalent of one physics tick.
     public final func integrateForces() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_integrate_forces, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_space_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_space_state")
+    fileprivate static let method_get_space_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_space_state")
         return withUnsafePointer(to: &PhysicsDirectBodyState2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2506717822)!
@@ -1209,9 +1252,10 @@ open class PhysicsDirectBodyState2D: Object {
     
     /// Returns the current state of the space, useful for queries.
     public final func getSpaceState() -> PhysicsDirectSpaceState2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(PhysicsDirectBodyState2D.method_get_space_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

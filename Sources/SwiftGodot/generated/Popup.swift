@@ -28,7 +28,7 @@ import Musl
 /// 
 /// - ``popupHide``
 open class Popup: Window {
-    fileprivate static var className = StringName("Popup")
+    private static var className = StringName("Popup")
     override open class var godotClassName: StringName { className }
     // Signals 
     /// Emitted when the popup is hidden.

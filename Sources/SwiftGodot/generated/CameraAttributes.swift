@@ -30,12 +30,17 @@ import Musl
 /// This is a pure virtual class that is inherited by ``CameraAttributesPhysical`` and ``CameraAttributesPractical``.
 /// 
 open class CameraAttributes: Resource {
-    fileprivate static var className = StringName("CameraAttributes")
+    private static var className = StringName("CameraAttributes")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
-    /// Sensitivity of camera sensors, measured in ISO. A higher sensitivity results in a brighter image. Only available when ``ProjectSettings/rendering/lightsAndShadows/usePhysicalLightUnits`` is enabled. When ``autoExposureEnabled`` this can be used as a method of exposure compensation, doubling the value will increase the exposure value (measured in EV100) by 1 stop.
+    /// Sensitivity of camera sensors, measured in ISO. A higher sensitivity results in a brighter image.
+    /// 
+    /// If ``autoExposureEnabled`` is `true`, this can be used as a method of exposure compensation, doubling the value will increase the exposure value (measured in EV100) by 1 stop.
+    /// 
+    /// > Note: Only available when ``ProjectSettings/rendering/lightsAndShadows/usePhysicalLightUnits`` is enabled.
+    /// 
     final public var exposureSensitivity: Double {
         get {
             return get_exposure_sensitivity ()
@@ -96,8 +101,8 @@ open class CameraAttributes: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_exposure_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exposure_multiplier")
+    fileprivate static let method_set_exposure_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exposure_multiplier")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -109,6 +114,7 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func set_exposure_multiplier(_ multiplier: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -122,8 +128,8 @@ open class CameraAttributes: Resource {
         
     }
     
-    fileprivate static var method_get_exposure_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_exposure_multiplier")
+    fileprivate static let method_get_exposure_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_exposure_multiplier")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -135,13 +141,14 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func get_exposure_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CameraAttributes.method_get_exposure_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_exposure_sensitivity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exposure_sensitivity")
+    fileprivate static let method_set_exposure_sensitivity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exposure_sensitivity")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -153,6 +160,7 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func set_exposure_sensitivity(_ sensitivity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sensitivity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -166,8 +174,8 @@ open class CameraAttributes: Resource {
         
     }
     
-    fileprivate static var method_get_exposure_sensitivity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_exposure_sensitivity")
+    fileprivate static let method_get_exposure_sensitivity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_exposure_sensitivity")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -179,13 +187,14 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func get_exposure_sensitivity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CameraAttributes.method_get_exposure_sensitivity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_auto_exposure_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auto_exposure_enabled")
+    fileprivate static let method_set_auto_exposure_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_exposure_enabled")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -197,6 +206,7 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func set_auto_exposure_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -210,8 +220,8 @@ open class CameraAttributes: Resource {
         
     }
     
-    fileprivate static var method_is_auto_exposure_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_auto_exposure_enabled")
+    fileprivate static let method_is_auto_exposure_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_auto_exposure_enabled")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -223,13 +233,14 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func is_auto_exposure_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CameraAttributes.method_is_auto_exposure_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_auto_exposure_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auto_exposure_speed")
+    fileprivate static let method_set_auto_exposure_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_exposure_speed")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -241,6 +252,7 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func set_auto_exposure_speed(_ exposureSpeed: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: exposureSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -254,8 +266,8 @@ open class CameraAttributes: Resource {
         
     }
     
-    fileprivate static var method_get_auto_exposure_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_auto_exposure_speed")
+    fileprivate static let method_get_auto_exposure_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_auto_exposure_speed")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -267,13 +279,14 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func get_auto_exposure_speed() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CameraAttributes.method_get_auto_exposure_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_auto_exposure_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auto_exposure_scale")
+    fileprivate static let method_set_auto_exposure_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_exposure_scale")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -285,6 +298,7 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func set_auto_exposure_scale(_ exposureGrey: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: exposureGrey) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -298,8 +312,8 @@ open class CameraAttributes: Resource {
         
     }
     
-    fileprivate static var method_get_auto_exposure_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_auto_exposure_scale")
+    fileprivate static let method_get_auto_exposure_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_auto_exposure_scale")
         return withUnsafePointer(to: &CameraAttributes.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -311,6 +325,7 @@ open class CameraAttributes: Resource {
     
     @inline(__always)
     fileprivate final func get_auto_exposure_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CameraAttributes.method_get_auto_exposure_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

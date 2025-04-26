@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This imports a 3-dimensional texture, which can then be used in custom shaders, as a ``FogMaterial`` density map or as a ``GPUParticlesAttractorVectorField3D``. See also ``ResourceImporterTexture`` and ``ResourceImporterTextureAtlas``.
 open class ResourceImporterLayeredTexture: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterLayeredTexture")
+    private static var className = StringName("ResourceImporterLayeredTexture")
     override open class var godotClassName: StringName { className }
 }
 

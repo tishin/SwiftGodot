@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A control used for visual representation of a percentage. Shows fill percentage from right to left.
 open class ProgressBar: Range {
-    fileprivate static var className = StringName("ProgressBar")
+    private static var className = StringName("ProgressBar")
     override open class var godotClassName: StringName { className }
     public enum FillMode: Int64, CaseIterable {
         /// The progress bar fills from begin to end horizontally, according to the language direction. If ``Control/isLayoutRtl()`` returns `false`, it fills from left to right, and if it returns `true`, it fills from right to left.
@@ -88,8 +88,8 @@ open class ProgressBar: Range {
     }
     
     /* Methods */
-    fileprivate static var method_set_fill_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fill_mode")
+    fileprivate static let method_set_fill_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fill_mode")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -101,6 +101,7 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func set_fill_mode(_ mode: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -114,8 +115,8 @@ open class ProgressBar: Range {
         
     }
     
-    fileprivate static var method_get_fill_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fill_mode")
+    fileprivate static let method_get_fill_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fill_mode")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -127,13 +128,14 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func get_fill_mode() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ProgressBar.method_get_fill_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_percentage: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_percentage")
+    fileprivate static let method_set_show_percentage: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_percentage")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -145,6 +147,7 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func set_show_percentage(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -158,8 +161,8 @@ open class ProgressBar: Range {
         
     }
     
-    fileprivate static var method_is_percentage_shown: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_percentage_shown")
+    fileprivate static let method_is_percentage_shown: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_percentage_shown")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -171,13 +174,14 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func is_percentage_shown() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ProgressBar.method_is_percentage_shown, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_indeterminate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_indeterminate")
+    fileprivate static let method_set_indeterminate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_indeterminate")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -189,6 +193,7 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func set_indeterminate(_ indeterminate: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: indeterminate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -202,8 +207,8 @@ open class ProgressBar: Range {
         
     }
     
-    fileprivate static var method_is_indeterminate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_indeterminate")
+    fileprivate static let method_is_indeterminate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_indeterminate")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -215,13 +220,14 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func is_indeterminate() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ProgressBar.method_is_indeterminate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_editor_preview_indeterminate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_editor_preview_indeterminate")
+    fileprivate static let method_set_editor_preview_indeterminate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_editor_preview_indeterminate")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -233,6 +239,7 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func set_editor_preview_indeterminate(_ previewIndeterminate: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: previewIndeterminate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -246,8 +253,8 @@ open class ProgressBar: Range {
         
     }
     
-    fileprivate static var method_is_editor_preview_indeterminate_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_editor_preview_indeterminate_enabled")
+    fileprivate static let method_is_editor_preview_indeterminate_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_editor_preview_indeterminate_enabled")
         return withUnsafePointer(to: &ProgressBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -259,6 +266,7 @@ open class ProgressBar: Range {
     
     @inline(__always)
     fileprivate final func is_editor_preview_indeterminate_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ProgressBar.method_is_editor_preview_indeterminate_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

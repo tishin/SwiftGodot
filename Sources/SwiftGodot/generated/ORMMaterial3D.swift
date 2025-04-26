@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ORMMaterial3D's properties are inherited from ``BaseMaterial3D``. Unlike ``StandardMaterial3D``, ORMMaterial3D uses a single texture for ambient occlusion, roughness and metallic maps, known as an ORM texture.
 open class ORMMaterial3D: BaseMaterial3D {
-    fileprivate static var className = StringName("ORMMaterial3D")
+    private static var className = StringName("ORMMaterial3D")
     override open class var godotClassName: StringName { className }
 }
 

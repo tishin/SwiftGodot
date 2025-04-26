@@ -26,11 +26,11 @@ import Musl
 /// > Note: This is an internal rendering server object, do not instantiate this from script.
 /// 
 open class RenderSceneData: Object {
-    fileprivate static var className = StringName("RenderSceneData")
+    private static var className = StringName("RenderSceneData")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_cam_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cam_transform")
+    fileprivate static let method_get_cam_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cam_transform")
         return withUnsafePointer(to: &RenderSceneData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -45,13 +45,14 @@ open class RenderSceneData: Object {
     /// > Note: If more than one view is rendered, this will return a centered transform.
     /// 
     public final func getCamTransform() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(RenderSceneData.method_get_cam_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_cam_projection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cam_projection")
+    fileprivate static let method_get_cam_projection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cam_projection")
         return withUnsafePointer(to: &RenderSceneData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2910717950)!
@@ -66,13 +67,14 @@ open class RenderSceneData: Object {
     /// > Note: If more than one view is rendered, this will return a combined projection.
     /// 
     public final func getCamProjection() -> Projection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Projection = Projection ()
         gi.object_method_bind_ptrcall(RenderSceneData.method_get_cam_projection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_view_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_view_count")
+    fileprivate static let method_get_view_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_view_count")
         return withUnsafePointer(to: &RenderSceneData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -84,13 +86,14 @@ open class RenderSceneData: Object {
     
     /// Returns the number of views being rendered.
     public final func getViewCount() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RenderSceneData.method_get_view_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_view_eye_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_view_eye_offset")
+    fileprivate static let method_get_view_eye_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_view_eye_offset")
         return withUnsafePointer(to: &RenderSceneData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 711720468)!
@@ -102,6 +105,7 @@ open class RenderSceneData: Object {
     
     /// Returns the eye offset per view used to render this frame. This is the offset between our camera transform and the eye transform.
     public final func getViewEyeOffset(view: UInt32) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: view) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -116,8 +120,8 @@ open class RenderSceneData: Object {
         return _result
     }
     
-    fileprivate static var method_get_view_projection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_view_projection")
+    fileprivate static let method_get_view_projection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_view_projection")
         return withUnsafePointer(to: &RenderSceneData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3179846605)!
@@ -132,6 +136,7 @@ open class RenderSceneData: Object {
     /// > Note: If a single view is rendered, this returns the camera projection. If more than one view is rendered, this will return a projection for the given view including the eye offset.
     /// 
     public final func getViewProjection(view: UInt32) -> Projection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Projection = Projection ()
         withUnsafePointer(to: view) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -146,8 +151,8 @@ open class RenderSceneData: Object {
         return _result
     }
     
-    fileprivate static var method_get_uniform_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uniform_buffer")
+    fileprivate static let method_get_uniform_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uniform_buffer")
         return withUnsafePointer(to: &RenderSceneData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -159,6 +164,7 @@ open class RenderSceneData: Object {
     
     /// Return the ``RID`` of the uniform buffer containing the scene data as a UBO.
     public final func getUniformBuffer() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(RenderSceneData.method_get_uniform_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

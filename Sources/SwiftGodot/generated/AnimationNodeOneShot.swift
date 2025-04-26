@@ -26,7 +26,7 @@ import Musl
 /// After setting the request and changing the animation playback, the one-shot node automatically clears the request on the next process frame by setting its `request` value to ``OneShotRequest/none``.
 /// 
 open class AnimationNodeOneShot: AnimationNodeSync {
-    fileprivate static var className = StringName("AnimationNodeOneShot")
+    private static var className = StringName("AnimationNodeOneShot")
     override open class var godotClassName: StringName { className }
     public enum OneShotRequest: Int64, CaseIterable {
         /// The default state of the request. Nothing is done.
@@ -76,7 +76,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    /// Determines how cross-fading between animations is eased. If empty, the transition will be linear.
+    /// Determines how cross-fading between animations is eased. If empty, the transition will be linear. Should be a unit ``Curve``.
     final public var fadeinCurve: Curve? {
         get {
             return get_fadein_curve ()
@@ -103,7 +103,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    /// Determines how cross-fading between animations is eased. If empty, the transition will be linear.
+    /// Determines how cross-fading between animations is eased. If empty, the transition will be linear. Should be a unit ``Curve``.
     final public var fadeoutCurve: Curve? {
         get {
             return get_fadeout_curve ()
@@ -167,8 +167,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     }
     
     /* Methods */
-    fileprivate static var method_set_fadein_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fadein_time")
+    fileprivate static let method_set_fadein_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fadein_time")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -180,6 +180,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_fadein_time(_ time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -193,8 +194,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_fadein_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fadein_time")
+    fileprivate static let method_get_fadein_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fadein_time")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -206,13 +207,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_fadein_time() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadein_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fadein_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fadein_curve")
+    fileprivate static let method_set_fadein_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fadein_curve")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -224,6 +226,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_fadein_curve(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -237,8 +240,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_fadein_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fadein_curve")
+    fileprivate static let method_get_fadein_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fadein_curve")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -250,13 +253,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_fadein_curve() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadein_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_fadeout_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fadeout_time")
+    fileprivate static let method_set_fadeout_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fadeout_time")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -268,6 +272,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_fadeout_time(_ time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -281,8 +286,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_fadeout_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fadeout_time")
+    fileprivate static let method_get_fadeout_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fadeout_time")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -294,13 +299,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_fadeout_time() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadeout_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fadeout_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fadeout_curve")
+    fileprivate static let method_set_fadeout_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fadeout_curve")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -312,6 +318,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_fadeout_curve(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -325,8 +332,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_fadeout_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fadeout_curve")
+    fileprivate static let method_get_fadeout_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fadeout_curve")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -338,13 +345,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_fadeout_curve() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadeout_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_break_loop_at_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_break_loop_at_end")
+    fileprivate static let method_set_break_loop_at_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_break_loop_at_end")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -356,6 +364,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_break_loop_at_end(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -369,8 +378,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_is_loop_broken_at_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_loop_broken_at_end")
+    fileprivate static let method_is_loop_broken_at_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_loop_broken_at_end")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -382,13 +391,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func is_loop_broken_at_end() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_is_loop_broken_at_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autorestart: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autorestart")
+    fileprivate static let method_set_autorestart: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autorestart")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -400,6 +410,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_autorestart(_ active: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -413,8 +424,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_has_autorestart: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_autorestart")
+    fileprivate static let method_has_autorestart: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_autorestart")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -426,13 +437,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func has_autorestart() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_has_autorestart, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autorestart_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autorestart_delay")
+    fileprivate static let method_set_autorestart_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autorestart_delay")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -444,6 +456,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_autorestart_delay(_ time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -457,8 +470,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_autorestart_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autorestart_delay")
+    fileprivate static let method_get_autorestart_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autorestart_delay")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -470,13 +483,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_autorestart_delay() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_autorestart_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autorestart_random_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autorestart_random_delay")
+    fileprivate static let method_set_autorestart_random_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autorestart_random_delay")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -488,6 +502,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_autorestart_random_delay(_ time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -501,8 +516,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_autorestart_random_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autorestart_random_delay")
+    fileprivate static let method_get_autorestart_random_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autorestart_random_delay")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -514,13 +529,14 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_autorestart_random_delay() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_autorestart_random_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mix_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mix_mode")
+    fileprivate static let method_set_mix_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mix_mode")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1018899799)!
@@ -532,6 +548,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_mix_mode(_ mode: AnimationNodeOneShot.MixMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -545,8 +562,8 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_mix_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mix_mode")
+    fileprivate static let method_get_mix_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mix_mode")
         return withUnsafePointer(to: &AnimationNodeOneShot.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3076550526)!
@@ -558,6 +575,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_mix_mode() -> AnimationNodeOneShot.MixMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_mix_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationNodeOneShot.MixMode (rawValue: _result)!

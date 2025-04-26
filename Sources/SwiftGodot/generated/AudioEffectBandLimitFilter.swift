@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Limits the frequencies in a range around the ``AudioEffectFilter/cutoffHz`` and allows frequencies outside of this range to pass.
 open class AudioEffectBandLimitFilter: AudioEffectFilter {
-    fileprivate static var className = StringName("AudioEffectBandLimitFilter")
+    private static var className = StringName("AudioEffectBandLimitFilter")
     override open class var godotClassName: StringName { className }
 }
 

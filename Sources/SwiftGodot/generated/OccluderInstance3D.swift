@@ -25,7 +25,7 @@ import Musl
 /// 
 /// The occlusion culling system is mostly static. ``OccluderInstance3D``s can be moved or hidden at run-time, but doing so will trigger a background recomputation that can take several frames. It is recommended to only move ``OccluderInstance3D``s sporadically (e.g. for procedural generation purposes), rather than doing so every frame.
 /// 
-/// The occlusion culling system works by rendering the occluders on the CPU in parallel using <a href="https://www.embree.org/">Embree</a>, drawing the result to a low-resolution buffer then using this to cull 3D nodes individually. In the 3D editor, you can preview the occlusion culling buffer by choosing **Perspective > Debug Advanced... > Occlusion Culling Buffer** in the top-left corner of the 3D viewport. The occlusion culling buffer quality can be adjusted in the Project Settings.
+/// The occlusion culling system works by rendering the occluders on the CPU in parallel using <a href="https://www.embree.org/">Embree</a>, drawing the result to a low-resolution buffer then using this to cull 3D nodes individually. In the 3D editor, you can preview the occlusion culling buffer by choosing **Perspective > Display Advanced... > Occlusion Culling Buffer** in the top-left corner of the 3D viewport. The occlusion culling buffer quality can be adjusted in the Project Settings.
 /// 
 /// **Baking:** Select an ``OccluderInstance3D`` node, then use the **Bake Occluders** button at the top of the 3D editor. Only opaque materials will be taken into account; transparent materials (alpha-blended or alpha-tested) will be ignored by the occluder generation.
 /// 
@@ -34,7 +34,7 @@ import Musl
 /// > Note: Due to memory constraints, occlusion culling is not supported by default in Web export templates. It can be enabled by compiling custom Web export templates with `module_raycast_enabled=yes`.
 /// 
 open class OccluderInstance3D: VisualInstance3D {
-    fileprivate static var className = StringName("OccluderInstance3D")
+    private static var className = StringName("OccluderInstance3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -91,8 +91,8 @@ open class OccluderInstance3D: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_bake_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_mask")
+    fileprivate static let method_set_bake_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_mask")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -104,6 +104,7 @@ open class OccluderInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_bake_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -117,8 +118,8 @@ open class OccluderInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_bake_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_mask")
+    fileprivate static let method_get_bake_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_mask")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -130,13 +131,14 @@ open class OccluderInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_bake_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bake_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_mask_value")
+    fileprivate static let method_set_bake_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_mask_value")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -148,6 +150,7 @@ open class OccluderInstance3D: VisualInstance3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``bakeMask``, given a `layerNumber` between 1 and 32.
     public final func setBakeMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -164,8 +167,8 @@ open class OccluderInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_bake_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_mask_value")
+    fileprivate static let method_get_bake_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_mask_value")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -177,6 +180,7 @@ open class OccluderInstance3D: VisualInstance3D {
     
     /// Returns whether or not the specified layer of the ``bakeMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getBakeMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -191,8 +195,8 @@ open class OccluderInstance3D: VisualInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_bake_simplification_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_simplification_distance")
+    fileprivate static let method_set_bake_simplification_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_simplification_distance")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -204,6 +208,7 @@ open class OccluderInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_bake_simplification_distance(_ simplificationDistance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: simplificationDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -217,8 +222,8 @@ open class OccluderInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_bake_simplification_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_simplification_distance")
+    fileprivate static let method_get_bake_simplification_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_simplification_distance")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -230,13 +235,14 @@ open class OccluderInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_bake_simplification_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_simplification_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_occluder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_occluder")
+    fileprivate static let method_set_occluder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_occluder")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1664878165)!
@@ -248,6 +254,7 @@ open class OccluderInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_occluder(_ occluder: Occluder3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: occluder?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -261,8 +268,8 @@ open class OccluderInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_occluder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_occluder")
+    fileprivate static let method_get_occluder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_occluder")
         return withUnsafePointer(to: &OccluderInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1696836198)!
@@ -274,9 +281,10 @@ open class OccluderInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_occluder() -> Occluder3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_occluder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

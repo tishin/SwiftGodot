@@ -33,14 +33,14 @@ import Musl
 /// 
 open class Performance: Object {
     /// The shared instance of this class
-    public static var shared: Performance = {
-        return withUnsafePointer (to: &Performance.godotClassName.content) { ptr in
-            Performance (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: Performance {
+        return withUnsafePointer(to: &Performance.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("Performance")
+    private static var className = StringName("Performance")
     override open class var godotClassName: StringName { className }
     public enum Monitor: Int64, CaseIterable {
         /// The number of frames rendered in the last second. This metric is only updated once per second, even if queried more often. _Higher is better._
@@ -109,13 +109,25 @@ open class Performance: Object {
         case navigationEdgeConnectionCount = 31 // NAVIGATION_EDGE_CONNECTION_COUNT
         /// Number of navigation mesh polygon edges that could not be merged in the ``NavigationServer3D``. The edges still may be connected by edge proximity or with links.
         case navigationEdgeFreeCount = 32 // NAVIGATION_EDGE_FREE_COUNT
+        /// Number of active navigation obstacles in the ``NavigationServer3D``.
+        case navigationObstacleCount = 33 // NAVIGATION_OBSTACLE_COUNT
+        /// Number of pipeline compilations that were triggered by the 2D canvas renderer.
+        case pipelineCompilationsCanvas = 34 // PIPELINE_COMPILATIONS_CANVAS
+        /// Number of pipeline compilations that were triggered by loading meshes. These compilations will show up as longer loading times the first time a user runs the game and the pipeline is required.
+        case pipelineCompilationsMesh = 35 // PIPELINE_COMPILATIONS_MESH
+        /// Number of pipeline compilations that were triggered by building the surface cache before rendering the scene. These compilations will show up as a stutter when loading an scene the first time a user runs the game and the pipeline is required.
+        case pipelineCompilationsSurface = 36 // PIPELINE_COMPILATIONS_SURFACE
+        /// Number of pipeline compilations that were triggered while drawing the scene. These compilations will show up as stutters during gameplay the first time a user runs the game and the pipeline is required.
+        case pipelineCompilationsDraw = 37 // PIPELINE_COMPILATIONS_DRAW
+        /// Number of pipeline compilations that were triggered to optimize the current scene. These compilations are done in the background and should not cause any stutters whatsoever.
+        case pipelineCompilationsSpecialization = 38 // PIPELINE_COMPILATIONS_SPECIALIZATION
         /// Represents the size of the ``Performance/Monitor`` enum.
-        case monitorMax = 33 // MONITOR_MAX
+        case monitorMax = 39 // MONITOR_MAX
     }
     
     /* Methods */
-    fileprivate static var method_get_monitor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_monitor")
+    fileprivate static let method_get_monitor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_monitor")
         return withUnsafePointer(to: &Performance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1943275655)!
@@ -144,8 +156,8 @@ open class Performance: Object {
         return _result
     }
     
-    fileprivate static var method_add_custom_monitor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_custom_monitor")
+    fileprivate static let method_add_custom_monitor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_custom_monitor")
         return withUnsafePointer(to: &Performance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4099036814)!
@@ -161,7 +173,7 @@ open class Performance: Object {
     /// 
     /// Callables are called with arguments supplied in argument array.
     /// 
-    public static func addCustomMonitor(id: StringName, callable: Callable, arguments: GArray = GArray ()) {
+    public static func addCustomMonitor(id: StringName, callable: Callable, arguments: VariantArray = VariantArray ()) {
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: callable.content) { pArg1 in
                 withUnsafePointer(to: arguments.content) { pArg2 in
@@ -181,8 +193,8 @@ open class Performance: Object {
         
     }
     
-    fileprivate static var method_remove_custom_monitor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_custom_monitor")
+    fileprivate static let method_remove_custom_monitor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_custom_monitor")
         return withUnsafePointer(to: &Performance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -207,8 +219,8 @@ open class Performance: Object {
         
     }
     
-    fileprivate static var method_has_custom_monitor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_custom_monitor")
+    fileprivate static let method_has_custom_monitor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_custom_monitor")
         return withUnsafePointer(to: &Performance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2041966384)!
@@ -234,8 +246,8 @@ open class Performance: Object {
         return _result
     }
     
-    fileprivate static var method_get_custom_monitor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_monitor")
+    fileprivate static let method_get_custom_monitor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_monitor")
         return withUnsafePointer(to: &Performance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2138907829)!
@@ -261,8 +273,8 @@ open class Performance: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_monitor_modification_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_monitor_modification_time")
+    fileprivate static let method_get_monitor_modification_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_monitor_modification_time")
         return withUnsafePointer(to: &Performance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -279,8 +291,8 @@ open class Performance: Object {
         return _result
     }
     
-    fileprivate static var method_get_custom_monitor_names: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_monitor_names")
+    fileprivate static let method_get_custom_monitor_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_monitor_names")
         return withUnsafePointer(to: &Performance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -290,11 +302,11 @@ open class Performance: Object {
         
     }()
     
-    /// Returns the names of active custom monitors in an ``GArray``.
-    public static func getCustomMonitorNames() -> VariantCollection<StringName> {
+    /// Returns the names of active custom monitors in an ``VariantArray``.
+    public static func getCustomMonitorNames() -> TypedArray<StringName> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_custom_monitor_names, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
     }
     
 }

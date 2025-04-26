@@ -28,7 +28,7 @@ import Musl
 /// The ``XRController3D`` consumes objects of this type and should be used in your project.
 /// 
 open class XRControllerTracker: XRPositionalTracker {
-    fileprivate static var className = StringName("XRControllerTracker")
+    private static var className = StringName("XRControllerTracker")
     override open class var godotClassName: StringName { className }
 }
 

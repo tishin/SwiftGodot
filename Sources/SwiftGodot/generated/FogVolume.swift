@@ -28,7 +28,7 @@ import Musl
 /// > Note: ``FogVolume``s only have a visible effect if ``Environment/volumetricFogEnabled`` is `true`. If you don't want fog to be globally visible (but only within ``FogVolume`` nodes), set ``Environment/volumetricFogDensity`` to `0.0`.
 /// 
 open class FogVolume: VisualInstance3D {
-    fileprivate static var className = StringName("FogVolume")
+    private static var className = StringName("FogVolume")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -75,8 +75,8 @@ open class FogVolume: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &FogVolume.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -88,6 +88,7 @@ open class FogVolume: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -101,8 +102,8 @@ open class FogVolume: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &FogVolume.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -114,13 +115,14 @@ open class FogVolume: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(FogVolume.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shape")
+    fileprivate static let method_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shape")
         return withUnsafePointer(to: &FogVolume.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1416323362)!
@@ -132,6 +134,7 @@ open class FogVolume: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_shape(_ shape: RenderingServer.FogVolumeShape) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -145,8 +148,8 @@ open class FogVolume: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shape")
+    fileprivate static let method_get_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shape")
         return withUnsafePointer(to: &FogVolume.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3920334604)!
@@ -158,13 +161,14 @@ open class FogVolume: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_shape() -> RenderingServer.FogVolumeShape {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FogVolume.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingServer.FogVolumeShape (rawValue: _result)!
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &FogVolume.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -176,6 +180,7 @@ open class FogVolume: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_material(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -189,8 +194,8 @@ open class FogVolume: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material")
+    fileprivate static let method_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material")
         return withUnsafePointer(to: &FogVolume.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -202,9 +207,10 @@ open class FogVolume: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_material() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(FogVolume.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

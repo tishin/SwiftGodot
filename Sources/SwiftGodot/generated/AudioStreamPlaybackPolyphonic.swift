@@ -23,14 +23,14 @@ import Musl
 /// 
 /// Playback instance for ``AudioStreamPolyphonic``. After setting the `stream` property of ``AudioStreamPlayer``, ``AudioStreamPlayer2D``, or ``AudioStreamPlayer3D``, the playback instance can be obtained by calling ``AudioStreamPlayer/getStreamPlayback()``, ``AudioStreamPlayer2D/getStreamPlayback()`` or ``AudioStreamPlayer3D/getStreamPlayback()`` methods.
 open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
-    fileprivate static var className = StringName("AudioStreamPlaybackPolyphonic")
+    private static var className = StringName("AudioStreamPlaybackPolyphonic")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Returned by ``playStream(_:fromOffset:volumeDb:pitchScale:playbackType:bus:)`` in case it could not allocate a stream for playback.
     public static let invalidId = -1
     /* Methods */
-    fileprivate static var method_play_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play_stream")
+    fileprivate static let method_play_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play_stream")
         return withUnsafePointer(to: &AudioStreamPlaybackPolyphonic.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1846744803)!
@@ -49,6 +49,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
     /// This function returns ``invalidId`` if the amount of streams currently playing equals ``AudioStreamPolyphonic/polyphony``. If you need a higher amount of maximum polyphony, raise this value.
     /// 
     public final func playStream(_ stream: AudioStream?, fromOffset: Double = 0, volumeDb: Double = 0, pitchScale: Double = 1.0, playbackType: AudioServer.PlaybackType = .`default`, bus: StringName = StringName ("Master")) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: fromOffset) { pArg1 in
@@ -78,8 +79,8 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
         return _result
     }
     
-    fileprivate static var method_set_stream_volume: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stream_volume")
+    fileprivate static let method_set_stream_volume: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stream_volume")
         return withUnsafePointer(to: &AudioStreamPlaybackPolyphonic.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -91,6 +92,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
     
     /// Change the stream volume (in db). The `stream` argument is an integer ID returned by ``playStream(_:fromOffset:volumeDb:pitchScale:playbackType:bus:)``.
     public final func setStreamVolume(stream: Int, volumeDb: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stream) { pArg0 in
             withUnsafePointer(to: volumeDb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -107,8 +109,8 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
         
     }
     
-    fileprivate static var method_set_stream_pitch_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stream_pitch_scale")
+    fileprivate static let method_set_stream_pitch_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stream_pitch_scale")
         return withUnsafePointer(to: &AudioStreamPlaybackPolyphonic.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -120,6 +122,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
     
     /// Change the stream pitch scale. The `stream` argument is an integer ID returned by ``playStream(_:fromOffset:volumeDb:pitchScale:playbackType:bus:)``.
     public final func setStreamPitchScale(stream: Int, pitchScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stream) { pArg0 in
             withUnsafePointer(to: pitchScale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -136,8 +139,8 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
         
     }
     
-    fileprivate static var method_is_stream_playing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_stream_playing")
+    fileprivate static let method_is_stream_playing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_stream_playing")
         return withUnsafePointer(to: &AudioStreamPlaybackPolyphonic.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -147,8 +150,9 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
         
     }()
     
-    /// Return true whether the stream associated with an integer ID is still playing. Check ``playStream(_:fromOffset:volumeDb:pitchScale:playbackType:bus:)`` for information on when this ID becomes invalid.
+    /// Returns `true` if the stream associated with the given integer ID is still playing. Check ``playStream(_:fromOffset:volumeDb:pitchScale:playbackType:bus:)`` for information on when this ID becomes invalid.
     public final func isStreamPlaying(stream: Int) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: stream) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -163,8 +167,8 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
         return _result
     }
     
-    fileprivate static var method_stop_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop_stream")
+    fileprivate static let method_stop_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop_stream")
         return withUnsafePointer(to: &AudioStreamPlaybackPolyphonic.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -176,6 +180,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
     
     /// Stop a stream. The `stream` argument is an integer ID returned by ``playStream(_:fromOffset:volumeDb:pitchScale:playbackType:bus:)``, which becomes invalid after calling this function.
     public final func stopStream(_ stream: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stream) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

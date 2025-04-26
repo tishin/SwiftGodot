@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Mesh is a type of ``Resource`` that contains vertex array-based geometry, divided in _surfaces_. Each surface contains a completely separate array and a material used to draw it. Design wise, a mesh with multiple surfaces is preferred to a single surface, because objects created in 3D editing software commonly contain multiple materials. The maximum number of surfaces per mesh is ``RenderingServer/maxMeshSurfaces``.
 open class Mesh: Resource {
-    fileprivate static var className = StringName("Mesh")
+    private static var className = StringName("Mesh")
     override open class var godotClassName: StringName { className }
     public enum PrimitiveType: Int64, CaseIterable {
         /// Render array as points (one vertex equals one point).
@@ -39,9 +39,12 @@ open class Mesh: Resource {
     }
     
     public enum ArrayType: Int64, CaseIterable {
-        /// ``PackedVector3Array``, ``PackedVector2Array``, or ``GArray`` of vertex positions.
+        /// ``PackedVector3Array``, ``PackedVector2Array``, or ``VariantArray`` of vertex positions.
         case vertex = 0 // ARRAY_VERTEX
         /// ``PackedVector3Array`` of vertex normals.
+        /// 
+        /// > Note: The array has to consist of normal vectors, otherwise they will be normalized by the engine, potentially causing visual discrepancies.
+        /// 
         case normal = 1 // ARRAY_NORMAL
         /// ``PackedFloat32Array`` of vertex tangents. Each element in groups of 4 floats, first 3 floats determine the tangent, and the last the binormal direction as -1 or 1.
         case tangent = 2 // ARRAY_TANGENT
@@ -212,90 +215,391 @@ open class Mesh: Resource {
     }
     
     /* Methods */
+    fileprivate static let method__get_surface_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_surface_count")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
     /// Virtual method to override the surface count for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _getSurfaceCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(Mesh.method__get_surface_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__surface_get_array_len: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_array_len")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the surface array length for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _surfaceGetArrayLen(index: Int32) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_array_len, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__surface_get_array_index_len: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_array_index_len")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the surface array index length for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _surfaceGetArrayIndexLen(index: Int32) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_array_index_len, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__surface_get_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_arrays")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the surface arrays for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
-    open func _surfaceGetArrays(index: Int32) -> GArray {
-        return GArray ()
+    open func _surfaceGetArrays(index: Int32) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantArray = VariantArray ()
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__surface_get_blend_shape_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_blend_shape_arrays")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the blend shape arrays for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
-    open func _surfaceGetBlendShapeArrays(index: Int32) -> VariantCollection<GArray> {
-        return VariantCollection<GArray>()
+    open func _surfaceGetBlendShapeArrays(index: Int32) -> TypedArray<VariantArray> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_blend_shape_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return TypedArray<VariantArray>(takingOver: _result)
     }
+    
+    fileprivate static let method__surface_get_lods: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_lods")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3485342025)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the surface LODs for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
-    open func _surfaceGetLods(index: Int32) -> GDictionary {
-        return GDictionary ()
+    open func _surfaceGetLods(index: Int32) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_lods, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__surface_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_format")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the surface format for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _surfaceGetFormat(index: Int32) -> UInt32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt32 = 0
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__surface_get_primitive_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_primitive_type")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the surface primitive type for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _surfaceGetPrimitiveType(index: Int32) -> UInt32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt32 = 0
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_primitive_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__surface_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_set_material")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3671737478)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the setting of a `material` at the given `index` for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _surfaceSetMaterial(index: Int32, material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: material?.handle) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Mesh.method__surface_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__surface_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_surface_get_material")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2897466400)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the surface material for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _surfaceGetMaterial(index: Int32) -> Material? {
-        return Material ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_material, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
+    
+    fileprivate static let method__get_blend_shape_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_blend_shape_count")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the number of blend shapes for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _getBlendShapeCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(Mesh.method__get_blend_shape_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_blend_shape_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_blend_shape_name")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the retrieval of blend shape names for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _getBlendShapeName(index: Int32) -> StringName {
-        return StringName ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: StringName = StringName ()
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Mesh.method__get_blend_shape_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__set_blend_shape_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_blend_shape_name")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the names of blend shapes for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _setBlendShapeName(index: Int32, name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: name.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Mesh.method__set_blend_shape_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_aabb")
+        return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override the ``AABB`` for a custom class extending ``Mesh``.
     @_documentation(visibility: public)
     open func _getAabb() -> AABB {
-        return AABB ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: AABB = AABB ()
+        gi.object_method_bind_ptrcall(Mesh.method__get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
-    fileprivate static var method_set_lightmap_size_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lightmap_size_hint")
+    fileprivate static let method_set_lightmap_size_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lightmap_size_hint")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -307,6 +611,7 @@ open class Mesh: Resource {
     
     @inline(__always)
     fileprivate final func set_lightmap_size_hint(_ size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -320,8 +625,8 @@ open class Mesh: Resource {
         
     }
     
-    fileprivate static var method_get_lightmap_size_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lightmap_size_hint")
+    fileprivate static let method_get_lightmap_size_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lightmap_size_hint")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -333,13 +638,14 @@ open class Mesh: Resource {
     
     @inline(__always)
     fileprivate final func get_lightmap_size_hint() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Mesh.method_get_lightmap_size_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_aabb")
+    fileprivate static let method_get_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_aabb")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -354,13 +660,14 @@ open class Mesh: Resource {
     /// > Note: This is only implemented for ``ArrayMesh`` and ``PrimitiveMesh``.
     /// 
     public final func getAabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(Mesh.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_faces")
+    fileprivate static let method_get_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_faces")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 497664490)!
@@ -372,13 +679,14 @@ open class Mesh: Resource {
     
     /// Returns all the vertices that make up the faces of the mesh. Each three vertices represent one triangle.
     public final func getFaces() -> PackedVector3Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
         gi.object_method_bind_ptrcall(Mesh.method_get_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_surface_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_count")
+    fileprivate static let method_get_surface_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_count")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -390,13 +698,14 @@ open class Mesh: Resource {
     
     /// Returns the number of surfaces that the ``Mesh`` holds. This is equivalent to ``MeshInstance3D/getSurfaceOverrideMaterialCount()``.
     public final func getSurfaceCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Mesh.method_get_surface_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_surface_get_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_get_arrays")
+    fileprivate static let method_surface_get_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_get_arrays")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
@@ -407,8 +716,9 @@ open class Mesh: Resource {
     }()
     
     /// Returns the arrays for the vertices, normals, UVs, etc. that make up the requested surface (see ``ArrayMesh/addSurfaceFromArrays(primitive:arrays:blendShapes:lods:flags:)``).
-    public final func surfaceGetArrays(surfIdx: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public final func surfaceGetArrays(surfIdx: Int32) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -422,8 +732,8 @@ open class Mesh: Resource {
         return _result
     }
     
-    fileprivate static var method_surface_get_blend_shape_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_get_blend_shape_arrays")
+    fileprivate static let method_surface_get_blend_shape_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_get_blend_shape_arrays")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
@@ -434,7 +744,8 @@ open class Mesh: Resource {
     }()
     
     /// Returns the blend shape arrays for the requested surface.
-    public final func surfaceGetBlendShapeArrays(surfIdx: Int32) -> VariantCollection<GArray> {
+    public final func surfaceGetBlendShapeArrays(surfIdx: Int32) -> TypedArray<VariantArray> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -446,11 +757,11 @@ open class Mesh: Resource {
             
         }
         
-        return VariantCollection<GArray>(content: _result)
+        return TypedArray<VariantArray>(takingOver: _result)
     }
     
-    fileprivate static var method_surface_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_set_material")
+    fileprivate static let method_surface_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_set_material")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3671737478)!
@@ -465,6 +776,7 @@ open class Mesh: Resource {
     /// > Note: This assigns the material within the ``Mesh`` resource, not the ``Material`` associated to the ``MeshInstance3D``'s Surface Material Override properties. To set the ``Material`` associated to the ``MeshInstance3D``'s Surface Material Override properties, use ``MeshInstance3D/setSurfaceOverrideMaterial(surface:material:)`` instead.
     /// 
     public final func surfaceSetMaterial(surfIdx: Int32, material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -481,8 +793,8 @@ open class Mesh: Resource {
         
     }
     
-    fileprivate static var method_surface_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_get_material")
+    fileprivate static let method_surface_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_get_material")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2897466400)!
@@ -497,6 +809,7 @@ open class Mesh: Resource {
     /// > Note: This returns the material within the ``Mesh`` resource, not the ``Material`` associated to the ``MeshInstance3D``'s Surface Material Override properties. To get the ``Material`` associated to the ``MeshInstance3D``'s Surface Material Override properties, use ``MeshInstance3D/getSurfaceOverrideMaterial(surface:)`` instead.
     /// 
     public final func surfaceGetMaterial(surfIdx: Int32) -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -508,11 +821,11 @@ open class Mesh: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_placeholder")
+    fileprivate static let method_create_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_placeholder")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 121922552)!
@@ -524,13 +837,14 @@ open class Mesh: Resource {
     
     /// Creates a placeholder version of this resource (``PlaceholderMesh``).
     public final func createPlaceholder() -> Resource? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Mesh.method_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_trimesh_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_trimesh_shape")
+    fileprivate static let method_create_trimesh_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_trimesh_shape")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4160111210)!
@@ -542,13 +856,14 @@ open class Mesh: Resource {
     
     /// Calculate a ``ConcavePolygonShape3D`` from the mesh.
     public final func createTrimeshShape() -> ConcavePolygonShape3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Mesh.method_create_trimesh_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_convex_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_convex_shape")
+    fileprivate static let method_create_convex_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_convex_shape")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2529984628)!
@@ -565,6 +880,7 @@ open class Mesh: Resource {
     /// If `simplify` is `true`, the geometry can be further simplified to reduce the number of vertices. Disabled by default.
     /// 
     public final func createConvexShape(clean: Bool = true, simplify: Bool = false) -> ConvexPolygonShape3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: clean) { pArg0 in
             withUnsafePointer(to: simplify) { pArg1 in
@@ -579,11 +895,11 @@ open class Mesh: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_outline")
+    fileprivate static let method_create_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_outline")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1208642001)!
@@ -598,6 +914,7 @@ open class Mesh: Resource {
     /// > Note: This method typically returns the vertices in reverse order (e.g. clockwise to counterclockwise).
     /// 
     public final func createOutline(margin: Double) -> Mesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -609,11 +926,11 @@ open class Mesh: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_generate_triangle_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_triangle_mesh")
+    fileprivate static let method_generate_triangle_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_triangle_mesh")
         return withUnsafePointer(to: &Mesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3476533166)!
@@ -625,12 +942,13 @@ open class Mesh: Resource {
     
     /// Generate a ``TriangleMesh`` from the mesh. Considers only surfaces using one of these primitive types: ``PrimitiveType/triangles``, ``PrimitiveType/triangleStrip``.
     public final func generateTriangleMesh() -> TriangleMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Mesh.method_generate_triangle_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_aabb":
@@ -672,14 +990,16 @@ open class Mesh: Resource {
 // Support methods for proxies
 func _Mesh_proxy_get_aabb (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._getAabb ()
     retPtr!.storeBytes (of: ret, as: AABB.self)
 }
 
 func _Mesh_proxy_get_blend_shape_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._getBlendShapeCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -687,7 +1007,8 @@ func _Mesh_proxy_get_blend_shape_count (instance: UnsafeMutableRawPointer?, args
 func _Mesh_proxy_get_blend_shape_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._getBlendShapeName (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // StringName
     ret.content = StringName.zero
@@ -695,7 +1016,8 @@ func _Mesh_proxy_get_blend_shape_name (instance: UnsafeMutableRawPointer?, args:
 
 func _Mesh_proxy_get_surface_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._getSurfaceCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -703,14 +1025,16 @@ func _Mesh_proxy_get_surface_count (instance: UnsafeMutableRawPointer?, args: Un
 func _Mesh_proxy_set_blend_shape_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     swiftObject._setBlendShapeName (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee, name: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee))
 }
 
 func _Mesh_proxy_surface_get_array_index_len (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetArrayIndexLen (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -718,7 +1042,8 @@ func _Mesh_proxy_surface_get_array_index_len (instance: UnsafeMutableRawPointer?
 func _Mesh_proxy_surface_get_array_len (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetArrayLen (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -726,16 +1051,18 @@ func _Mesh_proxy_surface_get_array_len (instance: UnsafeMutableRawPointer?, args
 func _Mesh_proxy_surface_get_arrays (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetArrays (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Array
-    ret.content = GArray.zero
+    ret.content = VariantArray.zero
 }
 
 func _Mesh_proxy_surface_get_blend_shape_arrays (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetBlendShapeArrays (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.array.content, as: type (of: ret.array.content)) // typedarray::Array
 }
@@ -743,7 +1070,8 @@ func _Mesh_proxy_surface_get_blend_shape_arrays (instance: UnsafeMutableRawPoint
 func _Mesh_proxy_surface_get_format (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetFormat (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: UInt32.self)
 }
@@ -751,16 +1079,18 @@ func _Mesh_proxy_surface_get_format (instance: UnsafeMutableRawPointer?, args: U
 func _Mesh_proxy_surface_get_lods (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetLods (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _Mesh_proxy_surface_get_material (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetMaterial (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Material
 }
@@ -768,7 +1098,8 @@ func _Mesh_proxy_surface_get_material (instance: UnsafeMutableRawPointer?, args:
 func _Mesh_proxy_surface_get_primitive_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetPrimitiveType (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: UInt32.self)
 }
@@ -776,9 +1107,10 @@ func _Mesh_proxy_surface_get_primitive_type (instance: UnsafeMutableRawPointer?,
 func _Mesh_proxy_surface_set_material (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Mesh>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Mesh else { return }
+    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._surfaceSetMaterial (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee, material: lookupLiveObject (handleAddress: resolved_1) as? Material ?? lookupObject (nativeHandle: resolved_1)!)
+    swiftObject._surfaceSetMaterial (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee, material: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Material)
 }
 

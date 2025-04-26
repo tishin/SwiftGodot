@@ -19,15 +19,59 @@ import Musl
 #endif
 
 
-/// Represents a GLTF accessor.
+/// Represents a glTF accessor.
 /// 
-/// GLTFAccessor is a data structure representing GLTF a `accessor` that would be found in the `"accessors"` array. A buffer is a blob of binary data. A buffer view is a slice of a buffer. An accessor is a typed interpretation of the data in a buffer view.
+/// GLTFAccessor is a data structure representing a glTF `accessor` that would be found in the `"accessors"` array. A buffer is a blob of binary data. A buffer view is a slice of a buffer. An accessor is a typed interpretation of the data in a buffer view.
 /// 
-/// Most custom data stored in GLTF does not need accessors, only buffer views (see ``GLTFBufferView``). Accessors are for more advanced use cases such as interleaved mesh data encoded for the GPU.
+/// Most custom data stored in glTF does not need accessors, only buffer views (see ``GLTFBufferView``). Accessors are for more advanced use cases such as interleaved mesh data encoded for the GPU.
 /// 
 open class GLTFAccessor: Resource {
-    fileprivate static var className = StringName("GLTFAccessor")
+    private static var className = StringName("GLTFAccessor")
     override open class var godotClassName: StringName { className }
+    public enum GLTFAccessorType: Int64, CaseIterable {
+        /// Accessor type "SCALAR". For the glTF object model, this can be used to map to a single float, int, or bool value, or a float array.
+        case scalar = 0 // TYPE_SCALAR
+        /// Accessor type "VEC2". For the glTF object model, this maps to "float2", represented in the glTF JSON as an array of two floats.
+        case vec2 = 1 // TYPE_VEC2
+        /// Accessor type "VEC3". For the glTF object model, this maps to "float3", represented in the glTF JSON as an array of three floats.
+        case vec3 = 2 // TYPE_VEC3
+        /// Accessor type "VEC4". For the glTF object model, this maps to "float4", represented in the glTF JSON as an array of four floats.
+        case vec4 = 3 // TYPE_VEC4
+        /// Accessor type "MAT2". For the glTF object model, this maps to "float2x2", represented in the glTF JSON as an array of four floats.
+        case mat2 = 4 // TYPE_MAT2
+        /// Accessor type "MAT3". For the glTF object model, this maps to "float3x3", represented in the glTF JSON as an array of nine floats.
+        case mat3 = 5 // TYPE_MAT3
+        /// Accessor type "MAT4". For the glTF object model, this maps to "float4x4", represented in the glTF JSON as an array of sixteen floats.
+        case mat4 = 6 // TYPE_MAT4
+    }
+    
+    public enum GLTFComponentType: Int64, CaseIterable {
+        /// Component type "NONE". This is not a valid component type, and is used to indicate that the component type is not set.
+        case none = 0 // COMPONENT_TYPE_NONE
+        /// Component type "BYTE". The value is `0x1400` which comes from OpenGL. This indicates data is stored in 1-byte or 8-bit signed integers. This is a core part of the glTF specification.
+        case signedByte = 5120 // COMPONENT_TYPE_SIGNED_BYTE
+        /// Component type "UNSIGNED_BYTE". The value is `0x1401` which comes from OpenGL. This indicates data is stored in 1-byte or 8-bit unsigned integers. This is a core part of the glTF specification.
+        case unsignedByte = 5121 // COMPONENT_TYPE_UNSIGNED_BYTE
+        /// Component type "SHORT". The value is `0x1402` which comes from OpenGL. This indicates data is stored in 2-byte or 16-bit signed integers. This is a core part of the glTF specification.
+        case signedShort = 5122 // COMPONENT_TYPE_SIGNED_SHORT
+        /// Component type "UNSIGNED_SHORT". The value is `0x1403` which comes from OpenGL. This indicates data is stored in 2-byte or 16-bit unsigned integers. This is a core part of the glTF specification.
+        case unsignedShort = 5123 // COMPONENT_TYPE_UNSIGNED_SHORT
+        /// Component type "INT". The value is `0x1404` which comes from OpenGL. This indicates data is stored in 4-byte or 32-bit signed integers. This is NOT a core part of the glTF specification, and may not be supported by all glTF importers. May be used by some extensions including `KHR_interactivity`.
+        case signedInt = 5124 // COMPONENT_TYPE_SIGNED_INT
+        /// Component type "UNSIGNED_INT". The value is `0x1405` which comes from OpenGL. This indicates data is stored in 4-byte or 32-bit unsigned integers. This is a core part of the glTF specification.
+        case unsignedInt = 5125 // COMPONENT_TYPE_UNSIGNED_INT
+        /// Component type "FLOAT". The value is `0x1406` which comes from OpenGL. This indicates data is stored in 4-byte or 32-bit floating-point numbers. This is a core part of the glTF specification.
+        case singleFloat = 5126 // COMPONENT_TYPE_SINGLE_FLOAT
+        /// Component type "DOUBLE". The value is `0x140A` which comes from OpenGL. This indicates data is stored in 8-byte or 64-bit floating-point numbers. This is NOT a core part of the glTF specification, and may not be supported by all glTF importers. May be used by some extensions including `KHR_interactivity`.
+        case doubleFloat = 5130 // COMPONENT_TYPE_DOUBLE_FLOAT
+        /// Component type "HALF_FLOAT". The value is `0x140B` which comes from OpenGL. This indicates data is stored in 2-byte or 16-bit floating-point numbers. This is NOT a core part of the glTF specification, and may not be supported by all glTF importers. May be used by some extensions including `KHR_interactivity`.
+        case halfFloat = 5131 // COMPONENT_TYPE_HALF_FLOAT
+        /// Component type "LONG". The value is `0x140E` which comes from OpenGL. This indicates data is stored in 8-byte or 64-bit signed integers. This is NOT a core part of the glTF specification, and may not be supported by all glTF importers. May be used by some extensions including `KHR_interactivity`.
+        case signedLong = 5134 // COMPONENT_TYPE_SIGNED_LONG
+        /// Component type "UNSIGNED_LONG". The value is `0x140F` which comes from OpenGL. This indicates data is stored in 8-byte or 64-bit unsigned integers. This is NOT a core part of the glTF specification, and may not be supported by all glTF importers. May be used by some extensions including `KHR_interactivity`.
+        case unsignedLong = 5135 // COMPONENT_TYPE_UNSIGNED_LONG
+    }
+    
     
     /* Properties */
     
@@ -55,7 +99,7 @@ open class GLTFAccessor: Resource {
         
     }
     
-    /// The GLTF component type as an enum. Possible values are 5120 for "BYTE", 5121 for "UNSIGNED_BYTE", 5122 for "SHORT", 5123 for "UNSIGNED_SHORT", 5125 for "UNSIGNED_INT", and 5126 for "FLOAT". A value of 5125 or "UNSIGNED_INT" must not be used for any accessor that is not referenced by mesh.primitive.indices.
+    /// The glTF component type as an enum. See ``GLTFAccessor/GLTFComponentType`` for possible values. Within the core glTF specification, a value of 5125 or "UNSIGNED_INT" must not be used for any accessor that is not referenced by mesh.primitive.indices.
     final public var componentType: Int32 {
         get {
             return get_component_type ()
@@ -91,8 +135,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    /// The GLTF accessor type as an enum. Possible values are 0 for "SCALAR", 1 for "VEC2", 2 for "VEC3", 3 for "VEC4", 4 for "MAT2", 5 for "MAT3", and 6 for "MAT4".
-    final public var accessorType: Int32 {
+    /// The glTF accessor type as an enum. Possible values are 0 for "SCALAR", 1 for "VEC2", 2 for "VEC3", 3 for "VEC4", 4 for "MAT2", 5 for "MAT3", and 6 for "MAT4".
+    final public var accessorType: GLTFAccessor.GLTFAccessorType {
         get {
             return get_accessor_type ()
         }
@@ -103,7 +147,7 @@ open class GLTFAccessor: Resource {
         
     }
     
-    /// The GLTF accessor type as an enum. Use ``accessorType`` instead.
+    /// The glTF accessor type as an enum. Use ``accessorType`` instead.
     final public var type: Int32 {
         get {
             return get_type ()
@@ -212,8 +256,8 @@ open class GLTFAccessor: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_buffer_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer_view")
+    fileprivate static let method_get_buffer_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer_view")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -225,13 +269,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_buffer_view() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_buffer_view, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_buffer_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_buffer_view")
+    fileprivate static let method_set_buffer_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_buffer_view")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -243,6 +288,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_buffer_view(_ bufferView: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bufferView) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -256,8 +302,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_byte_offset")
+    fileprivate static let method_get_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_byte_offset")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -269,13 +315,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_byte_offset() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_byte_offset")
+    fileprivate static let method_set_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_byte_offset")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -287,6 +334,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_byte_offset(_ byteOffset: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: byteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -300,8 +348,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_component_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_component_type")
+    fileprivate static let method_get_component_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_component_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -313,13 +361,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_component_type() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_component_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_component_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_component_type")
+    fileprivate static let method_set_component_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_component_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -331,6 +380,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_component_type(_ componentType: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: componentType) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -344,8 +394,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_normalized: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_normalized")
+    fileprivate static let method_get_normalized: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_normalized")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -357,13 +407,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_normalized() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_normalized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_normalized: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_normalized")
+    fileprivate static let method_set_normalized: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_normalized")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -375,6 +426,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_normalized(_ normalized: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normalized) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -388,8 +440,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_count")
+    fileprivate static let method_get_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_count")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -401,13 +453,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_count")
+    fileprivate static let method_set_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_count")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -419,6 +472,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -432,11 +486,11 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_accessor_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_accessor_type")
+    fileprivate static let method_get_accessor_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_accessor_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 679305214)!
             }
             
         }
@@ -444,17 +498,18 @@ open class GLTFAccessor: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func get_accessor_type() -> Int32 {
-        var _result: Int32 = 0
+    fileprivate final func get_accessor_type() -> GLTFAccessor.GLTFAccessorType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_accessor_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return _result
+        return GLTFAccessor.GLTFAccessorType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_accessor_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_accessor_type")
+    fileprivate static let method_set_accessor_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_accessor_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2347728198)!
             }
             
         }
@@ -462,8 +517,9 @@ open class GLTFAccessor: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func set_accessor_type(_ accessorType: Int32) {
-        withUnsafePointer(to: accessorType) { pArg0 in
+    fileprivate final func set_accessor_type(_ accessorType: GLTFAccessor.GLTFAccessorType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: accessorType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     gi.object_method_bind_ptrcall(GLTFAccessor.method_set_accessor_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
@@ -476,8 +532,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_type")
+    fileprivate static let method_get_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -489,13 +545,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_type() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_type")
+    fileprivate static let method_set_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -507,6 +564,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_type(_ type: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -520,8 +578,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min")
+    fileprivate static let method_get_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 148677866)!
@@ -533,13 +591,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_min() -> PackedFloat64Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat64Array = PackedFloat64Array ()
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min")
+    fileprivate static let method_set_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2576592201)!
@@ -551,6 +610,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_min(_ min: PackedFloat64Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: min.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -564,8 +624,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max")
+    fileprivate static let method_get_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 148677866)!
@@ -577,13 +637,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_max() -> PackedFloat64Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat64Array = PackedFloat64Array ()
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max")
+    fileprivate static let method_set_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2576592201)!
@@ -595,6 +656,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_max(_ max: PackedFloat64Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: max.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -608,8 +670,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_sparse_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sparse_count")
+    fileprivate static let method_get_sparse_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sparse_count")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -621,13 +683,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_sparse_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sparse_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sparse_count")
+    fileprivate static let method_set_sparse_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sparse_count")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -639,6 +702,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_sparse_count(_ sparseCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sparseCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -652,8 +716,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_sparse_indices_buffer_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sparse_indices_buffer_view")
+    fileprivate static let method_get_sparse_indices_buffer_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sparse_indices_buffer_view")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -665,13 +729,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_sparse_indices_buffer_view() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_buffer_view, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sparse_indices_buffer_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sparse_indices_buffer_view")
+    fileprivate static let method_set_sparse_indices_buffer_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sparse_indices_buffer_view")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -683,6 +748,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_sparse_indices_buffer_view(_ sparseIndicesBufferView: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sparseIndicesBufferView) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -696,8 +762,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_sparse_indices_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sparse_indices_byte_offset")
+    fileprivate static let method_get_sparse_indices_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sparse_indices_byte_offset")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -709,13 +775,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_sparse_indices_byte_offset() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sparse_indices_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sparse_indices_byte_offset")
+    fileprivate static let method_set_sparse_indices_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sparse_indices_byte_offset")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -727,6 +794,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_sparse_indices_byte_offset(_ sparseIndicesByteOffset: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sparseIndicesByteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -740,8 +808,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_sparse_indices_component_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sparse_indices_component_type")
+    fileprivate static let method_get_sparse_indices_component_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sparse_indices_component_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -753,13 +821,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_sparse_indices_component_type() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_component_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sparse_indices_component_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sparse_indices_component_type")
+    fileprivate static let method_set_sparse_indices_component_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sparse_indices_component_type")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -771,6 +840,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_sparse_indices_component_type(_ sparseIndicesComponentType: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sparseIndicesComponentType) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -784,8 +854,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_sparse_values_buffer_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sparse_values_buffer_view")
+    fileprivate static let method_get_sparse_values_buffer_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sparse_values_buffer_view")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -797,13 +867,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_sparse_values_buffer_view() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_values_buffer_view, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sparse_values_buffer_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sparse_values_buffer_view")
+    fileprivate static let method_set_sparse_values_buffer_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sparse_values_buffer_view")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -815,6 +886,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_sparse_values_buffer_view(_ sparseValuesBufferView: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sparseValuesBufferView) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -828,8 +900,8 @@ open class GLTFAccessor: Resource {
         
     }
     
-    fileprivate static var method_get_sparse_values_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sparse_values_byte_offset")
+    fileprivate static let method_get_sparse_values_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sparse_values_byte_offset")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -841,13 +913,14 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func get_sparse_values_byte_offset() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_values_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sparse_values_byte_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sparse_values_byte_offset")
+    fileprivate static let method_set_sparse_values_byte_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sparse_values_byte_offset")
         return withUnsafePointer(to: &GLTFAccessor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -859,6 +932,7 @@ open class GLTFAccessor: Resource {
     
     @inline(__always)
     fileprivate final func set_sparse_values_byte_offset(_ sparseValuesByteOffset: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sparseValuesByteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

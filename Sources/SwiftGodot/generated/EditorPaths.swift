@@ -28,11 +28,11 @@ import Musl
 /// > Note: On the Linux/BSD platform, Godot complies with the <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory Specification</a>. You can override environment variables following the specification to change the editor and project data paths.
 /// 
 open class EditorPaths: Object {
-    fileprivate static var className = StringName("EditorPaths")
+    private static var className = StringName("EditorPaths")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_data_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_data_dir")
+    fileprivate static let method_get_data_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_data_dir")
         return withUnsafePointer(to: &EditorPaths.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -47,13 +47,14 @@ open class EditorPaths: Object {
     /// **Default paths per platform:**
     /// 
     public final func getDataDir() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorPaths.method_get_data_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_config_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_config_dir")
+    fileprivate static let method_get_config_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_config_dir")
         return withUnsafePointer(to: &EditorPaths.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -68,13 +69,14 @@ open class EditorPaths: Object {
     /// **Default paths per platform:**
     /// 
     public final func getConfigDir() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorPaths.method_get_config_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_cache_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_dir")
+    fileprivate static let method_get_cache_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_dir")
         return withUnsafePointer(to: &EditorPaths.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -89,13 +91,14 @@ open class EditorPaths: Object {
     /// **Default paths per platform:**
     /// 
     public final func getCacheDir() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorPaths.method_get_cache_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_self_contained: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_self_contained")
+    fileprivate static let method_is_self_contained: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_self_contained")
         return withUnsafePointer(to: &EditorPaths.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -116,13 +119,14 @@ open class EditorPaths: Object {
     /// > Note: The Steam release of Godot uses self-contained mode by default.
     /// 
     public final func isSelfContained() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorPaths.method_is_self_contained, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_self_contained_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_self_contained_file")
+    fileprivate static let method_get_self_contained_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_self_contained_file")
         return withUnsafePointer(to: &EditorPaths.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -134,13 +138,14 @@ open class EditorPaths: Object {
     
     /// Returns the absolute path to the self-contained file that makes the current Godot editor instance be considered as self-contained. Returns an empty string if the current Godot editor instance isn't self-contained. See also ``isSelfContained()``.
     public final func getSelfContainedFile() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorPaths.method_get_self_contained_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_project_settings_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_project_settings_dir")
+    fileprivate static let method_get_project_settings_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_project_settings_dir")
         return withUnsafePointer(to: &EditorPaths.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -152,6 +157,7 @@ open class EditorPaths: Object {
     
     /// Returns the project-specific editor settings path. Projects all have a unique subdirectory inside the settings path where project-specific editor settings are saved.
     public final func getProjectSettingsDir() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorPaths.method_get_project_settings_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

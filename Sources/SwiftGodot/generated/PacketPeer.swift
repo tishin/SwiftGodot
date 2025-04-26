@@ -26,7 +26,7 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class PacketPeer: RefCounted {
-    fileprivate static var className = StringName("PacketPeer")
+    private static var className = StringName("PacketPeer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -47,8 +47,8 @@ open class PacketPeer: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_get_var: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_var")
+    fileprivate static let method_get_var: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_var")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3442865206)!
@@ -65,6 +65,7 @@ open class PacketPeer: RefCounted {
     /// > Warning: Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.
     /// 
     public final func getVar(allowObjects: Bool = false) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: allowObjects) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -79,8 +80,8 @@ open class PacketPeer: RefCounted {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_put_var: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_var")
+    fileprivate static let method_put_var: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_var")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2436251611)!
@@ -95,6 +96,7 @@ open class PacketPeer: RefCounted {
     /// Internally, this uses the same encoding mechanism as the ``@GlobalScope.var_to_bytes`` method.
     /// 
     public final func putVar(_ `var`: Variant?, fullObjects: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: `var`.content) { pArg0 in
             withUnsafePointer(to: fullObjects) { pArg1 in
@@ -112,8 +114,8 @@ open class PacketPeer: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_packet: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet")
+    fileprivate static let method_get_packet: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2115431945)!
@@ -125,13 +127,14 @@ open class PacketPeer: RefCounted {
     
     /// Gets a raw packet.
     public final func getPacket() -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         gi.object_method_bind_ptrcall(PacketPeer.method_get_packet, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_put_packet: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_packet")
+    fileprivate static let method_put_packet: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_packet")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -143,6 +146,7 @@ open class PacketPeer: RefCounted {
     
     /// Sends a raw packet.
     public final func putPacket(buffer: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -157,8 +161,8 @@ open class PacketPeer: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_packet_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_error")
+    fileprivate static let method_get_packet_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_error")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3185525595)!
@@ -170,13 +174,14 @@ open class PacketPeer: RefCounted {
     
     /// Returns the error state of the last packet received (via ``getPacket()`` and ``getVar(allowObjects:)``).
     public final func getPacketError() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(PacketPeer.method_get_packet_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_available_packet_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_available_packet_count")
+    fileprivate static let method_get_available_packet_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_available_packet_count")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -188,13 +193,14 @@ open class PacketPeer: RefCounted {
     
     /// Returns the number of packets currently available in the ring-buffer.
     public final func getAvailablePacketCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PacketPeer.method_get_available_packet_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_encode_buffer_max_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_encode_buffer_max_size")
+    fileprivate static let method_get_encode_buffer_max_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_encode_buffer_max_size")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -206,13 +212,14 @@ open class PacketPeer: RefCounted {
     
     @inline(__always)
     fileprivate final func get_encode_buffer_max_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PacketPeer.method_get_encode_buffer_max_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_encode_buffer_max_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_encode_buffer_max_size")
+    fileprivate static let method_set_encode_buffer_max_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_encode_buffer_max_size")
         return withUnsafePointer(to: &PacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -224,6 +231,7 @@ open class PacketPeer: RefCounted {
     
     @inline(__always)
     fileprivate final func set_encode_buffer_max_size(_ maxSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

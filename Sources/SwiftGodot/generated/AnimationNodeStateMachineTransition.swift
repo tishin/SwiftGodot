@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``advanceConditionChanged``
 open class AnimationNodeStateMachineTransition: Resource {
-    fileprivate static var className = StringName("AnimationNodeStateMachineTransition")
+    private static var className = StringName("AnimationNodeStateMachineTransition")
     override open class var godotClassName: StringName { className }
     public enum SwitchMode: Int64, CaseIterable {
         /// Switch to the next state immediately. The current state will end and blend into the beginning of the new one.
@@ -47,7 +47,7 @@ open class AnimationNodeStateMachineTransition: Resource {
         case disabled = 0 // ADVANCE_MODE_DISABLED
         /// Only use this transition during ``AnimationNodeStateMachinePlayback/travel(toNode:resetOnTeleport:)``.
         case enabled = 1 // ADVANCE_MODE_ENABLED
-        /// Automatically use this transition if the ``advanceCondition`` and ``advanceExpression`` checks are true (if assigned).
+        /// Automatically use this transition if the ``advanceCondition`` and ``advanceExpression`` checks are `true` (if assigned).
         case auto = 2 // ADVANCE_MODE_AUTO
     }
     
@@ -69,7 +69,7 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    /// Ease curve for better control over cross-fade between this state and the next.
+    /// Ease curve for better control over cross-fade between this state and the next. Should be a unit ``Curve``.
     final public var xfadeCurve: Curve? {
         get {
             return get_xfade_curve ()
@@ -129,7 +129,7 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    /// Determines whether the transition should disabled, enabled when using ``AnimationNodeStateMachinePlayback/travel(toNode:resetOnTeleport:)``, or traversed automatically if the ``advanceCondition`` and ``advanceExpression`` checks are true (if assigned).
+    /// Determines whether the transition should be disabled, enabled when using ``AnimationNodeStateMachinePlayback/travel(toNode:resetOnTeleport:)``, or traversed automatically if the ``advanceCondition`` and ``advanceExpression`` checks are `true` (if assigned).
     final public var advanceMode: AnimationNodeStateMachineTransition.AdvanceMode {
         get {
             return get_advance_mode ()
@@ -167,8 +167,8 @@ open class AnimationNodeStateMachineTransition: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_switch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_switch_mode")
+    fileprivate static let method_set_switch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_switch_mode")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2074906633)!
@@ -180,6 +180,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_switch_mode(_ mode: AnimationNodeStateMachineTransition.SwitchMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -193,8 +194,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_get_switch_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_switch_mode")
+    fileprivate static let method_get_switch_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_switch_mode")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2138562085)!
@@ -206,13 +207,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func get_switch_mode() -> AnimationNodeStateMachineTransition.SwitchMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_get_switch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationNodeStateMachineTransition.SwitchMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_advance_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_advance_mode")
+    fileprivate static let method_set_advance_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_advance_mode")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1210869868)!
@@ -224,6 +226,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_advance_mode(_ mode: AnimationNodeStateMachineTransition.AdvanceMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -237,8 +240,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_get_advance_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_advance_mode")
+    fileprivate static let method_get_advance_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_advance_mode")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 61101689)!
@@ -250,13 +253,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func get_advance_mode() -> AnimationNodeStateMachineTransition.AdvanceMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_get_advance_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationNodeStateMachineTransition.AdvanceMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_advance_condition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_advance_condition")
+    fileprivate static let method_set_advance_condition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_advance_condition")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -268,6 +272,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_advance_condition(_ name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -281,8 +286,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_get_advance_condition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_advance_condition")
+    fileprivate static let method_get_advance_condition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_advance_condition")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -294,13 +299,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func get_advance_condition() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_get_advance_condition, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_xfade_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_xfade_time")
+    fileprivate static let method_set_xfade_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_xfade_time")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -312,6 +318,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_xfade_time(_ secs: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: secs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -325,8 +332,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_get_xfade_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_xfade_time")
+    fileprivate static let method_get_xfade_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_xfade_time")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -338,13 +345,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func get_xfade_time() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_get_xfade_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_xfade_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_xfade_curve")
+    fileprivate static let method_set_xfade_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_xfade_curve")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -356,6 +364,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_xfade_curve(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -369,8 +378,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_get_xfade_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_xfade_curve")
+    fileprivate static let method_get_xfade_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_xfade_curve")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -382,13 +391,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func get_xfade_curve() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_get_xfade_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_break_loop_at_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_break_loop_at_end")
+    fileprivate static let method_set_break_loop_at_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_break_loop_at_end")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -400,6 +410,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_break_loop_at_end(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -413,8 +424,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_is_loop_broken_at_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_loop_broken_at_end")
+    fileprivate static let method_is_loop_broken_at_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_loop_broken_at_end")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -426,13 +437,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func is_loop_broken_at_end() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_is_loop_broken_at_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_reset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_reset")
+    fileprivate static let method_set_reset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_reset")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -444,6 +456,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_reset(_ reset: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: reset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -457,8 +470,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_is_reset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_reset")
+    fileprivate static let method_is_reset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_reset")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -470,13 +483,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func is_reset() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_is_reset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_priority")
+    fileprivate static let method_set_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_priority")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -488,6 +502,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -501,8 +516,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_get_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_priority")
+    fileprivate static let method_get_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_priority")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -514,13 +529,14 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func get_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_get_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_advance_expression: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_advance_expression")
+    fileprivate static let method_set_advance_expression: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_advance_expression")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -532,6 +548,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func set_advance_expression(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -546,8 +563,8 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    fileprivate static var method_get_advance_expression: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_advance_expression")
+    fileprivate static let method_get_advance_expression: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_advance_expression")
         return withUnsafePointer(to: &AnimationNodeStateMachineTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -559,6 +576,7 @@ open class AnimationNodeStateMachineTransition: Resource {
     
     @inline(__always)
     fileprivate final func get_advance_expression() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(AnimationNodeStateMachineTransition.method_get_advance_expression, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

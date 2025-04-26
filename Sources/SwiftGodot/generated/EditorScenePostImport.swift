@@ -23,20 +23,43 @@ import Musl
 /// 
 /// Imported scenes can be automatically modified right after import by setting their **Custom Script** Import property to a `tool` script that inherits from this class.
 /// 
-/// The ``_postImport(scene:)`` callback receives the imported scene's root node and returns the modified version of the scene. Usage example:
+/// The ``_postImport(scene:)`` callback receives the imported scene's root node and returns the modified version of the scene:
 /// 
 open class EditorScenePostImport: RefCounted {
-    fileprivate static var className = StringName("EditorScenePostImport")
+    private static var className = StringName("EditorScenePostImport")
     override open class var godotClassName: StringName { className }
     /* Methods */
+    fileprivate static let method__post_import: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_post_import")
+        return withUnsafePointer(to: &EditorScenePostImport.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 134930648)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called after the scene was imported. This method must return the modified version of the scene.
     @_documentation(visibility: public)
     open func _postImport(scene: Node?) -> Object? {
-        return Object ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: scene?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorScenePostImport.method__post_import, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_source_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source_file")
+    fileprivate static let method_get_source_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source_file")
         return withUnsafePointer(to: &EditorScenePostImport.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -48,12 +71,13 @@ open class EditorScenePostImport: RefCounted {
     
     /// Returns the source file path which got imported (e.g. `res://scene.dae`).
     public final func getSourceFile() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorScenePostImport.method_get_source_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_post_import":
@@ -70,10 +94,11 @@ open class EditorScenePostImport: RefCounted {
 func _EditorScenePostImport_proxy_post_import (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorScenePostImport>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorScenePostImport else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._postImport (scene: lookupLiveObject (handleAddress: resolved_0) as? Node ?? Node (nativeHandle: resolved_0))
+    let ret = swiftObject._postImport (scene: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Node)
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Object
 }
 

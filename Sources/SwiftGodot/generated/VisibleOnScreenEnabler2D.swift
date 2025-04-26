@@ -28,7 +28,7 @@ import Musl
 /// > Note: ``VisibleOnScreenEnabler2D`` uses the render culling code to determine whether it's visible on screen, so it won't function unless ``CanvasItem/visible`` is set to `true`.
 /// 
 open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
-    fileprivate static var className = StringName("VisibleOnScreenEnabler2D")
+    private static var className = StringName("VisibleOnScreenEnabler2D")
     override open class var godotClassName: StringName { className }
     public enum EnableMode: Int64, CaseIterable {
         /// Corresponds to ``Node/ProcessMode/inherit``.
@@ -67,8 +67,8 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_enable_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_mode")
+    fileprivate static let method_set_enable_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_mode")
         return withUnsafePointer(to: &VisibleOnScreenEnabler2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961788752)!
@@ -80,6 +80,7 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     
     @inline(__always)
     fileprivate final func set_enable_mode(_ mode: VisibleOnScreenEnabler2D.EnableMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -93,8 +94,8 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
         
     }
     
-    fileprivate static var method_get_enable_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_mode")
+    fileprivate static let method_get_enable_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_mode")
         return withUnsafePointer(to: &VisibleOnScreenEnabler2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2650445576)!
@@ -106,13 +107,14 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     
     @inline(__always)
     fileprivate final func get_enable_mode() -> VisibleOnScreenEnabler2D.EnableMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_get_enable_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisibleOnScreenEnabler2D.EnableMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_enable_node_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_node_path")
+    fileprivate static let method_set_enable_node_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_node_path")
         return withUnsafePointer(to: &VisibleOnScreenEnabler2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -124,6 +126,7 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     
     @inline(__always)
     fileprivate final func set_enable_node_path(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -137,8 +140,8 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
         
     }
     
-    fileprivate static var method_get_enable_node_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_node_path")
+    fileprivate static let method_get_enable_node_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_node_path")
         return withUnsafePointer(to: &VisibleOnScreenEnabler2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 277076166)!
@@ -150,6 +153,7 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     
     @inline(__always)
     fileprivate final func get_enable_node_path() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_get_enable_node_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

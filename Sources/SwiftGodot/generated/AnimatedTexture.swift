@@ -32,7 +32,7 @@ import Musl
 /// > Warning: The current implementation is not efficient for the modern renderers.
 /// 
 open class AnimatedTexture: Texture2D {
-    fileprivate static var className = StringName("AnimatedTexture")
+    private static var className = StringName("AnimatedTexture")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// The maximum number of frames supported by ``AnimatedTexture``. If you need more frames in your animation, use ``AnimationPlayer`` or ``AnimatedSprite2D``.
@@ -101,8 +101,8 @@ open class AnimatedTexture: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frames")
+    fileprivate static let method_set_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frames")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -114,6 +114,7 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_frames(_ frames: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -127,8 +128,8 @@ open class AnimatedTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frames")
+    fileprivate static let method_get_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frames")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -140,13 +141,14 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_frames() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AnimatedTexture.method_get_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_current_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_current_frame")
+    fileprivate static let method_set_current_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_current_frame")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -158,6 +160,7 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_current_frame(_ frame: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -171,8 +174,8 @@ open class AnimatedTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_current_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_frame")
+    fileprivate static let method_get_current_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_frame")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -184,13 +187,14 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_current_frame() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AnimatedTexture.method_get_current_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pause: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pause")
+    fileprivate static let method_set_pause: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pause")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -202,6 +206,7 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_pause(_ pause: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pause) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -215,8 +220,8 @@ open class AnimatedTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_pause: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pause")
+    fileprivate static let method_get_pause: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pause")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -228,13 +233,14 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_pause() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimatedTexture.method_get_pause, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_one_shot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_one_shot")
+    fileprivate static let method_set_one_shot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_one_shot")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -246,6 +252,7 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_one_shot(_ oneShot: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oneShot) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -259,8 +266,8 @@ open class AnimatedTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_one_shot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_one_shot")
+    fileprivate static let method_get_one_shot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_one_shot")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -272,13 +279,14 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_one_shot() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimatedTexture.method_get_one_shot, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_speed_scale")
+    fileprivate static let method_set_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_speed_scale")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -290,6 +298,7 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_speed_scale(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -303,8 +312,8 @@ open class AnimatedTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_speed_scale")
+    fileprivate static let method_get_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_speed_scale")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -316,13 +325,14 @@ open class AnimatedTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_speed_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimatedTexture.method_get_speed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_frame_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frame_texture")
+    fileprivate static let method_set_frame_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frame_texture")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -337,6 +347,7 @@ open class AnimatedTexture: Texture2D {
     /// You can define any number of textures up to ``maxFrames``, but keep in mind that only frames from 0 to ``frames`` - 1 will be part of the animation.
     /// 
     public final func setFrameTexture(frame: Int32, texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -353,8 +364,8 @@ open class AnimatedTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_frame_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_texture")
+    fileprivate static let method_get_frame_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_texture")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -366,6 +377,7 @@ open class AnimatedTexture: Texture2D {
     
     /// Returns the given frame's ``Texture2D``.
     public final func getFrameTexture(frame: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -377,11 +389,11 @@ open class AnimatedTexture: Texture2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_frame_duration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frame_duration")
+    fileprivate static let method_set_frame_duration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frame_duration")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -393,6 +405,7 @@ open class AnimatedTexture: Texture2D {
     
     /// Sets the duration of any given `frame`. The final duration is affected by the ``speedScale``. If set to `0`, the frame is skipped during playback.
     public final func setFrameDuration(frame: Int32, duration: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: duration) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -409,8 +422,8 @@ open class AnimatedTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_frame_duration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_duration")
+    fileprivate static let method_get_frame_duration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_duration")
         return withUnsafePointer(to: &AnimatedTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -422,6 +435,7 @@ open class AnimatedTexture: Texture2D {
     
     /// Returns the given `frame`'s duration, in seconds.
     public final func getFrameDuration(frame: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

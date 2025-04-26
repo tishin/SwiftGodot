@@ -23,12 +23,12 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDTextureView: RefCounted {
-    fileprivate static var className = StringName("RDTextureView")
+    private static var className = StringName("RDTextureView")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
-    /// Optional override for the data format to return sampled values in. The default value of ``RenderingDevice/DataFormat/max`` does not override the format.
+    /// Optional override for the data format to return sampled values in. The corresponding ``RDTextureFormat`` must have had this added as a shareable format. The default value of ``RenderingDevice/DataFormat/max`` does not override the format.
     final public var formatOverride: RenderingDevice.DataFormat {
         get {
             return get_format_override ()
@@ -89,8 +89,8 @@ open class RDTextureView: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_format_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_format_override")
+    fileprivate static let method_set_format_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_format_override")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 565531219)!
@@ -102,6 +102,7 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func set_format_override(_ pMember: RenderingDevice.DataFormat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -115,8 +116,8 @@ open class RDTextureView: RefCounted {
         
     }
     
-    fileprivate static var method_get_format_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format_override")
+    fileprivate static let method_get_format_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format_override")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2235804183)!
@@ -128,13 +129,14 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func get_format_override() -> RenderingDevice.DataFormat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureView.method_get_format_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.DataFormat (rawValue: _result)!
     }
     
-    fileprivate static var method_set_swizzle_r: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_swizzle_r")
+    fileprivate static let method_set_swizzle_r: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_swizzle_r")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3833362581)!
@@ -146,6 +148,7 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func set_swizzle_r(_ pMember: RenderingDevice.TextureSwizzle) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -159,8 +162,8 @@ open class RDTextureView: RefCounted {
         
     }
     
-    fileprivate static var method_get_swizzle_r: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_swizzle_r")
+    fileprivate static let method_get_swizzle_r: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_swizzle_r")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4150792614)!
@@ -172,13 +175,14 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func get_swizzle_r() -> RenderingDevice.TextureSwizzle {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_r, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!
     }
     
-    fileprivate static var method_set_swizzle_g: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_swizzle_g")
+    fileprivate static let method_set_swizzle_g: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_swizzle_g")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3833362581)!
@@ -190,6 +194,7 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func set_swizzle_g(_ pMember: RenderingDevice.TextureSwizzle) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -203,8 +208,8 @@ open class RDTextureView: RefCounted {
         
     }
     
-    fileprivate static var method_get_swizzle_g: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_swizzle_g")
+    fileprivate static let method_get_swizzle_g: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_swizzle_g")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4150792614)!
@@ -216,13 +221,14 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func get_swizzle_g() -> RenderingDevice.TextureSwizzle {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_g, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!
     }
     
-    fileprivate static var method_set_swizzle_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_swizzle_b")
+    fileprivate static let method_set_swizzle_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_swizzle_b")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3833362581)!
@@ -234,6 +240,7 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func set_swizzle_b(_ pMember: RenderingDevice.TextureSwizzle) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -247,8 +254,8 @@ open class RDTextureView: RefCounted {
         
     }
     
-    fileprivate static var method_get_swizzle_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_swizzle_b")
+    fileprivate static let method_get_swizzle_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_swizzle_b")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4150792614)!
@@ -260,13 +267,14 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func get_swizzle_b() -> RenderingDevice.TextureSwizzle {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_b, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!
     }
     
-    fileprivate static var method_set_swizzle_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_swizzle_a")
+    fileprivate static let method_set_swizzle_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_swizzle_a")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3833362581)!
@@ -278,6 +286,7 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func set_swizzle_a(_ pMember: RenderingDevice.TextureSwizzle) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -291,8 +300,8 @@ open class RDTextureView: RefCounted {
         
     }
     
-    fileprivate static var method_get_swizzle_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_swizzle_a")
+    fileprivate static let method_get_swizzle_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_swizzle_a")
         return withUnsafePointer(to: &RDTextureView.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4150792614)!
@@ -304,6 +313,7 @@ open class RDTextureView: RefCounted {
     
     @inline(__always)
     fileprivate final func get_swizzle_a() -> RenderingDevice.TextureSwizzle {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_a, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!

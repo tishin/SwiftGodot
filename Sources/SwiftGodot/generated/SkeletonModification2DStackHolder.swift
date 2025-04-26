@@ -26,11 +26,11 @@ import Musl
 /// > Note: The modifications in the held ``SkeletonModificationStack2D`` will only be executed if their execution mode matches the execution mode of the SkeletonModification2DStackHolder.
 /// 
 open class SkeletonModification2DStackHolder: SkeletonModification2D {
-    fileprivate static var className = StringName("SkeletonModification2DStackHolder")
+    private static var className = StringName("SkeletonModification2DStackHolder")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_set_held_modification_stack: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_held_modification_stack")
+    fileprivate static let method_set_held_modification_stack: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_held_modification_stack")
         return withUnsafePointer(to: &SkeletonModification2DStackHolder.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3907307132)!
@@ -42,6 +42,7 @@ open class SkeletonModification2DStackHolder: SkeletonModification2D {
     
     /// Sets the ``SkeletonModificationStack2D`` that this modification is holding. This modification stack will then be executed when this modification is executed.
     public final func setHeldModificationStack(_ heldModificationStack: SkeletonModificationStack2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: heldModificationStack?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -55,8 +56,8 @@ open class SkeletonModification2DStackHolder: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_held_modification_stack: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_held_modification_stack")
+    fileprivate static let method_get_held_modification_stack: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_held_modification_stack")
         return withUnsafePointer(to: &SkeletonModification2DStackHolder.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2107508396)!
@@ -68,9 +69,10 @@ open class SkeletonModification2DStackHolder: SkeletonModification2D {
     
     /// Returns the ``SkeletonModificationStack2D`` that this modification is holding.
     public final func getHeldModificationStack() -> SkeletonModificationStack2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(SkeletonModification2DStackHolder.method_get_held_modification_stack, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

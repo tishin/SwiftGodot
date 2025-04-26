@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This object is the base of all XR trackers.
 open class XRTracker: RefCounted {
-    fileprivate static var className = StringName("XRTracker")
+    private static var className = StringName("XRTracker")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -80,8 +80,8 @@ open class XRTracker: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_get_tracker_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracker_type")
+    fileprivate static let method_get_tracker_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracker_type")
         return withUnsafePointer(to: &XRTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2784508102)!
@@ -93,13 +93,14 @@ open class XRTracker: RefCounted {
     
     @inline(__always)
     fileprivate final func get_tracker_type() -> XRServer.TrackerType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRServer.TrackerType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_tracker_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tracker_type")
+    fileprivate static let method_set_tracker_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tracker_type")
         return withUnsafePointer(to: &XRTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3055763575)!
@@ -111,6 +112,7 @@ open class XRTracker: RefCounted {
     
     @inline(__always)
     fileprivate final func set_tracker_type(_ type: XRServer.TrackerType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -124,8 +126,8 @@ open class XRTracker: RefCounted {
         
     }
     
-    fileprivate static var method_get_tracker_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracker_name")
+    fileprivate static let method_get_tracker_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracker_name")
         return withUnsafePointer(to: &XRTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -137,13 +139,14 @@ open class XRTracker: RefCounted {
     
     @inline(__always)
     fileprivate final func get_tracker_name() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_tracker_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tracker_name")
+    fileprivate static let method_set_tracker_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tracker_name")
         return withUnsafePointer(to: &XRTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -155,6 +158,7 @@ open class XRTracker: RefCounted {
     
     @inline(__always)
     fileprivate final func set_tracker_name(_ name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -168,8 +172,8 @@ open class XRTracker: RefCounted {
         
     }
     
-    fileprivate static var method_get_tracker_desc: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracker_desc")
+    fileprivate static let method_get_tracker_desc: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracker_desc")
         return withUnsafePointer(to: &XRTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -181,13 +185,14 @@ open class XRTracker: RefCounted {
     
     @inline(__always)
     fileprivate final func get_tracker_desc() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_desc, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_tracker_desc: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tracker_desc")
+    fileprivate static let method_set_tracker_desc: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tracker_desc")
         return withUnsafePointer(to: &XRTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -199,6 +204,7 @@ open class XRTracker: RefCounted {
     
     @inline(__always)
     fileprivate final func set_tracker_desc(_ description: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let description = GString(description)
         withUnsafePointer(to: description.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

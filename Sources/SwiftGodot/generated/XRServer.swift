@@ -34,14 +34,14 @@ import Musl
 /// - ``trackerRemoved``
 open class XRServer: Object {
     /// The shared instance of this class
-    public static var shared: XRServer = {
-        return withUnsafePointer (to: &XRServer.godotClassName.content) { ptr in
-            XRServer (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: XRServer {
+        return withUnsafePointer(to: &XRServer.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("XRServer")
+    private static var className = StringName("XRServer")
     override open class var godotClassName: StringName { className }
     public enum TrackerType: Int64, CaseIterable {
         /// The tracker tracks the location of the players head. This is usually a location centered between the players eyes. Note that for handheld AR devices this can be the current location of the device.
@@ -105,6 +105,21 @@ open class XRServer: Object {
         
     }
     
+    /// If set to `true`, the scene will be rendered as if the camera is locked to the ``XROrigin3D``.
+    /// 
+    /// > Note: This doesn't provide a very comfortable experience for users. This setting exists for doing benchmarking or automated testing, where you want to control what is rendered via code.
+    /// 
+    static public var cameraLockedToOrigin: Bool {
+        get {
+            return is_camera_locked_to_origin ()
+        }
+        
+        set {
+            set_camera_locked_to_origin (newValue)
+        }
+        
+    }
+    
     /// The primary ``XRInterface`` currently bound to the ``XRServer``.
     static public var primaryInterface: XRInterface? {
         get {
@@ -118,8 +133,8 @@ open class XRServer: Object {
     }
     
     /* Methods */
-    fileprivate static var method_get_world_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_world_scale")
+    fileprivate static let method_get_world_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_world_scale")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -136,8 +151,8 @@ open class XRServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_world_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_world_scale")
+    fileprivate static let method_set_world_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_world_scale")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -162,8 +177,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_get_world_origin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_world_origin")
+    fileprivate static let method_get_world_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_world_origin")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -180,8 +195,8 @@ open class XRServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_world_origin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_world_origin")
+    fileprivate static let method_set_world_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_world_origin")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2952846383)!
@@ -206,8 +221,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_get_reference_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_reference_frame")
+    fileprivate static let method_get_reference_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_reference_frame")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -224,8 +239,8 @@ open class XRServer: Object {
         return _result
     }
     
-    fileprivate static var method_clear_reference_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_reference_frame")
+    fileprivate static let method_clear_reference_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_reference_frame")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -241,8 +256,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_center_on_hmd: GDExtensionMethodBindPtr = {
-        let methodName = StringName("center_on_hmd")
+    fileprivate static let method_center_on_hmd: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("center_on_hmd")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1450904707)!
@@ -281,8 +296,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_get_hmd_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hmd_transform")
+    fileprivate static let method_get_hmd_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hmd_transform")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4183770049)!
@@ -299,8 +314,52 @@ open class XRServer: Object {
         return _result
     }
     
-    fileprivate static var method_add_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_interface")
+    fileprivate static let method_set_camera_locked_to_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_camera_locked_to_origin")
+        return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate static func set_camera_locked_to_origin(_ enabled: Bool) {
+        withUnsafePointer(to: enabled) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_set_camera_locked_to_origin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_camera_locked_to_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_camera_locked_to_origin")
+        return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate static func is_camera_locked_to_origin() -> Bool {
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(method_is_camera_locked_to_origin, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_add_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_interface")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1898711491)!
@@ -325,8 +384,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_get_interface_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interface_count")
+    fileprivate static let method_get_interface_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interface_count")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -343,8 +402,8 @@ open class XRServer: Object {
         return _result
     }
     
-    fileprivate static var method_remove_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_interface")
+    fileprivate static let method_remove_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_interface")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1898711491)!
@@ -369,8 +428,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_get_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interface")
+    fileprivate static let method_get_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interface")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4237347919)!
@@ -393,11 +452,11 @@ open class XRServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_interfaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interfaces")
+    fileprivate static let method_get_interfaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interfaces")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -408,14 +467,14 @@ open class XRServer: Object {
     }()
     
     /// Returns a list of available interfaces the ID and name of each interface.
-    public static func getInterfaces() -> VariantCollection<GDictionary> {
+    public static func getInterfaces() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_interfaces, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_find_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_interface")
+    fileprivate static let method_find_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_interface")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1395192955)!
@@ -439,11 +498,11 @@ open class XRServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_tracker: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_tracker")
+    fileprivate static let method_add_tracker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_tracker")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 684804553)!
@@ -468,8 +527,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_remove_tracker: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_tracker")
+    fileprivate static let method_remove_tracker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_tracker")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 684804553)!
@@ -494,8 +553,8 @@ open class XRServer: Object {
         
     }
     
-    fileprivate static var method_get_trackers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_trackers")
+    fileprivate static let method_get_trackers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_trackers")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3554694381)!
@@ -506,8 +565,8 @@ open class XRServer: Object {
     }()
     
     /// Returns a dictionary of trackers for `trackerTypes`.
-    public static func getTrackers(trackerTypes: Int32) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getTrackers(trackerTypes: Int32) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: trackerTypes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -521,8 +580,8 @@ open class XRServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_tracker: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracker")
+    fileprivate static let method_get_tracker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracker")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 147382240)!
@@ -545,11 +604,11 @@ open class XRServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_primary_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_primary_interface")
+    fileprivate static let method_get_primary_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_primary_interface")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2143545064)!
@@ -563,11 +622,11 @@ open class XRServer: Object {
     fileprivate static func get_primary_interface() -> XRInterface? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_primary_interface, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_primary_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_primary_interface")
+    fileprivate static let method_set_primary_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_primary_interface")
         return withUnsafePointer(to: &XRServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1898711491)!

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This imports native GLSL shaders as ``RDShaderFile`` resources, for use with low-level ``RenderingDevice`` operations. This importer does _not_ handle `.gdshader` files.
 open class ResourceImporterShaderFile: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterShaderFile")
+    private static var className = StringName("ResourceImporterShaderFile")
     override open class var godotClassName: StringName { className }
 }
 

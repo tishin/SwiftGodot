@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``nodeChanged``
 open class AnimationNodeBlendTree: AnimationRootNode {
-    fileprivate static var className = StringName("AnimationNodeBlendTree")
+    private static var className = StringName("AnimationNodeBlendTree")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// The connection was successful.
@@ -62,8 +62,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     }
     
     /* Methods */
-    fileprivate static var method_add_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_node")
+    fileprivate static let method_add_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_node")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1980270704)!
@@ -75,6 +75,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Adds an ``AnimationNode`` at the given `position`. The `name` is used to identify the created sub animation node later.
     public final func addNode(name: StringName, node: AnimationNode?, position: Vector2 = Vector2 (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: node?.handle) { pArg1 in
                 withUnsafePointer(to: position) { pArg2 in
@@ -94,8 +95,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node")
+    fileprivate static let method_get_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 625644256)!
@@ -107,6 +108,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Returns the sub animation node with the specified `name`.
     public final func getNode(name: StringName) -> AnimationNode? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -118,11 +120,11 @@ open class AnimationNodeBlendTree: AnimationRootNode {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_remove_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_node")
+    fileprivate static let method_remove_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_node")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -134,6 +136,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Removes a sub animation node.
     public final func removeNode(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -147,8 +150,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         
     }
     
-    fileprivate static var method_rename_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_node")
+    fileprivate static let method_rename_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_node")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -160,6 +163,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Changes the name of a sub animation node.
     public final func renameNode(name: StringName, newName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: newName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -176,8 +180,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         
     }
     
-    fileprivate static var method_has_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_node")
+    fileprivate static let method_has_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_node")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -189,6 +193,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Returns `true` if a sub animation node with specified `name` exists.
     public final func hasNode(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -203,8 +208,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         return _result
     }
     
-    fileprivate static var method_connect_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_node")
+    fileprivate static let method_connect_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_node")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2168001410)!
@@ -216,6 +221,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Connects the output of an ``AnimationNode`` as input for another ``AnimationNode``, at the input port specified by `inputIndex`.
     public final func connectNode(inputNode: StringName, inputIndex: Int32, outputNode: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: inputNode.content) { pArg0 in
             withUnsafePointer(to: inputIndex) { pArg1 in
                 withUnsafePointer(to: outputNode.content) { pArg2 in
@@ -235,8 +241,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         
     }
     
-    fileprivate static var method_disconnect_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_node")
+    fileprivate static let method_disconnect_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_node")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2415702435)!
@@ -248,6 +254,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Disconnects the animation node connected to the specified input.
     public final func disconnectNode(inputNode: StringName, inputIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: inputNode.content) { pArg0 in
             withUnsafePointer(to: inputIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -264,8 +271,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         
     }
     
-    fileprivate static var method_set_node_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_node_position")
+    fileprivate static let method_set_node_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_node_position")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1999414630)!
@@ -277,6 +284,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Modifies the position of a sub animation node.
     public final func setNodePosition(name: StringName, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -293,8 +301,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_node_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_position")
+    fileprivate static let method_get_node_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_position")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3100822709)!
@@ -306,6 +314,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     /// Returns the position of the sub animation node with the specified `name`.
     public final func getNodePosition(name: StringName) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -320,8 +329,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         return _result
     }
     
-    fileprivate static var method_set_graph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_graph_offset")
+    fileprivate static let method_set_graph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_graph_offset")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -333,6 +342,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func set_graph_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -346,8 +356,8 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_graph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_graph_offset")
+    fileprivate static let method_get_graph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_graph_offset")
         return withUnsafePointer(to: &AnimationNodeBlendTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -359,6 +369,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func get_graph_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_get_graph_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

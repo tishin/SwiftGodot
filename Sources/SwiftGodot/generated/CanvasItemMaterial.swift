@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``CanvasItemMaterial``s provide a means of modifying the textures associated with a CanvasItem. They specialize in describing blend and lighting behaviors for textures. Use a ``ShaderMaterial`` to more fully customize a material's interactions with a ``CanvasItem``.
 open class CanvasItemMaterial: Material {
-    fileprivate static var className = StringName("CanvasItemMaterial")
+    private static var className = StringName("CanvasItemMaterial")
     override open class var godotClassName: StringName { className }
     public enum BlendMode: Int64, CaseIterable {
         /// Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
@@ -135,8 +135,8 @@ open class CanvasItemMaterial: Material {
     }
     
     /* Methods */
-    fileprivate static var method_set_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_mode")
+    fileprivate static let method_set_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_mode")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1786054936)!
@@ -148,6 +148,7 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_blend_mode(_ blendMode: CanvasItemMaterial.BlendMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: blendMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -161,8 +162,8 @@ open class CanvasItemMaterial: Material {
         
     }
     
-    fileprivate static var method_get_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_mode")
+    fileprivate static let method_get_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_mode")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3318684035)!
@@ -174,13 +175,14 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_blend_mode() -> CanvasItemMaterial.BlendMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CanvasItemMaterial.BlendMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_light_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_light_mode")
+    fileprivate static let method_set_light_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_light_mode")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 628074070)!
@@ -192,6 +194,7 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_light_mode(_ lightMode: CanvasItemMaterial.LightMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lightMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -205,8 +208,8 @@ open class CanvasItemMaterial: Material {
         
     }
     
-    fileprivate static var method_get_light_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_light_mode")
+    fileprivate static let method_get_light_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_light_mode")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3863292382)!
@@ -218,13 +221,14 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_light_mode() -> CanvasItemMaterial.LightMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_light_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CanvasItemMaterial.LightMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_particles_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_particles_animation")
+    fileprivate static let method_set_particles_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_particles_animation")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -236,6 +240,7 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_particles_animation(_ particlesAnim: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: particlesAnim) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -249,8 +254,8 @@ open class CanvasItemMaterial: Material {
         
     }
     
-    fileprivate static var method_get_particles_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_particles_animation")
+    fileprivate static let method_get_particles_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_particles_animation")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -262,13 +267,14 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_particles_animation() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_animation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_particles_anim_h_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_particles_anim_h_frames")
+    fileprivate static let method_set_particles_anim_h_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_particles_anim_h_frames")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -280,6 +286,7 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_particles_anim_h_frames(_ frames: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -293,8 +300,8 @@ open class CanvasItemMaterial: Material {
         
     }
     
-    fileprivate static var method_get_particles_anim_h_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_particles_anim_h_frames")
+    fileprivate static let method_get_particles_anim_h_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_particles_anim_h_frames")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -306,13 +313,14 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_particles_anim_h_frames() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_h_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_particles_anim_v_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_particles_anim_v_frames")
+    fileprivate static let method_set_particles_anim_v_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_particles_anim_v_frames")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -324,6 +332,7 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_particles_anim_v_frames(_ frames: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -337,8 +346,8 @@ open class CanvasItemMaterial: Material {
         
     }
     
-    fileprivate static var method_get_particles_anim_v_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_particles_anim_v_frames")
+    fileprivate static let method_get_particles_anim_v_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_particles_anim_v_frames")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -350,13 +359,14 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_particles_anim_v_frames() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_v_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_particles_anim_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_particles_anim_loop")
+    fileprivate static let method_set_particles_anim_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_particles_anim_loop")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -368,6 +378,7 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_particles_anim_loop(_ loop: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -381,8 +392,8 @@ open class CanvasItemMaterial: Material {
         
     }
     
-    fileprivate static var method_get_particles_anim_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_particles_anim_loop")
+    fileprivate static let method_get_particles_anim_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_particles_anim_loop")
         return withUnsafePointer(to: &CanvasItemMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -394,6 +405,7 @@ open class CanvasItemMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_particles_anim_loop() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -28,7 +28,7 @@ import Musl
 /// The command line argument `--text-driver Dummy` (case-sensitive) can be used to force the "Dummy" ``TextServer`` on any project.
 /// 
 open class TextServerDummy: TextServerExtension {
-    fileprivate static var className = StringName("TextServerDummy")
+    private static var className = StringName("TextServerDummy")
     override open class var godotClassName: StringName { className }
 }
 

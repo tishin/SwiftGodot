@@ -21,17 +21,18 @@ import Musl
 
 /// A mathematical curve.
 /// 
-/// This resource describes a mathematical curve by defining a set of points and tangents at each point. By default, it ranges between `0` and `1` on the Y axis and positions points relative to the `0.5` Y position.
+/// This resource describes a mathematical curve by defining a set of points and tangents at each point. By default, it ranges between `0` and `1` on the X and Y axes, but these ranges can be changed.
 /// 
-/// See also ``Gradient`` which is designed for color interpolation. See also ``Curve2D`` and ``Curve3D``.
+/// Please note that many resources and nodes assume they are given _unit curves_. A unit curve is a curve whose domain (the X axis) is between `0` and `1`. Some examples of unit curve usage are ``CPUParticles2D/angleCurve`` and ``Line2D/widthCurve``.
 /// 
 /// 
 /// 
 /// This object emits the following signals:
 /// 
 /// - ``rangeChanged``
+/// - ``domainChanged``
 open class Curve: Resource {
-    fileprivate static var className = StringName("Curve")
+    private static var className = StringName("Curve")
     override open class var godotClassName: StringName { className }
     public enum TangentMode: Int64, CaseIterable {
         /// The tangent on this side of the point is user-defined.
@@ -45,7 +46,31 @@ open class Curve: Resource {
     
     /* Properties */
     
-    /// The minimum value the curve can reach.
+    /// The minimum domain (x-coordinate) that points can have.
+    final public var minDomain: Double {
+        get {
+            return get_min_domain ()
+        }
+        
+        set {
+            set_min_domain (newValue)
+        }
+        
+    }
+    
+    /// The maximum domain (x-coordinate) that points can have.
+    final public var maxDomain: Double {
+        get {
+            return get_max_domain ()
+        }
+        
+        set {
+            set_max_domain (newValue)
+        }
+        
+    }
+    
+    /// The minimum value (y-coordinate) that points can have. Tangents can cause lower values between points.
     final public var minValue: Double {
         get {
             return get_min_value ()
@@ -57,7 +82,7 @@ open class Curve: Resource {
         
     }
     
-    /// The maximum value the curve can reach.
+    /// The maximum value (y-coordinate) that points can have. Tangents can cause higher values between points.
     final public var maxValue: Double {
         get {
             return get_max_value ()
@@ -94,8 +119,8 @@ open class Curve: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_point_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_count")
+    fileprivate static let method_get_point_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_count")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -107,13 +132,14 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func get_point_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Curve.method_get_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_point_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_count")
+    fileprivate static let method_set_point_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_count")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -125,6 +151,7 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func set_point_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -138,8 +165,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_add_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_point")
+    fileprivate static let method_add_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_point")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 434072736)!
@@ -151,6 +178,7 @@ open class Curve: Resource {
     
     /// Adds a point to the curve. For each side, if the `*_mode` is ``TangentMode/linear``, the `*_tangent` angle (in degrees) uses the slope of the curve halfway to the adjacent point. Allows custom assignments to the `*_tangent` angle if `*_mode` is set to ``TangentMode/free``.
     public final func addPoint(position: Vector2, leftTangent: Double = 0, rightTangent: Double = 0, leftMode: Curve.TangentMode = .free, rightMode: Curve.TangentMode = .free) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: leftTangent) { pArg1 in
@@ -177,8 +205,8 @@ open class Curve: Resource {
         return _result
     }
     
-    fileprivate static var method_remove_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_point")
+    fileprivate static let method_remove_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_point")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -190,6 +218,7 @@ open class Curve: Resource {
     
     /// Removes the point at `index` from the curve.
     public final func removePoint(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -203,8 +232,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_clear_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_points")
+    fileprivate static let method_clear_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_points")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -216,12 +245,13 @@ open class Curve: Resource {
     
     /// Removes all points from the curve.
     public final func clearPoints() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Curve.method_clear_points, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_point_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_position")
+    fileprivate static let method_get_point_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_position")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -233,6 +263,7 @@ open class Curve: Resource {
     
     /// Returns the curve coordinates for the point at `index`.
     public final func getPointPosition(index: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -247,8 +278,8 @@ open class Curve: Resource {
         return _result
     }
     
-    fileprivate static var method_set_point_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_value")
+    fileprivate static let method_set_point_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_value")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -260,6 +291,7 @@ open class Curve: Resource {
     
     /// Assigns the vertical position `y` to the point at `index`.
     public final func setPointValue(index: Int32, y: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: y) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -276,8 +308,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_set_point_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_offset")
+    fileprivate static let method_set_point_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_offset")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780573764)!
@@ -289,6 +321,7 @@ open class Curve: Resource {
     
     /// Sets the offset from `0.5`.
     public final func setPointOffset(index: Int32, offset: Double) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: offset) { pArg1 in
@@ -306,8 +339,8 @@ open class Curve: Resource {
         return _result
     }
     
-    fileprivate static var method_sample: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sample")
+    fileprivate static let method_sample: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sample")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3919130443)!
@@ -319,6 +352,7 @@ open class Curve: Resource {
     
     /// Returns the Y value for the point that would exist at the X position `offset` along the curve.
     public final func sample(offset: Double) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -333,8 +367,8 @@ open class Curve: Resource {
         return _result
     }
     
-    fileprivate static var method_sample_baked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sample_baked")
+    fileprivate static let method_sample_baked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sample_baked")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3919130443)!
@@ -346,6 +380,7 @@ open class Curve: Resource {
     
     /// Returns the Y value for the point that would exist at the X position `offset` along the curve using the baked cache. Bakes the curve's points if not already baked.
     public final func sampleBaked(offset: Double) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -360,8 +395,8 @@ open class Curve: Resource {
         return _result
     }
     
-    fileprivate static var method_get_point_left_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_left_tangent")
+    fileprivate static let method_get_point_left_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_left_tangent")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -373,6 +408,7 @@ open class Curve: Resource {
     
     /// Returns the left tangent angle (in degrees) for the point at `index`.
     public final func getPointLeftTangent(index: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -387,8 +423,8 @@ open class Curve: Resource {
         return _result
     }
     
-    fileprivate static var method_get_point_right_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_right_tangent")
+    fileprivate static let method_get_point_right_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_right_tangent")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -400,6 +436,7 @@ open class Curve: Resource {
     
     /// Returns the right tangent angle (in degrees) for the point at `index`.
     public final func getPointRightTangent(index: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -414,8 +451,8 @@ open class Curve: Resource {
         return _result
     }
     
-    fileprivate static var method_get_point_left_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_left_mode")
+    fileprivate static let method_get_point_left_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_left_mode")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 426950354)!
@@ -427,6 +464,7 @@ open class Curve: Resource {
     
     /// Returns the left ``Curve/TangentMode`` for the point at `index`.
     public final func getPointLeftMode(index: Int32) -> Curve.TangentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -441,8 +479,8 @@ open class Curve: Resource {
         return Curve.TangentMode (rawValue: _result)!
     }
     
-    fileprivate static var method_get_point_right_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_right_mode")
+    fileprivate static let method_get_point_right_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_right_mode")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 426950354)!
@@ -454,6 +492,7 @@ open class Curve: Resource {
     
     /// Returns the right ``Curve/TangentMode`` for the point at `index`.
     public final func getPointRightMode(index: Int32) -> Curve.TangentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -468,8 +507,8 @@ open class Curve: Resource {
         return Curve.TangentMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_point_left_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_left_tangent")
+    fileprivate static let method_set_point_left_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_left_tangent")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -481,6 +520,7 @@ open class Curve: Resource {
     
     /// Sets the left tangent angle for the point at `index` to `tangent`.
     public final func setPointLeftTangent(index: Int32, tangent: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: tangent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -497,8 +537,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_set_point_right_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_right_tangent")
+    fileprivate static let method_set_point_right_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_right_tangent")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -510,6 +550,7 @@ open class Curve: Resource {
     
     /// Sets the right tangent angle for the point at `index` to `tangent`.
     public final func setPointRightTangent(index: Int32, tangent: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: tangent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -526,8 +567,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_set_point_left_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_left_mode")
+    fileprivate static let method_set_point_left_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_left_mode")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1217242874)!
@@ -539,6 +580,7 @@ open class Curve: Resource {
     
     /// Sets the left ``Curve/TangentMode`` for the point at `index` to `mode`.
     public final func setPointLeftMode(index: Int32, mode: Curve.TangentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -555,8 +597,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_set_point_right_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_right_mode")
+    fileprivate static let method_set_point_right_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_right_mode")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1217242874)!
@@ -568,6 +610,7 @@ open class Curve: Resource {
     
     /// Sets the right ``Curve/TangentMode`` for the point at `index` to `mode`.
     public final func setPointRightMode(index: Int32, mode: Curve.TangentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -584,8 +627,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_get_min_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_value")
+    fileprivate static let method_get_min_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_value")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -597,13 +640,14 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func get_min_value() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Curve.method_get_min_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_min_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_value")
+    fileprivate static let method_set_min_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_value")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -615,6 +659,7 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func set_min_value(_ min: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: min) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -628,8 +673,8 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_get_max_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_value")
+    fileprivate static let method_get_max_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_value")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -641,13 +686,14 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func get_max_value() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Curve.method_get_max_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_value")
+    fileprivate static let method_set_max_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_value")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -659,6 +705,7 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func set_max_value(_ max: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: max) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -672,8 +719,138 @@ open class Curve: Resource {
         
     }
     
-    fileprivate static var method_clean_dupes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clean_dupes")
+    fileprivate static let method_get_value_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_value_range")
+        return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the difference between ``minValue`` and ``maxValue``.
+    public final func getValueRange() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(Curve.method_get_value_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_min_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_domain")
+        return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_min_domain() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(Curve.method_get_min_domain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_min_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_domain")
+        return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_min_domain(_ min: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: min) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Curve.method_set_min_domain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_max_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_domain")
+        return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_max_domain() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(Curve.method_get_max_domain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_max_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_domain")
+        return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_max_domain(_ max: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: max) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Curve.method_set_max_domain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_domain_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_range")
+        return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the difference between ``minDomain`` and ``maxDomain``.
+    public final func getDomainRange() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(Curve.method_get_domain_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_clean_dupes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clean_dupes")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -685,12 +862,13 @@ open class Curve: Resource {
     
     /// Removes duplicate points, i.e. points that are less than 0.00001 units (engine epsilon value) away from their neighbor on the curve.
     public final func cleanDupes() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Curve.method_clean_dupes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_bake: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bake")
+    fileprivate static let method_bake: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -702,12 +880,13 @@ open class Curve: Resource {
     
     /// Recomputes the baked cache of points for the curve.
     public final func bake() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Curve.method_bake, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_bake_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_resolution")
+    fileprivate static let method_get_bake_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_resolution")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -719,13 +898,14 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func get_bake_resolution() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Curve.method_get_bake_resolution, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bake_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_resolution")
+    fileprivate static let method_set_bake_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_resolution")
         return withUnsafePointer(to: &Curve.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -737,6 +917,7 @@ open class Curve: Resource {
     
     @inline(__always)
     fileprivate final func set_bake_resolution(_ resolution: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: resolution) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -766,6 +947,22 @@ open class Curve: Resource {
     /// }
     /// ```
     public var rangeChanged: SimpleSignal { SimpleSignal (target: self, signalName: "range_changed") }
+    
+    /// Emitted when ``maxDomain`` or ``minDomain`` is changed.
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.domainChanged.connect {
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var domainChanged: SimpleSignal { SimpleSignal (target: self, signalName: "domain_changed") }
     
 }
 

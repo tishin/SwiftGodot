@@ -23,10 +23,12 @@ import Musl
 /// 
 /// Stores information about a mouse or a pen motion. This includes relative position, absolute position, and velocity. See ``Node/_input(event:)``.
 /// 
-/// > Note: By default, this event is only emitted once per frame rendered at most. If you need more precise input reporting, set ``Input/useAccumulatedInput`` to `false` to make events emitted as often as possible. If you use InputEventMouseMotion to draw lines, consider implementing <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham's line algorithm</a> as well to avoid visible gaps in lines if the user is moving the mouse quickly.
+/// > Note: By default, this event is only emitted once per frame rendered at most. If you need more precise input reporting, set ``Input/useAccumulatedInput`` to `false` to make events emitted as often as possible. If you use InputEventMouseMotion to draw lines, consider using ``Geometry2D/bresenhamLine(from:to:)`` as well to avoid visible gaps in lines if the user is moving the mouse quickly.
+/// 
+/// > Note: This event may be emitted even when the mouse hasn't moved, either by the operating system or by Godot itself. If you really need to know if the mouse has moved (e.g. to suppress displaying a tooltip), you should check that `relative.is_zero_approx()` is `false`.
 /// 
 open class InputEventMouseMotion: InputEventMouse {
-    fileprivate static var className = StringName("InputEventMouseMotion")
+    private static var className = StringName("InputEventMouseMotion")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -72,7 +74,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     /// The mouse position relative to the previous position (position at the last frame).
     /// 
-    /// > Note: Since ``InputEventMouseMotion`` is only emitted when the mouse moves, the last event won't have a relative position of `Vector2(0, 0)` when the user stops moving the mouse.
+    /// > Note: Since ``InputEventMouseMotion`` may only be emitted when the mouse moves, it is not possible to reliably detect when the mouse has stopped moving by checking this property. A separate, short timer may be necessary.
     /// 
     /// > Note: ``relative`` is automatically scaled according to the content scale factor, which is defined by the project's stretch mode settings. This means mouse sensitivity will appear different depending on resolution when using ``relative`` in a script that handles mouse aiming with the ``Input/MouseMode/captured`` mouse mode. To avoid this, use ``screenRelative`` instead.
     /// 
@@ -89,7 +91,9 @@ open class InputEventMouseMotion: InputEventMouse {
     
     /// The unscaled mouse position relative to the previous position in the coordinate system of the screen (position at the last frame).
     /// 
-    /// > Note: Since ``InputEventMouseMotion`` is only emitted when the mouse moves, the last event won't have a relative position of `Vector2(0, 0)` when the user stops moving the mouse. This coordinate is _not_ scaled according to the content scale factor or calls to ``InputEvent/xformedBy(xform:localOfs:)``. This should be preferred over ``relative`` for mouse aiming when using the ``Input/MouseMode/captured`` mouse mode, regardless of the project's stretch mode.
+    /// > Note: Since ``InputEventMouseMotion`` may only be emitted when the mouse moves, it is not possible to reliably detect when the mouse has stopped moving by checking this property. A separate, short timer may be necessary.
+    /// 
+    /// > Note: This coordinate is _not_ scaled according to the content scale factor or calls to ``InputEvent/xformedBy(xform:localOfs:)``. This should be preferred over ``relative`` for mouse aiming when using the ``Input/MouseMode/captured`` mouse mode, regardless of the project's stretch mode.
     /// 
     final public var screenRelative: Vector2 {
         get {
@@ -130,8 +134,8 @@ open class InputEventMouseMotion: InputEventMouse {
     }
     
     /* Methods */
-    fileprivate static var method_set_tilt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tilt")
+    fileprivate static let method_set_tilt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tilt")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -143,6 +147,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_tilt(_ tilt: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tilt) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -156,8 +161,8 @@ open class InputEventMouseMotion: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_tilt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tilt")
+    fileprivate static let method_get_tilt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tilt")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -169,13 +174,14 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_tilt() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventMouseMotion.method_get_tilt, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressure")
+    fileprivate static let method_set_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressure")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -187,6 +193,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_pressure(_ pressure: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -200,8 +207,8 @@ open class InputEventMouseMotion: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pressure")
+    fileprivate static let method_get_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pressure")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -213,13 +220,14 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_pressure() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(InputEventMouseMotion.method_get_pressure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pen_inverted: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pen_inverted")
+    fileprivate static let method_set_pen_inverted: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pen_inverted")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -231,6 +239,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_pen_inverted(_ penInverted: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: penInverted) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -244,8 +253,8 @@ open class InputEventMouseMotion: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_pen_inverted: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pen_inverted")
+    fileprivate static let method_get_pen_inverted: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pen_inverted")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -257,13 +266,14 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_pen_inverted() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventMouseMotion.method_get_pen_inverted, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_relative")
+    fileprivate static let method_set_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_relative")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -275,6 +285,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_relative(_ relative: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: relative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -288,8 +299,8 @@ open class InputEventMouseMotion: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_relative")
+    fileprivate static let method_get_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_relative")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -301,13 +312,14 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_relative() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventMouseMotion.method_get_relative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_screen_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_screen_relative")
+    fileprivate static let method_set_screen_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_screen_relative")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -319,6 +331,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_screen_relative(_ relative: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: relative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -332,8 +345,8 @@ open class InputEventMouseMotion: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_screen_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_relative")
+    fileprivate static let method_get_screen_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_relative")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -345,13 +358,14 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_screen_relative() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventMouseMotion.method_get_screen_relative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_velocity")
+    fileprivate static let method_set_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_velocity")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -363,6 +377,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_velocity(_ velocity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -376,8 +391,8 @@ open class InputEventMouseMotion: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_velocity")
+    fileprivate static let method_get_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_velocity")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -389,13 +404,14 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_velocity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventMouseMotion.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_screen_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_screen_velocity")
+    fileprivate static let method_set_screen_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_screen_velocity")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -407,6 +423,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_screen_velocity(_ velocity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -420,8 +437,8 @@ open class InputEventMouseMotion: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_screen_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_velocity")
+    fileprivate static let method_get_screen_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_velocity")
         return withUnsafePointer(to: &InputEventMouseMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -433,6 +450,7 @@ open class InputEventMouseMotion: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_screen_velocity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventMouseMotion.method_get_screen_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

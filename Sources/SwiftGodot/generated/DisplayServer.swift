@@ -27,14 +27,14 @@ import Musl
 /// 
 open class DisplayServer: Object {
     /// The shared instance of this class
-    public static var shared: DisplayServer = {
-        return withUnsafePointer (to: &DisplayServer.godotClassName.content) { ptr in
-            DisplayServer (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: DisplayServer {
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("DisplayServer")
+    private static var className = StringName("DisplayServer")
     override open class var godotClassName: StringName { className }
     public enum Feature: Int64, CaseIterable {
         /// Display server supports global menu. This allows the application to display its menu items in the operating system's top bar. **macOS**
@@ -85,8 +85,20 @@ open class DisplayServer: Object {
         case nativeHelp = 23 // FEATURE_NATIVE_HELP
         /// Display server supports spawning text input dialogs using the operating system's native look-and-feel. See ``dialogInputText(title:description:existingText:callback:)``. **Windows, macOS**
         case nativeDialogInput = 24 // FEATURE_NATIVE_DIALOG_INPUT
-        /// Display server supports spawning dialogs for selecting files or directories using the operating system's native look-and-feel. See ``fileDialogShow(title:currentDirectory:filename:showHidden:mode:filters:callback:)`` and ``fileDialogWithOptionsShow(title:currentDirectory:root:filename:showHidden:mode:filters:options:callback:)``. **Windows, macOS, Linux (X11/Wayland)**
+        /// Display server supports spawning dialogs for selecting files or directories using the operating system's native look-and-feel. See ``fileDialogShow(title:currentDirectory:filename:showHidden:mode:filters:callback:)``. **Windows, macOS, Linux (X11/Wayland), Android**
         case nativeDialogFile = 25 // FEATURE_NATIVE_DIALOG_FILE
+        /// The display server supports all features of ``Feature/nativeDialogFile``, with the added functionality of Options and native dialog file access to `res://` and `user://` paths. See ``fileDialogShow(title:currentDirectory:filename:showHidden:mode:filters:callback:)`` and ``fileDialogWithOptionsShow(title:currentDirectory:root:filename:showHidden:mode:filters:options:callback:)``. **Windows, macOS, Linux (X11/Wayland)**
+        case nativeDialogFileExtra = 26 // FEATURE_NATIVE_DIALOG_FILE_EXTRA
+        /// The display server supports initiating window drag and resize operations on demand. See ``windowStartDrag(windowId:)`` and ``windowStartResize(edge:windowId:)``.
+        case windowDrag = 27 // FEATURE_WINDOW_DRAG
+        /// Display server supports ``WindowFlags/excludeFromCapture`` window flag.
+        case screenExcludeFromCapture = 28 // FEATURE_SCREEN_EXCLUDE_FROM_CAPTURE
+        /// Display server supports embedding a window from another process. **Windows, Linux (X11)**
+        case windowEmbedding = 29 // FEATURE_WINDOW_EMBEDDING
+        /// Native file selection dialog supports MIME types as filters.
+        case nativeDialogFileMime = 30 // FEATURE_NATIVE_DIALOG_FILE_MIME
+        /// Display server supports system emoji and symbol picker. **Windows, macOS**
+        case emojiAndSymbolPicker = 31 // FEATURE_EMOJI_AND_SYMBOL_PICKER
     }
     
     public enum MouseMode: Int64, CaseIterable {
@@ -103,6 +115,8 @@ open class DisplayServer: Object {
         case confined = 3 // MOUSE_MODE_CONFINED
         /// Confines the mouse cursor to the game window, and make it hidden.
         case confinedHidden = 4 // MOUSE_MODE_CONFINED_HIDDEN
+        /// Max value of the ``DisplayServer/MouseMode``.
+        case max = 5 // MOUSE_MODE_MAX
     }
     
     public enum ScreenOrientation: Int64, CaseIterable {
@@ -207,6 +221,8 @@ open class DisplayServer: Object {
         /// 
         /// Full screen window covers the entire display area of a screen and has no decorations. The display's video mode is not changed.
         /// 
+        /// **On Android:** This enables immersive mode.
+        /// 
         /// **On Windows:** Multi-window full-screen mode has a 1px border of the ``ProjectSettings/rendering/environment/defaults/defaultClearColor`` color.
         /// 
         /// **On macOS:** A new desktop is used to display the running project.
@@ -218,11 +234,15 @@ open class DisplayServer: Object {
         /// 
         /// Full screen window covers the entire display area of a screen and has no border or decorations. The display's video mode is not changed.
         /// 
+        /// **On Android:** This enables immersive mode.
+        /// 
         /// **On Windows:** Depending on video driver, full screen transition might cause screens to go black for a moment.
         /// 
         /// **On macOS:** A new desktop is used to display the running project. Exclusive full screen mode prevents Dock and Menu from showing up when the mouse pointer is hovering the edge of the screen.
         /// 
         /// **On Linux (X11):** Exclusive full screen mode bypasses compositor.
+        /// 
+        /// **On Linux (Wayland):** Equivalent to ``WindowMode/fullscreen``.
         /// 
         /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports <a href="https://docs.godotengine.org/en//tutorials/rendering/multiple_resolutions.html">multiple resolutions</a> when enabling full screen mode.
         /// 
@@ -258,8 +278,20 @@ open class DisplayServer: Object {
         case extendToTitle = 6 // WINDOW_FLAG_EXTEND_TO_TITLE
         /// All mouse events are passed to the underlying window of the same application.
         case mousePassthrough = 7 // WINDOW_FLAG_MOUSE_PASSTHROUGH
+        /// Window style is overridden, forcing sharp corners.
+        /// 
+        /// > Note: This flag is implemented only on Windows (11).
+        /// 
+        case sharpCorners = 8 // WINDOW_FLAG_SHARP_CORNERS
+        /// Windows is excluded from screenshots taken by ``screenGetImage(screen:)``, ``screenGetImageRect(_:)``, and ``screenGetPixel(position:)``.
+        /// 
+        /// > Note: This flag is implemented on macOS and Windows.
+        /// 
+        /// > Note: Setting this flag will **NOT** prevent other apps from capturing an image, it should not be used as a security measure.
+        /// 
+        case excludeFromCapture = 9 // WINDOW_FLAG_EXCLUDE_FROM_CAPTURE
         /// Max value of the ``DisplayServer/WindowFlags``.
-        case max = 8 // WINDOW_FLAG_MAX
+        case max = 10 // WINDOW_FLAG_MAX
     }
     
     public enum WindowEvent: Int64, CaseIterable {
@@ -290,6 +322,27 @@ open class DisplayServer: Object {
         case titlebarChange = 7 // WINDOW_EVENT_TITLEBAR_CHANGE
     }
     
+    public enum WindowResizeEdge: Int64, CaseIterable {
+        /// Top-left edge of a window.
+        case topLeft = 0 // WINDOW_EDGE_TOP_LEFT
+        /// Top edge of a window.
+        case top = 1 // WINDOW_EDGE_TOP
+        /// Top-right edge of a window.
+        case topRight = 2 // WINDOW_EDGE_TOP_RIGHT
+        /// Left edge of a window.
+        case left = 3 // WINDOW_EDGE_LEFT
+        /// Right edge of a window.
+        case right = 4 // WINDOW_EDGE_RIGHT
+        /// Bottom-left edge of a window.
+        case bottomLeft = 5 // WINDOW_EDGE_BOTTOM_LEFT
+        /// Bottom edge of a window.
+        case bottom = 6 // WINDOW_EDGE_BOTTOM
+        /// Bottom-right edge of a window.
+        case bottomRight = 7 // WINDOW_EDGE_BOTTOM_RIGHT
+        /// Represents the size of the ``DisplayServer/WindowResizeEdge`` enum.
+        case max = 8 // WINDOW_EDGE_MAX
+    }
+    
     public enum VSyncMode: Int64, CaseIterable {
         /// No vertical synchronization, which means the engine will display frames as fast as possible (tearing may be visible). Framerate is unlimited (regardless of ``Engine/maxFps``).
         case disabled = 0 // VSYNC_DISABLED
@@ -309,6 +362,8 @@ open class DisplayServer: Object {
         /// 
         /// - Linux (X11): `X11::Display*` for the display.
         /// 
+        /// - Linux (Wayland): `wl_display` for the display.
+        /// 
         /// - Android: `EGLDisplay` for the display.
         /// 
         case displayHandle = 0 // DISPLAY_HANDLE
@@ -317,6 +372,8 @@ open class DisplayServer: Object {
         /// - Windows: `HWND` for the window.
         /// 
         /// - Linux (X11): `X11::Window*` for the window.
+        /// 
+        /// - Linux (Wayland): `wl_surface` for the window.
         /// 
         /// - macOS: `NSWindow*` for the window.
         /// 
@@ -327,24 +384,40 @@ open class DisplayServer: Object {
         case windowHandle = 1 // WINDOW_HANDLE
         /// Window view:
         /// 
-        /// - Windows: `HDC` for the window (only with the GL Compatibility renderer).
+        /// - Windows: `HDC` for the window (only with the Compatibility renderer).
         /// 
         /// - macOS: `NSView*` for the window main view.
         /// 
         /// - iOS: `UIView*` for the window main view.
         /// 
         case windowView = 2 // WINDOW_VIEW
-        /// OpenGL context (only with the GL Compatibility renderer):
+        /// OpenGL context (only with the Compatibility renderer):
         /// 
         /// - Windows: `HGLRC` for the window (native GL), or `EGLContext` for the window (ANGLE).
         /// 
         /// - Linux (X11): `GLXContext*` for the window.
+        /// 
+        /// - Linux (Wayland): `EGLContext` for the window.
         /// 
         /// - macOS: `NSOpenGLContext*` for the window (native GL), or `EGLContext` for the window (ANGLE).
         /// 
         /// - Android: `EGLContext` for the window.
         /// 
         case openglContext = 3 // OPENGL_CONTEXT
+        /// - Windows: `EGLDisplay` for the window (ANGLE).
+        /// 
+        /// - macOS: `EGLDisplay` for the window (ANGLE).
+        /// 
+        /// - Linux (Wayland): `EGLDisplay` for the window.
+        /// 
+        case eglDisplay = 4 // EGL_DISPLAY
+        /// - Windows: `EGLConfig` for the window (ANGLE).
+        /// 
+        /// - macOS: `EGLConfig` for the window (ANGLE).
+        /// 
+        /// - Linux (Wayland): `EGLConfig` for the window.
+        /// 
+        case eglConfig = 5 // EGL_CONFIG
     }
     
     public enum TTSUtteranceEvent: Int64, CaseIterable {
@@ -386,8 +459,8 @@ open class DisplayServer: Object {
     /// The ID that refers to a nonexistent application status indicator.
     public static let invalidIndicatorId = -1
     /* Methods */
-    fileprivate static var method_has_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_feature")
+    fileprivate static let method_has_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_feature")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 334065950)!
@@ -413,8 +486,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -434,8 +507,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_help_set_search_callbacks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("help_set_search_callbacks")
+    fileprivate static let method_help_set_search_callbacks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("help_set_search_callbacks")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1687350599)!
@@ -447,7 +520,7 @@ open class DisplayServer: Object {
     
     /// Sets native help system search callbacks.
     /// 
-    /// `searchCallback` has the following arguments: `String search_string, int result_limit` and return a ``GDictionary`` with "key, display name" pairs for the search results. Called when the user enters search terms in the `Help` menu.
+    /// `searchCallback` has the following arguments: `String search_string, int result_limit` and return a ``VariantDictionary`` with "key, display name" pairs for the search results. Called when the user enters search terms in the `Help` menu.
     /// 
     /// `actionCallback` has the following arguments: `String key`. Called when the user selects a search result in the `Help` menu.
     /// 
@@ -470,8 +543,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_popup_callbacks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_popup_callbacks")
+    fileprivate static let method_global_menu_set_popup_callbacks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_popup_callbacks")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3893727526)!
@@ -503,8 +576,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_add_submenu_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_submenu_item")
+    fileprivate static let method_global_menu_add_submenu_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_submenu_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2828985934)!
@@ -549,11 +622,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_item")
+    fileprivate static let method_global_menu_add_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3401266716)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3616842746)!
             }
             
         }
@@ -607,11 +680,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_check_item")
+    fileprivate static let method_global_menu_add_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_check_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3401266716)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3616842746)!
             }
             
         }
@@ -665,11 +738,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_icon_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_icon_item")
+    fileprivate static let method_global_menu_add_icon_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_icon_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 4245856523)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3867083847)!
             }
             
         }
@@ -726,11 +799,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_icon_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_icon_check_item")
+    fileprivate static let method_global_menu_add_icon_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_icon_check_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 4245856523)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3867083847)!
             }
             
         }
@@ -787,11 +860,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_radio_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_radio_check_item")
+    fileprivate static let method_global_menu_add_radio_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_radio_check_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3401266716)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3616842746)!
             }
             
         }
@@ -847,11 +920,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_icon_radio_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_icon_radio_check_item")
+    fileprivate static let method_global_menu_add_icon_radio_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_icon_radio_check_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 4245856523)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3867083847)!
             }
             
         }
@@ -910,11 +983,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_multistate_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_multistate_item")
+    fileprivate static let method_global_menu_add_multistate_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_multistate_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3431222859)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3297554655)!
             }
             
         }
@@ -978,8 +1051,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_add_separator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_add_separator")
+    fileprivate static let method_global_menu_add_separator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_add_separator")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3214812433)!
@@ -1016,8 +1089,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_index_from_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_index_from_text")
+    fileprivate static let method_global_menu_get_item_index_from_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_index_from_text")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878152881)!
@@ -1051,8 +1124,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_index_from_tag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_index_from_tag")
+    fileprivate static let method_global_menu_get_item_index_from_tag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_index_from_tag")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2941063483)!
@@ -1085,8 +1158,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_is_item_checked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_is_item_checked")
+    fileprivate static let method_global_menu_is_item_checked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_is_item_checked")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3511468594)!
@@ -1119,8 +1192,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_is_item_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_is_item_checkable")
+    fileprivate static let method_global_menu_is_item_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_is_item_checkable")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3511468594)!
@@ -1153,8 +1226,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_is_item_radio_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_is_item_radio_checkable")
+    fileprivate static let method_global_menu_is_item_radio_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_is_item_radio_checkable")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3511468594)!
@@ -1189,8 +1262,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_callback")
+    fileprivate static let method_global_menu_get_item_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 748666903)!
@@ -1223,8 +1296,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_key_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_key_callback")
+    fileprivate static let method_global_menu_get_item_key_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_key_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 748666903)!
@@ -1257,8 +1330,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_tag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_tag")
+    fileprivate static let method_global_menu_get_item_tag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_tag")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 330672633)!
@@ -1291,8 +1364,8 @@ open class DisplayServer: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_global_menu_get_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_text")
+    fileprivate static let method_global_menu_get_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_text")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 591067909)!
@@ -1325,8 +1398,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_global_menu_get_item_submenu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_submenu")
+    fileprivate static let method_global_menu_get_item_submenu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_submenu")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 591067909)!
@@ -1359,8 +1432,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_global_menu_get_item_accelerator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_accelerator")
+    fileprivate static let method_global_menu_get_item_accelerator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_accelerator")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 936065394)!
@@ -1393,8 +1466,8 @@ open class DisplayServer: Object {
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_global_menu_is_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_is_item_disabled")
+    fileprivate static let method_global_menu_is_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_is_item_disabled")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3511468594)!
@@ -1429,8 +1502,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_is_item_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_is_item_hidden")
+    fileprivate static let method_global_menu_is_item_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_is_item_hidden")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3511468594)!
@@ -1465,8 +1538,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_tooltip")
+    fileprivate static let method_global_menu_get_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_tooltip")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 591067909)!
@@ -1499,8 +1572,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_global_menu_get_item_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_state")
+    fileprivate static let method_global_menu_get_item_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_state")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3422818498)!
@@ -1533,8 +1606,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_max_states: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_max_states")
+    fileprivate static let method_global_menu_get_item_max_states: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_max_states")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3422818498)!
@@ -1567,8 +1640,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_get_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_icon")
+    fileprivate static let method_global_menu_get_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_icon")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3591713183)!
@@ -1598,11 +1671,11 @@ open class DisplayServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_global_menu_get_item_indentation_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_indentation_level")
+    fileprivate static let method_global_menu_get_item_indentation_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_indentation_level")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3422818498)!
@@ -1635,8 +1708,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_set_item_checked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_checked")
+    fileprivate static let method_global_menu_set_item_checked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_checked")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4108344793)!
@@ -1671,8 +1744,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_checkable")
+    fileprivate static let method_global_menu_set_item_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_checkable")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4108344793)!
@@ -1707,8 +1780,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_radio_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_radio_checkable")
+    fileprivate static let method_global_menu_set_item_radio_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_radio_checkable")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4108344793)!
@@ -1745,8 +1818,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_callback")
+    fileprivate static let method_global_menu_set_item_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3809915389)!
@@ -1783,8 +1856,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_hover_callbacks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_hover_callbacks")
+    fileprivate static let method_global_menu_set_item_hover_callbacks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_hover_callbacks")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3809915389)!
@@ -1821,8 +1894,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_key_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_key_callback")
+    fileprivate static let method_global_menu_set_item_key_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_key_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3809915389)!
@@ -1859,8 +1932,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_tag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_tag")
+    fileprivate static let method_global_menu_set_item_tag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_tag")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 453659863)!
@@ -1895,8 +1968,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_text")
+    fileprivate static let method_global_menu_set_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_text")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 965966136)!
@@ -1932,8 +2005,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_submenu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_submenu")
+    fileprivate static let method_global_menu_set_item_submenu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_submenu")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 965966136)!
@@ -1969,8 +2042,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_accelerator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_accelerator")
+    fileprivate static let method_global_menu_set_item_accelerator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_accelerator")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 566943293)!
@@ -2005,8 +2078,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_disabled")
+    fileprivate static let method_global_menu_set_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_disabled")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4108344793)!
@@ -2041,8 +2114,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_hidden")
+    fileprivate static let method_global_menu_set_item_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_hidden")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4108344793)!
@@ -2077,8 +2150,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_tooltip")
+    fileprivate static let method_global_menu_set_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_tooltip")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 965966136)!
@@ -2114,8 +2187,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_state")
+    fileprivate static let method_global_menu_set_item_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_state")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3474840532)!
@@ -2150,8 +2223,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_max_states: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_max_states")
+    fileprivate static let method_global_menu_set_item_max_states: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_max_states")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3474840532)!
@@ -2186,8 +2259,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_icon")
+    fileprivate static let method_global_menu_set_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_icon")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3201338066)!
@@ -2224,8 +2297,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_set_item_indentation_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_set_item_indentation_level")
+    fileprivate static let method_global_menu_set_item_indentation_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_set_item_indentation_level")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3474840532)!
@@ -2260,8 +2333,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_get_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_item_count")
+    fileprivate static let method_global_menu_get_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_item_count")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -2291,8 +2364,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_global_menu_remove_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_remove_item")
+    fileprivate static let method_global_menu_remove_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_remove_item")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2956805083)!
@@ -2326,8 +2399,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_clear")
+    fileprivate static let method_global_menu_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_clear")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -2358,8 +2431,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_global_menu_get_system_menu_roots: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_menu_get_system_menu_roots")
+    fileprivate static let method_global_menu_get_system_menu_roots: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_menu_get_system_menu_roots")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -2373,14 +2446,14 @@ open class DisplayServer: Object {
     /// 
     /// > Note: This method is implemented only on macOS.
     /// 
-    public static func globalMenuGetSystemMenuRoots() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func globalMenuGetSystemMenuRoots() -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(method_global_menu_get_system_menu_roots, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_tts_is_speaking: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_is_speaking")
+    fileprivate static let method_tts_is_speaking: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_is_speaking")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2402,8 +2475,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_tts_is_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_is_paused")
+    fileprivate static let method_tts_is_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_is_paused")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2425,8 +2498,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_tts_get_voices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_get_voices")
+    fileprivate static let method_tts_get_voices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_get_voices")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -2436,9 +2509,9 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Returns an ``GArray`` of voice information dictionaries.
+    /// Returns an ``VariantArray`` of voice information dictionaries.
     /// 
-    /// Each ``GDictionary`` contains two ``String`` entries:
+    /// Each ``VariantDictionary`` contains two ``String`` entries:
     /// 
     /// - `name` is voice name.
     /// 
@@ -2452,14 +2525,14 @@ open class DisplayServer: Object {
     /// 
     /// > Note: ``ProjectSettings/audio/general/textToSpeech`` should be `true` to use text-to-speech.
     /// 
-    public static func ttsGetVoices() -> VariantCollection<GDictionary> {
+    public static func ttsGetVoices() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_tts_get_voices, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_tts_get_voices_for_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_get_voices_for_language")
+    fileprivate static let method_tts_get_voices_for_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_get_voices_for_language")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
@@ -2491,8 +2564,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_tts_speak: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_speak")
+    fileprivate static let method_tts_speak: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_speak")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 903992738)!
@@ -2556,8 +2629,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_tts_pause: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_pause")
+    fileprivate static let method_tts_pause: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_pause")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2578,8 +2651,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_tts_resume: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_resume")
+    fileprivate static let method_tts_resume: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_resume")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2600,8 +2673,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_tts_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_stop")
+    fileprivate static let method_tts_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_stop")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2622,8 +2695,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_tts_set_utterance_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tts_set_utterance_callback")
+    fileprivate static let method_tts_set_utterance_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tts_set_utterance_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 109679083)!
@@ -2662,8 +2735,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_is_dark_mode_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_dark_mode_supported")
+    fileprivate static let method_is_dark_mode_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_dark_mode_supported")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2683,8 +2756,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_is_dark_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_dark_mode")
+    fileprivate static let method_is_dark_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_dark_mode")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2704,8 +2777,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_accent_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_accent_color")
+    fileprivate static let method_get_accent_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_accent_color")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -2717,7 +2790,7 @@ open class DisplayServer: Object {
     
     /// Returns OS theme accent color. Returns `Color(0, 0, 0, 0)`, if accent color is unknown.
     /// 
-    /// > Note: This method is implemented on macOS and Windows.
+    /// > Note: This method is implemented on macOS, Windows, and Android.
     /// 
     public static func getAccentColor() -> Color {
         var _result: Color = Color ()
@@ -2725,8 +2798,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_base_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_base_color")
+    fileprivate static let method_get_base_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_base_color")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -2738,7 +2811,7 @@ open class DisplayServer: Object {
     
     /// Returns the OS theme base color (default control background). Returns `Color(0, 0, 0, 0)` if the base color is unknown.
     /// 
-    /// > Note: This method is implemented on macOS and Windows.
+    /// > Note: This method is implemented on macOS, Windows, and Android.
     /// 
     public static func getBaseColor() -> Color {
         var _result: Color = Color ()
@@ -2746,8 +2819,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_system_theme_change_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_system_theme_change_callback")
+    fileprivate static let method_set_system_theme_change_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_system_theme_change_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -2775,8 +2848,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_mouse_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mouse_set_mode")
+    fileprivate static let method_mouse_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mouse_set_mode")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 348288463)!
@@ -2801,8 +2874,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_mouse_get_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mouse_get_mode")
+    fileprivate static let method_mouse_get_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mouse_get_mode")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1353961651)!
@@ -2819,8 +2892,8 @@ open class DisplayServer: Object {
         return DisplayServer.MouseMode (rawValue: _result)!
     }
     
-    fileprivate static var method_warp_mouse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("warp_mouse")
+    fileprivate static let method_warp_mouse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("warp_mouse")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -2848,8 +2921,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_mouse_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mouse_get_position")
+    fileprivate static let method_mouse_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mouse_get_position")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -2866,8 +2939,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_mouse_get_button_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mouse_get_button_state")
+    fileprivate static let method_mouse_get_button_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mouse_get_button_state")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2512161324)!
@@ -2884,8 +2957,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_clipboard_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clipboard_set")
+    fileprivate static let method_clipboard_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clipboard_set")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -2911,8 +2984,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_clipboard_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clipboard_get")
+    fileprivate static let method_clipboard_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clipboard_get")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -2929,8 +3002,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_clipboard_get_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clipboard_get_image")
+    fileprivate static let method_clipboard_get_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clipboard_get_image")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4190603485)!
@@ -2941,14 +3014,17 @@ open class DisplayServer: Object {
     }()
     
     /// Returns the user's clipboard as an image if possible.
+    /// 
+    /// > Note: This method uses the copied pixel data, e.g. from a image editing software or a web browser, not an image file copied from file explorer.
+    /// 
     public static func clipboardGetImage() -> Image? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_clipboard_get_image, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_clipboard_has: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clipboard_has")
+    fileprivate static let method_clipboard_has: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clipboard_has")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2965,8 +3041,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_clipboard_has_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clipboard_has_image")
+    fileprivate static let method_clipboard_has_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clipboard_has_image")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2983,8 +3059,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_clipboard_set_primary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clipboard_set_primary")
+    fileprivate static let method_clipboard_set_primary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clipboard_set_primary")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -3013,8 +3089,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_clipboard_get_primary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clipboard_get_primary")
+    fileprivate static let method_clipboard_get_primary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clipboard_get_primary")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -3034,8 +3110,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_display_cutouts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_display_cutouts")
+    fileprivate static let method_get_display_cutouts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_display_cutouts")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -3045,18 +3121,18 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Returns an ``GArray`` of ``Rect2``, each of which is the bounding rectangle for a display cutout or notch. These are non-functional areas on edge-to-edge screens used by cameras and sensors. Returns an empty array if the device does not have cutouts. See also ``getDisplaySafeArea()``.
+    /// Returns an ``VariantArray`` of ``Rect2``, each of which is the bounding rectangle for a display cutout or notch. These are non-functional areas on edge-to-edge screens used by cameras and sensors. Returns an empty array if the device does not have cutouts. See also ``getDisplaySafeArea()``.
     /// 
     /// > Note: Currently only implemented on Android. Other platforms will return an empty array even if they do have display cutouts or notches.
     /// 
-    public static func getDisplayCutouts() -> VariantCollection<Rect2> {
+    public static func getDisplayCutouts() -> TypedArray<Rect2> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_display_cutouts, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<Rect2>(content: _result)
+        return TypedArray<Rect2>(takingOver: _result)
     }
     
-    fileprivate static var method_get_display_safe_area: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_display_safe_area")
+    fileprivate static let method_get_display_safe_area: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_display_safe_area")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 410525958)!
@@ -3067,14 +3143,17 @@ open class DisplayServer: Object {
     }()
     
     /// Returns the unobscured area of the display where interactive controls should be rendered. See also ``getDisplayCutouts()``.
+    /// 
+    /// > Note: Currently only implemented on Android and iOS. On other platforms, `screen_get_usable_rect(SCREEN_OF_MAIN_WINDOW)` will be returned as a fallback. See also ``screenGetUsableRect(screen:)``.
+    /// 
     public static func getDisplaySafeArea() -> Rect2i {
         var _result: Rect2i = Rect2i ()
         gi.object_method_bind_ptrcall(method_get_display_safe_area, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_screen_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_count")
+    fileprivate static let method_get_screen_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_count")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3091,8 +3170,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_primary_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_primary_screen")
+    fileprivate static let method_get_primary_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_primary_screen")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3109,8 +3188,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_keyboard_focus_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_keyboard_focus_screen")
+    fileprivate static let method_get_keyboard_focus_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keyboard_focus_screen")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3127,8 +3206,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_screen_from_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_from_rect")
+    fileprivate static let method_get_screen_from_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_from_rect")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 741354659)!
@@ -3138,7 +3217,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Returns index of the screen which contains specified rectangle.
+    /// Returns the index of the screen that overlaps the most with the given rectangle. Returns `-1` if the rectangle doesn't overlap with any screen or has no area.
     public static func getScreenFromRect(_ rect: Rect2) -> Int32 {
         var _result: Int32 = 0
         withUnsafePointer(to: rect) { pArg0 in
@@ -3154,8 +3233,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_position")
+    fileprivate static let method_screen_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_position")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1725937825)!
@@ -3186,8 +3265,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_size")
+    fileprivate static let method_screen_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1725937825)!
@@ -3213,8 +3292,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_usable_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_usable_rect")
+    fileprivate static let method_screen_get_usable_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_usable_rect")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2439012528)!
@@ -3240,8 +3319,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_dpi: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_dpi")
+    fileprivate static let method_screen_get_dpi: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_dpi")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 181039630)!
@@ -3274,8 +3353,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_scale")
+    fileprivate static let method_screen_get_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_scale")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 909105437)!
@@ -3291,7 +3370,7 @@ open class DisplayServer: Object {
     /// 
     /// > Note: On Linux (Wayland), the returned value is accurate only when `screen` is ``screenOfMainWindow``. Due to API limitations, passing a direct index will return a rounded-up integer, if the screen has a fractional scale (e.g. `1.25` would get rounded up to `2.0`).
     /// 
-    /// > Note: This method is implemented only on macOS and Linux (Wayland).
+    /// > Note: This method is implemented on Android, iOS, Web, macOS, and Linux (Wayland).
     /// 
     public static func screenGetScale(screen: Int32 = -1) -> Double {
         var _result: Double = 0.0
@@ -3308,11 +3387,11 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_is_touchscreen_available: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_touchscreen_available")
+    fileprivate static let method_is_touchscreen_available: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_touchscreen_available")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3323674545)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
             }
             
         }
@@ -3326,8 +3405,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_max_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_max_scale")
+    fileprivate static let method_screen_get_max_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_max_scale")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3349,8 +3428,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_refresh_rate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_refresh_rate")
+    fileprivate static let method_screen_get_refresh_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_refresh_rate")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 909105437)!
@@ -3381,8 +3460,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_pixel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_pixel")
+    fileprivate static let method_screen_get_pixel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_pixel")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1532707496)!
@@ -3413,8 +3492,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_image")
+    fileprivate static let method_screen_get_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_image")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3813388802)!
@@ -3442,11 +3521,43 @@ open class DisplayServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_screen_set_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_set_orientation")
+    fileprivate static let method_screen_get_image_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_image_rect")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2601441065)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns screenshot of the screen `rect`.
+    /// 
+    /// > Note: This method is implemented on macOS and Windows.
+    /// 
+    /// > Note: On macOS, this method requires "Screen Recording" permission, if permission is not granted it will return desktop wallpaper color.
+    /// 
+    public static func screenGetImageRect(_ rect: Rect2i) -> Image? {
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: rect) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_screen_get_image_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_screen_set_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_set_orientation")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2211511631)!
@@ -3477,8 +3588,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_screen_get_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_orientation")
+    fileprivate static let method_screen_get_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_orientation")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 133818562)!
@@ -3507,8 +3618,8 @@ open class DisplayServer: Object {
         return DisplayServer.ScreenOrientation (rawValue: _result)!
     }
     
-    fileprivate static var method_screen_set_keep_on: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_set_keep_on")
+    fileprivate static let method_screen_set_keep_on: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_set_keep_on")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3533,8 +3644,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_screen_is_kept_on: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_is_kept_on")
+    fileprivate static let method_screen_is_kept_on: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_is_kept_on")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3551,8 +3662,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_window_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_window_list")
+    fileprivate static let method_get_window_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_window_list")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -3572,8 +3683,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_window_at_screen_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_window_at_screen_position")
+    fileprivate static let method_get_window_at_screen_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_window_at_screen_position")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -3600,8 +3711,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_get_native_handle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_native_handle")
+    fileprivate static let method_window_get_native_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_native_handle")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1096425680)!
@@ -3633,8 +3744,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_get_active_popup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_active_popup")
+    fileprivate static let method_window_get_active_popup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_active_popup")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3651,8 +3762,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_popup_safe_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_popup_safe_rect")
+    fileprivate static let method_window_set_popup_safe_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_popup_safe_rect")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3317281434)!
@@ -3680,8 +3791,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_popup_safe_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_popup_safe_rect")
+    fileprivate static let method_window_get_popup_safe_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_popup_safe_rect")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2161169500)!
@@ -3707,8 +3818,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_title")
+    fileprivate static let method_window_set_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_title")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 441246282)!
@@ -3742,8 +3853,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_title_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_title_size")
+    fileprivate static let method_window_get_title_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_title_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2925301799)!
@@ -3776,8 +3887,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_mouse_passthrough: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_mouse_passthrough")
+    fileprivate static let method_window_set_mouse_passthrough: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_mouse_passthrough")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1993637420)!
@@ -3812,8 +3923,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_current_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_current_screen")
+    fileprivate static let method_window_get_current_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_current_screen")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -3839,8 +3950,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_current_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_current_screen")
+    fileprivate static let method_window_set_current_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_current_screen")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2230941749)!
@@ -3868,8 +3979,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_position")
+    fileprivate static let method_window_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_position")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 763922886)!
@@ -3895,8 +4006,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_get_position_with_decorations: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_position_with_decorations")
+    fileprivate static let method_window_get_position_with_decorations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_position_with_decorations")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 763922886)!
@@ -3922,8 +4033,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_position")
+    fileprivate static let method_window_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_position")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2019273902)!
@@ -3958,8 +4069,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_size")
+    fileprivate static let method_window_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 763922886)!
@@ -3985,8 +4096,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_size")
+    fileprivate static let method_window_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2019273902)!
@@ -4017,8 +4128,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_rect_changed_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_rect_changed_callback")
+    fileprivate static let method_window_set_rect_changed_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_rect_changed_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1091192925)!
@@ -4049,8 +4160,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_window_event_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_window_event_callback")
+    fileprivate static let method_window_set_window_event_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_window_event_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1091192925)!
@@ -4081,8 +4192,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_input_event_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_input_event_callback")
+    fileprivate static let method_window_set_input_event_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_input_event_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1091192925)!
@@ -4113,8 +4224,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_input_text_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_input_text_callback")
+    fileprivate static let method_window_set_input_text_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_input_text_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1091192925)!
@@ -4145,8 +4256,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_drop_files_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_drop_files_callback")
+    fileprivate static let method_window_set_drop_files_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_drop_files_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1091192925)!
@@ -4179,8 +4290,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_attached_instance_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_attached_instance_id")
+    fileprivate static let method_window_get_attached_instance_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_attached_instance_id")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -4206,8 +4317,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_get_max_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_max_size")
+    fileprivate static let method_window_get_max_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_max_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 763922886)!
@@ -4233,8 +4344,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_max_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_max_size")
+    fileprivate static let method_window_set_max_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_max_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2019273902)!
@@ -4267,8 +4378,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_min_size")
+    fileprivate static let method_window_get_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_min_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 763922886)!
@@ -4294,8 +4405,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_min_size")
+    fileprivate static let method_window_set_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_min_size")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2019273902)!
@@ -4330,8 +4441,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_size_with_decorations: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_size_with_decorations")
+    fileprivate static let method_window_get_size_with_decorations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_size_with_decorations")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 763922886)!
@@ -4357,8 +4468,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_get_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_mode")
+    fileprivate static let method_window_get_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_mode")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2185728461)!
@@ -4384,8 +4495,8 @@ open class DisplayServer: Object {
         return DisplayServer.WindowMode (rawValue: _result)!
     }
     
-    fileprivate static var method_window_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_mode")
+    fileprivate static let method_window_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_mode")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1319965401)!
@@ -4396,6 +4507,8 @@ open class DisplayServer: Object {
     }()
     
     /// Sets window mode for the given window to `mode`. See ``DisplayServer/WindowMode`` for possible values and how each mode behaves.
+    /// 
+    /// > Note: On Android, setting it to ``WindowMode/fullscreen`` or ``WindowMode/exclusiveFullscreen`` will enable immersive mode.
     /// 
     /// > Note: Setting the window to full screen forcibly sets the borderless flag to `true`, so make sure to set it back to `false` when not wanted.
     /// 
@@ -4416,8 +4529,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_flag")
+    fileprivate static let method_window_set_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_flag")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 254894155)!
@@ -4448,8 +4561,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_flag")
+    fileprivate static let method_window_get_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_flag")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 802816991)!
@@ -4478,8 +4591,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_window_buttons_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_window_buttons_offset")
+    fileprivate static let method_window_set_window_buttons_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_window_buttons_offset")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2019273902)!
@@ -4510,8 +4623,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_safe_title_margins: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_safe_title_margins")
+    fileprivate static let method_window_get_safe_title_margins: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_safe_title_margins")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2295066620)!
@@ -4537,8 +4650,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_request_attention: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_request_attention")
+    fileprivate static let method_window_request_attention: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_request_attention")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -4563,8 +4676,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_move_to_foreground: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_move_to_foreground")
+    fileprivate static let method_window_move_to_foreground: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_move_to_foreground")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -4589,8 +4702,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_is_focused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_is_focused")
+    fileprivate static let method_window_is_focused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_is_focused")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1051549951)!
@@ -4616,8 +4729,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_can_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_can_draw")
+    fileprivate static let method_window_can_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_can_draw")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1051549951)!
@@ -4643,8 +4756,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_set_transient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_transient")
+    fileprivate static let method_window_set_transient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_transient")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -4654,7 +4767,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Sets window transient parent. Transient window is will be destroyed with its transient parent and will return focus to their parent when closed. The transient window is displayed on top of a non-exclusive full-screen parent window. Transient windows can't enter full-screen mode.
+    /// Sets window transient parent. Transient window will be destroyed with its transient parent and will return focus to their parent when closed. The transient window is displayed on top of a non-exclusive full-screen parent window. Transient windows can't enter full-screen mode.
     /// 
     /// > Note: It's recommended to change this value using ``Window/transient`` instead.
     /// 
@@ -4677,8 +4790,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_exclusive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_exclusive")
+    fileprivate static let method_window_set_exclusive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_exclusive")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -4711,8 +4824,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_ime_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_ime_active")
+    fileprivate static let method_window_set_ime_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_ime_active")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1661950165)!
@@ -4740,8 +4853,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_ime_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_ime_position")
+    fileprivate static let method_window_set_ime_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_ime_position")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2019273902)!
@@ -4769,8 +4882,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_set_vsync_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_set_vsync_mode")
+    fileprivate static let method_window_set_vsync_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_set_vsync_mode")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2179333492)!
@@ -4805,8 +4918,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_window_get_vsync_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_get_vsync_mode")
+    fileprivate static let method_window_get_vsync_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_get_vsync_mode")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 578873795)!
@@ -4832,8 +4945,8 @@ open class DisplayServer: Object {
         return DisplayServer.VSyncMode (rawValue: _result)!
     }
     
-    fileprivate static var method_window_is_maximize_allowed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_is_maximize_allowed")
+    fileprivate static let method_window_is_maximize_allowed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_is_maximize_allowed")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1051549951)!
@@ -4859,8 +4972,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_maximize_on_title_dbl_click: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_maximize_on_title_dbl_click")
+    fileprivate static let method_window_maximize_on_title_dbl_click: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_maximize_on_title_dbl_click")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4880,8 +4993,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_window_minimize_on_title_dbl_click: GDExtensionMethodBindPtr = {
-        let methodName = StringName("window_minimize_on_title_dbl_click")
+    fileprivate static let method_window_minimize_on_title_dbl_click: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_minimize_on_title_dbl_click")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4901,8 +5014,69 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_ime_get_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ime_get_selection")
+    fileprivate static let method_window_start_drag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_start_drag")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Starts an interactive drag operation on the window with the given `windowId`, using the current mouse position. Call this method when handling a mouse button being pressed to simulate a pressed event on the window's title bar. Using this method allows the window to participate in space switching, tiling, and other system features.
+    /// 
+    /// > Note: This method is implemented on Linux (X11/Wayland), macOS, and Windows.
+    /// 
+    public static func windowStartDrag(windowId: Int32 = 0) {
+        withUnsafePointer(to: windowId) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_window_start_drag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_window_start_resize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("window_start_resize")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4009722312)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Starts an interactive resize operation on the window with the given `windowId`, using the current mouse position. Call this method when handling a mouse button being pressed to simulate a pressed event on the window's edge.
+    /// 
+    /// > Note: This method is implemented on Linux (X11/Wayland), macOS, and Windows.
+    /// 
+    public static func windowStartResize(edge: DisplayServer.WindowResizeEdge, windowId: Int32 = 0) {
+        withUnsafePointer(to: edge.rawValue) { pArg0 in
+            withUnsafePointer(to: windowId) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_window_start_resize, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_ime_get_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ime_get_selection")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -4922,8 +5096,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_ime_get_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ime_get_text")
+    fileprivate static let method_ime_get_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ime_get_text")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -4943,8 +5117,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_virtual_keyboard_show: GDExtensionMethodBindPtr = {
-        let methodName = StringName("virtual_keyboard_show")
+    fileprivate static let method_virtual_keyboard_show: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("virtual_keyboard_show")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3042891259)!
@@ -5000,8 +5174,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_virtual_keyboard_hide: GDExtensionMethodBindPtr = {
-        let methodName = StringName("virtual_keyboard_hide")
+    fileprivate static let method_virtual_keyboard_hide: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("virtual_keyboard_hide")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -5017,8 +5191,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_virtual_keyboard_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("virtual_keyboard_get_height")
+    fileprivate static let method_virtual_keyboard_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("virtual_keyboard_get_height")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5035,8 +5209,29 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_cursor_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cursor_set_shape")
+    fileprivate static let method_has_hardware_keyboard: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_hardware_keyboard")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if hardware keyboard is connected.
+    /// 
+    /// > Note: This method is implemented on Android and iOS, on other platforms this method always returns `true`.
+    /// 
+    public static func hasHardwareKeyboard() -> Bool {
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(method_has_hardware_keyboard, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_cursor_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cursor_set_shape")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2026291549)!
@@ -5061,8 +5256,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_cursor_get_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cursor_get_shape")
+    fileprivate static let method_cursor_get_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cursor_get_shape")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1087724927)!
@@ -5079,8 +5274,8 @@ open class DisplayServer: Object {
         return DisplayServer.CursorShape (rawValue: _result)!
     }
     
-    fileprivate static var method_cursor_set_custom_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cursor_set_custom_image")
+    fileprivate static let method_cursor_set_custom_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cursor_set_custom_image")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1816663697)!
@@ -5114,8 +5309,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_get_swap_cancel_ok: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_swap_cancel_ok")
+    fileprivate static let method_get_swap_cancel_ok: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_swap_cancel_ok")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -5135,8 +5330,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_enable_for_stealing_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("enable_for_stealing_focus")
+    fileprivate static let method_enable_for_stealing_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("enable_for_stealing_focus")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -5164,8 +5359,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_dialog_show: GDExtensionMethodBindPtr = {
-        let methodName = StringName("dialog_show")
+    fileprivate static let method_dialog_show: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("dialog_show")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4115553226)!
@@ -5177,7 +5372,7 @@ open class DisplayServer: Object {
     
     /// Shows a text dialog which uses the operating system's native look-and-feel. `callback` should accept a single integer parameter which corresponds to the index of the pressed button.
     /// 
-    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialog`` feature. Supported platforms include macOS and Windows.
+    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialog`` feature. Supported platforms include macOS, Windows, and Android.
     /// 
     public static func dialogShow(title: String, description: String, buttons: PackedStringArray, callback: Callable) -> GodotError {
         var _result: Int64 = 0 // to avoid packed enums on the stack
@@ -5205,8 +5400,8 @@ open class DisplayServer: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_dialog_input_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("dialog_input_text")
+    fileprivate static let method_dialog_input_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("dialog_input_text")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3088703427)!
@@ -5218,7 +5413,7 @@ open class DisplayServer: Object {
     
     /// Shows a text input dialog which uses the operating system's native look-and-feel. `callback` should accept a single ``String`` parameter which contains the text field's contents.
     /// 
-    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialogInput`` feature. Supported platforms include macOS and Windows.
+    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialogInput`` feature. Supported platforms include macOS, Windows, and Android.
     /// 
     public static func dialogInputText(title: String, description: String, existingText: String, callback: Callable) -> GodotError {
         var _result: Int64 = 0 // to avoid packed enums on the stack
@@ -5247,8 +5442,8 @@ open class DisplayServer: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_file_dialog_show: GDExtensionMethodBindPtr = {
-        let methodName = StringName("file_dialog_show")
+    fileprivate static let method_file_dialog_show: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("file_dialog_show")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1531299078)!
@@ -5260,17 +5455,19 @@ open class DisplayServer: Object {
     
     /// Displays OS native dialog for selecting files or directories in the file system.
     /// 
-    /// Each filter string in the `filters` array should be formatted like this: `*.txt,*.doc;Text Files`. The description text of the filter is optional and can be omitted. See also ``FileDialog/filters``.
+    /// Each filter string in the `filters` array should be formatted like this: `*.png,*.jpg,*.jpeg;Image Files;image/png,image/jpeg`. The description text of the filter is optional and can be omitted. It is recommended to set both file extension and MIME type. See also ``FileDialog/filters``.
     /// 
-    /// Callbacks have the following arguments: `status: bool, selected_paths: PackedStringArray, selected_filter_index: int`.
+    /// Callbacks have the following arguments: `status: bool, selected_paths: PackedStringArray, selected_filter_index: int`. **On Android,** callback argument `selected_filter_index` is always zero.
     /// 
-    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialogFile`` feature. Supported platforms include Linux (X11/Wayland), Windows, and macOS.
+    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialogFile`` feature. Supported platforms include Linux (X11/Wayland), Windows, macOS, and Android.
     /// 
     /// > Note: `currentDirectory` might be ignored.
     /// 
-    /// > Note: On Linux, `showHidden` is ignored.
+    /// > Note: Embedded file dialog and Windows file dialog support only file extensions, while Android, Linux, and macOS file dialogs also support MIME types.
     /// 
-    /// > Note: On macOS, native file dialogs have no title.
+    /// > Note: On Android and Linux, `showHidden` is ignored.
+    /// 
+    /// > Note: On Android and macOS, native file dialogs have no title.
     /// 
     /// > Note: On macOS, sandboxed apps will save security-scoped bookmarks to retain access to the opened folders across multiple sessions. Use ``OS/getGrantedPermissions()`` to get a list of saved bookmarks.
     /// 
@@ -5310,8 +5507,8 @@ open class DisplayServer: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_file_dialog_with_options_show: GDExtensionMethodBindPtr = {
-        let methodName = StringName("file_dialog_with_options_show")
+    fileprivate static let method_file_dialog_with_options_show: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("file_dialog_with_options_show")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1305318754)!
@@ -5323,9 +5520,9 @@ open class DisplayServer: Object {
     
     /// Displays OS native dialog for selecting files or directories in the file system with additional user selectable options.
     /// 
-    /// Each filter string in the `filters` array should be formatted like this: `*.txt,*.doc;Text Files`. The description text of the filter is optional and can be omitted. See also ``FileDialog/filters``.
+    /// Each filter string in the `filters` array should be formatted like this: `*.png,*.jpg,*.jpeg;Image Files;image/png,image/jpeg`. The description text of the filter is optional and can be omitted. It is recommended to set both file extension and MIME type. See also ``FileDialog/filters``.
     /// 
-    /// `options` is array of ``GDictionary``s with the following keys:
+    /// `options` is array of ``VariantDictionary``s with the following keys:
     /// 
     /// - `"name"` - option's name ``String``.
     /// 
@@ -5335,9 +5532,11 @@ open class DisplayServer: Object {
     /// 
     /// Callbacks have the following arguments: `status: bool, selected_paths: PackedStringArray, selected_filter_index: int, selected_option: Dictionary`.
     /// 
-    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialogFile`` feature. Supported platforms include Linux (X11/Wayland), Windows, and macOS.
+    /// > Note: This method is implemented if the display server has the ``Feature/nativeDialogFileExtra`` feature. Supported platforms include Linux (X11/Wayland), Windows, and macOS.
     /// 
     /// > Note: `currentDirectory` might be ignored.
+    /// 
+    /// > Note: Embedded file dialog and Windows file dialog support only file extensions, while Android, Linux, and macOS file dialogs also support MIME types.
     /// 
     /// > Note: On Linux (X11), `showHidden` is ignored.
     /// 
@@ -5345,7 +5544,7 @@ open class DisplayServer: Object {
     /// 
     /// > Note: On macOS, sandboxed apps will save security-scoped bookmarks to retain access to the opened folders across multiple sessions. Use ``OS/getGrantedPermissions()`` to get a list of saved bookmarks.
     /// 
-    public static func fileDialogWithOptionsShow(title: String, currentDirectory: String, root: String, filename: String, showHidden: Bool, mode: DisplayServer.FileDialogMode, filters: PackedStringArray, options: VariantCollection<GDictionary>, callback: Callable) -> GodotError {
+    public static func fileDialogWithOptionsShow(title: String, currentDirectory: String, root: String, filename: String, showHidden: Bool, mode: DisplayServer.FileDialogMode, filters: PackedStringArray, options: TypedArray<VariantDictionary>, callback: Callable) -> GodotError {
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let title = GString(title)
         withUnsafePointer(to: title.content) { pArg0 in
@@ -5388,8 +5587,28 @@ open class DisplayServer: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_keyboard_get_layout_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("keyboard_get_layout_count")
+    fileprivate static let method_beep: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("beep")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4051624405)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Plays the beep sound from the operative system, if possible. Because it comes from the OS, the beep sound will be audible even if the application is muted. It may also be disabled for the entire OS by the user.
+    /// 
+    /// > Note: This method is implemented on macOS, Linux (X11/Wayland), and Windows.
+    /// 
+    public static func beep() {
+        gi.object_method_bind_ptrcall(method_beep, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_keyboard_get_layout_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("keyboard_get_layout_count")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5409,8 +5628,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_keyboard_get_current_layout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("keyboard_get_current_layout")
+    fileprivate static let method_keyboard_get_current_layout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("keyboard_get_current_layout")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5430,8 +5649,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_keyboard_set_current_layout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("keyboard_set_current_layout")
+    fileprivate static let method_keyboard_set_current_layout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("keyboard_set_current_layout")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -5459,8 +5678,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_keyboard_get_layout_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("keyboard_get_layout_language")
+    fileprivate static let method_keyboard_get_layout_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("keyboard_get_layout_language")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -5489,8 +5708,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_keyboard_get_layout_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("keyboard_get_layout_name")
+    fileprivate static let method_keyboard_get_layout_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("keyboard_get_layout_name")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -5519,8 +5738,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_keyboard_get_keycode_from_physical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("keyboard_get_keycode_from_physical")
+    fileprivate static let method_keyboard_get_keycode_from_physical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("keyboard_get_keycode_from_physical")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3447613187)!
@@ -5549,8 +5768,8 @@ open class DisplayServer: Object {
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_keyboard_get_label_from_physical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("keyboard_get_label_from_physical")
+    fileprivate static let method_keyboard_get_label_from_physical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("keyboard_get_label_from_physical")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3447613187)!
@@ -5579,8 +5798,28 @@ open class DisplayServer: Object {
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_process_events: GDExtensionMethodBindPtr = {
-        let methodName = StringName("process_events")
+    fileprivate static let method_show_emoji_and_symbol_picker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("show_emoji_and_symbol_picker")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4051624405)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Opens system emoji and symbol picker.
+    /// 
+    /// > Note: This method is implemented on macOS and Windows.
+    /// 
+    public static func showEmojiAndSymbolPicker() {
+        gi.object_method_bind_ptrcall(method_show_emoji_and_symbol_picker, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_process_events: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("process_events")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -5596,8 +5835,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_force_process_and_drop_events: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_process_and_drop_events")
+    fileprivate static let method_force_process_and_drop_events: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_process_and_drop_events")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -5616,8 +5855,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_set_native_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_native_icon")
+    fileprivate static let method_set_native_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_native_icon")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -5646,8 +5885,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_set_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_icon")
+    fileprivate static let method_set_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_icon")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 532598488)!
@@ -5675,8 +5914,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_create_status_indicator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_status_indicator")
+    fileprivate static let method_create_status_indicator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_status_indicator")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1904285171)!
@@ -5712,8 +5951,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_status_indicator_set_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("status_indicator_set_icon")
+    fileprivate static let method_status_indicator_set_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("status_indicator_set_icon")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -5744,8 +5983,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_status_indicator_set_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("status_indicator_set_tooltip")
+    fileprivate static let method_status_indicator_set_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("status_indicator_set_tooltip")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -5777,8 +6016,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_status_indicator_set_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("status_indicator_set_menu")
+    fileprivate static let method_status_indicator_set_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("status_indicator_set_menu")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4040184819)!
@@ -5813,8 +6052,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_status_indicator_set_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("status_indicator_set_callback")
+    fileprivate static let method_status_indicator_set_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("status_indicator_set_callback")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 957362965)!
@@ -5845,8 +6084,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_status_indicator_get_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("status_indicator_get_rect")
+    fileprivate static let method_status_indicator_get_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("status_indicator_get_rect")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3327874267)!
@@ -5875,8 +6114,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_delete_status_indicator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("delete_status_indicator")
+    fileprivate static let method_delete_status_indicator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("delete_status_indicator")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -5901,8 +6140,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_tablet_get_driver_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tablet_get_driver_count")
+    fileprivate static let method_tablet_get_driver_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tablet_get_driver_count")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5922,8 +6161,8 @@ open class DisplayServer: Object {
         return _result
     }
     
-    fileprivate static var method_tablet_get_driver_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tablet_get_driver_name")
+    fileprivate static let method_tablet_get_driver_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tablet_get_driver_name")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -5952,8 +6191,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_tablet_get_current_driver: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tablet_get_current_driver")
+    fileprivate static let method_tablet_get_current_driver: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tablet_get_current_driver")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -5973,8 +6212,8 @@ open class DisplayServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_tablet_set_current_driver: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tablet_set_current_driver")
+    fileprivate static let method_tablet_set_current_driver: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tablet_set_current_driver")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -6011,8 +6250,8 @@ open class DisplayServer: Object {
         
     }
     
-    fileprivate static var method_is_window_transparency_available: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_window_transparency_available")
+    fileprivate static let method_is_window_transparency_available: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_window_transparency_available")
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -6026,6 +6265,79 @@ open class DisplayServer: Object {
     public static func isWindowTransparencyAvailable() -> Bool {
         var _result: Bool = false
         gi.object_method_bind_ptrcall(method_is_window_transparency_available, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_register_additional_output: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_additional_output")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3975164845)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Registers an ``Object`` which represents an additional output that will be rendered too, beyond normal windows. The ``Object`` is only used as an identifier, which can be later passed to ``unregisterAdditionalOutput(object:)``.
+    /// 
+    /// This can be used to prevent Godot from skipping rendering when no normal windows are visible.
+    /// 
+    public static func registerAdditionalOutput(object: Object?) {
+        withUnsafePointer(to: object?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_register_additional_output, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_unregister_additional_output: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unregister_additional_output")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3975164845)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Unregisters an ``Object`` representing an additional output, that was registered via ``registerAdditionalOutput(object:)``.
+    public static func unregisterAdditionalOutput(object: Object?) {
+        withUnsafePointer(to: object?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_unregister_additional_output, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_has_additional_outputs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_additional_outputs")
+        return withUnsafePointer(to: &DisplayServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if any additional outputs have been registered via ``registerAdditionalOutput(object:)``.
+    public static func hasAdditionalOutputs() -> Bool {
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(method_has_additional_outputs, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
         return _result
     }
     

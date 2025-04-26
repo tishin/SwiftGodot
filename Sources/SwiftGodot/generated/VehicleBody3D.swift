@@ -28,7 +28,7 @@ import Musl
 /// > Note: This class has known issues and isn't designed to provide realistic 3D vehicle physics. If you want advanced vehicle physics, you may have to write your own physics integration using ``CharacterBody3D`` or ``RigidBody3D``.
 /// 
 open class VehicleBody3D: RigidBody3D {
-    fileprivate static var className = StringName("VehicleBody3D")
+    private static var className = StringName("VehicleBody3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -78,8 +78,8 @@ open class VehicleBody3D: RigidBody3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_engine_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_engine_force")
+    fileprivate static let method_set_engine_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_engine_force")
         return withUnsafePointer(to: &VehicleBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -91,6 +91,7 @@ open class VehicleBody3D: RigidBody3D {
     
     @inline(__always)
     fileprivate final func set_engine_force(_ engineForce: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: engineForce) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -104,8 +105,8 @@ open class VehicleBody3D: RigidBody3D {
         
     }
     
-    fileprivate static var method_get_engine_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_engine_force")
+    fileprivate static let method_get_engine_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_engine_force")
         return withUnsafePointer(to: &VehicleBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -117,13 +118,14 @@ open class VehicleBody3D: RigidBody3D {
     
     @inline(__always)
     fileprivate final func get_engine_force() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleBody3D.method_get_engine_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_brake: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_brake")
+    fileprivate static let method_set_brake: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_brake")
         return withUnsafePointer(to: &VehicleBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -135,6 +137,7 @@ open class VehicleBody3D: RigidBody3D {
     
     @inline(__always)
     fileprivate final func set_brake(_ brake: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: brake) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -148,8 +151,8 @@ open class VehicleBody3D: RigidBody3D {
         
     }
     
-    fileprivate static var method_get_brake: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_brake")
+    fileprivate static let method_get_brake: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_brake")
         return withUnsafePointer(to: &VehicleBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -161,13 +164,14 @@ open class VehicleBody3D: RigidBody3D {
     
     @inline(__always)
     fileprivate final func get_brake() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleBody3D.method_get_brake, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_steering: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_steering")
+    fileprivate static let method_set_steering: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_steering")
         return withUnsafePointer(to: &VehicleBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -179,6 +183,7 @@ open class VehicleBody3D: RigidBody3D {
     
     @inline(__always)
     fileprivate final func set_steering(_ steering: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: steering) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -192,8 +197,8 @@ open class VehicleBody3D: RigidBody3D {
         
     }
     
-    fileprivate static var method_get_steering: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_steering")
+    fileprivate static let method_get_steering: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_steering")
         return withUnsafePointer(to: &VehicleBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -205,6 +210,7 @@ open class VehicleBody3D: RigidBody3D {
     
     @inline(__always)
     fileprivate final func get_steering() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VehicleBody3D.method_get_steering, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

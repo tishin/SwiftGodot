@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``CanvasModulate`` applies a color tint to all nodes on a canvas. Only one can be used to tint a canvas, but ``CanvasLayer``s can be used to render things independently.
 open class CanvasModulate: Node2D {
-    fileprivate static var className = StringName("CanvasModulate")
+    private static var className = StringName("CanvasModulate")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class CanvasModulate: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color")
+    fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color")
         return withUnsafePointer(to: &CanvasModulate.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -54,6 +54,7 @@ open class CanvasModulate: Node2D {
     
     @inline(__always)
     fileprivate final func set_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class CanvasModulate: Node2D {
         
     }
     
-    fileprivate static var method_get_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color")
+    fileprivate static let method_get_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color")
         return withUnsafePointer(to: &CanvasModulate.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -80,6 +81,7 @@ open class CanvasModulate: Node2D {
     
     @inline(__always)
     fileprivate final func get_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(CanvasModulate.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

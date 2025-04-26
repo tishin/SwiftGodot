@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Base class for audio samples.
 open class AudioSample: RefCounted {
-    fileprivate static var className = StringName("AudioSample")
+    private static var className = StringName("AudioSample")
     override open class var godotClassName: StringName { className }
 }
 

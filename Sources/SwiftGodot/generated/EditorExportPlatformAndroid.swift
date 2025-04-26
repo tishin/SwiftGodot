@@ -21,7 +21,7 @@ import Musl
 
 /// Exporter for Android.
 open class EditorExportPlatformAndroid: EditorExportPlatform {
-    fileprivate static var className = StringName("EditorExportPlatformAndroid")
+    private static var className = StringName("EditorExportPlatformAndroid")
     override open class var godotClassName: StringName { className }
 }
 

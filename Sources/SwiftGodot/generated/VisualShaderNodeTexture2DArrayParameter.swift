@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This parameter allows to provide a collection of textures for the shader. You can use ``VisualShaderNodeTexture2DArray`` to extract the textures from array.
 open class VisualShaderNodeTexture2DArrayParameter: VisualShaderNodeTextureParameter {
-    fileprivate static var className = StringName("VisualShaderNodeTexture2DArrayParameter")
+    private static var className = StringName("VisualShaderNodeTexture2DArrayParameter")
     override open class var godotClassName: StringName { className }
 }
 

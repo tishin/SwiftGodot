@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Base node for geometry-based visual instances. Shares some common functionality like visibility and custom materials.
 open class GeometryInstance3D: VisualInstance3D {
-    fileprivate static var className = StringName("GeometryInstance3D")
+    private static var className = StringName("GeometryInstance3D")
     override open class var godotClassName: StringName { className }
     public enum ShadowCastingSetting: Int64, CaseIterable {
         /// Will not cast any shadows. Use this to improve performance for small geometry that is unlikely to cast noticeable shadows (such as debris).
@@ -216,6 +216,21 @@ open class GeometryInstance3D: VisualInstance3D {
     }
     
     /// The texel density to use for lightmapping in ``LightmapGI``. Greater scale values provide higher resolution in the lightmap, which can result in sharper shadows for lights that have both direct and indirect light baked. However, greater scale values will also increase the space taken by the mesh in the lightmap texture, which increases the memory, storage, and bake time requirements. When using a single mesh at different scales, consider adjusting this value to keep the lightmap texel density consistent across meshes.
+    /// 
+    /// For example, doubling ``giLightmapTexelScale`` doubles the lightmap texture resolution for this object _on each axis_, so it will _quadruple_ the texel count.
+    /// 
+    final public var giLightmapTexelScale: Double {
+        get {
+            return get_lightmap_texel_scale ()
+        }
+        
+        set {
+            set_lightmap_texel_scale (newValue)
+        }
+        
+    }
+    
+    /// The texel density to use for lightmapping in ``LightmapGI``.
     final public var giLightmapScale: GeometryInstance3D.LightmapScale {
         get {
             return get_lightmap_scale ()
@@ -294,8 +309,8 @@ open class GeometryInstance3D: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_material_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material_override")
+    fileprivate static let method_set_material_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material_override")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -307,6 +322,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_material_override(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -320,8 +336,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_material_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material_override")
+    fileprivate static let method_get_material_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material_override")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -333,13 +349,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_material_override() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_material_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_material_overlay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material_overlay")
+    fileprivate static let method_set_material_overlay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material_overlay")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -351,6 +368,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_material_overlay(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -364,8 +382,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_material_overlay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material_overlay")
+    fileprivate static let method_get_material_overlay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material_overlay")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -377,13 +395,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_material_overlay() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_material_overlay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_cast_shadows_setting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cast_shadows_setting")
+    fileprivate static let method_set_cast_shadows_setting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cast_shadows_setting")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 856677339)!
@@ -395,6 +414,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_cast_shadows_setting(_ shadowCastingSetting: GeometryInstance3D.ShadowCastingSetting) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shadowCastingSetting.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -408,8 +428,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_cast_shadows_setting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cast_shadows_setting")
+    fileprivate static let method_get_cast_shadows_setting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cast_shadows_setting")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3383019359)!
@@ -421,13 +441,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_cast_shadows_setting() -> GeometryInstance3D.ShadowCastingSetting {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_cast_shadows_setting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GeometryInstance3D.ShadowCastingSetting (rawValue: _result)!
     }
     
-    fileprivate static var method_set_lod_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lod_bias")
+    fileprivate static let method_set_lod_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lod_bias")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -439,6 +460,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_lod_bias(_ bias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -452,8 +474,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_lod_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lod_bias")
+    fileprivate static let method_get_lod_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lod_bias")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -465,13 +487,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_lod_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lod_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transparency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transparency")
+    fileprivate static let method_set_transparency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transparency")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -483,6 +506,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_transparency(_ transparency: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: transparency) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -496,8 +520,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_transparency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transparency")
+    fileprivate static let method_get_transparency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transparency")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -509,13 +533,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_transparency() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_transparency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visibility_range_end_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_range_end_margin")
+    fileprivate static let method_set_visibility_range_end_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_range_end_margin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -527,6 +552,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_visibility_range_end_margin(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -540,8 +566,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_visibility_range_end_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visibility_range_end_margin")
+    fileprivate static let method_get_visibility_range_end_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visibility_range_end_margin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -553,13 +579,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_visibility_range_end_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_end_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visibility_range_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_range_end")
+    fileprivate static let method_set_visibility_range_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_range_end")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -571,6 +598,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_visibility_range_end(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -584,8 +612,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_visibility_range_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visibility_range_end")
+    fileprivate static let method_get_visibility_range_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visibility_range_end")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -597,13 +625,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_visibility_range_end() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visibility_range_begin_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_range_begin_margin")
+    fileprivate static let method_set_visibility_range_begin_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_range_begin_margin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -615,6 +644,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_visibility_range_begin_margin(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -628,8 +658,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_visibility_range_begin_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visibility_range_begin_margin")
+    fileprivate static let method_get_visibility_range_begin_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visibility_range_begin_margin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -641,13 +671,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_visibility_range_begin_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_begin_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visibility_range_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_range_begin")
+    fileprivate static let method_set_visibility_range_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_range_begin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -659,6 +690,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_visibility_range_begin(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -672,8 +704,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_visibility_range_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visibility_range_begin")
+    fileprivate static let method_get_visibility_range_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visibility_range_begin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -685,13 +717,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_visibility_range_begin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visibility_range_fade_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_range_fade_mode")
+    fileprivate static let method_set_visibility_range_fade_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_range_fade_mode")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1440117808)!
@@ -703,6 +736,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_visibility_range_fade_mode(_ mode: GeometryInstance3D.VisibilityRangeFadeMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -716,8 +750,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_visibility_range_fade_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visibility_range_fade_mode")
+    fileprivate static let method_get_visibility_range_fade_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visibility_range_fade_mode")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2067221882)!
@@ -729,13 +763,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_visibility_range_fade_mode() -> GeometryInstance3D.VisibilityRangeFadeMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_fade_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GeometryInstance3D.VisibilityRangeFadeMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_instance_shader_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_instance_shader_parameter")
+    fileprivate static let method_set_instance_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_instance_shader_parameter")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -751,9 +786,10 @@ open class GeometryInstance3D: VisualInstance3D {
     /// 
     /// > Note: `name` is case-sensitive and must match the name of the uniform in the code exactly (not the capitalized name in the inspector).
     /// 
-    /// > Note: Per-instance shader uniforms are currently only available in 3D, so there is no 2D equivalent of this method.
+    /// > Note: Per-instance shader uniforms are only available in Spatial and CanvasItem shaders, but not for Fog, Sky, or Particles shaders.
     /// 
     public final func setInstanceShaderParameter(name: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -770,8 +806,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_instance_shader_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_shader_parameter")
+    fileprivate static let method_get_instance_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_shader_parameter")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2760726917)!
@@ -783,6 +819,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     /// Get the value of a shader parameter as set on this instance.
     public final func getInstanceShaderParameter(name: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -797,8 +834,8 @@ open class GeometryInstance3D: VisualInstance3D {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_extra_cull_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_extra_cull_margin")
+    fileprivate static let method_set_extra_cull_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_extra_cull_margin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -810,6 +847,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_extra_cull_margin(_ margin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -823,8 +861,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_extra_cull_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_extra_cull_margin")
+    fileprivate static let method_get_extra_cull_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_extra_cull_margin")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -836,13 +874,60 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_extra_cull_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_extra_cull_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_lightmap_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lightmap_scale")
+    fileprivate static let method_set_lightmap_texel_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lightmap_texel_scale")
+        return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_lightmap_texel_scale(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: scale) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_lightmap_texel_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_lightmap_texel_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lightmap_texel_scale")
+        return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_lightmap_texel_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lightmap_texel_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_lightmap_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lightmap_scale")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2462696582)!
@@ -854,6 +939,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_lightmap_scale(_ scale: GeometryInstance3D.LightmapScale) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -867,8 +953,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_lightmap_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lightmap_scale")
+    fileprivate static let method_get_lightmap_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lightmap_scale")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 798767852)!
@@ -880,13 +966,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_lightmap_scale() -> GeometryInstance3D.LightmapScale {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lightmap_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GeometryInstance3D.LightmapScale (rawValue: _result)!
     }
     
-    fileprivate static var method_set_gi_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gi_mode")
+    fileprivate static let method_set_gi_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gi_mode")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2548557163)!
@@ -898,6 +985,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_gi_mode(_ mode: GeometryInstance3D.GIMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -911,8 +999,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_gi_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gi_mode")
+    fileprivate static let method_get_gi_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gi_mode")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2188566509)!
@@ -924,13 +1012,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_gi_mode() -> GeometryInstance3D.GIMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_gi_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GeometryInstance3D.GIMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_ignore_occlusion_culling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ignore_occlusion_culling")
+    fileprivate static let method_set_ignore_occlusion_culling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ignore_occlusion_culling")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -942,6 +1031,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_ignore_occlusion_culling(_ ignoreCulling: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ignoreCulling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -955,8 +1045,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_ignoring_occlusion_culling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ignoring_occlusion_culling")
+    fileprivate static let method_is_ignoring_occlusion_culling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ignoring_occlusion_culling")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -968,13 +1058,14 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_ignoring_occlusion_culling() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_is_ignoring_occlusion_culling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_aabb")
+    fileprivate static let method_set_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_aabb")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 259215842)!
@@ -986,6 +1077,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_custom_aabb(_ aabb: AABB) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -999,8 +1091,8 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_aabb")
+    fileprivate static let method_get_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_aabb")
         return withUnsafePointer(to: &GeometryInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -1012,6 +1104,7 @@ open class GeometryInstance3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_custom_aabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_custom_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

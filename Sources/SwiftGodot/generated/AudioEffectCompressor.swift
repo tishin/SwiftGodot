@@ -37,7 +37,7 @@ import Musl
 /// - Accentuates transients by using a wider attack, making effects sound more punchy.
 /// 
 open class AudioEffectCompressor: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectCompressor")
+    private static var className = StringName("AudioEffectCompressor")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -127,8 +127,8 @@ open class AudioEffectCompressor: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_threshold")
+    fileprivate static let method_set_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_threshold")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -140,6 +140,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_threshold(_ threshold: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -153,8 +154,8 @@ open class AudioEffectCompressor: AudioEffect {
         
     }
     
-    fileprivate static var method_get_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_threshold")
+    fileprivate static let method_get_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_threshold")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -166,13 +167,14 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_threshold() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ratio")
+    fileprivate static let method_set_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ratio")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -184,6 +186,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_ratio(_ ratio: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -197,8 +200,8 @@ open class AudioEffectCompressor: AudioEffect {
         
     }
     
-    fileprivate static var method_get_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ratio")
+    fileprivate static let method_get_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ratio")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -210,13 +213,14 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_ratio() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gain")
+    fileprivate static let method_set_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gain")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -228,6 +232,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_gain(_ gain: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -241,8 +246,8 @@ open class AudioEffectCompressor: AudioEffect {
         
     }
     
-    fileprivate static var method_get_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gain")
+    fileprivate static let method_get_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gain")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -254,13 +259,14 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_gain() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_attack_us: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_attack_us")
+    fileprivate static let method_set_attack_us: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_attack_us")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -272,6 +278,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_attack_us(_ attackUs: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: attackUs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -285,8 +292,8 @@ open class AudioEffectCompressor: AudioEffect {
         
     }
     
-    fileprivate static var method_get_attack_us: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_attack_us")
+    fileprivate static let method_get_attack_us: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_attack_us")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -298,13 +305,14 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_attack_us() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_attack_us, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_release_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_release_ms")
+    fileprivate static let method_set_release_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_release_ms")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -316,6 +324,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_release_ms(_ releaseMs: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: releaseMs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -329,8 +338,8 @@ open class AudioEffectCompressor: AudioEffect {
         
     }
     
-    fileprivate static var method_get_release_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_release_ms")
+    fileprivate static let method_get_release_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_release_ms")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -342,13 +351,14 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_release_ms() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_release_ms, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mix")
+    fileprivate static let method_set_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mix")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -360,6 +370,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_mix(_ mix: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mix) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -373,8 +384,8 @@ open class AudioEffectCompressor: AudioEffect {
         
     }
     
-    fileprivate static var method_get_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mix")
+    fileprivate static let method_get_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mix")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -386,13 +397,14 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_mix() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_mix, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sidechain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sidechain")
+    fileprivate static let method_set_sidechain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sidechain")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -404,6 +416,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_sidechain(_ sidechain: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sidechain.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -417,8 +430,8 @@ open class AudioEffectCompressor: AudioEffect {
         
     }
     
-    fileprivate static var method_get_sidechain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sidechain")
+    fileprivate static let method_get_sidechain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sidechain")
         return withUnsafePointer(to: &AudioEffectCompressor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -430,6 +443,7 @@ open class AudioEffectCompressor: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_sidechain() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_sidechain, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

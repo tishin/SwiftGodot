@@ -19,11 +19,11 @@ import Musl
 #endif
 
 
-/// Represents a GLTF light.
+/// Represents a glTF light.
 /// 
-/// Represents a light as defined by the `KHR_lights_punctual` GLTF extension.
+/// Represents a light as defined by the `KHR_lights_punctual` glTF extension.
 open class GLTFLight: Resource {
-    fileprivate static var className = StringName("GLTFLight")
+    private static var className = StringName("GLTFLight")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -64,7 +64,7 @@ open class GLTFLight: Resource {
         
     }
     
-    /// The range of the light, beyond which the light has no effect. GLTF lights with no range defined behave like physical lights (which have infinite range). When creating a Godot light, the range is clamped to 4096.
+    /// The range of the light, beyond which the light has no effect. glTF lights with no range defined behave like physical lights (which have infinite range). When creating a Godot light, the range is clamped to 4096.
     final public var range: Double {
         get {
             return get_range ()
@@ -107,8 +107,8 @@ open class GLTFLight: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_from_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("from_node")
+    fileprivate static let method_from_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("from_node")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3907677874)!
@@ -131,11 +131,11 @@ open class GLTFLight: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_to_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("to_node")
+    fileprivate static let method_to_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("to_node")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2040811672)!
@@ -147,13 +147,14 @@ open class GLTFLight: Resource {
     
     /// Converts this GLTFLight instance into a Godot ``Light3D`` node.
     public final func toNode() -> Light3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GLTFLight.method_to_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_from_dictionary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("from_dictionary")
+    fileprivate static let method_from_dictionary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("from_dictionary")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4057087208)!
@@ -163,8 +164,8 @@ open class GLTFLight: Resource {
         
     }()
     
-    /// Creates a new GLTFLight instance by parsing the given ``GDictionary``.
-    public static func fromDictionary(_ dictionary: GDictionary) -> GLTFLight? {
+    /// Creates a new GLTFLight instance by parsing the given ``VariantDictionary``.
+    public static func fromDictionary(_ dictionary: VariantDictionary) -> GLTFLight? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: dictionary.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -176,11 +177,11 @@ open class GLTFLight: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_to_dictionary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("to_dictionary")
+    fileprivate static let method_to_dictionary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("to_dictionary")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -190,15 +191,16 @@ open class GLTFLight: Resource {
         
     }()
     
-    /// Serializes this GLTFLight instance into a ``GDictionary``.
-    public final func toDictionary() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    /// Serializes this GLTFLight instance into a ``VariantDictionary``.
+    public final func toDictionary() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(GLTFLight.method_to_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color")
+    fileprivate static let method_get_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200896285)!
@@ -210,13 +212,14 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func get_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(GLTFLight.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color")
+    fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -228,6 +231,7 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func set_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -241,8 +245,8 @@ open class GLTFLight: Resource {
         
     }
     
-    fileprivate static var method_get_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_intensity")
+    fileprivate static let method_get_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_intensity")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -254,13 +258,14 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func get_intensity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GLTFLight.method_get_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_intensity")
+    fileprivate static let method_set_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_intensity")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -272,6 +277,7 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func set_intensity(_ intensity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -285,8 +291,8 @@ open class GLTFLight: Resource {
         
     }
     
-    fileprivate static var method_get_light_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_light_type")
+    fileprivate static let method_get_light_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_light_type")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -298,13 +304,14 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func get_light_type() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(GLTFLight.method_get_light_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_light_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_light_type")
+    fileprivate static let method_set_light_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_light_type")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -316,6 +323,7 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func set_light_type(_ lightType: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let lightType = GString(lightType)
         withUnsafePointer(to: lightType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -330,8 +338,8 @@ open class GLTFLight: Resource {
         
     }
     
-    fileprivate static var method_get_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_range")
+    fileprivate static let method_get_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_range")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -343,13 +351,14 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func get_range() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GLTFLight.method_get_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_range")
+    fileprivate static let method_set_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_range")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -361,6 +370,7 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func set_range(_ range: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: range) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -374,8 +384,8 @@ open class GLTFLight: Resource {
         
     }
     
-    fileprivate static var method_get_inner_cone_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inner_cone_angle")
+    fileprivate static let method_get_inner_cone_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inner_cone_angle")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -387,13 +397,14 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func get_inner_cone_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GLTFLight.method_get_inner_cone_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_inner_cone_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inner_cone_angle")
+    fileprivate static let method_set_inner_cone_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inner_cone_angle")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -405,6 +416,7 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func set_inner_cone_angle(_ innerConeAngle: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: innerConeAngle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -418,8 +430,8 @@ open class GLTFLight: Resource {
         
     }
     
-    fileprivate static var method_get_outer_cone_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outer_cone_angle")
+    fileprivate static let method_get_outer_cone_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outer_cone_angle")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -431,13 +443,14 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func get_outer_cone_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GLTFLight.method_get_outer_cone_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outer_cone_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outer_cone_angle")
+    fileprivate static let method_set_outer_cone_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outer_cone_angle")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -449,6 +462,7 @@ open class GLTFLight: Resource {
     
     @inline(__always)
     fileprivate final func set_outer_cone_angle(_ outerConeAngle: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: outerConeAngle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -462,8 +476,8 @@ open class GLTFLight: Resource {
         
     }
     
-    fileprivate static var method_get_additional_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_additional_data")
+    fileprivate static let method_get_additional_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_additional_data")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2138907829)!
@@ -475,6 +489,7 @@ open class GLTFLight: Resource {
     
     /// 
     public final func getAdditionalData(extensionName: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -489,8 +504,8 @@ open class GLTFLight: Resource {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_additional_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_additional_data")
+    fileprivate static let method_set_additional_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_additional_data")
         return withUnsafePointer(to: &GLTFLight.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -502,6 +517,7 @@ open class GLTFLight: Resource {
     
     /// 
     public final func setAdditionalData(extensionName: StringName, additionalData: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: additionalData.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in

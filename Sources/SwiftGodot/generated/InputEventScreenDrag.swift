@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Stores information about screen drag events. See ``Node/_input(event:)``.
 open class InputEventScreenDrag: InputEventFromWindow {
-    fileprivate static var className = StringName("InputEventScreenDrag")
+    private static var className = StringName("InputEventScreenDrag")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -143,8 +143,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
     }
     
     /* Methods */
-    fileprivate static var method_set_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_index")
+    fileprivate static let method_set_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_index")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -156,6 +156,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_index(_ index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -169,8 +170,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_index")
+    fileprivate static let method_get_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_index")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -182,13 +183,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_index() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tilt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tilt")
+    fileprivate static let method_set_tilt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tilt")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -200,6 +202,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_tilt(_ tilt: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tilt) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -213,8 +216,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_tilt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tilt")
+    fileprivate static let method_get_tilt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tilt")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -226,13 +229,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_tilt() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_tilt, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressure")
+    fileprivate static let method_set_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressure")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -244,6 +248,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_pressure(_ pressure: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -257,8 +262,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pressure")
+    fileprivate static let method_get_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pressure")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -270,13 +275,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_pressure() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_pressure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pen_inverted: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pen_inverted")
+    fileprivate static let method_set_pen_inverted: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pen_inverted")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -288,6 +294,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_pen_inverted(_ penInverted: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: penInverted) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -301,8 +308,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_pen_inverted: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pen_inverted")
+    fileprivate static let method_get_pen_inverted: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pen_inverted")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -314,13 +321,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_pen_inverted() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_pen_inverted, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position")
+    fileprivate static let method_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -332,6 +340,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_position(_ position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -345,8 +354,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -358,13 +367,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_position() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_relative")
+    fileprivate static let method_set_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_relative")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -376,6 +386,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_relative(_ relative: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: relative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -389,8 +400,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_relative")
+    fileprivate static let method_get_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_relative")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -402,13 +413,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_relative() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_relative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_screen_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_screen_relative")
+    fileprivate static let method_set_screen_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_screen_relative")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -420,6 +432,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_screen_relative(_ relative: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: relative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -433,8 +446,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_screen_relative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_relative")
+    fileprivate static let method_get_screen_relative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_relative")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -446,13 +459,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_screen_relative() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_screen_relative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_velocity")
+    fileprivate static let method_set_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_velocity")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -464,6 +478,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_velocity(_ velocity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -477,8 +492,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_velocity")
+    fileprivate static let method_get_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_velocity")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -490,13 +505,14 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_velocity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_screen_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_screen_velocity")
+    fileprivate static let method_set_screen_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_screen_velocity")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -508,6 +524,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_screen_velocity(_ velocity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -521,8 +538,8 @@ open class InputEventScreenDrag: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_screen_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_velocity")
+    fileprivate static let method_get_screen_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_velocity")
         return withUnsafePointer(to: &InputEventScreenDrag.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -534,6 +551,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_screen_velocity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_screen_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

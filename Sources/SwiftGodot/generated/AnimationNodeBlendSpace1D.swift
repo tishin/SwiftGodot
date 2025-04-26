@@ -28,7 +28,7 @@ import Musl
 /// You can set the extents of the axis with ``minSpace`` and ``maxSpace``.
 /// 
 open class AnimationNodeBlendSpace1D: AnimationRootNode {
-    fileprivate static var className = StringName("AnimationNodeBlendSpace1D")
+    private static var className = StringName("AnimationNodeBlendSpace1D")
     override open class var godotClassName: StringName { className }
     public enum BlendMode: Int64, CaseIterable {
         /// The interpolation between animations is linear.
@@ -118,8 +118,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     }
     
     /* Methods */
-    fileprivate static var method_add_blend_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_blend_point")
+    fileprivate static let method_add_blend_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_blend_point")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 285050433)!
@@ -131,6 +131,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     /// Adds a new point that represents a `node` on the virtual axis at a given position set by `pos`. You can insert it at a specific index using the `atIndex` argument. If you use the default value for `atIndex`, the point is inserted at the end of the blend points array.
     public final func addBlendPoint(node: AnimationRootNode?, pos: Double, atIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: atIndex) { pArg2 in
@@ -150,8 +151,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_set_blend_point_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_point_position")
+    fileprivate static let method_set_blend_point_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_point_position")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -163,6 +164,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     /// Updates the position of the point at index `point` on the blend axis.
     public final func setBlendPointPosition(point: Int32, pos: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -179,8 +181,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_blend_point_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_point_position")
+    fileprivate static let method_get_blend_point_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_point_position")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -192,6 +194,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     /// Returns the position of the point at index `point`.
     public final func getBlendPointPosition(point: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -206,8 +209,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         return _result
     }
     
-    fileprivate static var method_set_blend_point_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_point_node")
+    fileprivate static let method_set_blend_point_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_point_node")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4240341528)!
@@ -219,6 +222,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     /// Changes the ``AnimationNode`` referenced by the point at index `point`.
     public final func setBlendPointNode(point: Int32, node: AnimationRootNode?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: node?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -235,8 +239,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_blend_point_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_point_node")
+    fileprivate static let method_get_blend_point_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_point_node")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 665599029)!
@@ -248,6 +252,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     /// Returns the ``AnimationNode`` referenced by the point at index `point`.
     public final func getBlendPointNode(point: Int32) -> AnimationRootNode? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -259,11 +264,11 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_remove_blend_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_blend_point")
+    fileprivate static let method_remove_blend_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_blend_point")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -275,6 +280,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     /// Removes the point at index `point` from the blend axis.
     public final func removeBlendPoint(_ point: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -288,8 +294,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_blend_point_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_point_count")
+    fileprivate static let method_get_blend_point_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_point_count")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -301,13 +307,14 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     /// Returns the number of points on the blend axis.
     public final func getBlendPointCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_min_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_space")
+    fileprivate static let method_set_min_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_space")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -319,6 +326,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func set_min_space(_ minSpace: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minSpace) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -332,8 +340,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_min_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_space")
+    fileprivate static let method_get_min_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_space")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -345,13 +353,14 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func get_min_space() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_min_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_space")
+    fileprivate static let method_set_max_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_space")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -363,6 +372,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func set_max_space(_ maxSpace: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxSpace) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -376,8 +386,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_max_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_space")
+    fileprivate static let method_get_max_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_space")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -389,13 +399,14 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func get_max_space() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_max_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_snap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_snap")
+    fileprivate static let method_set_snap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_snap")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -407,6 +418,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func set_snap(_ snap: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: snap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -420,8 +432,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_snap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_snap")
+    fileprivate static let method_get_snap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_snap")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -433,13 +445,14 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func get_snap() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_snap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_value_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_value_label")
+    fileprivate static let method_set_value_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_value_label")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -451,6 +464,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func set_value_label(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -465,8 +479,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_value_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_value_label")
+    fileprivate static let method_get_value_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_value_label")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -478,13 +492,14 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func get_value_label() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_value_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_mode")
+    fileprivate static let method_set_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_mode")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2600869457)!
@@ -496,6 +511,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func set_blend_mode(_ mode: AnimationNodeBlendSpace1D.BlendMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -509,8 +525,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_get_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_mode")
+    fileprivate static let method_get_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_mode")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1547667849)!
@@ -522,13 +538,14 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func get_blend_mode() -> AnimationNodeBlendSpace1D.BlendMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationNodeBlendSpace1D.BlendMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_use_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_sync")
+    fileprivate static let method_set_use_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_sync")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -540,6 +557,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func set_use_sync(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -553,8 +571,8 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         
     }
     
-    fileprivate static var method_is_using_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_sync")
+    fileprivate static let method_is_using_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_sync")
         return withUnsafePointer(to: &AnimationNodeBlendSpace1D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -566,6 +584,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     
     @inline(__always)
     fileprivate final func is_using_sync() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_is_using_sync, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

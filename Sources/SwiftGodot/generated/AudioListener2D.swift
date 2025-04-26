@@ -26,11 +26,11 @@ import Musl
 /// If there is no active ``AudioListener2D`` in the current ``Viewport``, center of the screen will be used as a hearing point for the audio. ``AudioListener2D`` needs to be inside ``SceneTree`` to function.
 /// 
 open class AudioListener2D: Node2D {
-    fileprivate static var className = StringName("AudioListener2D")
+    private static var className = StringName("AudioListener2D")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_make_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_current")
+    fileprivate static let method_make_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_current")
         return withUnsafePointer(to: &AudioListener2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -45,12 +45,13 @@ open class AudioListener2D: Node2D {
     /// This method will have no effect if the ``AudioListener2D`` is not added to ``SceneTree``.
     /// 
     public final func makeCurrent() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AudioListener2D.method_make_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_current")
+    fileprivate static let method_clear_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_current")
         return withUnsafePointer(to: &AudioListener2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -62,12 +63,13 @@ open class AudioListener2D: Node2D {
     
     /// Disables the ``AudioListener2D``. If it's not set as current, this method will have no effect.
     public final func clearCurrent() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AudioListener2D.method_clear_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_current")
+    fileprivate static let method_is_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_current")
         return withUnsafePointer(to: &AudioListener2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -79,6 +81,7 @@ open class AudioListener2D: Node2D {
     
     /// Returns `true` if this ``AudioListener2D`` is currently active.
     public final func isCurrent() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioListener2D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A horizontal separator used for separating other controls that are arranged **vertically**. ``HSeparator`` is purely visual and normally drawn as a ``StyleBoxLine``.
 open class HSeparator: Separator {
-    fileprivate static var className = StringName("HSeparator")
+    private static var className = StringName("HSeparator")
     override open class var godotClassName: StringName { className }
 }
 

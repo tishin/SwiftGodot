@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDSamplerState: RefCounted {
-    fileprivate static var className = StringName("RDSamplerState")
+    private static var className = StringName("RDSamplerState")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -212,8 +212,8 @@ open class RDSamplerState: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_mag_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mag_filter")
+    fileprivate static let method_set_mag_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mag_filter")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1493420382)!
@@ -225,6 +225,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_mag_filter(_ pMember: RenderingDevice.SamplerFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -238,8 +239,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_mag_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mag_filter")
+    fileprivate static let method_get_mag_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mag_filter")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2209202801)!
@@ -251,13 +252,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_mag_filter() -> RenderingDevice.SamplerFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_mag_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.SamplerFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_min_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_filter")
+    fileprivate static let method_set_min_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_filter")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1493420382)!
@@ -269,6 +271,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_min_filter(_ pMember: RenderingDevice.SamplerFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -282,8 +285,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_min_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_filter")
+    fileprivate static let method_get_min_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_filter")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2209202801)!
@@ -295,13 +298,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_min_filter() -> RenderingDevice.SamplerFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_min_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.SamplerFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_mip_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mip_filter")
+    fileprivate static let method_set_mip_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mip_filter")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1493420382)!
@@ -313,6 +317,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_mip_filter(_ pMember: RenderingDevice.SamplerFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -326,8 +331,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_mip_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mip_filter")
+    fileprivate static let method_get_mip_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mip_filter")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2209202801)!
@@ -339,13 +344,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_mip_filter() -> RenderingDevice.SamplerFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_mip_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.SamplerFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_repeat_u: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_repeat_u")
+    fileprivate static let method_set_repeat_u: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_repeat_u")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 246127626)!
@@ -357,6 +363,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_repeat_u(_ pMember: RenderingDevice.SamplerRepeatMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -370,8 +377,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_repeat_u: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_repeat_u")
+    fileprivate static let method_get_repeat_u: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_repeat_u")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227895872)!
@@ -383,13 +390,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_repeat_u() -> RenderingDevice.SamplerRepeatMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_u, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.SamplerRepeatMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_repeat_v: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_repeat_v")
+    fileprivate static let method_set_repeat_v: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_repeat_v")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 246127626)!
@@ -401,6 +409,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_repeat_v(_ pMember: RenderingDevice.SamplerRepeatMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -414,8 +423,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_repeat_v: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_repeat_v")
+    fileprivate static let method_get_repeat_v: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_repeat_v")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227895872)!
@@ -427,13 +436,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_repeat_v() -> RenderingDevice.SamplerRepeatMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.SamplerRepeatMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_repeat_w: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_repeat_w")
+    fileprivate static let method_set_repeat_w: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_repeat_w")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 246127626)!
@@ -445,6 +455,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_repeat_w(_ pMember: RenderingDevice.SamplerRepeatMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -458,8 +469,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_repeat_w: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_repeat_w")
+    fileprivate static let method_get_repeat_w: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_repeat_w")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227895872)!
@@ -471,13 +482,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_repeat_w() -> RenderingDevice.SamplerRepeatMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_w, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.SamplerRepeatMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_lod_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lod_bias")
+    fileprivate static let method_set_lod_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lod_bias")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -489,6 +501,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_lod_bias(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -502,8 +515,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_lod_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lod_bias")
+    fileprivate static let method_get_lod_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lod_bias")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -515,13 +528,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_lod_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_lod_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_anisotropy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_anisotropy")
+    fileprivate static let method_set_use_anisotropy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_anisotropy")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -533,6 +547,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_use_anisotropy(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -546,8 +561,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_use_anisotropy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_anisotropy")
+    fileprivate static let method_get_use_anisotropy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_anisotropy")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -559,13 +574,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_use_anisotropy() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_use_anisotropy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_anisotropy_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anisotropy_max")
+    fileprivate static let method_set_anisotropy_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anisotropy_max")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -577,6 +593,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_anisotropy_max(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -590,8 +607,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_anisotropy_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_anisotropy_max")
+    fileprivate static let method_get_anisotropy_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_anisotropy_max")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -603,13 +620,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_anisotropy_max() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_anisotropy_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_compare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_compare")
+    fileprivate static let method_set_enable_compare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_compare")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -621,6 +639,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_compare(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -634,8 +653,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_compare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_compare")
+    fileprivate static let method_get_enable_compare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_compare")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -647,13 +666,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_compare() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_enable_compare, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_compare_op: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_compare_op")
+    fileprivate static let method_set_compare_op: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_compare_op")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2573711505)!
@@ -665,6 +685,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_compare_op(_ pMember: RenderingDevice.CompareOperator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -678,8 +699,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_compare_op: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_compare_op")
+    fileprivate static let method_get_compare_op: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_compare_op")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 269730778)!
@@ -691,13 +712,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_compare_op() -> RenderingDevice.CompareOperator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_compare_op, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.CompareOperator (rawValue: _result)!
     }
     
-    fileprivate static var method_set_min_lod: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_lod")
+    fileprivate static let method_set_min_lod: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_lod")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -709,6 +731,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_min_lod(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -722,8 +745,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_min_lod: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_lod")
+    fileprivate static let method_get_min_lod: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_lod")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -735,13 +758,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_min_lod() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_min_lod, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_lod: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_lod")
+    fileprivate static let method_set_max_lod: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_lod")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -753,6 +777,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_max_lod(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -766,8 +791,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_max_lod: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_lod")
+    fileprivate static let method_get_max_lod: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_lod")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -779,13 +804,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_max_lod() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_max_lod, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_border_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_border_color")
+    fileprivate static let method_set_border_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_border_color")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1115869595)!
@@ -797,6 +823,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_border_color(_ pMember: RenderingDevice.SamplerBorderColor) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -810,8 +837,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_border_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_border_color")
+    fileprivate static let method_get_border_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_border_color")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3514246478)!
@@ -823,13 +850,14 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_border_color() -> RenderingDevice.SamplerBorderColor {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_border_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.SamplerBorderColor (rawValue: _result)!
     }
     
-    fileprivate static var method_set_unnormalized_uvw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_unnormalized_uvw")
+    fileprivate static let method_set_unnormalized_uvw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_unnormalized_uvw")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -841,6 +869,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_unnormalized_uvw(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -854,8 +883,8 @@ open class RDSamplerState: RefCounted {
         
     }
     
-    fileprivate static var method_get_unnormalized_uvw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unnormalized_uvw")
+    fileprivate static let method_get_unnormalized_uvw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unnormalized_uvw")
         return withUnsafePointer(to: &RDSamplerState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -867,6 +896,7 @@ open class RDSamplerState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_unnormalized_uvw() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDSamplerState.method_get_unnormalized_uvw, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

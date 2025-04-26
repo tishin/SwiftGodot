@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDTextureFormat: RefCounted {
-    fileprivate static var className = StringName("RDTextureFormat")
+    private static var className = StringName("RDTextureFormat")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -136,9 +136,36 @@ open class RDTextureFormat: RefCounted {
         
     }
     
+    /// The texture will be used as the destination of a resolve operation.
+    final public var isResolveBuffer: Bool {
+        get {
+            return get_is_resolve_buffer ()
+        }
+        
+        set {
+            set_is_resolve_buffer (newValue)
+        }
+        
+    }
+    
+    /// If a texture is discardable, its contents do not need to be preserved between frames. This flag is only relevant when the texture is used as target in a draw list.
+    /// 
+    /// This information is used by ``RenderingDevice`` to figure out if a texture's contents can be discarded, eliminating unnecessary writes to memory and boosting performance.
+    /// 
+    final public var isDiscardable: Bool {
+        get {
+            return get_is_discardable ()
+        }
+        
+        set {
+            set_is_discardable (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_set_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_format")
+    fileprivate static let method_set_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_format")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 565531219)!
@@ -150,6 +177,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_format(_ pMember: RenderingDevice.DataFormat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -163,8 +191,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format")
+    fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2235804183)!
@@ -176,13 +204,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_format() -> RenderingDevice.DataFormat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.DataFormat (rawValue: _result)!
     }
     
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -194,6 +223,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_width(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -207,8 +237,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_width")
+    fileprivate static let method_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_width")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -220,13 +250,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_width() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_height")
+    fileprivate static let method_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_height")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -238,6 +269,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_height(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -251,8 +283,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_height")
+    fileprivate static let method_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_height")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -264,13 +296,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_height() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth")
+    fileprivate static let method_set_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -282,6 +315,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -295,8 +329,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth")
+    fileprivate static let method_get_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -308,13 +342,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_array_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_array_layers")
+    fileprivate static let method_set_array_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_array_layers")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -326,6 +361,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_array_layers(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -339,8 +375,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_array_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_array_layers")
+    fileprivate static let method_get_array_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_array_layers")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -352,13 +388,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_array_layers() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_array_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mipmaps")
+    fileprivate static let method_set_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mipmaps")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -370,6 +407,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_mipmaps(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -383,8 +421,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mipmaps")
+    fileprivate static let method_get_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mipmaps")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -396,13 +434,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_mipmaps() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_type")
+    fileprivate static let method_set_texture_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_type")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 652343381)!
@@ -414,6 +453,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_texture_type(_ pMember: RenderingDevice.TextureType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -427,8 +467,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_texture_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_type")
+    fileprivate static let method_get_texture_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_type")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4036357416)!
@@ -440,13 +480,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_texture_type() -> RenderingDevice.TextureType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_texture_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.TextureType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_samples: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_samples")
+    fileprivate static let method_set_samples: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_samples")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3774171498)!
@@ -458,6 +499,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_samples(_ pMember: RenderingDevice.TextureSamples) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -471,8 +513,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_samples: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_samples")
+    fileprivate static let method_get_samples: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_samples")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 407791724)!
@@ -484,13 +526,14 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_samples() -> RenderingDevice.TextureSamples {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_samples, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.TextureSamples (rawValue: _result)!
     }
     
-    fileprivate static var method_set_usage_bits: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_usage_bits")
+    fileprivate static let method_set_usage_bits: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_usage_bits")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 245642367)!
@@ -502,6 +545,7 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func set_usage_bits(_ pMember: RenderingDevice.TextureUsageBits) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -515,8 +559,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_get_usage_bits: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_usage_bits")
+    fileprivate static let method_get_usage_bits: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_usage_bits")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1313398998)!
@@ -528,13 +572,106 @@ open class RDTextureFormat: RefCounted {
     
     @inline(__always)
     fileprivate final func get_usage_bits() -> RenderingDevice.TextureUsageBits {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: RenderingDevice.TextureUsageBits = RenderingDevice.TextureUsageBits ()
         gi.object_method_bind_ptrcall(RDTextureFormat.method_get_usage_bits, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_shareable_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_shareable_format")
+    fileprivate static let method_set_is_resolve_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_is_resolve_buffer")
+        return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_is_resolve_buffer(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: pMember) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_is_resolve_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_is_resolve_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_is_resolve_buffer")
+        return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_is_resolve_buffer() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_is_resolve_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_is_discardable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_is_discardable")
+        return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_is_discardable(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: pMember) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_is_discardable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_is_discardable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_is_discardable")
+        return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_is_discardable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_is_discardable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_add_shareable_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_shareable_format")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 565531219)!
@@ -544,8 +681,9 @@ open class RDTextureFormat: RefCounted {
         
     }()
     
-    /// 
+    /// Adds `format` as a valid format for the corresponding ``RDTextureView``'s ``RDTextureView/formatOverride`` property. If any format is added as shareable, then the main ``format`` must also be added.
     public final func addShareableFormat(_ format: RenderingDevice.DataFormat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -559,8 +697,8 @@ open class RDTextureFormat: RefCounted {
         
     }
     
-    fileprivate static var method_remove_shareable_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_shareable_format")
+    fileprivate static let method_remove_shareable_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_shareable_format")
         return withUnsafePointer(to: &RDTextureFormat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 565531219)!
@@ -570,8 +708,9 @@ open class RDTextureFormat: RefCounted {
         
     }()
     
-    /// 
+    /// Removes `format` from the list of valid formats that the corresponding ``RDTextureView``'s ``RDTextureView/formatOverride`` property can be set to.
     public final func removeShareableFormat(_ format: RenderingDevice.DataFormat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

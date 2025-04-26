@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Custom Godot Shader Language expression, which is placed on top of the generated shader. You can place various function definitions inside to call later in ``VisualShaderNodeExpression``s (which are injected in the main shader functions). You can also declare varyings, uniforms and global constants.
 open class VisualShaderNodeGlobalExpression: VisualShaderNodeExpression {
-    fileprivate static var className = StringName("VisualShaderNodeGlobalExpression")
+    private static var className = StringName("VisualShaderNodeGlobalExpression")
     override open class var godotClassName: StringName { className }
 }
 

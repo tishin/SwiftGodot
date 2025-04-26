@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This node is only available in `Fragment` and `Light` visual shaders.
 open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeDerivativeFunc")
+    private static var className = StringName("VisualShaderNodeDerivativeFunc")
     override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar.
@@ -87,7 +87,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         
     }
     
-    /// Sets the level of precision to use for the derivative function. See ``VisualShaderNodeDerivativeFunc/Precision`` for options. When using the GL Compatibility renderer, this setting has no effect.
+    /// Sets the level of precision to use for the derivative function. See ``VisualShaderNodeDerivativeFunc/Precision`` for options. When using the Compatibility renderer, this setting has no effect.
     final public var precision: VisualShaderNodeDerivativeFunc.Precision {
         get {
             return get_precision ()
@@ -100,8 +100,8 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_op_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_op_type")
+    fileprivate static let method_set_op_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_op_type")
         return withUnsafePointer(to: &VisualShaderNodeDerivativeFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 377800221)!
@@ -113,6 +113,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_op_type(_ type: VisualShaderNodeDerivativeFunc.OpType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -126,8 +127,8 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_op_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_op_type")
+    fileprivate static let method_get_op_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_op_type")
         return withUnsafePointer(to: &VisualShaderNodeDerivativeFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3997800514)!
@@ -139,13 +140,14 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_op_type() -> VisualShaderNodeDerivativeFunc.OpType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_op_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeDerivativeFunc.OpType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_function")
+    fileprivate static let method_set_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_function")
         return withUnsafePointer(to: &VisualShaderNodeDerivativeFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1944704156)!
@@ -157,6 +159,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_function(_ `func`: VisualShaderNodeDerivativeFunc.Function) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -170,8 +173,8 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_function")
+    fileprivate static let method_get_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_function")
         return withUnsafePointer(to: &VisualShaderNodeDerivativeFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2389093396)!
@@ -183,13 +186,14 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_function() -> VisualShaderNodeDerivativeFunc.Function {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeDerivativeFunc.Function (rawValue: _result)!
     }
     
-    fileprivate static var method_set_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_precision")
+    fileprivate static let method_set_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_precision")
         return withUnsafePointer(to: &VisualShaderNodeDerivativeFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 797270566)!
@@ -201,6 +205,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_precision(_ precision: VisualShaderNodeDerivativeFunc.Precision) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: precision.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -214,8 +219,8 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_precision")
+    fileprivate static let method_get_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_precision")
         return withUnsafePointer(to: &VisualShaderNodeDerivativeFunc.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3822547323)!
@@ -227,6 +232,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_precision() -> VisualShaderNodeDerivativeFunc.Precision {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_precision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeDerivativeFunc.Precision (rawValue: _result)!

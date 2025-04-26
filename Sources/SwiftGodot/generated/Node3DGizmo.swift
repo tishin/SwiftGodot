@@ -26,7 +26,7 @@ import Musl
 /// ``Node3DGizmo`` by itself has no exposed API, refer to ``Node3D/addGizmo(_:)`` and pass it an ``EditorNode3DGizmo`` instance.
 /// 
 open class Node3DGizmo: RefCounted {
-    fileprivate static var className = StringName("Node3DGizmo")
+    private static var className = StringName("Node3DGizmo")
     override open class var godotClassName: StringName { className }
 }
 

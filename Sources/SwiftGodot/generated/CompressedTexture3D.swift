@@ -28,7 +28,7 @@ import Musl
 /// See ``Texture3D`` for a general description of 3D textures.
 /// 
 open class CompressedTexture3D: Texture3D {
-    fileprivate static var className = StringName("CompressedTexture3D")
+    private static var className = StringName("CompressedTexture3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class CompressedTexture3D: Texture3D {
     }
     
     /* Methods */
-    fileprivate static var method_load: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load")
+    fileprivate static let method_load: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load")
         return withUnsafePointer(to: &CompressedTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -60,6 +60,7 @@ open class CompressedTexture3D: Texture3D {
     @inline(__always)
     /// Loads the texture from the specified `path`.
     fileprivate final func load(_ path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -75,8 +76,8 @@ open class CompressedTexture3D: Texture3D {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_load_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_load_path")
+    fileprivate static let method_get_load_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_load_path")
         return withUnsafePointer(to: &CompressedTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -88,6 +89,7 @@ open class CompressedTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func get_load_path() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(CompressedTexture3D.method_get_load_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

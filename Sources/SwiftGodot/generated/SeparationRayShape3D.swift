@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A 3D ray shape, intended for use in physics. Usually used to provide a shape for a ``CollisionShape3D``. When a ``SeparationRayShape3D`` collides with an object, it tries to separate itself from it by moving its endpoint to the collision point. For example, a ``SeparationRayShape3D`` next to a character can allow it to instantly move up when touching stairs.
 open class SeparationRayShape3D: Shape3D {
-    fileprivate static var className = StringName("SeparationRayShape3D")
+    private static var className = StringName("SeparationRayShape3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -56,8 +56,8 @@ open class SeparationRayShape3D: Shape3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_length")
+    fileprivate static let method_set_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_length")
         return withUnsafePointer(to: &SeparationRayShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -69,6 +69,7 @@ open class SeparationRayShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func set_length(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -82,8 +83,8 @@ open class SeparationRayShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_get_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_length")
+    fileprivate static let method_get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_length")
         return withUnsafePointer(to: &SeparationRayShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -95,13 +96,14 @@ open class SeparationRayShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func get_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SeparationRayShape3D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_slide_on_slope: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slide_on_slope")
+    fileprivate static let method_set_slide_on_slope: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slide_on_slope")
         return withUnsafePointer(to: &SeparationRayShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -113,6 +115,7 @@ open class SeparationRayShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func set_slide_on_slope(_ active: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -126,8 +129,8 @@ open class SeparationRayShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_get_slide_on_slope: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slide_on_slope")
+    fileprivate static let method_get_slide_on_slope: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slide_on_slope")
         return withUnsafePointer(to: &SeparationRayShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -139,6 +142,7 @@ open class SeparationRayShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func get_slide_on_slope() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SeparationRayShape3D.method_get_slide_on_slope, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

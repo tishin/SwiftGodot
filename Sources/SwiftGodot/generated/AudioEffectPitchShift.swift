@@ -26,7 +26,7 @@ import Musl
 /// 
 /// Allows modulation of pitch independently of tempo. All frequencies can be increased/decreased with minimal effect on transients.
 open class AudioEffectPitchShift: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectPitchShift")
+    private static var className = StringName("AudioEffectPitchShift")
     override open class var godotClassName: StringName { className }
     public enum FFTSize: Int64, CaseIterable {
         /// Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
@@ -83,8 +83,8 @@ open class AudioEffectPitchShift: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_pitch_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pitch_scale")
+    fileprivate static let method_set_pitch_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pitch_scale")
         return withUnsafePointer(to: &AudioEffectPitchShift.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -96,6 +96,7 @@ open class AudioEffectPitchShift: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_pitch_scale(_ rate: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -109,8 +110,8 @@ open class AudioEffectPitchShift: AudioEffect {
         
     }
     
-    fileprivate static var method_get_pitch_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pitch_scale")
+    fileprivate static let method_get_pitch_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pitch_scale")
         return withUnsafePointer(to: &AudioEffectPitchShift.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -122,13 +123,14 @@ open class AudioEffectPitchShift: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_pitch_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_pitch_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_oversampling")
+    fileprivate static let method_set_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_oversampling")
         return withUnsafePointer(to: &AudioEffectPitchShift.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -140,6 +142,7 @@ open class AudioEffectPitchShift: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_oversampling(_ amount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -153,8 +156,8 @@ open class AudioEffectPitchShift: AudioEffect {
         
     }
     
-    fileprivate static var method_get_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_oversampling")
+    fileprivate static let method_get_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_oversampling")
         return withUnsafePointer(to: &AudioEffectPitchShift.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -166,13 +169,14 @@ open class AudioEffectPitchShift: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_oversampling() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fft_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fft_size")
+    fileprivate static let method_set_fft_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fft_size")
         return withUnsafePointer(to: &AudioEffectPitchShift.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323518741)!
@@ -184,6 +188,7 @@ open class AudioEffectPitchShift: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_fft_size(_ size: AudioEffectPitchShift.FFTSize) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -197,8 +202,8 @@ open class AudioEffectPitchShift: AudioEffect {
         
     }
     
-    fileprivate static var method_get_fft_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fft_size")
+    fileprivate static let method_get_fft_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fft_size")
         return withUnsafePointer(to: &AudioEffectPitchShift.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2361246789)!
@@ -210,6 +215,7 @@ open class AudioEffectPitchShift: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_fft_size() -> AudioEffectPitchShift.FFTSize {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_fft_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AudioEffectPitchShift.FFTSize (rawValue: _result)!

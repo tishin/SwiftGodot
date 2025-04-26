@@ -26,7 +26,7 @@ import Musl
 /// > Note: While Ogg Theora videos can also have an `.ogg` extension, you will have to rename the extension to `.ogv` to use those videos within Godot.
 /// 
 open class VideoStreamTheora: VideoStream {
-    fileprivate static var className = StringName("VideoStreamTheora")
+    private static var className = StringName("VideoStreamTheora")
     override open class var godotClassName: StringName { className }
 }
 

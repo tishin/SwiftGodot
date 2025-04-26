@@ -28,7 +28,7 @@ import Musl
 /// The ``WorldEnvironment`` allows the user to specify default lighting parameters (e.g. ambient lighting), various post-processing effects (e.g. SSAO, DOF, Tonemapping), and how to draw the background (e.g. solid color, skybox). Usually, these are added in order to improve the realism/color balance of the scene.
 /// 
 open class WorldEnvironment: Node {
-    fileprivate static var className = StringName("WorldEnvironment")
+    private static var className = StringName("WorldEnvironment")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -70,8 +70,8 @@ open class WorldEnvironment: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment")
+    fileprivate static let method_set_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment")
         return withUnsafePointer(to: &WorldEnvironment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4143518816)!
@@ -83,6 +83,7 @@ open class WorldEnvironment: Node {
     
     @inline(__always)
     fileprivate final func set_environment(_ env: Environment?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class WorldEnvironment: Node {
         
     }
     
-    fileprivate static var method_get_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment")
+    fileprivate static let method_get_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment")
         return withUnsafePointer(to: &WorldEnvironment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3082064660)!
@@ -109,13 +110,14 @@ open class WorldEnvironment: Node {
     
     @inline(__always)
     fileprivate final func get_environment() -> Environment? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(WorldEnvironment.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_camera_attributes")
+    fileprivate static let method_set_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_camera_attributes")
         return withUnsafePointer(to: &WorldEnvironment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2817810567)!
@@ -127,6 +129,7 @@ open class WorldEnvironment: Node {
     
     @inline(__always)
     fileprivate final func set_camera_attributes(_ cameraAttributes: CameraAttributes?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cameraAttributes?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -140,8 +143,8 @@ open class WorldEnvironment: Node {
         
     }
     
-    fileprivate static var method_get_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_attributes")
+    fileprivate static let method_get_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_attributes")
         return withUnsafePointer(to: &WorldEnvironment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3921283215)!
@@ -153,13 +156,14 @@ open class WorldEnvironment: Node {
     
     @inline(__always)
     fileprivate final func get_camera_attributes() -> CameraAttributes? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(WorldEnvironment.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_compositor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_compositor")
+    fileprivate static let method_set_compositor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_compositor")
         return withUnsafePointer(to: &WorldEnvironment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1586754307)!
@@ -171,6 +175,7 @@ open class WorldEnvironment: Node {
     
     @inline(__always)
     fileprivate final func set_compositor(_ compositor: Compositor?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: compositor?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +189,8 @@ open class WorldEnvironment: Node {
         
     }
     
-    fileprivate static var method_get_compositor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_compositor")
+    fileprivate static let method_get_compositor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_compositor")
         return withUnsafePointer(to: &WorldEnvironment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3647707413)!
@@ -197,9 +202,10 @@ open class WorldEnvironment: Node {
     
     @inline(__always)
     fileprivate final func get_compositor() -> Compositor? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(WorldEnvironment.method_get_compositor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

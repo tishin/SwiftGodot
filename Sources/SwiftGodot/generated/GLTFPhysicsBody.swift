@@ -19,11 +19,11 @@ import Musl
 #endif
 
 
-/// Represents a GLTF physics body.
+/// Represents a glTF physics body.
 /// 
-/// Represents a physics body as an intermediary between the `OMI_physics_body` GLTF data and Godot's nodes, and it's abstracted in a way that allows adding support for different GLTF physics extensions in the future.
+/// Represents a physics body as an intermediary between the `OMI_physics_body` glTF data and Godot's nodes, and it's abstracted in a way that allows adding support for different glTF physics extensions in the future.
 open class GLTFPhysicsBody: Resource {
-    fileprivate static var className = StringName("GLTFPhysicsBody")
+    private static var className = StringName("GLTFPhysicsBody")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -131,8 +131,8 @@ open class GLTFPhysicsBody: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_from_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("from_node")
+    fileprivate static let method_from_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("from_node")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 420544174)!
@@ -155,11 +155,11 @@ open class GLTFPhysicsBody: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_to_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("to_node")
+    fileprivate static let method_to_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("to_node")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3224013656)!
@@ -171,13 +171,14 @@ open class GLTFPhysicsBody: Resource {
     
     /// Converts this GLTFPhysicsBody instance into a Godot ``CollisionObject3D`` node.
     public final func toNode() -> CollisionObject3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_to_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_from_dictionary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("from_dictionary")
+    fileprivate static let method_from_dictionary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("from_dictionary")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1177544336)!
@@ -187,8 +188,8 @@ open class GLTFPhysicsBody: Resource {
         
     }()
     
-    /// Creates a new GLTFPhysicsBody instance by parsing the given ``GDictionary`` in the `OMI_physics_body` GLTF extension format.
-    public static func fromDictionary(_ dictionary: GDictionary) -> GLTFPhysicsBody? {
+    /// Creates a new GLTFPhysicsBody instance by parsing the given ``VariantDictionary`` in the `OMI_physics_body` glTF extension format.
+    public static func fromDictionary(_ dictionary: VariantDictionary) -> GLTFPhysicsBody? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: dictionary.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -200,11 +201,11 @@ open class GLTFPhysicsBody: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_to_dictionary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("to_dictionary")
+    fileprivate static let method_to_dictionary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("to_dictionary")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -214,15 +215,16 @@ open class GLTFPhysicsBody: Resource {
         
     }()
     
-    /// Serializes this GLTFPhysicsBody instance into a ``GDictionary``. It will be in the format expected by the `OMI_physics_body` GLTF extension.
-    public final func toDictionary() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    /// Serializes this GLTFPhysicsBody instance into a ``VariantDictionary``. It will be in the format expected by the `OMI_physics_body` glTF extension.
+    public final func toDictionary() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_to_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_body_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_body_type")
+    fileprivate static let method_get_body_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_body_type")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -234,13 +236,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_body_type() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_body_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_body_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_body_type")
+    fileprivate static let method_set_body_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_body_type")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -252,6 +255,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_body_type(_ bodyType: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let bodyType = GString(bodyType)
         withUnsafePointer(to: bodyType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -266,8 +270,8 @@ open class GLTFPhysicsBody: Resource {
         
     }
     
-    fileprivate static var method_get_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mass")
+    fileprivate static let method_get_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mass")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -279,13 +283,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_mass() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mass")
+    fileprivate static let method_set_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mass")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -297,6 +302,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_mass(_ mass: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -310,8 +316,8 @@ open class GLTFPhysicsBody: Resource {
         
     }
     
-    fileprivate static var method_get_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_linear_velocity")
+    fileprivate static let method_get_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_linear_velocity")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -323,13 +329,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_linear_velocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_linear_velocity")
+    fileprivate static let method_set_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_linear_velocity")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -341,6 +348,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_linear_velocity(_ linearVelocity: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: linearVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -354,8 +362,8 @@ open class GLTFPhysicsBody: Resource {
         
     }
     
-    fileprivate static var method_get_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_angular_velocity")
+    fileprivate static let method_get_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_angular_velocity")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -367,13 +375,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_angular_velocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_angular_velocity")
+    fileprivate static let method_set_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_angular_velocity")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -385,6 +394,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_angular_velocity(_ angularVelocity: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: angularVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -398,8 +408,8 @@ open class GLTFPhysicsBody: Resource {
         
     }
     
-    fileprivate static var method_get_center_of_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_center_of_mass")
+    fileprivate static let method_get_center_of_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_center_of_mass")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -411,13 +421,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_center_of_mass() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_center_of_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_center_of_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_center_of_mass")
+    fileprivate static let method_set_center_of_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_center_of_mass")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -429,6 +440,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_center_of_mass(_ centerOfMass: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: centerOfMass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -442,8 +454,8 @@ open class GLTFPhysicsBody: Resource {
         
     }
     
-    fileprivate static var method_get_inertia_diagonal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inertia_diagonal")
+    fileprivate static let method_get_inertia_diagonal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inertia_diagonal")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -455,13 +467,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_inertia_diagonal() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_diagonal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_inertia_diagonal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inertia_diagonal")
+    fileprivate static let method_set_inertia_diagonal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inertia_diagonal")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -473,6 +486,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_inertia_diagonal(_ inertiaDiagonal: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: inertiaDiagonal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -486,8 +500,8 @@ open class GLTFPhysicsBody: Resource {
         
     }
     
-    fileprivate static var method_get_inertia_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inertia_orientation")
+    fileprivate static let method_get_inertia_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inertia_orientation")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1222331677)!
@@ -499,13 +513,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_inertia_orientation() -> Quaternion {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_orientation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_inertia_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inertia_orientation")
+    fileprivate static let method_set_inertia_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inertia_orientation")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1727505552)!
@@ -517,6 +532,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_inertia_orientation(_ inertiaOrientation: Quaternion) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: inertiaOrientation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -530,8 +546,8 @@ open class GLTFPhysicsBody: Resource {
         
     }
     
-    fileprivate static var method_get_inertia_tensor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inertia_tensor")
+    fileprivate static let method_get_inertia_tensor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inertia_tensor")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2716978435)!
@@ -543,13 +559,14 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func get_inertia_tensor() -> Basis {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
         gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_tensor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_inertia_tensor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inertia_tensor")
+    fileprivate static let method_set_inertia_tensor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inertia_tensor")
         return withUnsafePointer(to: &GLTFPhysicsBody.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1055510324)!
@@ -561,6 +578,7 @@ open class GLTFPhysicsBody: Resource {
     
     @inline(__always)
     fileprivate final func set_inertia_tensor(_ inertiaTensor: Basis) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: inertiaTensor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

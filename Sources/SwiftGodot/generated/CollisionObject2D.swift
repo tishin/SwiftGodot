@@ -35,7 +35,7 @@ import Musl
 /// - ``mouseShapeEntered``
 /// - ``mouseShapeExited``
 open class CollisionObject2D: Node2D {
-    fileprivate static var className = StringName("CollisionObject2D")
+    private static var className = StringName("CollisionObject2D")
     override open class var godotClassName: StringName { className }
     public enum DisableMode: Int64, CaseIterable {
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, remove from the physics simulation to stop all physics interactions with this ``CollisionObject2D``.
@@ -122,36 +122,139 @@ open class CollisionObject2D: Node2D {
     }
     
     /* Methods */
+    fileprivate static let method__input_event: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_input_event")
+        return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1847696837)!
+            }
+            
+        }
+        
+    }()
+    
     /// Accepts unhandled ``InputEvent``s. `shapeIdx` is the child index of the clicked ``Shape2D``. Connect to [signal input_event] to easily pick up these events.
     /// 
     /// > Note: ``_inputEvent(viewport:event:shapeIdx:)`` requires ``inputPickable`` to be `true` and at least one ``collisionLayer`` bit to be set.
     /// 
     @_documentation(visibility: public)
     open func _inputEvent(viewport: Viewport?, event: InputEvent?, shapeIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: viewport?.handle) { pArg0 in
+            withUnsafePointer(to: event?.handle) { pArg1 in
+                withUnsafePointer(to: shapeIdx) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(CollisionObject2D.method__input_event, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__mouse_enter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_mouse_enter")
+        return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the mouse pointer enters any of this object's shapes. Requires ``inputPickable`` to be `true` and at least one ``collisionLayer`` bit to be set. Note that moving between different shapes within a single ``CollisionObject2D`` won't cause this function to be called.
     @_documentation(visibility: public)
     open func _mouseEnter() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(CollisionObject2D.method__mouse_enter, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__mouse_exit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_mouse_exit")
+        return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the mouse pointer exits all this object's shapes. Requires ``inputPickable`` to be `true` and at least one ``collisionLayer`` bit to be set. Note that moving between different shapes within a single ``CollisionObject2D`` won't cause this function to be called.
     @_documentation(visibility: public)
     open func _mouseExit() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(CollisionObject2D.method__mouse_exit, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__mouse_shape_enter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_mouse_shape_enter")
+        return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the mouse pointer enters any of this object's shapes or moves from one shape to another. `shapeIdx` is the child index of the newly entered ``Shape2D``. Requires ``inputPickable`` to be `true` and at least one ``collisionLayer`` bit to be called.
     @_documentation(visibility: public)
     open func _mouseShapeEnter(shapeIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: shapeIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(CollisionObject2D.method__mouse_shape_enter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__mouse_shape_exit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_mouse_shape_exit")
+        return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the mouse pointer exits any of this object's shapes. `shapeIdx` is the child index of the exited ``Shape2D``. Requires ``inputPickable`` to be `true` and at least one ``collisionLayer`` bit to be called.
     @_documentation(visibility: public)
     open func _mouseShapeExit(shapeIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: shapeIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(CollisionObject2D.method__mouse_shape_exit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_get_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rid")
+    fileprivate static let method_get_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rid")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -163,13 +266,14 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the object's ``RID``.
     public final func getRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(CollisionObject2D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer")
+    fileprivate static let method_set_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -181,6 +285,7 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_collision_layer(_ layer: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -194,8 +299,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer")
+    fileprivate static let method_get_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -207,13 +312,14 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_collision_layer() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(CollisionObject2D.method_get_collision_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -225,6 +331,7 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -238,8 +345,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -251,13 +358,14 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(CollisionObject2D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer_value")
+    fileprivate static let method_set_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer_value")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -269,6 +377,7 @@ open class CollisionObject2D: Node2D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionLayer``, given a `layerNumber` between 1 and 32.
     public final func setCollisionLayerValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -285,8 +394,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer_value")
+    fileprivate static let method_get_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer_value")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -298,6 +407,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns whether or not the specified layer of the ``collisionLayer`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionLayerValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -312,8 +422,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask_value")
+    fileprivate static let method_set_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask_value")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -325,6 +435,7 @@ open class CollisionObject2D: Node2D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionMask``, given a `layerNumber` between 1 and 32.
     public final func setCollisionMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -341,8 +452,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask_value")
+    fileprivate static let method_get_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask_value")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -354,6 +465,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns whether or not the specified layer of the ``collisionMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -368,8 +480,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_priority")
+    fileprivate static let method_set_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_priority")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -381,6 +493,7 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_collision_priority(_ priority: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -394,8 +507,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_priority")
+    fileprivate static let method_get_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_priority")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -407,13 +520,14 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_collision_priority() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CollisionObject2D.method_get_collision_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_disable_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_mode")
+    fileprivate static let method_set_disable_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_mode")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1919204045)!
@@ -425,6 +539,7 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_disable_mode(_ mode: CollisionObject2D.DisableMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -438,8 +553,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_disable_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_disable_mode")
+    fileprivate static let method_get_disable_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_disable_mode")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3172846349)!
@@ -451,13 +566,14 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_disable_mode() -> CollisionObject2D.DisableMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CollisionObject2D.method_get_disable_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CollisionObject2D.DisableMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_pickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pickable")
+    fileprivate static let method_set_pickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pickable")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -469,6 +585,7 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_pickable(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -482,8 +599,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_is_pickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_pickable")
+    fileprivate static let method_is_pickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_pickable")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -495,13 +612,14 @@ open class CollisionObject2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_pickable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CollisionObject2D.method_is_pickable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_create_shape_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_shape_owner")
+    fileprivate static let method_create_shape_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_shape_owner")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3429307534)!
@@ -513,6 +631,7 @@ open class CollisionObject2D: Node2D {
     
     /// Creates a new shape owner for the given object. Returns `owner_id` of the new owner for future reference.
     public final func createShapeOwner(_ owner: Object?) -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         withUnsafePointer(to: owner?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -527,8 +646,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_remove_shape_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_shape_owner")
+    fileprivate static let method_remove_shape_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_shape_owner")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -540,6 +659,7 @@ open class CollisionObject2D: Node2D {
     
     /// Removes the given shape owner.
     public final func removeShapeOwner(ownerId: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -553,8 +673,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_shape_owners: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shape_owners")
+    fileprivate static let method_get_shape_owners: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shape_owners")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -564,15 +684,16 @@ open class CollisionObject2D: Node2D {
         
     }()
     
-    /// Returns an ``GArray`` of `owner_id` identifiers. You can use these ids in other methods that take `owner_id` as an argument.
+    /// Returns an ``VariantArray`` of `owner_id` identifiers. You can use these ids in other methods that take `owner_id` as an argument.
     public final func getShapeOwners() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(CollisionObject2D.method_get_shape_owners, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_shape_owner_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_set_transform")
+    fileprivate static let method_shape_owner_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_set_transform")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 30160968)!
@@ -584,6 +705,7 @@ open class CollisionObject2D: Node2D {
     
     /// Sets the ``Transform2D`` of the given shape owner.
     public final func shapeOwnerSetTransform(ownerId: UInt32, transform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -600,8 +722,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_shape_owner_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_get_transform")
+    fileprivate static let method_shape_owner_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_get_transform")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3836996910)!
@@ -613,6 +735,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the shape owner's ``Transform2D``.
     public final func shapeOwnerGetTransform(ownerId: UInt32) -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -627,8 +750,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_shape_owner_get_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_get_owner")
+    fileprivate static let method_shape_owner_get_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_get_owner")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3332903315)!
@@ -640,6 +763,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the parent object of the given shape owner.
     public final func shapeOwnerGetOwner(ownerId: UInt32) -> Object? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -651,11 +775,11 @@ open class CollisionObject2D: Node2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_shape_owner_set_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_set_disabled")
+    fileprivate static let method_shape_owner_set_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_set_disabled")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -667,6 +791,7 @@ open class CollisionObject2D: Node2D {
     
     /// If `true`, disables the given shape owner.
     public final func shapeOwnerSetDisabled(ownerId: UInt32, disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -683,8 +808,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_is_shape_owner_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shape_owner_disabled")
+    fileprivate static let method_is_shape_owner_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shape_owner_disabled")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -696,6 +821,7 @@ open class CollisionObject2D: Node2D {
     
     /// If `true`, the shape owner and its shapes are disabled.
     public final func isShapeOwnerDisabled(ownerId: UInt32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -710,8 +836,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_shape_owner_set_one_way_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_set_one_way_collision")
+    fileprivate static let method_shape_owner_set_one_way_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_set_one_way_collision")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -723,6 +849,7 @@ open class CollisionObject2D: Node2D {
     
     /// If `enable` is `true`, collisions for the shape owner originating from this ``CollisionObject2D`` will not be reported to collided with ``CollisionObject2D``s.
     public final func shapeOwnerSetOneWayCollision(ownerId: UInt32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -739,8 +866,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_is_shape_owner_one_way_collision_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shape_owner_one_way_collision_enabled")
+    fileprivate static let method_is_shape_owner_one_way_collision_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shape_owner_one_way_collision_enabled")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -752,6 +879,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns `true` if collisions for the shape owner originating from this ``CollisionObject2D`` will not be reported to collided with ``CollisionObject2D``s.
     public final func isShapeOwnerOneWayCollisionEnabled(ownerId: UInt32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -766,8 +894,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_shape_owner_set_one_way_collision_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_set_one_way_collision_margin")
+    fileprivate static let method_shape_owner_set_one_way_collision_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_set_one_way_collision_margin")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -779,6 +907,7 @@ open class CollisionObject2D: Node2D {
     
     /// Sets the `one_way_collision_margin` of the shape owner identified by given `ownerId` to `margin` pixels.
     public final func shapeOwnerSetOneWayCollisionMargin(ownerId: UInt32, margin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: margin) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -795,8 +924,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_get_shape_owner_one_way_collision_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shape_owner_one_way_collision_margin")
+    fileprivate static let method_get_shape_owner_one_way_collision_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shape_owner_one_way_collision_margin")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -808,6 +937,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the `one_way_collision_margin` of the shape owner identified by given `ownerId`.
     public final func getShapeOwnerOneWayCollisionMargin(ownerId: UInt32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -822,8 +952,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_shape_owner_add_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_add_shape")
+    fileprivate static let method_shape_owner_add_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_add_shape")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2077425081)!
@@ -835,6 +965,7 @@ open class CollisionObject2D: Node2D {
     
     /// Adds a ``Shape2D`` to the shape owner.
     public final func shapeOwnerAddShape(ownerId: UInt32, shape: Shape2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: shape?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -851,8 +982,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_shape_owner_get_shape_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_get_shape_count")
+    fileprivate static let method_shape_owner_get_shape_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_get_shape_count")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -864,6 +995,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the number of shapes the given shape owner contains.
     public final func shapeOwnerGetShapeCount(ownerId: UInt32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -878,8 +1010,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_shape_owner_get_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_get_shape")
+    fileprivate static let method_shape_owner_get_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_get_shape")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3106725749)!
@@ -891,6 +1023,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the ``Shape2D`` with the given ID from the given shape owner.
     public final func shapeOwnerGetShape(ownerId: UInt32, shapeId: Int32) -> Shape2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: shapeId) { pArg1 in
@@ -905,11 +1038,11 @@ open class CollisionObject2D: Node2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_shape_owner_get_shape_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_get_shape_index")
+    fileprivate static let method_shape_owner_get_shape_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_get_shape_index")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -921,6 +1054,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the child index of the ``Shape2D`` with the given ID from the given shape owner.
     public final func shapeOwnerGetShapeIndex(ownerId: UInt32, shapeId: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: shapeId) { pArg1 in
@@ -938,8 +1072,8 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_shape_owner_remove_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_remove_shape")
+    fileprivate static let method_shape_owner_remove_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_remove_shape")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -951,6 +1085,7 @@ open class CollisionObject2D: Node2D {
     
     /// Removes a shape from the given shape owner.
     public final func shapeOwnerRemoveShape(ownerId: UInt32, shapeId: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: shapeId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -967,8 +1102,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_shape_owner_clear_shapes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_owner_clear_shapes")
+    fileprivate static let method_shape_owner_clear_shapes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_owner_clear_shapes")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -980,6 +1115,7 @@ open class CollisionObject2D: Node2D {
     
     /// Removes all shapes from the shape owner.
     public final func shapeOwnerClearShapes(ownerId: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ownerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -993,8 +1129,8 @@ open class CollisionObject2D: Node2D {
         
     }
     
-    fileprivate static var method_shape_find_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_find_owner")
+    fileprivate static let method_shape_find_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_find_owner")
         return withUnsafePointer(to: &CollisionObject2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1006,6 +1142,7 @@ open class CollisionObject2D: Node2D {
     
     /// Returns the `owner_id` of the given shape.
     public final func shapeFindOwner(shapeIndex: Int32) -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         withUnsafePointer(to: shapeIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1020,7 +1157,7 @@ open class CollisionObject2D: Node2D {
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_input_event":
@@ -1132,36 +1269,41 @@ open class CollisionObject2D: Node2D {
 func _CollisionObject2D_proxy_input_event (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<CollisionObject2D>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? CollisionObject2D else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._inputEvent (viewport: lookupLiveObject (handleAddress: resolved_0) as? Viewport ?? lookupObject (nativeHandle: resolved_0)!, event: lookupLiveObject (handleAddress: resolved_1) as? InputEvent ?? lookupObject (nativeHandle: resolved_1)!, shapeIdx: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
+    swiftObject._inputEvent (viewport: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Viewport, event: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? InputEvent, shapeIdx: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _CollisionObject2D_proxy_mouse_enter (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<CollisionObject2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? CollisionObject2D else { return }
     swiftObject._mouseEnter ()
 }
 
 func _CollisionObject2D_proxy_mouse_exit (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<CollisionObject2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? CollisionObject2D else { return }
     swiftObject._mouseExit ()
 }
 
 func _CollisionObject2D_proxy_mouse_shape_enter (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<CollisionObject2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? CollisionObject2D else { return }
     swiftObject._mouseShapeEnter (shapeIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _CollisionObject2D_proxy_mouse_shape_exit (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<CollisionObject2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? CollisionObject2D else { return }
     swiftObject._mouseShapeExit (shapeIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 

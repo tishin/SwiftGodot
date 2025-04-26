@@ -28,7 +28,7 @@ import Musl
 /// To generate a random float number (within a given range) based on a time-dependent seed:
 /// 
 open class RandomNumberGenerator: RefCounted {
-    fileprivate static var className = StringName("RandomNumberGenerator")
+    private static var className = StringName("RandomNumberGenerator")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -70,8 +70,8 @@ open class RandomNumberGenerator: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_seed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_seed")
+    fileprivate static let method_set_seed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_seed")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -83,6 +83,7 @@ open class RandomNumberGenerator: RefCounted {
     
     @inline(__always)
     fileprivate final func set_seed(_ seed: UInt) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: seed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class RandomNumberGenerator: RefCounted {
         
     }
     
-    fileprivate static var method_get_seed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_seed")
+    fileprivate static let method_get_seed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_seed")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -109,13 +110,14 @@ open class RandomNumberGenerator: RefCounted {
     
     @inline(__always)
     fileprivate final func get_seed() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(RandomNumberGenerator.method_get_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_state")
+    fileprivate static let method_set_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_state")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -127,6 +129,7 @@ open class RandomNumberGenerator: RefCounted {
     
     @inline(__always)
     fileprivate final func set_state(_ state: UInt) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: state) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -140,8 +143,8 @@ open class RandomNumberGenerator: RefCounted {
         
     }
     
-    fileprivate static var method_get_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_state")
+    fileprivate static let method_get_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_state")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -153,13 +156,14 @@ open class RandomNumberGenerator: RefCounted {
     
     @inline(__always)
     fileprivate final func get_state() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(RandomNumberGenerator.method_get_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_randi: GDExtensionMethodBindPtr = {
-        let methodName = StringName("randi")
+    fileprivate static let method_randi: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("randi")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -171,13 +175,14 @@ open class RandomNumberGenerator: RefCounted {
     
     /// Returns a pseudo-random 32-bit unsigned integer between `0` and `4294967295` (inclusive).
     public final func randi() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randi, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_randf: GDExtensionMethodBindPtr = {
-        let methodName = StringName("randf")
+    fileprivate static let method_randf: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("randf")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -189,13 +194,14 @@ open class RandomNumberGenerator: RefCounted {
     
     /// Returns a pseudo-random float between `0.0` and `1.0` (inclusive).
     public final func randf() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randf, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_randfn: GDExtensionMethodBindPtr = {
-        let methodName = StringName("randfn")
+    fileprivate static let method_randfn: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("randfn")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 837325100)!
@@ -210,6 +216,7 @@ open class RandomNumberGenerator: RefCounted {
     /// > Note: This method uses the <a href="https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform">Box-Muller transform</a> algorithm.
     /// 
     public final func randfn(mean: Double = 0.0, deviation: Double = 1.0) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: mean) { pArg0 in
             withUnsafePointer(to: deviation) { pArg1 in
@@ -227,8 +234,8 @@ open class RandomNumberGenerator: RefCounted {
         return _result
     }
     
-    fileprivate static var method_randf_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("randf_range")
+    fileprivate static let method_randf_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("randf_range")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4269894367)!
@@ -240,6 +247,7 @@ open class RandomNumberGenerator: RefCounted {
     
     /// Returns a pseudo-random float between `from` and `to` (inclusive).
     public final func randfRange(from: Double, to: Double) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: to) { pArg1 in
@@ -257,8 +265,8 @@ open class RandomNumberGenerator: RefCounted {
         return _result
     }
     
-    fileprivate static var method_randi_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("randi_range")
+    fileprivate static let method_randi_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("randi_range")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 50157827)!
@@ -270,6 +278,7 @@ open class RandomNumberGenerator: RefCounted {
     
     /// Returns a pseudo-random 32-bit signed integer between `from` and `to` (inclusive).
     public final func randiRange(from: Int32, to: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: to) { pArg1 in
@@ -287,8 +296,8 @@ open class RandomNumberGenerator: RefCounted {
         return _result
     }
     
-    fileprivate static var method_rand_weighted: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rand_weighted")
+    fileprivate static let method_rand_weighted: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rand_weighted")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4189642986)!
@@ -301,6 +310,7 @@ open class RandomNumberGenerator: RefCounted {
     /// Returns a random index with non-uniform weights. Prints an error and returns `-1` if the array is empty.
     /// 
     public final func randWeighted(weights: PackedFloat32Array) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: weights.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -315,8 +325,8 @@ open class RandomNumberGenerator: RefCounted {
         return _result
     }
     
-    fileprivate static var method_randomize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("randomize")
+    fileprivate static let method_randomize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("randomize")
         return withUnsafePointer(to: &RandomNumberGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -328,6 +338,7 @@ open class RandomNumberGenerator: RefCounted {
     
     /// Sets up a time-based seed for this ``RandomNumberGenerator`` instance. Unlike the [@GlobalScope] random number generation functions, different ``RandomNumberGenerator`` instances can use different seeds.
     public final func randomize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randomize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

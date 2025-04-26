@@ -26,7 +26,7 @@ import Musl
 /// The class uses ``Thread``s to generate the texture data internally, so ``Texture3D/getData()`` may return `null` if the generation process has not completed yet. In that case, you need to wait for the texture to be generated before accessing the image:
 /// 
 open class NoiseTexture3D: Texture3D {
-    fileprivate static var className = StringName("NoiseTexture3D")
+    private static var className = StringName("NoiseTexture3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -151,8 +151,8 @@ open class NoiseTexture3D: Texture3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -164,6 +164,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_width(_ width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -177,8 +178,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_height")
+    fileprivate static let method_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_height")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -190,6 +191,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_height(_ height: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -203,8 +205,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_set_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth")
+    fileprivate static let method_set_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -216,6 +218,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_depth(_ depth: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -229,8 +232,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_set_invert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_invert")
+    fileprivate static let method_set_invert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_invert")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -242,6 +245,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_invert(_ invert: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: invert) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -255,8 +259,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_get_invert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_invert")
+    fileprivate static let method_get_invert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_invert")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -268,13 +272,14 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func get_invert() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NoiseTexture3D.method_get_invert, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_seamless: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_seamless")
+    fileprivate static let method_set_seamless: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_seamless")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -286,6 +291,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_seamless(_ seamless: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: seamless) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -299,8 +305,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_get_seamless: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_seamless")
+    fileprivate static let method_get_seamless: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_seamless")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -312,13 +318,14 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func get_seamless() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NoiseTexture3D.method_get_seamless, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_seamless_blend_skirt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_seamless_blend_skirt")
+    fileprivate static let method_set_seamless_blend_skirt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_seamless_blend_skirt")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -330,6 +337,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_seamless_blend_skirt(_ seamlessBlendSkirt: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: seamlessBlendSkirt) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -343,8 +351,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_get_seamless_blend_skirt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_seamless_blend_skirt")
+    fileprivate static let method_get_seamless_blend_skirt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_seamless_blend_skirt")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -356,13 +364,14 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func get_seamless_blend_skirt() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NoiseTexture3D.method_get_seamless_blend_skirt, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_normalize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_normalize")
+    fileprivate static let method_set_normalize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_normalize")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -374,6 +383,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_normalize(_ normalize: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normalize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -387,8 +397,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_is_normalized: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_normalized")
+    fileprivate static let method_is_normalized: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_normalized")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -400,13 +410,14 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func is_normalized() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NoiseTexture3D.method_is_normalized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_color_ramp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color_ramp")
+    fileprivate static let method_set_color_ramp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color_ramp")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2756054477)!
@@ -418,6 +429,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_color_ramp(_ gradient: Gradient?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gradient?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -431,8 +443,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_get_color_ramp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color_ramp")
+    fileprivate static let method_get_color_ramp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color_ramp")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 132272999)!
@@ -444,13 +456,14 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func get_color_ramp() -> Gradient? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(NoiseTexture3D.method_get_color_ramp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_noise: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_noise")
+    fileprivate static let method_set_noise: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_noise")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4135492439)!
@@ -462,6 +475,7 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_noise(_ noise: Noise?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: noise?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -475,8 +489,8 @@ open class NoiseTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_get_noise: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_noise")
+    fileprivate static let method_get_noise: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_noise")
         return withUnsafePointer(to: &NoiseTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 185851837)!
@@ -488,9 +502,10 @@ open class NoiseTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func get_noise() -> Noise? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(NoiseTexture3D.method_get_noise, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

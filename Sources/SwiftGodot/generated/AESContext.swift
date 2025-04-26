@@ -24,7 +24,7 @@ import Musl
 /// This class holds the context information required for encryption and decryption operations with AES (Advanced Encryption Standard). Both AES-ECB and AES-CBC modes are supported.
 /// 
 open class AESContext: RefCounted {
-    fileprivate static var className = StringName("AESContext")
+    private static var className = StringName("AESContext")
     override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// AES electronic codebook encryption mode.
@@ -40,8 +40,8 @@ open class AESContext: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_start: GDExtensionMethodBindPtr = {
-        let methodName = StringName("start")
+    fileprivate static let method_start: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start")
         return withUnsafePointer(to: &AESContext.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3122411423)!
@@ -53,6 +53,7 @@ open class AESContext: RefCounted {
     
     /// Start the AES context in the given `mode`. A `key` of either 16 or 32 bytes must always be provided, while an `iv` (initialization vector) of exactly 16 bytes, is only needed when `mode` is either ``Mode/cbcEncrypt`` or ``Mode/cbcDecrypt``.
     public final func start(mode: AESContext.Mode, key: PackedByteArray, iv: PackedByteArray = PackedByteArray()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: key.content) { pArg1 in
@@ -73,8 +74,8 @@ open class AESContext: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update")
+    fileprivate static let method_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update")
         return withUnsafePointer(to: &AESContext.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 527836100)!
@@ -89,6 +90,7 @@ open class AESContext: RefCounted {
     /// > Note: The size of `src` must be a multiple of 16. Apply some padding if needed.
     /// 
     public final func update(src: PackedByteArray) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: src.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -103,8 +105,8 @@ open class AESContext: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_iv_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_iv_state")
+    fileprivate static let method_get_iv_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_iv_state")
         return withUnsafePointer(to: &AESContext.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2115431945)!
@@ -119,13 +121,14 @@ open class AESContext: RefCounted {
     /// > Note: This function only makes sense when the context is started with ``Mode/cbcEncrypt`` or ``Mode/cbcDecrypt``.
     /// 
     public final func getIvState() -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         gi.object_method_bind_ptrcall(AESContext.method_get_iv_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_finish: GDExtensionMethodBindPtr = {
-        let methodName = StringName("finish")
+    fileprivate static let method_finish: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("finish")
         return withUnsafePointer(to: &AESContext.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -137,6 +140,7 @@ open class AESContext: RefCounted {
     
     /// Close this AES context so it can be started again. See ``start(mode:key:iv:)``.
     public final func finish() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AESContext.method_finish, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

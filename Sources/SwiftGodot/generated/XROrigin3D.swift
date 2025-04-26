@@ -30,7 +30,7 @@ import Musl
 /// For example, if your character is driving a car, the ``XROrigin3D`` node should be a child node of this car. Or, if you're implementing a teleport system to move your character, you should change the position of this node.
 /// 
 open class XROrigin3D: Node3D {
-    fileprivate static var className = StringName("XROrigin3D")
+    private static var className = StringName("XROrigin3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -60,8 +60,8 @@ open class XROrigin3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_world_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_world_scale")
+    fileprivate static let method_set_world_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_world_scale")
         return withUnsafePointer(to: &XROrigin3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -73,6 +73,7 @@ open class XROrigin3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_world_scale(_ worldScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: worldScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -86,8 +87,8 @@ open class XROrigin3D: Node3D {
         
     }
     
-    fileprivate static var method_get_world_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_world_scale")
+    fileprivate static let method_get_world_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_world_scale")
         return withUnsafePointer(to: &XROrigin3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -99,13 +100,14 @@ open class XROrigin3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_world_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(XROrigin3D.method_get_world_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_current")
+    fileprivate static let method_set_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_current")
         return withUnsafePointer(to: &XROrigin3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -117,6 +119,7 @@ open class XROrigin3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_current(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -130,8 +133,8 @@ open class XROrigin3D: Node3D {
         
     }
     
-    fileprivate static var method_is_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_current")
+    fileprivate static let method_is_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_current")
         return withUnsafePointer(to: &XROrigin3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -143,6 +146,7 @@ open class XROrigin3D: Node3D {
     
     @inline(__always)
     fileprivate final func is_current() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XROrigin3D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

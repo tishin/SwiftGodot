@@ -19,20 +19,22 @@ import Musl
 #endif
 
 
-/// Efficiently packs and serializes ``GArray`` or ``GDictionary``.
+/// Efficiently packs and serializes ``VariantArray`` or ``VariantDictionary``.
 /// 
-/// ``PackedDataContainer`` can be used to efficiently store data from untyped containers. The data is packed into raw bytes and can be saved to file. Only ``GArray`` and ``GDictionary`` can be stored this way.
+/// ``PackedDataContainer`` can be used to efficiently store data from untyped containers. The data is packed into raw bytes and can be saved to file. Only ``VariantArray`` and ``VariantDictionary`` can be stored this way.
 /// 
-/// You can retrieve the data by iterating on the container, which will work as if iterating on the packed data itself. If the packed container is a ``GDictionary``, the data can be retrieved by key names (``String``/``StringName`` only).
+/// You can retrieve the data by iterating on the container, which will work as if iterating on the packed data itself. If the packed container is a ``VariantDictionary``, the data can be retrieved by key names (``String``/``StringName`` only).
+/// 
+/// Prints:
 /// 
 /// Nested containers will be packed recursively. While iterating, they will be returned as ``PackedDataContainerRef``.
 /// 
 open class PackedDataContainer: Resource {
-    fileprivate static var className = StringName("PackedDataContainer")
+    private static var className = StringName("PackedDataContainer")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_pack: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pack")
+    fileprivate static let method_pack: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pack")
         return withUnsafePointer(to: &PackedDataContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 966674026)!
@@ -42,11 +44,12 @@ open class PackedDataContainer: Resource {
         
     }()
     
-    /// Packs the given container into a binary representation. The `value` must be either ``GArray`` or ``GDictionary``, any other type will result in invalid data error.
+    /// Packs the given container into a binary representation. The `value` must be either ``VariantArray`` or ``VariantDictionary``, any other type will result in invalid data error.
     /// 
     /// > Note: Subsequent calls to this method will overwrite the existing data.
     /// 
     public final func pack(value: Variant?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -61,8 +64,8 @@ open class PackedDataContainer: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("size")
+    fileprivate static let method_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("size")
         return withUnsafePointer(to: &PackedDataContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -72,8 +75,9 @@ open class PackedDataContainer: Resource {
         
     }()
     
-    /// Returns the size of the packed container (see ``GArray/size()`` and ``GDictionary/size()``).
+    /// Returns the size of the packed container (see ``VariantArray/size()`` and ``VariantDictionary/size()``).
     public final func size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PackedDataContainer.method_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

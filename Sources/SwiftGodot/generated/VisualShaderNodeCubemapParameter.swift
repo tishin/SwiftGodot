@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translated to `uniform samplerCube` in the shader language. The output value can be used as port for ``VisualShaderNodeCubemap``.
 open class VisualShaderNodeCubemapParameter: VisualShaderNodeTextureParameter {
-    fileprivate static var className = StringName("VisualShaderNodeCubemapParameter")
+    private static var className = StringName("VisualShaderNodeCubemapParameter")
     override open class var godotClassName: StringName { className }
 }
 

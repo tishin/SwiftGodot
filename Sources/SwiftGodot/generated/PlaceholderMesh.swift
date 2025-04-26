@@ -28,7 +28,7 @@ import Musl
 /// - When this subclass is missing due to using a different engine version or build (e.g. modules disabled).
 /// 
 open class PlaceholderMesh: Mesh {
-    fileprivate static var className = StringName("PlaceholderMesh")
+    private static var className = StringName("PlaceholderMesh")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class PlaceholderMesh: Mesh {
     }
     
     /* Methods */
-    fileprivate static var method_set_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_aabb")
+    fileprivate static let method_set_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_aabb")
         return withUnsafePointer(to: &PlaceholderMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 259215842)!
@@ -59,6 +59,7 @@ open class PlaceholderMesh: Mesh {
     
     @inline(__always)
     fileprivate final func set_aabb(_ aabb: AABB) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

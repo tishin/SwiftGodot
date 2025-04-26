@@ -24,14 +24,14 @@ import Musl
 /// IP contains support functions for the Internet Protocol (IP). TCP/IP support is in different classes (see ``StreamPeerTCP`` and ``TCPServer``). IP provides DNS hostname resolution support, both blocking and threaded.
 open class IP: Object {
     /// The shared instance of this class
-    public static var shared: IP = {
-        return withUnsafePointer (to: &IP.godotClassName.content) { ptr in
-            IP (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: IP {
+        return withUnsafePointer(to: &IP.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("IP")
+    private static var className = StringName("IP")
     override open class var godotClassName: StringName { className }
     public enum ResolverStatus: Int64, CaseIterable {
         /// DNS hostname resolver status: No status.
@@ -61,8 +61,8 @@ open class IP: Object {
     /// Invalid ID constant. Returned if ``resolverMaxQueries`` is exceeded.
     public static let resolverInvalidId = -1
     /* Methods */
-    fileprivate static var method_resolve_hostname: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resolve_hostname")
+    fileprivate static let method_resolve_hostname: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resolve_hostname")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4283295457)!
@@ -92,8 +92,8 @@ open class IP: Object {
         return _result.description
     }
     
-    fileprivate static var method_resolve_hostname_addresses: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resolve_hostname_addresses")
+    fileprivate static let method_resolve_hostname_addresses: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resolve_hostname_addresses")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 773767525)!
@@ -103,7 +103,7 @@ open class IP: Object {
         
     }()
     
-    /// Resolves a given hostname in a blocking way. Addresses are returned as an ``GArray`` of IPv4 or IPv6 addresses depending on `ipType`.
+    /// Resolves a given hostname in a blocking way. Addresses are returned as an ``VariantArray`` of IPv4 or IPv6 addresses depending on `ipType`.
     public static func resolveHostnameAddresses(host: String, ipType: IP.GType = .any) -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
         let host = GString(host)
@@ -123,8 +123,8 @@ open class IP: Object {
         return _result
     }
     
-    fileprivate static var method_resolve_hostname_queue_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resolve_hostname_queue_item")
+    fileprivate static let method_resolve_hostname_queue_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resolve_hostname_queue_item")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1749894742)!
@@ -154,8 +154,8 @@ open class IP: Object {
         return _result
     }
     
-    fileprivate static var method_get_resolve_item_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resolve_item_status")
+    fileprivate static let method_get_resolve_item_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resolve_item_status")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3812250196)!
@@ -181,8 +181,8 @@ open class IP: Object {
         return IP.ResolverStatus (rawValue: _result)!
     }
     
-    fileprivate static var method_get_resolve_item_address: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resolve_item_address")
+    fileprivate static let method_get_resolve_item_address: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resolve_item_address")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -208,8 +208,8 @@ open class IP: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_resolve_item_addresses: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resolve_item_addresses")
+    fileprivate static let method_get_resolve_item_addresses: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resolve_item_addresses")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
@@ -220,8 +220,8 @@ open class IP: Object {
     }()
     
     /// Returns resolved addresses, or an empty array if an error happened or resolution didn't happen yet (see ``getResolveItemStatus(id:)``).
-    public static func getResolveItemAddresses(id: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public static func getResolveItemAddresses(id: Int32) -> VariantArray {
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -235,8 +235,8 @@ open class IP: Object {
         return _result
     }
     
-    fileprivate static var method_erase_resolve_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("erase_resolve_item")
+    fileprivate static let method_erase_resolve_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("erase_resolve_item")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -261,8 +261,8 @@ open class IP: Object {
         
     }
     
-    fileprivate static var method_get_local_addresses: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_local_addresses")
+    fileprivate static let method_get_local_addresses: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_local_addresses")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -279,8 +279,8 @@ open class IP: Object {
         return _result
     }
     
-    fileprivate static var method_get_local_interfaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_local_interfaces")
+    fileprivate static let method_get_local_interfaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_local_interfaces")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -294,14 +294,14 @@ open class IP: Object {
     /// 
     /// Each adapter is a dictionary of the form:
     /// 
-    public static func getLocalInterfaces() -> VariantCollection<GDictionary> {
+    public static func getLocalInterfaces() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_local_interfaces, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_clear_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_cache")
+    fileprivate static let method_clear_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_cache")
         return withUnsafePointer(to: &IP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3005725572)!

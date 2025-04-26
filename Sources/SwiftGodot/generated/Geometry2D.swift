@@ -24,14 +24,14 @@ import Musl
 /// Provides a set of helper functions to create geometric shapes, compute intersections between shapes, and process various other geometric operations in 2D.
 open class Geometry2D: Object {
     /// The shared instance of this class
-    public static var shared: Geometry2D = {
-        return withUnsafePointer (to: &Geometry2D.godotClassName.content) { ptr in
-            Geometry2D (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: Geometry2D {
+        return withUnsafePointer(to: &Geometry2D.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("Geometry2D")
+    private static var className = StringName("Geometry2D")
     override open class var godotClassName: StringName { className }
     public enum PolyBooleanOperation: Int64, CaseIterable {
         /// Create regions where either subject or clip polygons (or both) are filled.
@@ -67,8 +67,8 @@ open class Geometry2D: Object {
     }
     
     /* Methods */
-    fileprivate static var method_is_point_in_circle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_point_in_circle")
+    fileprivate static let method_is_point_in_circle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_point_in_circle")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2929491703)!
@@ -100,8 +100,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_segment_intersects_circle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("segment_intersects_circle")
+    fileprivate static let method_segment_intersects_circle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("segment_intersects_circle")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1356928167)!
@@ -136,8 +136,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_segment_intersects_segment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("segment_intersects_segment")
+    fileprivate static let method_segment_intersects_segment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("segment_intersects_segment")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2058025344)!
@@ -172,8 +172,8 @@ open class Geometry2D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_line_intersects_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("line_intersects_line")
+    fileprivate static let method_line_intersects_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("line_intersects_line")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2058025344)!
@@ -183,9 +183,9 @@ open class Geometry2D: Object {
         
     }()
     
-    /// Checks if the two lines (`fromA`, `dirA`) and (`fromB`, `dirB`) intersect. If yes, return the point of intersection as ``Vector2``. If no intersection takes place, returns `null`.
+    /// Returns the point of intersection between the two lines (`fromA`, `dirA`) and (`fromB`, `dirB`). Returns a ``Vector2``, or `null` if the lines are parallel.
     /// 
-    /// > Note: The lines are specified using direction vectors, not end points.
+    /// `from` and `dir` are _not_ endpoints of a line segment or ray but the slope (`dir`) and a known point (`from`) on that line.
     /// 
     public static func lineIntersectsLine(fromA: Vector2, dirA: Vector2, fromB: Vector2, dirB: Vector2) -> Variant? {
         var _result: Variant.ContentType = Variant.zero
@@ -211,8 +211,8 @@ open class Geometry2D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_closest_points_between_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_points_between_segments")
+    fileprivate static let method_get_closest_points_between_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_points_between_segments")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3344690961)!
@@ -247,8 +247,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_closest_point_to_segment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_point_to_segment")
+    fileprivate static let method_get_closest_point_to_segment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_point_to_segment")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4172901909)!
@@ -280,8 +280,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_get_closest_point_to_segment_uncapped: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_point_to_segment_uncapped")
+    fileprivate static let method_get_closest_point_to_segment_uncapped: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_point_to_segment_uncapped")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4172901909)!
@@ -313,8 +313,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_point_is_inside_triangle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("point_is_inside_triangle")
+    fileprivate static let method_point_is_inside_triangle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("point_is_inside_triangle")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025948137)!
@@ -349,8 +349,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_is_polygon_clockwise: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_polygon_clockwise")
+    fileprivate static let method_is_polygon_clockwise: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_polygon_clockwise")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1361156557)!
@@ -379,8 +379,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_is_point_in_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_point_in_polygon")
+    fileprivate static let method_is_point_in_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_point_in_polygon")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 738277916)!
@@ -409,8 +409,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_triangulate_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("triangulate_polygon")
+    fileprivate static let method_triangulate_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("triangulate_polygon")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1389921771)!
@@ -436,8 +436,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_triangulate_delaunay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("triangulate_delaunay")
+    fileprivate static let method_triangulate_delaunay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("triangulate_delaunay")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1389921771)!
@@ -463,8 +463,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_convex_hull: GDExtensionMethodBindPtr = {
-        let methodName = StringName("convex_hull")
+    fileprivate static let method_convex_hull: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("convex_hull")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2004331998)!
@@ -490,8 +490,8 @@ open class Geometry2D: Object {
         return _result
     }
     
-    fileprivate static var method_decompose_polygon_in_convex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decompose_polygon_in_convex")
+    fileprivate static let method_decompose_polygon_in_convex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decompose_polygon_in_convex")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3982393695)!
@@ -502,7 +502,7 @@ open class Geometry2D: Object {
     }()
     
     /// Decomposes the `polygon` into multiple convex hulls and returns an array of ``PackedVector2Array``.
-    public static func decomposePolygonInConvex(polygon: PackedVector2Array) -> VariantCollection<PackedVector2Array> {
+    public static func decomposePolygonInConvex(polygon: PackedVector2Array) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -514,11 +514,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_merge_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("merge_polygons")
+    fileprivate static let method_merge_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("merge_polygons")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3637387053)!
@@ -532,7 +532,7 @@ open class Geometry2D: Object {
     /// 
     /// The operation may result in an outer polygon (boundary) and multiple inner polygons (holes) produced which could be distinguished by calling ``isPolygonClockwise(polygon:)``.
     /// 
-    public static func mergePolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> VariantCollection<PackedVector2Array> {
+    public static func mergePolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polygonA.content) { pArg0 in
             withUnsafePointer(to: polygonB.content) { pArg1 in
@@ -547,11 +547,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_clip_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clip_polygons")
+    fileprivate static let method_clip_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clip_polygons")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3637387053)!
@@ -565,7 +565,7 @@ open class Geometry2D: Object {
     /// 
     /// If `polygonB` is enclosed by `polygonA`, returns an outer polygon (boundary) and inner polygon (hole) which could be distinguished by calling ``isPolygonClockwise(polygon:)``.
     /// 
-    public static func clipPolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> VariantCollection<PackedVector2Array> {
+    public static func clipPolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polygonA.content) { pArg0 in
             withUnsafePointer(to: polygonB.content) { pArg1 in
@@ -580,11 +580,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_intersect_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("intersect_polygons")
+    fileprivate static let method_intersect_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("intersect_polygons")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3637387053)!
@@ -598,7 +598,7 @@ open class Geometry2D: Object {
     /// 
     /// The operation may result in an outer polygon (boundary) and inner polygon (hole) produced which could be distinguished by calling ``isPolygonClockwise(polygon:)``.
     /// 
-    public static func intersectPolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> VariantCollection<PackedVector2Array> {
+    public static func intersectPolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polygonA.content) { pArg0 in
             withUnsafePointer(to: polygonB.content) { pArg1 in
@@ -613,11 +613,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_exclude_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("exclude_polygons")
+    fileprivate static let method_exclude_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("exclude_polygons")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3637387053)!
@@ -631,7 +631,7 @@ open class Geometry2D: Object {
     /// 
     /// The operation may result in an outer polygon (boundary) and inner polygon (hole) produced which could be distinguished by calling ``isPolygonClockwise(polygon:)``.
     /// 
-    public static func excludePolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> VariantCollection<PackedVector2Array> {
+    public static func excludePolygons(polygonA: PackedVector2Array, polygonB: PackedVector2Array) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polygonA.content) { pArg0 in
             withUnsafePointer(to: polygonB.content) { pArg1 in
@@ -646,11 +646,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_clip_polyline_with_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clip_polyline_with_polygon")
+    fileprivate static let method_clip_polyline_with_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clip_polyline_with_polygon")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3637387053)!
@@ -661,7 +661,7 @@ open class Geometry2D: Object {
     }()
     
     /// Clips `polyline` against `polygon` and returns an array of clipped polylines. This performs ``PolyBooleanOperation/difference`` between the polyline and the polygon. This operation can be thought of as cutting a line with a closed shape.
-    public static func clipPolylineWithPolygon(polyline: PackedVector2Array, polygon: PackedVector2Array) -> VariantCollection<PackedVector2Array> {
+    public static func clipPolylineWithPolygon(polyline: PackedVector2Array, polygon: PackedVector2Array) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polyline.content) { pArg0 in
             withUnsafePointer(to: polygon.content) { pArg1 in
@@ -676,11 +676,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_intersect_polyline_with_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("intersect_polyline_with_polygon")
+    fileprivate static let method_intersect_polyline_with_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("intersect_polyline_with_polygon")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3637387053)!
@@ -691,7 +691,7 @@ open class Geometry2D: Object {
     }()
     
     /// Intersects `polyline` with `polygon` and returns an array of intersected polylines. This performs ``PolyBooleanOperation/intersection`` between the polyline and the polygon. This operation can be thought of as chopping a line with a closed shape.
-    public static func intersectPolylineWithPolygon(polyline: PackedVector2Array, polygon: PackedVector2Array) -> VariantCollection<PackedVector2Array> {
+    public static func intersectPolylineWithPolygon(polyline: PackedVector2Array, polygon: PackedVector2Array) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polyline.content) { pArg0 in
             withUnsafePointer(to: polygon.content) { pArg1 in
@@ -706,11 +706,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_offset_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("offset_polygon")
+    fileprivate static let method_offset_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("offset_polygon")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1275354010)!
@@ -728,7 +728,7 @@ open class Geometry2D: Object {
     /// 
     /// > Note: To translate the polygon's vertices specifically, multiply them to a ``Transform2D``:
     /// 
-    public static func offsetPolygon(_ polygon: PackedVector2Array, delta: Double, joinType: Geometry2D.PolyJoinType = .square) -> VariantCollection<PackedVector2Array> {
+    public static func offsetPolygon(_ polygon: PackedVector2Array, delta: Double, joinType: Geometry2D.PolyJoinType = .square) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: delta) { pArg1 in
@@ -746,11 +746,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_offset_polyline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("offset_polyline")
+    fileprivate static let method_offset_polyline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("offset_polyline")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2328231778)!
@@ -768,7 +768,7 @@ open class Geometry2D: Object {
     /// 
     /// The operation may result in an outer polygon (boundary) and inner polygon (hole) produced which could be distinguished by calling ``isPolygonClockwise(polygon:)``.
     /// 
-    public static func offsetPolyline(_ polyline: PackedVector2Array, delta: Double, joinType: Geometry2D.PolyJoinType = .square, endType: Geometry2D.PolyEndType = .square) -> VariantCollection<PackedVector2Array> {
+    public static func offsetPolyline(_ polyline: PackedVector2Array, delta: Double, joinType: Geometry2D.PolyJoinType = .square, endType: Geometry2D.PolyEndType = .square) -> TypedArray<PackedVector2Array> {
         var _result: Int64 = 0
         withUnsafePointer(to: polyline.content) { pArg0 in
             withUnsafePointer(to: delta) { pArg1 in
@@ -789,11 +789,11 @@ open class Geometry2D: Object {
             
         }
         
-        return VariantCollection<PackedVector2Array>(content: _result)
+        return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
-    fileprivate static var method_make_atlas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_atlas")
+    fileprivate static let method_make_atlas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_atlas")
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1337682371)!
@@ -804,8 +804,8 @@ open class Geometry2D: Object {
     }()
     
     /// Given an array of ``Vector2``s representing tiles, builds an atlas. The returned dictionary has two keys: `points` is a ``PackedVector2Array`` that specifies the positions of each tile, `size` contains the overall size of the whole atlas as ``Vector2i``.
-    public static func makeAtlas(sizes: PackedVector2Array) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func makeAtlas(sizes: PackedVector2Array) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: sizes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -817,6 +817,39 @@ open class Geometry2D: Object {
         }
         
         return _result
+    }
+    
+    fileprivate static let method_bresenham_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bresenham_line")
+        return withUnsafePointer(to: &Geometry2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1989391000)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham line</a> between the `from` and `to` points. A Bresenham line is a series of pixels that draws a line and is always 1-pixel thick on every row and column of the drawing (never more, never less).
+    /// 
+    /// Example code to draw a line between two ``Marker2D`` nodes using a series of ``CanvasItem/drawRect(_:color:filled:width:antialiased:)`` calls:
+    /// 
+    public static func bresenhamLine(from: Vector2i, to: Vector2i) -> TypedArray<Vector2i> {
+        var _result: Int64 = 0
+        withUnsafePointer(to: from) { pArg0 in
+            withUnsafePointer(to: to) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_bresenham_line, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
 }

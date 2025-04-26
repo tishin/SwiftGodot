@@ -23,11 +23,12 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDVertexAttribute: RefCounted {
-    fileprivate static var className = StringName("RDVertexAttribute")
+    private static var className = StringName("RDVertexAttribute")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
+    /// The location in the shader that this attribute is bound to.
     final public var location: UInt32 {
         get {
             return get_location ()
@@ -39,6 +40,7 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
+    /// The number of bytes between the start of the vertex buffer and the first instance of this attribute.
     final public var offset: UInt32 {
         get {
             return get_offset ()
@@ -50,6 +52,7 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
+    /// The way that this attribute's data is interpreted when sent to a shader.
     final public var format: RenderingDevice.DataFormat {
         get {
             return get_format ()
@@ -61,6 +64,7 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
+    /// The number of bytes between the starts of consecutive instances of this attribute.
     final public var stride: UInt32 {
         get {
             return get_stride ()
@@ -72,6 +76,7 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
+    /// The rate at which this attribute is pulled from its vertex buffer.
     final public var frequency: RenderingDevice.VertexFrequency {
         get {
             return get_frequency ()
@@ -84,8 +89,8 @@ open class RDVertexAttribute: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_location: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_location")
+    fileprivate static let method_set_location: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_location")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -97,6 +102,7 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func set_location(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -110,8 +116,8 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
-    fileprivate static var method_get_location: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_location")
+    fileprivate static let method_get_location: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_location")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -123,13 +129,14 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func get_location() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_location, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -141,6 +148,7 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func set_offset(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -154,8 +162,8 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -167,13 +175,14 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func get_offset() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_format")
+    fileprivate static let method_set_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_format")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 565531219)!
@@ -185,6 +194,7 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func set_format(_ pMember: RenderingDevice.DataFormat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -198,8 +208,8 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
-    fileprivate static var method_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format")
+    fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2235804183)!
@@ -211,13 +221,14 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func get_format() -> RenderingDevice.DataFormat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.DataFormat (rawValue: _result)!
     }
     
-    fileprivate static var method_set_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stride")
+    fileprivate static let method_set_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stride")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -229,6 +240,7 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func set_stride(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -242,8 +254,8 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
-    fileprivate static var method_get_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stride")
+    fileprivate static let method_get_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stride")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -255,13 +267,14 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func get_stride() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_stride, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_frequency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frequency")
+    fileprivate static let method_set_frequency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frequency")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 522141836)!
@@ -273,6 +286,7 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func set_frequency(_ pMember: RenderingDevice.VertexFrequency) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -286,8 +300,8 @@ open class RDVertexAttribute: RefCounted {
         
     }
     
-    fileprivate static var method_get_frequency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frequency")
+    fileprivate static let method_get_frequency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frequency")
         return withUnsafePointer(to: &RDVertexAttribute.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4154106413)!
@@ -299,6 +313,7 @@ open class RDVertexAttribute: RefCounted {
     
     @inline(__always)
     fileprivate final func get_frequency() -> RenderingDevice.VertexFrequency {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.VertexFrequency (rawValue: _result)!

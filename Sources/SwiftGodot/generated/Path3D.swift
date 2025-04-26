@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``curveChanged``
 open class Path3D: Node3D {
-    fileprivate static var className = StringName("Path3D")
+    private static var className = StringName("Path3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -49,8 +49,8 @@ open class Path3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve")
+    fileprivate static let method_set_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve")
         return withUnsafePointer(to: &Path3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 408955118)!
@@ -62,6 +62,7 @@ open class Path3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_curve(_ curve: Curve3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -75,8 +76,8 @@ open class Path3D: Node3D {
         
     }
     
-    fileprivate static var method_get_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve")
+    fileprivate static let method_get_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve")
         return withUnsafePointer(to: &Path3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4244715212)!
@@ -88,9 +89,10 @@ open class Path3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_curve() -> Curve3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Path3D.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

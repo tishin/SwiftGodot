@@ -27,14 +27,14 @@ import Musl
 /// 
 open class ResourceSaver: Object {
     /// The shared instance of this class
-    public static var shared: ResourceSaver = {
-        return withUnsafePointer (to: &ResourceSaver.godotClassName.content) { ptr in
-            ResourceSaver (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: ResourceSaver {
+        return withUnsafePointer(to: &ResourceSaver.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("ResourceSaver")
+    private static var className = StringName("ResourceSaver")
     override open class var godotClassName: StringName { className }
     public struct SaverFlags: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
@@ -73,8 +73,8 @@ open class ResourceSaver: Object {
     }
     
     /* Methods */
-    fileprivate static var method_save: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save")
+    fileprivate static let method_save: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save")
         return withUnsafePointer(to: &ResourceSaver.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2983274697)!
@@ -114,8 +114,8 @@ open class ResourceSaver: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_recognized_extensions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_recognized_extensions")
+    fileprivate static let method_get_recognized_extensions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_recognized_extensions")
         return withUnsafePointer(to: &ResourceSaver.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4223597960)!
@@ -141,8 +141,8 @@ open class ResourceSaver: Object {
         return _result
     }
     
-    fileprivate static var method_add_resource_format_saver: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_resource_format_saver")
+    fileprivate static let method_add_resource_format_saver: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_resource_format_saver")
         return withUnsafePointer(to: &ResourceSaver.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 362894272)!
@@ -173,8 +173,8 @@ open class ResourceSaver: Object {
         
     }
     
-    fileprivate static var method_remove_resource_format_saver: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_resource_format_saver")
+    fileprivate static let method_remove_resource_format_saver: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_resource_format_saver")
         return withUnsafePointer(to: &ResourceSaver.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3373026878)!
@@ -197,6 +197,37 @@ open class ResourceSaver: Object {
         }
         
         
+    }
+    
+    fileprivate static let method_get_resource_id_for_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resource_id_for_path")
+        return withUnsafePointer(to: &ResourceSaver.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 150756522)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the resource ID for the given path. If `generate` is `true`, a new resource ID will be generated if one for the path is not found. If `generate` is `false` and the path is not found, ``ResourceUID/invalidId`` is returned.
+    public static func getResourceIdForPath(_ path: String, generate: Bool = false) -> Int {
+        var _result: Int = 0
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: generate) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_get_resource_id_for_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
     
 }

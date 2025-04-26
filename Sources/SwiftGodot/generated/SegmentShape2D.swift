@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A 2D line segment shape, intended for use in physics. Usually used to provide a shape for a ``CollisionShape2D``.
 open class SegmentShape2D: Shape2D {
-    fileprivate static var className = StringName("SegmentShape2D")
+    private static var className = StringName("SegmentShape2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -53,8 +53,8 @@ open class SegmentShape2D: Shape2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_a")
+    fileprivate static let method_set_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_a")
         return withUnsafePointer(to: &SegmentShape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -66,6 +66,7 @@ open class SegmentShape2D: Shape2D {
     
     @inline(__always)
     fileprivate final func set_a(_ a: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: a) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -79,8 +80,8 @@ open class SegmentShape2D: Shape2D {
         
     }
     
-    fileprivate static var method_get_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_a")
+    fileprivate static let method_get_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_a")
         return withUnsafePointer(to: &SegmentShape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -92,13 +93,14 @@ open class SegmentShape2D: Shape2D {
     
     @inline(__always)
     fileprivate final func get_a() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(SegmentShape2D.method_get_a, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_b")
+    fileprivate static let method_set_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_b")
         return withUnsafePointer(to: &SegmentShape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -110,6 +112,7 @@ open class SegmentShape2D: Shape2D {
     
     @inline(__always)
     fileprivate final func set_b(_ b: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: b) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -123,8 +126,8 @@ open class SegmentShape2D: Shape2D {
         
     }
     
-    fileprivate static var method_get_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_b")
+    fileprivate static let method_get_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_b")
         return withUnsafePointer(to: &SegmentShape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -136,6 +139,7 @@ open class SegmentShape2D: Shape2D {
     
     @inline(__always)
     fileprivate final func get_b() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(SegmentShape2D.method_get_b, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

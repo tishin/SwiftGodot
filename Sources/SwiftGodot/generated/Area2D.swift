@@ -40,7 +40,7 @@ import Musl
 /// - ``areaEntered``
 /// - ``areaExited``
 open class Area2D: CollisionObject2D {
-    fileprivate static var className = StringName("Area2D")
+    private static var className = StringName("Area2D")
     override open class var godotClassName: StringName { className }
     public enum SpaceOverride: Int64, CaseIterable {
         /// This area does not affect gravity/damping.
@@ -248,8 +248,8 @@ open class Area2D: CollisionObject2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_gravity_space_override_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity_space_override_mode")
+    fileprivate static let method_set_gravity_space_override_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity_space_override_mode")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2879900038)!
@@ -261,6 +261,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_gravity_space_override_mode(_ spaceOverrideMode: Area2D.SpaceOverride) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spaceOverrideMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -274,8 +275,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_gravity_space_override_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity_space_override_mode")
+    fileprivate static let method_get_gravity_space_override_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity_space_override_mode")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3990256304)!
@@ -287,13 +288,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_gravity_space_override_mode() -> Area2D.SpaceOverride {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Area2D.method_get_gravity_space_override_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Area2D.SpaceOverride (rawValue: _result)!
     }
     
-    fileprivate static var method_set_gravity_is_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity_is_point")
+    fileprivate static let method_set_gravity_is_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity_is_point")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -305,6 +307,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_gravity_is_point(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -318,8 +321,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_is_gravity_a_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_gravity_a_point")
+    fileprivate static let method_is_gravity_a_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_gravity_a_point")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -331,13 +334,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func is_gravity_a_point() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Area2D.method_is_gravity_a_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gravity_point_unit_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity_point_unit_distance")
+    fileprivate static let method_set_gravity_point_unit_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity_point_unit_distance")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -349,6 +353,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_gravity_point_unit_distance(_ distanceScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distanceScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -362,8 +367,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_gravity_point_unit_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity_point_unit_distance")
+    fileprivate static let method_get_gravity_point_unit_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity_point_unit_distance")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -375,13 +380,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_gravity_point_unit_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Area2D.method_get_gravity_point_unit_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gravity_point_center: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity_point_center")
+    fileprivate static let method_set_gravity_point_center: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity_point_center")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -393,6 +399,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_gravity_point_center(_ center: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: center) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -406,8 +413,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_gravity_point_center: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity_point_center")
+    fileprivate static let method_get_gravity_point_center: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity_point_center")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -419,13 +426,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_gravity_point_center() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Area2D.method_get_gravity_point_center, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gravity_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity_direction")
+    fileprivate static let method_set_gravity_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity_direction")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -437,6 +445,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_gravity_direction(_ direction: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -450,8 +459,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_gravity_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity_direction")
+    fileprivate static let method_get_gravity_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity_direction")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -463,13 +472,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_gravity_direction() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Area2D.method_get_gravity_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity")
+    fileprivate static let method_set_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -481,6 +491,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_gravity(_ gravity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gravity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -494,8 +505,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity")
+    fileprivate static let method_get_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -507,13 +518,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_gravity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Area2D.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_linear_damp_space_override_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_linear_damp_space_override_mode")
+    fileprivate static let method_set_linear_damp_space_override_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_linear_damp_space_override_mode")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2879900038)!
@@ -525,6 +537,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_linear_damp_space_override_mode(_ spaceOverrideMode: Area2D.SpaceOverride) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spaceOverrideMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -538,8 +551,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_linear_damp_space_override_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_linear_damp_space_override_mode")
+    fileprivate static let method_get_linear_damp_space_override_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_linear_damp_space_override_mode")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3990256304)!
@@ -551,13 +564,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_linear_damp_space_override_mode() -> Area2D.SpaceOverride {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Area2D.method_get_linear_damp_space_override_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Area2D.SpaceOverride (rawValue: _result)!
     }
     
-    fileprivate static var method_set_angular_damp_space_override_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_angular_damp_space_override_mode")
+    fileprivate static let method_set_angular_damp_space_override_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_angular_damp_space_override_mode")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2879900038)!
@@ -569,6 +583,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_angular_damp_space_override_mode(_ spaceOverrideMode: Area2D.SpaceOverride) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spaceOverrideMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -582,8 +597,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_angular_damp_space_override_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_angular_damp_space_override_mode")
+    fileprivate static let method_get_angular_damp_space_override_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_angular_damp_space_override_mode")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3990256304)!
@@ -595,13 +610,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_angular_damp_space_override_mode() -> Area2D.SpaceOverride {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Area2D.method_get_angular_damp_space_override_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Area2D.SpaceOverride (rawValue: _result)!
     }
     
-    fileprivate static var method_set_linear_damp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_linear_damp")
+    fileprivate static let method_set_linear_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_linear_damp")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -613,6 +629,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_linear_damp(_ linearDamp: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: linearDamp) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -626,8 +643,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_linear_damp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_linear_damp")
+    fileprivate static let method_get_linear_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_linear_damp")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -639,13 +656,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_linear_damp() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Area2D.method_get_linear_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_angular_damp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_angular_damp")
+    fileprivate static let method_set_angular_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_angular_damp")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -657,6 +675,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_angular_damp(_ angularDamp: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: angularDamp) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -670,8 +689,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_angular_damp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_angular_damp")
+    fileprivate static let method_get_angular_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_angular_damp")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -683,13 +702,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_angular_damp() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Area2D.method_get_angular_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_priority")
+    fileprivate static let method_set_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_priority")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -701,6 +721,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -714,8 +735,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_priority")
+    fileprivate static let method_get_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_priority")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -727,13 +748,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Area2D.method_get_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_monitoring: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_monitoring")
+    fileprivate static let method_set_monitoring: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_monitoring")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -745,6 +767,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_monitoring(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -758,8 +781,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_is_monitoring: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_monitoring")
+    fileprivate static let method_is_monitoring: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_monitoring")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -771,13 +794,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func is_monitoring() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Area2D.method_is_monitoring, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_monitorable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_monitorable")
+    fileprivate static let method_set_monitorable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_monitorable")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -789,6 +813,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_monitorable(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -802,8 +827,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_is_monitorable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_monitorable")
+    fileprivate static let method_is_monitorable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_monitorable")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -815,13 +840,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func is_monitorable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Area2D.method_is_monitorable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_overlapping_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_overlapping_bodies")
+    fileprivate static let method_get_overlapping_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_overlapping_bodies")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -835,14 +861,15 @@ open class Area2D: CollisionObject2D {
     /// 
     /// For performance reasons (collisions are all processed at the same time) this list is modified once during the physics step, not immediately after objects are moved. Consider using signals instead.
     /// 
-    public final func getOverlappingBodies() -> ObjectCollection<Node2D> {
+    public final func getOverlappingBodies() -> TypedArray<Node2D?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Area2D.method_get_overlapping_bodies, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<Node2D>(content: _result)
+        return TypedArray<Node2D?>(takingOver: _result)
     }
     
-    fileprivate static var method_get_overlapping_areas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_overlapping_areas")
+    fileprivate static let method_get_overlapping_areas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_overlapping_areas")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -856,14 +883,15 @@ open class Area2D: CollisionObject2D {
     /// 
     /// For performance reasons (collisions are all processed at the same time) this list is modified once during the physics step, not immediately after objects are moved. Consider using signals instead.
     /// 
-    public final func getOverlappingAreas() -> ObjectCollection<Area2D> {
+    public final func getOverlappingAreas() -> TypedArray<Area2D?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Area2D.method_get_overlapping_areas, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<Area2D>(content: _result)
+        return TypedArray<Area2D?>(takingOver: _result)
     }
     
-    fileprivate static var method_has_overlapping_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_overlapping_bodies")
+    fileprivate static let method_has_overlapping_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_overlapping_bodies")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -878,13 +906,14 @@ open class Area2D: CollisionObject2D {
     /// For performance reasons (collisions are all processed at the same time) the list of overlapping bodies is modified once during the physics step, not immediately after objects are moved. Consider using signals instead.
     /// 
     public final func hasOverlappingBodies() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Area2D.method_has_overlapping_bodies, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_overlapping_areas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_overlapping_areas")
+    fileprivate static let method_has_overlapping_areas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_overlapping_areas")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -899,13 +928,14 @@ open class Area2D: CollisionObject2D {
     /// For performance reasons (collisions are all processed at the same time) the list of overlapping areas is modified once during the physics step, not immediately after objects are moved. Consider using signals instead.
     /// 
     public final func hasOverlappingAreas() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Area2D.method_has_overlapping_areas, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_overlaps_body: GDExtensionMethodBindPtr = {
-        let methodName = StringName("overlaps_body")
+    fileprivate static let method_overlaps_body: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("overlaps_body")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3093956946)!
@@ -922,6 +952,7 @@ open class Area2D: CollisionObject2D {
     /// The `body` argument can either be a ``PhysicsBody2D`` or a ``TileMap`` instance. While TileMaps are not physics bodies themselves, they register their tiles with collision shapes as a virtual physics body.
     /// 
     public final func overlapsBody(_ body: Node?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -936,8 +967,8 @@ open class Area2D: CollisionObject2D {
         return _result
     }
     
-    fileprivate static var method_overlaps_area: GDExtensionMethodBindPtr = {
-        let methodName = StringName("overlaps_area")
+    fileprivate static let method_overlaps_area: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("overlaps_area")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3093956946)!
@@ -952,6 +983,7 @@ open class Area2D: CollisionObject2D {
     /// > Note: The result of this test is not immediate after moving objects. For performance, the list of overlaps is updated once per frame and before the physics step. Consider using signals instead.
     /// 
     public final func overlapsArea(_ area: Node?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: area?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -966,8 +998,8 @@ open class Area2D: CollisionObject2D {
         return _result
     }
     
-    fileprivate static var method_set_audio_bus_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_audio_bus_name")
+    fileprivate static let method_set_audio_bus_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_audio_bus_name")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -979,6 +1011,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_audio_bus_name(_ name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -992,8 +1025,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_get_audio_bus_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_audio_bus_name")
+    fileprivate static let method_get_audio_bus_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_audio_bus_name")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -1005,13 +1038,14 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func get_audio_bus_name() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(Area2D.method_get_audio_bus_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_audio_bus_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_audio_bus_override")
+    fileprivate static let method_set_audio_bus_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_audio_bus_override")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1023,6 +1057,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func set_audio_bus_override(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1036,8 +1071,8 @@ open class Area2D: CollisionObject2D {
         
     }
     
-    fileprivate static var method_is_overriding_audio_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_overriding_audio_bus")
+    fileprivate static let method_is_overriding_audio_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_overriding_audio_bus")
         return withUnsafePointer(to: &Area2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1049,6 +1084,7 @@ open class Area2D: CollisionObject2D {
     
     @inline(__always)
     fileprivate final func is_overriding_audio_bus() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Area2D.method_is_overriding_audio_bus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
@@ -1059,7 +1095,7 @@ open class Area2D: CollisionObject2D {
     /// 
     /// `localShapeIndex` and `bodyShapeIndex` contain indices of the interacting shapes from this area and the interacting body, respectively. `bodyRid` contains the ``RID`` of the body. These values can be used with the ``PhysicsServer2D``.
     /// 
-    /// **Example of getting the** ``CollisionShape2D`` **node from the shape index:**
+    /// **Example:** Get the ``CollisionShape2D`` node from the shape index:
     /// 
     ///
     /// To connect to this signal, reference this property and call the
@@ -1131,7 +1167,7 @@ open class Area2D: CollisionObject2D {
     /// 
     /// `localShapeIndex` and `areaShapeIndex` contain indices of the interacting shapes from this area and the other area, respectively. `areaRid` contains the ``RID`` of the other area. These values can be used with the ``PhysicsServer2D``.
     /// 
-    /// **Example of getting the** ``CollisionShape2D`` **node from the shape index:**
+    /// **Example:** Get the ``CollisionShape2D`` node from the shape index:
     /// 
     ///
     /// To connect to this signal, reference this property and call the

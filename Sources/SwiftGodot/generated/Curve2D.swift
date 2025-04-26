@@ -26,7 +26,7 @@ import Musl
 /// It keeps a cache of precalculated points along the curve, to speed up further calculations.
 /// 
 open class Curve2D: Resource {
-    fileprivate static var className = StringName("Curve2D")
+    private static var className = StringName("Curve2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -56,8 +56,8 @@ open class Curve2D: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_point_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_count")
+    fileprivate static let method_get_point_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_count")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -69,13 +69,14 @@ open class Curve2D: Resource {
     
     @inline(__always)
     fileprivate final func get_point_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Curve2D.method_get_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_point_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_count")
+    fileprivate static let method_set_point_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_count")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -87,6 +88,7 @@ open class Curve2D: Resource {
     
     @inline(__always)
     fileprivate final func set_point_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -100,8 +102,8 @@ open class Curve2D: Resource {
         
     }
     
-    fileprivate static var method_add_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_point")
+    fileprivate static let method_add_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_point")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4175465202)!
@@ -116,6 +118,7 @@ open class Curve2D: Resource {
     /// If `index` is given, the new point is inserted before the existing point identified by index `index`. Every existing point starting from `index` is shifted further down the list of points. The index must be greater than or equal to `0` and must not exceed the number of existing points in the line. See ``pointCount``.
     /// 
     public final func addPoint(position: Vector2, `in`: Vector2 = Vector2 (x: 0, y: 0), out: Vector2 = Vector2 (x: 0, y: 0), index: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: `in`) { pArg1 in
                 withUnsafePointer(to: out) { pArg2 in
@@ -138,8 +141,8 @@ open class Curve2D: Resource {
         
     }
     
-    fileprivate static var method_set_point_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_position")
+    fileprivate static let method_set_point_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_position")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -151,6 +154,7 @@ open class Curve2D: Resource {
     
     /// Sets the position for the vertex `idx`. If the index is out of bounds, the function sends an error to the console.
     public final func setPointPosition(idx: Int32, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -167,8 +171,8 @@ open class Curve2D: Resource {
         
     }
     
-    fileprivate static var method_get_point_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_position")
+    fileprivate static let method_get_point_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_position")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -180,6 +184,7 @@ open class Curve2D: Resource {
     
     /// Returns the position of the vertex `idx`. If the index is out of bounds, the function sends an error to the console, and returns `(0, 0)`.
     public final func getPointPosition(idx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -194,8 +199,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_set_point_in: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_in")
+    fileprivate static let method_set_point_in: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_in")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -207,6 +212,7 @@ open class Curve2D: Resource {
     
     /// Sets the position of the control point leading to the vertex `idx`. If the index is out of bounds, the function sends an error to the console. The position is relative to the vertex.
     public final func setPointIn(idx: Int32, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -223,8 +229,8 @@ open class Curve2D: Resource {
         
     }
     
-    fileprivate static var method_get_point_in: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_in")
+    fileprivate static let method_get_point_in: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_in")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -236,6 +242,7 @@ open class Curve2D: Resource {
     
     /// Returns the position of the control point leading to the vertex `idx`. The returned position is relative to the vertex `idx`. If the index is out of bounds, the function sends an error to the console, and returns `(0, 0)`.
     public final func getPointIn(idx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -250,8 +257,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_set_point_out: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_out")
+    fileprivate static let method_set_point_out: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_out")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -263,6 +270,7 @@ open class Curve2D: Resource {
     
     /// Sets the position of the control point leading out of the vertex `idx`. If the index is out of bounds, the function sends an error to the console. The position is relative to the vertex.
     public final func setPointOut(idx: Int32, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -279,8 +287,8 @@ open class Curve2D: Resource {
         
     }
     
-    fileprivate static var method_get_point_out: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_out")
+    fileprivate static let method_get_point_out: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_out")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -292,6 +300,7 @@ open class Curve2D: Resource {
     
     /// Returns the position of the control point leading out of the vertex `idx`. The returned position is relative to the vertex `idx`. If the index is out of bounds, the function sends an error to the console, and returns `(0, 0)`.
     public final func getPointOut(idx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -306,8 +315,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_remove_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_point")
+    fileprivate static let method_remove_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_point")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -319,6 +328,7 @@ open class Curve2D: Resource {
     
     /// Deletes the point `idx` from the curve. Sends an error to the console if `idx` is out of bounds.
     public final func removePoint(idx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -332,8 +342,8 @@ open class Curve2D: Resource {
         
     }
     
-    fileprivate static var method_clear_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_points")
+    fileprivate static let method_clear_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_points")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -345,12 +355,13 @@ open class Curve2D: Resource {
     
     /// Removes all points from the curve.
     public final func clearPoints() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Curve2D.method_clear_points, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_sample: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sample")
+    fileprivate static let method_sample: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sample")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 26514310)!
@@ -360,11 +371,12 @@ open class Curve2D: Resource {
         
     }()
     
-    /// Returns the position between the vertex `idx` and the vertex `idx + 1`, where `t` controls if the point is the first vertex (`t = 0.0`), the last vertex (`t = 1.0`), or in between. Values of `t` outside the range (`0.0 >= t <=1`) give strange, but predictable results.
+    /// Returns the position between the vertex `idx` and the vertex `idx + 1`, where `t` controls if the point is the first vertex (`t = 0.0`), the last vertex (`t = 1.0`), or in between. Values of `t` outside the range (`0.0 <= t <= 1.0`) give strange, but predictable results.
     /// 
     /// If `idx` is out of bounds it is truncated to the first or last vertex, and `t` is ignored. If the curve has no points, the function sends an error to the console, and returns `(0, 0)`.
     /// 
     public final func sample(idx: Int32, t: Double) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: t) { pArg1 in
@@ -382,8 +394,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_samplef: GDExtensionMethodBindPtr = {
-        let methodName = StringName("samplef")
+    fileprivate static let method_samplef: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("samplef")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3588506812)!
@@ -395,6 +407,7 @@ open class Curve2D: Resource {
     
     /// Returns the position at the vertex `fofs`. It calls ``sample(idx:t:)`` using the integer part of `fofs` as `idx`, and its fractional part as `t`.
     public final func samplef(fofs: Double) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: fofs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -409,8 +422,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_set_bake_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_interval")
+    fileprivate static let method_set_bake_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_interval")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -422,6 +435,7 @@ open class Curve2D: Resource {
     
     @inline(__always)
     fileprivate final func set_bake_interval(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -435,8 +449,8 @@ open class Curve2D: Resource {
         
     }
     
-    fileprivate static var method_get_bake_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_interval")
+    fileprivate static let method_get_bake_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_interval")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -448,13 +462,14 @@ open class Curve2D: Resource {
     
     @inline(__always)
     fileprivate final func get_bake_interval() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Curve2D.method_get_bake_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_baked_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_baked_length")
+    fileprivate static let method_get_baked_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_baked_length")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -466,13 +481,14 @@ open class Curve2D: Resource {
     
     /// Returns the total length of the curve, based on the cached points. Given enough density (see ``bakeInterval``), it should be approximate enough.
     public final func getBakedLength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Curve2D.method_get_baked_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_sample_baked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sample_baked")
+    fileprivate static let method_sample_baked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sample_baked")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3464257706)!
@@ -489,6 +505,7 @@ open class Curve2D: Resource {
     /// Cubic interpolation tends to follow the curves better, but linear is faster (and often, precise enough).
     /// 
     public final func sampleBaked(offset: Double = 0.0, cubic: Bool = false) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: cubic) { pArg1 in
@@ -506,8 +523,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_sample_baked_with_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sample_baked_with_rotation")
+    fileprivate static let method_sample_baked_with_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sample_baked_with_rotation")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3296056341)!
@@ -520,6 +537,7 @@ open class Curve2D: Resource {
     /// Similar to ``sampleBaked(offset:cubic:)``, but returns ``Transform2D`` that includes a rotation along the curve, with ``Transform2D/origin`` as the point position and the ``Transform2D/x`` vector pointing in the direction of the path at that point. Returns an empty transform if the length of the curve is `0`.
     /// 
     public final func sampleBakedWithRotation(offset: Double = 0.0, cubic: Bool = false) -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: cubic) { pArg1 in
@@ -537,8 +555,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_get_baked_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_baked_points")
+    fileprivate static let method_get_baked_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_baked_points")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -550,13 +568,14 @@ open class Curve2D: Resource {
     
     /// Returns the cache of points as a ``PackedVector2Array``.
     public final func getBakedPoints() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(Curve2D.method_get_baked_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_closest_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_point")
+    fileprivate static let method_get_closest_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_point")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2656412154)!
@@ -571,6 +590,7 @@ open class Curve2D: Resource {
     /// `toPoint` must be in this curve's local space.
     /// 
     public final func getClosestPoint(toPoint: Vector2) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: toPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -585,8 +605,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_get_closest_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_offset")
+    fileprivate static let method_get_closest_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_offset")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2276447920)!
@@ -601,6 +621,7 @@ open class Curve2D: Resource {
     /// `toPoint` must be in this curve's local space.
     /// 
     public final func getClosestOffset(toPoint: Vector2) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: toPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -615,8 +636,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_tessellate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tessellate")
+    fileprivate static let method_tessellate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tessellate")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 958145977)!
@@ -635,6 +656,7 @@ open class Curve2D: Resource {
     /// `toleranceDegrees` controls how many degrees the midpoint of a segment may deviate from the real curve, before the segment has to be subdivided.
     /// 
     public final func tessellate(maxStages: Int32 = 5, toleranceDegrees: Double = 4) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: maxStages) { pArg0 in
             withUnsafePointer(to: toleranceDegrees) { pArg1 in
@@ -652,8 +674,8 @@ open class Curve2D: Resource {
         return _result
     }
     
-    fileprivate static var method_tessellate_even_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tessellate_even_length")
+    fileprivate static let method_tessellate_even_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tessellate_even_length")
         return withUnsafePointer(to: &Curve2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2319761637)!
@@ -668,6 +690,7 @@ open class Curve2D: Resource {
     /// `toleranceLength` controls the maximal distance between two neighboring points, before the segment has to be subdivided.
     /// 
     public final func tessellateEvenLength(maxStages: Int32 = 5, toleranceLength: Double = 20.0) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: maxStages) { pArg0 in
             withUnsafePointer(to: toleranceLength) { pArg1 in

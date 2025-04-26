@@ -27,12 +27,14 @@ import Musl
 /// 
 /// Most of the methods have a static alternative that can be used without creating a ``DirAccess``. Static methods only support absolute paths (including `res://` and `user://`).
 /// 
-/// > Note: Many resources types are imported (e.g. textures or sound files), and their source asset will not be included in the exported game, as only the imported version is used. Use ``ResourceLoader`` to access imported resources.
+/// > Note: Accessing project ("res://") directories once exported may behave unexpectedly as some files are converted to engine-specific formats and their original source files may not be present in the expected PCK package. Because of this, to access resources in an exported project, it is recommended to use ``ResourceLoader`` instead of ``FileAccess``.
 /// 
 /// Here is an example on how to iterate through the files of a directory:
 /// 
+/// Keep in mind that file names may change or be remapped after export. If you want to see the actual resource file list as it appears in the editor, use ``ResourceLoader/listDirectory(directoryPath:)`` instead.
+/// 
 open class DirAccess: RefCounted {
-    fileprivate static var className = StringName("DirAccess")
+    private static var className = StringName("DirAccess")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -68,8 +70,8 @@ open class DirAccess: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_open: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open")
+    fileprivate static let method_open: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1923528528)!
@@ -96,11 +98,11 @@ open class DirAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_open_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_open_error")
+    fileprivate static let method_get_open_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_open_error")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -117,11 +119,49 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_list_dir_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("list_dir_begin")
+    fileprivate static let method_create_temp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_temp")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2610976713)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 812913566)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Creates a temporary directory. This directory will be freed when the returned ``DirAccess`` is freed.
+    /// 
+    /// If `prefix` is not empty, it will be prefixed to the directory name, separated by a `-`.
+    /// 
+    /// If `keep` is `true`, the directory is not deleted when the returned ``DirAccess`` is freed.
+    /// 
+    /// Returns `null` if opening the directory failed. You can use ``getOpenError()`` to check the error that occurred.
+    /// 
+    public static func createTemp(prefix: String = "", keep: Bool = false) -> DirAccess? {
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        let prefix = GString(prefix)
+        withUnsafePointer(to: prefix.content) { pArg0 in
+            withUnsafePointer(to: keep) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_create_temp, nil, pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_list_dir_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("list_dir_begin")
+        return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
             }
             
         }
@@ -135,13 +175,14 @@ open class DirAccess: RefCounted {
     /// > Note: The order of files and directories returned by this method is not deterministic, and can vary between operating systems. If you want a list of all files or folders sorted alphabetically, use ``getFiles()`` or ``getDirectories()``.
     /// 
     public final func listDirBegin() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(DirAccess.method_list_dir_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_next: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_next")
+    fileprivate static let method_get_next: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -156,13 +197,14 @@ open class DirAccess: RefCounted {
     /// The name of the file or directory is returned (and not its full path). Once the stream has been fully processed, the method returns an empty ``String`` and closes the stream automatically (i.e. ``listDirEnd()`` would not be mandatory in such a case).
     /// 
     public final func getNext() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(DirAccess.method_get_next, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_current_is_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("current_is_dir")
+    fileprivate static let method_current_is_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("current_is_dir")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -174,13 +216,14 @@ open class DirAccess: RefCounted {
     
     /// Returns whether the current item processed with the last ``getNext()`` call is a directory (`.` and `..` are considered directories).
     public final func currentIsDir() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(DirAccess.method_current_is_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_list_dir_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("list_dir_end")
+    fileprivate static let method_list_dir_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("list_dir_end")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -192,12 +235,13 @@ open class DirAccess: RefCounted {
     
     /// Closes the current stream opened with ``listDirBegin()`` (whether it has been fully processed with ``getNext()`` does not matter).
     public final func listDirEnd() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(DirAccess.method_list_dir_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_files: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_files")
+    fileprivate static let method_get_files: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_files")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -214,13 +258,14 @@ open class DirAccess: RefCounted {
     /// > Note: When used on a `res://` path in an exported project, only the files actually included in the PCK at the given folder level are returned. In practice, this means that since imported resources are stored in a top-level `.godot/` folder, only paths to `*.gd` and `*.import` files are returned (plus a few files such as `project.godot` or `project.binary` and the project icon). In an exported project, the list of returned files will also vary depending on whether ``ProjectSettings/editor/export/convertTextResourcesToBinary`` is `true`.
     /// 
     public final func getFiles() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(DirAccess.method_get_files, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_files_at: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_files_at")
+    fileprivate static let method_get_files_at: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_files_at")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3538744774)!
@@ -233,6 +278,8 @@ open class DirAccess: RefCounted {
     /// Returns a ``PackedStringArray`` containing filenames of the directory contents, excluding directories, at the given `path`. The array is sorted alphabetically.
     /// 
     /// Use ``getFiles()`` if you want more control of what gets included.
+    /// 
+    /// > Note: When used on a `res://` path in an exported project, only the files included in the PCK at the given folder level are returned. In practice, this means that since imported resources are stored in a top-level `.godot/` folder, only paths to `.gd` and `.import` files are returned (plus a few other files, such as `project.godot` or `project.binary` and the project icon). In an exported project, the list of returned files will also vary depending on ``ProjectSettings/editor/export/convertTextResourcesToBinary``.
     /// 
     public static func getFilesAt(path: String) -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
@@ -250,8 +297,8 @@ open class DirAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_directories: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_directories")
+    fileprivate static let method_get_directories: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_directories")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -265,14 +312,17 @@ open class DirAccess: RefCounted {
     /// 
     /// Affected by ``includeHidden`` and ``includeNavigational``.
     /// 
+    /// > Note: The returned directories in the editor and after exporting in the `res://` directory may differ as some files are converted to engine-specific formats when exported.
+    /// 
     public final func getDirectories() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(DirAccess.method_get_directories, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_directories_at: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_directories_at")
+    fileprivate static let method_get_directories_at: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_directories_at")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3538744774)!
@@ -285,6 +335,8 @@ open class DirAccess: RefCounted {
     /// Returns a ``PackedStringArray`` containing filenames of the directory contents, excluding files, at the given `path`. The array is sorted alphabetically.
     /// 
     /// Use ``getDirectories()`` if you want more control of what gets included.
+    /// 
+    /// > Note: The returned directories in the editor and after exporting in the `res://` directory may differ as some files are converted to engine-specific formats when exported.
     /// 
     public static func getDirectoriesAt(path: String) -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
@@ -302,8 +354,8 @@ open class DirAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_drive_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_drive_count")
+    fileprivate static let method_get_drive_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_drive_count")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -327,8 +379,8 @@ open class DirAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_drive_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_drive_name")
+    fileprivate static let method_get_drive_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_drive_name")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 990163283)!
@@ -361,8 +413,8 @@ open class DirAccess: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_get_current_drive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_drive")
+    fileprivate static let method_get_current_drive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_drive")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -374,13 +426,14 @@ open class DirAccess: RefCounted {
     
     /// Returns the currently opened directory's drive index. See ``getDriveName(idx:)`` to convert returned index to the name of the drive.
     public final func getCurrentDrive() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(DirAccess.method_get_current_drive, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_change_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("change_dir")
+    fileprivate static let method_change_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("change_dir")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -397,6 +450,7 @@ open class DirAccess: RefCounted {
     /// > Note: The new directory must be within the same scope, e.g. when you had opened a directory inside `res://`, you can't change it to `user://` directory. If you need to open a directory in another access scope, use ``open(path:)`` to create a new instance instead.
     /// 
     public final func changeDir(toDir: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let toDir = GString(toDir)
         withUnsafePointer(to: toDir.content) { pArg0 in
@@ -412,8 +466,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_current_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_dir")
+    fileprivate static let method_get_current_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_dir")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1287308131)!
@@ -425,6 +479,7 @@ open class DirAccess: RefCounted {
     
     /// Returns the absolute path to the currently opened directory (e.g. `res://folder` or `C:\tmp\folder`).
     public final func getCurrentDir(includeDrive: Bool = true) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: includeDrive) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -439,8 +494,8 @@ open class DirAccess: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_make_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_dir")
+    fileprivate static let method_make_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_dir")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -455,6 +510,7 @@ open class DirAccess: RefCounted {
     /// Returns one of the ``GodotError`` code constants (``GodotError/ok`` on success).
     /// 
     public final func makeDir(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -470,8 +526,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_make_dir_absolute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_dir_absolute")
+    fileprivate static let method_make_dir_absolute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_dir_absolute")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -498,8 +554,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_make_dir_recursive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_dir_recursive")
+    fileprivate static let method_make_dir_recursive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_dir_recursive")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -514,6 +570,7 @@ open class DirAccess: RefCounted {
     /// Returns one of the ``GodotError`` code constants (``GodotError/ok`` on success).
     /// 
     public final func makeDirRecursive(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -529,8 +586,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_make_dir_recursive_absolute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_dir_recursive_absolute")
+    fileprivate static let method_make_dir_recursive_absolute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_dir_recursive_absolute")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -557,8 +614,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_file_exists: GDExtensionMethodBindPtr = {
-        let methodName = StringName("file_exists")
+    fileprivate static let method_file_exists: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("file_exists")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -572,7 +629,10 @@ open class DirAccess: RefCounted {
     /// 
     /// For a static equivalent, use ``FileAccess/fileExists(path:)``.
     /// 
+    /// > Note: Many resources types are imported (e.g. textures or sound files), and their source asset will not be included in the exported game, as only the imported version is used. See ``ResourceLoader/exists(path:typeHint:)`` for an alternative approach that takes resource remapping into account.
+    /// 
     public final func fileExists(path: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -588,8 +648,8 @@ open class DirAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_dir_exists: GDExtensionMethodBindPtr = {
-        let methodName = StringName("dir_exists")
+    fileprivate static let method_dir_exists: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("dir_exists")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -600,7 +660,11 @@ open class DirAccess: RefCounted {
     }()
     
     /// Returns whether the target directory exists. The argument can be relative to the current directory, or an absolute path.
+    /// 
+    /// > Note: The returned [bool] in the editor and after exporting when used on a path in the `res://` directory may be different. Some files are converted to engine-specific formats when exported, potentially changing the directory structure.
+    /// 
     public final func dirExists(path: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -616,8 +680,8 @@ open class DirAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_dir_exists_absolute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("dir_exists_absolute")
+    fileprivate static let method_dir_exists_absolute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("dir_exists_absolute")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -628,6 +692,9 @@ open class DirAccess: RefCounted {
     }()
     
     /// Static version of ``dirExists(path:)``. Supports only absolute paths.
+    /// 
+    /// > Note: The returned [bool] in the editor and after exporting when used on a path in the `res://` directory may be different. Some files are converted to engine-specific formats when exported, potentially changing the directory structure.
+    /// 
     public static func dirExistsAbsolute(path: String) -> Bool {
         var _result: Bool = false
         let path = GString(path)
@@ -644,8 +711,8 @@ open class DirAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_space_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_space_left")
+    fileprivate static let method_get_space_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_space_left")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -657,13 +724,14 @@ open class DirAccess: RefCounted {
     
     /// Returns the available space on the current directory's disk, in bytes. Returns `0` if the platform-specific method to query the available space fails.
     public final func getSpaceLeft() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(DirAccess.method_get_space_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_copy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("copy")
+    fileprivate static let method_copy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("copy")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1063198817)!
@@ -680,6 +748,7 @@ open class DirAccess: RefCounted {
     /// Returns one of the ``GodotError`` code constants (``GodotError/ok`` on success).
     /// 
     public final func copy(from: String, to: String, chmodFlags: Int32 = -1) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let from = GString(from)
         withUnsafePointer(to: from.content) { pArg0 in
@@ -702,8 +771,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_copy_absolute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("copy_absolute")
+    fileprivate static let method_copy_absolute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("copy_absolute")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1063198817)!
@@ -737,8 +806,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_rename: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename")
+    fileprivate static let method_rename: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 852856452)!
@@ -753,6 +822,7 @@ open class DirAccess: RefCounted {
     /// Returns one of the ``GodotError`` code constants (``GodotError/ok`` on success).
     /// 
     public final func rename(from: String, to: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let from = GString(from)
         withUnsafePointer(to: from.content) { pArg0 in
@@ -772,8 +842,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_rename_absolute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_absolute")
+    fileprivate static let method_rename_absolute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_absolute")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 852856452)!
@@ -804,8 +874,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_remove: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove")
+    fileprivate static let method_remove: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -822,6 +892,7 @@ open class DirAccess: RefCounted {
     /// Returns one of the ``GodotError`` code constants (``GodotError/ok`` on success).
     /// 
     public final func remove(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -837,8 +908,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_remove_absolute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_absolute")
+    fileprivate static let method_remove_absolute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_absolute")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -865,8 +936,8 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_link: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_link")
+    fileprivate static let method_is_link: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_link")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -881,6 +952,7 @@ open class DirAccess: RefCounted {
     /// > Note: This method is implemented on macOS, Linux, and Windows.
     /// 
     public final func isLink(path: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -896,8 +968,8 @@ open class DirAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_read_link: GDExtensionMethodBindPtr = {
-        let methodName = StringName("read_link")
+    fileprivate static let method_read_link: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("read_link")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1703090593)!
@@ -912,6 +984,7 @@ open class DirAccess: RefCounted {
     /// > Note: This method is implemented on macOS, Linux, and Windows.
     /// 
     public final func readLink(path: String) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -927,8 +1000,8 @@ open class DirAccess: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_create_link: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_link")
+    fileprivate static let method_create_link: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_link")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 852856452)!
@@ -945,6 +1018,7 @@ open class DirAccess: RefCounted {
     /// > Note: This method is implemented on macOS, Linux, and Windows.
     /// 
     public final func createLink(source: String, target: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let source = GString(source)
         withUnsafePointer(to: source.content) { pArg0 in
@@ -964,8 +1038,40 @@ open class DirAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_include_navigational: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_include_navigational")
+    fileprivate static let method_is_bundle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_bundle")
+        return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the directory is a macOS bundle.
+    /// 
+    /// > Note: This method is implemented on macOS.
+    /// 
+    public final func isBundle(path: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(DirAccess.method_is_bundle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_set_include_navigational: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_include_navigational")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -977,6 +1083,7 @@ open class DirAccess: RefCounted {
     
     @inline(__always)
     fileprivate final func set_include_navigational(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -990,8 +1097,8 @@ open class DirAccess: RefCounted {
         
     }
     
-    fileprivate static var method_get_include_navigational: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_include_navigational")
+    fileprivate static let method_get_include_navigational: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_include_navigational")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1003,13 +1110,14 @@ open class DirAccess: RefCounted {
     
     @inline(__always)
     fileprivate final func get_include_navigational() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(DirAccess.method_get_include_navigational, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_include_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_include_hidden")
+    fileprivate static let method_set_include_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_include_hidden")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1021,6 +1129,7 @@ open class DirAccess: RefCounted {
     
     @inline(__always)
     fileprivate final func set_include_hidden(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1034,8 +1143,8 @@ open class DirAccess: RefCounted {
         
     }
     
-    fileprivate static var method_get_include_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_include_hidden")
+    fileprivate static let method_get_include_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_include_hidden")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1047,13 +1156,14 @@ open class DirAccess: RefCounted {
     
     @inline(__always)
     fileprivate final func get_include_hidden() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(DirAccess.method_get_include_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_case_sensitive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_case_sensitive")
+    fileprivate static let method_is_case_sensitive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_case_sensitive")
         return withUnsafePointer(to: &DirAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -1068,6 +1178,7 @@ open class DirAccess: RefCounted {
     /// > Note: This method is implemented on macOS, Linux (for EXT4 and F2FS filesystems only) and Windows. On other platforms, it always returns `true`.
     /// 
     public final func isCaseSensitive(path: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in

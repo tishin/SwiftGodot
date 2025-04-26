@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Abstract base class for separators, used for separating other controls. ``Separator``s are purely visual and normally drawn as a ``StyleBoxLine``.
 open class Separator: Control {
-    fileprivate static var className = StringName("Separator")
+    private static var className = StringName("Separator")
     override open class var godotClassName: StringName { className }
 }
 

@@ -31,13 +31,14 @@ import Musl
 /// 
 /// This object emits the following signals:
 /// 
+/// - ``restUpdated``
 /// - ``poseUpdated``
 /// - ``skeletonUpdated``
 /// - ``boneEnabledChanged``
 /// - ``boneListChanged``
 /// - ``showRestOnlyChanged``
 open class Skeleton3D: Node3D {
-    fileprivate static var className = StringName("Skeleton3D")
+    private static var className = StringName("Skeleton3D")
     override open class var godotClassName: StringName { className }
     public enum ModifierCallbackModeProcess: Int64, CaseIterable {
         /// Set a flag to process modification during physics frames (see ``Node/notificationInternalPhysicsProcess``).
@@ -91,9 +92,24 @@ open class Skeleton3D: Node3D {
         
     }
     
+    /// If you follow the recommended workflow and explicitly have ``PhysicalBoneSimulator3D`` as a child of ``Skeleton3D``, you can control whether it is affected by raycasting without running ``physicalBonesStartSimulation(bones:)``, by its ``SkeletonModifier3D/active``.
+    /// 
+    /// However, for old (deprecated) configurations, ``Skeleton3D`` has an internal virtual ``PhysicalBoneSimulator3D`` for compatibility. This property controls the internal virtual ``PhysicalBoneSimulator3D``'s ``SkeletonModifier3D/active``.
+    /// 
+    final public var animatePhysicalBones: Bool {
+        get {
+            return get_animate_physical_bones ()
+        }
+        
+        set {
+            set_animate_physical_bones (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_add_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_bone")
+    fileprivate static let method_add_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_bone")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1597066294)!
@@ -108,6 +124,7 @@ open class Skeleton3D: Node3D {
     /// > Note: Bone names should be unique, non empty, and cannot include the `:` and `/` characters.
     /// 
     public final func addBone(name: String) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -123,8 +140,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_find_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_bone")
+    fileprivate static let method_find_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_bone")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -136,6 +153,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the bone index that matches `name` as its name. Returns `-1` if no bone with this name exists.
     public final func findBone(name: String) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -151,8 +169,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_bone_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_name")
+    fileprivate static let method_get_bone_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_name")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -164,6 +182,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the name of the bone at index `boneIdx`.
     public final func getBoneName(boneIdx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -178,8 +197,8 @@ open class Skeleton3D: Node3D {
         return _result.description
     }
     
-    fileprivate static var method_set_bone_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_name")
+    fileprivate static let method_set_bone_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_name")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -191,6 +210,7 @@ open class Skeleton3D: Node3D {
     
     /// Sets the bone name, `name`, for the bone at `boneIdx`.
     public final func setBoneName(boneIdx: Int32, name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             let name = GString(name)
             withUnsafePointer(to: name.content) { pArg1 in
@@ -208,8 +228,131 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_concatenated_bone_names: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_concatenated_bone_names")
+    fileprivate static let method_get_bone_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_meta")
+        return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 203112058)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns bone metadata for `boneIdx` with `key`.
+    public final func getBoneMeta(boneIdx: Int32, key: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: boneIdx) { pArg0 in
+            withUnsafePointer(to: key.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Skeleton3D.method_get_bone_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
+    }
+    
+    fileprivate static let method_get_bone_meta_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_meta_list")
+        return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a list of all metadata keys for `boneIdx`.
+    public final func getBoneMetaList(boneIdx: Int32) -> TypedArray<StringName> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        withUnsafePointer(to: boneIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Skeleton3D.method_get_bone_meta_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return TypedArray<StringName>(takingOver: _result)
+    }
+    
+    fileprivate static let method_has_bone_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_bone_meta")
+        return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 921227809)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns whether there exists any bone metadata for `boneIdx` with key `key`.
+    public final func hasBoneMeta(boneIdx: Int32, key: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: boneIdx) { pArg0 in
+            withUnsafePointer(to: key.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Skeleton3D.method_has_bone_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_set_bone_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_meta")
+        return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 702482756)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets bone metadata for `boneIdx`, will set the `key` meta to `value`.
+    public final func setBoneMeta(boneIdx: Int32, key: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: boneIdx) { pArg0 in
+            withUnsafePointer(to: key.content) { pArg1 in
+                withUnsafePointer(to: value.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(Skeleton3D.method_set_bone_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_concatenated_bone_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_concatenated_bone_names")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -224,13 +367,14 @@ open class Skeleton3D: Node3D {
     /// It is useful to set it as a hint for the enum property.
     /// 
     public final func getConcatenatedBoneNames() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(Skeleton3D.method_get_concatenated_bone_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_bone_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_parent")
+    fileprivate static let method_get_bone_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_parent")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -245,6 +389,7 @@ open class Skeleton3D: Node3D {
     /// > Note: The parent bone returned will always be less than `boneIdx`.
     /// 
     public final func getBoneParent(boneIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -259,8 +404,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_bone_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_parent")
+    fileprivate static let method_set_bone_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_parent")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -275,6 +420,7 @@ open class Skeleton3D: Node3D {
     /// > Note: `parentIdx` must be less than `boneIdx`.
     /// 
     public final func setBoneParent(boneIdx: Int32, parentIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: parentIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -291,8 +437,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_count")
+    fileprivate static let method_get_bone_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_count")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -304,13 +450,14 @@ open class Skeleton3D: Node3D {
     
     /// Returns the number of bones in the skeleton.
     public final func getBoneCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Skeleton3D.method_get_bone_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_version: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_version")
+    fileprivate static let method_get_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_version")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -327,13 +474,14 @@ open class Skeleton3D: Node3D {
     /// Use for invalidating caches in IK solvers and other nodes which process bones.
     /// 
     public final func getVersion() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(Skeleton3D.method_get_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_unparent_bone_and_rest: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unparent_bone_and_rest")
+    fileprivate static let method_unparent_bone_and_rest: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unparent_bone_and_rest")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -345,6 +493,7 @@ open class Skeleton3D: Node3D {
     
     /// Unparents the bone at `boneIdx` and sets its rest position to that of its parent prior to being reset.
     public final func unparentBoneAndRest(boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -358,8 +507,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_children: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_children")
+    fileprivate static let method_get_bone_children: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_children")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1706082319)!
@@ -371,6 +520,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns an array containing the bone indexes of all the child node of the passed in bone, `boneIdx`.
     public final func getBoneChildren(boneIdx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -385,8 +535,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_parentless_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parentless_bones")
+    fileprivate static let method_get_parentless_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parentless_bones")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -398,13 +548,14 @@ open class Skeleton3D: Node3D {
     
     /// Returns an array with all of the bones that are parentless. Another way to look at this is that it returns the indexes of all the bones that are not dependent or modified by other bones in the Skeleton.
     public final func getParentlessBones() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(Skeleton3D.method_get_parentless_bones, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_bone_rest: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_rest")
+    fileprivate static let method_get_bone_rest: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_rest")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -416,6 +567,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the rest transform for a bone `boneIdx`.
     public final func getBoneRest(boneIdx: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -430,8 +582,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_bone_rest: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_rest")
+    fileprivate static let method_set_bone_rest: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_rest")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3616898986)!
@@ -443,6 +595,7 @@ open class Skeleton3D: Node3D {
     
     /// Sets the rest transform for bone `boneIdx`.
     public final func setBoneRest(boneIdx: Int32, rest: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: rest) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -459,8 +612,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_global_rest: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_global_rest")
+    fileprivate static let method_get_bone_global_rest: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_global_rest")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -472,6 +625,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the global rest transform for `boneIdx`.
     public final func getBoneGlobalRest(boneIdx: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -486,8 +640,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_create_skin_from_rest_transforms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_skin_from_rest_transforms")
+    fileprivate static let method_create_skin_from_rest_transforms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_skin_from_rest_transforms")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1032037385)!
@@ -499,13 +653,14 @@ open class Skeleton3D: Node3D {
     
     /// 
     public final func createSkinFromRestTransforms() -> Skin? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Skeleton3D.method_create_skin_from_rest_transforms, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_register_skin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_skin")
+    fileprivate static let method_register_skin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_skin")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3405789568)!
@@ -517,6 +672,7 @@ open class Skeleton3D: Node3D {
     
     /// Binds the given Skin to the Skeleton.
     public final func registerSkin(_ skin: Skin?) -> SkinReference? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: skin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -528,11 +684,11 @@ open class Skeleton3D: Node3D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_localize_rests: GDExtensionMethodBindPtr = {
-        let methodName = StringName("localize_rests")
+    fileprivate static let method_localize_rests: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("localize_rests")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -544,12 +700,13 @@ open class Skeleton3D: Node3D {
     
     /// Returns all bones in the skeleton to their rest poses.
     public final func localizeRests() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Skeleton3D.method_localize_rests, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_bones")
+    fileprivate static let method_clear_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_bones")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -561,12 +718,13 @@ open class Skeleton3D: Node3D {
     
     /// Clear all the bones in this skeleton.
     public final func clearBones() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Skeleton3D.method_clear_bones, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_bone_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_pose")
+    fileprivate static let method_get_bone_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_pose")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -581,6 +739,7 @@ open class Skeleton3D: Node3D {
     /// > Note: This is the pose you set to the skeleton in the process, the final pose can get overridden by modifiers in the deferred process, if you want to access the final pose, use [signal SkeletonModifier3D.modification_processed].
     /// 
     public final func getBonePose(boneIdx: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -595,8 +754,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_bone_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_pose")
+    fileprivate static let method_set_bone_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_pose")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3616898986)!
@@ -608,6 +767,7 @@ open class Skeleton3D: Node3D {
     
     /// Sets the pose transform, `pose`, for the bone at `boneIdx`.
     public final func setBonePose(boneIdx: Int32, pose: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: pose) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -624,8 +784,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_set_bone_pose_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_pose_position")
+    fileprivate static let method_set_bone_pose_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_pose_position")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1530502735)!
@@ -637,6 +797,7 @@ open class Skeleton3D: Node3D {
     
     /// Sets the pose position of the bone at `boneIdx` to `position`. `position` is a ``Vector3`` describing a position local to the ``Skeleton3D`` node.
     public final func setBonePosePosition(boneIdx: Int32, position: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -653,8 +814,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_set_bone_pose_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_pose_rotation")
+    fileprivate static let method_set_bone_pose_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_pose_rotation")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2823819782)!
@@ -666,6 +827,7 @@ open class Skeleton3D: Node3D {
     
     /// Sets the pose rotation of the bone at `boneIdx` to `rotation`. `rotation` is a ``Quaternion`` describing a rotation in the bone's local coordinate space with respect to the rotation of any parent bones.
     public final func setBonePoseRotation(boneIdx: Int32, rotation: Quaternion) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: rotation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -682,8 +844,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_set_bone_pose_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_pose_scale")
+    fileprivate static let method_set_bone_pose_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_pose_scale")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1530502735)!
@@ -695,6 +857,7 @@ open class Skeleton3D: Node3D {
     
     /// Sets the pose scale of the bone at `boneIdx` to `scale`.
     public final func setBonePoseScale(boneIdx: Int32, scale: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -711,8 +874,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_pose_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_pose_position")
+    fileprivate static let method_get_bone_pose_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_pose_position")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 711720468)!
@@ -724,6 +887,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the pose position of the bone at `boneIdx`. The returned ``Vector3`` is in the local coordinate space of the ``Skeleton3D`` node.
     public final func getBonePosePosition(boneIdx: Int32) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -738,8 +902,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_bone_pose_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_pose_rotation")
+    fileprivate static let method_get_bone_pose_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_pose_rotation")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 476865136)!
@@ -751,6 +915,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the pose rotation of the bone at `boneIdx`. The returned ``Quaternion`` is local to the bone with respect to the rotation of any parent bones.
     public final func getBonePoseRotation(boneIdx: Int32) -> Quaternion {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -765,8 +930,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_bone_pose_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_pose_scale")
+    fileprivate static let method_get_bone_pose_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_pose_scale")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 711720468)!
@@ -778,6 +943,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the pose scale of the bone at `boneIdx`.
     public final func getBonePoseScale(boneIdx: Int32) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -792,8 +958,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_reset_bone_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reset_bone_pose")
+    fileprivate static let method_reset_bone_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset_bone_pose")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -805,6 +971,7 @@ open class Skeleton3D: Node3D {
     
     /// Sets the bone pose to rest for `boneIdx`.
     public final func resetBonePose(boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -818,8 +985,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_reset_bone_poses: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reset_bone_poses")
+    fileprivate static let method_reset_bone_poses: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset_bone_poses")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -831,12 +998,13 @@ open class Skeleton3D: Node3D {
     
     /// Sets all bone poses to rests.
     public final func resetBonePoses() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Skeleton3D.method_reset_bone_poses, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_bone_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_bone_enabled")
+    fileprivate static let method_is_bone_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_bone_enabled")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -848,6 +1016,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns whether the bone pose for the bone at `boneIdx` is enabled.
     public final func isBoneEnabled(boneIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -862,8 +1031,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_bone_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_enabled")
+    fileprivate static let method_set_bone_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_enabled")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 972357352)!
@@ -875,6 +1044,7 @@ open class Skeleton3D: Node3D {
     
     /// Disables the pose for the bone at `boneIdx` if `false`, enables the bone pose if `true`.
     public final func setBoneEnabled(boneIdx: Int32, enabled: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -891,8 +1061,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_global_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_global_pose")
+    fileprivate static let method_get_bone_global_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_global_pose")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -907,6 +1077,7 @@ open class Skeleton3D: Node3D {
     /// > Note: This is the global pose you set to the skeleton in the process, the final global pose can get overridden by modifiers in the deferred process, if you want to access the final global pose, use [signal SkeletonModifier3D.modification_processed].
     /// 
     public final func getBoneGlobalPose(boneIdx: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -921,8 +1092,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_bone_global_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_global_pose")
+    fileprivate static let method_set_bone_global_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_global_pose")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3616898986)!
@@ -937,6 +1108,7 @@ open class Skeleton3D: Node3D {
     /// > Note: If other bone poses have been changed, this method executes a dirty poses recalculation and will cause performance to deteriorate. If you know that multiple global poses will be applied, consider using ``setBonePose(boneIdx:pose:)`` with precalculation.
     /// 
     public final func setBoneGlobalPose(boneIdx: Int32, pose: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: pose) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -953,8 +1125,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_force_update_all_bone_transforms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_update_all_bone_transforms")
+    fileprivate static let method_force_update_all_bone_transforms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_update_all_bone_transforms")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -966,12 +1138,13 @@ open class Skeleton3D: Node3D {
     
     /// Force updates the bone transforms/poses for all bones in the skeleton.
     public final func forceUpdateAllBoneTransforms() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Skeleton3D.method_force_update_all_bone_transforms, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_force_update_bone_child_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_update_bone_child_transform")
+    fileprivate static let method_force_update_bone_child_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_update_bone_child_transform")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -983,6 +1156,7 @@ open class Skeleton3D: Node3D {
     
     /// Force updates the bone transform for the bone at `boneIdx` and all of its children.
     public final func forceUpdateBoneChildTransform(boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -996,8 +1170,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_set_motion_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_motion_scale")
+    fileprivate static let method_set_motion_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_motion_scale")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1009,6 +1183,7 @@ open class Skeleton3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_motion_scale(_ motionScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: motionScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1022,8 +1197,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_motion_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_motion_scale")
+    fileprivate static let method_get_motion_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_motion_scale")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1035,13 +1210,14 @@ open class Skeleton3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_motion_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Skeleton3D.method_get_motion_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_rest_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_rest_only")
+    fileprivate static let method_set_show_rest_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_rest_only")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1053,6 +1229,7 @@ open class Skeleton3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_show_rest_only(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1066,8 +1243,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_is_show_rest_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_show_rest_only")
+    fileprivate static let method_is_show_rest_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_show_rest_only")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1079,13 +1256,14 @@ open class Skeleton3D: Node3D {
     
     @inline(__always)
     fileprivate final func is_show_rest_only() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Skeleton3D.method_is_show_rest_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_modifier_callback_mode_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_modifier_callback_mode_process")
+    fileprivate static let method_set_modifier_callback_mode_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_modifier_callback_mode_process")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3916362634)!
@@ -1097,6 +1275,7 @@ open class Skeleton3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_modifier_callback_mode_process(_ mode: Skeleton3D.ModifierCallbackModeProcess) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1110,8 +1289,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_modifier_callback_mode_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modifier_callback_mode_process")
+    fileprivate static let method_get_modifier_callback_mode_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modifier_callback_mode_process")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 997182536)!
@@ -1123,13 +1302,14 @@ open class Skeleton3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_modifier_callback_mode_process() -> Skeleton3D.ModifierCallbackModeProcess {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Skeleton3D.method_get_modifier_callback_mode_process, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Skeleton3D.ModifierCallbackModeProcess (rawValue: _result)!
     }
     
-    fileprivate static var method_clear_bones_global_pose_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_bones_global_pose_override")
+    fileprivate static let method_clear_bones_global_pose_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_bones_global_pose_override")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1141,12 +1321,13 @@ open class Skeleton3D: Node3D {
     
     /// Removes the global pose override on all bones in the skeleton.
     public final func clearBonesGlobalPoseOverride() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Skeleton3D.method_clear_bones_global_pose_override, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_bone_global_pose_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_global_pose_override")
+    fileprivate static let method_set_bone_global_pose_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_global_pose_override")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3483398371)!
@@ -1163,6 +1344,7 @@ open class Skeleton3D: Node3D {
     /// > Note: The pose transform needs to be a global pose! To convert a world transform from a ``Node3D`` to a global bone pose, multiply the ``Transform3D/affineInverse()`` of the node's ``Node3D/globalTransform`` by the desired world transform.
     /// 
     public final func setBoneGlobalPoseOverride(boneIdx: Int32, pose: Transform3D, amount: Double, persistent: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: pose) { pArg1 in
                 withUnsafePointer(to: amount) { pArg2 in
@@ -1185,8 +1367,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_global_pose_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_global_pose_override")
+    fileprivate static let method_get_bone_global_pose_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_global_pose_override")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -1198,6 +1380,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the global pose override transform for `boneIdx`.
     public final func getBoneGlobalPoseOverride(boneIdx: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1212,8 +1395,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_bone_global_pose_no_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_global_pose_no_override")
+    fileprivate static let method_get_bone_global_pose_no_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_global_pose_no_override")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -1225,6 +1408,7 @@ open class Skeleton3D: Node3D {
     
     /// Returns the overall transform of the specified bone, with respect to the skeleton, but without any global pose overrides. Being relative to the skeleton frame, this is not the actual "global" transform of the bone.
     public final func getBoneGlobalPoseNoOverride(boneIdx: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1239,8 +1423,8 @@ open class Skeleton3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_animate_physical_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_animate_physical_bones")
+    fileprivate static let method_set_animate_physical_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_animate_physical_bones")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1250,11 +1434,9 @@ open class Skeleton3D: Node3D {
         
     }()
     
-    /// This method exists for compatibility with old structures in which the ``Skeleton3D`` does not have a ``PhysicalBoneSimulator3D`` as a child, but directly has ``PhysicalBone3D``s as children.
-    /// 
-    /// In case you need to raycast to it without running ``physicalBonesStartSimulation(bones:)``, call this method with `enabled == true`.
-    /// 
-    public final func setAnimatePhysicalBones(enabled: Bool) {
+    @inline(__always)
+    fileprivate final func set_animate_physical_bones(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1268,8 +1450,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_get_animate_physical_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animate_physical_bones")
+    fileprivate static let method_get_animate_physical_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animate_physical_bones")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1279,15 +1461,16 @@ open class Skeleton3D: Node3D {
         
     }()
     
-    /// 
-    public final func getAnimatePhysicalBones() -> Bool {
+    @inline(__always)
+    fileprivate final func get_animate_physical_bones() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Skeleton3D.method_get_animate_physical_bones, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_physical_bones_stop_simulation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("physical_bones_stop_simulation")
+    fileprivate static let method_physical_bones_stop_simulation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("physical_bones_stop_simulation")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1299,12 +1482,13 @@ open class Skeleton3D: Node3D {
     
     /// Tells the ``PhysicalBone3D`` nodes in the Skeleton to stop simulating.
     public final func physicalBonesStopSimulation() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Skeleton3D.method_physical_bones_stop_simulation, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_physical_bones_start_simulation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("physical_bones_start_simulation")
+    fileprivate static let method_physical_bones_start_simulation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("physical_bones_start_simulation")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2787316981)!
@@ -1318,7 +1502,8 @@ open class Skeleton3D: Node3D {
     /// 
     /// Optionally, a list of bone names can be passed-in, allowing only the passed-in bones to be simulated.
     /// 
-    public final func physicalBonesStartSimulation(bones: VariantCollection<StringName> = VariantCollection<StringName> ()) {
+    public final func physicalBonesStartSimulation(bones: TypedArray<StringName> = TypedArray<StringName> ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bones.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1332,8 +1517,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_physical_bones_add_collision_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("physical_bones_add_collision_exception")
+    fileprivate static let method_physical_bones_add_collision_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("physical_bones_add_collision_exception")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -1348,6 +1533,7 @@ open class Skeleton3D: Node3D {
     /// Works just like the ``RigidBody3D`` node.
     /// 
     public final func physicalBonesAddCollisionException(_ exception: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: exception.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1361,8 +1547,8 @@ open class Skeleton3D: Node3D {
         
     }
     
-    fileprivate static var method_physical_bones_remove_collision_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("physical_bones_remove_collision_exception")
+    fileprivate static let method_physical_bones_remove_collision_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("physical_bones_remove_collision_exception")
         return withUnsafePointer(to: &Skeleton3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -1377,6 +1563,7 @@ open class Skeleton3D: Node3D {
     /// Works just like the ``RigidBody3D`` node.
     /// 
     public final func physicalBonesRemoveCollisionException(_ exception: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: exception.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1391,6 +1578,22 @@ open class Skeleton3D: Node3D {
     }
     
     // Signals 
+    /// Emitted when the rest is updated.
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.restUpdated.connect {
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var restUpdated: SimpleSignal { SimpleSignal (target: self, signalName: "rest_updated") }
+    
     /// Emitted when the pose is updated.
     /// 
     /// > Note: During the update process, this signal is not fired, so modification by ``SkeletonModifier3D`` is not detected.

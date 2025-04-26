@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A parameter represents a variable in the shader which is set externally, i.e. from the ``ShaderMaterial``. Parameters are exposed as properties in the ``ShaderMaterial`` and can be assigned from the Inspector or from a script.
 open class VisualShaderNodeParameter: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeParameter")
+    private static var className = StringName("VisualShaderNodeParameter")
     override open class var godotClassName: StringName { className }
     public enum Qualifier: Int64, CaseIterable {
         /// The parameter will be tied to the ``ShaderMaterial`` using this shader.
@@ -64,8 +64,8 @@ open class VisualShaderNodeParameter: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_parameter_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parameter_name")
+    fileprivate static let method_set_parameter_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parameter_name")
         return withUnsafePointer(to: &VisualShaderNodeParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -77,6 +77,7 @@ open class VisualShaderNodeParameter: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_parameter_name(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -91,8 +92,8 @@ open class VisualShaderNodeParameter: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_parameter_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parameter_name")
+    fileprivate static let method_get_parameter_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parameter_name")
         return withUnsafePointer(to: &VisualShaderNodeParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -104,13 +105,14 @@ open class VisualShaderNodeParameter: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_parameter_name() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_get_parameter_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_qualifier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_qualifier")
+    fileprivate static let method_set_qualifier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_qualifier")
         return withUnsafePointer(to: &VisualShaderNodeParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1276489447)!
@@ -122,6 +124,7 @@ open class VisualShaderNodeParameter: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_qualifier(_ qualifier: VisualShaderNodeParameter.Qualifier) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: qualifier.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -135,8 +138,8 @@ open class VisualShaderNodeParameter: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_qualifier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_qualifier")
+    fileprivate static let method_get_qualifier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_qualifier")
         return withUnsafePointer(to: &VisualShaderNodeParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3558406205)!
@@ -148,6 +151,7 @@ open class VisualShaderNodeParameter: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_qualifier() -> VisualShaderNodeParameter.Qualifier {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_get_qualifier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeParameter.Qualifier (rawValue: _result)!

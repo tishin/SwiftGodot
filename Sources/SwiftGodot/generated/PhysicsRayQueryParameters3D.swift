@@ -23,7 +23,7 @@ import Musl
 /// 
 /// By changing various properties of this object, such as the ray position, you can configure the parameters for ``PhysicsDirectSpaceState3D/intersectRay(parameters:)``.
 open class PhysicsRayQueryParameters3D: RefCounted {
-    fileprivate static var className = StringName("PhysicsRayQueryParameters3D")
+    private static var className = StringName("PhysicsRayQueryParameters3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -65,7 +65,10 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     }
     
     /// The list of object ``RID``s that will be excluded from collisions. Use ``CollisionObject3D/getRid()`` to get the ``RID`` associated with a ``CollisionObject3D``-derived node.
-    final public var exclude: VariantCollection<RID> {
+    /// 
+    /// > Note: The returned array is copied and any changes to it will not update the original property value. To update the value you need to modify the returned array, and then assign it to the property again.
+    /// 
+    final public var exclude: TypedArray<RID> {
         get {
             return get_exclude ()
         }
@@ -125,8 +128,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create")
+    fileprivate static let method_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3110599579)!
@@ -138,7 +141,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     /// Returns a new, pre-configured ``PhysicsRayQueryParameters3D`` object. Use it to quickly create query parameters using the most common options.
     /// 
-    public static func create(from: Vector3, to: Vector3, collisionMask: UInt32 = 4294967295, exclude: VariantCollection<RID> = VariantCollection<RID> ()) -> PhysicsRayQueryParameters3D? {
+    public static func create(from: Vector3, to: Vector3, collisionMask: UInt32 = 4294967295, exclude: TypedArray<RID> = TypedArray<RID> ()) -> PhysicsRayQueryParameters3D? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: to) { pArg1 in
@@ -159,11 +162,11 @@ open class PhysicsRayQueryParameters3D: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_from")
+    fileprivate static let method_set_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_from")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -175,6 +178,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_from(_ from: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -188,8 +192,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_from")
+    fileprivate static let method_get_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_from")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -201,13 +205,14 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_from() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_get_from, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_to")
+    fileprivate static let method_set_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_to")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -219,6 +224,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_to(_ to: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: to) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -232,8 +238,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_to")
+    fileprivate static let method_get_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_to")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -245,13 +251,14 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_to() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_get_to, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -263,6 +270,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ collisionMask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: collisionMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -276,8 +284,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -289,13 +297,14 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_exclude: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exclude")
+    fileprivate static let method_set_exclude: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exclude")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -306,7 +315,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func set_exclude(_ exclude: VariantCollection<RID>) {
+    fileprivate final func set_exclude(_ exclude: TypedArray<RID>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: exclude.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -320,8 +330,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_exclude: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_exclude")
+    fileprivate static let method_get_exclude: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_exclude")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -332,14 +342,15 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func get_exclude() -> VariantCollection<RID> {
+    fileprivate final func get_exclude() -> TypedArray<RID> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_get_exclude, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_set_collide_with_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collide_with_bodies")
+    fileprivate static let method_set_collide_with_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collide_with_bodies")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -351,6 +362,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_collide_with_bodies(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -364,8 +376,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_is_collide_with_bodies_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_collide_with_bodies_enabled")
+    fileprivate static let method_is_collide_with_bodies_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_collide_with_bodies_enabled")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -377,13 +389,14 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func is_collide_with_bodies_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_is_collide_with_bodies_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collide_with_areas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collide_with_areas")
+    fileprivate static let method_set_collide_with_areas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collide_with_areas")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -395,6 +408,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_collide_with_areas(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -408,8 +422,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_is_collide_with_areas_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_collide_with_areas_enabled")
+    fileprivate static let method_is_collide_with_areas_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_collide_with_areas_enabled")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -421,13 +435,14 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func is_collide_with_areas_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_is_collide_with_areas_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hit_from_inside: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hit_from_inside")
+    fileprivate static let method_set_hit_from_inside: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hit_from_inside")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -439,6 +454,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_hit_from_inside(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -452,8 +468,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_is_hit_from_inside_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hit_from_inside_enabled")
+    fileprivate static let method_is_hit_from_inside_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hit_from_inside_enabled")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -465,13 +481,14 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func is_hit_from_inside_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_is_hit_from_inside_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hit_back_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hit_back_faces")
+    fileprivate static let method_set_hit_back_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hit_back_faces")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -483,6 +500,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_hit_back_faces(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -496,8 +514,8 @@ open class PhysicsRayQueryParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_is_hit_back_faces_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hit_back_faces_enabled")
+    fileprivate static let method_is_hit_back_faces_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hit_back_faces_enabled")
         return withUnsafePointer(to: &PhysicsRayQueryParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -509,6 +527,7 @@ open class PhysicsRayQueryParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func is_hit_back_faces_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsRayQueryParameters3D.method_is_hit_back_faces_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

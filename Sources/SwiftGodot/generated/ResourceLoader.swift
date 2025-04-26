@@ -27,16 +27,18 @@ import Musl
 /// 
 /// > Note: You have to import the files into the engine first to load them using ``load(path:typeHint:cacheMode:)``. If you want to load ``Image``s at run-time, you may use ``Image/load(path:)``. If you want to import audio files, you can use the snippet described in ``AudioStreamMP3/data``.
 /// 
+/// > Note: Non-resource files such as plain text files cannot be read using ``ResourceLoader``. Use ``FileAccess`` for those files instead, and be aware that non-resource files are not exported by default (see notes in the ``FileAccess`` class description for instructions on exporting them).
+/// 
 open class ResourceLoader: Object {
     /// The shared instance of this class
-    public static var shared: ResourceLoader = {
-        return withUnsafePointer (to: &ResourceLoader.godotClassName.content) { ptr in
-            ResourceLoader (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: ResourceLoader {
+        return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("ResourceLoader")
+    private static var className = StringName("ResourceLoader")
     override open class var godotClassName: StringName { className }
     public enum ThreadLoadStatus: Int64, CaseIterable {
         /// The resource is invalid, or has not been loaded with ``loadThreadedRequest(path:typeHint:useSubThreads:cacheMode:)``.
@@ -63,8 +65,8 @@ open class ResourceLoader: Object {
     }
     
     /* Methods */
-    fileprivate static var method_load_threaded_request: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_threaded_request")
+    fileprivate static let method_load_threaded_request: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_threaded_request")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614384323)!
@@ -104,8 +106,8 @@ open class ResourceLoader: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_threaded_get_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_threaded_get_status")
+    fileprivate static let method_load_threaded_get_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_threaded_get_status")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4137685479)!
@@ -117,11 +119,11 @@ open class ResourceLoader: Object {
     
     /// Returns the status of a threaded loading operation started with ``loadThreadedRequest(path:typeHint:useSubThreads:cacheMode:)`` for the resource at `path`. See ``ResourceLoader/ThreadLoadStatus`` for possible return values.
     /// 
-    /// An array variable can optionally be passed via `progress`, and will return a one-element array containing the percentage of completion of the threaded loading.
+    /// An array variable can optionally be passed via `progress`, and will return a one-element array containing the ratio of completion of the threaded loading (between `0.0` and `1.0`).
     /// 
     /// > Note: The recommended way of using this method is to call it during different frames (e.g., in ``Node/_process(delta:)``, instead of a loop).
     /// 
-    public static func loadThreadedGetStatus(path: String, progress: GArray = GArray ()) -> ResourceLoader.ThreadLoadStatus {
+    public static func loadThreadedGetStatus(path: String, progress: VariantArray = VariantArray ()) -> ResourceLoader.ThreadLoadStatus {
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -140,8 +142,8 @@ open class ResourceLoader: Object {
         return ResourceLoader.ThreadLoadStatus (rawValue: _result)!
     }
     
-    fileprivate static var method_load_threaded_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_threaded_get")
+    fileprivate static let method_load_threaded_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_threaded_get")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1748875256)!
@@ -168,11 +170,11 @@ open class ResourceLoader: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_load: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load")
+    fileprivate static let method_load: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3358495409)!
@@ -218,11 +220,11 @@ open class ResourceLoader: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_recognized_extensions_for_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_recognized_extensions_for_type")
+    fileprivate static let method_get_recognized_extensions_for_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_recognized_extensions_for_type")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3538744774)!
@@ -249,8 +251,8 @@ open class ResourceLoader: Object {
         return _result
     }
     
-    fileprivate static var method_add_resource_format_loader: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_resource_format_loader")
+    fileprivate static let method_add_resource_format_loader: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_resource_format_loader")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2896595483)!
@@ -281,8 +283,8 @@ open class ResourceLoader: Object {
         
     }
     
-    fileprivate static var method_remove_resource_format_loader: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_resource_format_loader")
+    fileprivate static let method_remove_resource_format_loader: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_resource_format_loader")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 405397102)!
@@ -307,8 +309,8 @@ open class ResourceLoader: Object {
         
     }
     
-    fileprivate static var method_set_abort_on_missing_resources: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_abort_on_missing_resources")
+    fileprivate static let method_set_abort_on_missing_resources: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_abort_on_missing_resources")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -333,8 +335,8 @@ open class ResourceLoader: Object {
         
     }
     
-    fileprivate static var method_get_dependencies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_dependencies")
+    fileprivate static let method_get_dependencies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_dependencies")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3538744774)!
@@ -364,8 +366,8 @@ open class ResourceLoader: Object {
         return _result
     }
     
-    fileprivate static var method_has_cached: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_cached")
+    fileprivate static let method_has_cached: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_cached")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -395,8 +397,39 @@ open class ResourceLoader: Object {
         return _result
     }
     
-    fileprivate static var method_exists: GDExtensionMethodBindPtr = {
-        let methodName = StringName("exists")
+    fileprivate static let method_get_cached_ref: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cached_ref")
+        return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1748875256)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the cached resource reference for the given `path`.
+    /// 
+    /// > Note: If the resource is not cached, the returned ``Resource`` will be invalid.
+    /// 
+    public static func getCachedRef(path: String) -> Resource? {
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_get_cached_ref, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_exists: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("exists")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4185558881)!
@@ -432,8 +465,8 @@ open class ResourceLoader: Object {
         return _result
     }
     
-    fileprivate static var method_get_resource_uid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resource_uid")
+    fileprivate static let method_get_resource_uid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resource_uid")
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1597066294)!
@@ -451,6 +484,34 @@ open class ResourceLoader: Object {
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     gi.object_method_bind_ptrcall(method_get_resource_uid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_list_directory: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("list_directory")
+        return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3538744774)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Lists a directory (as example: "res://assets/enemies"), returning all resources contained within. The resource files are the original file names as visible in the editor before exporting.
+    public static func listDirectory(directoryPath: String) -> PackedStringArray {
+        let _result: PackedStringArray = PackedStringArray ()
+        let directoryPath = GString(directoryPath)
+        withUnsafePointer(to: directoryPath.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_list_directory, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
                 }
                 
             }

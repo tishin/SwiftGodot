@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``CenterContainer`` is a container that keeps all of its child controls in its center at their minimum size.
 open class CenterContainer: Container {
-    fileprivate static var className = StringName("CenterContainer")
+    private static var className = StringName("CenterContainer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class CenterContainer: Container {
     }
     
     /* Methods */
-    fileprivate static var method_set_use_top_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_top_left")
+    fileprivate static let method_set_use_top_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_top_left")
         return withUnsafePointer(to: &CenterContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -54,6 +54,7 @@ open class CenterContainer: Container {
     
     @inline(__always)
     fileprivate final func set_use_top_left(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class CenterContainer: Container {
         
     }
     
-    fileprivate static var method_is_using_top_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_top_left")
+    fileprivate static let method_is_using_top_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_top_left")
         return withUnsafePointer(to: &CenterContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -80,6 +81,7 @@ open class CenterContainer: Container {
     
     @inline(__always)
     fileprivate final func is_using_top_left() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CenterContainer.method_is_using_top_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

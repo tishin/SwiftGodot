@@ -39,11 +39,11 @@ import Musl
 /// - ``folderColorChanged``
 /// - ``displayModeChanged``
 open class FileSystemDock: VBoxContainer {
-    fileprivate static var className = StringName("FileSystemDock")
+    private static var className = StringName("FileSystemDock")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_navigate_to_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("navigate_to_path")
+    fileprivate static let method_navigate_to_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("navigate_to_path")
         return withUnsafePointer(to: &FileSystemDock.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -55,6 +55,7 @@ open class FileSystemDock: VBoxContainer {
     
     /// Sets the given `path` as currently selected, ensuring that the selected file/directory is visible.
     public final func navigateToPath(_ path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -69,8 +70,8 @@ open class FileSystemDock: VBoxContainer {
         
     }
     
-    fileprivate static var method_add_resource_tooltip_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_resource_tooltip_plugin")
+    fileprivate static let method_add_resource_tooltip_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_resource_tooltip_plugin")
         return withUnsafePointer(to: &FileSystemDock.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2258356838)!
@@ -82,6 +83,7 @@ open class FileSystemDock: VBoxContainer {
     
     /// Registers a new ``EditorResourceTooltipPlugin``.
     public final func addResourceTooltipPlugin(_ plugin: EditorResourceTooltipPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -95,8 +97,8 @@ open class FileSystemDock: VBoxContainer {
         
     }
     
-    fileprivate static var method_remove_resource_tooltip_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_resource_tooltip_plugin")
+    fileprivate static let method_remove_resource_tooltip_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_resource_tooltip_plugin")
         return withUnsafePointer(to: &FileSystemDock.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2258356838)!
@@ -108,6 +110,7 @@ open class FileSystemDock: VBoxContainer {
     
     /// Removes an ``EditorResourceTooltipPlugin``. Fails if the plugin wasn't previously added.
     public final func removeResourceTooltipPlugin(_ plugin: EditorResourceTooltipPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

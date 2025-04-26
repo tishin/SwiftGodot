@@ -23,7 +23,7 @@ import Musl
 /// 
 /// By changing various properties of this object, such as the motion, you can configure the parameters for ``PhysicsServer3D/bodyTestMotion(body:parameters:result:)``.
 open class PhysicsTestMotionParameters3D: RefCounted {
-    fileprivate static var className = StringName("PhysicsTestMotionParameters3D")
+    private static var className = StringName("PhysicsTestMotionParameters3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -92,7 +92,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     }
     
     /// Optional array of body ``RID`` to exclude from collision. Use ``CollisionObject3D/getRid()`` to get the ``RID`` associated with a ``CollisionObject3D``-derived node.
-    final public var excludeBodies: VariantCollection<RID> {
+    final public var excludeBodies: TypedArray<RID> {
         get {
             return get_exclude_bodies ()
         }
@@ -104,7 +104,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     }
     
     /// Optional array of object unique instance ID to exclude from collision. See ``Object/getInstanceId()``.
-    final public var excludeObjects: VariantCollection<Int64> {
+    final public var excludeObjects: TypedArray<Int64> {
         get {
             return get_exclude_objects ()
         }
@@ -131,8 +131,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_get_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_from")
+    fileprivate static let method_get_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_from")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -144,13 +144,14 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_from() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_get_from, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_from")
+    fileprivate static let method_set_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_from")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2952846383)!
@@ -162,6 +163,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_from(_ from: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -175,8 +177,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_motion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_motion")
+    fileprivate static let method_get_motion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_motion")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -188,13 +190,14 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_motion() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_get_motion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_motion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_motion")
+    fileprivate static let method_set_motion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_motion")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -206,6 +209,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_motion(_ motion: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: motion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -219,8 +223,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_margin")
+    fileprivate static let method_get_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_margin")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -232,13 +236,14 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_margin")
+    fileprivate static let method_set_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_margin")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -250,6 +255,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_margin(_ margin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -263,8 +269,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_max_collisions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_collisions")
+    fileprivate static let method_get_max_collisions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_collisions")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -276,13 +282,14 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_max_collisions() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_get_max_collisions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_collisions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_collisions")
+    fileprivate static let method_set_max_collisions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_collisions")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -294,6 +301,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_max_collisions(_ maxCollisions: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxCollisions) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -307,8 +315,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_is_collide_separation_ray_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_collide_separation_ray_enabled")
+    fileprivate static let method_is_collide_separation_ray_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_collide_separation_ray_enabled")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -320,13 +328,14 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func is_collide_separation_ray_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_is_collide_separation_ray_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collide_separation_ray_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collide_separation_ray_enabled")
+    fileprivate static let method_set_collide_separation_ray_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collide_separation_ray_enabled")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -338,6 +347,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_collide_separation_ray_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -351,8 +361,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_exclude_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_exclude_bodies")
+    fileprivate static let method_get_exclude_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_exclude_bodies")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -363,14 +373,15 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func get_exclude_bodies() -> VariantCollection<RID> {
+    fileprivate final func get_exclude_bodies() -> TypedArray<RID> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_get_exclude_bodies, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_set_exclude_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exclude_bodies")
+    fileprivate static let method_set_exclude_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exclude_bodies")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -381,7 +392,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func set_exclude_bodies(_ excludeList: VariantCollection<RID>) {
+    fileprivate final func set_exclude_bodies(_ excludeList: TypedArray<RID>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: excludeList.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -395,8 +407,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_exclude_objects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_exclude_objects")
+    fileprivate static let method_get_exclude_objects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_exclude_objects")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -407,14 +419,15 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func get_exclude_objects() -> VariantCollection<Int64> {
+    fileprivate final func get_exclude_objects() -> TypedArray<Int64> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_get_exclude_objects, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<Int64>(content: _result)
+        return TypedArray<Int64>(takingOver: _result)
     }
     
-    fileprivate static var method_set_exclude_objects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exclude_objects")
+    fileprivate static let method_set_exclude_objects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exclude_objects")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -425,7 +438,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func set_exclude_objects(_ excludeList: VariantCollection<Int64>) {
+    fileprivate final func set_exclude_objects(_ excludeList: TypedArray<Int64>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: excludeList.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -439,8 +453,8 @@ open class PhysicsTestMotionParameters3D: RefCounted {
         
     }
     
-    fileprivate static var method_is_recovery_as_collision_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_recovery_as_collision_enabled")
+    fileprivate static let method_is_recovery_as_collision_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_recovery_as_collision_enabled")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -452,13 +466,14 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func is_recovery_as_collision_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsTestMotionParameters3D.method_is_recovery_as_collision_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_recovery_as_collision_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_recovery_as_collision_enabled")
+    fileprivate static let method_set_recovery_as_collision_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_recovery_as_collision_enabled")
         return withUnsafePointer(to: &PhysicsTestMotionParameters3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -470,6 +485,7 @@ open class PhysicsTestMotionParameters3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_recovery_as_collision_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

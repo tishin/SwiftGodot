@@ -35,7 +35,7 @@ import Musl
 /// 
 /// - ``timeout``
 open class SceneTreeTimer: RefCounted {
-    fileprivate static var className = StringName("SceneTreeTimer")
+    private static var className = StringName("SceneTreeTimer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -53,8 +53,8 @@ open class SceneTreeTimer: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_time_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_time_left")
+    fileprivate static let method_set_time_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_time_left")
         return withUnsafePointer(to: &SceneTreeTimer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -66,6 +66,7 @@ open class SceneTreeTimer: RefCounted {
     
     @inline(__always)
     fileprivate final func set_time_left(_ time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -79,8 +80,8 @@ open class SceneTreeTimer: RefCounted {
         
     }
     
-    fileprivate static var method_get_time_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_left")
+    fileprivate static let method_get_time_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_left")
         return withUnsafePointer(to: &SceneTreeTimer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -92,6 +93,7 @@ open class SceneTreeTimer: RefCounted {
     
     @inline(__always)
     fileprivate final func get_time_left() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SceneTreeTimer.method_get_time_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

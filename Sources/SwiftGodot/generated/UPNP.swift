@@ -46,7 +46,7 @@ import Musl
 /// **Further reading:** If you want to know more about UPnP (and the Internet Gateway Device (IGD) and Port Control Protocol (PCP) specifically), <a href="https://en.wikipedia.org/wiki/Universal_Plug_and_Play">Wikipedia</a> is a good first stop, the specification can be found at the <a href="https://openconnectivity.org/developer/specifications/upnp-resources/upnp/">Open Connectivity Foundation</a> and Godot's implementation is based on the <a href="https://github.com/miniupnp/miniupnp">MiniUPnP client</a>.
 /// 
 open class UPNP: RefCounted {
-    fileprivate static var className = StringName("UPNP")
+    private static var className = StringName("UPNP")
     override open class var godotClassName: StringName { className }
     public enum UPNPResult: Int64, CaseIterable {
         /// UPNP command or discovery was successful.
@@ -149,8 +149,8 @@ open class UPNP: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_get_device_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_device_count")
+    fileprivate static let method_get_device_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_count")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -162,13 +162,14 @@ open class UPNP: RefCounted {
     
     /// Returns the number of discovered ``UPNPDevice``s.
     public final func getDeviceCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(UPNP.method_get_device_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_device")
+    fileprivate static let method_get_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2193290270)!
@@ -180,6 +181,7 @@ open class UPNP: RefCounted {
     
     /// Returns the ``UPNPDevice`` at the given `index`.
     public final func getDevice(index: Int32) -> UPNPDevice? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -191,11 +193,11 @@ open class UPNP: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_device")
+    fileprivate static let method_add_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_device")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 986715920)!
@@ -207,6 +209,7 @@ open class UPNP: RefCounted {
     
     /// Adds the given ``UPNPDevice`` to the list of discovered devices.
     public final func addDevice(_ device: UPNPDevice?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: device?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -220,8 +223,8 @@ open class UPNP: RefCounted {
         
     }
     
-    fileprivate static var method_set_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_device")
+    fileprivate static let method_set_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_device")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3015133723)!
@@ -233,6 +236,7 @@ open class UPNP: RefCounted {
     
     /// Sets the device at `index` from the list of discovered devices to `device`.
     public final func setDevice(index: Int32, device: UPNPDevice?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: device?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -249,8 +253,8 @@ open class UPNP: RefCounted {
         
     }
     
-    fileprivate static var method_remove_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_device")
+    fileprivate static let method_remove_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_device")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -262,6 +266,7 @@ open class UPNP: RefCounted {
     
     /// Removes the device at `index` from the list of discovered devices.
     public final func removeDevice(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -275,8 +280,8 @@ open class UPNP: RefCounted {
         
     }
     
-    fileprivate static var method_clear_devices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_devices")
+    fileprivate static let method_clear_devices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_devices")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -288,12 +293,13 @@ open class UPNP: RefCounted {
     
     /// Clears the list of discovered devices.
     public final func clearDevices() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(UPNP.method_clear_devices, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_gateway: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gateway")
+    fileprivate static let method_get_gateway: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gateway")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2276800779)!
@@ -305,13 +311,14 @@ open class UPNP: RefCounted {
     
     /// Returns the default gateway. That is the first discovered ``UPNPDevice`` that is also a valid IGD (InternetGatewayDevice).
     public final func getGateway() -> UPNPDevice? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(UPNP.method_get_gateway, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_discover: GDExtensionMethodBindPtr = {
-        let methodName = StringName("discover")
+    fileprivate static let method_discover: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("discover")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1575334765)!
@@ -328,6 +335,7 @@ open class UPNP: RefCounted {
     /// See ``UPNP/UPNPResult`` for possible return values.
     /// 
     public final func discover(timeout: Int32 = 2000, ttl: Int32 = 2, deviceFilter: String = "InternetGatewayDevice") -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: ttl) { pArg1 in
@@ -349,8 +357,8 @@ open class UPNP: RefCounted {
         return _result
     }
     
-    fileprivate static var method_query_external_address: GDExtensionMethodBindPtr = {
-        let methodName = StringName("query_external_address")
+    fileprivate static let method_query_external_address: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("query_external_address")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -362,13 +370,14 @@ open class UPNP: RefCounted {
     
     /// Returns the external ``IP`` address of the default gateway (see ``getGateway()``) as string. Returns an empty string on error.
     public final func queryExternalAddress() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(UPNP.method_query_external_address, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_add_port_mapping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_port_mapping")
+    fileprivate static let method_add_port_mapping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_port_mapping")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 818314583)!
@@ -391,6 +400,7 @@ open class UPNP: RefCounted {
     /// See ``UPNP/UPNPResult`` for possible return values.
     /// 
     public final func addPortMapping(port: Int32, portInternal: Int32 = 0, desc: String = "", proto: String = "UDP", duration: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: portInternal) { pArg1 in
@@ -419,8 +429,8 @@ open class UPNP: RefCounted {
         return _result
     }
     
-    fileprivate static var method_delete_port_mapping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("delete_port_mapping")
+    fileprivate static let method_delete_port_mapping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("delete_port_mapping")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444187325)!
@@ -432,6 +442,7 @@ open class UPNP: RefCounted {
     
     /// Deletes the port mapping for the given port and protocol combination on the default gateway (see ``getGateway()``) if one exists. `port` must be a valid port between 1 and 65535, `proto` can be either `"TCP"` or `"UDP"`. May be refused for mappings pointing to addresses other than this one, for well-known ports (below 1024), or for mappings not added via UPnP. See ``UPNP/UPNPResult`` for possible return values.
     public final func deletePortMapping(port: Int32, proto: String = "UDP") -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: port) { pArg0 in
             let proto = GString(proto)
@@ -450,8 +461,8 @@ open class UPNP: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_discover_multicast_if: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_discover_multicast_if")
+    fileprivate static let method_set_discover_multicast_if: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_discover_multicast_if")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -463,6 +474,7 @@ open class UPNP: RefCounted {
     
     @inline(__always)
     fileprivate final func set_discover_multicast_if(_ mIf: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let mIf = GString(mIf)
         withUnsafePointer(to: mIf.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -477,8 +489,8 @@ open class UPNP: RefCounted {
         
     }
     
-    fileprivate static var method_get_discover_multicast_if: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_discover_multicast_if")
+    fileprivate static let method_get_discover_multicast_if: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_discover_multicast_if")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -490,13 +502,14 @@ open class UPNP: RefCounted {
     
     @inline(__always)
     fileprivate final func get_discover_multicast_if() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(UPNP.method_get_discover_multicast_if, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_discover_local_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_discover_local_port")
+    fileprivate static let method_set_discover_local_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_discover_local_port")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -508,6 +521,7 @@ open class UPNP: RefCounted {
     
     @inline(__always)
     fileprivate final func set_discover_local_port(_ port: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -521,8 +535,8 @@ open class UPNP: RefCounted {
         
     }
     
-    fileprivate static var method_get_discover_local_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_discover_local_port")
+    fileprivate static let method_get_discover_local_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_discover_local_port")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -534,13 +548,14 @@ open class UPNP: RefCounted {
     
     @inline(__always)
     fileprivate final func get_discover_local_port() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(UPNP.method_get_discover_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_discover_ipv6: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_discover_ipv6")
+    fileprivate static let method_set_discover_ipv6: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_discover_ipv6")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -552,6 +567,7 @@ open class UPNP: RefCounted {
     
     @inline(__always)
     fileprivate final func set_discover_ipv6(_ ipv6: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ipv6) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -565,8 +581,8 @@ open class UPNP: RefCounted {
         
     }
     
-    fileprivate static var method_is_discover_ipv6: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_discover_ipv6")
+    fileprivate static let method_is_discover_ipv6: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_discover_ipv6")
         return withUnsafePointer(to: &UPNP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -578,6 +594,7 @@ open class UPNP: RefCounted {
     
     @inline(__always)
     fileprivate final func is_discover_ipv6() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(UPNP.method_is_discover_ipv6, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -21,37 +21,67 @@ import Musl
 
 /// A 2×3 matrix representing a 2D transformation.
 /// 
-/// A 2×3 matrix (2 rows, 3 columns) used for 2D linear transformations. It can represent transformations such as translation, rotation, and scaling. It consists of three ``Vector2`` values: ``x``, ``y``, and the ``origin``.
+/// The ``Transform2D`` built-in ``Variant`` type is a 2×3 <a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)">matrix</a> representing a transformation in 2D space. It contains three ``Vector2`` values: ``x``, ``y``, and ``origin``. Together, they can represent translation, rotation, scale, and skew.
+/// 
+/// The ``x`` and ``y`` axes form a 2×2 matrix, known as the transform's **basis**. The length of each axis (``Vector2/length()``) influences the transform's scale, while the direction of all axes influence the rotation. Usually, both axes are perpendicular to one another. However, when you rotate one axis individually, the transform becomes skewed. Applying a skewed transform to a 2D sprite will make the sprite appear distorted.
 /// 
 /// For a general introduction, see the <a href="https://docs.godotengine.org/en//tutorials/math/matrices_and_transforms.html">Matrices and transforms</a> tutorial.
 /// 
-public struct Transform2D: Equatable, Hashable {
-    /// The basis matrix's X vector (column 0). Equivalent to array index `0`.
+/// > Note: Unlike ``Transform3D``, there is no 2D equivalent to the ``Basis`` type. All mentions of "basis" refer to the ``x`` and ``y`` components of ``Transform2D``.
+/// 
+public struct Transform2D: _GodotBridgeableBuiltin, Equatable, Hashable {
+    /// The transform basis's X axis, and the column `0` of the matrix. Combined with ``y``, this represents the transform's rotation, scale, and skew.
+    /// 
+    /// On the identity transform, this vector points right (``Vector2/right``).
+    /// 
     public var x: Vector2
-    /// The basis matrix's Y vector (column 1). Equivalent to array index `1`.
+    /// The transform basis's Y axis, and the column `1` of the matrix. Combined with ``x``, this represents the transform's rotation, scale, and skew.
+    /// 
+    /// On the identity transform, this vector points down (``Vector2/down``).
+    /// 
     public var y: Vector2
-    /// The origin vector (column 2, the third column). Equivalent to array index `2`. The origin vector represents translation.
+    /// The translation offset of this transform, and the column `2` of the matrix. In 2D space, this can be seen as the position.
     public var origin: Vector2
-    static var constructor0: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 0)!
-    
-    /// Constructs a default-initialized ``Transform2D`` set to ``identity``.
-    public init () {
+    /// The identity ``Transform2D``. This is a transform with no translation, no rotation, and a scale of ``Vector2/one``. This also means that:
+    /// 
+    /// - The ``x`` points right (``Vector2/right``);
+    /// 
+    /// - The ``y`` points down (``Vector2/down``).
+    /// 
+    /// If a ``Vector2``, a ``Rect2``, a ``PackedVector2Array``, or another ``Transform2D`` is transformed (multiplied) by this constant, no transformation occurs.
+    /// 
+    /// > Note: In GDScript, this constant is equivalent to creating a [constructor Transform2D] without any arguments. It can be used to make your code clearer, and for consistency with C#.
+    /// 
+    public static var identity: Transform2D { Transform2D (xAxis: Vector2 (x: 1, y: 0), yAxis: Vector2 (x: 0, y: 1), origin: Vector2 (x: 0, y: 0)) }
+    /// When any transform is multiplied by ``flipX``, it negates all components of the ``x`` axis (the X column).
+    /// 
+    /// When ``flipX`` is multiplied by any transform, it negates the ``Vector2/x`` component of all axes (the X row).
+    /// 
+    public static var flipX: Transform2D { Transform2D (xAxis: Vector2 (x: -1, y: 0), yAxis: Vector2 (x: 0, y: 1), origin: Vector2 (x: 0, y: 0)) }
+    /// When any transform is multiplied by ``flipY``, it negates all components of the ``y`` axis (the Y column).
+    /// 
+    /// When ``flipY`` is multiplied by any transform, it negates the ``Vector2/y`` component of all axes (the Y row).
+    /// 
+    public static var flipY: Transform2D { Transform2D (xAxis: Vector2 (x: 1, y: 0), yAxis: Vector2 (x: 0, y: -1), origin: Vector2 (x: 0, y: 0)) }
+    /// Constructs a ``Transform2D`` identical to ``identity``.
+    /// 
+    /// > Note: In C#, this constructs a ``Transform2D`` with all of its components set to ``Vector2/zero``.
+    /// 
+    public init() {
         self.x = Vector2 (x: 1, y: 0)
         self.y = Vector2 (x: 0, y: 1)
         self.origin = Vector2 ()
     }
     
-    static var constructor1: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 1)!
-    
     /// Constructs a ``Transform2D`` as a copy of the given ``Transform2D``.
-    public init (from: Transform2D) {
+    public init(from: Transform2D) {
         self.x = Vector2 ()
         self.y = Vector2 ()
         self.origin = Vector2 ()
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    Transform2D.constructor1(&self, pArgs)
+                    GodotInterfaceForTransform2D.constructor1(&self, pArgs)
                 }
                 
             }
@@ -60,10 +90,8 @@ public struct Transform2D: Equatable, Hashable {
         
     }
     
-    static var constructor2: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 2)!
-    
-    /// Constructs the transform from a given angle (in radians) and position.
-    public init (rotation: Float, position: Vector2) {
+    /// Constructs a ``Transform2D`` from a given angle (in radians) and position.
+    public init(rotation: Float, position: Vector2) {
         self.x = Vector2 ()
         self.y = Vector2 ()
         self.origin = Vector2 ()
@@ -72,7 +100,7 @@ public struct Transform2D: Equatable, Hashable {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        Transform2D.constructor2(&self, pArgs)
+                        GodotInterfaceForTransform2D.constructor2(&self, pArgs)
                     }
                     
                 }
@@ -83,10 +111,8 @@ public struct Transform2D: Equatable, Hashable {
         
     }
     
-    static var constructor3: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 3)!
-    
-    /// Constructs the transform from a given angle (in radians), scale, skew (in radians) and position.
-    public init (rotation: Float, scale: Vector2, skew: Float, position: Vector2) {
+    /// Constructs a ``Transform2D`` from a given angle (in radians), scale, skew (in radians), and position.
+    public init(rotation: Float, scale: Vector2, skew: Float, position: Vector2) {
         self.x = Vector2 ()
         self.y = Vector2 ()
         self.origin = Vector2 ()
@@ -98,7 +124,7 @@ public struct Transform2D: Equatable, Hashable {
                     withUnsafePointer(to: position) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                Transform2D.constructor3(&self, pArgs)
+                                GodotInterfaceForTransform2D.constructor3(&self, pArgs)
                             }
                             
                         }
@@ -113,10 +139,8 @@ public struct Transform2D: Equatable, Hashable {
         
     }
     
-    static var constructor4: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 4)!
-    
-    /// Constructs the transform from 3 ``Vector2`` values representing ``x``, ``y``, and the ``origin`` (the three column vectors).
-    public init (xAxis: Vector2, yAxis: Vector2, origin: Vector2) {
+    /// Constructs a ``Transform2D`` from 3 ``Vector2`` values representing ``x``, ``y``, and the ``origin`` (the three matrix columns).
+    public init(xAxis: Vector2, yAxis: Vector2, origin: Vector2) {
         self.x = xAxis
         self.y = yAxis
         self.origin = origin
@@ -125,123 +149,94 @@ public struct Transform2D: Equatable, Hashable {
     
     /* Methods */
     
-    static var method_inverse: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("inverse")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1420440541)!
-    }()
-    
-    /// Returns the inverse of the transform, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not). Use ``affineInverse()`` for non-orthonormal transforms (e.g. with scaling).
-    public func inverse()-> Transform2D {
+    /// Returns the <a href="https://en.wikipedia.org/wiki/Invertible_matrix">inverted version of this transform</a>.
+    /// 
+    /// > Note: For this method to return correctly, the transform's basis needs to be _orthonormal_ (see ``orthonormalized()``). That means the basis should only represent a rotation. If it does not, use ``affineInverse()`` instead.
+    /// 
+    public func inverse() -> Transform2D {
         var result: Transform2D = Transform2D()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_inverse(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_inverse(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_affine_inverse: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("affine_inverse")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1420440541)!
-    }()
-    
-    /// Returns the inverse of the transform, under the assumption that the basis is invertible (must have non-zero determinant).
-    public func affineInverse()-> Transform2D {
+    /// Returns the inverted version of this transform. Unlike ``inverse()``, this method works with almost any basis, including non-uniform ones, but is slower.
+    /// 
+    /// > Note: For this method to return correctly, the transform's basis needs to have a determinant that is not exactly `0.0` (see ``determinant()``).
+    /// 
+    public func affineInverse() -> Transform2D {
         var result: Transform2D = Transform2D()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_affine_inverse(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_affine_inverse(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_get_rotation: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_rotation")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 466405837)!
-    }()
-    
-    /// Returns the transform's rotation (in radians).
-    public func getRotation()-> Double {
+    /// Returns this transform's rotation (in radians). This is equivalent to ``x``'s angle (see ``Vector2/angle()``).
+    public func getRotation() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_get_rotation(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_get_rotation(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_get_origin: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_origin")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2428350749)!
-    }()
-    
-    /// Returns the transform's origin (translation).
-    public func getOrigin()-> Vector2 {
+    /// Returns this transform's translation. Equivalent to ``origin``.
+    public func getOrigin() -> Vector2 {
         var result: Vector2 = Vector2()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_get_origin(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_get_origin(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_get_scale: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_scale")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2428350749)!
-    }()
-    
-    /// Returns the scale.
-    public func getScale()-> Vector2 {
+    /// Returns the length of both ``x`` and ``y``, as a ``Vector2``. If this transform's basis is not skewed, this value is the scaling factor. It is not affected by rotation.
+    /// 
+    /// > Note: If the value returned by ``determinant()`` is negative, the scale is also negative.
+    /// 
+    public func getScale() -> Vector2 {
         var result: Vector2 = Vector2()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_get_scale(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_get_scale(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_get_skew: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_skew")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 466405837)!
-    }()
-    
-    /// Returns the transform's skew (in radians).
-    public func getSkew()-> Double {
+    /// Returns this transform's skew (in radians).
+    public func getSkew() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_get_skew(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_get_skew(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_orthonormalized: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("orthonormalized")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1420440541)!
-    }()
-    
-    /// Returns the transform with the basis orthogonal (90 degrees), and normalized axis vectors (scale of 1 or -1).
-    public func orthonormalized()-> Transform2D {
+    /// Returns a copy of this transform with its basis orthonormalized. An orthonormal basis is both _orthogonal_ (the axes are perpendicular to each other) and _normalized_ (the axes have a length of `1.0`), which also means it can only represent a rotation.
+    public func orthonormalized() -> Transform2D {
         var result: Transform2D = Transform2D()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_orthonormalized(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_orthonormalized(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_rotated: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("rotated")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 729597514)!
-    }()
-    
-    /// Returns a copy of the transform rotated by the given `angle` (in radians).
+    /// Returns a copy of this transform rotated by the given `angle` (in radians).
+    /// 
+    /// If `angle` is positive, the transform is rotated clockwise.
     /// 
     /// This method is an optimized version of multiplying the given transform `X` with a corresponding rotation transform `R` from the left, i.e., `R * X`.
     /// 
     /// This can be seen as transforming with respect to the global/parent frame.
     /// 
-    public func rotated(angle: Double)-> Transform2D {
+    public func rotated(angle: Double) -> Transform2D {
         var result: Transform2D = Transform2D()
         let angle = Double(angle)
         withUnsafePointer(to: angle) { pArg0 in
@@ -249,7 +244,7 @@ public struct Transform2D: Equatable, Hashable {
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_rotated(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_rotated(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -259,11 +254,6 @@ public struct Transform2D: Equatable, Hashable {
         
         return result
     }
-    
-    static var method_rotated_local: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("rotated_local")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 729597514)!
-    }()
     
     /// Returns a copy of the transform rotated by the given `angle` (in radians).
     /// 
@@ -271,7 +261,7 @@ public struct Transform2D: Equatable, Hashable {
     /// 
     /// This can be seen as transforming with respect to the local frame.
     /// 
-    public func rotatedLocal(angle: Double)-> Transform2D {
+    public func rotatedLocal(angle: Double) -> Transform2D {
         var result: Transform2D = Transform2D()
         let angle = Double(angle)
         withUnsafePointer(to: angle) { pArg0 in
@@ -279,7 +269,7 @@ public struct Transform2D: Equatable, Hashable {
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_rotated_local(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_rotated_local(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -289,11 +279,6 @@ public struct Transform2D: Equatable, Hashable {
         
         return result
     }
-    
-    static var method_scaled: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("scaled")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
-    }()
     
     /// Returns a copy of the transform scaled by the given `scale` factor.
     /// 
@@ -301,14 +286,14 @@ public struct Transform2D: Equatable, Hashable {
     /// 
     /// This can be seen as transforming with respect to the global/parent frame.
     /// 
-    public func scaled(scale: Vector2)-> Transform2D {
+    public func scaled(scale: Vector2) -> Transform2D {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_scaled(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_scaled(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -318,11 +303,6 @@ public struct Transform2D: Equatable, Hashable {
         
         return result
     }
-    
-    static var method_scaled_local: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("scaled_local")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
-    }()
     
     /// Returns a copy of the transform scaled by the given `scale` factor.
     /// 
@@ -330,14 +310,14 @@ public struct Transform2D: Equatable, Hashable {
     /// 
     /// This can be seen as transforming with respect to the local frame.
     /// 
-    public func scaledLocal(scale: Vector2)-> Transform2D {
+    public func scaledLocal(scale: Vector2) -> Transform2D {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_scaled_local(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_scaled_local(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -347,11 +327,6 @@ public struct Transform2D: Equatable, Hashable {
         
         return result
     }
-    
-    static var method_translated: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("translated")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
-    }()
     
     /// Returns a copy of the transform translated by the given `offset`.
     /// 
@@ -359,14 +334,14 @@ public struct Transform2D: Equatable, Hashable {
     /// 
     /// This can be seen as transforming with respect to the global/parent frame.
     /// 
-    public func translated(offset: Vector2)-> Transform2D {
+    public func translated(offset: Vector2) -> Transform2D {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_translated(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_translated(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -376,11 +351,6 @@ public struct Transform2D: Equatable, Hashable {
         
         return result
     }
-    
-    static var method_translated_local: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("translated_local")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
-    }()
     
     /// Returns a copy of the transform translated by the given `offset`.
     /// 
@@ -388,14 +358,14 @@ public struct Transform2D: Equatable, Hashable {
     /// 
     /// This can be seen as transforming with respect to the local frame.
     /// 
-    public func translatedLocal(offset: Vector2)-> Transform2D {
+    public func translatedLocal(offset: Vector2) -> Transform2D {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_translated_local(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_translated_local(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -406,41 +376,32 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var method_determinant: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("determinant")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 466405837)!
-    }()
-    
-    /// Returns the determinant of the basis matrix. If the basis is uniformly scaled, then its determinant equals the square of the scale factor.
+    /// Returns the <a href="https://en.wikipedia.org/wiki/Determinant">determinant</a> of this transform basis's matrix. For advanced math, this number can be used to determine a few attributes:
     /// 
-    /// A negative determinant means the basis was flipped, so one part of the scale is negative. A zero determinant means the basis isn't invertible, and is usually considered invalid.
+    /// - If the determinant is exactly `0.0`, the basis is not invertible (see ``inverse()``).
     /// 
-    public func determinant()-> Double {
+    /// - If the determinant is a negative number, the basis represents a negative scale.
+    /// 
+    /// > Note: If the basis's scale is the same for every axis, its determinant is always that scale by the power of 2.
+    /// 
+    public func determinant() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_determinant(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_determinant(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_basis_xform: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("basis_xform")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2026743667)!
-    }()
-    
-    /// Returns a vector transformed (multiplied) by the basis matrix.
-    /// 
-    /// This method does not account for translation (the ``origin`` vector).
-    /// 
-    public func basisXform(v: Vector2)-> Vector2 {
+    /// Returns a copy of the `v` vector, transformed (multiplied) by the transform basis's matrix. Unlike the multiplication operator (`*`), this method ignores the ``origin``.
+    public func basisXform(v: Vector2) -> Vector2 {
         var result: Vector2 = Vector2()
         withUnsafePointer(to: v) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_basis_xform(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_basis_xform(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -451,27 +412,18 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var method_basis_xform_inv: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("basis_xform_inv")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2026743667)!
-    }()
-    
-    /// Returns a vector transformed (multiplied) by the inverse basis matrix, under the assumption that the basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+    /// Returns a copy of the `v` vector, transformed (multiplied) by the inverse transform basis's matrix (see ``inverse()``). This method ignores the ``origin``.
     /// 
-    /// This method does not account for translation (the ``origin`` vector).
+    /// > Note: This method assumes that this transform's basis is _orthonormal_ (see ``orthonormalized()``). If the basis is not orthonormal, `transform.affine_inverse().basis_xform(vector)` should be used instead (see ``affineInverse()``).
     /// 
-    /// `transform.basis_xform_inv(vector)` is equivalent to `transform.inverse().basis_xform(vector)`. See ``inverse()``.
-    /// 
-    /// For non-orthonormal transforms (e.g. with scaling) `transform.affine_inverse().basis_xform(vector)` can be used instead. See ``affineInverse()``.
-    /// 
-    public func basisXformInv(v: Vector2)-> Vector2 {
+    public func basisXformInv(v: Vector2) -> Vector2 {
         var result: Vector2 = Vector2()
         withUnsafePointer(to: v) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_basis_xform_inv(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_basis_xform_inv(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -482,13 +434,11 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var method_interpolate_with: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("interpolate_with")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 359399686)!
-    }()
-    
-    /// Returns a transform interpolated between this transform and another by a given `weight` (on the range of 0.0 to 1.0).
-    public func interpolateWith(xform: Transform2D, weight: Double)-> Transform2D {
+    /// Returns the result of the linear interpolation between this transform and `xform` by the given `weight`.
+    /// 
+    /// The `weight` should be between `0.0` and `1.0` (inclusive). Values outside this range are allowed and can be used to perform _extrapolation_ instead.
+    /// 
+    public func interpolateWith(xform: Transform2D, weight: Double) -> Transform2D {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: xform) { pArg0 in
             let weight = Double(weight)
@@ -497,7 +447,7 @@ public struct Transform2D: Equatable, Hashable {
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
                         var mutSelfCopy = self
                         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                           Transform2D.method_interpolate_with(ptr, pArgs, &result, 2)
+                           GodotInterfaceForTransform2D.method_interpolate_with(ptr, pArgs, &result, 2)
                         }
                     }
                     
@@ -510,35 +460,25 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var method_is_conformal: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_conformal")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 3918633141)!
-    }()
-    
-    /// Returns `true` if the transform's basis is conformal, meaning it preserves angles and distance ratios, and may only be composed of rotation and uniform scale. Returns `false` if the transform's basis has non-uniform scale or shear/skew. This can be used to validate if the transform is non-distorted, which is important for physics and other use cases.
-    public func isConformal()-> Bool {
+    /// Returns `true` if this transform's basis is conformal. A conformal basis is both _orthogonal_ (the axes are perpendicular to each other) and _uniform_ (the axes share the same length). This method can be especially useful during physics calculations.
+    public func isConformal() -> Bool {
         var result: Bool = Bool()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_is_conformal(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_is_conformal(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_is_equal_approx: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_equal_approx")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 3837431929)!
-    }()
-    
     /// Returns `true` if this transform and `xform` are approximately equal, by running ``@GlobalScope.is_equal_approx`` on each component.
-    public func isEqualApprox(xform: Transform2D)-> Bool {
+    public func isEqualApprox(xform: Transform2D) -> Bool {
         var result: Bool = Bool()
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_is_equal_approx(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_is_equal_approx(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -549,38 +489,25 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var method_is_finite: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_finite")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 3918633141)!
-    }()
-    
     /// Returns `true` if this transform is finite, by calling ``@GlobalScope.is_finite`` on each component.
-    public func isFinite()-> Bool {
+    public func isFinite() -> Bool {
         var result: Bool = Bool()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Transform2D.method_is_finite(ptr, nil, &result, 0)
+           GodotInterfaceForTransform2D.method_is_finite(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_looking_at: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("looking_at")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
-    }()
-    
-    /// Returns a copy of the transform rotated such that the rotated X-axis points towards the `target` position.
-    /// 
-    /// Operations take place in global space.
-    /// 
-    public func lookingAt(target: Vector2 = Vector2 (x: 0, y: 0))-> Transform2D {
+    /// Returns a copy of the transform rotated such that the rotated X-axis points towards the `target` position, in global space.
+    public func lookingAt(target: Vector2 = Vector2 (x: 0, y: 0)) -> Transform2D {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: target) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Transform2D.method_looking_at(ptr, pArgs, &result, 1)
+                       GodotInterfaceForTransform2D.method_looking_at(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -591,38 +518,26 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    private static var indexed_getter: GDExtensionPtrIndexedGetter = {
-        return gi.variant_get_ptr_indexed_getter (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
-    }()
-    
-    private static var indexed_setter: GDExtensionPtrIndexedSetter = {
-        return gi.variant_get_ptr_indexed_setter (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
-    }()
-    
-     public subscript (index: Int64) -> Vector2 {
+    public subscript(index: Int64) -> Vector2 {
         mutating get {
-            var result = Vector2 ()
-            Self.indexed_getter (&self, index, &result)
+            var result = Vector2()
+            GodotInterfaceForTransform2D.indexed_getter (&self, index, &result)
             return result
         }
         
         set {
             var value = newValue
-            Self.indexed_setter (&self, index, &value)
+            GodotInterfaceForTransform2D.indexed_setter (&self, index, &value)
         }
         
     }
     
-    static var operator_3: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_INT)!
-    }()
-    
-    /// This operator multiplies all components of the ``Transform2D``, including the ``origin`` vector, which scales it uniformly.
-    public static func * (lhs: Transform2D, rhs: Int64) -> Transform2D  {
+    /// Multiplies all components of the ``Transform2D`` by the given integer, including the ``origin``. This affects the transform's scale uniformly.
+    public static func *(lhs: Transform2D, rhs: Int64) -> Transform2D  {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_3(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_3(pArg0, pArg1, &result)
             }
             
         }
@@ -630,16 +545,12 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_4: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_DIVIDE, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_INT)!
-    }()
-    
-    /// This operator divides all components of the ``Transform2D``, including the ``origin`` vector, which inversely scales it uniformly.
-    public static func / (lhs: Transform2D, rhs: Int64) -> Transform2D  {
+    /// Divides all components of the ``Transform2D`` by the given integer, including the ``origin``. This affects the transform's scale uniformly.
+    public static func /(lhs: Transform2D, rhs: Int64) -> Transform2D  {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_4(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_4(pArg0, pArg1, &result)
             }
             
         }
@@ -647,17 +558,13 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_5: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_FLOAT)!
-    }()
-    
-    /// This operator multiplies all components of the ``Transform2D``, including the ``origin`` vector, which scales it uniformly.
-    public static func * (lhs: Transform2D, rhs: Double) -> Transform2D  {
+    /// Multiplies all components of the ``Transform2D`` by the given float, including the ``origin``. This affects the transform's scale uniformly.
+    public static func *(lhs: Transform2D, rhs: Double) -> Transform2D  {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: lhs) { pArg0 in
             let rhs = Double(rhs)
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_5(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_5(pArg0, pArg1, &result)
             }
             
         }
@@ -665,17 +572,13 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_6: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_DIVIDE, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_FLOAT)!
-    }()
-    
-    /// This operator divides all components of the ``Transform2D``, including the ``origin`` vector, which inversely scales it uniformly.
-    public static func / (lhs: Transform2D, rhs: Double) -> Transform2D  {
+    /// Divides all components of the ``Transform2D`` by the given float, including the ``origin``. This affects the transform's scale uniformly.
+    public static func /(lhs: Transform2D, rhs: Double) -> Transform2D  {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: lhs) { pArg0 in
             let rhs = Double(rhs)
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_6(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_6(pArg0, pArg1, &result)
             }
             
         }
@@ -683,16 +586,12 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_7: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_VECTOR2)!
-    }()
-    
-    /// Transforms (multiplies) the ``Vector2`` by the given ``Transform2D`` matrix.
-    public static func * (lhs: Transform2D, rhs: Vector2) -> Vector2  {
+    /// Transforms (multiplies) the ``Vector2`` by this transformation matrix.
+    public static func *(lhs: Transform2D, rhs: Vector2) -> Vector2  {
         var result: Vector2 = Vector2()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_7(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_7(pArg0, pArg1, &result)
             }
             
         }
@@ -700,16 +599,12 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_8: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_RECT2)!
-    }()
-    
-    /// Transforms (multiplies) the ``Rect2`` by the given ``Transform2D`` matrix.
-    public static func * (lhs: Transform2D, rhs: Rect2) -> Rect2  {
+    /// Transforms (multiplies) the ``Rect2`` by this transformation matrix.
+    public static func *(lhs: Transform2D, rhs: Rect2) -> Rect2  {
         var result: Rect2 = Rect2()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_8(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_8(pArg0, pArg1, &result)
             }
             
         }
@@ -717,19 +612,15 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_9: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_EQUAL, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
-    }()
-    
-    /// Returns `true` if the transforms are exactly equal.
+    /// Returns `true` if the components of both transforms are exactly equal.
     /// 
     /// > Note: Due to floating-point precision errors, consider using ``isEqualApprox(xform:)`` instead, which is more reliable.
     /// 
-    public static func == (lhs: Transform2D, rhs: Transform2D) -> Bool  {
+    public static func ==(lhs: Transform2D, rhs: Transform2D) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_9(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_9(pArg0, pArg1, &result)
             }
             
         }
@@ -737,19 +628,15 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_10: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_NOT_EQUAL, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
-    }()
-    
-    /// Returns `true` if the transforms are not equal.
+    /// Returns `true` if the components of both transforms are not equal.
     /// 
     /// > Note: Due to floating-point precision errors, consider using ``isEqualApprox(xform:)`` instead, which is more reliable.
     /// 
-    public static func != (lhs: Transform2D, rhs: Transform2D) -> Bool  {
+    public static func !=(lhs: Transform2D, rhs: Transform2D) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_10(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_10(pArg0, pArg1, &result)
             }
             
         }
@@ -757,16 +644,23 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_11: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
-    }()
-    
-    /// Composes these two transformation matrices by multiplying them together. This has the effect of transforming the second transform (the child) by the first transform (the parent).
-    public static func * (lhs: Transform2D, rhs: Transform2D) -> Transform2D  {
+    /// Transforms (multiplies) this transform by the `right` transform.
+    /// 
+    /// This is the operation performed between parent and child ``CanvasItem`` nodes.
+    /// 
+    /// > Note: If you need to only modify one attribute of this transform, consider using one of the following methods, instead:
+    /// 
+    /// - For translation, see ``translated(offset:)`` or ``translatedLocal(offset:)``.
+    /// 
+    /// - For rotation, see ``rotated(angle:)`` or ``rotatedLocal(angle:)``.
+    /// 
+    /// - For scale, see ``scaled(scale:)`` or ``scaledLocal(scale:)``.
+    /// 
+    public static func *(lhs: Transform2D, rhs: Transform2D) -> Transform2D  {
         var result: Transform2D = Transform2D()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Transform2D.operator_11(pArg0, pArg1, &result)
+                GodotInterfaceForTransform2D.operator_11(pArg0, pArg1, &result)
             }
             
         }
@@ -774,16 +668,15 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    static var operator_14: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY)!
-    }()
-    
-    /// Transforms (multiplies) each element of the ``Vector2`` array by the given ``Transform2D`` matrix.
-    public static func * (lhs: Transform2D, rhs: PackedVector2Array) -> PackedVector2Array  {
+    /// Transforms (multiplies) every ``Vector2`` element of the given ``PackedVector2Array`` by this transformation matrix.
+    /// 
+    /// On larger arrays, this operation is much faster than transforming each ``Vector2`` individually.
+    /// 
+    public static func *(lhs: Transform2D, rhs: PackedVector2Array) -> PackedVector2Array  {
         let result: PackedVector2Array = PackedVector2Array()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                Transform2D.operator_14(pArg0, pArg1, &result.content)
+                GodotInterfaceForTransform2D.operator_14(pArg0, pArg1, &result.content)
             }
             
         }
@@ -791,11 +684,330 @@ public struct Transform2D: Equatable, Hashable {
         return result
     }
     
-    /// The identity ``Transform2D`` with no translation, rotation or scaling applied. When applied to other data structures, ``identity`` performs no transformation.
-    public static let identity = Transform2D (xAxis: Vector2 (x: 1, y: 0), yAxis: Vector2 (x: 0, y: 1), origin: Vector2 (x: 0, y: 0))
-    /// The ``Transform2D`` that will flip something along the X axis.
-    public static let flipX = Transform2D (xAxis: Vector2 (x: -1, y: 0), yAxis: Vector2 (x: 0, y: 1), origin: Vector2 (x: 0, y: 0))
-    /// The ``Transform2D`` that will flip something along the Y axis.
-    public static let flipY = Transform2D (xAxis: Vector2 (x: 1, y: 0), yAxis: Vector2 (x: 0, y: -1), origin: Vector2 (x: 0, y: 0))
+    /// Wrap ``Transform2D`` into a ``Variant``
+    @inline(__always)
+    @inlinable
+    public func toVariant() -> Variant {
+        Variant(self)
+    }
+    
+    /// Wrap ``Transform2D`` into a ``Variant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toVariant() -> Variant? {
+        Variant(self)
+    }
+    
+    /// Wrap ``Transform2D`` into a ``FastVariant``
+    @inline(__always)
+    @inlinable
+    public func toFastVariant() -> FastVariant {
+        FastVariant(self)
+    }
+    
+    /// Wrap ``Transform2D`` into a ``FastVariant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toFastVariant() -> FastVariant? {
+        FastVariant(self)
+    }
+    
+    /// Extract ``Transform2D`` from a ``Variant``. Throws `VariantConversionError` if it's not possible.
+    @inline(__always)
+    @inlinable
+    public static func fromVariantOrThrow(_ variant: Variant) throws(VariantConversionError) -> Self {                
+        guard let value = Self(variant) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    @inline(__always)
+    @inlinable
+    public static func fromFastVariantOrThrow(_ variant: borrowing FastVariant) throws(VariantConversionError) -> Self {                
+        guard let value = Self(variant) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    /// Initialze ``Transform2D`` from ``Variant``. Fails if `variant` doesn't contain ``Transform2D``
+    @inline(__always)                
+    public init?(_ variant: Variant) {
+        guard Self._variantType == variant.gtype else { return nil }
+        self.init()
+        
+        withUnsafeMutablePointer(to: &self) { pPayload in
+            variant.constructType(into: pPayload, constructor: GodotInterfaceForTransform2D.selfFromVariant)                        
+        }
+    }
+    
+    /// Initialze ``Transform2D`` from ``Variant``. Fails if `variant` doesn't contain ``Transform2D`` or is `nil`
+    @inline(__always)
+    @inlinable
+    public init?(_ variant: Variant?) {
+        guard let variant else { return nil }
+        self.init(variant)
+    }
+    
+    /// Initialze ``Transform2D`` from ``FastVariant``. Fails if `variant` doesn't contain ``Transform2D``
+    @inline(__always)                
+    public init?(_ variant: borrowing FastVariant) {
+        guard Self._variantType == variant.gtype else { return nil }
+        self.init()
+        
+        withUnsafeMutablePointer(to: &self) { pPayload in
+            variant.constructType(into: pPayload, constructor: GodotInterfaceForTransform2D.selfFromVariant)                        
+        }
+    }
+    
+    /// Initialze ``Transform2D`` from ``FastVariant``. Fails if `variant` doesn't contain ``Transform2D`` or is `nil`
+    @inline(__always)
+    @inlinable
+    public init?(_ variant: borrowing FastVariant?) {
+        switch variant {
+        case .some(let variant):
+            self.init(variant)
+        case .none:
+            return nil
+        }
+    }
+    
+    /// Internal API. For indicating that Godot `Array` of ``Transform2D`` has type `Array[Transform2D]`
+    @inline(__always)
+    @inlinable
+    public static var _variantType: Variant.GType {
+        .transform2d 
+    }
+}
+
+public extension Variant {
+    /// Initialize ``Variant`` by wrapping ``Transform2D?``, fails if it's `nil`
+    @inline(__always)
+    @inlinable
+    convenience init?(_ from: Transform2D?) {
+        guard let from else {
+            return nil
+        }
+        self.init(from)
+    }
+    
+    /// Initialize ``Variant`` by wrapping ``Transform2D``
+    @inline(__always)
+    convenience init(_ from: Transform2D) {
+        self.init(payload: from, constructor: GodotInterfaceForTransform2D.variantFromSelf)
+    }
+    
+}
+
+public extension FastVariant {
+    /// Initialize ``FastVariant`` by wrapping ``Transform2D?``, fails if it's `nil`
+    @inline(__always)
+    @inlinable
+    init?(_ from: Transform2D?) {
+        guard let from else {
+            return nil
+        }
+        self.init(from)
+    }
+    
+    /// Initialize ``FastVariant`` by wrapping ``Transform2D``
+    @inline(__always)
+    init(_ from: Transform2D) {
+        self.init(payload: from, constructor: GodotInterfaceForTransform2D.variantFromSelf)
+    }
+    
+}
+
+/// Static storage for keeping pointers to Godot implementation wrapped by Transform2D
+enum GodotInterfaceForTransform2D {
+    // MARK: - Constructors
+    static let constructor0: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 0)!
+    }()
+    
+    static let constructor1: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 1)!
+    }()
+    
+    static let constructor2: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 2)!
+    }()
+    
+    static let constructor3: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 3)!
+    }()
+    
+    static let constructor4: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, 4)!
+    }()
+    
+    // MARK: - Methods
+    static let method_inverse: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("inverse")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1420440541)!
+    }()
+    
+    static let method_affine_inverse: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("affine_inverse")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1420440541)!
+    }()
+    
+    static let method_get_rotation: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_rotation")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 466405837)!
+    }()
+    
+    static let method_get_origin: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_origin")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2428350749)!
+    }()
+    
+    static let method_get_scale: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_scale")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2428350749)!
+    }()
+    
+    static let method_get_skew: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_skew")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 466405837)!
+    }()
+    
+    static let method_orthonormalized: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("orthonormalized")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1420440541)!
+    }()
+    
+    static let method_rotated: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("rotated")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 729597514)!
+    }()
+    
+    static let method_rotated_local: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("rotated_local")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 729597514)!
+    }()
+    
+    static let method_scaled: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("scaled")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
+    }()
+    
+    static let method_scaled_local: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("scaled_local")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
+    }()
+    
+    static let method_translated: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("translated")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
+    }()
+    
+    static let method_translated_local: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("translated_local")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
+    }()
+    
+    static let method_determinant: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("determinant")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 466405837)!
+    }()
+    
+    static let method_basis_xform: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("basis_xform")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2026743667)!
+    }()
+    
+    static let method_basis_xform_inv: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("basis_xform_inv")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 2026743667)!
+    }()
+    
+    static let method_interpolate_with: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("interpolate_with")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 359399686)!
+    }()
+    
+    static let method_is_conformal: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_conformal")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 3918633141)!
+    }()
+    
+    static let method_is_equal_approx: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_equal_approx")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 3837431929)!
+    }()
+    
+    static let method_is_finite: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_finite")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 3918633141)!
+    }()
+    
+    static let method_looking_at: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("looking_at")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, &name.content, 1446323263)!
+    }()
+    
+    static let indexed_getter: GDExtensionPtrIndexedGetter = {
+        return gi.variant_get_ptr_indexed_getter (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
+    }()
+    
+    static let indexed_setter: GDExtensionPtrIndexedSetter = {
+        return gi.variant_get_ptr_indexed_setter (GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
+    }()
+    
+    // MARK: - Operators
+    static let operator_3: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_INT)!
+    }()
+    
+    static let operator_4: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_DIVIDE, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_INT)!
+    }()
+    
+    static let operator_5: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_FLOAT)!
+    }()
+    
+    static let operator_6: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_DIVIDE, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_FLOAT)!
+    }()
+    
+    static let operator_7: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_VECTOR2)!
+    }()
+    
+    static let operator_8: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_RECT2)!
+    }()
+    
+    static let operator_9: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_EQUAL, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
+    }()
+    
+    static let operator_10: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_NOT_EQUAL, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
+    }()
+    
+    static let operator_11: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
+    }()
+    
+    static let operator_14: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_TRANSFORM2D, GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY)!
+    }()
+    
+    // MARK: - Variant conversion
+    static let variantFromSelf: GDExtensionVariantFromTypeConstructorFunc = {
+        gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
+    }()
+    
+    static let selfFromVariant: GDExtensionTypeFromVariantConstructorFunc = {
+        gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)!
+    }()
+    
+    
 }
 

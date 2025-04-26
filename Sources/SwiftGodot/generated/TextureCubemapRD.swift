@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This texture class allows you to use a cubemap texture created directly on the ``RenderingDevice`` as a texture for materials, meshes, etc.
 open class TextureCubemapRD: TextureLayeredRD {
-    fileprivate static var className = StringName("TextureCubemapRD")
+    private static var className = StringName("TextureCubemapRD")
     override open class var godotClassName: StringName { className }
 }
 

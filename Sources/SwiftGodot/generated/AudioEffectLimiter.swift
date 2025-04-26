@@ -26,7 +26,7 @@ import Musl
 /// Soft clipping starts to reduce the peaks a little below the threshold level and progressively increases its effect as the input level increases such that the threshold is never exceeded.
 /// 
 open class AudioEffectLimiter: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectLimiter")
+    private static var className = StringName("AudioEffectLimiter")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -79,8 +79,8 @@ open class AudioEffectLimiter: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_ceiling_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ceiling_db")
+    fileprivate static let method_set_ceiling_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ceiling_db")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -92,6 +92,7 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_ceiling_db(_ ceiling: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ceiling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -105,8 +106,8 @@ open class AudioEffectLimiter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_ceiling_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ceiling_db")
+    fileprivate static let method_get_ceiling_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ceiling_db")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -118,13 +119,14 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_ceiling_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_ceiling_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_threshold_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_threshold_db")
+    fileprivate static let method_set_threshold_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_threshold_db")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -136,6 +138,7 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_threshold_db(_ threshold: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -149,8 +152,8 @@ open class AudioEffectLimiter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_threshold_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_threshold_db")
+    fileprivate static let method_get_threshold_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_threshold_db")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -162,13 +165,14 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_threshold_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_threshold_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_soft_clip_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_soft_clip_db")
+    fileprivate static let method_set_soft_clip_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_soft_clip_db")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -180,6 +184,7 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_soft_clip_db(_ softClip: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: softClip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -193,8 +198,8 @@ open class AudioEffectLimiter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_soft_clip_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_soft_clip_db")
+    fileprivate static let method_get_soft_clip_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_soft_clip_db")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -206,13 +211,14 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_soft_clip_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_soft_clip_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_soft_clip_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_soft_clip_ratio")
+    fileprivate static let method_set_soft_clip_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_soft_clip_ratio")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -224,6 +230,7 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_soft_clip_ratio(_ softClip: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: softClip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -237,8 +244,8 @@ open class AudioEffectLimiter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_soft_clip_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_soft_clip_ratio")
+    fileprivate static let method_get_soft_clip_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_soft_clip_ratio")
         return withUnsafePointer(to: &AudioEffectLimiter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -250,6 +257,7 @@ open class AudioEffectLimiter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_soft_clip_ratio() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_soft_clip_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

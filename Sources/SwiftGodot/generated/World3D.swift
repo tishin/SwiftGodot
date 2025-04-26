@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Class that has everything pertaining to a world: A physics space, a visual scenario, and a sound space. 3D nodes register their resources into the current 3D world.
 open class World3D: Resource {
-    fileprivate static var className = StringName("World3D")
+    private static var className = StringName("World3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -97,8 +97,8 @@ open class World3D: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_space")
+    fileprivate static let method_get_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_space")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -110,13 +110,14 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func get_space() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(World3D.method_get_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_map")
+    fileprivate static let method_get_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_map")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -128,13 +129,14 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func get_navigation_map() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(World3D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_scenario: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scenario")
+    fileprivate static let method_get_scenario: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scenario")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -146,13 +148,14 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func get_scenario() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(World3D.method_get_scenario, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment")
+    fileprivate static let method_set_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4143518816)!
@@ -164,6 +167,7 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func set_environment(_ env: Environment?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -177,8 +181,8 @@ open class World3D: Resource {
         
     }
     
-    fileprivate static var method_get_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment")
+    fileprivate static let method_get_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3082064660)!
@@ -190,13 +194,14 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func get_environment() -> Environment? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(World3D.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_fallback_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fallback_environment")
+    fileprivate static let method_set_fallback_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fallback_environment")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4143518816)!
@@ -208,6 +213,7 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func set_fallback_environment(_ env: Environment?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -221,8 +227,8 @@ open class World3D: Resource {
         
     }
     
-    fileprivate static var method_get_fallback_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fallback_environment")
+    fileprivate static let method_get_fallback_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fallback_environment")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3082064660)!
@@ -234,13 +240,14 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func get_fallback_environment() -> Environment? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(World3D.method_get_fallback_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_camera_attributes")
+    fileprivate static let method_set_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_camera_attributes")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2817810567)!
@@ -252,6 +259,7 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func set_camera_attributes(_ attributes: CameraAttributes?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: attributes?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -265,8 +273,8 @@ open class World3D: Resource {
         
     }
     
-    fileprivate static var method_get_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_attributes")
+    fileprivate static let method_get_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_attributes")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3921283215)!
@@ -278,13 +286,14 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func get_camera_attributes() -> CameraAttributes? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(World3D.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_direct_space_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_direct_space_state")
+    fileprivate static let method_get_direct_space_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_direct_space_state")
         return withUnsafePointer(to: &World3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2069328350)!
@@ -296,9 +305,10 @@ open class World3D: Resource {
     
     @inline(__always)
     fileprivate final func get_direct_space_state() -> PhysicsDirectSpaceState3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(World3D.method_get_direct_space_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -34,7 +34,7 @@ import Musl
 /// In general, the blend value should be in the `[-1.0, 1.0]` range. Values outside of this range can blend amplified animations, however, ``AnimationNodeAdd3`` works better for this purpose.
 /// 
 open class AnimationNodeBlend3: AnimationNodeSync {
-    fileprivate static var className = StringName("AnimationNodeBlend3")
+    private static var className = StringName("AnimationNodeBlend3")
     override open class var godotClassName: StringName { className }
 }
 

@@ -20,7 +20,7 @@ import Musl
 
 
 open class OggPacketSequencePlayback: RefCounted {
-    fileprivate static var className = StringName("OggPacketSequencePlayback")
+    private static var className = StringName("OggPacketSequencePlayback")
     override open class var godotClassName: StringName { className }
 }
 

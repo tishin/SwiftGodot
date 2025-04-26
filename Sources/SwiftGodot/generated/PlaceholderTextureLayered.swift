@@ -30,7 +30,7 @@ import Musl
 /// > Note: This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).
 /// 
 open class PlaceholderTextureLayered: TextureLayered {
-    fileprivate static var className = StringName("PlaceholderTextureLayered")
+    private static var className = StringName("PlaceholderTextureLayered")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -60,8 +60,8 @@ open class PlaceholderTextureLayered: TextureLayered {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &PlaceholderTextureLayered.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -73,6 +73,7 @@ open class PlaceholderTextureLayered: TextureLayered {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -86,8 +87,8 @@ open class PlaceholderTextureLayered: TextureLayered {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &PlaceholderTextureLayered.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -99,13 +100,14 @@ open class PlaceholderTextureLayered: TextureLayered {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(PlaceholderTextureLayered.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layers")
+    fileprivate static let method_set_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layers")
         return withUnsafePointer(to: &PlaceholderTextureLayered.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -117,6 +119,7 @@ open class PlaceholderTextureLayered: TextureLayered {
     
     @inline(__always)
     fileprivate final func set_layers(_ layers: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

@@ -38,7 +38,7 @@ import Musl
 /// - ``poseRecentered``
 /// - ``refreshRateChanged``
 open class OpenXRInterface: XRInterface {
-    fileprivate static var className = StringName("OpenXRInterface")
+    private static var className = StringName("OpenXRInterface")
     override open class var godotClassName: StringName { className }
     public enum Hand: Int64, CaseIterable {
         /// Left hand.
@@ -247,8 +247,8 @@ open class OpenXRInterface: XRInterface {
     }
     
     /* Methods */
-    fileprivate static var method_get_display_refresh_rate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_display_refresh_rate")
+    fileprivate static let method_get_display_refresh_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_display_refresh_rate")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -260,13 +260,14 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_display_refresh_rate() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_display_refresh_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_display_refresh_rate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_display_refresh_rate")
+    fileprivate static let method_set_display_refresh_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_display_refresh_rate")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -278,6 +279,7 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_display_refresh_rate(_ refreshRate: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: refreshRate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -291,8 +293,8 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_render_target_size_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_target_size_multiplier")
+    fileprivate static let method_get_render_target_size_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_target_size_multiplier")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -304,13 +306,14 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_render_target_size_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_render_target_size_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_render_target_size_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_render_target_size_multiplier")
+    fileprivate static let method_set_render_target_size_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_render_target_size_multiplier")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -322,6 +325,7 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_render_target_size_multiplier(_ multiplier: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -335,8 +339,8 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_is_foveation_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_foveation_supported")
+    fileprivate static let method_is_foveation_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_foveation_supported")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -351,13 +355,14 @@ open class OpenXRInterface: XRInterface {
     /// > Note: This feature is only available on the compatibility renderer and currently only available on some stand alone headsets. For Vulkan set ``Viewport/vrsMode`` to `VRS_XR` on desktop.
     /// 
     public final func isFoveationSupported() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(OpenXRInterface.method_is_foveation_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_foveation_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_foveation_level")
+    fileprivate static let method_get_foveation_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_foveation_level")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -369,13 +374,14 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_foveation_level() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_foveation_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_foveation_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_foveation_level")
+    fileprivate static let method_set_foveation_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_foveation_level")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -387,6 +393,7 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_foveation_level(_ foveationLevel: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: foveationLevel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -400,8 +407,8 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_foveation_dynamic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_foveation_dynamic")
+    fileprivate static let method_get_foveation_dynamic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_foveation_dynamic")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -413,13 +420,14 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_foveation_dynamic() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_foveation_dynamic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_foveation_dynamic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_foveation_dynamic")
+    fileprivate static let method_set_foveation_dynamic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_foveation_dynamic")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -431,6 +439,7 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_foveation_dynamic(_ foveationDynamic: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: foveationDynamic) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -444,8 +453,8 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_is_action_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action_set_active")
+    fileprivate static let method_is_action_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action_set_active")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -457,6 +466,7 @@ open class OpenXRInterface: XRInterface {
     
     /// Returns `true` if the given action set is active.
     public final func isActionSetActive(name: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -472,8 +482,8 @@ open class OpenXRInterface: XRInterface {
         return _result
     }
     
-    fileprivate static var method_set_action_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_action_set_active")
+    fileprivate static let method_set_action_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_action_set_active")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678287736)!
@@ -485,6 +495,7 @@ open class OpenXRInterface: XRInterface {
     
     /// Sets the given action set as active or inactive.
     public final func setActionSetActive(name: String, active: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: active) { pArg1 in
@@ -502,8 +513,8 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_action_sets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_sets")
+    fileprivate static let method_get_action_sets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_sets")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -514,14 +525,15 @@ open class OpenXRInterface: XRInterface {
     }()
     
     /// Returns a list of action sets registered with Godot (loaded from the action map at runtime).
-    public final func getActionSets() -> GArray {
-        let _result: GArray = GArray ()
+    public final func getActionSets() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_action_sets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_available_display_refresh_rates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_available_display_refresh_rates")
+    fileprivate static let method_get_available_display_refresh_rates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_available_display_refresh_rates")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -532,14 +544,15 @@ open class OpenXRInterface: XRInterface {
     }()
     
     /// Returns display refresh rates supported by the current HMD. Only returned if this feature is supported by the OpenXR runtime and after the interface has been initialized.
-    public final func getAvailableDisplayRefreshRates() -> GArray {
-        let _result: GArray = GArray ()
+    public final func getAvailableDisplayRefreshRates() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_available_display_refresh_rates, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_motion_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_motion_range")
+    fileprivate static let method_set_motion_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_motion_range")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 855158159)!
@@ -551,6 +564,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled and motion range is supported, sets the currently configured motion range for `hand` to `motionRange`.
     public final func setMotionRange(hand: OpenXRInterface.Hand, motionRange: OpenXRInterface.HandMotionRange) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: motionRange.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -567,8 +581,8 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_motion_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_motion_range")
+    fileprivate static let method_get_motion_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_motion_range")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3955838114)!
@@ -580,6 +594,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled and motion range is supported, gets the currently configured motion range for `hand`.
     public final func getMotionRange(hand: OpenXRInterface.Hand) -> OpenXRInterface.HandMotionRange {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -594,8 +609,8 @@ open class OpenXRInterface: XRInterface {
         return OpenXRInterface.HandMotionRange (rawValue: _result)!
     }
     
-    fileprivate static var method_get_hand_tracking_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_tracking_source")
+    fileprivate static let method_get_hand_tracking_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_tracking_source")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4092421202)!
@@ -607,6 +622,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled and hand tracking source is supported, gets the source of the hand tracking data for `hand`.
     public final func getHandTrackingSource(hand: OpenXRInterface.Hand) -> OpenXRInterface.HandTrackedSource {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -621,8 +637,8 @@ open class OpenXRInterface: XRInterface {
         return OpenXRInterface.HandTrackedSource (rawValue: _result)!
     }
     
-    fileprivate static var method_get_hand_joint_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_flags")
+    fileprivate static let method_get_hand_joint_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_flags")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 720567706)!
@@ -634,6 +650,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled, returns flags that inform us of the validity of the tracking data.
     public final func getHandJointFlags(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> OpenXRInterface.HandJointFlags {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: OpenXRInterface.HandJointFlags = OpenXRInterface.HandJointFlags ()
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: joint.rawValue) { pArg1 in
@@ -651,8 +668,8 @@ open class OpenXRInterface: XRInterface {
         return _result
     }
     
-    fileprivate static var method_get_hand_joint_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_rotation")
+    fileprivate static let method_get_hand_joint_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_rotation")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1974618321)!
@@ -664,6 +681,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled, returns the rotation of a joint (`joint`) of a hand (`hand`) as provided by OpenXR.
     public final func getHandJointRotation(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Quaternion {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: joint.rawValue) { pArg1 in
@@ -681,8 +699,8 @@ open class OpenXRInterface: XRInterface {
         return _result
     }
     
-    fileprivate static var method_get_hand_joint_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_position")
+    fileprivate static let method_get_hand_joint_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_position")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3529194242)!
@@ -694,6 +712,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled, returns the position of a joint (`joint`) of a hand (`hand`) as provided by OpenXR. This is relative to ``XROrigin3D`` without worldscale applied!
     public final func getHandJointPosition(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: joint.rawValue) { pArg1 in
@@ -711,8 +730,8 @@ open class OpenXRInterface: XRInterface {
         return _result
     }
     
-    fileprivate static var method_get_hand_joint_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_radius")
+    fileprivate static let method_get_hand_joint_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_radius")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 901522724)!
@@ -724,6 +743,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled, returns the radius of a joint (`joint`) of a hand (`hand`) as provided by OpenXR. This is without worldscale applied!
     public final func getHandJointRadius(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: joint.rawValue) { pArg1 in
@@ -741,8 +761,8 @@ open class OpenXRInterface: XRInterface {
         return _result
     }
     
-    fileprivate static var method_get_hand_joint_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_linear_velocity")
+    fileprivate static let method_get_hand_joint_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_linear_velocity")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3529194242)!
@@ -754,6 +774,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled, returns the linear velocity of a joint (`joint`) of a hand (`hand`) as provided by OpenXR. This is relative to ``XROrigin3D`` without worldscale applied!
     public final func getHandJointLinearVelocity(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: joint.rawValue) { pArg1 in
@@ -771,8 +792,8 @@ open class OpenXRInterface: XRInterface {
         return _result
     }
     
-    fileprivate static var method_get_hand_joint_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_angular_velocity")
+    fileprivate static let method_get_hand_joint_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_angular_velocity")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3529194242)!
@@ -784,6 +805,7 @@ open class OpenXRInterface: XRInterface {
     
     /// If handtracking is enabled, returns the angular velocity of a joint (`joint`) of a hand (`hand`) as provided by OpenXR. This is relative to ``XROrigin3D``!
     public final func getHandJointAngularVelocity(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: joint.rawValue) { pArg1 in
@@ -801,8 +823,8 @@ open class OpenXRInterface: XRInterface {
         return _result
     }
     
-    fileprivate static var method_is_hand_tracking_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hand_tracking_supported")
+    fileprivate static let method_is_hand_tracking_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hand_tracking_supported")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -817,13 +839,14 @@ open class OpenXRInterface: XRInterface {
     /// > Note: This only returns a valid value after OpenXR has been initialized.
     /// 
     public final func isHandTrackingSupported() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(OpenXRInterface.method_is_hand_tracking_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_hand_interaction_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hand_interaction_supported")
+    fileprivate static let method_is_hand_interaction_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hand_interaction_supported")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -838,13 +861,14 @@ open class OpenXRInterface: XRInterface {
     /// > Note: This only returns a valid value after OpenXR has been initialized.
     /// 
     public final func isHandInteractionSupported() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(OpenXRInterface.method_is_hand_interaction_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_eye_gaze_interaction_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_eye_gaze_interaction_supported")
+    fileprivate static let method_is_eye_gaze_interaction_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_eye_gaze_interaction_supported")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -859,13 +883,14 @@ open class OpenXRInterface: XRInterface {
     /// > Note: This only returns a valid value after OpenXR has been initialized.
     /// 
     public final func isEyeGazeInteractionSupported() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(OpenXRInterface.method_is_eye_gaze_interaction_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_vrs_min_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_min_radius")
+    fileprivate static let method_get_vrs_min_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_min_radius")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -877,13 +902,14 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_vrs_min_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vrs_min_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_min_radius")
+    fileprivate static let method_set_vrs_min_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_min_radius")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -895,6 +921,7 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_vrs_min_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -908,8 +935,8 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    fileprivate static var method_get_vrs_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vrs_strength")
+    fileprivate static let method_get_vrs_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vrs_strength")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -921,13 +948,14 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func get_vrs_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRInterface.method_get_vrs_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vrs_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vrs_strength")
+    fileprivate static let method_set_vrs_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vrs_strength")
         return withUnsafePointer(to: &OpenXRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -939,6 +967,7 @@ open class OpenXRInterface: XRInterface {
     
     @inline(__always)
     fileprivate final func set_vrs_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1067,7 +1096,7 @@ open class OpenXRInterface: XRInterface {
     
     /// Informs the user the HMD refresh rate has changed.
     /// 
-    /// **Node:** Only emitted if XR runtime supports the refresh rate extension.
+    /// > Note: Only emitted if XR runtime supports the refresh rate extension.
     /// 
     ///
     /// To connect to this signal, reference this property and call the

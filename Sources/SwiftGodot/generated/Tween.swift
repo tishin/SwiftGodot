@@ -45,7 +45,7 @@ import Musl
 /// 
 /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/tween_cheatsheet.webp">Tween easing and transition types cheatsheet</a>
 /// 
-/// > Note: Tweens are not designed to be re-used and trying to do so results in an undefined behavior. Create a new Tween for each animation and every time you replay an animation from start. Keep in mind that Tweens start immediately, so only create a Tween when you want to start animating.
+/// > Note: Tweens are not designed to be reused and trying to do so results in an undefined behavior. Create a new Tween for each animation and every time you replay an animation from start. Keep in mind that Tweens start immediately, so only create a Tween when you want to start animating.
 /// 
 /// > Note: The tween is processed after all of the nodes in the current frame, i.e. node's ``Node/_process(delta:)`` method would be called before the tween (or ``Node/_physicsProcess(delta:)`` depending on the value passed to ``setProcessMode(_:)``).
 /// 
@@ -57,7 +57,7 @@ import Musl
 /// - ``loopFinished``
 /// - ``finished``
 open class Tween: RefCounted {
-    fileprivate static var className = StringName("Tween")
+    private static var className = StringName("Tween")
     override open class var godotClassName: StringName { className }
     public enum TweenProcessMode: Int64, CaseIterable {
         /// The ``Tween`` updates after each physics frame (see ``Node/_physicsProcess(delta:)``).
@@ -114,8 +114,8 @@ open class Tween: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_tween_property: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tween_property")
+    fileprivate static let method_tween_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tween_property")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4049770449)!
@@ -127,8 +127,6 @@ open class Tween: RefCounted {
     
     /// Creates and appends a ``PropertyTweener``. This method tweens a `property` of an `object` between an initial value and `finalVal` in a span of time equal to `duration`, in seconds. The initial value by default is the property's value at the time the tweening of the ``PropertyTweener`` starts.
     /// 
-    /// **Example:**
-    /// 
     /// will move the sprite to position (100, 200) and then to (200, 300). If you use ``PropertyTweener/from(value:)`` or ``PropertyTweener/fromCurrent()``, the starting position will be overwritten by the given value instead. See other methods in ``PropertyTweener`` to see how the tweening can be tweaked further.
     /// 
     /// > Note: You can find the correct property name by hovering over the property in the Inspector. You can also provide the components of a property directly by using `"property:component"` (eg. `position:x`), where it would only apply to that particular component.
@@ -136,6 +134,7 @@ open class Tween: RefCounted {
     /// **Example:** Moving an object twice from the same position, with different transition types:
     /// 
     public final func tweenProperty(object: Object?, property: NodePath, finalVal: Variant?, duration: Double) -> PropertyTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: property.content) { pArg1 in
@@ -156,11 +155,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_tween_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tween_interval")
+    fileprivate static let method_tween_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tween_interval")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 413360199)!
@@ -177,6 +176,7 @@ open class Tween: RefCounted {
     /// **Example:** Creating an object that moves back and forth and jumps every few seconds:
     /// 
     public final func tweenInterval(time: Double) -> IntervalTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -188,11 +188,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_tween_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tween_callback")
+    fileprivate static let method_tween_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tween_callback")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1540176488)!
@@ -209,6 +209,7 @@ open class Tween: RefCounted {
     /// **Example:** Turning a sprite red and then blue, with 2 second delay:
     /// 
     public final func tweenCallback(_ callback: Callable) -> CallbackTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: callback.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -220,11 +221,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_tween_method: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tween_method")
+    fileprivate static let method_tween_method: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tween_method")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2337877153)!
@@ -241,6 +242,7 @@ open class Tween: RefCounted {
     /// **Example:** Setting the text of a ``Label``, using an intermediate method and after a delay:
     /// 
     public final func tweenMethod(_ method: Callable, from: Variant?, to: Variant?, duration: Double) -> MethodTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: from.content) { pArg1 in
@@ -261,11 +263,44 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_custom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("custom_step")
+    fileprivate static let method_tween_subtween: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tween_subtween")
+        return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1567358477)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Creates and appends a ``SubtweenTweener``. This method can be used to nest `subtween` within this ``Tween``, allowing for the creation of more complex and composable sequences.
+    /// 
+    /// > Note: The methods ``pause()``, ``stop()``, and ``setLoops(_:)`` can cause the parent ``Tween`` to get stuck on the subtween step; see the documentation for those methods for more information.
+    /// 
+    /// > Note: The pause and process modes set by ``setPauseMode(_:)`` and ``setProcessMode(_:)`` on `subtween` will be overridden by the parent ``Tween``'s settings.
+    /// 
+    public final func tweenSubtween(_ subtween: Tween?) -> SubtweenTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: subtween?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Tween.method_tween_subtween, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_custom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("custom_step")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 330693286)!
@@ -280,6 +315,7 @@ open class Tween: RefCounted {
     /// Returns `true` if the ``Tween`` still has ``Tweener``s that haven't finished.
     /// 
     public final func customStep(delta: Double) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -294,8 +330,8 @@ open class Tween: RefCounted {
         return _result
     }
     
-    fileprivate static var method_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop")
+    fileprivate static let method_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -307,15 +343,18 @@ open class Tween: RefCounted {
     
     /// Stops the tweening and resets the ``Tween`` to its initial state. This will not remove any appended ``Tweener``s.
     /// 
+    /// > Note: This does _not_ reset targets of ``PropertyTweener``s to their values when the ``Tween`` first started.
+    /// 
     /// > Note: If a Tween is stopped and not bound to any node, it will exist indefinitely until manually started or invalidated. If you lose a reference to such Tween, you can retrieve it using ``SceneTree/getProcessedTweens()``.
     /// 
     public final func stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Tween.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_pause: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pause")
+    fileprivate static let method_pause: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pause")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -330,12 +369,13 @@ open class Tween: RefCounted {
     /// > Note: If a Tween is paused and not bound to any node, it will exist indefinitely until manually started or invalidated. If you lose a reference to such Tween, you can retrieve it using ``SceneTree/getProcessedTweens()``.
     /// 
     public final func pause() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Tween.method_pause, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_play: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play")
+    fileprivate static let method_play: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -347,12 +387,13 @@ open class Tween: RefCounted {
     
     /// Resumes a paused or stopped ``Tween``.
     public final func play() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Tween.method_play, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_kill: GDExtensionMethodBindPtr = {
-        let methodName = StringName("kill")
+    fileprivate static let method_kill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("kill")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -364,12 +405,13 @@ open class Tween: RefCounted {
     
     /// Aborts all tweening operations and invalidates the ``Tween``.
     public final func kill() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Tween.method_kill, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_total_elapsed_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_elapsed_time")
+    fileprivate static let method_get_total_elapsed_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_elapsed_time")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -384,13 +426,14 @@ open class Tween: RefCounted {
     /// > Note: As it results from accumulating frame deltas, the time returned after the ``Tween`` has finished animating will be slightly greater than the actual ``Tween`` duration.
     /// 
     public final func getTotalElapsedTime() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Tween.method_get_total_elapsed_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_running: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_running")
+    fileprivate static let method_is_running: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_running")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -402,13 +445,14 @@ open class Tween: RefCounted {
     
     /// Returns whether the ``Tween`` is currently running, i.e. it wasn't paused and it's not finished.
     public final func isRunning() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tween.method_is_running, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_valid")
+    fileprivate static let method_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_valid")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -420,13 +464,14 @@ open class Tween: RefCounted {
     
     /// Returns whether the ``Tween`` is valid. A valid ``Tween`` is a ``Tween`` contained by the scene tree (i.e. the array from ``SceneTree/getProcessedTweens()`` will contain this ``Tween``). A ``Tween`` might become invalid when it has finished tweening, is killed, or when created with `Tween.new()`. Invalid ``Tween``s can't have ``Tweener``s appended.
     public final func isValid() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tween.method_is_valid, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_bind_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bind_node")
+    fileprivate static let method_bind_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bind_node")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2946786331)!
@@ -441,6 +486,7 @@ open class Tween: RefCounted {
     /// For a shorter way to create and bind a ``Tween``, you can use ``Node/createTween()``.
     /// 
     public final func bindNode(_ node: Node?) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -452,11 +498,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_process_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_mode")
+    fileprivate static let method_set_process_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_mode")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 855258840)!
@@ -471,6 +517,7 @@ open class Tween: RefCounted {
     /// Default value is ``TweenProcessMode/idle``.
     /// 
     public final func setProcessMode(_ mode: Tween.TweenProcessMode) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -482,11 +529,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_pause_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pause_mode")
+    fileprivate static let method_set_pause_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pause_mode")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3363368837)!
@@ -501,6 +548,7 @@ open class Tween: RefCounted {
     /// Default value is ``TweenPauseMode/bound``.
     /// 
     public final func setPauseMode(_ mode: Tween.TweenPauseMode) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -512,11 +560,39 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_parallel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parallel")
+    fileprivate static let method_set_ignore_time_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ignore_time_scale")
+        return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1942052223)!
+            }
+            
+        }
+        
+    }()
+    
+    /// If `ignore` is `true`, the tween will ignore ``Engine/timeScale`` and update with the real, elapsed time. This affects all ``Tweener``s and their delays. Default value is `false`.
+    public final func setIgnoreTimeScale(ignore: Bool = true) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: ignore) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Tween.method_set_ignore_time_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_set_parallel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parallel")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1942052223)!
@@ -531,6 +607,7 @@ open class Tween: RefCounted {
     /// > Note: Just like with ``parallel()``, the tweener added right before this method will also be part of the parallel step.
     /// 
     public final func setParallel(_ parallel: Bool = true) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: parallel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -542,11 +619,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_loops: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_loops")
+    fileprivate static let method_set_loops: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_loops")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2670836414)!
@@ -563,6 +640,7 @@ open class Tween: RefCounted {
     /// > Warning: Make sure to always add some duration/delay when using infinite loops. To prevent the game freezing, 0-duration looped animations (e.g. a single ``CallbackTweener`` with no delay) are stopped after a small number of loops, which may produce unexpected results. If a ``Tween``'s lifetime depends on some node, always use ``bindNode(_:)``.
     /// 
     public final func setLoops(_ loops: Int32 = 0) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: loops) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -574,11 +652,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_loops_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_loops_left")
+    fileprivate static let method_get_loops_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_loops_left")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -590,13 +668,14 @@ open class Tween: RefCounted {
     
     /// Returns the number of remaining loops for this ``Tween`` (see ``setLoops(_:)``). A return value of `-1` indicates an infinitely looping ``Tween``, and a return value of `0` indicates that the ``Tween`` has already finished.
     public final func getLoopsLeft() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Tween.method_get_loops_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_speed_scale")
+    fileprivate static let method_set_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_speed_scale")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3961971106)!
@@ -608,6 +687,7 @@ open class Tween: RefCounted {
     
     /// Scales the speed of tweening. This affects all ``Tweener``s and their delays.
     public final func setSpeedScale(speed: Double) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: speed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -619,11 +699,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_trans: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_trans")
+    fileprivate static let method_set_trans: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_trans")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3965963875)!
@@ -633,11 +713,12 @@ open class Tween: RefCounted {
         
     }()
     
-    /// Sets the default transition type for ``PropertyTweener``s and ``MethodTweener``s animated by this ``Tween``.
+    /// Sets the default transition type for ``PropertyTweener``s and ``MethodTweener``s appended after this method.
     /// 
-    /// If not specified, the default value is ``TransitionType/linear``.
+    /// Before this method is called, the default transition type is ``TransitionType/linear``.
     /// 
     public final func setTrans(_ trans: Tween.TransitionType) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: trans.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -649,11 +730,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_ease: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ease")
+    fileprivate static let method_set_ease: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ease")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1208117252)!
@@ -663,11 +744,12 @@ open class Tween: RefCounted {
         
     }()
     
-    /// Sets the default ease type for ``PropertyTweener``s and ``MethodTweener``s animated by this ``Tween``.
+    /// Sets the default ease type for ``PropertyTweener``s and ``MethodTweener``s appended after this method.
     /// 
-    /// If not specified, the default value is ``EaseType/inOut``.
+    /// Before this method is called, the default ease type is ``EaseType/inOut``.
     /// 
     public final func setEase(_ ease: Tween.EaseType) -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: ease.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -679,11 +761,11 @@ open class Tween: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_parallel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parallel")
+    fileprivate static let method_parallel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parallel")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3426978995)!
@@ -695,20 +777,19 @@ open class Tween: RefCounted {
     
     /// Makes the next ``Tweener`` run parallelly to the previous one.
     /// 
-    /// **Example:**
-    /// 
     /// All ``Tweener``s in the example will run at the same time.
     /// 
     /// You can make the ``Tween`` parallel by default by using ``setParallel(_:)``.
     /// 
     public final func parallel() -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Tween.method_parallel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_chain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("chain")
+    fileprivate static let method_chain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("chain")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3426978995)!
@@ -721,13 +802,14 @@ open class Tween: RefCounted {
     /// Used to chain two ``Tweener``s after ``setParallel(_:)`` is called with `true`.
     /// 
     public final func chain() -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Tween.method_chain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_interpolate_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("interpolate_value")
+    fileprivate static let method_interpolate_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("interpolate_value")
         return withUnsafePointer(to: &Tween.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3452526450)!

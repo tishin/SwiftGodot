@@ -23,12 +23,12 @@ import Musl
 /// 
 /// This audio effect does not affect sound output, but can be used for real-time audio visualizations.
 /// 
-/// This resource configures an ``AudioEffectSpectrumAnalyzerInstance``, which performs the actual analysis at runtime. An instance can be acquired with ``AudioServer/getBusEffectInstance(busIdx:effectIdx:channel:)``.
+/// This resource configures an ``AudioEffectSpectrumAnalyzerInstance``, which performs the actual analysis at runtime. An instance can be obtained with ``AudioServer/getBusEffectInstance(busIdx:effectIdx:channel:)``.
 /// 
 /// See also ``AudioStreamGenerator`` for procedurally generating sounds.
 /// 
 open class AudioEffectSpectrumAnalyzer: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectSpectrumAnalyzer")
+    private static var className = StringName("AudioEffectSpectrumAnalyzer")
     override open class var godotClassName: StringName { className }
     public enum FFTSize: Int64, CaseIterable {
         /// Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
@@ -84,8 +84,8 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_buffer_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_buffer_length")
+    fileprivate static let method_set_buffer_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_buffer_length")
         return withUnsafePointer(to: &AudioEffectSpectrumAnalyzer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -97,6 +97,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_buffer_length(_ seconds: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -110,8 +111,8 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         
     }
     
-    fileprivate static var method_get_buffer_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer_length")
+    fileprivate static let method_get_buffer_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer_length")
         return withUnsafePointer(to: &AudioEffectSpectrumAnalyzer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -123,13 +124,14 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_buffer_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_buffer_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap_back_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap_back_pos")
+    fileprivate static let method_set_tap_back_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap_back_pos")
         return withUnsafePointer(to: &AudioEffectSpectrumAnalyzer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -141,6 +143,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap_back_pos(_ seconds: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -154,8 +157,8 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         
     }
     
-    fileprivate static var method_get_tap_back_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tap_back_pos")
+    fileprivate static let method_get_tap_back_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tap_back_pos")
         return withUnsafePointer(to: &AudioEffectSpectrumAnalyzer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -167,13 +170,14 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_tap_back_pos() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_tap_back_pos, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fft_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fft_size")
+    fileprivate static let method_set_fft_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fft_size")
         return withUnsafePointer(to: &AudioEffectSpectrumAnalyzer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1202879215)!
@@ -185,6 +189,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_fft_size(_ size: AudioEffectSpectrumAnalyzer.FFTSize) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -198,8 +203,8 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         
     }
     
-    fileprivate static var method_get_fft_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fft_size")
+    fileprivate static let method_get_fft_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fft_size")
         return withUnsafePointer(to: &AudioEffectSpectrumAnalyzer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3925405343)!
@@ -211,6 +216,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_fft_size() -> AudioEffectSpectrumAnalyzer.FFTSize {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_fft_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AudioEffectSpectrumAnalyzer.FFTSize (rawValue: _result)!

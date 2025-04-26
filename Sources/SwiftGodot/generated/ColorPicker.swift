@@ -33,7 +33,7 @@ import Musl
 /// - ``presetAdded``
 /// - ``presetRemoved``
 open class ColorPicker: VBoxContainer {
-    fileprivate static var className = StringName("ColorPicker")
+    private static var className = StringName("ColorPicker")
     override open class var godotClassName: StringName { className }
     public enum ColorModeType: Int64, CaseIterable {
         /// Allows editing the color with Red/Green/Blue sliders.
@@ -200,8 +200,8 @@ open class ColorPicker: VBoxContainer {
     }
     
     /* Methods */
-    fileprivate static var method_set_pick_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pick_color")
+    fileprivate static let method_set_pick_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pick_color")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -213,6 +213,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_pick_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -226,8 +227,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_get_pick_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pick_color")
+    fileprivate static let method_get_pick_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pick_color")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -239,13 +240,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func get_pick_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(ColorPicker.method_get_pick_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_deferred_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deferred_mode")
+    fileprivate static let method_set_deferred_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deferred_mode")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -257,6 +259,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_deferred_mode(_ mode: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -270,8 +273,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_is_deferred_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_deferred_mode")
+    fileprivate static let method_is_deferred_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_deferred_mode")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -283,13 +286,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func is_deferred_mode() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_is_deferred_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_color_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color_mode")
+    fileprivate static let method_set_color_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color_mode")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1579114136)!
@@ -301,6 +305,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_color_mode(_ colorMode: ColorPicker.ColorModeType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: colorMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -314,8 +319,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_get_color_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color_mode")
+    fileprivate static let method_get_color_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color_mode")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 392907674)!
@@ -327,13 +332,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func get_color_mode() -> ColorPicker.ColorModeType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ColorPicker.method_get_color_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ColorPicker.ColorModeType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_edit_alpha: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_edit_alpha")
+    fileprivate static let method_set_edit_alpha: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_edit_alpha")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -345,6 +351,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_edit_alpha(_ show: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: show) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -358,8 +365,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_is_editing_alpha: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_editing_alpha")
+    fileprivate static let method_is_editing_alpha: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_editing_alpha")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -371,13 +378,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func is_editing_alpha() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_is_editing_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_can_add_swatches: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_can_add_swatches")
+    fileprivate static let method_set_can_add_swatches: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_can_add_swatches")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -389,6 +397,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_can_add_swatches(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -402,8 +411,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_are_swatches_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("are_swatches_enabled")
+    fileprivate static let method_are_swatches_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("are_swatches_enabled")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -415,13 +424,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func are_swatches_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_are_swatches_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_presets_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_presets_visible")
+    fileprivate static let method_set_presets_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_presets_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -433,6 +443,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_presets_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -446,8 +457,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_are_presets_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("are_presets_visible")
+    fileprivate static let method_are_presets_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("are_presets_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -459,13 +470,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func are_presets_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_are_presets_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_modes_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_modes_visible")
+    fileprivate static let method_set_modes_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_modes_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -477,6 +489,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_modes_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -490,8 +503,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_are_modes_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("are_modes_visible")
+    fileprivate static let method_are_modes_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("are_modes_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -503,13 +516,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func are_modes_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_are_modes_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sampler_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sampler_visible")
+    fileprivate static let method_set_sampler_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sampler_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -521,6 +535,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_sampler_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -534,8 +549,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_is_sampler_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sampler_visible")
+    fileprivate static let method_is_sampler_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sampler_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -547,13 +562,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func is_sampler_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_is_sampler_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sliders_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sliders_visible")
+    fileprivate static let method_set_sliders_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sliders_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -565,6 +581,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_sliders_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -578,8 +595,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_are_sliders_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("are_sliders_visible")
+    fileprivate static let method_are_sliders_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("are_sliders_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -591,13 +608,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func are_sliders_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_are_sliders_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hex_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hex_visible")
+    fileprivate static let method_set_hex_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hex_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -609,6 +627,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_hex_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -622,8 +641,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_is_hex_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hex_visible")
+    fileprivate static let method_is_hex_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hex_visible")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -635,13 +654,14 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func is_hex_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ColorPicker.method_is_hex_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_preset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_preset")
+    fileprivate static let method_add_preset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_preset")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -656,6 +676,7 @@ open class ColorPicker: VBoxContainer {
     /// > Note: The presets list is only for _this_ color picker.
     /// 
     public final func addPreset(color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -669,8 +690,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_erase_preset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("erase_preset")
+    fileprivate static let method_erase_preset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("erase_preset")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -682,6 +703,7 @@ open class ColorPicker: VBoxContainer {
     
     /// Removes the given color from the list of color presets of this color picker.
     public final func erasePreset(color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -695,8 +717,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_get_presets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_presets")
+    fileprivate static let method_get_presets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_presets")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1392750486)!
@@ -708,13 +730,14 @@ open class ColorPicker: VBoxContainer {
     
     /// Returns the list of colors in the presets of the color picker.
     public final func getPresets() -> PackedColorArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
         gi.object_method_bind_ptrcall(ColorPicker.method_get_presets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_add_recent_preset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_recent_preset")
+    fileprivate static let method_add_recent_preset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_recent_preset")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -729,6 +752,7 @@ open class ColorPicker: VBoxContainer {
     /// > Note: The recent presets list is only for _this_ color picker.
     /// 
     public final func addRecentPreset(color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -742,8 +766,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_erase_recent_preset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("erase_recent_preset")
+    fileprivate static let method_erase_recent_preset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("erase_recent_preset")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -755,6 +779,7 @@ open class ColorPicker: VBoxContainer {
     
     /// Removes the given color from the list of color recent presets of this color picker.
     public final func eraseRecentPreset(color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -768,8 +793,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_get_recent_presets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_recent_presets")
+    fileprivate static let method_get_recent_presets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_recent_presets")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1392750486)!
@@ -781,13 +806,14 @@ open class ColorPicker: VBoxContainer {
     
     /// Returns the list of colors in the recent presets of the color picker.
     public final func getRecentPresets() -> PackedColorArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
         gi.object_method_bind_ptrcall(ColorPicker.method_get_recent_presets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_picker_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_picker_shape")
+    fileprivate static let method_set_picker_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_picker_shape")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3981373861)!
@@ -799,6 +825,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func set_picker_shape(_ shape: ColorPicker.PickerShapeType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -812,8 +839,8 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    fileprivate static var method_get_picker_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_picker_shape")
+    fileprivate static let method_get_picker_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_picker_shape")
         return withUnsafePointer(to: &ColorPicker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1143229889)!
@@ -825,6 +852,7 @@ open class ColorPicker: VBoxContainer {
     
     @inline(__always)
     fileprivate final func get_picker_shape() -> ColorPicker.PickerShapeType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ColorPicker.method_get_picker_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ColorPicker.PickerShapeType (rawValue: _result)!

@@ -28,7 +28,7 @@ import Musl
 /// Use ``Control/theme`` of any control node to set up a theme that will be available to that control and all of its direct and indirect children.
 /// 
 open class Theme: Resource {
-    fileprivate static var className = StringName("Theme")
+    private static var className = StringName("Theme")
     override open class var godotClassName: StringName { className }
     public enum DataType: Int64, CaseIterable {
         /// Theme's ``Color`` item type.
@@ -82,7 +82,7 @@ open class Theme: Resource {
     
     /// The default font size of this theme resource. Used as the default value when trying to fetch a font size value that doesn't exist in this theme or is in invalid state. If the default font size is also missing or invalid, the engine fallback value is used (see ``ThemeDB/fallbackFontSize``).
     /// 
-    /// Values below `0` are invalid and can be used to unset the property. Use ``hasDefaultFontSize()`` to check if this value is valid.
+    /// Values below `1` are invalid and can be used to unset the property. Use ``hasDefaultFontSize()`` to check if this value is valid.
     /// 
     final public var defaultFontSize: Int32 {
         get {
@@ -96,8 +96,8 @@ open class Theme: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_icon")
+    fileprivate static let method_set_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_icon")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2188371082)!
@@ -109,6 +109,7 @@ open class Theme: Resource {
     
     /// Creates or changes the value of the icon property defined by `name` and `themeType`. Use ``clearIcon(name:themeType:)`` to remove the property.
     public final func setIcon(name: StringName, themeType: StringName, texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: texture?.handle) { pArg2 in
@@ -128,8 +129,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_icon")
+    fileprivate static let method_get_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_icon")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 934555193)!
@@ -144,6 +145,7 @@ open class Theme: Resource {
     /// Returns the engine fallback icon value if the property doesn't exist (see ``ThemeDB/fallbackIcon``). Use ``hasIcon(name:themeType:)`` to check for existence.
     /// 
     public final func getIcon(name: StringName, themeType: StringName) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -158,11 +160,11 @@ open class Theme: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_has_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_icon")
+    fileprivate static let method_has_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_icon")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -177,6 +179,7 @@ open class Theme: Resource {
     /// Returns `false` if it doesn't exist. Use ``setIcon(name:themeType:texture:)`` to define it.
     /// 
     public final func hasIcon(name: StringName, themeType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -194,8 +197,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_rename_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_icon")
+    fileprivate static let method_rename_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_icon")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642128662)!
@@ -210,6 +213,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist, or if a similar property with the new name already exists. Use ``hasIcon(name:themeType:)`` to check for existence, and ``clearIcon(name:themeType:)`` to remove the existing property.
     /// 
     public final func renameIcon(oldName: StringName, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oldName.content) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -229,8 +233,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_icon")
+    fileprivate static let method_clear_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_icon")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -245,6 +249,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist. Use ``hasIcon(name:themeType:)`` to check for existence.
     /// 
     public final func clearIcon(name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -261,8 +266,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_icon_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_icon_list")
+    fileprivate static let method_get_icon_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_icon_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
@@ -274,6 +279,7 @@ open class Theme: Resource {
     
     /// Returns a list of names for icon properties defined with `themeType`. Use ``getIconTypeList()`` to get a list of possible theme type names.
     public final func getIconList(themeType: String) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         let themeType = GString(themeType)
         withUnsafePointer(to: themeType.content) { pArg0 in
@@ -289,8 +295,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_icon_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_icon_type_list")
+    fileprivate static let method_get_icon_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_icon_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -302,13 +308,14 @@ open class Theme: Resource {
     
     /// Returns a list of all unique theme type names for icon properties. Use ``getTypeList()`` to get a list of all unique theme types.
     public final func getIconTypeList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Theme.method_get_icon_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stylebox")
+    fileprivate static let method_set_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stylebox")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2075907568)!
@@ -320,6 +327,7 @@ open class Theme: Resource {
     
     /// Creates or changes the value of the ``StyleBox`` property defined by `name` and `themeType`. Use ``clearStylebox(name:themeType:)`` to remove the property.
     public final func setStylebox(name: StringName, themeType: StringName, texture: StyleBox?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: texture?.handle) { pArg2 in
@@ -339,8 +347,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stylebox")
+    fileprivate static let method_get_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stylebox")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3405608165)!
@@ -355,6 +363,7 @@ open class Theme: Resource {
     /// Returns the engine fallback stylebox value if the property doesn't exist (see ``ThemeDB/fallbackStylebox``). Use ``hasStylebox(name:themeType:)`` to check for existence.
     /// 
     public final func getStylebox(name: StringName, themeType: StringName) -> StyleBox? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -369,11 +378,11 @@ open class Theme: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_has_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_stylebox")
+    fileprivate static let method_has_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_stylebox")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -388,6 +397,7 @@ open class Theme: Resource {
     /// Returns `false` if it doesn't exist. Use ``setStylebox(name:themeType:texture:)`` to define it.
     /// 
     public final func hasStylebox(name: StringName, themeType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -405,8 +415,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_rename_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_stylebox")
+    fileprivate static let method_rename_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_stylebox")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642128662)!
@@ -421,6 +431,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist, or if a similar property with the new name already exists. Use ``hasStylebox(name:themeType:)`` to check for existence, and ``clearStylebox(name:themeType:)`` to remove the existing property.
     /// 
     public final func renameStylebox(oldName: StringName, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oldName.content) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -440,8 +451,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_stylebox")
+    fileprivate static let method_clear_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_stylebox")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -456,6 +467,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist. Use ``hasStylebox(name:themeType:)`` to check for existence.
     /// 
     public final func clearStylebox(name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -472,8 +484,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_stylebox_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stylebox_list")
+    fileprivate static let method_get_stylebox_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stylebox_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
@@ -485,6 +497,7 @@ open class Theme: Resource {
     
     /// Returns a list of names for ``StyleBox`` properties defined with `themeType`. Use ``getStyleboxTypeList()`` to get a list of possible theme type names.
     public final func getStyleboxList(themeType: String) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         let themeType = GString(themeType)
         withUnsafePointer(to: themeType.content) { pArg0 in
@@ -500,8 +513,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_stylebox_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stylebox_type_list")
+    fileprivate static let method_get_stylebox_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stylebox_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -513,13 +526,14 @@ open class Theme: Resource {
     
     /// Returns a list of all unique theme type names for ``StyleBox`` properties. Use ``getTypeList()`` to get a list of all unique theme types.
     public final func getStyleboxTypeList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Theme.method_get_stylebox_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font")
+    fileprivate static let method_set_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 177292320)!
@@ -531,6 +545,7 @@ open class Theme: Resource {
     
     /// Creates or changes the value of the ``Font`` property defined by `name` and `themeType`. Use ``clearFont(name:themeType:)`` to remove the property.
     public final func setFont(name: StringName, themeType: StringName, font: Font?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: font?.handle) { pArg2 in
@@ -550,8 +565,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font")
+    fileprivate static let method_get_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3445063586)!
@@ -568,6 +583,7 @@ open class Theme: Resource {
     /// Returns the engine fallback font value, if neither exist (see ``ThemeDB/fallbackFont``).
     /// 
     public final func getFont(name: StringName, themeType: StringName) -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -582,11 +598,11 @@ open class Theme: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_has_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_font")
+    fileprivate static let method_has_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -601,6 +617,7 @@ open class Theme: Resource {
     /// Returns `false` if neither exist. Use ``setFont(name:themeType:font:)`` to define the property.
     /// 
     public final func hasFont(name: StringName, themeType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -618,8 +635,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_rename_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_font")
+    fileprivate static let method_rename_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642128662)!
@@ -634,6 +651,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist, or if a similar property with the new name already exists. Use ``hasFont(name:themeType:)`` to check for existence, and ``clearFont(name:themeType:)`` to remove the existing property.
     /// 
     public final func renameFont(oldName: StringName, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oldName.content) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -653,8 +671,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_font")
+    fileprivate static let method_clear_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -669,6 +687,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist. Use ``hasFont(name:themeType:)`` to check for existence.
     /// 
     public final func clearFont(name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -685,8 +704,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_font_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_list")
+    fileprivate static let method_get_font_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
@@ -698,6 +717,7 @@ open class Theme: Resource {
     
     /// Returns a list of names for ``Font`` properties defined with `themeType`. Use ``getFontTypeList()`` to get a list of possible theme type names.
     public final func getFontList(themeType: String) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         let themeType = GString(themeType)
         withUnsafePointer(to: themeType.content) { pArg0 in
@@ -713,8 +733,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_font_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_type_list")
+    fileprivate static let method_get_font_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -726,13 +746,14 @@ open class Theme: Resource {
     
     /// Returns a list of all unique theme type names for ``Font`` properties. Use ``getTypeList()`` to get a list of all unique theme types.
     public final func getFontTypeList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Theme.method_get_font_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_size")
+    fileprivate static let method_set_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 281601298)!
@@ -744,6 +765,7 @@ open class Theme: Resource {
     
     /// Creates or changes the value of the font size property defined by `name` and `themeType`. Use ``clearFontSize(name:themeType:)`` to remove the property.
     public final func setFontSize(name: StringName, themeType: StringName, fontSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: fontSize) { pArg2 in
@@ -763,8 +785,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_size")
+    fileprivate static let method_get_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2419549490)!
@@ -781,6 +803,7 @@ open class Theme: Resource {
     /// Returns the engine fallback font size value, if neither exist (see ``ThemeDB/fallbackFontSize``).
     /// 
     public final func getFontSize(name: StringName, themeType: StringName) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -798,8 +821,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_has_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_font_size")
+    fileprivate static let method_has_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -814,6 +837,7 @@ open class Theme: Resource {
     /// Returns `false` if neither exist. Use ``setFontSize(name:themeType:fontSize:)`` to define the property.
     /// 
     public final func hasFontSize(name: StringName, themeType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -831,8 +855,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_rename_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_font_size")
+    fileprivate static let method_rename_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642128662)!
@@ -847,6 +871,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist, or if a similar property with the new name already exists. Use ``hasFontSize(name:themeType:)`` to check for existence, and ``clearFontSize(name:themeType:)`` to remove the existing property.
     /// 
     public final func renameFontSize(oldName: StringName, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oldName.content) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -866,8 +891,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_font_size")
+    fileprivate static let method_clear_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -882,6 +907,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist. Use ``hasFontSize(name:themeType:)`` to check for existence.
     /// 
     public final func clearFontSize(name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -898,8 +924,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_font_size_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_size_list")
+    fileprivate static let method_get_font_size_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_size_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
@@ -911,6 +937,7 @@ open class Theme: Resource {
     
     /// Returns a list of names for font size properties defined with `themeType`. Use ``getFontSizeTypeList()`` to get a list of possible theme type names.
     public final func getFontSizeList(themeType: String) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         let themeType = GString(themeType)
         withUnsafePointer(to: themeType.content) { pArg0 in
@@ -926,8 +953,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_font_size_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_size_type_list")
+    fileprivate static let method_get_font_size_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_size_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -939,13 +966,14 @@ open class Theme: Resource {
     
     /// Returns a list of all unique theme type names for font size properties. Use ``getTypeList()`` to get a list of all unique theme types.
     public final func getFontSizeTypeList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Theme.method_get_font_size_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color")
+    fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4111215154)!
@@ -957,6 +985,7 @@ open class Theme: Resource {
     
     /// Creates or changes the value of the ``Color`` property defined by `name` and `themeType`. Use ``clearColor(name:themeType:)`` to remove the property.
     public final func setColor(name: StringName, themeType: StringName, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: color) { pArg2 in
@@ -976,8 +1005,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color")
+    fileprivate static let method_get_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2015923404)!
@@ -992,6 +1021,7 @@ open class Theme: Resource {
     /// Returns the default color value if the property doesn't exist. Use ``hasColor(name:themeType:)`` to check for existence.
     /// 
     public final func getColor(name: StringName, themeType: StringName) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -1009,8 +1039,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_has_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_color")
+    fileprivate static let method_has_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_color")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -1025,6 +1055,7 @@ open class Theme: Resource {
     /// Returns `false` if it doesn't exist. Use ``setColor(name:themeType:color:)`` to define it.
     /// 
     public final func hasColor(name: StringName, themeType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -1042,8 +1073,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_rename_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_color")
+    fileprivate static let method_rename_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_color")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642128662)!
@@ -1058,6 +1089,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist, or if a similar property with the new name already exists. Use ``hasColor(name:themeType:)`` to check for existence, and ``clearColor(name:themeType:)`` to remove the existing property.
     /// 
     public final func renameColor(oldName: StringName, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oldName.content) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -1077,8 +1109,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_color")
+    fileprivate static let method_clear_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_color")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -1093,6 +1125,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist. Use ``hasColor(name:themeType:)`` to check for existence.
     /// 
     public final func clearColor(name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1109,8 +1142,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_color_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color_list")
+    fileprivate static let method_get_color_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
@@ -1122,6 +1155,7 @@ open class Theme: Resource {
     
     /// Returns a list of names for ``Color`` properties defined with `themeType`. Use ``getColorTypeList()`` to get a list of possible theme type names.
     public final func getColorList(themeType: String) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         let themeType = GString(themeType)
         withUnsafePointer(to: themeType.content) { pArg0 in
@@ -1137,8 +1171,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_color_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color_type_list")
+    fileprivate static let method_get_color_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -1150,13 +1184,14 @@ open class Theme: Resource {
     
     /// Returns a list of all unique theme type names for ``Color`` properties. Use ``getTypeList()`` to get a list of all unique theme types.
     public final func getColorTypeList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Theme.method_get_color_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constant")
+    fileprivate static let method_set_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constant")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 281601298)!
@@ -1168,6 +1203,7 @@ open class Theme: Resource {
     
     /// Creates or changes the value of the constant property defined by `name` and `themeType`. Use ``clearConstant(name:themeType:)`` to remove the property.
     public final func setConstant(name: StringName, themeType: StringName, constant: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: constant) { pArg2 in
@@ -1187,8 +1223,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant")
+    fileprivate static let method_get_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2419549490)!
@@ -1203,6 +1239,7 @@ open class Theme: Resource {
     /// Returns `0` if the property doesn't exist. Use ``hasConstant(name:themeType:)`` to check for existence.
     /// 
     public final func getConstant(name: StringName, themeType: StringName) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -1220,8 +1257,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_has_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_constant")
+    fileprivate static let method_has_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_constant")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -1236,6 +1273,7 @@ open class Theme: Resource {
     /// Returns `false` if it doesn't exist. Use ``setConstant(name:themeType:constant:)`` to define it.
     /// 
     public final func hasConstant(name: StringName, themeType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -1253,8 +1291,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_rename_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_constant")
+    fileprivate static let method_rename_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_constant")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642128662)!
@@ -1269,6 +1307,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist, or if a similar property with the new name already exists. Use ``hasConstant(name:themeType:)`` to check for existence, and ``clearConstant(name:themeType:)`` to remove the existing property.
     /// 
     public final func renameConstant(oldName: StringName, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oldName.content) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -1288,8 +1327,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_constant")
+    fileprivate static let method_clear_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_constant")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -1304,6 +1343,7 @@ open class Theme: Resource {
     /// Fails if it doesn't exist. Use ``hasConstant(name:themeType:)`` to check for existence.
     /// 
     public final func clearConstant(name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1320,8 +1360,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_constant_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant_list")
+    fileprivate static let method_get_constant_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
@@ -1333,6 +1373,7 @@ open class Theme: Resource {
     
     /// Returns a list of names for constant properties defined with `themeType`. Use ``getConstantTypeList()`` to get a list of possible theme type names.
     public final func getConstantList(themeType: String) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         let themeType = GString(themeType)
         withUnsafePointer(to: themeType.content) { pArg0 in
@@ -1348,8 +1389,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_constant_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant_type_list")
+    fileprivate static let method_get_constant_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -1361,13 +1402,14 @@ open class Theme: Resource {
     
     /// Returns a list of all unique theme type names for constant properties. Use ``getTypeList()`` to get a list of all unique theme types.
     public final func getConstantTypeList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Theme.method_get_constant_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_default_base_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_base_scale")
+    fileprivate static let method_set_default_base_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_base_scale")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1379,6 +1421,7 @@ open class Theme: Resource {
     
     @inline(__always)
     fileprivate final func set_default_base_scale(_ baseScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: baseScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1392,8 +1435,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_default_base_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_base_scale")
+    fileprivate static let method_get_default_base_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_base_scale")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1405,13 +1448,14 @@ open class Theme: Resource {
     
     @inline(__always)
     fileprivate final func get_default_base_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Theme.method_get_default_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_default_base_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_default_base_scale")
+    fileprivate static let method_has_default_base_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_default_base_scale")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1426,13 +1470,14 @@ open class Theme: Resource {
     /// Returns `false` if it doesn't. The value must be greater than `0.0` to be considered valid.
     /// 
     public final func hasDefaultBaseScale() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Theme.method_has_default_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_default_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_font")
+    fileprivate static let method_set_default_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1262170328)!
@@ -1444,6 +1489,7 @@ open class Theme: Resource {
     
     @inline(__always)
     fileprivate final func set_default_font(_ font: Font?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1457,8 +1503,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_default_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_font")
+    fileprivate static let method_get_default_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229501585)!
@@ -1470,13 +1516,14 @@ open class Theme: Resource {
     
     @inline(__always)
     fileprivate final func get_default_font() -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Theme.method_get_default_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_has_default_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_default_font")
+    fileprivate static let method_has_default_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_default_font")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1491,13 +1538,14 @@ open class Theme: Resource {
     /// Returns `false` if it doesn't.
     /// 
     public final func hasDefaultFont() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Theme.method_has_default_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_default_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_font_size")
+    fileprivate static let method_set_default_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1509,6 +1557,7 @@ open class Theme: Resource {
     
     @inline(__always)
     fileprivate final func set_default_font_size(_ fontSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1522,8 +1571,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_default_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_font_size")
+    fileprivate static let method_get_default_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1535,13 +1584,14 @@ open class Theme: Resource {
     
     @inline(__always)
     fileprivate final func get_default_font_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Theme.method_get_default_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_default_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_default_font_size")
+    fileprivate static let method_has_default_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_default_font_size")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1556,13 +1606,14 @@ open class Theme: Resource {
     /// Returns `false` if it doesn't. The value must be greater than `0` to be considered valid.
     /// 
     public final func hasDefaultFontSize() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Theme.method_has_default_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_theme_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_theme_item")
+    fileprivate static let method_set_theme_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_theme_item")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2492983623)!
@@ -1579,6 +1630,7 @@ open class Theme: Resource {
     /// > Note: This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
     /// 
     public final func setThemeItem(dataType: Theme.DataType, name: StringName, themeType: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -1601,8 +1653,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_theme_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_item")
+    fileprivate static let method_get_theme_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_item")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2191024021)!
@@ -1619,6 +1671,7 @@ open class Theme: Resource {
     /// > Note: This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
     /// 
     public final func getThemeItem(dataType: Theme.DataType, name: StringName, themeType: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
@@ -1639,8 +1692,8 @@ open class Theme: Resource {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_has_theme_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_item")
+    fileprivate static let method_has_theme_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_item")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1739311056)!
@@ -1657,6 +1710,7 @@ open class Theme: Resource {
     /// > Note: This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
     /// 
     public final func hasThemeItem(dataType: Theme.DataType, name: StringName, themeType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
@@ -1677,8 +1731,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_rename_theme_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_theme_item")
+    fileprivate static let method_rename_theme_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_theme_item")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3900867553)!
@@ -1695,6 +1749,7 @@ open class Theme: Resource {
     /// > Note: This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
     /// 
     public final func renameThemeItem(dataType: Theme.DataType, oldName: StringName, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             withUnsafePointer(to: oldName.content) { pArg1 in
                 withUnsafePointer(to: name.content) { pArg2 in
@@ -1717,8 +1772,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear_theme_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_theme_item")
+    fileprivate static let method_clear_theme_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_theme_item")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2965505587)!
@@ -1735,6 +1790,7 @@ open class Theme: Resource {
     /// > Note: This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
     /// 
     public final func clearThemeItem(dataType: Theme.DataType, name: StringName, themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: themeType.content) { pArg2 in
@@ -1754,8 +1810,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_theme_item_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_item_list")
+    fileprivate static let method_get_theme_item_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_item_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3726716710)!
@@ -1770,6 +1826,7 @@ open class Theme: Resource {
     /// > Note: This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
     /// 
     public final func getThemeItemList(dataType: Theme.DataType, themeType: String) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             let themeType = GString(themeType)
@@ -1788,8 +1845,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_theme_item_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_item_type_list")
+    fileprivate static let method_get_theme_item_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_item_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1316004935)!
@@ -1804,6 +1861,7 @@ open class Theme: Resource {
     /// > Note: This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
     /// 
     public final func getThemeItemTypeList(dataType: Theme.DataType) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1818,8 +1876,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_set_type_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_type_variation")
+    fileprivate static let method_set_type_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_type_variation")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -1838,6 +1896,7 @@ open class Theme: Resource {
     /// > Note: Suggestions only show up if this theme resource is set as the project default theme. See ``ProjectSettings/gui/theme/custom``.
     /// 
     public final func setTypeVariation(themeType: StringName, baseType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: baseType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1854,8 +1913,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_is_type_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_type_variation")
+    fileprivate static let method_is_type_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_type_variation")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -1867,6 +1926,7 @@ open class Theme: Resource {
     
     /// Returns `true` if `themeType` is marked as a variation of `baseType`.
     public final func isTypeVariation(themeType: StringName, baseType: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: baseType.content) { pArg1 in
@@ -1884,8 +1944,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_clear_type_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_type_variation")
+    fileprivate static let method_clear_type_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_type_variation")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -1897,6 +1957,7 @@ open class Theme: Resource {
     
     /// Unmarks `themeType` as being a variation of another theme type. See ``setTypeVariation(themeType:baseType:)``.
     public final func clearTypeVariation(themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1910,8 +1971,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_type_variation_base: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_type_variation_base")
+    fileprivate static let method_get_type_variation_base: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_type_variation_base")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965194235)!
@@ -1923,6 +1984,7 @@ open class Theme: Resource {
     
     /// Returns the name of the base theme type if `themeType` is a valid variation type. Returns an empty string otherwise.
     public final func getTypeVariationBase(themeType: StringName) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1937,8 +1999,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_get_type_variation_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_type_variation_list")
+    fileprivate static let method_get_type_variation_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_type_variation_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1761182771)!
@@ -1950,6 +2012,7 @@ open class Theme: Resource {
     
     /// Returns a list of all type variations for the given `baseType`.
     public final func getTypeVariationList(baseType: StringName) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         withUnsafePointer(to: baseType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1964,8 +2027,8 @@ open class Theme: Resource {
         return _result
     }
     
-    fileprivate static var method_add_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_type")
+    fileprivate static let method_add_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_type")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -1980,6 +2043,7 @@ open class Theme: Resource {
     /// > Note: Empty types are not saved with the theme. This method only exists to perform in-memory changes to the resource. Use available `set_*` methods to add theme items.
     /// 
     public final func addType(themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1993,8 +2057,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_remove_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_type")
+    fileprivate static let method_remove_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_type")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2006,6 +2070,7 @@ open class Theme: Resource {
     
     /// Removes the theme type, gracefully discarding defined theme items. If the type is a variation, this information is also erased. If the type is a base for type variations, those variations lose their base.
     public final func removeType(themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2019,8 +2084,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_get_type_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_type_list")
+    fileprivate static let method_get_type_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_type_list")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -2032,13 +2097,14 @@ open class Theme: Resource {
     
     /// Returns a list of all unique theme type names. Use the appropriate `get_*_type_list` method to get a list of unique theme types for a single data type.
     public final func getTypeList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Theme.method_get_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_merge_with: GDExtensionMethodBindPtr = {
-        let methodName = StringName("merge_with")
+    fileprivate static let method_merge_with: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("merge_with")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2326690814)!
@@ -2053,6 +2119,7 @@ open class Theme: Resource {
     /// > Note: This modifies the current theme. If you want to merge two themes together without modifying either one, create a new empty theme and merge the other two into it one after another.
     /// 
     public final func mergeWith(other: Theme?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: other?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2066,8 +2133,8 @@ open class Theme: Resource {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &Theme.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2079,6 +2146,7 @@ open class Theme: Resource {
     
     /// Removes all the theme properties defined on the theme resource.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Theme.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

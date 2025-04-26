@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This is the base class for Godot's resource importers. To implement your own resource importers using editor plugins, see ``EditorImportPlugin``.
 open class ResourceImporter: RefCounted {
-    fileprivate static var className = StringName("ResourceImporter")
+    private static var className = StringName("ResourceImporter")
     override open class var godotClassName: StringName { className }
     public enum ImportOrder: Int64, CaseIterable {
         /// The default import order.

@@ -30,7 +30,7 @@ import Musl
 /// - ``canceled``
 /// - ``customAction``
 open class AcceptDialog: Window {
-    fileprivate static var className = StringName("AcceptDialog")
+    private static var className = StringName("AcceptDialog")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -99,8 +99,8 @@ open class AcceptDialog: Window {
     }
     
     /* Methods */
-    fileprivate static var method_get_ok_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ok_button")
+    fileprivate static let method_get_ok_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ok_button")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1856205918)!
@@ -115,13 +115,14 @@ open class AcceptDialog: Window {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``CanvasItem/visible`` property.
     /// 
     public final func getOkButton() -> Button? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AcceptDialog.method_get_ok_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_label")
+    fileprivate static let method_get_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_label")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 566733104)!
@@ -136,13 +137,14 @@ open class AcceptDialog: Window {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``CanvasItem/visible`` property.
     /// 
     public final func getLabel() -> Label? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AcceptDialog.method_get_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_hide_on_ok: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hide_on_ok")
+    fileprivate static let method_set_hide_on_ok: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hide_on_ok")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -154,6 +156,7 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func set_hide_on_ok(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -167,8 +170,8 @@ open class AcceptDialog: Window {
         
     }
     
-    fileprivate static var method_get_hide_on_ok: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hide_on_ok")
+    fileprivate static let method_get_hide_on_ok: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hide_on_ok")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -180,13 +183,14 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func get_hide_on_ok() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AcceptDialog.method_get_hide_on_ok, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_close_on_escape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_close_on_escape")
+    fileprivate static let method_set_close_on_escape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_close_on_escape")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -198,6 +202,7 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func set_close_on_escape(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -211,8 +216,8 @@ open class AcceptDialog: Window {
         
     }
     
-    fileprivate static var method_get_close_on_escape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_close_on_escape")
+    fileprivate static let method_get_close_on_escape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_close_on_escape")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -224,13 +229,14 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func get_close_on_escape() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AcceptDialog.method_get_close_on_escape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_button")
+    fileprivate static let method_add_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_button")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3328440682)!
@@ -247,6 +253,7 @@ open class AcceptDialog: Window {
     /// You can use ``removeButton(_:)`` method to remove a button created with this method from the dialog.
     /// 
     public final func addButton(text: String, right: Bool = false, action: String = "") -> Button? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
@@ -266,11 +273,11 @@ open class AcceptDialog: Window {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_cancel_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_cancel_button")
+    fileprivate static let method_add_cancel_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_cancel_button")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 242045556)!
@@ -285,6 +292,7 @@ open class AcceptDialog: Window {
     /// You can use ``removeButton(_:)`` method to remove a button created with this method from the dialog.
     /// 
     public final func addCancelButton(name: String) -> Button? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -297,11 +305,11 @@ open class AcceptDialog: Window {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_remove_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_button")
+    fileprivate static let method_remove_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_button")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2068354942)!
@@ -313,6 +321,7 @@ open class AcceptDialog: Window {
     
     /// Removes the `button` from the dialog. Does NOT free the `button`. The `button` must be a ``Button`` added with ``addButton(text:right:action:)`` or ``addCancelButton(name:)`` method. After removal, pressing the `button` will no longer emit this dialog's [signal custom_action] or [signal canceled] signals.
     public final func removeButton(_ button: Button?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: button?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -326,8 +335,8 @@ open class AcceptDialog: Window {
         
     }
     
-    fileprivate static var method_register_text_enter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_text_enter")
+    fileprivate static let method_register_text_enter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_text_enter")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3714008017)!
@@ -339,6 +348,7 @@ open class AcceptDialog: Window {
     
     /// Registers a ``LineEdit`` in the dialog. When the enter key is pressed, the dialog will be accepted.
     public final func registerTextEnter(lineEdit: LineEdit?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lineEdit?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -352,8 +362,8 @@ open class AcceptDialog: Window {
         
     }
     
-    fileprivate static var method_set_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text")
+    fileprivate static let method_set_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -365,6 +375,7 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func set_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -379,8 +390,8 @@ open class AcceptDialog: Window {
         
     }
     
-    fileprivate static var method_get_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text")
+    fileprivate static let method_get_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -392,13 +403,14 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func get_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(AcceptDialog.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_autowrap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autowrap")
+    fileprivate static let method_set_autowrap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autowrap")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -410,6 +422,7 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func set_autowrap(_ autowrap: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autowrap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -423,8 +436,8 @@ open class AcceptDialog: Window {
         
     }
     
-    fileprivate static var method_has_autowrap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_autowrap")
+    fileprivate static let method_has_autowrap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_autowrap")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -436,13 +449,14 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func has_autowrap() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AcceptDialog.method_has_autowrap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ok_button_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ok_button_text")
+    fileprivate static let method_set_ok_button_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ok_button_text")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -454,6 +468,7 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func set_ok_button_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -468,8 +483,8 @@ open class AcceptDialog: Window {
         
     }
     
-    fileprivate static var method_get_ok_button_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ok_button_text")
+    fileprivate static let method_get_ok_button_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ok_button_text")
         return withUnsafePointer(to: &AcceptDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -481,6 +496,7 @@ open class AcceptDialog: Window {
     
     @inline(__always)
     fileprivate final func get_ok_button_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(AcceptDialog.method_get_ok_button_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

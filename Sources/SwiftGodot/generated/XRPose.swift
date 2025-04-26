@@ -26,7 +26,7 @@ import Musl
 /// Orientation, location, linear velocity and angular velocity are all provided for each pose by the XR runtime. This object contains this state of a pose.
 /// 
 open class XRPose: RefCounted {
-    fileprivate static var className = StringName("XRPose")
+    private static var className = StringName("XRPose")
     override open class var godotClassName: StringName { className }
     public enum TrackingConfidence: Int64, CaseIterable {
         /// No tracking information is available for this pose.
@@ -52,15 +52,15 @@ open class XRPose: RefCounted {
         
     }
     
-    /// The name of this pose. Pose names are often driven by an action map setup by the user. Godot does suggest a number of pose names that it expects ``XRInterface``s to implement:
+    /// The name of this pose. Usually, this name is derived from an action map set up by the user. Godot also suggests some pose names that ``XRInterface`` objects are expected to implement:
     /// 
-    /// - `root` defines a root location, often used for tracked objects that do not have further nodes.
+    /// - `root` is the root location, often used for tracked objects that do not have further nodes.
     /// 
-    /// - `aim` defines the tip of a controller with the orientation pointing outwards, for example: add your raycasts to this.
+    /// - `aim` is the tip of a controller with its orientation pointing outwards, often used for raycasts.
     /// 
-    /// - `grip` defines the location where the user grips the controller
+    /// - `grip` is the location where the user grips the controller.
     /// 
-    /// - `skeleton` defines the root location a hand mesh should be placed when using hand tracking and the animated skeleton supplied by the XR runtime.
+    /// - `skeleton` is the root location for a hand mesh, when using hand tracking and an animated skeleton is supplied by the XR runtime.
     /// 
     final public var name: StringName {
         get {
@@ -122,8 +122,8 @@ open class XRPose: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_has_tracking_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_has_tracking_data")
+    fileprivate static let method_set_has_tracking_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_has_tracking_data")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -135,6 +135,7 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func set_has_tracking_data(_ hasTrackingData: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hasTrackingData) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -148,8 +149,8 @@ open class XRPose: RefCounted {
         
     }
     
-    fileprivate static var method_get_has_tracking_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_has_tracking_data")
+    fileprivate static let method_get_has_tracking_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_has_tracking_data")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -161,13 +162,14 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func get_has_tracking_data() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRPose.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_name")
+    fileprivate static let method_set_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_name")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -179,6 +181,7 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func set_name(_ name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -192,8 +195,8 @@ open class XRPose: RefCounted {
         
     }
     
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -205,13 +208,14 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func get_name() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(XRPose.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transform")
+    fileprivate static let method_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transform")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2952846383)!
@@ -223,6 +227,7 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func set_transform(_ transform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -236,8 +241,8 @@ open class XRPose: RefCounted {
         
     }
     
-    fileprivate static var method_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transform")
+    fileprivate static let method_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transform")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -249,13 +254,14 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func get_transform() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(XRPose.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_adjusted_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_adjusted_transform")
+    fileprivate static let method_get_adjusted_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_adjusted_transform")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -267,13 +273,14 @@ open class XRPose: RefCounted {
     
     /// Returns the ``transform`` with world scale and our reference frame applied. This is the transform used to position ``XRNode3D`` objects.
     public final func getAdjustedTransform() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(XRPose.method_get_adjusted_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_linear_velocity")
+    fileprivate static let method_set_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_linear_velocity")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -285,6 +292,7 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func set_linear_velocity(_ velocity: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -298,8 +306,8 @@ open class XRPose: RefCounted {
         
     }
     
-    fileprivate static var method_get_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_linear_velocity")
+    fileprivate static let method_get_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_linear_velocity")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -311,13 +319,14 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func get_linear_velocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(XRPose.method_get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_angular_velocity")
+    fileprivate static let method_set_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_angular_velocity")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -329,6 +338,7 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func set_angular_velocity(_ velocity: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -342,8 +352,8 @@ open class XRPose: RefCounted {
         
     }
     
-    fileprivate static var method_get_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_angular_velocity")
+    fileprivate static let method_get_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_angular_velocity")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -355,13 +365,14 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func get_angular_velocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(XRPose.method_get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tracking_confidence: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tracking_confidence")
+    fileprivate static let method_set_tracking_confidence: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tracking_confidence")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4171656666)!
@@ -373,6 +384,7 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func set_tracking_confidence(_ trackingConfidence: XRPose.TrackingConfidence) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackingConfidence.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -386,8 +398,8 @@ open class XRPose: RefCounted {
         
     }
     
-    fileprivate static var method_get_tracking_confidence: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracking_confidence")
+    fileprivate static let method_get_tracking_confidence: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracking_confidence")
         return withUnsafePointer(to: &XRPose.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2064923680)!
@@ -399,6 +411,7 @@ open class XRPose: RefCounted {
     
     @inline(__always)
     fileprivate final func get_tracking_confidence() -> XRPose.TrackingConfidence {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRPose.method_get_tracking_confidence, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRPose.TrackingConfidence (rawValue: _result)!

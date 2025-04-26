@@ -20,8 +20,8 @@ import Musl
 
 
 public class GD {
-    fileprivate static var method_abs: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("abs")
+    fileprivate static let method_abs: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("abs")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 4776452)!
         }
@@ -47,8 +47,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_sign: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("sign")
+    fileprivate static let method_sign: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("sign")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 4776452)!
         }
@@ -76,8 +76,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_signf: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("signf")
+    fileprivate static let method_signf: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("signf")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2140049587)!
         }
@@ -101,15 +101,15 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_signi: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("signi")
+    fileprivate static let method_signi: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("signi")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2157319888)!
         }
         
     }()
     
-    /// Returns `-1` if `x` is negative, `1` if `x` is positive, and `0` if if `x` is zero.
+    /// Returns `-1` if `x` is negative, `1` if `x` is positive, and `0` if `x` is zero.
     /// 
     public static func signi(x: Int64) -> Int64 {
         var _result: Int64 = 0
@@ -126,8 +126,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_snappedi: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("snappedi")
+    fileprivate static let method_snappedi: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("snappedi")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3570758393)!
         }
@@ -156,8 +156,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_is_nan: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_nan")
+    fileprivate static let method_is_nan: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_nan")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3569215213)!
         }
@@ -180,8 +180,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_is_inf: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_inf")
+    fileprivate static let method_is_inf: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_inf")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3569215213)!
         }
@@ -204,8 +204,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_is_equal_approx: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_equal_approx")
+    fileprivate static let method_is_equal_approx: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_equal_approx")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1400789633)!
         }
@@ -236,8 +236,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_is_zero_approx: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_zero_approx")
+    fileprivate static let method_is_zero_approx: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_zero_approx")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3569215213)!
         }
@@ -263,8 +263,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_is_finite: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_finite")
+    fileprivate static let method_is_finite: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_finite")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3569215213)!
         }
@@ -287,8 +287,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_ease: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("ease")
+    fileprivate static let method_ease: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("ease")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 92296394)!
         }
@@ -319,8 +319,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_step_decimals: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("step_decimals")
+    fileprivate static let method_step_decimals: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("step_decimals")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2780425386)!
         }
@@ -344,8 +344,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_cubic_interpolate: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("cubic_interpolate")
+    fileprivate static let method_cubic_interpolate: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("cubic_interpolate")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1090965791)!
         }
@@ -380,8 +380,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_cubic_interpolate_angle: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("cubic_interpolate_angle")
+    fileprivate static let method_cubic_interpolate_angle: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("cubic_interpolate_angle")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1090965791)!
         }
@@ -416,8 +416,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_cubic_interpolate_in_time: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("cubic_interpolate_in_time")
+    fileprivate static let method_cubic_interpolate_in_time: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("cubic_interpolate_in_time")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 388121036)!
         }
@@ -464,8 +464,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_cubic_interpolate_angle_in_time: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("cubic_interpolate_angle_in_time")
+    fileprivate static let method_cubic_interpolate_angle_in_time: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("cubic_interpolate_angle_in_time")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 388121036)!
         }
@@ -512,8 +512,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_bezier_interpolate: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("bezier_interpolate")
+    fileprivate static let method_bezier_interpolate: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("bezier_interpolate")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1090965791)!
         }
@@ -548,8 +548,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_bezier_derivative: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("bezier_derivative")
+    fileprivate static let method_bezier_derivative: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("bezier_derivative")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1090965791)!
         }
@@ -584,15 +584,15 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_angle_difference: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("angle_difference")
+    fileprivate static let method_angle_difference: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("angle_difference")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 92296394)!
         }
         
     }()
     
-    /// Returns the difference between the two angles, in the range of `[-PI, +PI]`. When `from` and `to` are opposite, returns `-PI` if `from` is smaller than `to`, or `PI` otherwise.
+    /// Returns the difference between the two angles (in radians), in the range of `[-PI, +PI]`. When `from` and `to` are opposite, returns `-PI` if `from` is smaller than `to`, or `PI` otherwise.
     public static func angleDifference(from: Double, to: Double) -> Double {
         var _result: Double = 0.0
         withUnsafePointer(to: from) { pArg0 in
@@ -611,8 +611,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_lerp_angle: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("lerp_angle")
+    fileprivate static let method_lerp_angle: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("lerp_angle")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 998901048)!
         }
@@ -646,8 +646,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_remap: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("remap")
+    fileprivate static let method_remap: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("remap")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1090965791)!
         }
@@ -687,23 +687,27 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_smoothstep: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("smoothstep")
+    fileprivate static let method_smoothstep: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("smoothstep")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 998901048)!
         }
         
     }()
     
-    /// Returns the result of smoothly interpolating the value of `x` between `0` and `1`, based on the where `x` lies with respect to the edges `from` and `to`.
+    /// Returns a smooth cubic Hermite interpolation between `0` and `1`.
     /// 
-    /// The return value is `0` if `x <= from`, and `1` if `x >= to`. If `x` lies between `from` and `to`, the returned value follows an S-shaped curve that maps `x` between `0` and `1`.
+    /// For positive ranges (when `from <= to`) the return value is `0` when `x <= from`, and `1` when `x >= to`. If `x` lies between `from` and `to`, the return value follows an S-shaped curve that smoothly transitions from `0` to `1`.
+    /// 
+    /// For negative ranges (when `from > to`) the function is mirrored and returns `1` when `x <= to` and `0` when `x >= from`.
     /// 
     /// This S-shaped curve is the cubic Hermite interpolator, given by `f(y) = 3*y^2 - 2*y^3` where `y = (x-from) / (to-from)`.
     /// 
     /// Compared to ``ease()`` with a curve value of `-1.6521`, ``smoothstep()`` returns the smoothest possible curve with no sudden changes in the derivative. If you need to perform more advanced transitions, use ``Tween`` or ``AnimationPlayer``.
     /// 
     /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_ease_comparison.png">Comparison between smoothstep() and ease(x, -1.6521) return values</a>
+    /// 
+    /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_range.webp">Smoothstep() return values with positive, zero, and negative ranges</a>
     /// 
     public static func smoothstep(from: Double, to: Double, x: Double) -> Double {
         var _result: Double = 0.0
@@ -726,8 +730,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_move_toward: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("move_toward")
+    fileprivate static let method_move_toward: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("move_toward")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 998901048)!
         }
@@ -759,8 +763,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_rotate_toward: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("rotate_toward")
+    fileprivate static let method_rotate_toward: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("rotate_toward")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 998901048)!
         }
@@ -794,17 +798,17 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_linear_to_db: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("linear_to_db")
+    fileprivate static let method_linear_to_db: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("linear_to_db")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2140049587)!
         }
         
     }()
     
-    /// Converts from linear energy to decibels (audio). This can be used to implement volume sliders that behave as expected (since volume isn't linear).
+    /// Converts from linear energy to decibels (audio). Since volume is not normally linear, this can be used to implement volume sliders that behave as expected.
     /// 
-    /// **Example:**
+    /// **Example:** Change the Master bus's volume through a ``Slider`` node, which ranges from `0.0` to `1.0`:
     /// 
     public static func linearToDb(lin: Double) -> Double {
         var _result: Double = 0.0
@@ -821,8 +825,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_db_to_linear: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("db_to_linear")
+    fileprivate static let method_db_to_linear: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("db_to_linear")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2140049587)!
         }
@@ -845,8 +849,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_wrap: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("wrap")
+    fileprivate static let method_wrap: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("wrap")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3389874542)!
         }
@@ -878,8 +882,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_wrapi: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("wrapi")
+    fileprivate static let method_wrapi: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("wrapi")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 650295447)!
         }
@@ -909,8 +913,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_wrapf: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("wrapf")
+    fileprivate static let method_wrapf: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("wrapf")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 998901048)!
         }
@@ -944,8 +948,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_max: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("max")
+    fileprivate static let method_max: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("max")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3896050336)!
         }
@@ -1003,8 +1007,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_maxi: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("maxi")
+    fileprivate static let method_maxi: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("maxi")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3133453818)!
         }
@@ -1031,8 +1035,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_maxf: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("maxf")
+    fileprivate static let method_maxf: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("maxf")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 92296394)!
         }
@@ -1059,8 +1063,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_min: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("min")
+    fileprivate static let method_min: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("min")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3896050336)!
         }
@@ -1118,8 +1122,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_mini: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("mini")
+    fileprivate static let method_mini: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("mini")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3133453818)!
         }
@@ -1146,8 +1150,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_minf: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("minf")
+    fileprivate static let method_minf: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("minf")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 92296394)!
         }
@@ -1174,8 +1178,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_clamp: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("clamp")
+    fileprivate static let method_clamp: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("clamp")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3389874542)!
         }
@@ -1209,8 +1213,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_clampi: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("clampi")
+    fileprivate static let method_clampi: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("clampi")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 650295447)!
         }
@@ -1240,8 +1244,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_clampf: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("clampf")
+    fileprivate static let method_clampf: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("clampf")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 998901048)!
         }
@@ -1271,8 +1275,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_nearest_po2: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("nearest_po2")
+    fileprivate static let method_nearest_po2: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("nearest_po2")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2157319888)!
         }
@@ -1298,8 +1302,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_pingpong: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("pingpong")
+    fileprivate static let method_pingpong: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("pingpong")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 92296394)!
         }
@@ -1326,8 +1330,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_randomize: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("randomize")
+    fileprivate static let method_randomize: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("randomize")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1691721052)!
         }
@@ -1343,8 +1347,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_randi: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("randi")
+    fileprivate static let method_randi: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("randi")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 701202648)!
         }
@@ -1359,8 +1363,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_randf: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("randf")
+    fileprivate static let method_randf: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("randf")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2086227845)!
         }
@@ -1375,8 +1379,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_randi_range: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("randi_range")
+    fileprivate static let method_randi_range: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("randi_range")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3133453818)!
         }
@@ -1403,8 +1407,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_randf_range: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("randf_range")
+    fileprivate static let method_randf_range: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("randf_range")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 92296394)!
         }
@@ -1431,8 +1435,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_randfn: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("randfn")
+    fileprivate static let method_randfn: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("randfn")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 92296394)!
         }
@@ -1461,8 +1465,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_seed: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("seed")
+    fileprivate static let method_seed: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("seed")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 382931173)!
         }
@@ -1485,8 +1489,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_rand_from_seed: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("rand_from_seed")
+    fileprivate static let method_rand_from_seed: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("rand_from_seed")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1391063685)!
         }
@@ -1512,8 +1516,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_weakref: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("weakref")
+    fileprivate static let method_weakref: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("weakref")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 4776452)!
         }
@@ -1539,8 +1543,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_typeof: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("typeof")
+    fileprivate static let method_typeof: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("typeof")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 326422594)!
         }
@@ -1566,8 +1570,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_type_convert: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("type_convert")
+    fileprivate static let method_type_convert: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("type_convert")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2453062746)!
         }
@@ -1598,8 +1602,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_str: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("str")
+    fileprivate static let method_str: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("str")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 32569176)!
         }
@@ -1651,8 +1655,8 @@ public class GD {
         return _result.description
     }
     
-    fileprivate static var method_error_string: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("error_string")
+    fileprivate static let method_error_string: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("error_string")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 942708242)!
         }
@@ -1676,8 +1680,8 @@ public class GD {
         return _result.description
     }
     
-    fileprivate static var method_type_string: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("type_string")
+    fileprivate static let method_type_string: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("type_string")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 942708242)!
         }
@@ -1703,8 +1707,8 @@ public class GD {
         return _result.description
     }
     
-    fileprivate static var method_print: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("print")
+    fileprivate static let method_print: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("print")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -1713,7 +1717,7 @@ public class GD {
     
     /// Converts one or more arguments of any type to string in the best way possible and prints them to the console.
     /// 
-    /// > Note: Consider using ``pushError()`` and ``pushWarning()`` to print error and warning messages instead of ``print()`` or ``printRich()``. This distinguishes them from print messages used for debugging purposes, while also displaying a stack trace when an error or warning is printed.
+    /// > Note: Consider using ``pushError()`` and ``pushWarning()`` to print error and warning messages instead of ``print()`` or ``printRich()``. This distinguishes them from print messages used for debugging purposes, while also displaying a stack trace when an error or warning is printed. See also ``Engine/printToStdout`` and ``ProjectSettings/application/run/disableStdout``.
     /// 
     public static func print(arg1: Variant?, _ arguments: Variant?...) {
         var _result: Variant.ContentType = Variant.zero
@@ -1758,8 +1762,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_print_rich: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("print_rich")
+    fileprivate static let method_print_rich: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("print_rich")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -1769,8 +1773,6 @@ public class GD {
     /// Converts one or more arguments of any type to string in the best way possible and prints them to the console.
     /// 
     /// The following BBCode tags are supported: `b`, `i`, `u`, `s`, `indent`, `code`, `url`, `center`, `right`, `color`, `bgcolor`, `fgcolor`.
-    /// 
-    /// Color tags only support the following named colors: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `pink`, `purple`, `cyan`, `white`, `orange`, `gray`. Hexadecimal color codes are not supported.
     /// 
     /// URL tags only support URLs wrapped by a URL tag, not URLs with a different title.
     /// 
@@ -1825,8 +1827,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_printerr: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("printerr")
+    fileprivate static let method_printerr: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("printerr")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -1878,8 +1880,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_printt: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("printt")
+    fileprivate static let method_printt: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("printt")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -1931,8 +1933,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_prints: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("prints")
+    fileprivate static let method_prints: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("prints")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -1984,8 +1986,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_printraw: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("printraw")
+    fileprivate static let method_printraw: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("printraw")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -2039,8 +2041,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_print_verbose: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("print_verbose")
+    fileprivate static let method_print_verbose: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("print_verbose")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -2091,8 +2093,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_push_error: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("push_error")
+    fileprivate static let method_push_error: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("push_error")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -2146,8 +2148,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_push_warning: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("push_warning")
+    fileprivate static let method_push_warning: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("push_warning")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2648703342)!
         }
@@ -2199,8 +2201,8 @@ public class GD {
         
     }
     
-    fileprivate static var method_var_to_str: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("var_to_str")
+    fileprivate static let method_var_to_str: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("var_to_str")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 866625479)!
         }
@@ -2228,8 +2230,8 @@ public class GD {
         return _result.description
     }
     
-    fileprivate static var method_str_to_var: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("str_to_var")
+    fileprivate static let method_str_to_var: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("str_to_var")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1891498491)!
         }
@@ -2254,8 +2256,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_var_to_bytes: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("var_to_bytes")
+    fileprivate static let method_var_to_bytes: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("var_to_bytes")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2947269930)!
         }
@@ -2283,8 +2285,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_bytes_to_var: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("bytes_to_var")
+    fileprivate static let method_bytes_to_var: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("bytes_to_var")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 4249819452)!
         }
@@ -2310,8 +2312,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_var_to_bytes_with_objects: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("var_to_bytes_with_objects")
+    fileprivate static let method_var_to_bytes_with_objects: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("var_to_bytes_with_objects")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2947269930)!
         }
@@ -2337,8 +2339,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_bytes_to_var_with_objects: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("bytes_to_var_with_objects")
+    fileprivate static let method_bytes_to_var_with_objects: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("bytes_to_var_with_objects")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 4249819452)!
         }
@@ -2364,8 +2366,8 @@ public class GD {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_hash: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("hash")
+    fileprivate static let method_hash: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("hash")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 326422594)!
         }
@@ -2389,8 +2391,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_instance_from_id: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("instance_from_id")
+    fileprivate static let method_instance_from_id: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("instance_from_id")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1156694636)!
         }
@@ -2411,11 +2413,11 @@ public class GD {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_instance_id_valid: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_instance_id_valid")
+    fileprivate static let method_is_instance_id_valid: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_instance_id_valid")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 2232439758)!
         }
@@ -2438,8 +2440,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_is_instance_valid: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_instance_valid")
+    fileprivate static let method_is_instance_valid: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_instance_valid")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 996128841)!
         }
@@ -2462,8 +2464,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_rid_allocate_id: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("rid_allocate_id")
+    fileprivate static let method_rid_allocate_id: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("rid_allocate_id")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 701202648)!
         }
@@ -2477,8 +2479,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_rid_from_int64: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("rid_from_int64")
+    fileprivate static let method_rid_from_int64: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("rid_from_int64")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 3426892196)!
         }
@@ -2501,8 +2503,8 @@ public class GD {
         return _result
     }
     
-    fileprivate static var method_is_same: GDExtensionPtrUtilityFunction = {
-        let methodName = StringName("is_same")
+    fileprivate static let method_is_same: GDExtensionPtrUtilityFunction = {
+        var methodName = FastStringName("is_same")
         return withUnsafePointer(to: &methodName.content) { ptr in
             return gi.variant_get_ptr_utility_function(ptr, 1409423524)!
         }
@@ -2513,7 +2515,7 @@ public class GD {
     /// 
     /// These are ``Variant`` value types: `null`, [bool], integer, float, ``String``, ``StringName``, ``Vector2``, ``Vector2i``, ``Vector3``, ``Vector3i``, ``Vector4``, ``Vector4i``, ``Rect2``, ``Rect2i``, ``Transform2D``, ``Transform3D``, ``Plane``, ``Quaternion``, ``AABB``, ``Basis``, ``Projection``, ``Color``, ``NodePath``, ``RID``, ``Callable`` and ``Signal``.
     /// 
-    /// These are ``Variant`` reference types: ``Object``, ``GDictionary``, ``GArray``, ``PackedByteArray``, ``PackedInt32Array``, ``PackedInt64Array``, ``PackedFloat32Array``, ``PackedFloat64Array``, ``PackedStringArray``, ``PackedVector2Array``, ``PackedVector3Array``, ``PackedVector4Array``, and ``PackedColorArray``.
+    /// These are ``Variant`` reference types: ``Object``, ``VariantDictionary``, ``VariantArray``, ``PackedByteArray``, ``PackedInt32Array``, ``PackedInt64Array``, ``PackedFloat32Array``, ``PackedFloat64Array``, ``PackedStringArray``, ``PackedVector2Array``, ``PackedVector3Array``, ``PackedVector4Array``, and ``PackedColorArray``.
     /// 
     public static func isSame(a: Variant?, b: Variant?) -> Bool {
         var _result: Bool = false

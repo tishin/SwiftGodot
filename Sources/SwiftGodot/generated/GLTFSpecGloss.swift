@@ -19,11 +19,11 @@ import Musl
 #endif
 
 
-/// Archived GLTF extension for specular/glossy materials.
+/// Archived glTF extension for specular/glossy materials.
 /// 
-/// KHR_materials_pbrSpecularGlossiness is an archived GLTF extension. This means that it is deprecated and not recommended for new files. However, it is still supported for loading old files.
+/// KHR_materials_pbrSpecularGlossiness is an archived glTF extension. This means that it is deprecated and not recommended for new files. However, it is still supported for loading old files.
 open class GLTFSpecGloss: Resource {
-    fileprivate static var className = StringName("GLTFSpecGloss")
+    private static var className = StringName("GLTFSpecGloss")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -89,8 +89,8 @@ open class GLTFSpecGloss: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_diffuse_img: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_diffuse_img")
+    fileprivate static let method_get_diffuse_img: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_diffuse_img")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 564927088)!
@@ -102,13 +102,14 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func get_diffuse_img() -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_diffuse_img, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_diffuse_img: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_diffuse_img")
+    fileprivate static let method_set_diffuse_img: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_diffuse_img")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 532598488)!
@@ -120,6 +121,7 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func set_diffuse_img(_ diffuseImg: Image?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: diffuseImg?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -133,8 +135,8 @@ open class GLTFSpecGloss: Resource {
         
     }
     
-    fileprivate static var method_get_diffuse_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_diffuse_factor")
+    fileprivate static let method_get_diffuse_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_diffuse_factor")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200896285)!
@@ -146,13 +148,14 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func get_diffuse_factor() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_diffuse_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_diffuse_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_diffuse_factor")
+    fileprivate static let method_set_diffuse_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_diffuse_factor")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -164,6 +167,7 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func set_diffuse_factor(_ diffuseFactor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: diffuseFactor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -177,8 +181,8 @@ open class GLTFSpecGloss: Resource {
         
     }
     
-    fileprivate static var method_get_gloss_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gloss_factor")
+    fileprivate static let method_get_gloss_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gloss_factor")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -190,13 +194,14 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func get_gloss_factor() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_gloss_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gloss_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gloss_factor")
+    fileprivate static let method_set_gloss_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gloss_factor")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -208,6 +213,7 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func set_gloss_factor(_ glossFactor: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: glossFactor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -221,8 +227,8 @@ open class GLTFSpecGloss: Resource {
         
     }
     
-    fileprivate static var method_get_specular_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_specular_factor")
+    fileprivate static let method_get_specular_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_specular_factor")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200896285)!
@@ -234,13 +240,14 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func get_specular_factor() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_specular_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_specular_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_specular_factor")
+    fileprivate static let method_set_specular_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_specular_factor")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -252,6 +259,7 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func set_specular_factor(_ specularFactor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: specularFactor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -265,8 +273,8 @@ open class GLTFSpecGloss: Resource {
         
     }
     
-    fileprivate static var method_get_spec_gloss_img: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spec_gloss_img")
+    fileprivate static let method_get_spec_gloss_img: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spec_gloss_img")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 564927088)!
@@ -278,13 +286,14 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func get_spec_gloss_img() -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_spec_gloss_img, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_spec_gloss_img: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_spec_gloss_img")
+    fileprivate static let method_set_spec_gloss_img: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_spec_gloss_img")
         return withUnsafePointer(to: &GLTFSpecGloss.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 532598488)!
@@ -296,6 +305,7 @@ open class GLTFSpecGloss: Resource {
     
     @inline(__always)
     fileprivate final func set_spec_gloss_img(_ specGlossImg: Image?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: specGlossImg?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

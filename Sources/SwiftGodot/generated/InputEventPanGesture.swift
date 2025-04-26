@@ -26,7 +26,7 @@ import Musl
 /// > Note: On Android, this requires the ``ProjectSettings/inputDevices/pointing/android/enablePanAndScaleGestures`` project setting to be enabled.
 /// 
 open class InputEventPanGesture: InputEventGesture {
-    fileprivate static var className = StringName("InputEventPanGesture")
+    private static var className = StringName("InputEventPanGesture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class InputEventPanGesture: InputEventGesture {
     }
     
     /* Methods */
-    fileprivate static var method_set_delta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_delta")
+    fileprivate static let method_set_delta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_delta")
         return withUnsafePointer(to: &InputEventPanGesture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -57,6 +57,7 @@ open class InputEventPanGesture: InputEventGesture {
     
     @inline(__always)
     fileprivate final func set_delta(_ delta: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class InputEventPanGesture: InputEventGesture {
         
     }
     
-    fileprivate static var method_get_delta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_delta")
+    fileprivate static let method_get_delta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_delta")
         return withUnsafePointer(to: &InputEventPanGesture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -83,6 +84,7 @@ open class InputEventPanGesture: InputEventGesture {
     
     @inline(__always)
     fileprivate final func get_delta() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventPanGesture.method_get_delta, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

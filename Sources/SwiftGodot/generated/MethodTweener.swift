@@ -28,11 +28,11 @@ import Musl
 /// > Note: ``Tween/tweenMethod(_:from:to:duration:)`` is the only correct way to create ``MethodTweener``. Any ``MethodTweener`` created manually will not function correctly.
 /// 
 open class MethodTweener: Tweener {
-    fileprivate static var className = StringName("MethodTweener")
+    private static var className = StringName("MethodTweener")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_set_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_delay")
+    fileprivate static let method_set_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_delay")
         return withUnsafePointer(to: &MethodTweener.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 266477812)!
@@ -44,6 +44,7 @@ open class MethodTweener: Tweener {
     
     /// Sets the time in seconds after which the ``MethodTweener`` will start interpolating. By default there's no delay.
     public final func setDelay(_ delay: Double) -> MethodTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: delay) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -55,11 +56,11 @@ open class MethodTweener: Tweener {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_trans: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_trans")
+    fileprivate static let method_set_trans: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_trans")
         return withUnsafePointer(to: &MethodTweener.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740975367)!
@@ -71,6 +72,7 @@ open class MethodTweener: Tweener {
     
     /// Sets the type of used transition from ``Tween.TransitionType``. If not set, the default transition is used from the ``Tween`` that contains this Tweener.
     public final func setTrans(_ trans: Tween.TransitionType) -> MethodTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: trans.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -82,11 +84,11 @@ open class MethodTweener: Tweener {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_ease: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ease")
+    fileprivate static let method_set_ease: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ease")
         return withUnsafePointer(to: &MethodTweener.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 315540545)!
@@ -98,6 +100,7 @@ open class MethodTweener: Tweener {
     
     /// Sets the type of used easing from ``Tween.EaseType``. If not set, the default easing is used from the ``Tween`` that contains this Tweener.
     public final func setEase(_ ease: Tween.EaseType) -> MethodTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: ease.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -109,7 +112,7 @@ open class MethodTweener: Tweener {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A shader include file, saved with the `.gdshaderinc` extension. This class allows you to define a custom shader snippet that can be included in a ``Shader`` by using the preprocessor directive `#include`, followed by the file path (e.g. `#include "res://shader_lib.gdshaderinc"`). The snippet doesn't have to be a valid shader on its own.
 open class ShaderInclude: Resource {
-    fileprivate static var className = StringName("ShaderInclude")
+    private static var className = StringName("ShaderInclude")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class ShaderInclude: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_code")
+    fileprivate static let method_set_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_code")
         return withUnsafePointer(to: &ShaderInclude.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -54,6 +54,7 @@ open class ShaderInclude: Resource {
     
     @inline(__always)
     fileprivate final func set_code(_ code: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let code = GString(code)
         withUnsafePointer(to: code.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -68,8 +69,8 @@ open class ShaderInclude: Resource {
         
     }
     
-    fileprivate static var method_get_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_code")
+    fileprivate static let method_get_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_code")
         return withUnsafePointer(to: &ShaderInclude.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -81,6 +82,7 @@ open class ShaderInclude: Resource {
     
     @inline(__always)
     fileprivate final func get_code() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(ShaderInclude.method_get_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

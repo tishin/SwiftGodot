@@ -26,7 +26,7 @@ import Musl
 /// Use ``XRHandModifier3D`` to animate a hand mesh using hand tracking data.
 /// 
 open class XRHandTracker: XRPositionalTracker {
-    fileprivate static var className = StringName("XRHandTracker")
+    private static var className = StringName("XRHandTracker")
     override open class var godotClassName: StringName { className }
     public enum HandTrackingSource: Int64, CaseIterable {
         /// The source of hand tracking data is unknown.
@@ -35,8 +35,10 @@ open class XRHandTracker: XRPositionalTracker {
         case unobstructed = 1 // HAND_TRACKING_SOURCE_UNOBSTRUCTED
         /// The source of hand tracking data is a controller, meaning that joint positions are inferred from controller inputs.
         case controller = 2 // HAND_TRACKING_SOURCE_CONTROLLER
+        /// No hand tracking data is tracked, this either means the hand is obscured, the controller is turned off, or tracking is not supported for the current input type.
+        case notTracked = 3 // HAND_TRACKING_SOURCE_NOT_TRACKED
         /// Represents the size of the ``XRHandTracker/HandTrackingSource`` enum.
-        case max = 3 // HAND_TRACKING_SOURCE_MAX
+        case max = 4 // HAND_TRACKING_SOURCE_MAX
     }
     
     public enum HandJoint: Int64, CaseIterable {
@@ -157,8 +159,8 @@ open class XRHandTracker: XRPositionalTracker {
     }
     
     /* Methods */
-    fileprivate static var method_set_has_tracking_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_has_tracking_data")
+    fileprivate static let method_set_has_tracking_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_has_tracking_data")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -170,6 +172,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func set_has_tracking_data(_ hasData: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hasData) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -183,8 +186,8 @@ open class XRHandTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_has_tracking_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_has_tracking_data")
+    fileprivate static let method_get_has_tracking_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_has_tracking_data")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -196,13 +199,14 @@ open class XRHandTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func get_has_tracking_data() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRHandTracker.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hand_tracking_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand_tracking_source")
+    fileprivate static let method_set_hand_tracking_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand_tracking_source")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2958308861)!
@@ -214,6 +218,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func set_hand_tracking_source(_ source: XRHandTracker.HandTrackingSource) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -227,8 +232,8 @@ open class XRHandTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_hand_tracking_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_tracking_source")
+    fileprivate static let method_get_hand_tracking_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_tracking_source")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2475045250)!
@@ -240,13 +245,14 @@ open class XRHandTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func get_hand_tracking_source() -> XRHandTracker.HandTrackingSource {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_tracking_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRHandTracker.HandTrackingSource (rawValue: _result)!
     }
     
-    fileprivate static var method_set_hand_joint_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand_joint_flags")
+    fileprivate static let method_set_hand_joint_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand_joint_flags")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3028437365)!
@@ -258,6 +264,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Sets flags about the validity of the tracking data for the given hand joint.
     public final func setHandJointFlags(joint: XRHandTracker.HandJoint, flags: XRHandTracker.HandJointFlags) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: flags.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -274,8 +281,8 @@ open class XRHandTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_hand_joint_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_flags")
+    fileprivate static let method_get_hand_joint_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_flags")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1730972401)!
@@ -287,6 +294,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Returns flags about the validity of the tracking data for the given hand joint (see ``XRHandTracker.HandJointFlags``).
     public final func getHandJointFlags(joint: XRHandTracker.HandJoint) -> XRHandTracker.HandJointFlags {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: XRHandTracker.HandJointFlags = XRHandTracker.HandJointFlags ()
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -301,8 +309,8 @@ open class XRHandTracker: XRPositionalTracker {
         return _result
     }
     
-    fileprivate static var method_set_hand_joint_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand_joint_transform")
+    fileprivate static let method_set_hand_joint_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand_joint_transform")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2529959613)!
@@ -314,6 +322,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Sets the transform for the given hand joint.
     public final func setHandJointTransform(joint: XRHandTracker.HandJoint, transform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -330,8 +339,8 @@ open class XRHandTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_hand_joint_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_transform")
+    fileprivate static let method_get_hand_joint_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_transform")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1090840196)!
@@ -343,6 +352,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Returns the transform for the given hand joint.
     public final func getHandJointTransform(joint: XRHandTracker.HandJoint) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -357,8 +367,8 @@ open class XRHandTracker: XRPositionalTracker {
         return _result
     }
     
-    fileprivate static var method_set_hand_joint_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand_joint_radius")
+    fileprivate static let method_set_hand_joint_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand_joint_radius")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2723659615)!
@@ -370,6 +380,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Sets the radius of the given hand joint.
     public final func setHandJointRadius(joint: XRHandTracker.HandJoint, radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -386,8 +397,8 @@ open class XRHandTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_hand_joint_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_radius")
+    fileprivate static let method_get_hand_joint_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_radius")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3400025734)!
@@ -399,6 +410,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Returns the radius of the given hand joint.
     public final func getHandJointRadius(joint: XRHandTracker.HandJoint) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -413,8 +425,8 @@ open class XRHandTracker: XRPositionalTracker {
         return _result
     }
     
-    fileprivate static var method_set_hand_joint_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand_joint_linear_velocity")
+    fileprivate static let method_set_hand_joint_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand_joint_linear_velocity")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1978646737)!
@@ -426,6 +438,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Sets the linear velocity for the given hand joint.
     public final func setHandJointLinearVelocity(joint: XRHandTracker.HandJoint, linearVelocity: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: linearVelocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -442,8 +455,8 @@ open class XRHandTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_hand_joint_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_linear_velocity")
+    fileprivate static let method_get_hand_joint_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_linear_velocity")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 547240792)!
@@ -455,6 +468,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Returns the linear velocity for the given hand joint.
     public final func getHandJointLinearVelocity(joint: XRHandTracker.HandJoint) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -469,8 +483,8 @@ open class XRHandTracker: XRPositionalTracker {
         return _result
     }
     
-    fileprivate static var method_set_hand_joint_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand_joint_angular_velocity")
+    fileprivate static let method_set_hand_joint_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand_joint_angular_velocity")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1978646737)!
@@ -482,6 +496,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Sets the angular velocity for the given hand joint.
     public final func setHandJointAngularVelocity(joint: XRHandTracker.HandJoint, angularVelocity: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: angularVelocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -498,8 +513,8 @@ open class XRHandTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_hand_joint_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_joint_angular_velocity")
+    fileprivate static let method_get_hand_joint_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_joint_angular_velocity")
         return withUnsafePointer(to: &XRHandTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 547240792)!
@@ -511,6 +526,7 @@ open class XRHandTracker: XRPositionalTracker {
     
     /// Returns the angular velocity for the given hand joint.
     public final func getHandJointAngularVelocity(joint: XRHandTracker.HandJoint) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

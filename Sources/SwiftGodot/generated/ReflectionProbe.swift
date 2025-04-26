@@ -32,7 +32,7 @@ import Musl
 /// > Note: When using the Mobile rendering method, reflection probes will only correctly affect meshes whose visibility AABB intersects with the reflection probe's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, ``GeometryInstance3D/extraCullMargin`` must be increased on the mesh. Otherwise, the reflection probe may not be visible on the mesh.
 /// 
 open class ReflectionProbe: VisualInstance3D {
-    fileprivate static var className = StringName("ReflectionProbe")
+    private static var className = StringName("ReflectionProbe")
     override open class var godotClassName: StringName { className }
     public enum UpdateMode: Int64, CaseIterable {
         /// Update the probe once on the next frame (recommended for most objects). The corresponding radiance map will be generated over the following six frames. This takes more time to update than ``UpdateMode/always``, but it has a lower performance cost and can result in higher-quality reflections. The ReflectionProbe is updated when its transform changes, but not when nearby geometry changes. You can force a ``ReflectionProbe`` update by moving the ``ReflectionProbe`` slightly in any direction.
@@ -73,6 +73,18 @@ open class ReflectionProbe: VisualInstance3D {
         
         set {
             set_intensity (newValue)
+        }
+        
+    }
+    
+    /// Defines the distance in meters over which a probe blends into the scene.
+    final public var blendDistance: Double {
+        get {
+            return get_blend_distance ()
+        }
+        
+        set {
+            set_blend_distance (newValue)
         }
         
     }
@@ -237,8 +249,8 @@ open class ReflectionProbe: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_intensity")
+    fileprivate static let method_set_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_intensity")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -250,6 +262,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_intensity(_ intensity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -263,8 +276,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_intensity")
+    fileprivate static let method_get_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_intensity")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -276,13 +289,60 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_intensity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ambient_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ambient_mode")
+    fileprivate static let method_set_blend_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_distance")
+        return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_blend_distance(_ blendDistance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: blendDistance) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_blend_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_blend_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_distance")
+        return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_blend_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_blend_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_ambient_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ambient_mode")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1748981278)!
@@ -294,6 +354,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_ambient_mode(_ ambient: ReflectionProbe.AmbientMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ambient.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -307,8 +368,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_ambient_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ambient_mode")
+    fileprivate static let method_get_ambient_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ambient_mode")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1014607621)!
@@ -320,13 +381,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_ambient_mode() -> ReflectionProbe.AmbientMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ReflectionProbe.AmbientMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_ambient_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ambient_color")
+    fileprivate static let method_set_ambient_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ambient_color")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -338,6 +400,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_ambient_color(_ ambient: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ambient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -351,8 +414,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_ambient_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ambient_color")
+    fileprivate static let method_get_ambient_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ambient_color")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -364,13 +427,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_ambient_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ambient_color_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ambient_color_energy")
+    fileprivate static let method_set_ambient_color_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ambient_color_energy")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -382,6 +446,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_ambient_color_energy(_ ambientEnergy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ambientEnergy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -395,8 +460,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_ambient_color_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ambient_color_energy")
+    fileprivate static let method_get_ambient_color_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ambient_color_energy")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -408,13 +473,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_ambient_color_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_color_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_distance")
+    fileprivate static let method_set_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_distance")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -426,6 +492,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_max_distance(_ maxDistance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -439,8 +506,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_distance")
+    fileprivate static let method_get_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_distance")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -452,13 +519,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_max_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mesh_lod_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mesh_lod_threshold")
+    fileprivate static let method_set_mesh_lod_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mesh_lod_threshold")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -470,6 +538,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_mesh_lod_threshold(_ ratio: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -483,8 +552,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_mesh_lod_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh_lod_threshold")
+    fileprivate static let method_get_mesh_lod_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh_lod_threshold")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -496,13 +565,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_mesh_lod_threshold() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_mesh_lod_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -514,6 +584,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -527,8 +598,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -540,13 +611,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_origin_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_origin_offset")
+    fileprivate static let method_set_origin_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_origin_offset")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -558,6 +630,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_origin_offset(_ originOffset: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: originOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -571,8 +644,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_origin_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_origin_offset")
+    fileprivate static let method_get_origin_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_origin_offset")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -584,13 +657,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_origin_offset() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_origin_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_as_interior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_as_interior")
+    fileprivate static let method_set_as_interior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_as_interior")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -602,6 +676,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_as_interior(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -615,8 +690,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_set_as_interior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_set_as_interior")
+    fileprivate static let method_is_set_as_interior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_set_as_interior")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -628,13 +703,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_set_as_interior() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ReflectionProbe.method_is_set_as_interior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_box_projection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_box_projection")
+    fileprivate static let method_set_enable_box_projection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_box_projection")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -646,6 +722,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_enable_box_projection(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -659,8 +736,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_box_projection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_box_projection_enabled")
+    fileprivate static let method_is_box_projection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_box_projection_enabled")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -672,13 +749,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_box_projection_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ReflectionProbe.method_is_box_projection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_shadows: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_shadows")
+    fileprivate static let method_set_enable_shadows: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_shadows")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -690,6 +768,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_enable_shadows(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -703,8 +782,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_are_shadows_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("are_shadows_enabled")
+    fileprivate static let method_are_shadows_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("are_shadows_enabled")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -716,13 +795,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func are_shadows_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ReflectionProbe.method_are_shadows_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mask")
+    fileprivate static let method_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mask")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -734,6 +814,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_cull_mask(_ layers: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -747,8 +828,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mask")
+    fileprivate static let method_get_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mask")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -760,13 +841,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_cull_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_reflection_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_reflection_mask")
+    fileprivate static let method_set_reflection_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_reflection_mask")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -778,6 +860,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_reflection_mask(_ layers: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -791,8 +874,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_reflection_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_reflection_mask")
+    fileprivate static let method_get_reflection_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_reflection_mask")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -804,13 +887,14 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_reflection_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_reflection_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_update_mode")
+    fileprivate static let method_set_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_update_mode")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4090221187)!
@@ -822,6 +906,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_update_mode(_ mode: ReflectionProbe.UpdateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -835,8 +920,8 @@ open class ReflectionProbe: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_update_mode")
+    fileprivate static let method_get_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_update_mode")
         return withUnsafePointer(to: &ReflectionProbe.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2367550552)!
@@ -848,6 +933,7 @@ open class ReflectionProbe: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_update_mode() -> ReflectionProbe.UpdateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ReflectionProbe.method_get_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ReflectionProbe.UpdateMode (rawValue: _result)!

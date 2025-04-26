@@ -30,11 +30,11 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class WebRTCMultiplayerPeer: MultiplayerPeer {
-    fileprivate static var className = StringName("WebRTCMultiplayerPeer")
+    private static var className = StringName("WebRTCMultiplayerPeer")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_create_server: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_server")
+    fileprivate static let method_create_server: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_server")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2865356025)!
@@ -48,7 +48,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     /// 
     /// You can optionally specify a `channelsConfig` array of ``MultiplayerPeer.TransferMode`` which will be used to create extra channels (WebRTC only supports one transfer mode per channel).
     /// 
-    public final func createServer(channelsConfig: GArray = GArray ()) -> GodotError {
+    public final func createServer(channelsConfig: VariantArray = VariantArray ()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: channelsConfig.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -63,8 +64,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_create_client: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_client")
+    fileprivate static let method_create_client: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_client")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2641732907)!
@@ -78,7 +79,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     /// 
     /// You can optionally specify a `channelsConfig` array of ``MultiplayerPeer.TransferMode`` which will be used to create extra channels (WebRTC only supports one transfer mode per channel).
     /// 
-    public final func createClient(peerId: Int32, channelsConfig: GArray = GArray ()) -> GodotError {
+    public final func createClient(peerId: Int32, channelsConfig: VariantArray = VariantArray ()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: channelsConfig.content) { pArg1 in
@@ -96,8 +98,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_create_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_mesh")
+    fileprivate static let method_create_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_mesh")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2641732907)!
@@ -108,7 +110,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     }()
     
     /// Initialize the multiplayer peer as a mesh (i.e. all peers connect to each other) with the given `peerId` (must be between 1 and 2147483647).
-    public final func createMesh(peerId: Int32, channelsConfig: GArray = GArray ()) -> GodotError {
+    public final func createMesh(peerId: Int32, channelsConfig: VariantArray = VariantArray ()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: channelsConfig.content) { pArg1 in
@@ -126,8 +129,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_add_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_peer")
+    fileprivate static let method_add_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_peer")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4078953270)!
@@ -142,6 +145,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     /// Three channels will be created for reliable, unreliable, and ordered transport. The value of `unreliableLifetime` will be passed to the `"maxPacketLifetime"` option when creating unreliable and ordered channels (see ``WebRTCPeerConnection/createDataChannel(label:options:)``).
     /// 
     public final func addPeer(_ peer: WebRTCPeerConnection?, peerId: Int32, unreliableLifetime: Int32 = 1) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: peer?.handle) { pArg0 in
             withUnsafePointer(to: peerId) { pArg1 in
@@ -162,8 +166,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_remove_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_peer")
+    fileprivate static let method_remove_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_peer")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -175,6 +179,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     
     /// Remove the peer with given `peerId` from the mesh. If the peer was connected, and [signal MultiplayerPeer.peer_connected] was emitted for it, then [signal MultiplayerPeer.peer_disconnected] will be emitted.
     public final func removePeer(peerId: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -188,8 +193,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         
     }
     
-    fileprivate static var method_has_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_peer")
+    fileprivate static let method_has_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_peer")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
@@ -201,6 +206,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     
     /// Returns `true` if the given `peerId` is in the peers map (it might not be connected though).
     public final func hasPeer(peerId: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -215,8 +221,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         return _result
     }
     
-    fileprivate static var method_get_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_peer")
+    fileprivate static let method_get_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_peer")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3554694381)!
@@ -227,8 +233,9 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     }()
     
     /// Returns a dictionary representation of the peer with given `peerId` with three keys. `"connection"` containing the ``WebRTCPeerConnection`` to this peer, `"channels"` an array of three ``WebRTCDataChannel``, and `"connected"` a boolean representing if the peer connection is currently connected (all three channels are open).
-    public final func getPeer(peerId: Int32) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getPeer(peerId: Int32) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -242,8 +249,8 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         return _result
     }
     
-    fileprivate static var method_get_peers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_peers")
+    fileprivate static let method_get_peers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_peers")
         return withUnsafePointer(to: &WebRTCMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2382534195)!
@@ -254,8 +261,9 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     }()
     
     /// Returns a dictionary which keys are the peer ids and values the peer representation as in ``getPeer(peerId:)``.
-    public final func getPeers() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getPeers() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_get_peers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }

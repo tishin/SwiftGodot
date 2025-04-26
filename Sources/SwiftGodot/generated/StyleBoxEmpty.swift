@@ -23,7 +23,7 @@ import Musl
 /// 
 /// An empty ``StyleBox`` that can be used to display nothing instead of the default style (e.g. it can "disable" `focus` styles).
 open class StyleBoxEmpty: StyleBox {
-    fileprivate static var className = StringName("StyleBoxEmpty")
+    private static var className = StringName("StyleBoxEmpty")
     override open class var godotClassName: StringName { className }
 }
 

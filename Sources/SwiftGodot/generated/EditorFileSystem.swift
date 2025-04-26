@@ -32,14 +32,15 @@ import Musl
 /// - ``filesystemChanged``
 /// - ``scriptClassesUpdated``
 /// - ``sourcesChanged``
+/// - ``resourcesReimporting``
 /// - ``resourcesReimported``
 /// - ``resourcesReload``
 open class EditorFileSystem: Node {
-    fileprivate static var className = StringName("EditorFileSystem")
+    private static var className = StringName("EditorFileSystem")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_filesystem: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_filesystem")
+    fileprivate static let method_get_filesystem: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_filesystem")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 842323275)!
@@ -51,13 +52,14 @@ open class EditorFileSystem: Node {
     
     /// Gets the root directory object.
     public final func getFilesystem() -> EditorFileSystemDirectory? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorFileSystem.method_get_filesystem, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_scanning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_scanning")
+    fileprivate static let method_is_scanning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_scanning")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -69,13 +71,14 @@ open class EditorFileSystem: Node {
     
     /// Returns `true` if the filesystem is being scanned.
     public final func isScanning() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorFileSystem.method_is_scanning, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_scanning_progress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scanning_progress")
+    fileprivate static let method_get_scanning_progress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scanning_progress")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -87,13 +90,14 @@ open class EditorFileSystem: Node {
     
     /// Returns the scan progress for 0 to 1 if the FS is being scanned.
     public final func getScanningProgress() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(EditorFileSystem.method_get_scanning_progress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_scan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scan")
+    fileprivate static let method_scan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scan")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -105,12 +109,13 @@ open class EditorFileSystem: Node {
     
     /// Scan the filesystem for changes.
     public final func scan() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorFileSystem.method_scan, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_scan_sources: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scan_sources")
+    fileprivate static let method_scan_sources: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scan_sources")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -122,12 +127,13 @@ open class EditorFileSystem: Node {
     
     /// Check if the source of any imported resource changed.
     public final func scanSources() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorFileSystem.method_scan_sources, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_update_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_file")
+    fileprivate static let method_update_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_file")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -142,6 +148,7 @@ open class EditorFileSystem: Node {
     /// This will not import the file. To reimport, call ``reimportFiles(_:)`` or ``scan()`` methods.
     /// 
     public final func updateFile(path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -156,8 +163,8 @@ open class EditorFileSystem: Node {
         
     }
     
-    fileprivate static var method_get_filesystem_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_filesystem_path")
+    fileprivate static let method_get_filesystem_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_filesystem_path")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3188521125)!
@@ -169,6 +176,7 @@ open class EditorFileSystem: Node {
     
     /// Returns a view into the filesystem at `path`.
     public final func getFilesystemPath(_ path: String) -> EditorFileSystemDirectory? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -181,11 +189,11 @@ open class EditorFileSystem: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_file_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_type")
+    fileprivate static let method_get_file_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_type")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -197,6 +205,7 @@ open class EditorFileSystem: Node {
     
     /// Returns the resource type of the file, given the full path. This returns a string such as `"Resource"` or `"GDScript"`, _not_ a file extension such as `".gd"`.
     public final func getFileType(path: String) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -212,8 +221,8 @@ open class EditorFileSystem: Node {
         return _result.description
     }
     
-    fileprivate static var method_reimport_files: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reimport_files")
+    fileprivate static let method_reimport_files: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reimport_files")
         return withUnsafePointer(to: &EditorFileSystem.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4015028928)!
@@ -230,6 +239,7 @@ open class EditorFileSystem: Node {
     /// > Note: This function blocks until the import is finished. However, the main loop iteration, including timers and ``Node/_process(delta:)``, will occur during the import process due to progress bar updates. Avoid calls to ``reimportFiles(_:)`` or ``scan()`` while an import is in progress.
     /// 
     public final func reimportFiles(_ files: PackedStringArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: files.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -291,6 +301,22 @@ open class EditorFileSystem: Node {
     /// }
     /// ```
     public var sourcesChanged: SignalWithArguments<Bool> { SignalWithArguments<Bool> (target: self, signalName: "sources_changed") }
+    
+    /// Emitted before a resource is reimported.
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.resourcesReimporting.connect { resources in
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var resourcesReimporting: SignalWithArguments<PackedStringArray> { SignalWithArguments<PackedStringArray> (target: self, signalName: "resources_reimporting") }
     
     /// Emitted if a resource is reimported.
     ///

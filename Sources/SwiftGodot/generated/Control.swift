@@ -25,6 +25,8 @@ import Musl
 /// 
 /// For more information on Godot's UI system, anchors, offsets, and containers, see the related tutorials in the manual. To build flexible UIs, you'll need a mix of UI elements that inherit from ``Control`` and ``Container`` nodes.
 /// 
+/// > Note: Since both ``Node2D`` and ``Control`` inherit from ``CanvasItem``, they share several concepts from the class such as the ``CanvasItem/zIndex`` and ``CanvasItem/visible`` properties.
+/// 
 /// **User Interface nodes and input**
 /// 
 /// Godot propagates input events via viewports. Each ``Viewport`` is responsible for propagating ``InputEvent``s to their child nodes. As the ``SceneTree/root`` is a ``Window``, this already happens automatically for all UI elements in your game.
@@ -37,7 +39,7 @@ import Musl
 /// 
 /// Sets ``mouseFilter`` to ``MouseFilter/ignore`` to tell a ``Control`` node to ignore mouse or touch events. You'll need it if you place an icon on top of a button.
 /// 
-/// ``Theme`` resources change the Control's appearance. If you change the ``Theme`` on a ``Control`` node, it affects all of its children. To override some of the theme's parameters, call one of the `add_theme_*_override` methods, like ``addThemeFontOverride(name:font:)``. You can override the theme with the Inspector.
+/// ``Theme`` resources change the control's appearance. The ``theme`` of a ``Control`` node affects all of its direct and indirect children (as long as a chain of controls is uninterrupted). To override some of the theme items, call one of the `add_theme_*_override` methods, like ``addThemeFontOverride(name:font:)``. You can also override theme items in the Inspector.
 /// 
 /// > Note: Theme items are _not_ ``Object`` properties. This means you can't access their values using ``Object/get(property:)`` and ``Object/set(property:value:)``. Instead, use the `get_theme_*` and `add_theme_*_override` methods provided by this class.
 /// 
@@ -55,7 +57,7 @@ import Musl
 /// - ``minimumSizeChanged``
 /// - ``themeChanged``
 open class Control: CanvasItem {
-    fileprivate static var className = StringName("Control")
+    private static var className = StringName("Control")
     override open class var godotClassName: StringName { className }
     public enum FocusMode: Int64, CaseIterable {
         /// The node cannot grab focus. Use with ``focusMode``.
@@ -180,11 +182,14 @@ open class Control: CanvasItem {
     }
     
     public enum MouseFilter: Int64, CaseIterable {
-        /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. And the control will receive the [signal mouse_entered] and [signal mouse_exited] signals. These events are automatically marked as handled, and they will not propagate further to other controls. This also results in blocking signals in other controls.
+        /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. The control will also receive the [signal mouse_entered] and [signal mouse_exited] signals. These events are automatically marked as handled, and they will not propagate further to other controls. This also results in blocking signals in other controls.
         case stop = 0 // MOUSE_FILTER_STOP
-        /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. And the control will receive the [signal mouse_entered] and [signal mouse_exited] signals. If this control does not handle the event, the parent control (if any) will be considered, and so on until there is no more parent control to potentially handle it. This also allows signals to fire in other controls. If no control handled it, the event will be passed to ``Node/_shortcutInput(event:)`` for further processing.
+        /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. The control will also receive the [signal mouse_entered] and [signal mouse_exited] signals.
+        /// 
+        /// If this control does not handle the event, the event will propagate up to its parent control if it has one. The event is bubbled up the node hierarchy until it reaches a non-``CanvasItem``, a control with ``MouseFilter/stop``, or a ``CanvasItem`` with ``CanvasItem/topLevel`` enabled. This will allow signals to fire in all controls it reaches. If no control handled it, the event will be passed to ``Node/_shortcutInput(event:)`` for further processing.
+        /// 
         case pass = 1 // MOUSE_FILTER_PASS
-        /// The control will not receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. The control will also not receive the [signal mouse_entered] nor [signal mouse_exited] signals. This will not block other controls from receiving these events or firing the signals. Ignored events will not be handled automatically.
+        /// The control will not receive any mouse movement input events nor mouse button input events through ``_guiInput(event:)``. The control will also not receive the [signal mouse_entered] nor [signal mouse_exited] signals. This will not block other controls from receiving these events or firing the signals. Ignored events will not be handled automatically. If a child has ``MouseFilter/pass`` and an event was passed to this control, the event will further propagate up to the control's parent.
         /// 
         /// > Note: If the control has received [signal mouse_entered] but not [signal mouse_exited], changing the ``mouseFilter`` to ``MouseFilter/ignore`` will cause [signal mouse_exited] to be emitted.
         /// 
@@ -210,12 +215,18 @@ open class Control: CanvasItem {
     public enum LayoutDirection: Int64, CaseIterable {
         /// Automatic layout direction, determined from the parent control layout direction.
         case inherited = 0 // LAYOUT_DIRECTION_INHERITED
-        /// Automatic layout direction, determined from the current locale.
-        case locale = 1 // LAYOUT_DIRECTION_LOCALE
+        /// Automatic layout direction, determined from the current locale. Right-to-left layout direction is automatically used for languages that require it such as Arabic and Hebrew, but only if a valid translation file is loaded for the given language (unless said language is configured as a fallback in ``ProjectSettings/internationalization/locale/fallback``). For all other languages (or if no valid translation file is found by Godot), left-to-right layout direction is used. If using ``TextServerFallback`` (``ProjectSettings/internationalization/rendering/textDriver``), left-to-right layout direction is always used regardless of the language. Right-to-left layout direction can also be forced using ``ProjectSettings/internationalization/rendering/forceRightToLeftLayoutDirection``.
+        case applicationLocale = 1 // LAYOUT_DIRECTION_APPLICATION_LOCALE
         /// Left-to-right layout direction.
         case ltr = 2 // LAYOUT_DIRECTION_LTR
         /// Right-to-left layout direction.
         case rtl = 3 // LAYOUT_DIRECTION_RTL
+        /// Automatic layout direction, determined from the system locale. Right-to-left layout direction is automatically used for languages that require it such as Arabic and Hebrew, but only if a valid translation file is loaded for the given language.. For all other languages (or if no valid translation file is found by Godot), left-to-right layout direction is used. If using ``TextServerFallback`` (``ProjectSettings/internationalization/rendering/textDriver``), left-to-right layout direction is always used regardless of the language.
+        case systemLocale = 4 // LAYOUT_DIRECTION_SYSTEM_LOCALE
+        /// Represents the size of the ``Control/LayoutDirection`` enum.
+        case max = 5 // LAYOUT_DIRECTION_MAX
+        /// 
+        // case locale = 1 // LAYOUT_DIRECTION_LOCALE
     }
     
     public enum TextDirection: Int64, CaseIterable {
@@ -289,7 +300,7 @@ open class Control: CanvasItem {
     /// > Note: This signal is only emitted on Android or iOS, or on desktop/web platforms when ``ProjectSettings/inputDevices/pointing/emulateTouchFromMouse`` is enabled.
     /// 
     public static let notificationScrollEnd = 48
-    /// Sent when control layout direction is changed.
+    /// Sent when the control layout direction is changed from LTR or RTL or vice versa. This notification is propagated to child Control nodes as result of a change to ``layoutDirection``.
     public static let notificationLayoutDirectionChanged = 49
     
     /* Properties */
@@ -318,7 +329,7 @@ open class Control: CanvasItem {
         
     }
     
-    /// Controls layout direction and text writing direction. Right-to-left layouts are necessary for certain languages (e.g. Arabic and Hebrew).
+    /// Controls layout direction and text writing direction. Right-to-left layouts are necessary for certain languages (e.g. Arabic and Hebrew). See also ``isLayoutRtl()``.
     final public var layoutDirection: Control.LayoutDirection {
         get {
             return get_layout_direction ()
@@ -535,7 +546,9 @@ open class Control: CanvasItem {
         
     }
     
-    /// The default tooltip text. The tooltip appears when the user's mouse cursor stays idle over this control for a few moments, provided that the ``mouseFilter`` property is not ``MouseFilter/ignore``. The time required for the tooltip to appear can be changed with the ``ProjectSettings/gui/timers/tooltipDelaySec`` option. See also ``getTooltip(atPosition:)``.
+    /// The default tooltip text. The tooltip appears when the user's mouse cursor stays idle over this control for a few moments, provided that the ``mouseFilter`` property is not ``MouseFilter/ignore``. The time required for the tooltip to appear can be changed with the ``ProjectSettings/gui/timers/tooltipDelaySec`` setting.
+    /// 
+    /// This string is the default return value of ``getTooltip(atPosition:)``. Override ``_getTooltip(atPosition:)`` to generate tooltip text dynamically. Override ``_makeCustomTooltip(forText:)`` to customize the tooltip interface and behavior.
     /// 
     /// The tooltip popup will use either a default implementation, or a custom one that you can provide by overriding ``_makeCustomTooltip(forText:)``. The default tooltip includes a ``PopupPanel`` and ``Label`` whose theme properties can be customized using ``Theme`` methods with the `"TooltipPanel"` and `"TooltipLabel"` respectively. For example:
     /// 
@@ -546,6 +559,21 @@ open class Control: CanvasItem {
         
         set {
             set_tooltip_text (newValue)
+        }
+        
+    }
+    
+    /// Defines if tooltip text should automatically change to its translated version depending on the current locale. Uses the same auto translate mode as this control when set to ``Node/AutoTranslateMode/inherit``.
+    /// 
+    /// > Note: Tooltips customized using ``_makeCustomTooltip(forText:)`` do not use this auto translate mode automatically.
+    /// 
+    final public var tooltipAutoTranslateMode: Node.AutoTranslateMode {
+        get {
+            return get_tooltip_auto_translate_mode ()
+        }
+        
+        set {
+            set_tooltip_auto_translate_mode (newValue)
         }
         
     }
@@ -652,9 +680,11 @@ open class Control: CanvasItem {
         
     }
     
-    /// When enabled, scroll wheel events processed by ``_guiInput(event:)`` will be passed to the parent control even if ``mouseFilter`` is set to ``MouseFilter/stop``. As it defaults to true, this allows nested scrollable containers to work out of the box.
+    /// When enabled, scroll wheel events processed by ``_guiInput(event:)`` will be passed to the parent control even if ``mouseFilter`` is set to ``MouseFilter/stop``.
     /// 
     /// You should disable it on the root of your UI if you do not want scroll events to go to the ``Node/_unhandledInput(event:)`` processing.
+    /// 
+    /// > Note: Because this property defaults to `true`, this allows nested scrollable containers to work out of the box.
     /// 
     final public var mouseForcePassScrollEvents: Bool {
         get {
@@ -729,6 +759,17 @@ open class Control: CanvasItem {
     }
     
     /* Methods */
+    fileprivate static let method__has_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_has_point")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 556197845)!
+            }
+            
+        }
+        
+    }()
+    
     /// Virtual method to be implemented by the user. Returns whether the given `point` is inside this control.
     /// 
     /// If not overridden, default behavior is checking if the point is within control's Rect.
@@ -737,17 +778,67 @@ open class Control: CanvasItem {
     /// 
     @_documentation(visibility: public)
     open func _hasPoint(_ point: Vector2) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: point) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Control.method__has_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__structured_text_parser: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_structured_text_parser")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1292548940)!
+            }
+            
+        }
+        
+    }()
     
     /// User defined BiDi algorithm override function.
     /// 
-    /// Returns an ``GArray`` of ``Vector3i`` text ranges and text base directions, in the left-to-right order. Ranges should cover full source `text` without overlaps. BiDi algorithm will be used on each range separately.
+    /// Returns an ``VariantArray`` of ``Vector3i`` text ranges and text base directions, in the left-to-right order. Ranges should cover full source `text` without overlaps. BiDi algorithm will be used on each range separately.
     /// 
     @_documentation(visibility: public)
-    open func _structuredTextParser(args: GArray, text: String) -> VariantCollection<Vector3i> {
-        return VariantCollection<Vector3i>()
+    open func _structuredTextParser(args: VariantArray, text: String) -> TypedArray<Vector3i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        withUnsafePointer(to: args.content) { pArg0 in
+            let text = GString(text)
+            withUnsafePointer(to: text.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Control.method__structured_text_parser, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return TypedArray<Vector3i>(takingOver: _result)
     }
+    
+    fileprivate static let method__get_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_minimum_size")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to be implemented by the user. Returns the minimum size for this control. Alternative to ``customMinimumSize`` for controlling minimum size via code. The actual minimum size will be the max value of these two (in each axis separately).
     /// 
@@ -757,17 +848,54 @@ open class Control: CanvasItem {
     /// 
     @_documentation(visibility: public)
     open func _getMinimumSize() -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        gi.object_method_bind_ptrcall(Control.method__get_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_tooltip")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3674420000)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to be implemented by the user. Returns the tooltip text for the position `atPosition` in control's local coordinates, which will typically appear when the cursor is resting over this control. See ``getTooltip(atPosition:)``.
     /// 
-    /// > Note: If this method returns an empty ``String``, no tooltip is displayed.
+    /// > Note: If this method returns an empty ``String`` and ``_makeCustomTooltip(forText:)`` is not overridden, no tooltip is displayed.
     /// 
     @_documentation(visibility: public)
     open func _getTooltip(atPosition: Vector2) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: atPosition) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Control.method__get_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_drag_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_drag_data")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2233896889)!
+            }
+            
+        }
+        
+    }()
     
     /// Godot calls this method to get data that can be dragged and dropped onto controls that expect drop data. Returns `null` if there is no data to drag. Controls that want to receive drop data should implement ``_canDropData(atPosition:data:)`` and ``_dropData(atPosition:data:)``. `atPosition` is local to this control. Drag may be forced with ``forceDrag(data:preview:)``.
     /// 
@@ -775,8 +903,31 @@ open class Control: CanvasItem {
     /// 
     @_documentation(visibility: public)
     open func _getDragData(atPosition: Vector2) -> Variant? {
-        return nil
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: atPosition) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Control.method__get_drag_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
     }
+    
+    fileprivate static let method__can_drop_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_can_drop_data")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2603004011)!
+            }
+            
+        }
+        
+    }()
     
     /// Godot calls this method to test if `data` from a control's ``_getDragData(atPosition:)`` can be dropped at `atPosition`. `atPosition` is local to this control.
     /// 
@@ -784,16 +935,68 @@ open class Control: CanvasItem {
     /// 
     @_documentation(visibility: public)
     open func _canDropData(atPosition: Vector2, data: Variant?) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: atPosition) { pArg0 in
+            withUnsafePointer(to: data.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Control.method__can_drop_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__drop_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_drop_data")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3699746064)!
+            }
+            
+        }
+        
+    }()
     
     /// Godot calls this method to pass you the `data` from a control's ``_getDragData(atPosition:)`` result. Godot first calls ``_canDropData(atPosition:data:)`` to test if `data` is allowed to drop at `atPosition` where `atPosition` is local to this control.
     /// 
     @_documentation(visibility: public)
     open func _dropData(atPosition: Vector2, data: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: atPosition) { pArg0 in
+            withUnsafePointer(to: data.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Control.method__drop_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    /// Virtual method to be implemented by the user. Returns a ``Control`` node that should be used as a tooltip instead of the default one. The `forText` includes the contents of the ``tooltipText`` property.
+    fileprivate static let method__make_custom_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_make_custom_tooltip")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1976279298)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Virtual method to be implemented by the user. Returns a ``Control`` node that should be used as a tooltip instead of the default one. `forText` is the return value of ``getTooltip(atPosition:)``.
     /// 
     /// The returned node must be of type ``Control`` or Control-derived. It can have child nodes of any type. It is freed when the tooltip disappears, so make sure you always provide a new instance (if you want to use a pre-existing node from your scene tree, you can duplicate it and pass the duplicated instance). When `null` or a non-Control node is returned, the default tooltip will be used instead.
     /// 
@@ -801,41 +1004,79 @@ open class Control: CanvasItem {
     /// 
     /// > Note: The tooltip is shrunk to minimal size. If you want to ensure it's fully visible, you might want to set its ``customMinimumSize`` to some non-zero value.
     /// 
-    /// > Note: The node (and any relevant children) should be ``CanvasItem/visible`` when returned, otherwise, the viewport that instantiates it will not be able to calculate its minimum size reliably.
+    /// > Note: The node (and any relevant children) should have their ``CanvasItem/visible`` set to `true` when returned, otherwise, the viewport that instantiates it will not be able to calculate its minimum size reliably.
     /// 
-    /// **Example of usage with a custom-constructed node:**
+    /// > Note: If overridden, this method is called even if ``getTooltip(atPosition:)`` returns an empty string. When this happens with the default tooltip, it is not displayed. To copy this behavior, return `null` in this method when `forText` is empty.
     /// 
-    /// **Example of usage with a custom scene instance:**
+    /// **Example:** Use a constructed node as a tooltip:
+    /// 
+    /// **Example:** Usa a scene instance as a tooltip:
     /// 
     @_documentation(visibility: public)
     open func _makeCustomTooltip(forText: String) -> Object? {
-        return Object ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        let forText = GString(forText)
+        withUnsafePointer(to: forText.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Control.method__make_custom_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    /// Virtual method to be implemented by the user. Use this method to process and accept inputs on UI elements. See ``acceptEvent()``.
+    fileprivate static let method__gui_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_gui_input")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3754044979)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Virtual method to be implemented by the user. Override this method to handle and accept inputs on UI elements. See also ``acceptEvent()``.
     /// 
-    /// **Example usage for clicking a control:**
+    /// **Example:** Click on the control to print a message:
     /// 
-    /// The event won't trigger if:
+    /// If the `event` inherits ``InputEventMouse``, this method will **not** be called when:
     /// 
-    /// * clicking outside the control (see ``_hasPoint(_:)``);
+    /// - the control's ``mouseFilter`` is set to ``MouseFilter/ignore``;
     /// 
-    /// * control has ``mouseFilter`` set to ``MouseFilter/ignore``;
+    /// - the control is obstructed by another control on top, that doesn't have ``mouseFilter`` set to ``MouseFilter/ignore``;
     /// 
-    /// * control is obstructed by another ``Control`` on top of it, which doesn't have ``mouseFilter`` set to ``MouseFilter/ignore``;
+    /// - the control's parent has ``mouseFilter`` set to ``MouseFilter/stop`` or has accepted the event;
     /// 
-    /// * control's parent has ``mouseFilter`` set to ``MouseFilter/stop`` or has accepted the event;
+    /// - the control's parent has ``clipContents`` enabled and the `event`'s position is outside the parent's rectangle;
     /// 
-    /// * it happens outside the parent's rectangle and the parent has either ``clipContents`` enabled.
+    /// - the `event`'s position is outside the control (see ``_hasPoint(_:)``).
     /// 
-    /// > Note: Event position is relative to the control origin.
+    /// > Note: The `event`'s position is relative to this control's origin.
     /// 
     @_documentation(visibility: public)
     open func _guiInput(event: InputEvent?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: event?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Control.method__gui_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_accept_event: GDExtensionMethodBindPtr = {
-        let methodName = StringName("accept_event")
+    fileprivate static let method_accept_event: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("accept_event")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -850,12 +1091,13 @@ open class Control: CanvasItem {
     /// > Note: This does not affect the methods in ``Input``, only the way events are propagated.
     /// 
     public final func acceptEvent() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_accept_event, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_minimum_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimum_size")
+    fileprivate static let method_get_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimum_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -867,13 +1109,14 @@ open class Control: CanvasItem {
     
     /// Returns the minimum size for this control. See ``customMinimumSize``.
     public final func getMinimumSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_combined_minimum_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_combined_minimum_size")
+    fileprivate static let method_get_combined_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_combined_minimum_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -885,13 +1128,14 @@ open class Control: CanvasItem {
     
     /// Returns combined minimum size from ``customMinimumSize`` and ``getMinimumSize()``.
     public final func getCombinedMinimumSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_combined_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_anchors_preset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anchors_preset")
+    fileprivate static let method_set_anchors_preset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anchors_preset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 509135270)!
@@ -906,6 +1150,7 @@ open class Control: CanvasItem {
     /// If `keepOffsets` is `true`, control's position will also be updated.
     /// 
     public final func setAnchorsPreset(_ preset: Control.LayoutPreset, keepOffsets: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: preset.rawValue) { pArg0 in
             withUnsafePointer(to: keepOffsets) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -922,8 +1167,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_offsets_preset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offsets_preset")
+    fileprivate static let method_set_offsets_preset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offsets_preset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3724524307)!
@@ -940,6 +1185,7 @@ open class Control: CanvasItem {
     /// Use parameter `margin` to determine the gap between the ``Control`` and the edges.
     /// 
     public final func setOffsetsPreset(_ preset: Control.LayoutPreset, resizeMode: Control.LayoutPresetMode = .minsize, margin: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: preset.rawValue) { pArg0 in
             withUnsafePointer(to: resizeMode.rawValue) { pArg1 in
                 withUnsafePointer(to: margin) { pArg2 in
@@ -959,8 +1205,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_anchors_and_offsets_preset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anchors_and_offsets_preset")
+    fileprivate static let method_set_anchors_and_offsets_preset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anchors_and_offsets_preset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3724524307)!
@@ -972,6 +1218,7 @@ open class Control: CanvasItem {
     
     /// Sets both anchor preset and offset preset. See ``setAnchorsPreset(_:keepOffsets:)`` and ``setOffsetsPreset(_:resizeMode:margin:)``.
     public final func setAnchorsAndOffsetsPreset(_ preset: Control.LayoutPreset, resizeMode: Control.LayoutPresetMode = .minsize, margin: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: preset.rawValue) { pArg0 in
             withUnsafePointer(to: resizeMode.rawValue) { pArg1 in
                 withUnsafePointer(to: margin) { pArg2 in
@@ -991,8 +1238,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_anchor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anchor")
+    fileprivate static let method_set_anchor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anchor")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2302782885)!
@@ -1009,6 +1256,7 @@ open class Control: CanvasItem {
     /// If `pushOppositeAnchor` is `true` and the opposite anchor overlaps this anchor, the opposite one will have its value overridden. For example, when setting left anchor to 1 and the right anchor has value of 0.5, the right anchor will also get value of 1. If `pushOppositeAnchor` was `false`, the left anchor would get value 0.5.
     /// 
     public final func setAnchor(side: Side, anchor: Double, keepOffset: Bool = false, pushOppositeAnchor: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: side.rawValue) { pArg0 in
             withUnsafePointer(to: anchor) { pArg1 in
                 withUnsafePointer(to: keepOffset) { pArg2 in
@@ -1031,8 +1279,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_anchor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_anchor")
+    fileprivate static let method_get_anchor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_anchor")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2869120046)!
@@ -1044,6 +1292,7 @@ open class Control: CanvasItem {
     
     /// Returns the anchor for the specified ``Side``. A getter method for ``anchorBottom``, ``anchorLeft``, ``anchorRight`` and ``anchorTop``.
     public final func getAnchor(side: Side) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: side.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1058,8 +1307,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4290182280)!
@@ -1072,6 +1321,7 @@ open class Control: CanvasItem {
     @inline(__always)
     /// Sets the offset for the specified ``Side`` to `offset`. A setter method for ``offsetBottom``, ``offsetLeft``, ``offsetRight`` and ``offsetTop``.
     fileprivate final func set_offset(_ side: Side, _ offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: side.rawValue) { pArg0 in
             withUnsafePointer(to: offset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1088,8 +1338,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2869120046)!
@@ -1102,6 +1352,7 @@ open class Control: CanvasItem {
     @inline(__always)
     /// Returns the offset for the specified ``Side``. A getter method for ``offsetBottom``, ``offsetLeft``, ``offsetRight`` and ``offsetTop``.
     fileprivate final func get_offset(_ offset: Side) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: offset.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1116,8 +1367,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_set_anchor_and_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anchor_and_offset")
+    fileprivate static let method_set_anchor_and_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anchor_and_offset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4031722181)!
@@ -1129,6 +1380,7 @@ open class Control: CanvasItem {
     
     /// Works the same as ``setAnchor(side:anchor:keepOffset:pushOppositeAnchor:)``, but instead of `keep_offset` argument and automatic update of offset, it allows to set the offset yourself (see ``setOffset(side:offset:)``).
     public final func setAnchorAndOffset(side: Side, anchor: Double, offset: Double, pushOppositeAnchor: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: side.rawValue) { pArg0 in
             withUnsafePointer(to: anchor) { pArg1 in
                 withUnsafePointer(to: offset) { pArg2 in
@@ -1151,8 +1403,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_begin")
+    fileprivate static let method_set_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_begin")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1164,6 +1416,7 @@ open class Control: CanvasItem {
     
     /// Sets ``offsetLeft`` and ``offsetTop`` at the same time. Equivalent of changing ``position``.
     public final func setBegin(position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1177,8 +1430,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_end")
+    fileprivate static let method_set_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_end")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1190,6 +1443,7 @@ open class Control: CanvasItem {
     
     /// Sets ``offsetRight`` and ``offsetBottom`` at the same time.
     public final func setEnd(position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1203,8 +1457,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position")
+    fileprivate static let method_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2436320129)!
@@ -1219,6 +1473,7 @@ open class Control: CanvasItem {
     /// If `keepOffsets` is `true`, control's anchors will be updated instead of offsets.
     /// 
     public final func setPosition(_ position: Vector2, keepOffsets: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: keepOffsets) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1235,8 +1490,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2436320129)!
@@ -1251,6 +1506,7 @@ open class Control: CanvasItem {
     /// If `keepOffsets` is `true`, control's anchors will be updated instead of offsets.
     /// 
     public final func setSize(_ size: Vector2, keepOffsets: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: keepOffsets) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1267,8 +1523,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_reset_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reset_size")
+    fileprivate static let method_reset_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1280,12 +1536,13 @@ open class Control: CanvasItem {
     
     /// Resets the size to ``getCombinedMinimumSize()``. This is equivalent to calling `set_size(Vector2())` (or any size below the minimum).
     public final func resetSize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_reset_size, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_custom_minimum_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_minimum_size")
+    fileprivate static let method_set_custom_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_minimum_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1297,6 +1554,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_custom_minimum_size(_ size: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1310,8 +1568,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_global_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_position")
+    fileprivate static let method_set_global_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_position")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2436320129)!
@@ -1326,6 +1584,7 @@ open class Control: CanvasItem {
     /// If `keepOffsets` is `true`, control's anchors will be updated instead of offsets.
     /// 
     public final func setGlobalPosition(_ position: Vector2, keepOffsets: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: keepOffsets) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1342,8 +1601,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rotation")
+    fileprivate static let method_set_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rotation")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1355,6 +1614,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_rotation(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1368,8 +1628,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_rotation_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rotation_degrees")
+    fileprivate static let method_set_rotation_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rotation_degrees")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1381,6 +1641,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_rotation_degrees(_ degrees: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1394,8 +1655,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scale")
+    fileprivate static let method_set_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scale")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1407,6 +1668,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_scale(_ scale: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1420,8 +1682,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_pivot_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pivot_offset")
+    fileprivate static let method_set_pivot_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pivot_offset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1433,6 +1695,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_pivot_offset(_ pivotOffset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pivotOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1446,8 +1709,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_begin")
+    fileprivate static let method_get_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_begin")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1459,13 +1722,14 @@ open class Control: CanvasItem {
     
     /// Returns ``offsetLeft`` and ``offsetTop``. See also ``position``.
     public final func getBegin() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_end")
+    fileprivate static let method_get_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_end")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1477,13 +1741,14 @@ open class Control: CanvasItem {
     
     /// Returns ``offsetRight`` and ``offsetBottom``.
     public final func getEnd() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1494,13 +1759,14 @@ open class Control: CanvasItem {
     }()
     
     public final func getPosition() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1511,13 +1777,14 @@ open class Control: CanvasItem {
     }()
     
     public final func getSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rotation")
+    fileprivate static let method_get_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rotation")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1529,13 +1796,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_rotation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Control.method_get_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rotation_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rotation_degrees")
+    fileprivate static let method_get_rotation_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rotation_degrees")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1547,13 +1815,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_rotation_degrees() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Control.method_get_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scale")
+    fileprivate static let method_get_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scale")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1565,13 +1834,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_scale() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_pivot_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pivot_offset")
+    fileprivate static let method_get_pivot_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pivot_offset")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1583,13 +1853,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_pivot_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_pivot_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_custom_minimum_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_minimum_size")
+    fileprivate static let method_get_custom_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_minimum_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1601,13 +1872,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_custom_minimum_size() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_custom_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_parent_area_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parent_area_size")
+    fileprivate static let method_get_parent_area_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parent_area_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1619,13 +1891,14 @@ open class Control: CanvasItem {
     
     /// Returns the width/height occupied in the parent control.
     public final func getParentAreaSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_parent_area_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_global_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_position")
+    fileprivate static let method_get_global_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_position")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1636,13 +1909,14 @@ open class Control: CanvasItem {
     }()
     
     public final func getGlobalPosition() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_global_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_screen_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_position")
+    fileprivate static let method_get_screen_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_position")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1656,16 +1930,17 @@ open class Control: CanvasItem {
     /// 
     /// Equals to ``globalPosition`` if the window is embedded (see ``Viewport/guiEmbedSubwindows``).
     /// 
-    /// **Example usage for showing a popup:**
+    /// **Example:** Show a popup at the mouse position:
     /// 
     public final func getScreenPosition() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Control.method_get_screen_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rect")
+    fileprivate static let method_get_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rect")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -1682,13 +1957,14 @@ open class Control: CanvasItem {
     /// > Note: Setting ``Viewport/guiSnapControlsToPixels`` to `true` can lead to rounding inaccuracies between the displayed control and the returned ``Rect2``.
     /// 
     public final func getRect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(Control.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_global_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_rect")
+    fileprivate static let method_get_global_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_rect")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -1705,13 +1981,14 @@ open class Control: CanvasItem {
     /// > Note: Setting ``Viewport/guiSnapControlsToPixels`` to `true` can lead to rounding inaccuracies between the displayed control and the returned ``Rect2``.
     /// 
     public final func getGlobalRect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(Control.method_get_global_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_focus_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_focus_mode")
+    fileprivate static let method_set_focus_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_focus_mode")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3232914922)!
@@ -1723,6 +2000,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_focus_mode(_ mode: Control.FocusMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1736,8 +2014,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_focus_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_focus_mode")
+    fileprivate static let method_get_focus_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_focus_mode")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2132829277)!
@@ -1749,13 +2027,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_focus_mode() -> Control.FocusMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Control.method_get_focus_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.FocusMode (rawValue: _result)!
     }
     
-    fileprivate static var method_has_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_focus")
+    fileprivate static let method_has_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_focus")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1767,13 +2046,14 @@ open class Control: CanvasItem {
     
     /// Returns `true` if this is the current focused control. See ``focusMode``.
     public final func hasFocus() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Control.method_has_focus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_grab_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("grab_focus")
+    fileprivate static let method_grab_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("grab_focus")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1788,12 +2068,13 @@ open class Control: CanvasItem {
     /// > Note: Using this method together with ``Callable/callDeferred()`` makes it more reliable, especially when called inside ``Node/_ready()``.
     /// 
     public final func grabFocus() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_grab_focus, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_release_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("release_focus")
+    fileprivate static let method_release_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("release_focus")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1805,12 +2086,13 @@ open class Control: CanvasItem {
     
     /// Give up the focus. No other control will be able to receive input.
     public final func releaseFocus() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_release_focus, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_find_prev_valid_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_prev_valid_focus")
+    fileprivate static let method_find_prev_valid_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_prev_valid_focus")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -1822,13 +2104,14 @@ open class Control: CanvasItem {
     
     /// Finds the previous (above in the tree) ``Control`` that can receive the focus.
     public final func findPrevValidFocus() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Control.method_find_prev_valid_focus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_find_next_valid_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_next_valid_focus")
+    fileprivate static let method_find_next_valid_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_next_valid_focus")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -1840,13 +2123,14 @@ open class Control: CanvasItem {
     
     /// Finds the next (below in the tree) ``Control`` that can receive the focus.
     public final func findNextValidFocus() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Control.method_find_next_valid_focus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_find_valid_focus_neighbor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_valid_focus_neighbor")
+    fileprivate static let method_find_valid_focus_neighbor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_valid_focus_neighbor")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1543910170)!
@@ -1861,6 +2145,7 @@ open class Control: CanvasItem {
     /// > Note: This is different from ``getFocusNeighbor(side:)``, which returns the path of a specified focus neighbor.
     /// 
     public final func findValidFocusNeighbor(side: Side) -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: side.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1872,11 +2157,11 @@ open class Control: CanvasItem {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_h_size_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_h_size_flags")
+    fileprivate static let method_set_h_size_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_h_size_flags")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 394851643)!
@@ -1888,6 +2173,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_h_size_flags(_ flags: Control.SizeFlags) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1901,8 +2187,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_h_size_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_size_flags")
+    fileprivate static let method_get_h_size_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_size_flags")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3781367401)!
@@ -1914,13 +2200,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_h_size_flags() -> Control.SizeFlags {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Control.SizeFlags = Control.SizeFlags ()
         gi.object_method_bind_ptrcall(Control.method_get_h_size_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_stretch_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stretch_ratio")
+    fileprivate static let method_set_stretch_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stretch_ratio")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1932,6 +2219,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_stretch_ratio(_ ratio: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1945,8 +2233,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_stretch_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stretch_ratio")
+    fileprivate static let method_get_stretch_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stretch_ratio")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1958,13 +2246,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_stretch_ratio() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Control.method_get_stretch_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_v_size_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_size_flags")
+    fileprivate static let method_set_v_size_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_size_flags")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 394851643)!
@@ -1976,6 +2265,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_v_size_flags(_ flags: Control.SizeFlags) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1989,8 +2279,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_v_size_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_size_flags")
+    fileprivate static let method_get_v_size_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_size_flags")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3781367401)!
@@ -2002,13 +2292,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_v_size_flags() -> Control.SizeFlags {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Control.SizeFlags = Control.SizeFlags ()
         gi.object_method_bind_ptrcall(Control.method_get_v_size_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_theme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_theme")
+    fileprivate static let method_set_theme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_theme")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2326690814)!
@@ -2020,6 +2311,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_theme(_ theme: Theme?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: theme?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2033,8 +2325,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_theme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme")
+    fileprivate static let method_get_theme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3846893731)!
@@ -2046,13 +2338,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_theme() -> Theme? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Control.method_get_theme, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_theme_type_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_theme_type_variation")
+    fileprivate static let method_set_theme_type_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_theme_type_variation")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2064,6 +2357,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_theme_type_variation(_ themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2077,8 +2371,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_theme_type_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_type_variation")
+    fileprivate static let method_get_theme_type_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_type_variation")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -2090,13 +2384,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_theme_type_variation() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(Control.method_get_theme_type_variation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_begin_bulk_theme_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("begin_bulk_theme_override")
+    fileprivate static let method_begin_bulk_theme_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("begin_bulk_theme_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2108,12 +2403,13 @@ open class Control: CanvasItem {
     
     /// Prevents `*_theme_*_override` methods from emitting ``notificationThemeChanged`` until ``endBulkThemeOverride()`` is called.
     public final func beginBulkThemeOverride() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_begin_bulk_theme_override, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_end_bulk_theme_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("end_bulk_theme_override")
+    fileprivate static let method_end_bulk_theme_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("end_bulk_theme_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2125,12 +2421,13 @@ open class Control: CanvasItem {
     
     /// Ends a bulk theme override update. See ``beginBulkThemeOverride()``.
     public final func endBulkThemeOverride() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_end_bulk_theme_override, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_add_theme_icon_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_icon_override")
+    fileprivate static let method_add_theme_icon_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_icon_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1373065600)!
@@ -2145,6 +2442,7 @@ open class Control: CanvasItem {
     /// See also ``getThemeIcon(name:themeType:)``.
     /// 
     public final func addThemeIconOverride(name: StringName, texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2161,8 +2459,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_add_theme_stylebox_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_stylebox_override")
+    fileprivate static let method_add_theme_stylebox_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_stylebox_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4188838905)!
@@ -2176,9 +2474,10 @@ open class Control: CanvasItem {
     /// 
     /// See also ``getThemeStylebox(name:themeType:)``.
     /// 
-    /// **Example of modifying a property in a StyleBox by duplicating it:**
+    /// **Example:** Modify a property in a ``StyleBox`` by duplicating it:
     /// 
     public final func addThemeStyleboxOverride(name: StringName, stylebox: StyleBox?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: stylebox?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2195,8 +2494,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_add_theme_font_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_font_override")
+    fileprivate static let method_add_theme_font_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_font_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3518018674)!
@@ -2211,6 +2510,7 @@ open class Control: CanvasItem {
     /// See also ``getThemeFont(name:themeType:)``.
     /// 
     public final func addThemeFontOverride(name: StringName, font: Font?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: font?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2227,8 +2527,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_add_theme_font_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_font_size_override")
+    fileprivate static let method_add_theme_font_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_font_size_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2415702435)!
@@ -2243,6 +2543,7 @@ open class Control: CanvasItem {
     /// See also ``getThemeFontSize(name:themeType:)``.
     /// 
     public final func addThemeFontSizeOverride(name: StringName, fontSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: fontSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2259,8 +2560,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_add_theme_color_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_color_override")
+    fileprivate static let method_add_theme_color_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_color_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4260178595)!
@@ -2274,9 +2575,10 @@ open class Control: CanvasItem {
     /// 
     /// See also ``getThemeColor(name:themeType:)``.
     /// 
-    /// **Example of overriding a label's color and resetting it later:**
+    /// **Example:** Override a ``Label``'s color and reset it later:
     /// 
     public final func addThemeColorOverride(name: StringName, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2293,8 +2595,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_add_theme_constant_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_constant_override")
+    fileprivate static let method_add_theme_constant_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_constant_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2415702435)!
@@ -2309,6 +2611,7 @@ open class Control: CanvasItem {
     /// See also ``getThemeConstant(name:themeType:)``.
     /// 
     public final func addThemeConstantOverride(name: StringName, constant: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: constant) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2325,8 +2628,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_remove_theme_icon_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_icon_override")
+    fileprivate static let method_remove_theme_icon_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_icon_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2338,6 +2641,7 @@ open class Control: CanvasItem {
     
     /// Removes a local override for a theme icon with the specified `name` previously added by ``addThemeIconOverride(name:texture:)`` or via the Inspector dock.
     public final func removeThemeIconOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2351,8 +2655,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_remove_theme_stylebox_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_stylebox_override")
+    fileprivate static let method_remove_theme_stylebox_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_stylebox_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2364,6 +2668,7 @@ open class Control: CanvasItem {
     
     /// Removes a local override for a theme ``StyleBox`` with the specified `name` previously added by ``addThemeStyleboxOverride(name:stylebox:)`` or via the Inspector dock.
     public final func removeThemeStyleboxOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2377,8 +2682,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_remove_theme_font_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_font_override")
+    fileprivate static let method_remove_theme_font_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_font_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2390,6 +2695,7 @@ open class Control: CanvasItem {
     
     /// Removes a local override for a theme ``Font`` with the specified `name` previously added by ``addThemeFontOverride(name:font:)`` or via the Inspector dock.
     public final func removeThemeFontOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2403,8 +2709,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_remove_theme_font_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_font_size_override")
+    fileprivate static let method_remove_theme_font_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_font_size_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2416,6 +2722,7 @@ open class Control: CanvasItem {
     
     /// Removes a local override for a theme font size with the specified `name` previously added by ``addThemeFontSizeOverride(name:fontSize:)`` or via the Inspector dock.
     public final func removeThemeFontSizeOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2429,8 +2736,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_remove_theme_color_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_color_override")
+    fileprivate static let method_remove_theme_color_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_color_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2442,6 +2749,7 @@ open class Control: CanvasItem {
     
     /// Removes a local override for a theme ``Color`` with the specified `name` previously added by ``addThemeColorOverride(name:color:)`` or via the Inspector dock.
     public final func removeThemeColorOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2455,8 +2763,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_remove_theme_constant_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_constant_override")
+    fileprivate static let method_remove_theme_constant_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_constant_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2468,6 +2776,7 @@ open class Control: CanvasItem {
     
     /// Removes a local override for a theme constant with the specified `name` previously added by ``addThemeConstantOverride(name:constant:)`` or via the Inspector dock.
     public final func removeThemeConstantOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2481,11 +2790,11 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_theme_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_icon")
+    fileprivate static let method_get_theme_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_icon")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2336455395)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3163973443)!
             }
             
         }
@@ -2497,6 +2806,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeIcon(name: StringName, themeType: StringName = StringName ("")) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2511,14 +2821,14 @@ open class Control: CanvasItem {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_stylebox")
+    fileprivate static let method_get_theme_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_stylebox")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2759935355)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 604739069)!
             }
             
         }
@@ -2530,6 +2840,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeStylebox(name: StringName, themeType: StringName = StringName ("")) -> StyleBox? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2544,14 +2855,14 @@ open class Control: CanvasItem {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_font")
+    fileprivate static let method_get_theme_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_font")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 387378635)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2826986490)!
             }
             
         }
@@ -2563,6 +2874,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeFont(name: StringName, themeType: StringName = StringName ("")) -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2577,14 +2889,14 @@ open class Control: CanvasItem {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_font_size")
+    fileprivate static let method_get_theme_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_font_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 229578101)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1327056374)!
             }
             
         }
@@ -2596,6 +2908,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeFontSize(name: StringName, themeType: StringName = StringName ("")) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2613,11 +2926,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_get_theme_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_color")
+    fileprivate static let method_get_theme_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_color")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2377051548)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2798751242)!
             }
             
         }
@@ -2629,6 +2942,7 @@ open class Control: CanvasItem {
     /// For the current control its local overrides are considered first (see ``addThemeColorOverride(name:color:)``), then its assigned ``theme``. After the current control, each parent control and its assigned ``theme`` are considered; controls without a ``theme`` assigned are skipped. If no matching ``Theme`` is found in the tree, the custom project ``Theme`` (see ``ProjectSettings/gui/theme/custom``) and the default ``Theme`` are used (see ``ThemeDB``).
     /// 
     public final func getThemeColor(name: StringName, themeType: StringName = StringName ("")) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2646,11 +2960,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_get_theme_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_constant")
+    fileprivate static let method_get_theme_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_constant")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 229578101)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1327056374)!
             }
             
         }
@@ -2662,6 +2976,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeConstant(name: StringName, themeType: StringName = StringName ("")) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2679,8 +2994,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_icon_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_icon_override")
+    fileprivate static let method_has_theme_icon_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_icon_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2695,6 +3010,7 @@ open class Control: CanvasItem {
     /// See ``addThemeIconOverride(name:texture:)``.
     /// 
     public final func hasThemeIconOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2709,8 +3025,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_stylebox_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_stylebox_override")
+    fileprivate static let method_has_theme_stylebox_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_stylebox_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2725,6 +3041,7 @@ open class Control: CanvasItem {
     /// See ``addThemeStyleboxOverride(name:stylebox:)``.
     /// 
     public final func hasThemeStyleboxOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2739,8 +3056,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_font_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font_override")
+    fileprivate static let method_has_theme_font_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2755,6 +3072,7 @@ open class Control: CanvasItem {
     /// See ``addThemeFontOverride(name:font:)``.
     /// 
     public final func hasThemeFontOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2769,8 +3087,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_font_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font_size_override")
+    fileprivate static let method_has_theme_font_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font_size_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2785,6 +3103,7 @@ open class Control: CanvasItem {
     /// See ``addThemeFontSizeOverride(name:fontSize:)``.
     /// 
     public final func hasThemeFontSizeOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2799,8 +3118,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_color_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_color_override")
+    fileprivate static let method_has_theme_color_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_color_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2815,6 +3134,7 @@ open class Control: CanvasItem {
     /// See ``addThemeColorOverride(name:color:)``.
     /// 
     public final func hasThemeColorOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2829,8 +3149,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_constant_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_constant_override")
+    fileprivate static let method_has_theme_constant_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_constant_override")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2845,6 +3165,7 @@ open class Control: CanvasItem {
     /// See ``addThemeConstantOverride(name:constant:)``.
     /// 
     public final func hasThemeConstantOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2859,11 +3180,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_icon")
+    fileprivate static let method_has_theme_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_icon")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2875,6 +3196,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeIcon(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2892,11 +3214,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_stylebox")
+    fileprivate static let method_has_theme_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_stylebox")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2908,6 +3230,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeStylebox(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2925,11 +3248,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font")
+    fileprivate static let method_has_theme_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2941,6 +3264,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeFont(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2958,11 +3282,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font_size")
+    fileprivate static let method_has_theme_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2974,6 +3298,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeFontSize(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2991,11 +3316,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_color")
+    fileprivate static let method_has_theme_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_color")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -3007,6 +3332,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeColor(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -3024,11 +3350,11 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_has_theme_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_constant")
+    fileprivate static let method_has_theme_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_constant")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -3040,6 +3366,7 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeConstant(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -3057,8 +3384,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_get_theme_default_base_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_default_base_scale")
+    fileprivate static let method_get_theme_default_base_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_default_base_scale")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3073,13 +3400,14 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeDefaultBaseScale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Control.method_get_theme_default_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_theme_default_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_default_font")
+    fileprivate static let method_get_theme_default_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_default_font")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229501585)!
@@ -3094,13 +3422,14 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeDefaultFont() -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Control.method_get_theme_default_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_default_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_default_font_size")
+    fileprivate static let method_get_theme_default_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_default_font_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3115,13 +3444,14 @@ open class Control: CanvasItem {
     /// See ``getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeDefaultFontSize() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Control.method_get_theme_default_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_parent_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parent_control")
+    fileprivate static let method_get_parent_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parent_control")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -3133,13 +3463,14 @@ open class Control: CanvasItem {
     
     /// Returns the parent control node.
     public final func getParentControl() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Control.method_get_parent_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_h_grow_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_h_grow_direction")
+    fileprivate static let method_set_h_grow_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_h_grow_direction")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2022385301)!
@@ -3151,6 +3482,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_h_grow_direction(_ direction: Control.GrowDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3164,8 +3496,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_h_grow_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_grow_direction")
+    fileprivate static let method_get_h_grow_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_grow_direction")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635610155)!
@@ -3177,13 +3509,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_h_grow_direction() -> Control.GrowDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Control.method_get_h_grow_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.GrowDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_v_grow_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_grow_direction")
+    fileprivate static let method_set_v_grow_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_grow_direction")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2022385301)!
@@ -3195,6 +3528,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_v_grow_direction(_ direction: Control.GrowDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3208,8 +3542,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_v_grow_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_grow_direction")
+    fileprivate static let method_get_v_grow_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_grow_direction")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635610155)!
@@ -3221,13 +3555,60 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_v_grow_direction() -> Control.GrowDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Control.method_get_v_grow_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.GrowDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_tooltip_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tooltip_text")
+    fileprivate static let method_set_tooltip_auto_translate_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tooltip_auto_translate_mode")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 776149714)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_tooltip_auto_translate_mode(_ mode: Node.AutoTranslateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: mode.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Control.method_set_tooltip_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_tooltip_auto_translate_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tooltip_auto_translate_mode")
+        return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2498906432)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_tooltip_auto_translate_mode() -> Node.AutoTranslateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(Control.method_get_tooltip_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return Node.AutoTranslateMode (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_tooltip_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tooltip_text")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -3239,6 +3620,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_tooltip_text(_ hint: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let hint = GString(hint)
         withUnsafePointer(to: hint.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3253,8 +3635,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_tooltip_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tooltip_text")
+    fileprivate static let method_get_tooltip_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tooltip_text")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -3266,13 +3648,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_tooltip_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Control.method_get_tooltip_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tooltip")
+    fileprivate static let method_get_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tooltip")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2895288280)!
@@ -3286,9 +3669,10 @@ open class Control: CanvasItem {
     /// 
     /// This method can be overridden to customize its behavior. See ``_getTooltip(atPosition:)``.
     /// 
-    /// > Note: If this method returns an empty ``String``, no tooltip is displayed.
+    /// > Note: If this method returns an empty ``String`` and ``_makeCustomTooltip(forText:)`` is not overridden, no tooltip is displayed.
     /// 
     public final func getTooltip(atPosition: Vector2 = Vector2 (x: 0, y: 0)) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: atPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3303,8 +3687,8 @@ open class Control: CanvasItem {
         return _result.description
     }
     
-    fileprivate static var method_set_default_cursor_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_cursor_shape")
+    fileprivate static let method_set_default_cursor_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_cursor_shape")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 217062046)!
@@ -3316,6 +3700,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_default_cursor_shape(_ shape: Control.CursorShape) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3329,8 +3714,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_default_cursor_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_cursor_shape")
+    fileprivate static let method_get_default_cursor_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_cursor_shape")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2359535750)!
@@ -3342,13 +3727,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_default_cursor_shape() -> Control.CursorShape {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Control.method_get_default_cursor_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.CursorShape (rawValue: _result)!
     }
     
-    fileprivate static var method_get_cursor_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cursor_shape")
+    fileprivate static let method_get_cursor_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cursor_shape")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1395773853)!
@@ -3360,6 +3746,7 @@ open class Control: CanvasItem {
     
     /// Returns the mouse cursor shape the control displays on mouse hover. See ``Control/CursorShape``.
     public final func getCursorShape(position: Vector2 = Vector2 (x: 0, y: 0)) -> Control.CursorShape {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3374,8 +3761,8 @@ open class Control: CanvasItem {
         return Control.CursorShape (rawValue: _result)!
     }
     
-    fileprivate static var method_set_focus_neighbor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_focus_neighbor")
+    fileprivate static let method_set_focus_neighbor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_focus_neighbor")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2024461774)!
@@ -3388,6 +3775,7 @@ open class Control: CanvasItem {
     @inline(__always)
     /// Sets the focus neighbor for the specified ``Side`` to the ``Control`` at `neighbor` node path. A setter method for ``focusNeighborBottom``, ``focusNeighborLeft``, ``focusNeighborRight`` and ``focusNeighborTop``.
     fileprivate final func set_focus_neighbor(_ side: Side, _ neighbor: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: side.rawValue) { pArg0 in
             withUnsafePointer(to: neighbor.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3404,8 +3792,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_focus_neighbor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_focus_neighbor")
+    fileprivate static let method_get_focus_neighbor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_focus_neighbor")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757935761)!
@@ -3421,6 +3809,7 @@ open class Control: CanvasItem {
     /// > Note: To find the next ``Control`` on the specific ``Side``, even if a neighbor is not assigned, use ``findValidFocusNeighbor(side:)``.
     /// 
     fileprivate final func get_focus_neighbor(_ side: Side) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         withUnsafePointer(to: side.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3435,8 +3824,8 @@ open class Control: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_set_focus_next: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_focus_next")
+    fileprivate static let method_set_focus_next: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_focus_next")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -3448,6 +3837,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_focus_next(_ next: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: next.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3461,8 +3851,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_focus_next: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_focus_next")
+    fileprivate static let method_get_focus_next: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_focus_next")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -3474,13 +3864,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_focus_next() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(Control.method_get_focus_next, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_focus_previous: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_focus_previous")
+    fileprivate static let method_set_focus_previous: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_focus_previous")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -3492,6 +3883,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_focus_previous(_ previous: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: previous.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3505,8 +3897,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_focus_previous: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_focus_previous")
+    fileprivate static let method_get_focus_previous: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_focus_previous")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -3518,13 +3910,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_focus_previous() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(Control.method_get_focus_previous, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_force_drag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_drag")
+    fileprivate static let method_force_drag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_drag")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3191844692)!
@@ -3539,6 +3932,7 @@ open class Control: CanvasItem {
     /// The methods ``_canDropData(atPosition:data:)`` and ``_dropData(atPosition:data:)`` must be implemented on controls that want to receive drop data.
     /// 
     public final func forceDrag(data: Variant?, preview: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: preview?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3555,8 +3949,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_mouse_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mouse_filter")
+    fileprivate static let method_set_mouse_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mouse_filter")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3891156122)!
@@ -3568,6 +3962,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_mouse_filter(_ filter: Control.MouseFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3581,8 +3976,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_mouse_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mouse_filter")
+    fileprivate static let method_get_mouse_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mouse_filter")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1572545674)!
@@ -3594,13 +3989,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_mouse_filter() -> Control.MouseFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Control.method_get_mouse_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.MouseFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_force_pass_scroll_events: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_force_pass_scroll_events")
+    fileprivate static let method_set_force_pass_scroll_events: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_force_pass_scroll_events")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3612,6 +4008,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_force_pass_scroll_events(_ forcePassScrollEvents: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: forcePassScrollEvents) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3625,8 +4022,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_is_force_pass_scroll_events: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_force_pass_scroll_events")
+    fileprivate static let method_is_force_pass_scroll_events: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_force_pass_scroll_events")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3638,13 +4035,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func is_force_pass_scroll_events() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Control.method_is_force_pass_scroll_events, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_clip_contents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_contents")
+    fileprivate static let method_set_clip_contents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_contents")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3656,6 +4054,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_clip_contents(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3669,8 +4068,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_is_clipping_contents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_clipping_contents")
+    fileprivate static let method_is_clipping_contents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_clipping_contents")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -3682,13 +4081,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func is_clipping_contents() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Control.method_is_clipping_contents, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_grab_click_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("grab_click_focus")
+    fileprivate static let method_grab_click_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("grab_click_focus")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3698,15 +4098,16 @@ open class Control: CanvasItem {
         
     }()
     
-    /// Creates an ``InputEventMouseButton`` that attempts to click the control. If the event is received, the control acquires focus.
+    /// Creates an ``InputEventMouseButton`` that attempts to click the control. If the event is received, the control gains focus.
     /// 
     public final func grabClickFocus() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_grab_click_focus, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_drag_forwarding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drag_forwarding")
+    fileprivate static let method_set_drag_forwarding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drag_forwarding")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1076571380)!
@@ -3716,13 +4117,18 @@ open class Control: CanvasItem {
         
     }()
     
-    /// Forwards the handling of this control's ``_getDragData(atPosition:)``,  ``_canDropData(atPosition:data:)`` and ``_dropData(atPosition:data:)`` virtual functions to delegate callables.
+    /// Sets the given callables to be used instead of the control's own drag-and-drop virtual methods. If a callable is empty, its respective virtual method is used as normal.
     /// 
-    /// For each argument, if not empty, the delegate callable is used, otherwise the local (virtual) function is used.
+    /// The arguments for each callable should be exactly the same as their respective virtual methods, which would be:
     /// 
-    /// The function format for each callable should be exactly the same as the virtual functions described above.
+    /// - `dragFunc` corresponds to ``_getDragData(atPosition:)`` and requires a ``Vector2``;
+    /// 
+    /// - `canDropFunc` corresponds to ``_canDropData(atPosition:data:)`` and requires both a ``Vector2`` and a ``Variant``;
+    /// 
+    /// - `dropFunc` corresponds to ``_dropData(atPosition:data:)`` and requires both a ``Vector2`` and a ``Variant``.
     /// 
     public final func setDragForwarding(dragFunc: Callable, canDropFunc: Callable, dropFunc: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dragFunc.content) { pArg0 in
             withUnsafePointer(to: canDropFunc.content) { pArg1 in
                 withUnsafePointer(to: dropFunc.content) { pArg2 in
@@ -3742,8 +4148,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_drag_preview: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drag_preview")
+    fileprivate static let method_set_drag_preview: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drag_preview")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
@@ -3756,6 +4162,7 @@ open class Control: CanvasItem {
     /// Shows the given control at the mouse pointer. A good time to call this method is in ``_getDragData(atPosition:)``. The control must not be in the scene tree. You should not free the control, and you should not keep a reference to the control beyond the duration of the drag. It will be deleted automatically after the drag has ended.
     /// 
     public final func setDragPreview(control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3769,8 +4176,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_is_drag_successful: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_drag_successful")
+    fileprivate static let method_is_drag_successful: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_drag_successful")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3785,13 +4192,14 @@ open class Control: CanvasItem {
     /// Best used with ``Node/notificationDragEnd``.
     /// 
     public final func isDragSuccessful() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Control.method_is_drag_successful, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_warp_mouse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("warp_mouse")
+    fileprivate static let method_warp_mouse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("warp_mouse")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -3806,6 +4214,7 @@ open class Control: CanvasItem {
     /// > Note: ``warpMouse(position:)`` is only supported on Windows, macOS and Linux. It has no effect on Android, iOS and Web.
     /// 
     public final func warpMouse(position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3819,8 +4228,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_set_shortcut_context: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shortcut_context")
+    fileprivate static let method_set_shortcut_context: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shortcut_context")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -3832,6 +4241,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_shortcut_context(_ node: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3845,8 +4255,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_shortcut_context: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shortcut_context")
+    fileprivate static let method_get_shortcut_context: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shortcut_context")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3160264692)!
@@ -3858,13 +4268,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_shortcut_context() -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Control.method_get_shortcut_context, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_update_minimum_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_minimum_size")
+    fileprivate static let method_update_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_minimum_size")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3876,12 +4287,13 @@ open class Control: CanvasItem {
     
     /// Invalidates the size cache in this node and in parent nodes up to top level. Intended to be used with ``getMinimumSize()`` when the return value is changed. Setting ``customMinimumSize`` directly calls this method automatically.
     public final func updateMinimumSize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Control.method_update_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_layout_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layout_direction")
+    fileprivate static let method_set_layout_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layout_direction")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3310692370)!
@@ -3893,6 +4305,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_layout_direction(_ direction: Control.LayoutDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3906,8 +4319,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_get_layout_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layout_direction")
+    fileprivate static let method_get_layout_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layout_direction")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1546772008)!
@@ -3919,13 +4332,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_layout_direction() -> Control.LayoutDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Control.method_get_layout_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.LayoutDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_is_layout_rtl: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_layout_rtl")
+    fileprivate static let method_is_layout_rtl: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_layout_rtl")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3935,15 +4349,16 @@ open class Control: CanvasItem {
         
     }()
     
-    /// Returns `true` if layout is right-to-left.
+    /// Returns `true` if layout is right-to-left. See also ``layoutDirection``.
     public final func isLayoutRtl() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Control.method_is_layout_rtl, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_auto_translate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auto_translate")
+    fileprivate static let method_set_auto_translate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_translate")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3955,6 +4370,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_auto_translate(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3968,8 +4384,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_is_auto_translating: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_auto_translating")
+    fileprivate static let method_is_auto_translating: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_auto_translating")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3981,13 +4397,14 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func is_auto_translating() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Control.method_is_auto_translating, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_localize_numeral_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_localize_numeral_system")
+    fileprivate static let method_set_localize_numeral_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_localize_numeral_system")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3999,6 +4416,7 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_localize_numeral_system(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4012,8 +4430,8 @@ open class Control: CanvasItem {
         
     }
     
-    fileprivate static var method_is_localizing_numeral_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_localizing_numeral_system")
+    fileprivate static let method_is_localizing_numeral_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_localizing_numeral_system")
         return withUnsafePointer(to: &Control.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4025,12 +4443,13 @@ open class Control: CanvasItem {
     
     @inline(__always)
     fileprivate final func is_localizing_numeral_system() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Control.method_is_localizing_numeral_system, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_can_drop_data":
@@ -4216,7 +4635,8 @@ open class Control: CanvasItem {
 func _Control_proxy_can_drop_data (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
     let ret = swiftObject._canDropData (atPosition: args [0]!.assumingMemoryBound (to: Vector2.self).pointee, data: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -4224,14 +4644,16 @@ func _Control_proxy_can_drop_data (instance: UnsafeMutableRawPointer?, args: Uns
 func _Control_proxy_drop_data (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
     swiftObject._dropData (atPosition: args [0]!.assumingMemoryBound (to: Vector2.self).pointee, data: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
 }
 
 func _Control_proxy_get_drag_data (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
     let ret = swiftObject._getDragData (atPosition: args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes(of: ret.content, as: Variant.ContentType.self)
     ret?.content = Variant.zero
@@ -4239,7 +4661,8 @@ func _Control_proxy_get_drag_data (instance: UnsafeMutableRawPointer?, args: Uns
 
 func _Control_proxy_get_minimum_size (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
     let ret = swiftObject._getMinimumSize ()
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
@@ -4247,7 +4670,8 @@ func _Control_proxy_get_minimum_size (instance: UnsafeMutableRawPointer?, args: 
 func _Control_proxy_get_tooltip (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
     let ret = GString (swiftObject._getTooltip (atPosition: args [0]!.assumingMemoryBound (to: Vector2.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -4256,16 +4680,18 @@ func _Control_proxy_get_tooltip (instance: UnsafeMutableRawPointer?, args: Unsaf
 func _Control_proxy_gui_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._guiInput (event: lookupLiveObject (handleAddress: resolved_0) as? InputEvent ?? lookupObject (nativeHandle: resolved_0)!)
+    swiftObject._guiInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
 }
 
 func _Control_proxy_has_point (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
     let ret = swiftObject._hasPoint (args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -4273,7 +4699,8 @@ func _Control_proxy_has_point (instance: UnsafeMutableRawPointer?, args: UnsafeP
 func _Control_proxy_make_custom_tooltip (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
     let ret = swiftObject._makeCustomTooltip (forText: GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Object
 }
@@ -4281,8 +4708,9 @@ func _Control_proxy_make_custom_tooltip (instance: UnsafeMutableRawPointer?, arg
 func _Control_proxy_structured_text_parser (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Control>.fromOpaque(instance).takeUnretainedValue()
-    let ret = swiftObject._structuredTextParser (args: GArray (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), text: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Control else { return }
+    let ret = swiftObject._structuredTextParser (args: VariantArray (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), text: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
     retPtr!.storeBytes (of: ret.array.content, as: type (of: ret.array.content)) // typedarray::Vector3i
 }
 

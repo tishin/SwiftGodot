@@ -26,7 +26,7 @@ import Musl
 /// For game objects that don't require complex movement or collision detection, such as moving platforms, ``AnimatableBody3D`` is simpler to configure.
 /// 
 open class CharacterBody3D: PhysicsBody3D {
-    fileprivate static var className = StringName("CharacterBody3D")
+    private static var className = StringName("CharacterBody3D")
     override open class var godotClassName: StringName { className }
     public enum MotionMode: Int64, CaseIterable {
         /// Apply when notions of walls, ceiling and floor are relevant. In this mode the body motion will react to slopes (acceleration/slowdown). This mode is suitable for grounded games like platformers.
@@ -244,8 +244,8 @@ open class CharacterBody3D: PhysicsBody3D {
     }
     
     /* Methods */
-    fileprivate static var method_move_and_slide: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_and_slide")
+    fileprivate static let method_move_and_slide: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_and_slide")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -265,13 +265,14 @@ open class CharacterBody3D: PhysicsBody3D {
     /// 
     @discardableResult /* discardable per discardableList: CharacterBody3D, move_and_slide */ 
     public final func moveAndSlide() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_move_and_slide, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_apply_floor_snap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_floor_snap")
+    fileprivate static let method_apply_floor_snap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_floor_snap")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -283,12 +284,13 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Allows to manually apply a snap to the floor regardless of the body's velocity. This function does nothing when ``isOnFloor()`` returns `true`.
     public final func applyFloorSnap() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(CharacterBody3D.method_apply_floor_snap, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_velocity")
+    fileprivate static let method_set_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_velocity")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -300,6 +302,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_velocity(_ velocity: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -313,8 +316,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_velocity")
+    fileprivate static let method_get_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_velocity")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -326,13 +329,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_velocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_safe_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_safe_margin")
+    fileprivate static let method_set_safe_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_safe_margin")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -344,6 +348,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_safe_margin(_ margin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -357,8 +362,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_safe_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_safe_margin")
+    fileprivate static let method_get_safe_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_safe_margin")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -370,13 +375,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_safe_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_safe_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_floor_stop_on_slope_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_floor_stop_on_slope_enabled")
+    fileprivate static let method_is_floor_stop_on_slope_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_floor_stop_on_slope_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -388,13 +394,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func is_floor_stop_on_slope_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_stop_on_slope_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_floor_stop_on_slope_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_floor_stop_on_slope_enabled")
+    fileprivate static let method_set_floor_stop_on_slope_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_floor_stop_on_slope_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -406,6 +413,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_floor_stop_on_slope_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -419,8 +427,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_set_floor_constant_speed_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_floor_constant_speed_enabled")
+    fileprivate static let method_set_floor_constant_speed_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_floor_constant_speed_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -432,6 +440,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_floor_constant_speed_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -445,8 +454,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_is_floor_constant_speed_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_floor_constant_speed_enabled")
+    fileprivate static let method_is_floor_constant_speed_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_floor_constant_speed_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -458,13 +467,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func is_floor_constant_speed_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_constant_speed_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_floor_block_on_wall_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_floor_block_on_wall_enabled")
+    fileprivate static let method_set_floor_block_on_wall_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_floor_block_on_wall_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -476,6 +486,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_floor_block_on_wall_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -489,8 +500,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_is_floor_block_on_wall_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_floor_block_on_wall_enabled")
+    fileprivate static let method_is_floor_block_on_wall_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_floor_block_on_wall_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -502,13 +513,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func is_floor_block_on_wall_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_block_on_wall_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_slide_on_ceiling_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slide_on_ceiling_enabled")
+    fileprivate static let method_set_slide_on_ceiling_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slide_on_ceiling_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -520,6 +532,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_slide_on_ceiling_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -533,8 +546,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_is_slide_on_ceiling_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_slide_on_ceiling_enabled")
+    fileprivate static let method_is_slide_on_ceiling_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_slide_on_ceiling_enabled")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -546,13 +559,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func is_slide_on_ceiling_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_slide_on_ceiling_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_platform_floor_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_platform_floor_layers")
+    fileprivate static let method_set_platform_floor_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_platform_floor_layers")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -564,6 +578,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_platform_floor_layers(_ excludeLayer: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: excludeLayer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -577,8 +592,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_platform_floor_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_platform_floor_layers")
+    fileprivate static let method_get_platform_floor_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_platform_floor_layers")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -590,13 +605,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_platform_floor_layers() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_floor_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_platform_wall_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_platform_wall_layers")
+    fileprivate static let method_set_platform_wall_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_platform_wall_layers")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -608,6 +624,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_platform_wall_layers(_ excludeLayer: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: excludeLayer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -621,8 +638,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_platform_wall_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_platform_wall_layers")
+    fileprivate static let method_get_platform_wall_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_platform_wall_layers")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -634,13 +651,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_platform_wall_layers() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_wall_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_max_slides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_slides")
+    fileprivate static let method_get_max_slides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_slides")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -652,13 +670,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_max_slides() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_max_slides, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_slides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_slides")
+    fileprivate static let method_set_max_slides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_slides")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -670,6 +689,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_max_slides(_ maxSlides: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxSlides) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -683,8 +703,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_floor_max_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_floor_max_angle")
+    fileprivate static let method_get_floor_max_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_floor_max_angle")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -696,13 +716,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_floor_max_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_max_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_floor_max_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_floor_max_angle")
+    fileprivate static let method_set_floor_max_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_floor_max_angle")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -714,6 +735,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_floor_max_angle(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -727,8 +749,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_floor_snap_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_floor_snap_length")
+    fileprivate static let method_get_floor_snap_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_floor_snap_length")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -740,13 +762,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_floor_snap_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_snap_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_floor_snap_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_floor_snap_length")
+    fileprivate static let method_set_floor_snap_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_floor_snap_length")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -758,6 +781,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_floor_snap_length(_ floorSnapLength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: floorSnapLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -771,8 +795,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_wall_min_slide_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_wall_min_slide_angle")
+    fileprivate static let method_get_wall_min_slide_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_wall_min_slide_angle")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -784,13 +808,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_wall_min_slide_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_wall_min_slide_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_wall_min_slide_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_wall_min_slide_angle")
+    fileprivate static let method_set_wall_min_slide_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_wall_min_slide_angle")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -802,6 +827,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_wall_min_slide_angle(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -815,8 +841,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_up_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_up_direction")
+    fileprivate static let method_get_up_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_up_direction")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -828,13 +854,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_up_direction() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_up_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_up_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_up_direction")
+    fileprivate static let method_set_up_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_up_direction")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -846,6 +873,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_up_direction(_ upDirection: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: upDirection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -859,8 +887,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_set_motion_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_motion_mode")
+    fileprivate static let method_set_motion_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_motion_mode")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2690739026)!
@@ -872,6 +900,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_motion_mode(_ mode: CharacterBody3D.MotionMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -885,8 +914,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_motion_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_motion_mode")
+    fileprivate static let method_get_motion_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_motion_mode")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3529553604)!
@@ -898,13 +927,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_motion_mode() -> CharacterBody3D.MotionMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_motion_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CharacterBody3D.MotionMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_platform_on_leave: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_platform_on_leave")
+    fileprivate static let method_set_platform_on_leave: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_platform_on_leave")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1459986142)!
@@ -916,6 +946,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_platform_on_leave(_ onLeaveApplyVelocity: CharacterBody3D.PlatformOnLeave) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: onLeaveApplyVelocity.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -929,8 +960,8 @@ open class CharacterBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_platform_on_leave: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_platform_on_leave")
+    fileprivate static let method_get_platform_on_leave: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_platform_on_leave")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 996491171)!
@@ -942,13 +973,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_platform_on_leave() -> CharacterBody3D.PlatformOnLeave {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_on_leave, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CharacterBody3D.PlatformOnLeave (rawValue: _result)!
     }
     
-    fileprivate static var method_is_on_floor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_floor")
+    fileprivate static let method_is_on_floor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_floor")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -960,13 +992,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns `true` if the body collided with the floor on the last call of ``moveAndSlide()``. Otherwise, returns `false`. The ``upDirection`` and ``floorMaxAngle`` are used to determine whether a surface is "floor" or not.
     public final func isOnFloor() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_floor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_on_floor_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_floor_only")
+    fileprivate static let method_is_on_floor_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_floor_only")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -978,13 +1011,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns `true` if the body collided only with the floor on the last call of ``moveAndSlide()``. Otherwise, returns `false`. The ``upDirection`` and ``floorMaxAngle`` are used to determine whether a surface is "floor" or not.
     public final func isOnFloorOnly() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_floor_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_on_ceiling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_ceiling")
+    fileprivate static let method_is_on_ceiling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_ceiling")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -996,13 +1030,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns `true` if the body collided with the ceiling on the last call of ``moveAndSlide()``. Otherwise, returns `false`. The ``upDirection`` and ``floorMaxAngle`` are used to determine whether a surface is "ceiling" or not.
     public final func isOnCeiling() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_ceiling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_on_ceiling_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_ceiling_only")
+    fileprivate static let method_is_on_ceiling_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_ceiling_only")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1014,13 +1049,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns `true` if the body collided only with the ceiling on the last call of ``moveAndSlide()``. Otherwise, returns `false`. The ``upDirection`` and ``floorMaxAngle`` are used to determine whether a surface is "ceiling" or not.
     public final func isOnCeilingOnly() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_ceiling_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_on_wall: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_wall")
+    fileprivate static let method_is_on_wall: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_wall")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1032,13 +1068,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns `true` if the body collided with a wall on the last call of ``moveAndSlide()``. Otherwise, returns `false`. The ``upDirection`` and ``floorMaxAngle`` are used to determine whether a surface is "wall" or not.
     public final func isOnWall() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_wall, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_on_wall_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_wall_only")
+    fileprivate static let method_is_on_wall_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_wall_only")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1050,13 +1087,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns `true` if the body collided only with a wall on the last call of ``moveAndSlide()``. Otherwise, returns `false`. The ``upDirection`` and ``floorMaxAngle`` are used to determine whether a surface is "wall" or not.
     public final func isOnWallOnly() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_wall_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_floor_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_floor_normal")
+    fileprivate static let method_get_floor_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_floor_normal")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1071,13 +1109,14 @@ open class CharacterBody3D: PhysicsBody3D {
     /// > Warning: The collision normal is not always the same as the surface normal.
     /// 
     public final func getFloorNormal() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_wall_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_wall_normal")
+    fileprivate static let method_get_wall_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_wall_normal")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1092,13 +1131,14 @@ open class CharacterBody3D: PhysicsBody3D {
     /// > Warning: The collision normal is not always the same as the surface normal.
     /// 
     public final func getWallNormal() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_wall_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_last_motion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_motion")
+    fileprivate static let method_get_last_motion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_motion")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1110,13 +1150,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns the last motion applied to the ``CharacterBody3D`` during the last call to ``moveAndSlide()``. The movement can be split into multiple motions when sliding occurs, and this method return the last one, which is useful to retrieve the current direction of the movement.
     public final func getLastMotion() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_last_motion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_position_delta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position_delta")
+    fileprivate static let method_get_position_delta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position_delta")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1128,13 +1169,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns the travel (position delta) that occurred during the last call to ``moveAndSlide()``.
     public final func getPositionDelta() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_position_delta, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_real_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_real_velocity")
+    fileprivate static let method_get_real_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_real_velocity")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1146,13 +1188,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns the current real velocity since the last call to ``moveAndSlide()``. For example, when you climb a slope, you will move diagonally even though the velocity is horizontal. This method returns the diagonal movement, as opposed to ``velocity`` which returns the requested velocity.
     public final func getRealVelocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_real_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_floor_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_floor_angle")
+    fileprivate static let method_get_floor_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_floor_angle")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2906300789)!
@@ -1164,6 +1207,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns the floor's collision angle at the last collision point according to `upDirection`, which is ``Vector3/up`` by default. This value is always positive and only valid after calling ``moveAndSlide()`` and when ``isOnFloor()`` returns `true`.
     public final func getFloorAngle(upDirection: Vector3 = Vector3 (x: 0, y: 1, z: 0)) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: upDirection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1178,8 +1222,8 @@ open class CharacterBody3D: PhysicsBody3D {
         return _result
     }
     
-    fileprivate static var method_get_platform_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_platform_velocity")
+    fileprivate static let method_get_platform_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_platform_velocity")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1191,13 +1235,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns the linear velocity of the platform at the last collision point. Only valid after calling ``moveAndSlide()``.
     public final func getPlatformVelocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_platform_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_platform_angular_velocity")
+    fileprivate static let method_get_platform_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_platform_angular_velocity")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1209,13 +1254,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns the angular velocity of the platform at the last collision point. Only valid after calling ``moveAndSlide()``.
     public final func getPlatformAngularVelocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_slide_collision_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slide_collision_count")
+    fileprivate static let method_get_slide_collision_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slide_collision_count")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1227,13 +1273,14 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns the number of times the body collided and changed direction during the last call to ``moveAndSlide()``.
     public final func getSlideCollisionCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_slide_collision_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_slide_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slide_collision")
+    fileprivate static let method_get_slide_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slide_collision")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 107003663)!
@@ -1245,6 +1292,7 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns a ``KinematicCollision3D``, which contains information about a collision that occurred during the last call to ``moveAndSlide()``. Since the body can collide several times in a single call to ``moveAndSlide()``, you must specify the index of the collision in the range 0 to (``getSlideCollisionCount()`` - 1).
     public final func getSlideCollision(slideIdx: Int32) -> KinematicCollision3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: slideIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1256,11 +1304,11 @@ open class CharacterBody3D: PhysicsBody3D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_last_slide_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_slide_collision")
+    fileprivate static let method_get_last_slide_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_slide_collision")
         return withUnsafePointer(to: &CharacterBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 186875014)!
@@ -1272,9 +1320,10 @@ open class CharacterBody3D: PhysicsBody3D {
     
     /// Returns a ``KinematicCollision3D``, which contains information about the latest collision that occurred during the last call to ``moveAndSlide()``.
     public final func getLastSlideCollision() -> KinematicCollision3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CharacterBody3D.method_get_last_slide_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

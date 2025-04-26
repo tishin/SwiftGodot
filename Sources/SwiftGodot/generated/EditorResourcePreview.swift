@@ -31,11 +31,11 @@ import Musl
 /// 
 /// - ``previewInvalidated``
 open class EditorResourcePreview: Node {
-    fileprivate static var className = StringName("EditorResourcePreview")
+    private static var className = StringName("EditorResourcePreview")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_queue_resource_preview: GDExtensionMethodBindPtr = {
-        let methodName = StringName("queue_resource_preview")
+    fileprivate static let method_queue_resource_preview: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("queue_resource_preview")
         return withUnsafePointer(to: &EditorResourcePreview.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 233177534)!
@@ -47,9 +47,10 @@ open class EditorResourcePreview: Node {
     
     /// Queue a resource file located at `path` for preview. Once the preview is ready, the `receiver`'s `receiverFunc` will be called. The `receiverFunc` must take the following four arguments: ``String`` path, ``Texture2D`` preview, ``Texture2D`` thumbnail_preview, ``Variant`` userdata. `userdata` can be anything, and will be returned when `receiverFunc` is called.
     /// 
-    /// > Note: If it was not possible to create the preview the `receiverFunc` will still be called, but the preview will be null.
+    /// > Note: If it was not possible to create the preview the `receiverFunc` will still be called, but the preview will be `null`.
     /// 
     public final func queueResourcePreview(path: String, receiver: Object?, receiverFunc: StringName, userdata: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: receiver?.handle) { pArg1 in
@@ -73,8 +74,8 @@ open class EditorResourcePreview: Node {
         
     }
     
-    fileprivate static var method_queue_edited_resource_preview: GDExtensionMethodBindPtr = {
-        let methodName = StringName("queue_edited_resource_preview")
+    fileprivate static let method_queue_edited_resource_preview: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("queue_edited_resource_preview")
         return withUnsafePointer(to: &EditorResourcePreview.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1608376650)!
@@ -86,9 +87,10 @@ open class EditorResourcePreview: Node {
     
     /// Queue the `resource` being edited for preview. Once the preview is ready, the `receiver`'s `receiverFunc` will be called. The `receiverFunc` must take the following four arguments: ``String`` path, ``Texture2D`` preview, ``Texture2D`` thumbnail_preview, ``Variant`` userdata. `userdata` can be anything, and will be returned when `receiverFunc` is called.
     /// 
-    /// > Note: If it was not possible to create the preview the `receiverFunc` will still be called, but the preview will be null.
+    /// > Note: If it was not possible to create the preview the `receiverFunc` will still be called, but the preview will be `null`.
     /// 
     public final func queueEditedResourcePreview(resource: Resource?, receiver: Object?, receiverFunc: StringName, userdata: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: receiver?.handle) { pArg1 in
                 withUnsafePointer(to: receiverFunc.content) { pArg2 in
@@ -111,8 +113,8 @@ open class EditorResourcePreview: Node {
         
     }
     
-    fileprivate static var method_add_preview_generator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_preview_generator")
+    fileprivate static let method_add_preview_generator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_preview_generator")
         return withUnsafePointer(to: &EditorResourcePreview.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 332288124)!
@@ -124,6 +126,7 @@ open class EditorResourcePreview: Node {
     
     /// Create an own, custom preview generator.
     public final func addPreviewGenerator(_ generator: EditorResourcePreviewGenerator?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: generator?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -137,8 +140,8 @@ open class EditorResourcePreview: Node {
         
     }
     
-    fileprivate static var method_remove_preview_generator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_preview_generator")
+    fileprivate static let method_remove_preview_generator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_preview_generator")
         return withUnsafePointer(to: &EditorResourcePreview.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 332288124)!
@@ -150,6 +153,7 @@ open class EditorResourcePreview: Node {
     
     /// Removes a custom preview generator.
     public final func removePreviewGenerator(_ generator: EditorResourcePreviewGenerator?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: generator?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -163,8 +167,8 @@ open class EditorResourcePreview: Node {
         
     }
     
-    fileprivate static var method_check_for_invalidation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("check_for_invalidation")
+    fileprivate static let method_check_for_invalidation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("check_for_invalidation")
         return withUnsafePointer(to: &EditorResourcePreview.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -176,6 +180,7 @@ open class EditorResourcePreview: Node {
     
     /// Check if the resource changed, if so, it will be invalidated and the corresponding signal emitted.
     public final func checkForInvalidation(path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

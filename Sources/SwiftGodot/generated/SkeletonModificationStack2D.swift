@@ -28,7 +28,7 @@ import Musl
 /// This resource also controls how strongly all of the modifications are applied to the ``Skeleton2D``.
 /// 
 open class SkeletonModificationStack2D: Resource {
-    fileprivate static var className = StringName("SkeletonModificationStack2D")
+    private static var className = StringName("SkeletonModificationStack2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -70,8 +70,8 @@ open class SkeletonModificationStack2D: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_setup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("setup")
+    fileprivate static let method_setup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("setup")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -83,12 +83,13 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Sets up the modification stack so it can execute. This function should be called by ``Skeleton2D`` and shouldn't be manually called unless you know what you are doing.
     public final func setup() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SkeletonModificationStack2D.method_setup, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_execute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("execute")
+    fileprivate static let method_execute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("execute")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1005356550)!
@@ -103,6 +104,7 @@ open class SkeletonModificationStack2D: Resource {
     /// > Note: The order of the modifications can matter depending on the modifications. For example, modifications on a spine should operate before modifications on the arms in order to get proper results.
     /// 
     public final func execute(delta: Double, executionMode: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: executionMode) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -119,8 +121,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_enable_all_modifications: GDExtensionMethodBindPtr = {
-        let methodName = StringName("enable_all_modifications")
+    fileprivate static let method_enable_all_modifications: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("enable_all_modifications")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -132,6 +134,7 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Enables all ``SkeletonModification2D``s in the stack.
     public final func enableAllModifications(enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -145,8 +148,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_get_modification: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modification")
+    fileprivate static let method_get_modification: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modification")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2570274329)!
@@ -158,6 +161,7 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Returns the ``SkeletonModification2D`` at the passed-in index, `modIdx`.
     public final func getModification(modIdx: Int32) -> SkeletonModification2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: modIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -169,11 +173,11 @@ open class SkeletonModificationStack2D: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_modification: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_modification")
+    fileprivate static let method_add_modification: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_modification")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 354162120)!
@@ -185,6 +189,7 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Adds the passed-in ``SkeletonModification2D`` to the stack.
     public final func addModification(_ modification: SkeletonModification2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: modification?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -198,8 +203,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_delete_modification: GDExtensionMethodBindPtr = {
-        let methodName = StringName("delete_modification")
+    fileprivate static let method_delete_modification: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("delete_modification")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -211,6 +216,7 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Deletes the ``SkeletonModification2D`` at the index position `modIdx`, if it exists.
     public final func deleteModification(modIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: modIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -224,8 +230,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_set_modification: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_modification")
+    fileprivate static let method_set_modification: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_modification")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1098262544)!
@@ -237,6 +243,7 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Sets the modification at `modIdx` to the passed-in modification, `modification`.
     public final func setModification(modIdx: Int32, modification: SkeletonModification2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: modIdx) { pArg0 in
             withUnsafePointer(to: modification?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -253,8 +260,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_set_modification_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_modification_count")
+    fileprivate static let method_set_modification_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_modification_count")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -266,6 +273,7 @@ open class SkeletonModificationStack2D: Resource {
     
     @inline(__always)
     fileprivate final func set_modification_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -279,8 +287,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_get_modification_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modification_count")
+    fileprivate static let method_get_modification_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modification_count")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -292,13 +300,14 @@ open class SkeletonModificationStack2D: Resource {
     
     @inline(__always)
     fileprivate final func get_modification_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModificationStack2D.method_get_modification_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_is_setup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_is_setup")
+    fileprivate static let method_get_is_setup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_is_setup")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -310,13 +319,14 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Returns a boolean that indicates whether the modification stack is setup and can execute.
     public final func getIsSetup() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonModificationStack2D.method_get_is_setup, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enabled")
+    fileprivate static let method_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enabled")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -328,6 +338,7 @@ open class SkeletonModificationStack2D: Resource {
     
     @inline(__always)
     fileprivate final func set_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -341,8 +352,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_get_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enabled")
+    fileprivate static let method_get_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enabled")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -354,13 +365,14 @@ open class SkeletonModificationStack2D: Resource {
     
     @inline(__always)
     fileprivate final func get_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonModificationStack2D.method_get_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_strength")
+    fileprivate static let method_set_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_strength")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -372,6 +384,7 @@ open class SkeletonModificationStack2D: Resource {
     
     @inline(__always)
     fileprivate final func set_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -385,8 +398,8 @@ open class SkeletonModificationStack2D: Resource {
         
     }
     
-    fileprivate static var method_get_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_strength")
+    fileprivate static let method_get_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_strength")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -398,13 +411,14 @@ open class SkeletonModificationStack2D: Resource {
     
     @inline(__always)
     fileprivate final func get_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModificationStack2D.method_get_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skeleton")
+    fileprivate static let method_get_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skeleton")
         return withUnsafePointer(to: &SkeletonModificationStack2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1697361217)!
@@ -416,9 +430,10 @@ open class SkeletonModificationStack2D: Resource {
     
     /// Returns the ``Skeleton2D`` node that the SkeletonModificationStack2D is bound to.
     public final func getSkeleton() -> Skeleton2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(SkeletonModificationStack2D.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

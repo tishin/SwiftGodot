@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A visual shader node for use of vector operators. Operates on vector `a` and vector `b`.
 open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
-    fileprivate static var className = StringName("VisualShaderNodeVectorOp")
+    private static var className = StringName("VisualShaderNodeVectorOp")
     override open class var godotClassName: StringName { className }
     public enum Operator: Int64, CaseIterable {
         /// Adds two vectors.
@@ -70,8 +70,8 @@ open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
     }
     
     /* Methods */
-    fileprivate static var method_set_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_operator")
+    fileprivate static let method_set_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_operator")
         return withUnsafePointer(to: &VisualShaderNodeVectorOp.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3371507302)!
@@ -83,6 +83,7 @@ open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
     
     @inline(__always)
     fileprivate final func set_operator(_ op: VisualShaderNodeVectorOp.Operator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: op.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
         
     }
     
-    fileprivate static var method_get_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_operator")
+    fileprivate static let method_get_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_operator")
         return withUnsafePointer(to: &VisualShaderNodeVectorOp.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 11793929)!
@@ -109,6 +110,7 @@ open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
     
     @inline(__always)
     fileprivate final func get_operator() -> VisualShaderNodeVectorOp.Operator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeVectorOp.method_get_operator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeVectorOp.Operator (rawValue: _result)!

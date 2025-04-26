@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This node was replaced by ``VisualShaderNodeFrame`` and only exists to preserve compatibility. In the ``VisualShader`` editor it behaves exactly like ``VisualShaderNodeFrame``.
 open class VisualShaderNodeComment: VisualShaderNodeFrame {
-    fileprivate static var className = StringName("VisualShaderNodeComment")
+    private static var className = StringName("VisualShaderNodeComment")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class VisualShaderNodeComment: VisualShaderNodeFrame {
     }
     
     /* Methods */
-    fileprivate static var method_set_description: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_description")
+    fileprivate static let method_set_description: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_description")
         return withUnsafePointer(to: &VisualShaderNodeComment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -54,6 +54,7 @@ open class VisualShaderNodeComment: VisualShaderNodeFrame {
     
     @inline(__always)
     fileprivate final func set_description(_ description: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let description = GString(description)
         withUnsafePointer(to: description.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -68,8 +69,8 @@ open class VisualShaderNodeComment: VisualShaderNodeFrame {
         
     }
     
-    fileprivate static var method_get_description: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_description")
+    fileprivate static let method_get_description: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_description")
         return withUnsafePointer(to: &VisualShaderNodeComment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -81,6 +82,7 @@ open class VisualShaderNodeComment: VisualShaderNodeFrame {
     
     @inline(__always)
     fileprivate final func get_description() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VisualShaderNodeComment.method_get_description, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

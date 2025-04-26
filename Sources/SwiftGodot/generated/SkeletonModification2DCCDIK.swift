@@ -30,7 +30,7 @@ import Musl
 /// CCDIK also fully supports angle constraints, allowing for more control over how a solution is met.
 /// 
 open class SkeletonModification2DCCDIK: SkeletonModification2D {
-    fileprivate static var className = StringName("SkeletonModification2DCCDIK")
+    private static var className = StringName("SkeletonModification2DCCDIK")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -72,8 +72,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_node")
+    fileprivate static let method_set_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_node")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -85,6 +85,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_target_node(_ targetNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -98,8 +99,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_node")
+    fileprivate static let method_get_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_node")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -111,13 +112,14 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_target_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_tip_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tip_node")
+    fileprivate static let method_set_tip_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tip_node")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -129,6 +131,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_tip_node(_ tipNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tipNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -142,8 +145,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_tip_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tip_node")
+    fileprivate static let method_get_tip_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tip_node")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -155,13 +158,14 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_tip_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_tip_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_ccdik_data_chain_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_data_chain_length")
+    fileprivate static let method_set_ccdik_data_chain_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_data_chain_length")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -173,6 +177,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_ccdik_data_chain_length(_ length: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -186,8 +191,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_data_chain_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_data_chain_length")
+    fileprivate static let method_get_ccdik_data_chain_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_data_chain_length")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -199,13 +204,14 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_ccdik_data_chain_length() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_data_chain_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ccdik_joint_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_joint_bone2d_node")
+    fileprivate static let method_set_ccdik_joint_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_joint_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761262315)!
@@ -217,6 +223,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Sets the ``Bone2D`` node assigned to the CCDIK joint at `jointIdx`.
     public final func setCcdikJointBone2dNode(jointIdx: Int32, bone2dNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: bone2dNodepath.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -233,8 +240,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_joint_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_joint_bone2d_node")
+    fileprivate static let method_get_ccdik_joint_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_joint_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 408788394)!
@@ -246,6 +253,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Returns the ``Bone2D`` node assigned to the CCDIK joint at `jointIdx`.
     public final func getCcdikJointBone2dNode(jointIdx: Int32) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -260,8 +268,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_ccdik_joint_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_joint_bone_index")
+    fileprivate static let method_set_ccdik_joint_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_joint_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -273,6 +281,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Sets the bone index, `boneIdx`, of the CCDIK joint at `jointIdx`. When possible, this will also update the `bone2d_node` of the CCDIK joint based on data provided by the linked skeleton.
     public final func setCcdikJointBoneIndex(jointIdx: Int32, boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: boneIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -289,8 +298,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_joint_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_joint_bone_index")
+    fileprivate static let method_get_ccdik_joint_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_joint_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -302,6 +311,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Returns the index of the ``Bone2D`` node assigned to the CCDIK joint at `jointIdx`.
     public final func getCcdikJointBoneIndex(jointIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -316,8 +326,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_ccdik_joint_rotate_from_joint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_joint_rotate_from_joint")
+    fileprivate static let method_set_ccdik_joint_rotate_from_joint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_joint_rotate_from_joint")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -329,6 +339,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Sets whether the joint at `jointIdx` is set to rotate from the joint, `true`, or to rotate from the tip, `false`.
     public final func setCcdikJointRotateFromJoint(jointIdx: Int32, rotateFromJoint: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: rotateFromJoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -345,8 +356,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_joint_rotate_from_joint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_joint_rotate_from_joint")
+    fileprivate static let method_get_ccdik_joint_rotate_from_joint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_joint_rotate_from_joint")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -358,6 +369,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Returns whether the joint at `jointIdx` is set to rotate from the joint, `true`, or to rotate from the tip, `false`. The default is to rotate from the tip.
     public final func getCcdikJointRotateFromJoint(jointIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -372,8 +384,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_ccdik_joint_enable_constraint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_joint_enable_constraint")
+    fileprivate static let method_set_ccdik_joint_enable_constraint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_joint_enable_constraint")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -385,6 +397,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Determines whether angle constraints on the CCDIK joint at `jointIdx` are enabled. When `true`, constraints will be enabled and taken into account when solving.
     public final func setCcdikJointEnableConstraint(jointIdx: Int32, enableConstraint: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: enableConstraint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -401,8 +414,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_joint_enable_constraint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_joint_enable_constraint")
+    fileprivate static let method_get_ccdik_joint_enable_constraint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_joint_enable_constraint")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -414,6 +427,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Returns whether angle constraints on the CCDIK joint at `jointIdx` are enabled.
     public final func getCcdikJointEnableConstraint(jointIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -428,8 +442,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_ccdik_joint_constraint_angle_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_joint_constraint_angle_min")
+    fileprivate static let method_set_ccdik_joint_constraint_angle_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_joint_constraint_angle_min")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -441,6 +455,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Sets the minimum angle constraint for the joint at `jointIdx`.
     public final func setCcdikJointConstraintAngleMin(jointIdx: Int32, angleMin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: angleMin) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -457,8 +472,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_joint_constraint_angle_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_joint_constraint_angle_min")
+    fileprivate static let method_get_ccdik_joint_constraint_angle_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_joint_constraint_angle_min")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -470,6 +485,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Returns the minimum angle constraint for the joint at `jointIdx`.
     public final func getCcdikJointConstraintAngleMin(jointIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -484,8 +500,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_ccdik_joint_constraint_angle_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_joint_constraint_angle_max")
+    fileprivate static let method_set_ccdik_joint_constraint_angle_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_joint_constraint_angle_max")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -497,6 +513,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Sets the maximum angle constraint for the joint at `jointIdx`.
     public final func setCcdikJointConstraintAngleMax(jointIdx: Int32, angleMax: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: angleMax) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -513,8 +530,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_joint_constraint_angle_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_joint_constraint_angle_max")
+    fileprivate static let method_get_ccdik_joint_constraint_angle_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_joint_constraint_angle_max")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -526,6 +543,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Returns the maximum angle constraint for the joint at `jointIdx`.
     public final func getCcdikJointConstraintAngleMax(jointIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -540,8 +558,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_ccdik_joint_constraint_angle_invert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ccdik_joint_constraint_angle_invert")
+    fileprivate static let method_set_ccdik_joint_constraint_angle_invert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ccdik_joint_constraint_angle_invert")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -556,6 +574,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     /// An inverted joint constraint only constraints the CCDIK joint to the angles _outside of_ the inputted minimum and maximum angles. For this reason, it is referred to as an inverted joint constraint, as it constraints the joint to the outside of the inputted values.
     /// 
     public final func setCcdikJointConstraintAngleInvert(jointIdx: Int32, invert: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: invert) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -572,8 +591,8 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_ccdik_joint_constraint_angle_invert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ccdik_joint_constraint_angle_invert")
+    fileprivate static let method_get_ccdik_joint_constraint_angle_invert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ccdik_joint_constraint_angle_invert")
         return withUnsafePointer(to: &SkeletonModification2DCCDIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -585,6 +604,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     
     /// Returns whether the CCDIK joint at `jointIdx` uses an inverted joint constraint. See ``setCcdikJointConstraintAngleInvert(jointIdx:invert:)`` for details.
     public final func getCcdikJointConstraintAngleInvert(jointIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

@@ -21,64 +21,53 @@ import Musl
 
 /// A built-in data structure that holds a sequence of elements.
 /// 
-/// An array data structure that can contain a sequence of elements of any type. Elements are accessed by a numerical index starting at 0. Negative indices are used to count from the back (-1 is the last element, -2 is the second to last, etc.).
+/// An array data structure that can contain a sequence of elements of any ``Variant`` type. Elements are accessed by a numerical index starting at `0`. Negative indices are used to count from the back (`-1` is the last element, `-2` is the second to last, etc.).
 /// 
-/// **Example:**
-/// 
-/// Arrays can be concatenated using the `+` operator:
-/// 
-/// > Note: Arrays are always passed by reference. To get a copy of an array that can be modified independently of the original array, use ``duplicate(deep:)``.
+/// > Note: Arrays are always passed by **reference**. To get a copy of an array that can be modified independently of the original array, use ``duplicate(deep:)``.
 /// 
 /// > Note: Erasing elements while iterating over arrays is **not** supported and will result in unpredictable behavior.
 /// 
-/// **Differences between packed arrays, typed arrays, and untyped arrays:** Packed arrays are generally faster to iterate on and modify compared to a typed array of the same type (e.g. ``PackedInt64Array`` versus `Arrayinteger`). Also, packed arrays consume less memory. As a downside, packed arrays are less flexible as they don't offer as many convenience methods such as ``GArray/map()``. Typed arrays are in turn faster to iterate on and modify than untyped arrays.
+/// **Differences between packed arrays, typed arrays, and untyped arrays:** Packed arrays are generally faster to iterate on and modify compared to a typed array of the same type (e.g. ``PackedInt64Array`` versus `Arrayinteger`). Also, packed arrays consume less memory. As a downside, packed arrays are less flexible as they don't offer as many convenience methods such as ``VariantArray/map()``. Typed arrays are in turn faster to iterate on and modify than untyped arrays.
 /// 
-public class GArray: Equatable, Collection, RandomAccessCollection {
-    static var destructor: GDExtensionPtrDestructor = {
-        return gi.variant_get_ptr_destructor (GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
+public final class VariantArray: _GodotBridgeableBuiltin, Equatable, Hashable, Collection, RandomAccessCollection {
     deinit {
-        if content != GArray.zero {
-            GArray.destructor (&content)
+        if content != VariantArray.zero {
+            GodotInterfaceForArray.destructor(&content)
         }
         
     }
     
     // Contains a binary blob where this type information is stored
-    public var content: ContentType = 0
+    public var content: ContentType = VariantArray.zero
+    
     // Used to initialize empty types
-    public static let zero: ContentType  = 0
+    public static var zero: ContentType { 0 }
     // Convenience type that matches the build configuration storage needs
     public typealias ContentType = Int64
     // Used to construct objects on virtual proxies
     public required init(content proxyContent: ContentType) {
         withUnsafePointer(to: proxyContent) { pContent in
             withUnsafePointer(to: pContent) { pArgs in
-                GArray.constructor1(&content, pArgs)
+                GodotInterfaceForArray.constructor1(&content, pArgs)
             }
         }
     }
-    // Used to construct objects when the underlying built-in's ref count has already been incremented for me
-    public required init(alreadyOwnedContent content: ContentType) {
+    /// Initialize with existing `ContentType` assuming this ``VariantArray`` owns it since now.
+    init(takingOver content: ContentType) {
         self.content = content
     }
     
-    static var constructor0: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 0)!
-    
-    /// Constructs an empty ``GArray``.
-    public required init () {
-        GArray.constructor0(&content, nil)
+    /// Constructs an empty ``VariantArray``.
+    public required init() {
+        GodotInterfaceForArray.constructor0(&content, nil)
     }
     
-    static var constructor1: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 1)!
-    
     /// Returns the same array as `from`. If you need a copy of the array, use ``duplicate(deep:)``.
-    public init (from: GArray) {
+    public init(from: VariantArray) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor1(&content, pArgs)
+                    GodotInterfaceForArray.constructor1(&content, pArgs)
                 }
                 
             }
@@ -87,28 +76,28 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var constructor2: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 2)!
-    
-    /// Creates a typed array from the `base` array. All arguments are required.
+    /// Creates a typed array from the `base` array. A typed array can only contain elements of the given type, or that inherit from the given class, as described by this constructor's parameters:
     /// 
-    /// - `type` is the built-in type as a ``Variant.GType`` constant, for example ``Variant.GType/int``.
+    /// - `type` is the built-in ``Variant`` type, as one the ``Variant.GType`` constants.
     /// 
-    /// - `className` is the **native** class name, for example ``Node``. If `type` is not ``Variant.GType/object``, must be an empty string.
+    /// - `className` is the built-in class name (see ``Object/getClass()``).
     /// 
-    /// - `script` is the associated script. Must be a ``Script`` instance or `null`.
+    /// - `script` is the associated script. It must be a ``Script`` instance or `null`.
     /// 
-    /// Examples:
+    /// If `type` is not ``Variant.GType/object``, `className` must be an empty ``StringName`` and `script` must be `null`.
     /// 
-    /// > Note: This constructor can be useful if you want to create a typed array on the fly, but you are not required to use it. In GDScript you can use a temporary variable with the static type you need and then pass it:
+    /// The `base` array's elements are converted when necessary. If this is not possible or `base` is already typed, this constructor fails and returns an empty ``VariantArray``.
     /// 
-    public init (base: GArray, type: Int32, className: StringName, script: Variant?) {
+    /// In GDScript, this constructor is usually not necessary, as it is possible to create a typed array through static typing:
+    /// 
+    public init(base: VariantArray, type: Int32, className: StringName, script: Variant?) {
         withUnsafePointer(to: base.content) { pArg0 in
             withUnsafePointer(to: type) { pArg1 in
                 withUnsafePointer(to: className.content) { pArg2 in
                     withUnsafePointer(to: script.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                GArray.constructor2(&content, pArgs)
+                                GodotInterfaceForArray.constructor2(&content, pArgs)
                             }
                             
                         }
@@ -123,14 +112,12 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var constructor3: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 3)!
-    
     /// Constructs an array from a ``PackedByteArray``.
-    public init (from: PackedByteArray) {
+    public init(from: PackedByteArray) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor3(&content, pArgs)
+                    GodotInterfaceForArray.constructor3(&content, pArgs)
                 }
                 
             }
@@ -138,15 +125,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor4: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 4)!
     
     /// Constructs an array from a ``PackedInt32Array``.
-    public init (from: PackedInt32Array) {
+    public init(from: PackedInt32Array) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor4(&content, pArgs)
+                    GodotInterfaceForArray.constructor4(&content, pArgs)
                 }
                 
             }
@@ -154,15 +139,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor5: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 5)!
     
     /// Constructs an array from a ``PackedInt64Array``.
-    public init (from: PackedInt64Array) {
+    public init(from: PackedInt64Array) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor5(&content, pArgs)
+                    GodotInterfaceForArray.constructor5(&content, pArgs)
                 }
                 
             }
@@ -170,15 +153,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor6: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 6)!
     
     /// Constructs an array from a ``PackedFloat32Array``.
-    public init (from: PackedFloat32Array) {
+    public init(from: PackedFloat32Array) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor6(&content, pArgs)
+                    GodotInterfaceForArray.constructor6(&content, pArgs)
                 }
                 
             }
@@ -186,15 +167,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor7: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 7)!
     
     /// Constructs an array from a ``PackedFloat64Array``.
-    public init (from: PackedFloat64Array) {
+    public init(from: PackedFloat64Array) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor7(&content, pArgs)
+                    GodotInterfaceForArray.constructor7(&content, pArgs)
                 }
                 
             }
@@ -202,15 +181,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor8: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 8)!
     
     /// Constructs an array from a ``PackedStringArray``.
-    public init (from: PackedStringArray) {
+    public init(from: PackedStringArray) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor8(&content, pArgs)
+                    GodotInterfaceForArray.constructor8(&content, pArgs)
                 }
                 
             }
@@ -218,15 +195,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor9: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 9)!
     
     /// Constructs an array from a ``PackedVector2Array``.
-    public init (from: PackedVector2Array) {
+    public init(from: PackedVector2Array) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor9(&content, pArgs)
+                    GodotInterfaceForArray.constructor9(&content, pArgs)
                 }
                 
             }
@@ -234,15 +209,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor10: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 10)!
     
     /// Constructs an array from a ``PackedVector3Array``.
-    public init (from: PackedVector3Array) {
+    public init(from: PackedVector3Array) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor10(&content, pArgs)
+                    GodotInterfaceForArray.constructor10(&content, pArgs)
                 }
                 
             }
@@ -250,15 +223,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         }
         
     }
-    
-    static var constructor11: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 11)!
     
     /// Constructs an array from a ``PackedColorArray``.
-    public init (from: PackedColorArray) {
+    public init(from: PackedColorArray) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor11(&content, pArgs)
+                    GodotInterfaceForArray.constructor11(&content, pArgs)
                 }
                 
             }
@@ -267,14 +238,12 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var constructor12: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_ARRAY, 12)!
-    
     /// Constructs an array from a ``PackedVector4Array``.
-    public init (from: PackedVector4Array) {
+    public init(from: PackedVector4Array) {
         withUnsafePointer(to: from.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.constructor12(&content, pArgs)
+                    GodotInterfaceForArray.constructor12(&content, pArgs)
                 }
                 
             }
@@ -286,66 +255,41 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
     
     /* Methods */
     
-    static var method_size: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("size")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3173160232)!
-    }()
-    
-    /// Returns the number of elements in the array.
-    public final func size()-> Int64 {
+    /// Returns the number of elements in the array. Empty arrays (`[]`) always return `0`. See also ``isEmpty()``.
+    public final func size() -> Int64 {
         var result: Int64 = Int64()
-        GArray.method_size(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_size(&content, nil, &result, 0)
         return result
     }
     
-    static var method_is_empty: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_empty")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3918633141)!
-    }()
-    
-    /// Returns `true` if the array is empty.
-    public final func isEmpty()-> Bool {
+    /// Returns `true` if the array is empty (`[]`). See also ``size()``.
+    public final func isEmpty() -> Bool {
         var result: Bool = Bool()
-        GArray.method_is_empty(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_is_empty(&content, nil, &result, 0)
         return result
     }
     
-    static var method_clear: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("clear")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
-    }()
-    
-    /// Clears the array. This is equivalent to using ``resize(size:)`` with a size of `0`.
+    /// Removes all elements from the array. This is equivalent to using ``resize(size:)`` with a size of `0`.
     public final func clear() {
-        GArray.method_clear(&content, nil, nil, 0)
+        GodotInterfaceForArray.method_clear(&content, nil, nil, 0)
     }
-    
-    static var method_hash: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("hash")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3173160232)!
-    }()
     
     /// Returns a hashed 32-bit integer value representing the array and its contents.
     /// 
-    /// > Note: ``GArray``s with equal content will always produce identical hash values. However, the reverse is not true. Returning identical hash values does _not_ imply the arrays are equal, because different arrays can have identical hash values due to hash collisions.
+    /// > Note: Arrays with equal hash values are _not_ guaranteed to be the same, as a result of hash collisions. On the countrary, arrays with different hash values are guaranteed to be different.
     /// 
-    public final func hash()-> Int64 {
+    public final func hash() -> Int64 {
         var result: Int64 = Int64()
-        GArray.method_hash(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_hash(&content, nil, &result, 0)
         return result
     }
     
-    static var method_assign: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("assign")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2307260970)!
-    }()
-    
     /// Assigns elements of another `array` into the array. Resizes the array to match `array`. Performs type conversions if the array is typed.
-    public final func assign(array: GArray) {
+    public final func assign(array: VariantArray) {
         withUnsafePointer(to: array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_assign(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_assign(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -354,17 +298,45 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_push_back: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("push_back")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
-    }()
+    /// Returns the element at the given `index` in the array. This is the same as using the `[]` operator (`array[index]`).
+    public final func get(index: Int64) -> Variant? {
+        var result = Variant.zero
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    GodotInterfaceForArray.method_get(&content, pArgs, &result, 1)
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: result)
+    }
+    
+    /// Sets the value of the element at the given `index` to the given `value`. This will not change the size of the array, it only changes the value at an index already in the array. This is the same as using the `[]` operator (`array[index] = value`).
+    public final func set(index: Int64, value: Variant?) {
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: value.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        GodotInterfaceForArray.method_set(&content, pArgs, nil, 2)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
     
     /// Appends an element at the end of the array. See also ``pushFront(value:)``.
     public final func pushBack(value: Variant?) {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_push_back(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_push_back(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -373,20 +345,15 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_push_front: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("push_front")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
-    }()
-    
     /// Adds an element at the beginning of the array. See also ``pushBack(value:)``.
     /// 
-    /// > Note: On large arrays, this method is much slower than ``pushBack(value:)`` as it will reindex all the array's elements every time it's called. The larger the array, the slower ``pushFront(value:)`` will be.
+    /// > Note: This method shifts every other element's index forward, which may have a noticeable performance cost, especially on larger arrays.
     /// 
     public final func pushFront(value: Variant?) {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_push_front(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_push_front(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -395,17 +362,12 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_append: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("append")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
-    }()
-    
-    /// Appends an element at the end of the array (alias of ``pushBack(value:)``).
+    /// Appends `value` at the end of the array (alias of ``pushBack(value:)``).
     public final func append(_ value: Variant?) {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_append(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_append(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -414,18 +376,13 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_append_array: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("append_array")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2307260970)!
-    }()
-    
-    /// Appends another array at the end of this array.
+    /// Appends another `array` at the end of this array.
     /// 
-    public final func appendArray(_ array: GArray) {
+    public final func appendArray(_ array: VariantArray) {
         withUnsafePointer(to: array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_append_array(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_append_array(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -434,24 +391,19 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_resize: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("resize")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 848867239)!
-    }()
-    
-    /// Resizes the array to contain a different number of elements. If the array size is smaller, elements are cleared, if bigger, new elements are `null`. Returns ``GodotError/ok`` on success, or one of the other ``GodotError`` values if the operation failed.
+    /// Sets the array's number of elements to `size`. If `size` is smaller than the array's current size, the elements at the end are removed. If `size` is greater, new default elements (usually `null`) are added, depending on the array's type.
     /// 
-    /// Calling ``resize(size:)`` once and assigning the new values is faster than adding new elements one by one.
+    /// Returns ``GodotError/ok`` on success, or one of the other ``GodotError`` constants if this method fails.
     /// 
-    /// > Note: This method acts in-place and doesn't return a modified array.
+    /// > Note: Calling this method once and assigning the new values is faster than calling ``append(value:)`` for every new element.
     /// 
     @discardableResult /* 1: resize */ 
-    public final func resize(size: Int64)-> Int64 {
+    public final func resize(size: Int64) -> Int64 {
         var result: Int64 = Int64()
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_resize(&content, pArgs, &result, 1)
+                    GodotInterfaceForArray.method_resize(&content, pArgs, &result, 1)
                 }
                 
             }
@@ -461,24 +413,19 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_insert: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("insert")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3176316662)!
-    }()
-    
-    /// Inserts a new element at a given position in the array. The position must be valid, or at the end of the array (`pos == size()`). Returns ``GodotError/ok`` on success, or one of the other ``GodotError`` values if the operation failed.
+    /// Inserts a new element (`value`) at a given index (`position`) in the array. `position` should be between `0` and the array's ``size()``.
     /// 
-    /// > Note: This method acts in-place and doesn't return a modified array.
+    /// Returns ``GodotError/ok`` on success, or one of the other ``GodotError`` constants if this method fails.
     /// 
-    /// > Note: On large arrays, this method will be slower if the inserted element is close to the beginning of the array (index 0). This is because all elements placed after the newly inserted element have to be reindexed.
+    /// > Note: Every element's index after `position` needs to be shifted forward, which may have a noticeable performance cost, especially on larger arrays.
     /// 
-    public final func insert(position: Int64, value: Variant?)-> Int64 {
+    public final func insert(position: Int64, value: Variant?) -> Int64 {
         var result: Int64 = Int64()
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        GArray.method_insert(&content, pArgs, &result, 2)
+                        GodotInterfaceForArray.method_insert(&content, pArgs, &result, 2)
                     }
                     
                 }
@@ -490,24 +437,19 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_remove_at: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("remove_at")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2823966027)!
-    }()
-    
-    /// Removes an element from the array by index. If the index does not exist in the array, nothing happens. To remove an element by searching for its value, use ``erase(value:)`` instead.
+    /// Removes the element from the array at the given index (`position`). If the index is out of bounds, this method fails.
     /// 
-    /// > Note: This method acts in-place and doesn't return a modified array.
+    /// If you need to return the removed element, use ``popAt(position:)``. To remove an element by value, use ``erase(value:)`` instead.
     /// 
-    /// > Note: On large arrays, this method will be slower if the removed element is close to the beginning of the array (index 0). This is because all elements placed after the removed element have to be reindexed.
+    /// > Note: This method shifts every element's index after `position` back, which may have a noticeable performance cost, especially on larger arrays.
     /// 
-    /// > Note: `position` cannot be negative. To remove an element relative to the end of the array, use `arr.remove_at(arr.size() - (i + 1))`. To remove the last element from the array without returning the value, use `arr.resize(arr.size() - 1)`.
+    /// > Note: The `position` cannot be negative. To remove an element relative to the end of the array, use `arr.remove_at(arr.size() - (i + 1))`. To remove the last element from the array, use `arr.resize(arr.size() - 1)`.
     /// 
     public final func removeAt(position: Int64) {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_remove_at(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_remove_at(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -516,20 +458,17 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_fill: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("fill")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
-    }()
-    
-    /// Assigns the given value to all elements in the array. This can typically be used together with ``resize(size:)`` to create an array with a given size and initialized elements:
+    /// Assigns the given `value` to all elements in the array.
     /// 
-    /// > Note: If `value` is of a reference type (``Object``-derived, ``GArray``, ``GDictionary``, etc.) then the array is filled with the references to the same object, i.e. no duplicates are created.
+    /// This method can often be combined with ``resize(size:)`` to create an array with a given size and initialized elements:
+    /// 
+    /// > Note: If `value` is a ``Variant`` passed by reference (``Object``-derived, ``VariantArray``, ``VariantDictionary``, etc.), the array will be filled with references to the same `value`, which are not duplicates.
     /// 
     public final func fill(value: Variant?) {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_fill(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_fill(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -538,24 +477,17 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_erase: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("erase")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
-    }()
-    
-    /// Removes the first occurrence of a value from the array. If the value does not exist in the array, nothing happens. To remove an element by index, use ``removeAt(position:)`` instead.
+    /// Finds and removes the first occurrence of `value` from the array. If `value` does not exist in the array, nothing happens. To remove an element by index, use ``removeAt(position:)`` instead.
     /// 
-    /// > Note: This method acts in-place and doesn't return a modified array.
+    /// > Note: This method shifts every element's index after the removed `value` back, which may have a noticeable performance cost, especially on larger arrays.
     /// 
-    /// > Note: On large arrays, this method will be slower if the removed element is close to the beginning of the array (index 0). This is because all elements placed after the removed element have to be reindexed.
-    /// 
-    /// > Note: Do not erase entries while iterating over the array.
+    /// > Note: Erasing elements while iterating over arrays is **not** supported and will result in unpredictable behavior.
     /// 
     public final func erase(value: Variant?) {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_erase(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_erase(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -564,62 +496,49 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_front: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("front")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
-    }()
-    
-    /// Returns the first element of the array. Prints an error and returns `null` if the array is empty.
+    /// Returns the first element of the array. If the array is empty, fails and returns `null`. See also ``back()``.
     /// 
-    /// > Note: Calling this function is not the same as writing `array[0]`. If the array is empty, accessing by index will pause project execution when running from the editor.
+    /// > Note: Unlike with the `[]` operator (`array[0]`), an error is generated without stopping project execution.
     /// 
-    public final func front()-> Variant? {
+    public final func front() -> Variant? {
         var result = Variant.zero
-        GArray.method_front(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_front(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_back: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("back")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
-    }()
-    
-    /// Returns the last element of the array. Prints an error and returns `null` if the array is empty.
+    /// Returns the last element of the array. If the array is empty, fails and returns `null`. See also ``front()``.
     /// 
-    /// > Note: Calling this function is not the same as writing `array[-1]`. If the array is empty, accessing by index will pause project execution when running from the editor.
+    /// > Note: Unlike with the `[]` operator (`array[-1]`), an error is generated without stopping project execution.
     /// 
-    public final func back()-> Variant? {
+    public final func back() -> Variant? {
         var result = Variant.zero
-        GArray.method_back(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_back(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_pick_random: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("pick_random")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
-    }()
-    
-    /// Returns a random value from the target array. Prints an error and returns `null` if the array is empty.
+    /// Returns a random element from the array. Generates an error and returns `null` if the array is empty.
     /// 
-    public final func pickRandom()-> Variant? {
+    /// > Note: Like many similar functions in the engine (such as ``@GlobalScope.randi`` or ``shuffle()``), this method uses a common, global random seed. To get a predictable outcome from this method, see ``@GlobalScope.seed``.
+    /// 
+    public final func pickRandom() -> Variant? {
         var result = Variant.zero
-        GArray.method_pick_random(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_pick_random(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_find: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("find")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2336346817)!
-    }()
-    
-    /// Searches the array for a value and returns its index or `-1` if not found. Optionally, the initial search index can be passed.
-    public final func find(what: Variant?, from: Int64 = 0)-> Int64 {
+    /// Returns the index of the **first** occurrence of `what` in this array, or `-1` if there are none. The search's start can be specified with `from`, continuing to the end of the array.
+    /// 
+    /// > Note: If you just want to know whether the array contains `what`, use ``has(value:)`` (`Contains` in C#). In GDScript, you may also use the `in` operator.
+    /// 
+    /// > Note: For performance reasons, the search is affected by `what`'s ``Variant.GType``. For example, `7` (integer) and `7.0` (float) are not considered equal for this method.
+    /// 
+    public final func find(what: Variant?, from: Int64 = 0) -> Int64 {
         var result: Int64 = Int64()
         withUnsafePointer(to: what.content) { pArg0 in
             withUnsafePointer(to: from) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        GArray.method_find(&content, pArgs, &result, 2)
+                        GodotInterfaceForArray.method_find(&content, pArgs, &result, 2)
                     }
                     
                 }
@@ -631,19 +550,19 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_rfind: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("rfind")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2336346817)!
-    }()
-    
-    /// Searches the array in reverse order. Optionally, a start search index can be passed. If negative, the start index is considered relative to the end of the array.
-    public final func rfind(what: Variant?, from: Int64 = -1)-> Int64 {
+    /// Returns the index of the **first** element in the array that causes `method` to return `true`, or `-1` if there are none. The search's start can be specified with `from`, continuing to the end of the array.
+    /// 
+    /// `method` is a callable that takes an element of the array, and returns a [bool].
+    /// 
+    /// > Note: If you just want to know whether the array contains _anything_ that satisfies `method`, use ``any(method:)``.
+    /// 
+    public final func findCustom(method: Callable, from: Int64 = 0) -> Int64 {
         var result: Int64 = Int64()
-        withUnsafePointer(to: what.content) { pArg0 in
+        withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: from) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        GArray.method_rfind(&content, pArgs, &result, 2)
+                        GodotInterfaceForArray.method_find_custom(&content, pArgs, &result, 2)
                     }
                     
                 }
@@ -655,18 +574,54 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_count: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("count")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1481661226)!
-    }()
+    /// Returns the index of the **last** occurrence of `what` in this array, or `-1` if there are none. The search's start can be specified with `from`, continuing to the beginning of the array. This method is the reverse of ``find(what:from:)``.
+    public final func rfind(what: Variant?, from: Int64 = -1) -> Int64 {
+        var result: Int64 = Int64()
+        withUnsafePointer(to: what.content) { pArg0 in
+            withUnsafePointer(to: from) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        GodotInterfaceForArray.method_rfind(&content, pArgs, &result, 2)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return result
+    }
+    
+    /// Returns the index of the **last** element of the array that causes `method` to return `true`, or `-1` if there are none. The search's start can be specified with `from`, continuing to the beginning of the array. This method is the reverse of ``findCustom(method:from:)``.
+    public final func rfindCustom(method: Callable, from: Int64 = -1) -> Int64 {
+        var result: Int64 = Int64()
+        withUnsafePointer(to: method.content) { pArg0 in
+            withUnsafePointer(to: from) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        GodotInterfaceForArray.method_rfind_custom(&content, pArgs, &result, 2)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return result
+    }
     
     /// Returns the number of times an element is in the array.
-    public final func count(value: Variant?)-> Int64 {
+    /// 
+    /// To count how many elements in an array satisfy a condition, see ``reduce(method:accum:)``.
+    /// 
+    public final func count(value: Variant?) -> Int64 {
         var result: Int64 = Int64()
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_count(&content, pArgs, &result, 1)
+                    GodotInterfaceForArray.method_count(&content, pArgs, &result, 1)
                 }
                 
             }
@@ -676,21 +631,18 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_has: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("has")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3680194679)!
-    }()
-    
-    /// Returns `true` if the array contains the given value.
+    /// Returns `true` if the array contains the given `value`.
     /// 
-    /// > Note: This is equivalent to using the `in` operator as follows:
+    /// In GDScript, this is equivalent to the `in` operator:
     /// 
-    public final func has(value: Variant?)-> Bool {
+    /// > Note: For performance reasons, the search is affected by the `value`'s ``Variant.GType``. For example, `7` (integer) and `7.0` (float) are not considered equal for this method.
+    /// 
+    public final func has(value: Variant?) -> Bool {
         var result: Bool = Bool()
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_has(&content, pArgs, &result, 1)
+                    GodotInterfaceForArray.method_has(&content, pArgs, &result, 1)
                 }
                 
             }
@@ -700,48 +652,33 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_pop_back: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("pop_back")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1321915136)!
-    }()
-    
-    /// Removes and returns the last element of the array. Returns `null` if the array is empty, without printing an error message. See also ``popFront()``.
-    public final func popBack()-> Variant? {
+    /// Removes and returns the last element of the array. Returns `null` if the array is empty, without generating an error. See also ``popFront()``.
+    public final func popBack() -> Variant? {
         var result = Variant.zero
-        GArray.method_pop_back(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_pop_back(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_pop_front: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("pop_front")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1321915136)!
-    }()
-    
-    /// Removes and returns the first element of the array. Returns `null` if the array is empty, without printing an error message. See also ``popBack()``.
+    /// Removes and returns the first element of the array. Returns `null` if the array is empty, without generating an error. See also ``popBack()``.
     /// 
-    /// > Note: On large arrays, this method is much slower than ``popBack()`` as it will reindex all the array's elements every time it's called. The larger the array, the slower ``popFront()`` will be.
+    /// > Note: This method shifts every other element's index back, which may have a noticeable performance cost, especially on larger arrays.
     /// 
-    public final func popFront()-> Variant? {
+    public final func popFront() -> Variant? {
         var result = Variant.zero
-        GArray.method_pop_front(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_pop_front(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_pop_at: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("pop_at")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3518259424)!
-    }()
-    
-    /// Removes and returns the element of the array at index `position`. If negative, `position` is considered relative to the end of the array. Leaves the array unchanged and returns `null` if the array is empty or if it's accessed out of bounds. An error message is printed when the array is accessed out of bounds, but not when the array is empty.
+    /// Removes and returns the element of the array at index `position`. If negative, `position` is considered relative to the end of the array. Returns `null` if the array is empty. If `position` is out of bounds, an error message is also generated.
     /// 
-    /// > Note: On large arrays, this method can be slower than ``popBack()`` as it will reindex the array's elements that are located after the removed element. The larger the array and the lower the index of the removed element, the slower ``popAt(position:)`` will be.
+    /// > Note: This method shifts every element's index after `position` back, which may have a noticeable performance cost, especially on larger arrays.
     /// 
-    public final func popAt(position: Int64)-> Variant? {
+    public final func popAt(position: Int64) -> Variant? {
         var result = Variant.zero
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_pop_at(&content, pArgs, &result, 1)
+                    GodotInterfaceForArray.method_pop_at(&content, pArgs, &result, 1)
                 }
                 
             }
@@ -751,39 +688,31 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return Variant(takingOver: result)
     }
     
-    static var method_sort: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("sort")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
-    }()
-    
-    /// Sorts the array.
+    /// Sorts the array in ascending order. The final order is dependent on the "less than" (`<`) comparison between elements.
     /// 
-    /// > Note: The sorting algorithm used is not <a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">stable</a>. This means that values considered equal may have their order changed when using ``sort()``.
-    /// 
-    /// > Note: Strings are sorted in alphabetical order (as opposed to natural order). This may lead to unexpected behavior when sorting an array of strings ending with a sequence of numbers. Consider the following example:
-    /// 
-    /// To perform natural order sorting, you can use ``sortCustom(`func`:)`` with ``GString/naturalnocasecmpTo()`` as follows:
+    /// > Note: The sorting algorithm used is not <a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">stable</a>. This means that equivalent elements (such as `2` and `2.0`) may have their order changed when calling ``sort()``.
     /// 
     public final func sort() {
-        GArray.method_sort(&content, nil, nil, 0)
+        GodotInterfaceForArray.method_sort(&content, nil, nil, 0)
     }
     
-    static var method_sort_custom: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("sort_custom")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3470848906)!
-    }()
-    
-    /// Sorts the array using a custom method. The custom method receives two arguments (a pair of elements from the array) and must return either `true` or `false`. For two elements `a` and `b`, if the given method returns `true`, element `b` will be after element `a` in the array.
+    /// Sorts the array using a custom ``Callable``.
     /// 
-    /// > Note: The sorting algorithm used is not <a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">stable</a>. This means that values considered equal may have their order changed when using ``sortCustom(`func`:)``.
+    /// `func` is called as many times as necessary, receiving two array elements as arguments. The function should return `true` if the first element should be moved _before_ the second one, otherwise it should return `false`.
     /// 
-    /// > Note: You cannot randomize the return value as the heapsort algorithm expects a deterministic result. Randomizing the return value will result in unexpected behavior.
+    /// It may also be necessary to use this method to sort strings by natural order, with ``GString/naturalnocasecmpTo()``, as in the following example:
+    /// 
+    /// > Note: In C#, this method is not supported.
+    /// 
+    /// > Note: The sorting algorithm used is not <a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">stable</a>. This means that values considered equal may have their order changed when calling this method.
+    /// 
+    /// > Note: You should not randomize the return value of `func`, as the heapsort algorithm expects a consistent result. Randomizing the return value will result in unexpected behavior.
     /// 
     public final func sortCustom(`func`: Callable) {
         withUnsafePointer(to: `func`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_sort_custom(&content, pArgs, nil, 1)
+                    GodotInterfaceForArray.method_sort_custom(&content, pArgs, nil, 1)
                 }
                 
             }
@@ -792,32 +721,27 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         
     }
     
-    static var method_shuffle: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("shuffle")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
-    }()
-    
-    /// Shuffles the array such that the items will have a random order. This method uses the global random number generator common to methods such as ``@GlobalScope.randi``. Call ``@GlobalScope.randomize`` to ensure that a new seed will be used each time if you want non-reproducible shuffling.
+    /// Shuffles all elements of the array in a random order.
+    /// 
+    /// > Note: Like many similar functions in the engine (such as ``@GlobalScope.randi`` or ``pickRandom()``), this method uses a common, global random seed. To get a predictable outcome from this method, see ``@GlobalScope.seed``.
+    /// 
     public final func shuffle() {
-        GArray.method_shuffle(&content, nil, nil, 0)
+        GodotInterfaceForArray.method_shuffle(&content, nil, nil, 0)
     }
     
-    static var method_bsearch: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("bsearch")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3372222236)!
-    }()
-    
-    /// Finds the index of an existing value (or the insertion index that maintains sorting order, if the value is not yet present in the array) using binary search. Optionally, a `before` specifier can be passed. If `false`, the returned index comes after all existing entries of the value in the array.
+    /// Returns the index of `value` in the sorted array. If it cannot be found, returns where `value` should be inserted to keep the array sorted. The algorithm used is <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>.
     /// 
-    /// > Note: Calling ``bsearch(value:before:)`` on an unsorted array results in unexpected behavior.
+    /// If `before` is `true` (as by default), the returned index comes before all existing elements equal to `value` in the array.
     /// 
-    public final func bsearch(value: Variant?, before: Bool = true)-> Int64 {
+    /// > Note: Calling ``bsearch(value:before:)`` on an _unsorted_ array will result in unexpected behavior. Use ``sort()`` before calling this method.
+    /// 
+    public final func bsearch(value: Variant?, before: Bool = true) -> Int64 {
         var result: Int64 = Int64()
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: before) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        GArray.method_bsearch(&content, pArgs, &result, 2)
+                        GodotInterfaceForArray.method_bsearch(&content, pArgs, &result, 2)
                     }
                     
                 }
@@ -829,25 +753,22 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_bsearch_custom: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("bsearch_custom")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 161317131)!
-    }()
-    
-    /// Finds the index of an existing value (or the insertion index that maintains sorting order, if the value is not yet present in the array) using binary search and a custom comparison method. Optionally, a `before` specifier can be passed. If `false`, the returned index comes after all existing entries of the value in the array. The custom method receives two arguments (an element from the array and the value searched for) and must return `true` if the first argument is less than the second, and return `false` otherwise.
+    /// Returns the index of `value` in the sorted array. If it cannot be found, returns where `value` should be inserted to keep the array sorted (using `func` for the comparisons). The algorithm used is <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>.
     /// 
-    /// > Note: The custom method must accept the two arguments in any order, you cannot rely on that the first argument will always be from the array.
+    /// Similar to ``sortCustom(`func`:)``, `func` is called as many times as necessary, receiving one array element and `value` as arguments. The function should return `true` if the array element should be _behind_ `value`, otherwise it should return `false`.
     /// 
-    /// > Note: Calling ``bsearchCustom(value:`func`:before:)`` on an unsorted array results in unexpected behavior.
+    /// If `before` is `true` (as by default), the returned index comes before all existing elements equal to `value` in the array.
     /// 
-    public final func bsearchCustom(value: Variant?, `func`: Callable, before: Bool = true)-> Int64 {
+    /// > Note: Calling ``bsearchCustom(value:`func`:before:)`` on an _unsorted_ array will result in unexpected behavior. Use ``sortCustom(`func`:)`` with `func` before calling this method.
+    /// 
+    public final func bsearchCustom(value: Variant?, `func`: Callable, before: Bool = true) -> Int64 {
         var result: Int64 = Int64()
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: `func`.content) { pArg1 in
                 withUnsafePointer(to: before) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            GArray.method_bsearch_custom(&content, pArgs, &result, 3)
+                            GodotInterfaceForArray.method_bsearch_custom(&content, pArgs, &result, 3)
                         }
                         
                     }
@@ -861,31 +782,21 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_reverse: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("reverse")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
-    }()
-    
-    /// Reverses the order of the elements in the array.
+    /// Reverses the order of all elements in the array.
     public final func reverse() {
-        GArray.method_reverse(&content, nil, nil, 0)
+        GodotInterfaceForArray.method_reverse(&content, nil, nil, 0)
     }
     
-    static var method_duplicate: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("duplicate")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 636440122)!
-    }()
-    
-    /// Returns a copy of the array.
+    /// Returns a new copy of the array.
     /// 
-    /// If `deep` is `true`, a deep copy is performed: all nested arrays and dictionaries are duplicated and will not be shared with the original array. If `false`, a shallow copy is made and references to the original nested arrays and dictionaries are kept, so that modifying a sub-array or dictionary in the copy will also impact those referenced in the source array. Note that any ``Object``-derived elements will be shallow copied regardless of the `deep` setting.
+    /// By default, a **shallow** copy is returned: all nested ``VariantArray`` and ``VariantDictionary`` elements are shared with the original array. Modifying them in one array will also affect them in the other.[br]If `deep` is `true`, a **deep** copy is returned: all nested arrays and dictionaries are also duplicated (recursively).
     /// 
-    public final func duplicate(deep: Bool = false)-> GArray {
-        let result: GArray = GArray()
+    public final func duplicate(deep: Bool = false) -> VariantArray {
+        let result: VariantArray = VariantArray()
         withUnsafePointer(to: deep) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_duplicate(&content, pArgs, &result.content, 1)
+                    GodotInterfaceForArray.method_duplicate(&content, pArgs, &result.content, 1)
                 }
                 
             }
@@ -895,32 +806,23 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_slice: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("slice")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1393718243)!
-    }()
-    
-    /// Returns the slice of the ``GArray``, from `begin` (inclusive) to `end` (exclusive), as a new ``GArray``.
+    /// Returns a new ``VariantArray`` containing this array's elements, from index `begin` (inclusive) to `end` (exclusive), every `step` elements.
     /// 
-    /// The absolute value of `begin` and `end` will be clamped to the array size, so the default value for `end` makes it slice to the size of the array by default (i.e. `arr.slice(1)` is a shorthand for `arr.slice(1, arr.size())`).
+    /// If either `begin` or `end` are negative, their value is relative to the end of the array.
     /// 
-    /// If either `begin` or `end` are negative, they will be relative to the end of the array (i.e. `arr.slice(0, -2)` is a shorthand for `arr.slice(0, arr.size() - 2)`).
+    /// If `step` is negative, this method iterates through the array in reverse, returning a slice ordered backwards. For this to work, `begin` must be greater than `end`.
     /// 
-    /// If specified, `step` is the relative index between source elements. It can be negative, then `begin` must be higher than `end`. For example, `[0, 1, 2, 3, 4, 5].slice(5, 1, -2)` returns `[5, 3]`.
+    /// If `deep` is `true`, all nested ``VariantArray`` and ``VariantDictionary`` elements in the slice are duplicated from the original, recursively. See also ``duplicate(deep:)``).
     /// 
-    /// If `deep` is true, each element will be copied by value rather than by reference.
-    /// 
-    /// > Note: To include the first element when `step` is negative, use `arr.slice(begin, -arr.size() - 1, step)` (i.e. `[0, 1, 2].slice(1, -4, -1)` returns `[1, 0]`).
-    /// 
-    public final func slice(begin: Int64, end: Int64 = 2147483647, step: Int64 = 1, deep: Bool = false)-> GArray {
-        let result: GArray = GArray()
+    public final func slice(begin: Int64, end: Int64 = 2147483647, step: Int64 = 1, deep: Bool = false) -> VariantArray {
+        let result: VariantArray = VariantArray()
         withUnsafePointer(to: begin) { pArg0 in
             withUnsafePointer(to: end) { pArg1 in
                 withUnsafePointer(to: step) { pArg2 in
                     withUnsafePointer(to: deep) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                GArray.method_slice(&content, pArgs, &result.content, 4)
+                                GodotInterfaceForArray.method_slice(&content, pArgs, &result.content, 4)
                             }
                             
                         }
@@ -936,23 +838,18 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_filter: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("filter")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4075186556)!
-    }()
-    
-    /// Calls the provided ``Callable`` on each element in the array and returns a new array with the elements for which the method returned `true`.
+    /// Calls the given ``Callable`` on each element in the array and returns a new, filtered ``VariantArray``.
     /// 
-    /// The callable's method should take one ``Variant`` parameter (the current array element) and return a boolean value.
+    /// The `method` receives one of the array elements as an argument, and should return `true` to add the element to the filtered array, or `false` to exclude it.
     /// 
     /// See also ``any(method:)``, ``all(method:)``, ``map(method:)`` and ``reduce(method:accum:)``.
     /// 
-    public final func filter(method: Callable)-> GArray {
-        let result: GArray = GArray()
+    public final func filter(method: Callable) -> VariantArray {
+        let result: VariantArray = VariantArray()
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_filter(&content, pArgs, &result.content, 1)
+                    GodotInterfaceForArray.method_filter(&content, pArgs, &result.content, 1)
                 }
                 
             }
@@ -962,23 +859,18 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_map: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("map")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4075186556)!
-    }()
-    
-    /// Calls the provided ``Callable`` for each element in the array and returns a new array filled with values returned by the method.
+    /// Calls the given ``Callable`` for each element in the array and returns a new array filled with values returned by the `method`.
     /// 
-    /// The callable's method should take one ``Variant`` parameter (the current array element) and can return any ``Variant``.
+    /// The `method` should take one ``Variant`` parameter (the current array element) and can return any ``Variant``.
     /// 
     /// See also ``filter(method:)``, ``reduce(method:accum:)``, ``any(method:)`` and ``all(method:)``.
     /// 
-    public final func map(method: Callable)-> GArray {
-        let result: GArray = GArray()
+    public final func map(method: Callable) -> VariantArray {
+        let result: VariantArray = VariantArray()
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_map(&content, pArgs, &result.content, 1)
+                    GodotInterfaceForArray.method_map(&content, pArgs, &result.content, 1)
                 }
                 
             }
@@ -988,24 +880,23 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_reduce: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("reduce")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4272450342)!
-    }()
-    
-    /// Calls the provided ``Callable`` for each element in array and accumulates the result in `accum`.
+    /// Calls the given ``Callable`` for each element in array, accumulates the result in `accum`, then returns it.
     /// 
-    /// The callable's method takes two arguments: the current value of `accum` and the current array element. If `accum` is `null` (default value), the iteration will start from the second element, with the first one used as initial value of `accum`.
+    /// The `method` takes two arguments: the current value of `accum` and the current array element. If `accum` is `null` (as by default), the iteration will start from the second element, with the first one used as initial value of `accum`.
     /// 
-    /// See also ``map(method:)``, ``filter(method:)``, ``any(method:)`` and ``all(method:)``.
+    /// If ``max()`` is not desirable, this method may also be used to implement a custom comparator:
     /// 
-    public final func reduce(method: Callable, accum: Variant?)-> Variant? {
+    /// This method can also be used to count how many elements in an array satisfy a certain condition, similar to ``count(value:)``:
+    /// 
+    /// See also ``map(method:)``, ``filter(method:)``, ``any(method:)``, and ``all(method:)``.
+    /// 
+    public final func reduce(method: Callable, accum: Variant?) -> Variant? {
         var result = Variant.zero
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: accum.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        GArray.method_reduce(&content, pArgs, &result, 2)
+                        GodotInterfaceForArray.method_reduce(&content, pArgs, &result, 2)
                     }
                     
                 }
@@ -1017,14 +908,9 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return Variant(takingOver: result)
     }
     
-    static var method_any: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("any")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4129521963)!
-    }()
-    
-    /// Calls the provided ``Callable`` on each element in the array and returns `true` if the ``Callable`` returns `true` for _one or more_ elements in the array. If the ``Callable`` returns `false` for all elements in the array, this method returns `false`.
+    /// Calls the given ``Callable`` on each element in the array and returns `true` if the ``Callable`` returns `true` for _one or more_ elements in the array. If the ``Callable`` returns `false` for all elements in the array, this method returns `false`.
     /// 
-    /// The callable's method should take one ``Variant`` parameter (the current array element) and return a boolean value.
+    /// The `method` should take one ``Variant`` parameter (the current array element) and return a [bool].
     /// 
     /// See also ``all(method:)``, ``filter(method:)``, ``map(method:)`` and ``reduce(method:accum:)``.
     /// 
@@ -1032,12 +918,12 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
     /// 
     /// > Note: For an empty array, this method always returns `false`.
     /// 
-    public final func any(method: Callable)-> Bool {
+    public final func any(method: Callable) -> Bool {
         var result: Bool = Bool()
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_any(&content, pArgs, &result, 1)
+                    GodotInterfaceForArray.method_any(&content, pArgs, &result, 1)
                 }
                 
             }
@@ -1047,14 +933,9 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_all: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("all")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4129521963)!
-    }()
-    
-    /// Calls the provided ``Callable`` on each element in the array and returns `true` if the ``Callable`` returns `true` for _all_ elements in the array. If the ``Callable`` returns `false` for one array element or more, this method returns `false`.
+    /// Calls the given ``Callable`` on each element in the array and returns `true` if the ``Callable`` returns `true` for _all_ elements in the array. If the ``Callable`` returns `false` for one array element or more, this method returns `false`.
     /// 
-    /// The callable's method should take one ``Variant`` parameter (the current array element) and return a boolean value.
+    /// The `method` should take one ``Variant`` parameter (the current array element) and return a [bool].
     /// 
     /// See also ``any(method:)``, ``filter(method:)``, ``map(method:)`` and ``reduce(method:accum:)``.
     /// 
@@ -1062,12 +943,12 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
     /// 
     /// > Note: For an empty array, this method <a href="https://en.wikipedia.org/wiki/Vacuous_truth">always</a> returns `true`.
     /// 
-    public final func all(method: Callable)-> Bool {
+    public final func all(method: Callable) -> Bool {
         var result: Bool = Bool()
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_all(&content, pArgs, &result, 1)
+                    GodotInterfaceForArray.method_all(&content, pArgs, &result, 1)
                 }
                 
             }
@@ -1077,60 +958,40 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_max: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("max")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
-    }()
-    
-    /// Returns the maximum value contained in the array if all elements are of comparable types. If the elements can't be compared, `null` is returned.
+    /// Returns the maximum value contained in the array, if all elements can be compared. Otherwise, returns `null`. See also ``min()``.
     /// 
-    /// To find the maximum value using a custom comparator, you can use ``reduce(method:accum:)``. In this example every array element is checked and the first maximum value is returned:
+    /// To find the maximum value using a custom comparator, you can use ``reduce(method:accum:)``.
     /// 
-    public final func max()-> Variant? {
+    public final func max() -> Variant? {
         var result = Variant.zero
-        GArray.method_max(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_max(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_min: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("min")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
-    }()
-    
-    /// Returns the minimum value contained in the array if all elements are of comparable types. If the elements can't be compared, `null` is returned.
-    /// 
-    /// See also ``max()`` for an example of using a custom comparator.
-    /// 
-    public final func min()-> Variant? {
+    /// Returns the minimum value contained in the array, if all elements can be compared. Otherwise, returns `null`. See also ``max()``.
+    public final func min() -> Variant? {
         var result = Variant.zero
-        GArray.method_min(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_min(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_is_typed: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_typed")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3918633141)!
-    }()
-    
-    /// Returns `true` if the array is typed. Typed arrays can only store elements of their associated type and provide type safety for the `[]` operator. Methods of typed array still return ``Variant``.
-    public final func isTyped()-> Bool {
+    /// Returns `true` if the array is typed. Typed arrays can only contain elements of a specific type, as defined by the typed array constructor. The methods of a typed array are still expected to return a generic ``Variant``.
+    /// 
+    /// In GDScript, it is possible to define a typed array with static typing:
+    /// 
+    public final func isTyped() -> Bool {
         var result: Bool = Bool()
-        GArray.method_is_typed(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_is_typed(&content, nil, &result, 0)
         return result
     }
     
-    static var method_is_same_typed: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_same_typed")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2988181878)!
-    }()
-    
-    /// Returns `true` if the array is typed the same as `array`.
-    public final func isSameTyped(array: GArray)-> Bool {
+    /// Returns `true` if this array is typed the same as the given `array`. See also ``isTyped()``.
+    public final func isSameTyped(array: VariantArray) -> Bool {
         var result: Bool = Bool()
         withUnsafePointer(to: array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    GArray.method_is_same_typed(&content, pArgs, &result, 1)
+                    GodotInterfaceForArray.method_is_same_typed(&content, pArgs, &result, 1)
                 }
                 
             }
@@ -1140,74 +1001,51 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var method_get_typed_builtin: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_typed_builtin")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3173160232)!
-    }()
-    
-    /// Returns the built-in type of the typed array as a ``Variant.GType`` constant. If the array is not typed, returns ``Variant.GType/`nil```.
-    public final func getTypedBuiltin()-> Int64 {
+    /// Returns the built-in ``Variant`` type of the typed array as a ``Variant.GType`` constant. If the array is not typed, returns ``Variant.GType/`nil```. See also ``isTyped()``.
+    public final func getTypedBuiltin() -> Int64 {
         var result: Int64 = Int64()
-        GArray.method_get_typed_builtin(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_get_typed_builtin(&content, nil, &result, 0)
         return result
     }
     
-    static var method_get_typed_class_name: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_typed_class_name")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1825232092)!
-    }()
-    
-    /// Returns the **native** class name of the typed array if the built-in type is ``Variant.GType/object``. Otherwise, this method returns an empty string.
-    public final func getTypedClassName()-> StringName {
+    /// Returns the **built-in** class name of the typed array, if the built-in ``Variant`` type ``Variant.GType/object``. Otherwise, returns an empty ``StringName``. See also ``isTyped()`` and ``Object/getClass()``.
+    public final func getTypedClassName() -> StringName {
         let result: StringName = StringName()
-        GArray.method_get_typed_class_name(&content, nil, &result.content, 0)
+        GodotInterfaceForArray.method_get_typed_class_name(&content, nil, &result.content, 0)
         return result
     }
     
-    static var method_get_typed_script: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_typed_script")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
-    }()
-    
-    /// Returns the script associated with the typed array. This method returns a ``Script`` instance or `null`.
-    public final func getTypedScript()-> Variant? {
+    /// Returns the ``Script`` instance associated with this typed array, or `null` if it does not exist. See also ``isTyped()``.
+    public final func getTypedScript() -> Variant? {
         var result = Variant.zero
-        GArray.method_get_typed_script(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_get_typed_script(&content, nil, &result, 0)
         return Variant(takingOver: result)
     }
     
-    static var method_make_read_only: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("make_read_only")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
-    }()
-    
-    /// Makes the array read-only, i.e. disabled modifying of the array's elements. Does not apply to nested content, e.g. content of nested arrays.
+    /// Makes the array read-only. The array's elements cannot be overridden with different values, and their order cannot change. Does not apply to nested elements, such as dictionaries.
+    /// 
+    /// In GDScript, arrays are automatically read-only if declared with the `const` keyword.
+    /// 
     public final func makeReadOnly() {
-        GArray.method_make_read_only(&content, nil, nil, 0)
+        GodotInterfaceForArray.method_make_read_only(&content, nil, nil, 0)
     }
     
-    static var method_is_read_only: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_read_only")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3918633141)!
-    }()
-    
-    /// Returns `true` if the array is read-only. See ``makeReadOnly()``. Arrays are automatically read-only if declared with `const` keyword.
-    public final func isReadOnly()-> Bool {
+    /// Returns `true` if the array is read-only. See ``makeReadOnly()``.
+    /// 
+    /// In GDScript, arrays are automatically read-only if declared with the `const` keyword.
+    /// 
+    public final func isReadOnly() -> Bool {
         var result: Bool = Bool()
-        GArray.method_is_read_only(&content, nil, &result, 0)
+        GodotInterfaceForArray.method_is_read_only(&content, nil, &result, 0)
         return result
     }
     
-    static var operator_4: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
-    /// Compares the left operand ``GArray`` against the `right` ``GArray``. Returns `true` if the sizes and contents of the arrays are equal, `false` otherwise.
-    public static func == (lhs: GArray, rhs: GArray) -> Bool  {
+    /// Compares the left operand ``VariantArray`` against the `right` ``VariantArray``. Returns `true` if the sizes and contents of the arrays are equal, `false` otherwise.
+    public static func ==(lhs: VariantArray, rhs: VariantArray) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs.content) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                GArray.operator_4(pArg0, pArg1, &result)
+                GodotInterfaceForArray.operator_4(pArg0, pArg1, &result)
             }
             
         }
@@ -1215,16 +1053,12 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var operator_5: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_NOT_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
-    /// Compares the left operand ``GArray`` against the `right` ``GArray``. Returns `true` if the sizes or contents of the arrays are _not_ equal, `false` otherwise.
-    public static func != (lhs: GArray, rhs: GArray) -> Bool  {
+    /// Returns `true` if the array's size or its elements are different than `right`'s.
+    public static func !=(lhs: VariantArray, rhs: VariantArray) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs.content) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                GArray.operator_5(pArg0, pArg1, &result)
+                GodotInterfaceForArray.operator_5(pArg0, pArg1, &result)
             }
             
         }
@@ -1232,16 +1066,15 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var operator_6: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_LESS, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
-    /// Performs a comparison for each index between the left operand ``GArray`` and the `right` ``GArray``, considering the highest common index of both arrays for this comparison: Returns `true` on the first occurrence of an element that is less, or `false` if the element is greater. Note that depending on the type of data stored, this function may be recursive. If all elements are equal, it compares the length of both arrays and returns `false` if the left operand ``GArray`` has fewer elements, otherwise it returns `true`.
-    public static func < (lhs: GArray, rhs: GArray) -> Bool  {
+    /// Compares the elements of both arrays in order, starting from index `0` and ending on the last index in common between both arrays. For each pair of elements, returns `true` if this array's element is less than `right`'s, `false` if this element is greater. Otherwise, continues to the next pair.
+    /// 
+    /// If all searched elements are equal, returns `true` if this array's size is less than `right`'s, otherwise returns `false`.
+    /// 
+    public static func <(lhs: VariantArray, rhs: VariantArray) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs.content) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                GArray.operator_6(pArg0, pArg1, &result)
+                GodotInterfaceForArray.operator_6(pArg0, pArg1, &result)
             }
             
         }
@@ -1249,16 +1082,15 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var operator_7: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_LESS_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
-    /// Performs a comparison for each index between the left operand ``GArray`` and the `right` ``GArray``, considering the highest common index of both arrays for this comparison: Returns `true` on the first occurrence of an element that is less, or `false` if the element is greater. Note that depending on the type of data stored, this function may be recursive. If all elements are equal, it compares the length of both arrays and returns `true` if the left operand ``GArray`` has the same number of elements or fewer, otherwise it returns `false`.
-    public static func <= (lhs: GArray, rhs: GArray) -> Bool  {
+    /// Compares the elements of both arrays in order, starting from index `0` and ending on the last index in common between both arrays. For each pair of elements, returns `true` if this array's element is less than `right`'s, `false` if this element is greater. Otherwise, continues to the next pair.
+    /// 
+    /// If all searched elements are equal, returns `true` if this array's size is less or equal to `right`'s, otherwise returns `false`.
+    /// 
+    public static func <=(lhs: VariantArray, rhs: VariantArray) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs.content) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                GArray.operator_7(pArg0, pArg1, &result)
+                GodotInterfaceForArray.operator_7(pArg0, pArg1, &result)
             }
             
         }
@@ -1266,16 +1098,15 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var operator_8: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_GREATER, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
-    /// Performs a comparison for each index between the left operand ``GArray`` and the `right` ``GArray``, considering the highest common index of both arrays for this comparison: Returns `true` on the first occurrence of an element that is greater, or `false` if the element is less. Note that depending on the type of data stored, this function may be recursive. If all elements are equal, it compares the length of both arrays and returns `true` if the `right` ``GArray`` has more elements, otherwise it returns `false`.
-    public static func > (lhs: GArray, rhs: GArray) -> Bool  {
+    /// Compares the elements of both arrays in order, starting from index `0` and ending on the last index in common between both arrays. For each pair of elements, returns `true` if this array's element is greater than `right`'s, `false` if this element is less. Otherwise, continues to the next pair.
+    /// 
+    /// If all searched elements are equal, returns `true` if this array's size is greater than `right`'s, otherwise returns `false`.
+    /// 
+    public static func >(lhs: VariantArray, rhs: VariantArray) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs.content) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                GArray.operator_8(pArg0, pArg1, &result)
+                GodotInterfaceForArray.operator_8(pArg0, pArg1, &result)
             }
             
         }
@@ -1283,16 +1114,15 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var operator_9: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_GREATER_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
-    /// Performs a comparison for each index between the left operand ``GArray`` and the `right` ``GArray``, considering the highest common index of both arrays for this comparison: Returns `true` on the first occurrence of an element that is greater, or `false` if the element is less. Note that depending on the type of data stored, this function may be recursive. If all elements are equal, it compares the length of both arrays and returns `true` if the `right` ``GArray`` has more or the same number of elements, otherwise it returns `false`.
-    public static func >= (lhs: GArray, rhs: GArray) -> Bool  {
+    /// Compares the elements of both arrays in order, starting from index `0` and ending on the last index in common between both arrays. For each pair of elements, returns `true` if this array's element is greater than `right`'s, `false` if this element is less. Otherwise, continues to the next pair.
+    /// 
+    /// If all searched elements are equal, returns `true` if this array's size is greater or equal to `right`'s, otherwise returns `false`.
+    /// 
+    public static func >=(lhs: VariantArray, rhs: VariantArray) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs.content) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                GArray.operator_9(pArg0, pArg1, &result)
+                GodotInterfaceForArray.operator_9(pArg0, pArg1, &result)
             }
             
         }
@@ -1300,16 +1130,15 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
-    static var operator_10: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_ADD, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
-    }()
-    
-    /// Concatenates two ``GArray``s together, with the `right` ``GArray`` being added to the end of the ``GArray`` specified in the left operand. For example, `[1, 2] + [3, 4]` results in `[1, 2, 3, 4]`.
-    public static func + (lhs: GArray, rhs: GArray) -> GArray  {
-        let result: GArray = GArray()
+    /// Appends the `right` array to the left operand, creating a new ``VariantArray``. This is also known as an array concatenation.
+    /// 
+    /// > Note: For existing arrays, ``appendArray(array:)`` is much more efficient than concatenation and assignment with the `+=` operator.
+    /// 
+    public static func +(lhs: VariantArray, rhs: VariantArray) -> VariantArray  {
+        let result: VariantArray = VariantArray()
         withUnsafePointer(to: lhs.content) { pArg0 in
             withUnsafePointer(to: rhs.content) { pArg1 in
-                GArray.operator_10(pArg0, pArg1, &result.content)
+                GodotInterfaceForArray.operator_10(pArg0, pArg1, &result.content)
             }
             
         }
@@ -1317,6 +1146,105 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
         return result
     }
     
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(hash())
+    }
+    /// Wrap ``VariantArray`` into a ``Variant``
+    @inline(__always)
+    @inlinable
+    public func toVariant() -> Variant {
+        Variant(self)
+    }
+    
+    /// Wrap ``VariantArray`` into a ``Variant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toVariant() -> Variant? {
+        Variant(self)
+    }
+    
+    /// Wrap ``VariantArray`` into a ``FastVariant``
+    @inline(__always)
+    @inlinable
+    public func toFastVariant() -> FastVariant {
+        FastVariant(self)
+    }
+    
+    /// Wrap ``VariantArray`` into a ``FastVariant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toFastVariant() -> FastVariant? {
+        FastVariant(self)
+    }
+    
+    /// Extract ``VariantArray`` from a ``Variant``. Throws `VariantConversionError` if it's not possible.
+    @inline(__always)
+    @inlinable
+    public static func fromVariantOrThrow(_ variant: Variant) throws(VariantConversionError) -> Self {                
+        guard let value = Self(variant) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    @inline(__always)
+    @inlinable
+    public static func fromFastVariantOrThrow(_ variant: borrowing FastVariant) throws(VariantConversionError) -> Self {                
+        guard let value = Self(variant) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    /// Initialze ``VariantArray`` from ``Variant``. Fails if `variant` doesn't contain ``VariantArray``
+    @inline(__always)                                
+    public convenience init?(_ variant: Variant) {
+        guard Self._variantType == variant.gtype else { return nil }
+        var content = VariantArray.zero
+        withUnsafeMutablePointer(to: &content) { pPayload in
+            variant.constructType(into: pPayload, constructor: GodotInterfaceForArray.selfFromVariant)                        
+        }
+        self.init(takingOver: content)
+    }
+    
+    /// Initialze ``VariantArray`` from ``Variant``. Fails if `variant` doesn't contain ``VariantArray`` or is `nil`
+    @inline(__always)
+    @inlinable
+    public convenience init?(_ variant: Variant?) {
+        guard let variant else { return nil }
+        self.init(variant)
+    }
+    
+    /// Initialze ``VariantArray`` from ``FastVariant``. Fails if `variant` doesn't contain ``VariantArray``
+    @inline(__always)                                
+    public convenience init?(_ variant: borrowing FastVariant) {
+        guard Self._variantType == variant.gtype else { return nil }
+        var content = VariantArray.zero
+        withUnsafeMutablePointer(to: &content) { pPayload in
+            variant.constructType(into: pPayload, constructor: GodotInterfaceForArray.selfFromVariant)                        
+        }
+        self.init(takingOver: content)
+    }
+    
+    /// Initialze ``VariantArray`` from ``FastVariant``. Fails if `variant` doesn't contain ``VariantArray`` or is `nil`
+    @inline(__always)
+    @inlinable
+    public convenience init?(_ variant: borrowing FastVariant?) {                    
+        switch variant {
+        case .some(let variant):
+            self.init(variant)
+        case .none:
+            return nil
+        }
+    }
+    /// Internal API. For indicating that Godot `Array` of ``VariantArray`` has type `Array[Array]`
+    @inline(__always)
+    @inlinable
+    public static var _variantType: Variant.GType {
+        .array 
+    }
     public var startIndex: Int {
         0
     }
@@ -1332,6 +1260,396 @@ public class GArray: Equatable, Collection, RandomAccessCollection {
     public func index(before i: Int) -> Int {
         return i-1
     }
+    
+}
+
+public extension Variant {
+    /// Initialize ``Variant`` by wrapping ``VariantArray?``, fails if it's `nil`
+    @inline(__always)
+    @inlinable
+    convenience init?(_ from: VariantArray?) {
+        guard let from else {
+            return nil
+        }
+        self.init(from)
+    }
+    
+    /// Initialize ``Variant`` by wrapping ``VariantArray``
+    @inline(__always)
+    convenience init(_ from: VariantArray) {
+        self.init(payload: from.content, constructor: GodotInterfaceForArray.variantFromSelf)
+    }
+    
+}
+
+public extension FastVariant {
+    /// Initialize ``FastVariant`` by wrapping ``VariantArray?``, fails if it's `nil`
+    @inline(__always)
+    @inlinable
+    init?(_ from: VariantArray?) {
+        guard let from else {
+            return nil
+        }
+        self.init(from)
+    }
+    
+    /// Initialize ``FastVariant`` by wrapping ``VariantArray``
+    @inline(__always)
+    init(_ from: VariantArray) {
+        self.init(payload: from.content, constructor: GodotInterfaceForArray.variantFromSelf)
+    }
+    
+}
+
+/// Static storage for keeping pointers to Godot implementation wrapped by VariantArray
+enum GodotInterfaceForArray {
+    // MARK: - Destructor
+    static let destructor: GDExtensionPtrDestructor = {
+        return gi.variant_get_ptr_destructor(GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    // MARK: - Constructors
+    static let constructor0: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 0)!
+    }()
+    
+    static let constructor1: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 1)!
+    }()
+    
+    static let constructor2: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 2)!
+    }()
+    
+    static let constructor3: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 3)!
+    }()
+    
+    static let constructor4: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 4)!
+    }()
+    
+    static let constructor5: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 5)!
+    }()
+    
+    static let constructor6: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 6)!
+    }()
+    
+    static let constructor7: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 7)!
+    }()
+    
+    static let constructor8: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 8)!
+    }()
+    
+    static let constructor9: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 9)!
+    }()
+    
+    static let constructor10: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 10)!
+    }()
+    
+    static let constructor11: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 11)!
+    }()
+    
+    static let constructor12: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY, 12)!
+    }()
+    
+    // MARK: - Methods
+    static let method_size: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("size")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3173160232)!
+    }()
+    
+    static let method_is_empty: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_empty")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3918633141)!
+    }()
+    
+    static let method_clear: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("clear")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
+    }()
+    
+    static let method_hash: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("hash")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3173160232)!
+    }()
+    
+    static let method_assign: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("assign")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2307260970)!
+    }()
+    
+    static let method_get: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 708700221)!
+    }()
+    
+    static let method_set: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("set")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3798478031)!
+    }()
+    
+    static let method_push_back: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("push_back")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
+    }()
+    
+    static let method_push_front: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("push_front")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
+    }()
+    
+    static let method_append: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("append")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
+    }()
+    
+    static let method_append_array: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("append_array")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2307260970)!
+    }()
+    
+    static let method_resize: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("resize")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 848867239)!
+    }()
+    
+    static let method_insert: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("insert")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3176316662)!
+    }()
+    
+    static let method_remove_at: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("remove_at")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2823966027)!
+    }()
+    
+    static let method_fill: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("fill")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
+    }()
+    
+    static let method_erase: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("erase")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3316032543)!
+    }()
+    
+    static let method_front: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("front")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
+    }()
+    
+    static let method_back: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("back")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
+    }()
+    
+    static let method_pick_random: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("pick_random")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
+    }()
+    
+    static let method_find: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("find")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2336346817)!
+    }()
+    
+    static let method_find_custom: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("find_custom")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2145562546)!
+    }()
+    
+    static let method_rfind: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("rfind")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2336346817)!
+    }()
+    
+    static let method_rfind_custom: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("rfind_custom")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2145562546)!
+    }()
+    
+    static let method_count: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("count")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1481661226)!
+    }()
+    
+    static let method_has: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("has")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3680194679)!
+    }()
+    
+    static let method_pop_back: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("pop_back")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1321915136)!
+    }()
+    
+    static let method_pop_front: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("pop_front")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1321915136)!
+    }()
+    
+    static let method_pop_at: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("pop_at")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3518259424)!
+    }()
+    
+    static let method_sort: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("sort")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
+    }()
+    
+    static let method_sort_custom: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("sort_custom")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3470848906)!
+    }()
+    
+    static let method_shuffle: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("shuffle")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
+    }()
+    
+    static let method_bsearch: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("bsearch")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3372222236)!
+    }()
+    
+    static let method_bsearch_custom: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("bsearch_custom")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 161317131)!
+    }()
+    
+    static let method_reverse: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("reverse")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
+    }()
+    
+    static let method_duplicate: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("duplicate")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 636440122)!
+    }()
+    
+    static let method_slice: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("slice")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1393718243)!
+    }()
+    
+    static let method_filter: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("filter")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4075186556)!
+    }()
+    
+    static let method_map: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("map")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4075186556)!
+    }()
+    
+    static let method_reduce: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("reduce")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4272450342)!
+    }()
+    
+    static let method_any: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("any")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4129521963)!
+    }()
+    
+    static let method_all: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("all")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 4129521963)!
+    }()
+    
+    static let method_max: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("max")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
+    }()
+    
+    static let method_min: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("min")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
+    }()
+    
+    static let method_is_typed: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_typed")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3918633141)!
+    }()
+    
+    static let method_is_same_typed: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_same_typed")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 2988181878)!
+    }()
+    
+    static let method_get_typed_builtin: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_typed_builtin")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3173160232)!
+    }()
+    
+    static let method_get_typed_class_name: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_typed_class_name")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1825232092)!
+    }()
+    
+    static let method_get_typed_script: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_typed_script")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 1460142086)!
+    }()
+    
+    static let method_make_read_only: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("make_read_only")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3218959716)!
+    }()
+    
+    static let method_is_read_only: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_read_only")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_ARRAY, &name.content, 3918633141)!
+    }()
+    
+    // MARK: - Operators
+    static let operator_4: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    static let operator_5: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_NOT_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    static let operator_6: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_LESS, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    static let operator_7: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_LESS_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    static let operator_8: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_GREATER, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    static let operator_9: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_GREATER_EQUAL, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    static let operator_10: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_ADD, GDEXTENSION_VARIANT_TYPE_ARRAY, GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    // MARK: - Variant conversion
+    static let variantFromSelf: GDExtensionVariantFromTypeConstructorFunc = {
+        gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
+    static let selfFromVariant: GDExtensionTypeFromVariantConstructorFunc = {
+        gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_ARRAY)!
+    }()
+    
     
 }
 

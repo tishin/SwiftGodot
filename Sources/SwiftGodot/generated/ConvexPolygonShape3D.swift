@@ -30,7 +30,7 @@ import Musl
 /// **Performance:** ``ConvexPolygonShape3D`` is faster to check collisions against compared to ``ConcavePolygonShape3D``, but it is slower than primitive collision shapes such as ``SphereShape3D`` and ``BoxShape3D``. Its use should generally be limited to medium-sized objects that cannot have their collision accurately represented by primitive shapes.
 /// 
 open class ConvexPolygonShape3D: Shape3D {
-    fileprivate static var className = StringName("ConvexPolygonShape3D")
+    private static var className = StringName("ConvexPolygonShape3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -48,8 +48,8 @@ open class ConvexPolygonShape3D: Shape3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_points")
+    fileprivate static let method_set_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_points")
         return withUnsafePointer(to: &ConvexPolygonShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 334873810)!
@@ -61,6 +61,7 @@ open class ConvexPolygonShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func set_points(_ points: PackedVector3Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: points.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -74,8 +75,8 @@ open class ConvexPolygonShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_get_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_points")
+    fileprivate static let method_get_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_points")
         return withUnsafePointer(to: &ConvexPolygonShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 497664490)!
@@ -87,6 +88,7 @@ open class ConvexPolygonShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func get_points() -> PackedVector3Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
         gi.object_method_bind_ptrcall(ConvexPolygonShape3D.method_get_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

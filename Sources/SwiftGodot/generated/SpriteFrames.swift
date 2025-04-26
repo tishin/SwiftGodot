@@ -23,14 +23,14 @@ import Musl
 /// 
 /// Sprite frame library for an ``AnimatedSprite2D`` or ``AnimatedSprite3D`` node. Contains frames and animation data for playback.
 open class SpriteFrames: Resource {
-    fileprivate static var className = StringName("SpriteFrames")
+    private static var className = StringName("SpriteFrames")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /* Methods */
-    fileprivate static var method_add_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_animation")
+    fileprivate static let method_add_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_animation")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -42,6 +42,7 @@ open class SpriteFrames: Resource {
     
     /// Adds a new `anim` animation to the library.
     public final func addAnimation(anim: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -55,8 +56,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_has_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_animation")
+    fileprivate static let method_has_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_animation")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -68,6 +69,7 @@ open class SpriteFrames: Resource {
     
     /// Returns `true` if the `anim` animation exists.
     public final func hasAnimation(anim: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -82,8 +84,38 @@ open class SpriteFrames: Resource {
         return _result
     }
     
-    fileprivate static var method_remove_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_animation")
+    fileprivate static let method_duplicate_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("duplicate_animation")
+        return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Duplicates the animation `animFrom` to a new animation named `animTo`. Fails if `animTo` already exists, or if `animFrom` does not exist.
+    public final func duplicateAnimation(animFrom: StringName, animTo: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: animFrom.content) { pArg0 in
+            withUnsafePointer(to: animTo.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_duplicate_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_remove_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_animation")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -95,6 +127,7 @@ open class SpriteFrames: Resource {
     
     /// Removes the `anim` animation.
     public final func removeAnimation(anim: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -108,8 +141,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_rename_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_animation")
+    fileprivate static let method_rename_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_animation")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -121,6 +154,7 @@ open class SpriteFrames: Resource {
     
     /// Changes the `anim` animation's name to `newname`.
     public final func renameAnimation(anim: StringName, newname: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: newname.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -137,8 +171,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_get_animation_names: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_names")
+    fileprivate static let method_get_animation_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_names")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -150,13 +184,14 @@ open class SpriteFrames: Resource {
     
     /// Returns an array containing the names associated to each animation. Values are placed in alphabetical order.
     public final func getAnimationNames() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(SpriteFrames.method_get_animation_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_animation_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_animation_speed")
+    fileprivate static let method_set_animation_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_animation_speed")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4135858297)!
@@ -168,6 +203,7 @@ open class SpriteFrames: Resource {
     
     /// Sets the speed for the `anim` animation in frames per second.
     public final func setAnimationSpeed(anim: StringName, fps: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: fps) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -184,8 +220,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_get_animation_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_speed")
+    fileprivate static let method_get_animation_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_speed")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2349060816)!
@@ -197,6 +233,7 @@ open class SpriteFrames: Resource {
     
     /// Returns the speed in frames per second for the `anim` animation.
     public final func getAnimationSpeed(anim: StringName) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -211,8 +248,8 @@ open class SpriteFrames: Resource {
         return _result
     }
     
-    fileprivate static var method_set_animation_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_animation_loop")
+    fileprivate static let method_set_animation_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_animation_loop")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2524380260)!
@@ -224,6 +261,7 @@ open class SpriteFrames: Resource {
     
     /// If `loop` is `true`, the `anim` animation will loop when it reaches the end, or the start if it is played in reverse.
     public final func setAnimationLoop(anim: StringName, loop: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: loop) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -240,8 +278,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_get_animation_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_loop")
+    fileprivate static let method_get_animation_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_loop")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -253,6 +291,7 @@ open class SpriteFrames: Resource {
     
     /// Returns `true` if the given animation is configured to loop when it finishes playing. Otherwise, returns `false`.
     public final func getAnimationLoop(anim: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -267,8 +306,8 @@ open class SpriteFrames: Resource {
         return _result
     }
     
-    fileprivate static var method_add_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_frame")
+    fileprivate static let method_add_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_frame")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1351332740)!
@@ -280,6 +319,7 @@ open class SpriteFrames: Resource {
     
     /// Adds a frame to the `anim` animation. If `atPosition` is `-1`, the frame will be added to the end of the animation. `duration` specifies the relative duration, see ``getFrameDuration(anim:idx:)`` for details.
     public final func addFrame(anim: StringName, texture: Texture2D?, duration: Double = 1.0, atPosition: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: duration) { pArg2 in
@@ -302,8 +342,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_set_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frame")
+    fileprivate static let method_set_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frame")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 56804795)!
@@ -315,6 +355,7 @@ open class SpriteFrames: Resource {
     
     /// Sets the `texture` and the `duration` of the frame `idx` in the `anim` animation. `duration` specifies the relative duration, see ``getFrameDuration(anim:idx:)`` for details.
     public final func setFrame(anim: StringName, idx: Int32, texture: Texture2D?, duration: Double = 1.0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: texture?.handle) { pArg2 in
@@ -337,8 +378,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_remove_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_frame")
+    fileprivate static let method_remove_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_frame")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2415702435)!
@@ -350,6 +391,7 @@ open class SpriteFrames: Resource {
     
     /// Removes the `anim` animation's frame `idx`.
     public final func removeFrame(anim: StringName, idx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -366,8 +408,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_get_frame_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_count")
+    fileprivate static let method_get_frame_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_count")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2458036349)!
@@ -379,6 +421,7 @@ open class SpriteFrames: Resource {
     
     /// Returns the number of frames for the `anim` animation.
     public final func getFrameCount(anim: StringName) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -393,8 +436,8 @@ open class SpriteFrames: Resource {
         return _result
     }
     
-    fileprivate static var method_get_frame_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_texture")
+    fileprivate static let method_get_frame_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_texture")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2900517879)!
@@ -406,6 +449,7 @@ open class SpriteFrames: Resource {
     
     /// Returns the texture of the frame `idx` in the `anim` animation.
     public final func getFrameTexture(anim: StringName, idx: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: idx) { pArg1 in
@@ -420,11 +464,11 @@ open class SpriteFrames: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_frame_duration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_duration")
+    fileprivate static let method_get_frame_duration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_duration")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1129309260)!
@@ -439,6 +483,7 @@ open class SpriteFrames: Resource {
     /// In this example, `playing_speed` refers to either ``AnimatedSprite2D/getPlayingSpeed()`` or ``AnimatedSprite3D/getPlayingSpeed()``.
     /// 
     public final func getFrameDuration(anim: StringName, idx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: idx) { pArg1 in
@@ -456,8 +501,8 @@ open class SpriteFrames: Resource {
         return _result
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -469,6 +514,7 @@ open class SpriteFrames: Resource {
     
     /// Removes all frames from the `anim` animation.
     public final func clear(anim: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -482,8 +528,8 @@ open class SpriteFrames: Resource {
         
     }
     
-    fileprivate static var method_clear_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_all")
+    fileprivate static let method_clear_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_all")
         return withUnsafePointer(to: &SpriteFrames.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -495,6 +541,7 @@ open class SpriteFrames: Resource {
     
     /// Removes all animations. An empty `default` animation will be created.
     public final func clearAll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SpriteFrames.method_clear_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

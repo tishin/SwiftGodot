@@ -26,7 +26,7 @@ import Musl
 /// To get cancel action, you can use:
 /// 
 open class ConfirmationDialog: AcceptDialog {
-    fileprivate static var className = StringName("ConfirmationDialog")
+    private static var className = StringName("ConfirmationDialog")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class ConfirmationDialog: AcceptDialog {
     }
     
     /* Methods */
-    fileprivate static var method_get_cancel_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cancel_button")
+    fileprivate static let method_get_cancel_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cancel_button")
         return withUnsafePointer(to: &ConfirmationDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1856205918)!
@@ -60,13 +60,14 @@ open class ConfirmationDialog: AcceptDialog {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``CanvasItem/visible`` property.
     /// 
     public final func getCancelButton() -> Button? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ConfirmationDialog.method_get_cancel_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_cancel_button_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cancel_button_text")
+    fileprivate static let method_set_cancel_button_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cancel_button_text")
         return withUnsafePointer(to: &ConfirmationDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -78,6 +79,7 @@ open class ConfirmationDialog: AcceptDialog {
     
     @inline(__always)
     fileprivate final func set_cancel_button_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -92,8 +94,8 @@ open class ConfirmationDialog: AcceptDialog {
         
     }
     
-    fileprivate static var method_get_cancel_button_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cancel_button_text")
+    fileprivate static let method_get_cancel_button_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cancel_button_text")
         return withUnsafePointer(to: &ConfirmationDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -105,6 +107,7 @@ open class ConfirmationDialog: AcceptDialog {
     
     @inline(__always)
     fileprivate final func get_cancel_button_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(ConfirmationDialog.method_get_cancel_button_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

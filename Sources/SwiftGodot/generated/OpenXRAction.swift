@@ -30,7 +30,7 @@ import Musl
 /// Note that the name of the resource is used to register the action with.
 /// 
 open class OpenXRAction: Resource {
-    fileprivate static var className = StringName("OpenXRAction")
+    private static var className = StringName("OpenXRAction")
     override open class var godotClassName: StringName { className }
     public enum ActionType: Int64, CaseIterable {
         /// This action provides a boolean value.
@@ -83,8 +83,8 @@ open class OpenXRAction: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_localized_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_localized_name")
+    fileprivate static let method_set_localized_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_localized_name")
         return withUnsafePointer(to: &OpenXRAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -96,6 +96,7 @@ open class OpenXRAction: Resource {
     
     @inline(__always)
     fileprivate final func set_localized_name(_ localizedName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let localizedName = GString(localizedName)
         withUnsafePointer(to: localizedName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -110,8 +111,8 @@ open class OpenXRAction: Resource {
         
     }
     
-    fileprivate static var method_get_localized_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_localized_name")
+    fileprivate static let method_get_localized_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_localized_name")
         return withUnsafePointer(to: &OpenXRAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -123,13 +124,14 @@ open class OpenXRAction: Resource {
     
     @inline(__always)
     fileprivate final func get_localized_name() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(OpenXRAction.method_get_localized_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_action_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_action_type")
+    fileprivate static let method_set_action_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_action_type")
         return withUnsafePointer(to: &OpenXRAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1675238366)!
@@ -141,6 +143,7 @@ open class OpenXRAction: Resource {
     
     @inline(__always)
     fileprivate final func set_action_type(_ actionType: OpenXRAction.ActionType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: actionType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -154,8 +157,8 @@ open class OpenXRAction: Resource {
         
     }
     
-    fileprivate static var method_get_action_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_type")
+    fileprivate static let method_get_action_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_type")
         return withUnsafePointer(to: &OpenXRAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536542431)!
@@ -167,13 +170,14 @@ open class OpenXRAction: Resource {
     
     @inline(__always)
     fileprivate final func get_action_type() -> OpenXRAction.ActionType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(OpenXRAction.method_get_action_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return OpenXRAction.ActionType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_toplevel_paths: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_toplevel_paths")
+    fileprivate static let method_set_toplevel_paths: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_toplevel_paths")
         return withUnsafePointer(to: &OpenXRAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4015028928)!
@@ -185,6 +189,7 @@ open class OpenXRAction: Resource {
     
     @inline(__always)
     fileprivate final func set_toplevel_paths(_ toplevelPaths: PackedStringArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: toplevelPaths.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -198,8 +203,8 @@ open class OpenXRAction: Resource {
         
     }
     
-    fileprivate static var method_get_toplevel_paths: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_toplevel_paths")
+    fileprivate static let method_get_toplevel_paths: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_toplevel_paths")
         return withUnsafePointer(to: &OpenXRAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -211,6 +216,7 @@ open class OpenXRAction: Resource {
     
     @inline(__always)
     fileprivate final func get_toplevel_paths() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(OpenXRAction.method_get_toplevel_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

@@ -28,7 +28,7 @@ import Musl
 /// This object is used by ``RenderingDevice``.
 /// 
 open class RDFramebufferPass: RefCounted {
-    fileprivate static var className = StringName("RDFramebufferPass")
+    private static var className = StringName("RDFramebufferPass")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Attachment is unused.
@@ -97,8 +97,8 @@ open class RDFramebufferPass: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_color_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color_attachments")
+    fileprivate static let method_set_color_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -110,6 +110,7 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func set_color_attachments(_ pMember: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -123,8 +124,8 @@ open class RDFramebufferPass: RefCounted {
         
     }
     
-    fileprivate static var method_get_color_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color_attachments")
+    fileprivate static let method_get_color_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -136,13 +137,14 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func get_color_attachments() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_color_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_input_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_attachments")
+    fileprivate static let method_set_input_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -154,6 +156,7 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func set_input_attachments(_ pMember: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -167,8 +170,8 @@ open class RDFramebufferPass: RefCounted {
         
     }
     
-    fileprivate static var method_get_input_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_attachments")
+    fileprivate static let method_get_input_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -180,13 +183,14 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func get_input_attachments() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_input_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_resolve_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_resolve_attachments")
+    fileprivate static let method_set_resolve_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_resolve_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -198,6 +202,7 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func set_resolve_attachments(_ pMember: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -211,8 +216,8 @@ open class RDFramebufferPass: RefCounted {
         
     }
     
-    fileprivate static var method_get_resolve_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resolve_attachments")
+    fileprivate static let method_get_resolve_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resolve_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -224,13 +229,14 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func get_resolve_attachments() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_resolve_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_preserve_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_preserve_attachments")
+    fileprivate static let method_set_preserve_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_preserve_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -242,6 +248,7 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func set_preserve_attachments(_ pMember: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -255,8 +262,8 @@ open class RDFramebufferPass: RefCounted {
         
     }
     
-    fileprivate static var method_get_preserve_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_preserve_attachments")
+    fileprivate static let method_get_preserve_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_preserve_attachments")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -268,13 +275,14 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func get_preserve_attachments() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_preserve_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_depth_attachment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_attachment")
+    fileprivate static let method_set_depth_attachment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_attachment")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -286,6 +294,7 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_attachment(_ pMember: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -299,8 +308,8 @@ open class RDFramebufferPass: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_attachment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_attachment")
+    fileprivate static let method_get_depth_attachment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_attachment")
         return withUnsafePointer(to: &RDFramebufferPass.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -312,6 +321,7 @@ open class RDFramebufferPass: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_attachment() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_depth_attachment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

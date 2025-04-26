@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Casts light in a 2D environment. A light is defined as a color, an energy value, a mode (see constants), and various other parameters (range and shadows-related).
 open class Light2D: Node2D {
-    fileprivate static var className = StringName("Light2D")
+    private static var className = StringName("Light2D")
     override open class var godotClassName: StringName { className }
     public enum ShadowFilter: Int64, CaseIterable {
         /// No filter applies to the shadow map. This provides hard shadow edges and is the fastest to render. See ``shadowFilter``.
@@ -230,8 +230,8 @@ open class Light2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enabled")
+    fileprivate static let method_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enabled")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -243,6 +243,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -256,8 +257,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_is_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_enabled")
+    fileprivate static let method_is_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_enabled")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -269,13 +270,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Light2D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_editor_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_editor_only")
+    fileprivate static let method_set_editor_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_editor_only")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -287,6 +289,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_editor_only(_ editorOnly: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: editorOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -300,8 +303,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_is_editor_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_editor_only")
+    fileprivate static let method_is_editor_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_editor_only")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -313,13 +316,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_editor_only() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Light2D.method_is_editor_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color")
+    fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -331,6 +335,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -344,8 +349,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color")
+    fileprivate static let method_get_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -357,13 +362,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Light2D.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_energy")
+    fileprivate static let method_set_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_energy")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -375,6 +381,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_energy(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -388,8 +395,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_energy")
+    fileprivate static let method_get_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_energy")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -401,13 +408,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Light2D.method_get_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_z_range_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_z_range_min")
+    fileprivate static let method_set_z_range_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_z_range_min")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -419,6 +427,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_z_range_min(_ z: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: z) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -432,8 +441,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_z_range_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_z_range_min")
+    fileprivate static let method_get_z_range_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_z_range_min")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -445,13 +454,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_z_range_min() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Light2D.method_get_z_range_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_z_range_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_z_range_max")
+    fileprivate static let method_set_z_range_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_z_range_max")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -463,6 +473,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_z_range_max(_ z: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: z) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -476,8 +487,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_z_range_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_z_range_max")
+    fileprivate static let method_get_z_range_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_z_range_max")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -489,13 +500,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_z_range_max() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Light2D.method_get_z_range_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_layer_range_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_range_min")
+    fileprivate static let method_set_layer_range_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_range_min")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -507,6 +519,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_layer_range_min(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -520,8 +533,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_layer_range_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_range_min")
+    fileprivate static let method_get_layer_range_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_range_min")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -533,13 +546,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_layer_range_min() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Light2D.method_get_layer_range_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_layer_range_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_range_max")
+    fileprivate static let method_set_layer_range_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_range_max")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -551,6 +565,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_layer_range_max(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -564,8 +579,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_layer_range_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_range_max")
+    fileprivate static let method_get_layer_range_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_range_max")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -577,13 +592,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_layer_range_max() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Light2D.method_get_layer_range_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_item_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_cull_mask")
+    fileprivate static let method_set_item_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_cull_mask")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -595,6 +611,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_item_cull_mask(_ itemCullMask: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: itemCullMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -608,8 +625,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_item_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_cull_mask")
+    fileprivate static let method_get_item_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_cull_mask")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -621,13 +638,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_item_cull_mask() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Light2D.method_get_item_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_item_shadow_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_shadow_cull_mask")
+    fileprivate static let method_set_item_shadow_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_shadow_cull_mask")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -639,6 +657,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_item_shadow_cull_mask(_ itemShadowCullMask: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: itemShadowCullMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -652,8 +671,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_item_shadow_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_shadow_cull_mask")
+    fileprivate static let method_get_item_shadow_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_shadow_cull_mask")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -665,13 +684,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_item_shadow_cull_mask() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Light2D.method_get_item_shadow_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_enabled")
+    fileprivate static let method_set_shadow_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_enabled")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -683,6 +703,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_shadow_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -696,8 +717,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_is_shadow_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shadow_enabled")
+    fileprivate static let method_is_shadow_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shadow_enabled")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -709,13 +730,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_shadow_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Light2D.method_is_shadow_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_smooth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_smooth")
+    fileprivate static let method_set_shadow_smooth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_smooth")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -727,6 +749,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_shadow_smooth(_ smooth: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: smooth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -740,8 +763,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_shadow_smooth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_smooth")
+    fileprivate static let method_get_shadow_smooth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_smooth")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -753,13 +776,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_shadow_smooth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Light2D.method_get_shadow_smooth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_filter")
+    fileprivate static let method_set_shadow_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_filter")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3209356555)!
@@ -771,6 +795,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_shadow_filter(_ filter: Light2D.ShadowFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -784,8 +809,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_shadow_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_filter")
+    fileprivate static let method_get_shadow_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_filter")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1973619177)!
@@ -797,13 +822,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_shadow_filter() -> Light2D.ShadowFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Light2D.method_get_shadow_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Light2D.ShadowFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_shadow_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_color")
+    fileprivate static let method_set_shadow_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_color")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -815,6 +841,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_shadow_color(_ shadowColor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shadowColor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -828,8 +855,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_shadow_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_color")
+    fileprivate static let method_get_shadow_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_color")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -841,13 +868,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_shadow_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Light2D.method_get_shadow_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_mode")
+    fileprivate static let method_set_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_mode")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2916638796)!
@@ -859,6 +887,7 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_blend_mode(_ mode: Light2D.BlendMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -872,8 +901,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_mode")
+    fileprivate static let method_get_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_mode")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 936255250)!
@@ -885,13 +914,14 @@ open class Light2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_blend_mode() -> Light2D.BlendMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Light2D.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Light2D.BlendMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_height")
+    fileprivate static let method_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_height")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -903,6 +933,7 @@ open class Light2D: Node2D {
     
     /// Sets the light's height, which is used in 2D normal mapping. See ``PointLight2D/height`` and ``DirectionalLight2D/height``.
     public final func setHeight(_ height: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -916,8 +947,8 @@ open class Light2D: Node2D {
         
     }
     
-    fileprivate static var method_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_height")
+    fileprivate static let method_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_height")
         return withUnsafePointer(to: &Light2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -929,6 +960,7 @@ open class Light2D: Node2D {
     
     /// Returns the light's height, which is used in 2D normal mapping. See ``PointLight2D/height`` and ``DirectionalLight2D/height``.
     public final func getHeight() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Light2D.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

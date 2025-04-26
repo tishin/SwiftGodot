@@ -26,7 +26,7 @@ import Musl
 /// Translated to `distance(p0, p1)` in the shader language.
 /// 
 open class VisualShaderNodeVectorDistance: VisualShaderNodeVectorBase {
-    fileprivate static var className = StringName("VisualShaderNodeVectorDistance")
+    private static var className = StringName("VisualShaderNodeVectorDistance")
     override open class var godotClassName: StringName { className }
 }
 

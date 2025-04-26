@@ -23,13 +23,38 @@ import Musl
 /// 
 /// Gizmo that is used for providing custom visualization and editing (handles and subgizmos) for ``Node3D`` objects. Can be overridden to create custom gizmos, but for simple gizmos creating a ``EditorNode3DGizmoPlugin`` is usually recommended.
 open class EditorNode3DGizmo: Node3DGizmo {
-    fileprivate static var className = StringName("EditorNode3DGizmo")
+    private static var className = StringName("EditorNode3DGizmo")
     override open class var godotClassName: StringName { className }
     /* Methods */
+    fileprivate static let method__redraw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_redraw")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
     /// Override this method to add all the gizmo elements whenever a gizmo update is requested. It's common to call ``clear()`` at the beginning of this method and then add visual elements depending on the node's properties.
     @_documentation(visibility: public)
     open func _redraw() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__redraw, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__get_handle_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_handle_name")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1868713439)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to return the name of an edited handle (handles must have been previously added by ``addHandles(_:material:ids:billboard:secondary:)``). Handles can be named for reference to the user when editing.
     /// 
@@ -37,8 +62,34 @@ open class EditorNode3DGizmo: Node3DGizmo {
     /// 
     @_documentation(visibility: public)
     open func _getHandleName(id: Int32, secondary: Bool) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: secondary) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__get_handle_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__is_handle_highlighted: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_handle_highlighted")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 361316320)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to return `true` whenever the given handle should be highlighted in the editor.
     /// 
@@ -46,8 +97,34 @@ open class EditorNode3DGizmo: Node3DGizmo {
     /// 
     @_documentation(visibility: public)
     open func _isHandleHighlighted(id: Int32, secondary: Bool) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: secondary) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__is_handle_highlighted, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_handle_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_handle_value")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2144196525)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to return the current value of a handle. This value will be requested at the start of an edit and used as the `restore` argument in ``_commitHandle(id:secondary:restore:cancel:)``.
     /// 
@@ -55,13 +132,65 @@ open class EditorNode3DGizmo: Node3DGizmo {
     /// 
     @_documentation(visibility: public)
     open func _getHandleValue(id: Int32, secondary: Bool) -> Variant? {
-        return nil
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: secondary) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__get_handle_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
     }
+    
+    fileprivate static let method__begin_handle_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_begin_handle_action")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _beginHandleAction(id: Int32, secondary: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: secondary) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__begin_handle_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__set_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_handle")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2210262157)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to update the node properties when the user drags a gizmo handle (previously added with ``addHandles(_:material:ids:billboard:secondary:)``). The provided `point` is the mouse position in screen coordinates and the `camera` can be used to convert it to raycasts.
     /// 
@@ -69,7 +198,39 @@ open class EditorNode3DGizmo: Node3DGizmo {
     /// 
     @_documentation(visibility: public)
     open func _setHandle(id: Int32, secondary: Bool, camera: Camera3D?, point: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: secondary) { pArg1 in
+                withUnsafePointer(to: camera?.handle) { pArg2 in
+                    withUnsafePointer(to: point) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__set_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__commit_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_commit_handle")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3655739840)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to commit a handle being edited (handles must have been previously added by ``addHandles(_:material:ids:billboard:secondary:)``). This usually means creating an ``UndoRedo`` action for the change, using the current handle value as "do" and the `restore` argument as "undo".
     /// 
@@ -79,41 +240,192 @@ open class EditorNode3DGizmo: Node3DGizmo {
     /// 
     @_documentation(visibility: public)
     open func _commitHandle(id: Int32, secondary: Bool, restore: Variant?, cancel: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: secondary) { pArg1 in
+                withUnsafePointer(to: restore.content) { pArg2 in
+                    withUnsafePointer(to: cancel) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__commit_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__subgizmos_intersect_ray: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_subgizmos_intersect_ray")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2055005479)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to allow selecting subgizmos using mouse clicks. Given a `camera` and a `point` in screen coordinates, this method should return which subgizmo should be selected. The returned value should be a unique subgizmo identifier, which can have any non-negative value and will be used in other virtual methods like ``_getSubgizmoTransform(id:)`` or ``_commitSubgizmos(ids:restores:cancel:)``.
     @_documentation(visibility: public)
     open func _subgizmosIntersectRay(camera: Camera3D?, point: Vector2) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: camera?.handle) { pArg0 in
+            withUnsafePointer(to: point) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__subgizmos_intersect_ray, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__subgizmos_intersect_frustum: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_subgizmos_intersect_frustum")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1653813165)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to allow selecting subgizmos using mouse drag box selection. Given a `camera` and a `frustum`, this method should return which subgizmos are contained within the frustum. The `frustum` argument consists of an array with all the ``Plane``s that make up the selection frustum. The returned value should contain a list of unique subgizmo identifiers, which can have any non-negative value and will be used in other virtual methods like ``_getSubgizmoTransform(id:)`` or ``_commitSubgizmos(ids:restores:cancel:)``.
     @_documentation(visibility: public)
-    open func _subgizmosIntersectFrustum(camera: Camera3D?, frustum: VariantCollection<Plane>) -> PackedInt32Array {
-        return PackedInt32Array ()
+    open func _subgizmosIntersectFrustum(camera: Camera3D?, frustum: TypedArray<Plane>) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedInt32Array = PackedInt32Array ()
+        withUnsafePointer(to: camera?.handle) { pArg0 in
+            withUnsafePointer(to: frustum.array.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__subgizmos_intersect_frustum, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__set_subgizmo_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_subgizmo_transform")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3616898986)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to update the node properties during subgizmo editing (see ``_subgizmosIntersectRay(camera:point:)`` and ``_subgizmosIntersectFrustum(camera:frustum:)``). The `transform` is given in the ``Node3D``'s local coordinate system.
     @_documentation(visibility: public)
     open func _setSubgizmoTransform(id: Int32, transform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: transform) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__set_subgizmo_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_subgizmo_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_subgizmo_transform")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to return the current transform of a subgizmo. This transform will be requested at the start of an edit and used as the `restore` argument in ``_commitSubgizmos(ids:restores:cancel:)``.
     @_documentation(visibility: public)
     open func _getSubgizmoTransform(id: Int32) -> Transform3D {
-        return Transform3D ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Transform3D = Transform3D ()
+        withUnsafePointer(to: id) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__get_subgizmo_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__commit_subgizmos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_commit_subgizmos")
+        return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3411059856)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to commit a group of subgizmos being edited (see ``_subgizmosIntersectRay(camera:point:)`` and ``_subgizmosIntersectFrustum(camera:frustum:)``). This usually means creating an ``UndoRedo`` action for the change, using the current transforms as "do" and the `restores` transforms as "undo".
     /// 
     /// If the `cancel` argument is `true`, the `restores` transforms should be directly set, without any ``UndoRedo`` action.
     /// 
     @_documentation(visibility: public)
-    open func _commitSubgizmos(ids: PackedInt32Array, restores: VariantCollection<Transform3D>, cancel: Bool) {
+    open func _commitSubgizmos(ids: PackedInt32Array, restores: TypedArray<Transform3D>, cancel: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: ids.content) { pArg0 in
+            withUnsafePointer(to: restores.array.content) { pArg1 in
+                withUnsafePointer(to: cancel) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmo.method__commit_subgizmos, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_add_lines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_lines")
+    fileprivate static let method_add_lines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_lines")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2910971437)!
@@ -125,6 +437,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Adds lines to the gizmo (as sets of 2 points), with a given material. The lines are used for visualizing the gizmo. Call this method during ``_redraw()``.
     public final func addLines(_ lines: PackedVector3Array, material: Material?, billboard: Bool = false, modulate: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lines.content) { pArg0 in
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: billboard) { pArg2 in
@@ -147,8 +460,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_add_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_mesh")
+    fileprivate static let method_add_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_mesh")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1579955111)!
@@ -160,6 +473,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Adds a mesh to the gizmo with the specified `material`, local `transform` and `skeleton`. Call this method during ``_redraw()``.
     public final func addMesh(_ mesh: Mesh?, material: Material? = nil, transform: Transform3D = Transform3D (xAxis: Vector3 (x: 1, y: 0, z: 0), yAxis: Vector3 (x: 0, y: 1, z: 0), zAxis: Vector3(x: 0, y: 0, z: 1), origin: Vector3 (x: 0, y: 0, z: 0)), skeleton: SkinReference? = nil) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: transform) { pArg2 in
@@ -182,8 +496,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_add_collision_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_collision_segments")
+    fileprivate static let method_add_collision_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_collision_segments")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 334873810)!
@@ -195,6 +509,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Adds the specified `segments` to the gizmo's collision shape for picking. Call this method during ``_redraw()``.
     public final func addCollisionSegments(_ segments: PackedVector3Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: segments.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -208,8 +523,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_add_collision_triangles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_collision_triangles")
+    fileprivate static let method_add_collision_triangles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_collision_triangles")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 54901064)!
@@ -221,6 +536,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Adds collision triangles to the gizmo for picking. A ``TriangleMesh`` can be generated from a regular ``Mesh`` too. Call this method during ``_redraw()``.
     public final func addCollisionTriangles(_ triangles: TriangleMesh?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: triangles?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -234,8 +550,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_add_unscaled_billboard: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_unscaled_billboard")
+    fileprivate static let method_add_unscaled_billboard: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_unscaled_billboard")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 520007164)!
@@ -247,6 +563,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Adds an unscaled billboard for visualization and selection. Call this method during ``_redraw()``.
     public final func addUnscaledBillboard(material: Material?, defaultScale: Double = 1, modulate: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: defaultScale) { pArg1 in
                 withUnsafePointer(to: modulate) { pArg2 in
@@ -266,8 +583,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_add_handles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_handles")
+    fileprivate static let method_add_handles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_handles")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2254560097)!
@@ -284,6 +601,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     /// There are virtual methods which will be called upon editing of these handles. Call this method during ``_redraw()``.
     /// 
     public final func addHandles(_ handles: PackedVector3Array, material: Material?, ids: PackedInt32Array, billboard: Bool = false, secondary: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: handles.content) { pArg0 in
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: ids.content) { pArg2 in
@@ -309,8 +627,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_set_node_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_node_3d")
+    fileprivate static let method_set_node_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_node_3d")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -322,6 +640,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Sets the reference ``Node3D`` node for the gizmo. `node` must inherit from ``Node3D``.
     public final func setNode3d(node: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -335,8 +654,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_get_node_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_3d")
+    fileprivate static let method_get_node_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_3d")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 151077316)!
@@ -348,13 +667,14 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Returns the ``Node3D`` node associated with this gizmo.
     public final func getNode3d() -> Node3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorNode3DGizmo.method_get_node_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_plugin")
+    fileprivate static let method_get_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_plugin")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4250544552)!
@@ -366,13 +686,14 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Returns the ``EditorNode3DGizmoPlugin`` that owns this gizmo. It's useful to retrieve materials using ``EditorNode3DGizmoPlugin/getMaterial(name:gizmo:)``.
     public final func getPlugin() -> EditorNode3DGizmoPlugin? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorNode3DGizmo.method_get_plugin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -384,12 +705,13 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Removes everything in the gizmo including meshes, collisions and handles.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorNode3DGizmo.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hidden")
+    fileprivate static let method_set_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hidden")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -401,6 +723,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Sets the gizmo's hidden state. If `true`, the gizmo will be hidden. If `false`, it will be shown.
     public final func setHidden(_ hidden: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -414,8 +737,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         
     }
     
-    fileprivate static var method_is_subgizmo_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_subgizmo_selected")
+    fileprivate static let method_is_subgizmo_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_subgizmo_selected")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -427,6 +750,7 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Returns `true` if the given subgizmo is currently selected. Can be used to highlight selected elements during ``_redraw()``.
     public final func isSubgizmoSelected(id: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -441,8 +765,8 @@ open class EditorNode3DGizmo: Node3DGizmo {
         return _result
     }
     
-    fileprivate static var method_get_subgizmo_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subgizmo_selection")
+    fileprivate static let method_get_subgizmo_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subgizmo_selection")
         return withUnsafePointer(to: &EditorNode3DGizmo.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -454,12 +778,13 @@ open class EditorNode3DGizmo: Node3DGizmo {
     
     /// Returns a list of the currently selected subgizmos. Can be used to highlight selected elements during ``_redraw()``.
     public final func getSubgizmoSelection() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(EditorNode3DGizmo.method_get_subgizmo_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_begin_handle_action":
@@ -498,28 +823,32 @@ open class EditorNode3DGizmo: Node3DGizmo {
 func _EditorNode3DGizmo_proxy_begin_handle_action (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     swiftObject._beginHandleAction (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorNode3DGizmo_proxy_commit_handle (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     swiftObject._commitHandle (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [1]!.assumingMemoryBound (to: Bool.self).pointee, restore: args [2]!.assumingMemoryBound (to: Variant.self).pointee, cancel: args [3]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorNode3DGizmo_proxy_commit_subgizmos (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
-    swiftObject._commitSubgizmos (ids: PackedInt32Array (content: args [0]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), restores: args [1]!.assumingMemoryBound (to: VariantCollection<Transform3D>.self).pointee, cancel: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
+    swiftObject._commitSubgizmos (ids: PackedInt32Array (content: args [0]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), restores: args [1]!.assumingMemoryBound (to: TypedArray<Transform3D>.self).pointee, cancel: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorNode3DGizmo_proxy_get_handle_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     let ret = GString (swiftObject._getHandleName (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [1]!.assumingMemoryBound (to: Bool.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -528,7 +857,8 @@ func _EditorNode3DGizmo_proxy_get_handle_name (instance: UnsafeMutableRawPointer
 func _EditorNode3DGizmo_proxy_get_handle_value (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     let ret = swiftObject._getHandleValue (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes(of: ret.content, as: Variant.ContentType.self)
     ret?.content = Variant.zero
@@ -537,7 +867,8 @@ func _EditorNode3DGizmo_proxy_get_handle_value (instance: UnsafeMutableRawPointe
 func _EditorNode3DGizmo_proxy_get_subgizmo_transform (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     let ret = swiftObject._getSubgizmoTransform (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Transform3D.self)
 }
@@ -545,40 +876,45 @@ func _EditorNode3DGizmo_proxy_get_subgizmo_transform (instance: UnsafeMutableRaw
 func _EditorNode3DGizmo_proxy_is_handle_highlighted (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     let ret = swiftObject._isHandleHighlighted (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _EditorNode3DGizmo_proxy_redraw (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     swiftObject._redraw ()
 }
 
 func _EditorNode3DGizmo_proxy_set_handle (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
+    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._setHandle (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [1]!.assumingMemoryBound (to: Bool.self).pointee, camera: lookupLiveObject (handleAddress: resolved_2) as? Camera3D ?? Camera3D (nativeHandle: resolved_2), point: args [3]!.assumingMemoryBound (to: Vector2.self).pointee)
+    swiftObject._setHandle (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [1]!.assumingMemoryBound (to: Bool.self).pointee, camera: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Camera3D, point: args [3]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _EditorNode3DGizmo_proxy_set_subgizmo_transform (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
     swiftObject._setSubgizmoTransform (id: args [0]!.assumingMemoryBound (to: Int32.self).pointee, transform: args [1]!.assumingMemoryBound (to: Transform3D.self).pointee)
 }
 
 func _EditorNode3DGizmo_proxy_subgizmos_intersect_frustum (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._subgizmosIntersectFrustum (camera: lookupLiveObject (handleAddress: resolved_0) as? Camera3D ?? Camera3D (nativeHandle: resolved_0), frustum: args [1]!.assumingMemoryBound (to: VariantCollection<Plane>.self).pointee)
+    let ret = swiftObject._subgizmosIntersectFrustum (camera: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Camera3D, frustum: args [1]!.assumingMemoryBound (to: TypedArray<Plane>.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedInt32Array
     ret.content = PackedInt32Array.zero
 }
@@ -586,10 +922,11 @@ func _EditorNode3DGizmo_proxy_subgizmos_intersect_frustum (instance: UnsafeMutab
 func _EditorNode3DGizmo_proxy_subgizmos_intersect_ray (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorNode3DGizmo>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorNode3DGizmo else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._subgizmosIntersectRay (camera: lookupLiveObject (handleAddress: resolved_0) as? Camera3D ?? Camera3D (nativeHandle: resolved_0), point: args [1]!.assumingMemoryBound (to: Vector2.self).pointee)
+    let ret = swiftObject._subgizmosIntersectRay (camera: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Camera3D, point: args [1]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 

@@ -34,7 +34,7 @@ import Musl
 /// > Note: Particle collision only affects ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
-    fileprivate static var className = StringName("GPUParticlesCollisionSDF3D")
+    private static var className = StringName("GPUParticlesCollisionSDF3D")
     override open class var godotClassName: StringName { className }
     public enum Resolution: Int64, CaseIterable {
         /// Bake a 16×16×16 signed distance field. This is the fastest option, but also the least precise.
@@ -117,8 +117,8 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -130,6 +130,7 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -143,8 +144,8 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -156,13 +157,14 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GPUParticlesCollisionSDF3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_resolution")
+    fileprivate static let method_set_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_resolution")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1155629297)!
@@ -174,6 +176,7 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_resolution(_ resolution: GPUParticlesCollisionSDF3D.Resolution) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: resolution.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -187,8 +190,8 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resolution")
+    fileprivate static let method_get_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resolution")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2919555867)!
@@ -200,13 +203,14 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_resolution() -> GPUParticlesCollisionSDF3D.Resolution {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GPUParticlesCollisionSDF3D.method_get_resolution, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GPUParticlesCollisionSDF3D.Resolution (rawValue: _result)!
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1188404210)!
@@ -218,6 +222,7 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: Texture3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -231,8 +236,8 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373985333)!
@@ -244,13 +249,14 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_texture() -> Texture3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GPUParticlesCollisionSDF3D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_thickness")
+    fileprivate static let method_set_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_thickness")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -262,6 +268,7 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_thickness(_ thickness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: thickness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -275,8 +282,8 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_thickness")
+    fileprivate static let method_get_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_thickness")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -288,13 +295,14 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_thickness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GPUParticlesCollisionSDF3D.method_get_thickness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bake_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_mask")
+    fileprivate static let method_set_bake_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_mask")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -306,6 +314,7 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func set_bake_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -319,8 +328,8 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_bake_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_mask")
+    fileprivate static let method_get_bake_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_mask")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -332,13 +341,14 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     @inline(__always)
     fileprivate final func get_bake_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(GPUParticlesCollisionSDF3D.method_get_bake_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bake_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_mask_value")
+    fileprivate static let method_set_bake_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_mask_value")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -350,6 +360,7 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``bakeMask``, given a `layerNumber` between 1 and 32.
     public final func setBakeMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -366,8 +377,8 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
         
     }
     
-    fileprivate static var method_get_bake_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_mask_value")
+    fileprivate static let method_get_bake_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_mask_value")
         return withUnsafePointer(to: &GPUParticlesCollisionSDF3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -379,6 +390,7 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     
     /// Returns whether or not the specified layer of the ``bakeMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getBakeMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

@@ -19,9 +19,9 @@ import Musl
 #endif
 
 
-/// A spatial node representing a spatially-tracked controller.
+/// A 3D node representing a spatially-tracked controller.
 /// 
-/// This is a helper spatial node that is linked to the tracking of controllers. It also offers several handy passthroughs to the state of buttons and such on the controllers.
+/// This is a helper 3D node that is linked to the tracking of controllers. It also offers several handy passthroughs to the state of buttons and such on the controllers.
 /// 
 /// Controllers are linked by their ID. You can create controller nodes before the controllers are available. If your game always uses two controllers (one for each hand), you can predefine the controllers with ID 1 and 2; they will become active as soon as the controllers are identified. If you expect additional controllers to be used, you should react to the signals and add XRController3D nodes to your scene.
 /// 
@@ -39,11 +39,11 @@ import Musl
 /// - ``inputVector2Changed``
 /// - ``profileChanged``
 open class XRController3D: XRNode3D {
-    fileprivate static var className = StringName("XRController3D")
+    private static var className = StringName("XRController3D")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_is_button_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_button_pressed")
+    fileprivate static let method_is_button_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_button_pressed")
         return withUnsafePointer(to: &XRController3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -55,6 +55,7 @@ open class XRController3D: XRNode3D {
     
     /// Returns `true` if the button with the given `name` is pressed.
     public final func isButtonPressed(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -69,8 +70,8 @@ open class XRController3D: XRNode3D {
         return _result
     }
     
-    fileprivate static var method_get_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input")
+    fileprivate static let method_get_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input")
         return withUnsafePointer(to: &XRController3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2760726917)!
@@ -82,6 +83,7 @@ open class XRController3D: XRNode3D {
     
     /// Returns a ``Variant`` for the input with the given `name`. This works for any input type, the variant will be typed according to the actions configuration.
     public final func getInput(name: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -96,8 +98,8 @@ open class XRController3D: XRNode3D {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_float: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_float")
+    fileprivate static let method_get_float: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_float")
         return withUnsafePointer(to: &XRController3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2349060816)!
@@ -109,6 +111,7 @@ open class XRController3D: XRNode3D {
     
     /// Returns a numeric value for the input with the given `name`. This is used for triggers and grip sensors.
     public final func getFloat(name: StringName) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -123,8 +126,8 @@ open class XRController3D: XRNode3D {
         return _result
     }
     
-    fileprivate static var method_get_vector2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vector2")
+    fileprivate static let method_get_vector2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vector2")
         return withUnsafePointer(to: &XRController3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3100822709)!
@@ -136,6 +139,7 @@ open class XRController3D: XRNode3D {
     
     /// Returns a ``Vector2`` for the input with the given `name`. This is used for thumbsticks and thumbpads found on many controllers.
     public final func getVector2(name: StringName) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -150,8 +154,8 @@ open class XRController3D: XRNode3D {
         return _result
     }
     
-    fileprivate static var method_get_tracker_hand: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracker_hand")
+    fileprivate static let method_get_tracker_hand: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracker_hand")
         return withUnsafePointer(to: &XRController3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4181770860)!
@@ -163,6 +167,7 @@ open class XRController3D: XRNode3D {
     
     /// Returns the hand holding this controller, if known. See ``XRPositionalTracker.TrackerHand``.
     public final func getTrackerHand() -> XRPositionalTracker.TrackerHand {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRController3D.method_get_tracker_hand, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRPositionalTracker.TrackerHand (rawValue: _result)!

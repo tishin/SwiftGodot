@@ -30,7 +30,7 @@ import Musl
 /// > Note: This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).
 /// 
 open class PlaceholderTexture3D: Texture3D {
-    fileprivate static var className = StringName("PlaceholderTexture3D")
+    private static var className = StringName("PlaceholderTexture3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -48,8 +48,8 @@ open class PlaceholderTexture3D: Texture3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &PlaceholderTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 560364750)!
@@ -61,6 +61,7 @@ open class PlaceholderTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -74,8 +75,8 @@ open class PlaceholderTexture3D: Texture3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &PlaceholderTexture3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2785653706)!
@@ -87,6 +88,7 @@ open class PlaceholderTexture3D: Texture3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3i = Vector3i ()
         gi.object_method_bind_ptrcall(PlaceholderTexture3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

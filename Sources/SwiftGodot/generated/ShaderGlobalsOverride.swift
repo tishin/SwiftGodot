@@ -28,7 +28,7 @@ import Musl
 /// > Note: All ``ShaderGlobalsOverride`` nodes are made part of a `"shader_overrides_group"` group when they are added to the scene tree. The currently active ``ShaderGlobalsOverride`` node also has a `"shader_overrides_group_active"` group added to it. You can use this to check which ``ShaderGlobalsOverride`` node is currently active.
 /// 
 open class ShaderGlobalsOverride: Node {
-    fileprivate static var className = StringName("ShaderGlobalsOverride")
+    private static var className = StringName("ShaderGlobalsOverride")
     override open class var godotClassName: StringName { className }
 }
 

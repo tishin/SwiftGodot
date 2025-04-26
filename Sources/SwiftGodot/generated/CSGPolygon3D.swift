@@ -26,7 +26,7 @@ import Musl
 /// > Note: CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a ``MeshInstance3D`` with a ``PrimitiveMesh``. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.
 /// 
 open class CSGPolygon3D: CSGPrimitive3D {
-    fileprivate static var className = StringName("CSGPolygon3D")
+    private static var className = StringName("CSGPolygon3D")
     override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// The ``polygon`` shape is extruded along the negative Z axis.
@@ -185,6 +185,18 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
+    /// When ``mode`` is ``Mode/path``, if `true` the polygon will be rotated according to the proper tangent of the path at the sampled points. If `false` an approximation is used, which decreases in accuracy as the number of subdivisions decreases.
+    final public var pathRotationAccurate: Bool {
+        get {
+            return get_path_rotation_accurate ()
+        }
+        
+        set {
+            set_path_rotation_accurate (newValue)
+        }
+        
+    }
+    
     /// When ``mode`` is ``Mode/path``, if `true` the ``Transform3D`` of the ``CSGPolygon3D`` is used as the starting point for the extrusions, not the ``Transform3D`` of the ``pathNode``.
     final public var pathLocal: Bool {
         get {
@@ -258,8 +270,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_polygon")
+    fileprivate static let method_set_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_polygon")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -271,6 +283,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_polygon(_ polygon: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -284,8 +297,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon")
+    fileprivate static let method_get_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -297,13 +310,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_polygon() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mode")
+    fileprivate static let method_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mode")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3158377035)!
@@ -315,6 +329,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_mode(_ mode: CSGPolygon3D.Mode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -328,8 +343,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mode")
+    fileprivate static let method_get_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mode")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1201612222)!
@@ -341,13 +356,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_mode() -> CSGPolygon3D.Mode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CSGPolygon3D.Mode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth")
+    fileprivate static let method_set_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -359,6 +375,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_depth(_ depth: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -372,8 +389,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth")
+    fileprivate static let method_get_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -385,13 +402,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_depth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_spin_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_spin_degrees")
+    fileprivate static let method_set_spin_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_spin_degrees")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -403,6 +421,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_spin_degrees(_ degrees: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -416,8 +435,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_spin_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spin_degrees")
+    fileprivate static let method_get_spin_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spin_degrees")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -429,13 +448,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_spin_degrees() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_spin_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_spin_sides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_spin_sides")
+    fileprivate static let method_set_spin_sides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_spin_sides")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -447,6 +467,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_spin_sides(_ spinSides: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spinSides) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -460,8 +481,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_spin_sides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spin_sides")
+    fileprivate static let method_get_spin_sides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spin_sides")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -473,13 +494,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_spin_sides() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_spin_sides, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_path_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_node")
+    fileprivate static let method_set_path_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_node")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -491,6 +513,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_node(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -504,8 +527,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_path_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_node")
+    fileprivate static let method_get_path_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_node")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -517,13 +540,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_path_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_path_interval_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_interval_type")
+    fileprivate static let method_set_path_interval_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_interval_type")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744240707)!
@@ -535,6 +559,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_interval_type(_ intervalType: CSGPolygon3D.PathIntervalType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: intervalType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -548,8 +573,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_path_interval_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_interval_type")
+    fileprivate static let method_get_path_interval_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_interval_type")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3434618397)!
@@ -561,13 +586,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_path_interval_type() -> CSGPolygon3D.PathIntervalType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_interval_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CSGPolygon3D.PathIntervalType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_path_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_interval")
+    fileprivate static let method_set_path_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_interval")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -579,6 +605,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_interval(_ interval: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: interval) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -592,8 +619,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_path_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_interval")
+    fileprivate static let method_get_path_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_interval")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -605,13 +632,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_path_interval() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_path_simplify_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_simplify_angle")
+    fileprivate static let method_set_path_simplify_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_simplify_angle")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -623,6 +651,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_simplify_angle(_ degrees: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -636,8 +665,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_path_simplify_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_simplify_angle")
+    fileprivate static let method_get_path_simplify_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_simplify_angle")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -649,13 +678,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_path_simplify_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_simplify_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_path_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_rotation")
+    fileprivate static let method_set_path_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_rotation")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1412947288)!
@@ -667,6 +697,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_rotation(_ pathRotation: CSGPolygon3D.PathRotation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pathRotation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -680,8 +711,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_path_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_rotation")
+    fileprivate static let method_get_path_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_rotation")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 647219346)!
@@ -693,13 +724,60 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_path_rotation() -> CSGPolygon3D.PathRotation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CSGPolygon3D.PathRotation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_path_local: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_local")
+    fileprivate static let method_set_path_rotation_accurate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_rotation_accurate")
+        return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_path_rotation_accurate(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_rotation_accurate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_path_rotation_accurate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_rotation_accurate")
+        return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_path_rotation_accurate() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_rotation_accurate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_path_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_local")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -711,6 +789,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_local(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -724,8 +803,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_is_path_local: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_path_local")
+    fileprivate static let method_is_path_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_path_local")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -737,13 +816,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func is_path_local() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_local, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_path_continuous_u: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_continuous_u")
+    fileprivate static let method_set_path_continuous_u: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_continuous_u")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -755,6 +835,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_continuous_u(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -768,8 +849,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_is_path_continuous_u: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_path_continuous_u")
+    fileprivate static let method_is_path_continuous_u: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_path_continuous_u")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -781,13 +862,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func is_path_continuous_u() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_continuous_u, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_path_u_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_u_distance")
+    fileprivate static let method_set_path_u_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_u_distance")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -799,6 +881,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_u_distance(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -812,8 +895,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_path_u_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_u_distance")
+    fileprivate static let method_get_path_u_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_u_distance")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -825,13 +908,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_path_u_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_u_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_path_joined: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_joined")
+    fileprivate static let method_set_path_joined: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_joined")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -843,6 +927,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_path_joined(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -856,8 +941,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_is_path_joined: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_path_joined")
+    fileprivate static let method_is_path_joined: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_path_joined")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -869,13 +954,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func is_path_joined() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_joined, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -887,6 +973,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_material(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -900,8 +987,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material")
+    fileprivate static let method_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -913,13 +1000,14 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_material() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_smooth_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_smooth_faces")
+    fileprivate static let method_set_smooth_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_smooth_faces")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -931,6 +1019,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_smooth_faces(_ smoothFaces: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: smoothFaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -944,8 +1033,8 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_smooth_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_smooth_faces")
+    fileprivate static let method_get_smooth_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_smooth_faces")
         return withUnsafePointer(to: &CSGPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -957,6 +1046,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_smooth_faces() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_smooth_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

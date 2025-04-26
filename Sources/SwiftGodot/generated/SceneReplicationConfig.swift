@@ -21,7 +21,7 @@ import Musl
 
 /// Configuration for properties to synchronize with a ``MultiplayerSynchronizer``.
 open class SceneReplicationConfig: Resource {
-    fileprivate static var className = StringName("SceneReplicationConfig")
+    private static var className = StringName("SceneReplicationConfig")
     override open class var godotClassName: StringName { className }
     public enum ReplicationMode: Int64, CaseIterable {
         /// Do not keep the given property synchronized.
@@ -33,8 +33,8 @@ open class SceneReplicationConfig: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_properties: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_properties")
+    fileprivate static let method_get_properties: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_properties")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -45,14 +45,15 @@ open class SceneReplicationConfig: Resource {
     }()
     
     /// Returns a list of synchronized property ``NodePath``s.
-    public final func getProperties() -> VariantCollection<NodePath> {
+    public final func getProperties() -> TypedArray<NodePath> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(SceneReplicationConfig.method_get_properties, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<NodePath>(content: _result)
+        return TypedArray<NodePath>(takingOver: _result)
     }
     
-    fileprivate static var method_add_property: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_property")
+    fileprivate static let method_add_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_property")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4094619021)!
@@ -67,6 +68,7 @@ open class SceneReplicationConfig: Resource {
     /// > Note: For details on restrictions and limitations on property synchronization, see ``MultiplayerSynchronizer``.
     /// 
     public final func addProperty(path: NodePath, index: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -83,8 +85,8 @@ open class SceneReplicationConfig: Resource {
         
     }
     
-    fileprivate static var method_has_property: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_property")
+    fileprivate static let method_has_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_property")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 861721659)!
@@ -96,6 +98,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Returns `true` if the given `path` is configured for synchronization.
     public final func hasProperty(path: NodePath) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -110,8 +113,8 @@ open class SceneReplicationConfig: Resource {
         return _result
     }
     
-    fileprivate static var method_remove_property: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_property")
+    fileprivate static let method_remove_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_property")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -123,6 +126,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Removes the property identified by the given `path` from the configuration.
     public final func removeProperty(path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -136,8 +140,8 @@ open class SceneReplicationConfig: Resource {
         
     }
     
-    fileprivate static var method_property_get_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_get_index")
+    fileprivate static let method_property_get_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_get_index")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1382022557)!
@@ -149,6 +153,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Finds the index of the given `path`.
     public final func propertyGetIndex(path: NodePath) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -163,8 +168,8 @@ open class SceneReplicationConfig: Resource {
         return _result
     }
     
-    fileprivate static var method_property_get_spawn: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_get_spawn")
+    fileprivate static let method_property_get_spawn: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_get_spawn")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3456846888)!
@@ -176,6 +181,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Returns `true` if the property identified by the given `path` is configured to be synchronized on spawn.
     public final func propertyGetSpawn(path: NodePath) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -190,8 +196,8 @@ open class SceneReplicationConfig: Resource {
         return _result
     }
     
-    fileprivate static var method_property_set_spawn: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_set_spawn")
+    fileprivate static let method_property_set_spawn: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_set_spawn")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3868023870)!
@@ -203,6 +209,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Sets whether the property identified by the given `path` is configured to be synchronized on spawn.
     public final func propertySetSpawn(path: NodePath, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -219,8 +226,8 @@ open class SceneReplicationConfig: Resource {
         
     }
     
-    fileprivate static var method_property_get_replication_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_get_replication_mode")
+    fileprivate static let method_property_get_replication_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_get_replication_mode")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2870606336)!
@@ -232,6 +239,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Returns the replication mode for the property identified by the given `path`. See ``SceneReplicationConfig/ReplicationMode``.
     public final func propertyGetReplicationMode(path: NodePath) -> SceneReplicationConfig.ReplicationMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -246,8 +254,8 @@ open class SceneReplicationConfig: Resource {
         return SceneReplicationConfig.ReplicationMode (rawValue: _result)!
     }
     
-    fileprivate static var method_property_set_replication_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_set_replication_mode")
+    fileprivate static let method_property_set_replication_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_set_replication_mode")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200083865)!
@@ -259,6 +267,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Sets the synchronization mode for the property identified by the given `path`. See ``SceneReplicationConfig/ReplicationMode``.
     public final func propertySetReplicationMode(path: NodePath, mode: SceneReplicationConfig.ReplicationMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -275,8 +284,8 @@ open class SceneReplicationConfig: Resource {
         
     }
     
-    fileprivate static var method_property_get_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_get_sync")
+    fileprivate static let method_property_get_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_get_sync")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3456846888)!
@@ -288,6 +297,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Returns `true` if the property identified by the given `path` is configured to be synchronized on process.
     public final func propertyGetSync(path: NodePath) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -302,8 +312,8 @@ open class SceneReplicationConfig: Resource {
         return _result
     }
     
-    fileprivate static var method_property_set_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_set_sync")
+    fileprivate static let method_property_set_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_set_sync")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3868023870)!
@@ -315,6 +325,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Sets whether the property identified by the given `path` is configured to be synchronized on process.
     public final func propertySetSync(path: NodePath, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -331,8 +342,8 @@ open class SceneReplicationConfig: Resource {
         
     }
     
-    fileprivate static var method_property_get_watch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_get_watch")
+    fileprivate static let method_property_get_watch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_get_watch")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3456846888)!
@@ -344,6 +355,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Returns `true` if the property identified by the given `path` is configured to be reliably synchronized when changes are detected on process.
     public final func propertyGetWatch(path: NodePath) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -358,8 +370,8 @@ open class SceneReplicationConfig: Resource {
         return _result
     }
     
-    fileprivate static var method_property_set_watch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_set_watch")
+    fileprivate static let method_property_set_watch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_set_watch")
         return withUnsafePointer(to: &SceneReplicationConfig.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3868023870)!
@@ -371,6 +383,7 @@ open class SceneReplicationConfig: Resource {
     
     /// Sets whether the property identified by the given `path` is configured to be reliably synchronized when changes are detected on process.
     public final func propertySetWatch(path: NodePath, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in

@@ -28,7 +28,7 @@ import Musl
 /// 
 /// - ``inputTypeChanged``
 open class VisualShaderNodeInput: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeInput")
+    private static var className = StringName("VisualShaderNodeInput")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class VisualShaderNodeInput: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_input_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_name")
+    fileprivate static let method_set_input_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_name")
         return withUnsafePointer(to: &VisualShaderNodeInput.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -59,6 +59,7 @@ open class VisualShaderNodeInput: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_input_name(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -73,8 +74,8 @@ open class VisualShaderNodeInput: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_input_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_name")
+    fileprivate static let method_get_input_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_name")
         return withUnsafePointer(to: &VisualShaderNodeInput.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -86,13 +87,14 @@ open class VisualShaderNodeInput: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_input_name() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_get_input_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_input_real_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_real_name")
+    fileprivate static let method_get_input_real_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_real_name")
         return withUnsafePointer(to: &VisualShaderNodeInput.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -104,6 +106,7 @@ open class VisualShaderNodeInput: VisualShaderNode {
     
     /// Returns a translated name of the current constant in the Godot Shader Language. E.g. `"ALBEDO"` if the ``inputName`` equal to `"albedo"`.
     public final func getInputRealName() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_get_input_real_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

@@ -28,7 +28,7 @@ import Musl
 /// Its title, description and color can be customized.
 /// 
 open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
-    fileprivate static var className = StringName("VisualShaderNodeFrame")
+    private static var className = StringName("VisualShaderNodeFrame")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -94,8 +94,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     }
     
     /* Methods */
-    fileprivate static var method_set_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_title")
+    fileprivate static let method_set_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_title")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -107,6 +107,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func set_title(_ title: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let title = GString(title)
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -121,8 +122,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_get_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_title")
+    fileprivate static let method_get_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_title")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -134,13 +135,14 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func get_title() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_tint_color_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tint_color_enabled")
+    fileprivate static let method_set_tint_color_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tint_color_enabled")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -152,6 +154,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func set_tint_color_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -165,8 +168,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_is_tint_color_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_tint_color_enabled")
+    fileprivate static let method_is_tint_color_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_tint_color_enabled")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -178,13 +181,14 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func is_tint_color_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_is_tint_color_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tint_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tint_color")
+    fileprivate static let method_set_tint_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tint_color")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -196,6 +200,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func set_tint_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -209,8 +214,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_get_tint_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tint_color")
+    fileprivate static let method_get_tint_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tint_color")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -222,13 +227,14 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func get_tint_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_tint_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autoshrink_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autoshrink_enabled")
+    fileprivate static let method_set_autoshrink_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autoshrink_enabled")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -240,6 +246,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func set_autoshrink_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -253,8 +260,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_is_autoshrink_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_autoshrink_enabled")
+    fileprivate static let method_is_autoshrink_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_autoshrink_enabled")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -266,13 +273,14 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func is_autoshrink_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_is_autoshrink_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_attached_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_attached_node")
+    fileprivate static let method_add_attached_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_attached_node")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -284,6 +292,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     /// Adds a node to the list of nodes attached to the frame. Should not be called directly, use the ``VisualShader/attachNodeToFrame(type:id:frame:)`` method instead.
     public final func addAttachedNode(_ node: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -297,8 +306,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_remove_attached_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_attached_node")
+    fileprivate static let method_remove_attached_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_attached_node")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -310,6 +319,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     /// Removes a node from the list of nodes attached to the frame. Should not be called directly, use the ``VisualShader/detachNodeFromFrame(type:id:)`` method instead.
     public final func removeAttachedNode(_ node: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -323,8 +333,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_set_attached_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_attached_nodes")
+    fileprivate static let method_set_attached_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_attached_nodes")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -336,6 +346,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func set_attached_nodes(_ attachedNodes: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: attachedNodes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -349,8 +360,8 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_get_attached_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_attached_nodes")
+    fileprivate static let method_get_attached_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_attached_nodes")
         return withUnsafePointer(to: &VisualShaderNodeFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -362,6 +373,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func get_attached_nodes() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_attached_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

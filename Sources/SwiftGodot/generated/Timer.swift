@@ -37,7 +37,7 @@ import Musl
 /// 
 /// - ``timeout``
 open class Timer: Node {
-    fileprivate static var className = StringName("Timer")
+    private static var className = StringName("Timer")
     override open class var godotClassName: StringName { className }
     public enum TimerProcessCallback: Int64, CaseIterable {
         /// Update the timer every physics process frame (see ``Node/notificationInternalPhysicsProcess``).
@@ -92,6 +92,8 @@ open class Timer: Node {
     /// 
     /// > Note: After the timer enters the tree, this property is automatically set to `false`.
     /// 
+    /// > Note: This property does nothing when the timer is running in the editor.
+    /// 
     final public var autostart: Bool {
         get {
             return has_autostart ()
@@ -115,6 +117,18 @@ open class Timer: Node {
         
     }
     
+    /// If `true`, the timer will ignore ``Engine/timeScale`` and update with the real, elapsed time.
+    final public var ignoreTimeScale: Bool {
+        get {
+            return is_ignoring_time_scale ()
+        }
+        
+        set {
+            set_ignore_time_scale (newValue)
+        }
+        
+    }
+    
     /// The timer's remaining time in seconds. This is always `0` if the timer is stopped.
     /// 
     /// > Note: This property is read-only and cannot be modified. It is based on ``waitTime``.
@@ -127,8 +141,8 @@ open class Timer: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_wait_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_wait_time")
+    fileprivate static let method_set_wait_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_wait_time")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -140,6 +154,7 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func set_wait_time(_ timeSec: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: timeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -153,8 +168,8 @@ open class Timer: Node {
         
     }
     
-    fileprivate static var method_get_wait_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_wait_time")
+    fileprivate static let method_get_wait_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_wait_time")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -166,13 +181,14 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func get_wait_time() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Timer.method_get_wait_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_one_shot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_one_shot")
+    fileprivate static let method_set_one_shot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_one_shot")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -184,6 +200,7 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func set_one_shot(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -197,8 +214,8 @@ open class Timer: Node {
         
     }
     
-    fileprivate static var method_is_one_shot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_one_shot")
+    fileprivate static let method_is_one_shot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_one_shot")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -210,13 +227,14 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func is_one_shot() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Timer.method_is_one_shot, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autostart: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autostart")
+    fileprivate static let method_set_autostart: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autostart")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -228,6 +246,7 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func set_autostart(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -241,8 +260,8 @@ open class Timer: Node {
         
     }
     
-    fileprivate static var method_has_autostart: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_autostart")
+    fileprivate static let method_has_autostart: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_autostart")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -254,13 +273,14 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func has_autostart() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Timer.method_has_autostart, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_start: GDExtensionMethodBindPtr = {
-        let methodName = StringName("start")
+    fileprivate static let method_start: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1392008558)!
@@ -270,11 +290,12 @@ open class Timer: Node {
         
     }()
     
-    /// Starts the timer, if it was not started already. Fails if the timer is not inside the tree. If `timeSec` is greater than `0`, this value is used for the ``waitTime``.
+    /// Starts the timer, or resets the timer if it was started already. Fails if the timer is not inside the tree. If `timeSec` is greater than `0`, this value is used for the ``waitTime``.
     /// 
     /// > Note: This method does not resume a paused timer. See ``paused``.
     /// 
     public final func start(timeSec: Double = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: timeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -288,8 +309,8 @@ open class Timer: Node {
         
     }
     
-    fileprivate static var method_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop")
+    fileprivate static let method_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -301,12 +322,13 @@ open class Timer: Node {
     
     /// Stops the timer.
     public final func stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Timer.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_paused")
+    fileprivate static let method_set_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_paused")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -318,6 +340,7 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func set_paused(_ paused: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: paused) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -331,8 +354,8 @@ open class Timer: Node {
         
     }
     
-    fileprivate static var method_is_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_paused")
+    fileprivate static let method_is_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_paused")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -344,13 +367,60 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func is_paused() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Timer.method_is_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_stopped: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_stopped")
+    fileprivate static let method_set_ignore_time_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ignore_time_scale")
+        return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_ignore_time_scale(_ ignore: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: ignore) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Timer.method_set_ignore_time_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_ignoring_time_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ignoring_time_scale")
+        return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_ignoring_time_scale() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(Timer.method_is_ignoring_time_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_is_stopped: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_stopped")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -362,13 +432,14 @@ open class Timer: Node {
     
     /// Returns `true` if the timer is stopped or has not started.
     public final func isStopped() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Timer.method_is_stopped, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_time_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_left")
+    fileprivate static let method_get_time_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_left")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -380,13 +451,14 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func get_time_left() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Timer.method_get_time_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_timer_process_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_timer_process_callback")
+    fileprivate static let method_set_timer_process_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_timer_process_callback")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3469495063)!
@@ -398,6 +470,7 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func set_timer_process_callback(_ callback: Timer.TimerProcessCallback) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: callback.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -411,8 +484,8 @@ open class Timer: Node {
         
     }
     
-    fileprivate static var method_get_timer_process_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_timer_process_callback")
+    fileprivate static let method_get_timer_process_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_timer_process_callback")
         return withUnsafePointer(to: &Timer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2672570227)!
@@ -424,6 +497,7 @@ open class Timer: Node {
     
     @inline(__always)
     fileprivate final func get_timer_process_callback() -> Timer.TimerProcessCallback {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Timer.method_get_timer_process_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Timer.TimerProcessCallback (rawValue: _result)!

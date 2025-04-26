@@ -28,7 +28,7 @@ import Musl
 /// Unlike ``AudioEffectRecord``, this effect only returns the raw audio samples instead of encoding them into an ``AudioStream``.
 /// 
 open class AudioEffectCapture: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectCapture")
+    private static var className = StringName("AudioEffectCapture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class AudioEffectCapture: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_can_get_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("can_get_buffer")
+    fileprivate static let method_can_get_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("can_get_buffer")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -59,6 +59,7 @@ open class AudioEffectCapture: AudioEffect {
     
     /// Returns `true` if at least `frames` audio frames are available to read in the internal ring buffer.
     public final func canGetBuffer(frames: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -73,8 +74,8 @@ open class AudioEffectCapture: AudioEffect {
         return _result
     }
     
-    fileprivate static var method_get_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer")
+    fileprivate static let method_get_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2649534757)!
@@ -91,6 +92,7 @@ open class AudioEffectCapture: AudioEffect {
     /// The samples are signed floating-point PCM between `-1` and `1`. You will have to scale them if you want to use them as 8 or 16-bit integer samples. (`v = 0x7fff * samples[0].x`)
     /// 
     public final func getBuffer(frames: Int32) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -105,8 +107,8 @@ open class AudioEffectCapture: AudioEffect {
         return _result
     }
     
-    fileprivate static var method_clear_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_buffer")
+    fileprivate static let method_clear_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_buffer")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -121,12 +123,13 @@ open class AudioEffectCapture: AudioEffect {
     /// > Note: Calling this during a capture can cause the loss of samples which causes popping in the playback.
     /// 
     public final func clearBuffer() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AudioEffectCapture.method_clear_buffer, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_buffer_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_buffer_length")
+    fileprivate static let method_set_buffer_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_buffer_length")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -138,6 +141,7 @@ open class AudioEffectCapture: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_buffer_length(_ bufferLengthSeconds: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bufferLengthSeconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -151,8 +155,8 @@ open class AudioEffectCapture: AudioEffect {
         
     }
     
-    fileprivate static var method_get_buffer_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer_length")
+    fileprivate static let method_get_buffer_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer_length")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -164,13 +168,14 @@ open class AudioEffectCapture: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_buffer_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_frames_available: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frames_available")
+    fileprivate static let method_get_frames_available: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frames_available")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -182,13 +187,14 @@ open class AudioEffectCapture: AudioEffect {
     
     /// Returns the number of frames available to read using ``getBuffer(frames:)``.
     public final func getFramesAvailable() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_frames_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_discarded_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_discarded_frames")
+    fileprivate static let method_get_discarded_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_discarded_frames")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -200,13 +206,14 @@ open class AudioEffectCapture: AudioEffect {
     
     /// Returns the number of audio frames discarded from the audio bus due to full buffer.
     public final func getDiscardedFrames() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_discarded_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_buffer_length_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer_length_frames")
+    fileprivate static let method_get_buffer_length_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer_length_frames")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -218,13 +225,14 @@ open class AudioEffectCapture: AudioEffect {
     
     /// Returns the total size of the internal ring buffer in frames.
     public final func getBufferLengthFrames() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer_length_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_pushed_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pushed_frames")
+    fileprivate static let method_get_pushed_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pushed_frames")
         return withUnsafePointer(to: &AudioEffectCapture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -236,6 +244,7 @@ open class AudioEffectCapture: AudioEffect {
     
     /// Returns the number of audio frames inserted from the audio bus.
     public final func getPushedFrames() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_pushed_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

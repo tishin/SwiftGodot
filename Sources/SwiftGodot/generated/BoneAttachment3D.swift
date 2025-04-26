@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This node selects a bone in a ``Skeleton3D`` and attaches to it. This means that the ``BoneAttachment3D`` node will either dynamically copy or override the 3D transform of the selected bone.
 open class BoneAttachment3D: Node3D {
-    fileprivate static var className = StringName("BoneAttachment3D")
+    private static var className = StringName("BoneAttachment3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -68,8 +68,27 @@ open class BoneAttachment3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_bone_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_name")
+    fileprivate static let method_get_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skeleton")
+        return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1814733083)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Get parent or external ``Skeleton3D`` node if found.
+    public final func getSkeleton() -> Skeleton3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_set_bone_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_name")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -81,6 +100,7 @@ open class BoneAttachment3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_bone_name(_ boneName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let boneName = GString(boneName)
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -95,8 +115,8 @@ open class BoneAttachment3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_name")
+    fileprivate static let method_get_bone_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_name")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -108,13 +128,14 @@ open class BoneAttachment3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_bone_name() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_bone_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_bone_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_idx")
+    fileprivate static let method_set_bone_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_idx")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -126,6 +147,7 @@ open class BoneAttachment3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_bone_idx(_ boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -139,8 +161,8 @@ open class BoneAttachment3D: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_idx")
+    fileprivate static let method_get_bone_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_idx")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -152,13 +174,14 @@ open class BoneAttachment3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_bone_idx() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_bone_idx, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_on_skeleton_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("on_skeleton_update")
+    fileprivate static let method_on_skeleton_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("on_skeleton_update")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -170,12 +193,13 @@ open class BoneAttachment3D: Node3D {
     
     /// A function that is called automatically when the ``Skeleton3D`` is updated. This function is where the ``BoneAttachment3D`` node updates its position so it is correctly bound when it is _not_ set to override the bone pose.
     public final func onSkeletonUpdate() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(BoneAttachment3D.method_on_skeleton_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_override_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_override_pose")
+    fileprivate static let method_set_override_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_override_pose")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -187,6 +211,7 @@ open class BoneAttachment3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_override_pose(_ overridePose: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: overridePose) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -200,8 +225,8 @@ open class BoneAttachment3D: Node3D {
         
     }
     
-    fileprivate static var method_get_override_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_override_pose")
+    fileprivate static let method_get_override_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_override_pose")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -213,13 +238,14 @@ open class BoneAttachment3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_override_pose() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_override_pose, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_external_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_external_skeleton")
+    fileprivate static let method_set_use_external_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_external_skeleton")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -231,6 +257,7 @@ open class BoneAttachment3D: Node3D {
     
     /// Sets whether the BoneAttachment3D node will use an external ``Skeleton3D`` node rather than attempting to use its parent node as the ``Skeleton3D``. When set to `true`, the BoneAttachment3D node will use the external ``Skeleton3D`` node set in ``setExternalSkeleton(_:)``.
     public final func setUseExternalSkeleton(_ useExternalSkeleton: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useExternalSkeleton) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -244,8 +271,8 @@ open class BoneAttachment3D: Node3D {
         
     }
     
-    fileprivate static var method_get_use_external_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_external_skeleton")
+    fileprivate static let method_get_use_external_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_external_skeleton")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -257,13 +284,14 @@ open class BoneAttachment3D: Node3D {
     
     /// Returns whether the BoneAttachment3D node is using an external ``Skeleton3D`` rather than attempting to use its parent node as the ``Skeleton3D``.
     public final func getUseExternalSkeleton() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_use_external_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_external_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_external_skeleton")
+    fileprivate static let method_set_external_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_external_skeleton")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -275,6 +303,7 @@ open class BoneAttachment3D: Node3D {
     
     /// Sets the ``NodePath`` to the external skeleton that the BoneAttachment3D node should use. See ``setUseExternalSkeleton(_:)`` to enable the external ``Skeleton3D`` node.
     public final func setExternalSkeleton(_ externalSkeleton: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: externalSkeleton.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -288,8 +317,8 @@ open class BoneAttachment3D: Node3D {
         
     }
     
-    fileprivate static var method_get_external_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_external_skeleton")
+    fileprivate static let method_get_external_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_external_skeleton")
         return withUnsafePointer(to: &BoneAttachment3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -301,6 +330,7 @@ open class BoneAttachment3D: Node3D {
     
     /// Returns the ``NodePath`` to the external ``Skeleton3D`` node, if one has been set.
     public final func getExternalSkeleton() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_external_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

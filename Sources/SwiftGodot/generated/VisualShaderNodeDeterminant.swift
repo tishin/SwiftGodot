@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translates to `determinant(x)` in the shader language.
 open class VisualShaderNodeDeterminant: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeDeterminant")
+    private static var className = StringName("VisualShaderNodeDeterminant")
     override open class var godotClassName: StringName { className }
 }
 

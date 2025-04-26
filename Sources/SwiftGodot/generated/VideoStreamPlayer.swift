@@ -33,7 +33,7 @@ import Musl
 /// 
 /// - ``finished``
 open class VideoStreamPlayer: Control {
-    fileprivate static var className = StringName("VideoStreamPlayer")
+    private static var className = StringName("VideoStreamPlayer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -174,8 +174,8 @@ open class VideoStreamPlayer: Control {
     }
     
     /* Methods */
-    fileprivate static var method_set_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stream")
+    fileprivate static let method_set_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stream")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2317102564)!
@@ -187,6 +187,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_stream(_ stream: VideoStream?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -200,8 +201,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_get_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream")
+    fileprivate static let method_get_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 438621487)!
@@ -213,13 +214,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func get_stream() -> VideoStream? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_play: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play")
+    fileprivate static let method_play: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -231,12 +233,13 @@ open class VideoStreamPlayer: Control {
     
     /// Starts the video playback from the beginning. If the video is paused, this will not unpause the video.
     public final func play() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_play, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop")
+    fileprivate static let method_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -251,12 +254,13 @@ open class VideoStreamPlayer: Control {
     /// > Note: Although the stream position will be set to 0, the first frame of the video stream won't become the current frame.
     /// 
     public final func stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_playing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_playing")
+    fileprivate static let method_is_playing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_playing")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -271,13 +275,14 @@ open class VideoStreamPlayer: Control {
     /// > Note: The video is still considered playing if paused during playback.
     /// 
     public final func isPlaying() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_paused")
+    fileprivate static let method_set_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_paused")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -289,6 +294,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_paused(_ paused: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: paused) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -302,8 +308,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_is_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_paused")
+    fileprivate static let method_is_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_paused")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -315,13 +321,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func is_paused() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_is_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_loop")
+    fileprivate static let method_set_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_loop")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -333,6 +340,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_loop(_ loop: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -346,8 +354,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_has_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_loop")
+    fileprivate static let method_has_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_loop")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -359,13 +367,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func has_loop() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volume: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volume")
+    fileprivate static let method_set_volume: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volume")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -377,6 +386,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_volume(_ volume: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: volume) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -390,8 +400,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_get_volume: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volume")
+    fileprivate static let method_get_volume: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volume")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -403,13 +413,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func get_volume() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_volume, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volume_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volume_db")
+    fileprivate static let method_set_volume_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volume_db")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -421,6 +432,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_volume_db(_ db: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: db) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -434,8 +446,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_get_volume_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volume_db")
+    fileprivate static let method_get_volume_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volume_db")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -447,13 +459,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func get_volume_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_volume_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_audio_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_audio_track")
+    fileprivate static let method_set_audio_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_audio_track")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -465,6 +478,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_audio_track(_ track: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: track) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -478,8 +492,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_get_audio_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_audio_track")
+    fileprivate static let method_get_audio_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_audio_track")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -491,13 +505,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func get_audio_track() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_audio_track, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_stream_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream_name")
+    fileprivate static let method_get_stream_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream_name")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -509,13 +524,14 @@ open class VideoStreamPlayer: Control {
     
     /// Returns the video stream's name, or `"<No Stream>"` if no video stream is assigned.
     public final func getStreamName() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_stream_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream_length")
+    fileprivate static let method_get_stream_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream_length")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -530,13 +546,14 @@ open class VideoStreamPlayer: Control {
     /// > Note: For ``VideoStreamTheora`` streams (the built-in format supported by Godot), this value will always be zero, as getting the stream length is not implemented yet. The feature may be supported by video formats implemented by a GDExtension add-on.
     /// 
     public final func getStreamLength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_stream_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stream_position")
+    fileprivate static let method_set_stream_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stream_position")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -548,6 +565,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_stream_position(_ position: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -561,8 +579,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_get_stream_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream_position")
+    fileprivate static let method_get_stream_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream_position")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -574,13 +592,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func get_stream_position() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autoplay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autoplay")
+    fileprivate static let method_set_autoplay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autoplay")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -592,6 +611,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_autoplay(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -605,8 +625,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_has_autoplay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_autoplay")
+    fileprivate static let method_has_autoplay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_autoplay")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -618,13 +638,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func has_autoplay() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_autoplay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_expand: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_expand")
+    fileprivate static let method_set_expand: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_expand")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -636,6 +657,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_expand(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -649,8 +671,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_has_expand: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_expand")
+    fileprivate static let method_has_expand: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_expand")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -662,13 +684,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func has_expand() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_expand, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_buffering_msec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_buffering_msec")
+    fileprivate static let method_set_buffering_msec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_buffering_msec")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -680,6 +703,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_buffering_msec(_ msec: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -693,8 +717,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_get_buffering_msec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffering_msec")
+    fileprivate static let method_get_buffering_msec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffering_msec")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -706,13 +730,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func get_buffering_msec() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_buffering_msec, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus")
+    fileprivate static let method_set_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -724,6 +749,7 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func set_bus(_ bus: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bus.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -737,8 +763,8 @@ open class VideoStreamPlayer: Control {
         
     }
     
-    fileprivate static var method_get_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus")
+    fileprivate static let method_get_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -750,13 +776,14 @@ open class VideoStreamPlayer: Control {
     
     @inline(__always)
     fileprivate final func get_bus() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_bus, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_video_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_video_texture")
+    fileprivate static let method_get_video_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_video_texture")
         return withUnsafePointer(to: &VideoStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -768,9 +795,10 @@ open class VideoStreamPlayer: Control {
     
     /// Returns the current frame as a ``Texture2D``.
     public final func getVideoTexture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_video_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

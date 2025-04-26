@@ -26,7 +26,7 @@ import Musl
 /// A humanoid skeleton profile contains 54 bones divided in 4 groups: `"Body"`, `"Face"`, `"LeftHand"`, and `"RightHand"`. It is structured as follows:
 /// 
 open class SkeletonProfileHumanoid: SkeletonProfile {
-    fileprivate static var className = StringName("SkeletonProfileHumanoid")
+    private static var className = StringName("SkeletonProfileHumanoid")
     override open class var godotClassName: StringName { className }
 }
 

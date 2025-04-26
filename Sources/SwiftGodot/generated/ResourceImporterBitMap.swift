@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``BitMap`` resources are typically used as click masks in ``TextureButton`` and ``TouchScreenButton``.
 open class ResourceImporterBitMap: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterBitMap")
+    private static var className = StringName("ResourceImporterBitMap")
     override open class var godotClassName: StringName { className }
 }
 

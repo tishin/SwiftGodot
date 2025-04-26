@@ -29,7 +29,7 @@ import Musl
 /// - ``preSortChildren``
 /// - ``sortChildren``
 open class Container: Control {
-    fileprivate static var className = StringName("Container")
+    private static var className = StringName("Container")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Notification just before children are going to be sorted, in case there's something to process beforehand.
@@ -37,14 +37,39 @@ open class Container: Control {
     /// Notification for when sorting the children, it must be obeyed immediately.
     public static let notificationSortChildren = 51
     /* Methods */
+    fileprivate static let method__get_allowed_size_flags_horizontal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_allowed_size_flags_horizontal")
+        return withUnsafePointer(to: &Container.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
+            }
+            
+        }
+        
+    }()
+    
     /// Implement to return a list of allowed horizontal ``Control.SizeFlags`` for child nodes. This doesn't technically prevent the usages of any other size flags, if your implementation requires that. This only limits the options available to the user in the Inspector dock.
     /// 
     /// > Note: Having no size flags is equal to having ``Control/SizeFlags/shrinkBegin``. As such, this value is always implicitly allowed.
     /// 
     @_documentation(visibility: public)
     open func _getAllowedSizeFlagsHorizontal() -> PackedInt32Array {
-        return PackedInt32Array ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedInt32Array = PackedInt32Array ()
+        gi.object_method_bind_ptrcall(Container.method__get_allowed_size_flags_horizontal, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__get_allowed_size_flags_vertical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_allowed_size_flags_vertical")
+        return withUnsafePointer(to: &Container.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to return a list of allowed vertical ``Control.SizeFlags`` for child nodes. This doesn't technically prevent the usages of any other size flags, if your implementation requires that. This only limits the options available to the user in the Inspector dock.
     /// 
@@ -52,11 +77,14 @@ open class Container: Control {
     /// 
     @_documentation(visibility: public)
     open func _getAllowedSizeFlagsVertical() -> PackedInt32Array {
-        return PackedInt32Array ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedInt32Array = PackedInt32Array ()
+        gi.object_method_bind_ptrcall(Container.method__get_allowed_size_flags_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
     
-    fileprivate static var method_queue_sort: GDExtensionMethodBindPtr = {
-        let methodName = StringName("queue_sort")
+    fileprivate static let method_queue_sort: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("queue_sort")
         return withUnsafePointer(to: &Container.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -68,12 +96,13 @@ open class Container: Control {
     
     /// Queue resort of the contained children. This is called automatically anyway, but can be called upon request.
     public final func queueSort() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Container.method_queue_sort, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_fit_child_in_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fit_child_in_rect")
+    fileprivate static let method_fit_child_in_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fit_child_in_rect")
         return withUnsafePointer(to: &Container.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1993438598)!
@@ -85,6 +114,7 @@ open class Container: Control {
     
     /// Fit a child control in a given rect. This is mainly a helper for creating custom container classes.
     public final func fitChildInRect(child: Control?, rect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: child?.handle) { pArg0 in
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -101,7 +131,7 @@ open class Container: Control {
         
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_allowed_size_flags_horizontal":
@@ -152,7 +182,8 @@ open class Container: Control {
 // Support methods for proxies
 func _Container_proxy_get_allowed_size_flags_horizontal (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Container>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Container else { return }
     let ret = swiftObject._getAllowedSizeFlagsHorizontal ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedInt32Array
     ret.content = PackedInt32Array.zero
@@ -160,7 +191,8 @@ func _Container_proxy_get_allowed_size_flags_horizontal (instance: UnsafeMutable
 
 func _Container_proxy_get_allowed_size_flags_vertical (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Container>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Container else { return }
     let ret = swiftObject._getAllowedSizeFlagsVertical ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedInt32Array
     ret.content = PackedInt32Array.zero

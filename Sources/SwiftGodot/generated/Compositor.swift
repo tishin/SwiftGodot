@@ -23,13 +23,13 @@ import Musl
 /// 
 /// The compositor resource stores attributes used to customize how a ``Viewport`` is rendered.
 open class Compositor: Resource {
-    fileprivate static var className = StringName("Compositor")
+    private static var className = StringName("Compositor")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /// The custom ``CompositorEffect``s that are applied during rendering of viewports using this compositor.
-    final public var compositorEffects: ObjectCollection<CompositorEffect> {
+    final public var compositorEffects: TypedArray<CompositorEffect?> {
         get {
             return get_compositor_effects ()
         }
@@ -41,8 +41,8 @@ open class Compositor: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_compositor_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_compositor_effects")
+    fileprivate static let method_set_compositor_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_compositor_effects")
         return withUnsafePointer(to: &Compositor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -53,7 +53,8 @@ open class Compositor: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func set_compositor_effects(_ compositorEffects: ObjectCollection<CompositorEffect>) {
+    fileprivate final func set_compositor_effects(_ compositorEffects: TypedArray<CompositorEffect?>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: compositorEffects.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class Compositor: Resource {
         
     }
     
-    fileprivate static var method_get_compositor_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_compositor_effects")
+    fileprivate static let method_get_compositor_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_compositor_effects")
         return withUnsafePointer(to: &Compositor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -79,10 +80,11 @@ open class Compositor: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func get_compositor_effects() -> ObjectCollection<CompositorEffect> {
+    fileprivate final func get_compositor_effects() -> TypedArray<CompositorEffect?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Compositor.method_get_compositor_effects, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<CompositorEffect>(content: _result)
+        return TypedArray<CompositorEffect?>(takingOver: _result)
     }
     
 }

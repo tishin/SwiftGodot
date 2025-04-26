@@ -29,7 +29,7 @@ import Musl
 /// 
 /// - ``pressed``
 open class StatusIndicator: Node {
-    fileprivate static var className = StringName("StatusIndicator")
+    private static var className = StringName("StatusIndicator")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -86,8 +86,8 @@ open class StatusIndicator: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tooltip")
+    fileprivate static let method_set_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tooltip")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -99,6 +99,7 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func set_tooltip(_ tooltip: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let tooltip = GString(tooltip)
         withUnsafePointer(to: tooltip.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -113,8 +114,8 @@ open class StatusIndicator: Node {
         
     }
     
-    fileprivate static var method_get_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tooltip")
+    fileprivate static let method_get_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tooltip")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -126,13 +127,14 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func get_tooltip() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(StatusIndicator.method_get_tooltip, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_icon")
+    fileprivate static let method_set_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_icon")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -144,6 +146,7 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func set_icon(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -157,8 +160,8 @@ open class StatusIndicator: Node {
         
     }
     
-    fileprivate static var method_get_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_icon")
+    fileprivate static let method_get_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_icon")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -170,13 +173,14 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func get_icon() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(StatusIndicator.method_get_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visible")
+    fileprivate static let method_set_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visible")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -188,6 +192,7 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func set_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -201,8 +206,8 @@ open class StatusIndicator: Node {
         
     }
     
-    fileprivate static var method_is_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_visible")
+    fileprivate static let method_is_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_visible")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -214,13 +219,14 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func is_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(StatusIndicator.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_menu")
+    fileprivate static let method_set_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_menu")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -232,6 +238,7 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func set_menu(_ menu: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: menu.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -245,8 +252,8 @@ open class StatusIndicator: Node {
         
     }
     
-    fileprivate static var method_get_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_menu")
+    fileprivate static let method_get_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_menu")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -258,13 +265,14 @@ open class StatusIndicator: Node {
     
     @inline(__always)
     fileprivate final func get_menu() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(StatusIndicator.method_get_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rect")
+    fileprivate static let method_get_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rect")
         return withUnsafePointer(to: &StatusIndicator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -276,6 +284,7 @@ open class StatusIndicator: Node {
     
     /// Returns the status indicator rectangle in screen coordinates. If this status indicator is not visible, returns an empty ``Rect2``.
     public final func getRect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(StatusIndicator.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

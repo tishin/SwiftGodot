@@ -43,14 +43,16 @@ import Musl
 /// 
 /// > Note: The `script` is not exposed like most properties. To set or get an object's ``Script`` in code, use ``setScript(_:)`` and ``getScript()``, respectively.
 /// 
+/// > Note: In a boolean context, an ``Object`` will evaluate to `false` if it is equal to `null` or it has been freed. Otherwise, an ``Object`` will always evaluate to `true`. See also ``@GlobalScope.is_instance_valid``.
+/// 
 /// 
 /// 
 /// This object emits the following signals:
 /// 
 /// - ``scriptChanged``
 /// - ``propertyListChanged``
-open class Object: Wrapped {
-    fileprivate static var className = StringName("Object")
+open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
+    private static var className = StringName("Object")
     override open class var godotClassName: StringName { className }
     public struct ConnectFlags: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
@@ -82,13 +84,13 @@ open class Object: Wrapped {
     /* Constants */
     /// Notification received when the object is initialized, before its script is attached. Used internally.
     public static let notificationPostinitialize = 0
-    /// Notification received when the object is about to be deleted. Can act as the deconstructor of some programming languages.
+    /// Notification received when the object is about to be deleted. Can be used like destructors in object-oriented programming languages.
     public static let notificationPredelete = 1
     /// Notification received when the object finishes hot reloading. This notification is only sent for extensions classes and derived.
     public static let notificationExtensionReloaded = 2
     /* Methods */
-    static var method_get_class: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_class")
+    static let method_get_class: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_class")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -103,13 +105,14 @@ open class Object: Wrapped {
     /// > Note: This method ignores `class_name` declarations. If this object's script has defined a `class_name`, the base, built-in class name is returned instead.
     /// 
     public final func getClass() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Object.method_get_class, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_class: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_class")
+    fileprivate static let method_is_class: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_class")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -124,6 +127,7 @@ open class Object: Wrapped {
     /// > Note: This method ignores `class_name` declarations in the object's script.
     /// 
     public final func isClass(_ `class`: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let `class` = GString(`class`)
         withUnsafePointer(to: `class`.content) { pArg0 in
@@ -139,8 +143,8 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set")
+    fileprivate static let method_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -155,6 +159,7 @@ open class Object: Wrapped {
     /// > Note: In C#, `property` must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func set(property: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -171,8 +176,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get")
+    fileprivate static let method_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2760726917)!
@@ -187,6 +192,7 @@ open class Object: Wrapped {
     /// > Note: In C#, `property` must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func get(property: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -201,8 +207,8 @@ open class Object: Wrapped {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_indexed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_indexed")
+    fileprivate static let method_set_indexed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_indexed")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3500910842)!
@@ -217,6 +223,7 @@ open class Object: Wrapped {
     /// > Note: In C#, `propertyPath` must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func setIndexed(propertyPath: NodePath, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: propertyPath.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -233,8 +240,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_get_indexed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_indexed")
+    fileprivate static let method_get_indexed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_indexed")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4006125091)!
@@ -253,6 +260,7 @@ open class Object: Wrapped {
     /// > Note: This method does not support actual paths to nodes in the ``SceneTree``, only sub-property paths. In the context of nodes, use ``Node/getNodeAndResource(path:)`` instead.
     /// 
     public final func getIndexed(propertyPath: NodePath) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: propertyPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -267,8 +275,8 @@ open class Object: Wrapped {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_property_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_property_list")
+    fileprivate static let method_get_property_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_property_list")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -278,7 +286,7 @@ open class Object: Wrapped {
         
     }()
     
-    /// Returns the object's property list as an ``GArray`` of dictionaries. Each ``GDictionary`` contains the following entries:
+    /// Returns the object's property list as an ``VariantArray`` of dictionaries. Each ``VariantDictionary`` contains the following entries:
     /// 
     /// - `name` is the property's name, as a ``String``;
     /// 
@@ -294,14 +302,15 @@ open class Object: Wrapped {
     /// 
     /// > Note: In GDScript, all class members are treated as properties. In C# and GDExtension, it may be necessary to explicitly mark class members as Godot properties using decorators or attributes.
     /// 
-    public final func getPropertyList() -> VariantCollection<GDictionary> {
+    public final func getPropertyList() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Object.method_get_property_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_method_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_method_list")
+    fileprivate static let method_get_method_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_method_list")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -311,30 +320,31 @@ open class Object: Wrapped {
         
     }()
     
-    /// Returns this object's methods and their signatures as an ``GArray`` of dictionaries. Each ``GDictionary`` contains the following entries:
+    /// Returns this object's methods and their signatures as an ``VariantArray`` of dictionaries. Each ``VariantDictionary`` contains the following entries:
     /// 
     /// - `name` is the name of the method, as a ``String``;
     /// 
-    /// - `args` is an ``GArray`` of dictionaries representing the arguments;
+    /// - `args` is an ``VariantArray`` of dictionaries representing the arguments;
     /// 
-    /// - `default_args` is the default arguments as an ``GArray`` of variants;
+    /// - `default_args` is the default arguments as an ``VariantArray`` of variants;
     /// 
     /// - `flags` is a combination of ``MethodFlags``;
     /// 
     /// - `id` is the method's internal identifier integer;
     /// 
-    /// - `return` is the returned value, as a ``GDictionary``;
+    /// - `return` is the returned value, as a ``VariantDictionary``;
     /// 
     /// > Note: The dictionaries of `args` and `return` are formatted identically to the results of ``getPropertyList()``, although not all entries are used.
     /// 
-    public final func getMethodList() -> VariantCollection<GDictionary> {
+    public final func getMethodList() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Object.method_get_method_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_property_can_revert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_can_revert")
+    fileprivate static let method_property_can_revert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_can_revert")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -349,6 +359,7 @@ open class Object: Wrapped {
     /// > Note: This method is used by the Inspector dock to display a revert icon. The object must implement ``_propertyCanRevert()`` to customize the default value. If ``_propertyCanRevert()`` is not implemented, this method returns `false`.
     /// 
     public final func propertyCanRevert(property: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -363,8 +374,8 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_property_get_revert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("property_get_revert")
+    fileprivate static let method_property_get_revert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("property_get_revert")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2760726917)!
@@ -379,6 +390,7 @@ open class Object: Wrapped {
     /// > Note: This method is used by the Inspector dock to display a revert icon. The object must implement ``_propertyGetRevert()`` to customize the default value. If ``_propertyGetRevert()`` is not implemented, this method returns `null`.
     /// 
     public final func propertyGetRevert(property: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -393,8 +405,8 @@ open class Object: Wrapped {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_notification: GDExtensionMethodBindPtr = {
-        let methodName = StringName("notification")
+    fileprivate static let method_notification: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("notification")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4023243586)!
@@ -409,6 +421,7 @@ open class Object: Wrapped {
     /// If `reversed` is `true`, the call order is reversed.
     /// 
     public final func notification(what: Int32, reversed: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: what) { pArg0 in
             withUnsafePointer(to: reversed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -425,8 +438,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_to_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("to_string")
+    fileprivate static let method_to_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("to_string")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -438,13 +451,14 @@ open class Object: Wrapped {
     
     /// Returns a ``String`` representing the object. Defaults to `"<ClassName#RID>"`. Override ``_toString()`` to customize the string representation of the object.
     public final func toString() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Object.method_to_string, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_instance_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_id")
+    fileprivate static let method_get_instance_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_id")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -459,13 +473,14 @@ open class Object: Wrapped {
     /// > Note: This ID is only useful during the current session. It won't correspond to a similar object if the ID is sent over a network, or loaded from a file at a later time.
     /// 
     public final func getInstanceId() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(Object.method_get_instance_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_script: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_script")
+    fileprivate static let method_set_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_script")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1114965689)!
@@ -480,6 +495,7 @@ open class Object: Wrapped {
     /// If a script already exists, its instance is detached, and its property values and state are lost. Built-in property values are still kept.
     /// 
     public final func setScript(_ script: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -493,8 +509,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_get_script: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script")
+    fileprivate static let method_get_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1214101251)!
@@ -506,13 +522,14 @@ open class Object: Wrapped {
     
     /// Returns the object's ``Script`` instance, or `null` if no script is attached.
     public final func getScript() -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         gi.object_method_bind_ptrcall(Object.method_get_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_meta")
+    fileprivate static let method_set_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_meta")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -531,6 +548,7 @@ open class Object: Wrapped {
     /// > Note: Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
     /// 
     public final func setMeta(name: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -547,8 +565,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_remove_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_meta")
+    fileprivate static let method_remove_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_meta")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -565,6 +583,7 @@ open class Object: Wrapped {
     /// > Note: Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
     /// 
     public final func removeMeta(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -578,8 +597,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_get_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_meta")
+    fileprivate static let method_get_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_meta")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3990617847)!
@@ -596,6 +615,7 @@ open class Object: Wrapped {
     /// > Note: Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
     /// 
     public final func getMeta(name: StringName, `default`: Variant?) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: `default`.content) { pArg1 in
@@ -613,8 +633,8 @@ open class Object: Wrapped {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_has_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_meta")
+    fileprivate static let method_has_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_meta")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -631,6 +651,7 @@ open class Object: Wrapped {
     /// > Note: Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
     /// 
     public final func hasMeta(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -645,8 +666,8 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_get_meta_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_meta_list")
+    fileprivate static let method_get_meta_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_meta_list")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -656,15 +677,16 @@ open class Object: Wrapped {
         
     }()
     
-    /// Returns the object's metadata entry names as a ``PackedStringArray``.
-    public final func getMetaList() -> VariantCollection<StringName> {
+    /// Returns the object's metadata entry names as an ``VariantArray`` of ``StringName``s.
+    public final func getMetaList() -> TypedArray<StringName> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Object.method_get_meta_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
     }
     
-    fileprivate static var method_add_user_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_user_signal")
+    fileprivate static let method_add_user_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_user_signal")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 85656714)!
@@ -674,9 +696,10 @@ open class Object: Wrapped {
         
     }()
     
-    /// Adds a user-defined `signal`. Optional arguments for the signal can be added as an ``GArray`` of dictionaries, each defining a `name` ``String`` and a `type` integer (see ``Variant.GType``). See also ``hasUserSignal(_:)`` and ``removeUserSignal(_:)``.
+    /// Adds a user-defined signal named `signal`. Optional arguments for the signal can be added as an ``VariantArray`` of dictionaries, each defining a `name` ``String`` and a `type` integer (see ``Variant.GType``). See also ``hasUserSignal(_:)`` and ``removeUserSignal(_:)``.
     /// 
-    public final func addUserSignal(_ signal: String, arguments: GArray = GArray ()) {
+    public final func addUserSignal(_ signal: String, arguments: VariantArray = VariantArray ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let signal = GString(signal)
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: arguments.content) { pArg1 in
@@ -694,8 +717,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_has_user_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_user_signal")
+    fileprivate static let method_has_user_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_user_signal")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -707,6 +730,7 @@ open class Object: Wrapped {
     
     /// Returns `true` if the given user-defined `signal` name exists. Only signals added with ``addUserSignal(_:arguments:)`` are included. See also ``removeUserSignal(_:)``.
     public final func hasUserSignal(_ signal: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -721,8 +745,8 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_remove_user_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_user_signal")
+    fileprivate static let method_remove_user_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_user_signal")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -734,6 +758,7 @@ open class Object: Wrapped {
     
     /// Removes the given user signal `signal` from the object. See also ``addUserSignal(_:arguments:)`` and ``hasUserSignal(_:)``.
     public final func removeUserSignal(_ signal: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -747,8 +772,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_emit_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("emit_signal")
+    fileprivate static let method_emit_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("emit_signal")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4047867050)!
@@ -766,8 +791,9 @@ open class Object: Wrapped {
     /// 
     @discardableResult /* discardable per discardableList: Object, emit_signal */ 
     public final func emitSignal(_ signal: StringName, _ arguments: Variant?...) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let signal = Variant(signal)
+        let signal = signal.toVariant()
         withUnsafePointer(to: signal.content) { pArg0 in
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -817,8 +843,8 @@ open class Object: Wrapped {
         return GodotError(rawValue: Int64(errorCode))!                
     }
     
-    fileprivate static var method_call: GDExtensionMethodBindPtr = {
-        let methodName = StringName("call")
+    fileprivate static let method_call: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("call")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3400424181)!
@@ -833,8 +859,9 @@ open class Object: Wrapped {
     /// > Note: In C#, `method` must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func call(method: StringName, _ arguments: Variant?...) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let method = Variant(method)
+        let method = method.toVariant()
         withUnsafePointer(to: method.content) { pArg0 in
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -876,8 +903,8 @@ open class Object: Wrapped {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_call_deferred: GDExtensionMethodBindPtr = {
-        let methodName = StringName("call_deferred")
+    fileprivate static let method_call_deferred: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("call_deferred")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3400424181)!
@@ -887,7 +914,7 @@ open class Object: Wrapped {
         
     }()
     
-    /// Calls the `method` on the object during idle time. Always returns null, **not** the method's result.
+    /// Calls the `method` on the object during idle time. Always returns `null`, **not** the method's result.
     /// 
     /// Idle time happens mainly at the end of process and physics frames. In it, deferred calls will be run until there are none left, which means you can defer calls from other deferred calls and they'll still be run in the current idle time cycle. This means you should not call a method deferred from itself (or from a method called by it), as this causes infinite recursion the same way as if you had called the method directly.
     /// 
@@ -900,8 +927,9 @@ open class Object: Wrapped {
     /// > Note: If you're looking to delay the function call by a frame, refer to the [signal SceneTree.process_frame] and [signal SceneTree.physics_frame] signals.
     /// 
     public final func callDeferred(method: StringName, _ arguments: Variant?...) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let method = Variant(method)
+        let method = method.toVariant()
         withUnsafePointer(to: method.content) { pArg0 in
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -943,8 +971,8 @@ open class Object: Wrapped {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_deferred: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deferred")
+    fileprivate static let method_set_deferred: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deferred")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -959,6 +987,7 @@ open class Object: Wrapped {
     /// > Note: In C#, `property` must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func setDeferred(property: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -975,8 +1004,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_callv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("callv")
+    fileprivate static let method_callv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("callv")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1260104456)!
@@ -990,7 +1019,8 @@ open class Object: Wrapped {
     /// 
     /// > Note: In C#, `method` must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new ``StringName`` on each call.
     /// 
-    public final func callv(method: StringName, argArray: GArray) -> Variant? {
+    public final func callv(method: StringName, argArray: VariantArray) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: argArray.content) { pArg1 in
@@ -1008,8 +1038,8 @@ open class Object: Wrapped {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_has_method: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_method")
+    fileprivate static let method_has_method: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_method")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -1024,6 +1054,7 @@ open class Object: Wrapped {
     /// > Note: In C#, `method` must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func hasMethod(_ method: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1038,8 +1069,8 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_get_method_argument_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_method_argument_count")
+    fileprivate static let method_get_method_argument_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_method_argument_count")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2458036349)!
@@ -1054,6 +1085,7 @@ open class Object: Wrapped {
     /// > Note: In C#, `method` must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func getMethodArgumentCount(method: StringName) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1068,8 +1100,8 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_has_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_signal")
+    fileprivate static let method_has_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_signal")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -1081,9 +1113,10 @@ open class Object: Wrapped {
     
     /// Returns `true` if the given `signal` name exists in the object.
     /// 
-    /// > Note: In C#, `signal` must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `SignalName` class to avoid allocating a new ``StringName`` on each call.
+    /// > Note: In C#, `signal` must be in snake_case when referring to built-in Godot signals. Prefer using the names exposed in the `SignalName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func hasSignal(_ signal: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1098,8 +1131,8 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_get_signal_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_signal_list")
+    fileprivate static let method_get_signal_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_signal_list")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -1109,18 +1142,19 @@ open class Object: Wrapped {
         
     }()
     
-    /// Returns the list of existing signals as an ``GArray`` of dictionaries.
+    /// Returns the list of existing signals as an ``VariantArray`` of dictionaries.
     /// 
-    /// > Note: Due of the implementation, each ``GDictionary`` is formatted very similarly to the returned values of ``getMethodList()``.
+    /// > Note: Due of the implementation, each ``VariantDictionary`` is formatted very similarly to the returned values of ``getMethodList()``.
     /// 
-    public final func getSignalList() -> VariantCollection<GDictionary> {
+    public final func getSignalList() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Object.method_get_signal_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_signal_connection_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_signal_connection_list")
+    fileprivate static let method_get_signal_connection_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_signal_connection_list")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3147814860)!
@@ -1130,7 +1164,7 @@ open class Object: Wrapped {
         
     }()
     
-    /// Returns an ``GArray`` of connections for the given `signal` name. Each connection is represented as a ``GDictionary`` that contains three entries:
+    /// Returns an ``VariantArray`` of connections for the given `signal` name. Each connection is represented as a ``VariantDictionary`` that contains three entries:
     /// 
     /// - [code skip-lint]signal` is a reference to the ``Signal``;
     /// 
@@ -1138,7 +1172,8 @@ open class Object: Wrapped {
     /// 
     /// - `flags` is a combination of ``Object/ConnectFlags``.
     /// 
-    public final func getSignalConnectionList(signal: StringName) -> VariantCollection<GDictionary> {
+    public final func getSignalConnectionList(signal: StringName) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1150,11 +1185,11 @@ open class Object: Wrapped {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_incoming_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_incoming_connections")
+    fileprivate static let method_get_incoming_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_incoming_connections")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -1164,7 +1199,7 @@ open class Object: Wrapped {
         
     }()
     
-    /// Returns an ``GArray`` of signal connections received by this object. Each connection is represented as a ``GDictionary`` that contains three entries:
+    /// Returns an ``VariantArray`` of signal connections received by this object. Each connection is represented as a ``VariantDictionary`` that contains three entries:
     /// 
     /// - `signal` is a reference to the ``Signal``;
     /// 
@@ -1172,14 +1207,15 @@ open class Object: Wrapped {
     /// 
     /// - `flags` is a combination of ``Object/ConnectFlags``.
     /// 
-    public final func getIncomingConnections() -> VariantCollection<GDictionary> {
+    public final func getIncomingConnections() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Object.method_get_incoming_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_connect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect")
+    fileprivate static let method_connect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1518946055)!
@@ -1212,6 +1248,7 @@ open class Object: Wrapped {
     /// When calling ``emitSignal(_:)`` or ``Signal/emit()``, the signal parameters can be also passed. The examples below show the relationship between these signal parameters and bound parameters.
     /// 
     public final func connect(signal: StringName, callable: Callable, flags: UInt32 = 0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: callable.content) { pArg1 in
@@ -1232,8 +1269,8 @@ open class Object: Wrapped {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_disconnect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect")
+    fileprivate static let method_disconnect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1874754934)!
@@ -1245,6 +1282,7 @@ open class Object: Wrapped {
     
     /// Disconnects a `signal` by name from a given `callable`. If the connection does not exist, generates an error. Use ``isConnected(signal:callable:)`` to make sure that the connection exists.
     public final func disconnect(signal: StringName, callable: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: callable.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1261,8 +1299,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_is_connected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_connected")
+    fileprivate static let method_is_connected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_connected")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 768136979)!
@@ -1274,9 +1312,10 @@ open class Object: Wrapped {
     
     /// Returns `true` if a connection exists between the given `signal` name and `callable`.
     /// 
-    /// > Note: In C#, `signal` must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `SignalName` class to avoid allocating a new ``StringName`` on each call.
+    /// > Note: In C#, `signal` must be in snake_case when referring to built-in Godot signals. Prefer using the names exposed in the `SignalName` class to avoid allocating a new ``StringName`` on each call.
     /// 
     public final func isConnected(signal: StringName, callable: Callable) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: callable.content) { pArg1 in
@@ -1294,8 +1333,39 @@ open class Object: Wrapped {
         return _result
     }
     
-    fileprivate static var method_set_block_signals: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_block_signals")
+    fileprivate static let method_has_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_connections")
+        return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if any connection exists on the given `signal` name.
+    /// 
+    /// > Note: In C#, `signal` must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `SignalName` class to avoid allocating a new ``StringName`` on each call.
+    /// 
+    public final func hasConnections(signal: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: signal.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Object.method_has_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_set_block_signals: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_block_signals")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1307,6 +1377,7 @@ open class Object: Wrapped {
     
     /// If set to `true`, the object becomes unable to emit signals. As such, ``emitSignal(_:)`` and signal connections will not work, until it is set to `false`.
     public final func setBlockSignals(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1320,8 +1391,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_is_blocking_signals: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_blocking_signals")
+    fileprivate static let method_is_blocking_signals: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_blocking_signals")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1333,13 +1404,14 @@ open class Object: Wrapped {
     
     /// Returns `true` if the object is blocking its signals from being emitted. See ``setBlockSignals(enable:)``.
     public final func isBlockingSignals() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Object.method_is_blocking_signals, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_notify_property_list_changed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("notify_property_list_changed")
+    fileprivate static let method_notify_property_list_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("notify_property_list_changed")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1351,12 +1423,13 @@ open class Object: Wrapped {
     
     /// Emits the [signal property_list_changed] signal. This is mainly used to refresh the editor, so that the Inspector and editor plugins are properly updated.
     public final func notifyPropertyListChanged() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Object.method_notify_property_list_changed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_message_translation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_message_translation")
+    fileprivate static let method_set_message_translation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_message_translation")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1368,6 +1441,7 @@ open class Object: Wrapped {
     
     /// If set to `true`, allows the object to translate messages with ``tr(message:context:)`` and ``trN(message:pluralMessage:n:context:)``. Enabled by default. See also ``canTranslateMessages()``.
     public final func setMessageTranslation(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1381,8 +1455,8 @@ open class Object: Wrapped {
         
     }
     
-    fileprivate static var method_can_translate_messages: GDExtensionMethodBindPtr = {
-        let methodName = StringName("can_translate_messages")
+    fileprivate static let method_can_translate_messages: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("can_translate_messages")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1394,16 +1468,17 @@ open class Object: Wrapped {
     
     /// Returns `true` if the object is allowed to translate messages with ``tr(message:context:)`` and ``trN(message:pluralMessage:n:context:)``. See also ``setMessageTranslation(enable:)``.
     public final func canTranslateMessages() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Object.method_can_translate_messages, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_tr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tr")
+    fileprivate static let method_tr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tr")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2475554935)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1195764410)!
             }
             
         }
@@ -1419,6 +1494,7 @@ open class Object: Wrapped {
     /// > Note: This method can't be used without an ``Object`` instance, as it requires the ``canTranslateMessages()`` method. To translate strings in a static context, use ``TranslationServer/translate(message:context:)``.
     /// 
     public final func tr(message: StringName, context: StringName = StringName ("")) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: context.content) { pArg1 in
@@ -1436,11 +1512,11 @@ open class Object: Wrapped {
         return _result.description
     }
     
-    fileprivate static var method_tr_n: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tr_n")
+    fileprivate static let method_tr_n: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tr_n")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 4021311862)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 162698058)!
             }
             
         }
@@ -1460,6 +1536,7 @@ open class Object: Wrapped {
     /// > Note: This method can't be used without an ``Object`` instance, as it requires the ``canTranslateMessages()`` method. To translate strings in a static context, use ``TranslationServer/translatePlural(message:pluralMessage:n:context:)``.
     /// 
     public final func trN(message: StringName, pluralMessage: StringName, n: Int32, context: StringName = StringName ("")) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: pluralMessage.content) { pArg1 in
@@ -1483,8 +1560,54 @@ open class Object: Wrapped {
         return _result.description
     }
     
-    fileprivate static var method_is_queued_for_deletion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_queued_for_deletion")
+    fileprivate static let method_get_translation_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_translation_domain")
+        return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the name of the translation domain used by ``tr(message:context:)`` and ``trN(message:pluralMessage:n:context:)``. See also ``TranslationServer``.
+    public final func getTranslationDomain() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: StringName = StringName ()
+        gi.object_method_bind_ptrcall(Object.method_get_translation_domain, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
+    }
+    
+    fileprivate static let method_set_translation_domain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_translation_domain")
+        return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the name of the translation domain used by ``tr(message:context:)`` and ``trN(message:pluralMessage:n:context:)``. See also ``TranslationServer``.
+    public final func setTranslationDomain(_ domain: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: domain.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Object.method_set_translation_domain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_queued_for_deletion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_queued_for_deletion")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1496,13 +1619,14 @@ open class Object: Wrapped {
     
     /// Returns `true` if the ``Node/queueFree()`` method was called for the object.
     public final func isQueuedForDeletion() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Object.method_is_queued_for_deletion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_cancel_free: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cancel_free")
+    fileprivate static let method_cancel_free: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cancel_free")
         return withUnsafePointer(to: &Object.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1514,10 +1638,78 @@ open class Object: Wrapped {
     
     /// If this method is called during ``notificationPredelete``, this object will reject being freed and will remain allocated. This is mostly an internal function used for error handling to avoid the user from freeing objects when they are not intended to.
     public final func cancelFree() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Object.method_cancel_free, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
+    static let variantFromSelf: GDExtensionVariantFromTypeConstructorFunc = {
+        gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_OBJECT)!
+    }()
+    
+    static let selfFromVariant: GDExtensionTypeFromVariantConstructorFunc = {
+        gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_OBJECT)!
+    }()
+    
+    /// Wrap ``Object`` into a ``Variant``
+    @inline(__always)
+    @inlinable
+    public func toVariant() -> Variant {
+        Variant(self)                
+    }
+    
+    /// Wrap ``Object`` into a ``Variant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toVariant() -> Variant? {
+        Variant(self)                
+    }
+    
+    /// Extract ``Object`` from a ``Variant``. Throws `VariantConversionError` if it's not possible.
+    @inline(__always)
+    @inlinable
+    public static func fromVariantOrThrow(_ variant: Variant) throws(VariantConversionError) -> Self {                
+        guard let value = variant.asObject(Self.self) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    /// Wrap ``Object`` into a ``FastVariant``
+    @inline(__always)
+    @inlinable
+    public func toFastVariant() -> FastVariant {
+        FastVariant(self)                
+    }
+    
+    /// Wrap ``Object`` into a ``FastVariant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toFastVariant() -> FastVariant? {
+        FastVariant(self)                
+    }
+    
+    /// Extract ``Object`` from a ``FastVariant``. Throws `VariantConversionError` if it's not possible.
+    @inline(__always)
+    @inlinable
+    public static func fromFastVariantOrThrow(_ variant: borrowing FastVariant) throws(VariantConversionError) -> Self {                
+        guard let value = variant.to(self) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    /// Internal API
+    public func _macroRcRef() {
+        // no-op, needed for virtual dispatch when RefCounted is stored as Object
+    }
+    
+    /// Internal API
+    public func _macroRcUnref() {
+        // no-op, needed for virtual dispatch when RefCounted is stored as Object
+    }
     // Signals 
     /// Emitted when the object's script is changed.
     /// 

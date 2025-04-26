@@ -26,7 +26,7 @@ import Musl
 /// > Note: On Android, this requires the ``ProjectSettings/inputDevices/pointing/android/enablePanAndScaleGestures`` project setting to be enabled.
 /// 
 open class InputEventMagnifyGesture: InputEventGesture {
-    fileprivate static var className = StringName("InputEventMagnifyGesture")
+    private static var className = StringName("InputEventMagnifyGesture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class InputEventMagnifyGesture: InputEventGesture {
     }
     
     /* Methods */
-    fileprivate static var method_set_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_factor")
+    fileprivate static let method_set_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_factor")
         return withUnsafePointer(to: &InputEventMagnifyGesture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -57,6 +57,7 @@ open class InputEventMagnifyGesture: InputEventGesture {
     
     @inline(__always)
     fileprivate final func set_factor(_ factor: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: factor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class InputEventMagnifyGesture: InputEventGesture {
         
     }
     
-    fileprivate static var method_get_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_factor")
+    fileprivate static let method_get_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_factor")
         return withUnsafePointer(to: &InputEventMagnifyGesture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -83,6 +84,7 @@ open class InputEventMagnifyGesture: InputEventGesture {
     
     @inline(__always)
     fileprivate final func get_factor() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(InputEventMagnifyGesture.method_get_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

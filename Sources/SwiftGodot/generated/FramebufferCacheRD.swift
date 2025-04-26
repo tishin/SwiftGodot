@@ -23,11 +23,11 @@ import Musl
 /// 
 /// Framebuffer cache manager for Rendering Device based renderers. Provides a way to create a framebuffer and reuse it in subsequent calls for as long as the used textures exists. Framebuffers will automatically be cleaned up when dependent objects are freed.
 open class FramebufferCacheRD: Object {
-    fileprivate static var className = StringName("FramebufferCacheRD")
+    private static var className = StringName("FramebufferCacheRD")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_cache_multipass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_multipass")
+    fileprivate static let method_get_cache_multipass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_multipass")
         return withUnsafePointer(to: &FramebufferCacheRD.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3437881813)!
@@ -38,7 +38,7 @@ open class FramebufferCacheRD: Object {
     }()
     
     /// Creates, or obtains a cached, framebuffer. `textures` lists textures accessed. `passes` defines the subpasses and texture allocation, if left empty a single pass is created and textures are allocated depending on their usage flags. `views` defines the number of views used when rendering.
-    public static func getCacheMultipass(textures: VariantCollection<RID>, passes: ObjectCollection<RDFramebufferPass>, views: UInt32) -> RID {
+    public static func getCacheMultipass(textures: TypedArray<RID>, passes: TypedArray<RDFramebufferPass?>, views: UInt32) -> RID {
         let _result: RID = RID ()
         withUnsafePointer(to: textures.array.content) { pArg0 in
             withUnsafePointer(to: passes.array.content) { pArg1 in

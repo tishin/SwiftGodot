@@ -23,11 +23,11 @@ import Musl
 /// 
 /// A more generalized, low-level variation of the directory concept.
 open class EditorFileSystemDirectory: Object {
-    fileprivate static var className = StringName("EditorFileSystemDirectory")
+    private static var className = StringName("EditorFileSystemDirectory")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_subdir_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subdir_count")
+    fileprivate static let method_get_subdir_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subdir_count")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -39,13 +39,14 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the number of subdirectories in this directory.
     public final func getSubdirCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_subdir_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_subdir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subdir")
+    fileprivate static let method_get_subdir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subdir")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2330964164)!
@@ -57,6 +58,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the subdirectory at index `idx`.
     public final func getSubdir(idx: Int32) -> EditorFileSystemDirectory? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -68,11 +70,11 @@ open class EditorFileSystemDirectory: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_file_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_count")
+    fileprivate static let method_get_file_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_count")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -84,13 +86,14 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the number of files in this directory.
     public final func getFileCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file")
+    fileprivate static let method_get_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -102,6 +105,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the name of the file at index `idx`.
     public final func getFile(idx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -116,8 +120,8 @@ open class EditorFileSystemDirectory: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_file_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_path")
+    fileprivate static let method_get_file_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_path")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -129,6 +133,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the path to the file at index `idx`.
     public final func getFilePath(idx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -143,8 +148,8 @@ open class EditorFileSystemDirectory: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_file_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_type")
+    fileprivate static let method_get_file_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_type")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -156,6 +161,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the resource type of the file at index `idx`. This returns a string such as `"Resource"` or `"GDScript"`, _not_ a file extension such as `".gd"`.
     public final func getFileType(idx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -170,8 +176,8 @@ open class EditorFileSystemDirectory: Object {
         return _result
     }
     
-    fileprivate static var method_get_file_script_class_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_script_class_name")
+    fileprivate static let method_get_file_script_class_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_script_class_name")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -183,6 +189,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the name of the script class defined in the file at index `idx`. If the file doesn't define a script class using the `class_name` syntax, this will return an empty string.
     public final func getFileScriptClassName(idx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -197,8 +204,8 @@ open class EditorFileSystemDirectory: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_file_script_class_extends: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_script_class_extends")
+    fileprivate static let method_get_file_script_class_extends: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_script_class_extends")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -210,6 +217,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the base class of the script class defined in the file at index `idx`. If the file doesn't define a script class using the `class_name` syntax, this will return an empty string.
     public final func getFileScriptClassExtends(idx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -224,8 +232,8 @@ open class EditorFileSystemDirectory: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_file_import_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_import_is_valid")
+    fileprivate static let method_get_file_import_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_import_is_valid")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -237,6 +245,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns `true` if the file at index `idx` imported properly.
     public final func getFileImportIsValid(idx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -251,8 +260,8 @@ open class EditorFileSystemDirectory: Object {
         return _result
     }
     
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -264,13 +273,14 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the name of this directory.
     public final func getName() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path")
+    fileprivate static let method_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -282,13 +292,14 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the path to this directory.
     public final func getPath() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parent")
+    fileprivate static let method_get_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parent")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 842323275)!
@@ -300,13 +311,14 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the parent directory for this directory or `null` if called on a directory at `res://` or `user://`.
     public final func getParent() -> EditorFileSystemDirectory? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_parent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_find_file_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_file_index")
+    fileprivate static let method_find_file_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_file_index")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -318,6 +330,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the index of the file with name `name` or `-1` if not found.
     public final func findFileIndex(name: String) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -333,8 +346,8 @@ open class EditorFileSystemDirectory: Object {
         return _result
     }
     
-    fileprivate static var method_find_dir_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_dir_index")
+    fileprivate static let method_find_dir_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_dir_index")
         return withUnsafePointer(to: &EditorFileSystemDirectory.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -346,6 +359,7 @@ open class EditorFileSystemDirectory: Object {
     
     /// Returns the index of the directory with name `name` or `-1` if not found.
     public final func findDirIndex(name: String) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in

@@ -26,7 +26,7 @@ import Musl
 /// > Note: ``Tween/tweenInterval(time:)`` is the only correct way to create ``IntervalTweener``. Any ``IntervalTweener`` created manually will not function correctly.
 /// 
 open class IntervalTweener: Tweener {
-    fileprivate static var className = StringName("IntervalTweener")
+    private static var className = StringName("IntervalTweener")
     override open class var godotClassName: StringName { className }
 }
 

@@ -26,7 +26,7 @@ import Musl
 /// Importantly, you can inherit from ``Material`` to create your own custom material type in script or in GDExtension.
 /// 
 open class Material: Resource {
-    fileprivate static var className = StringName("Material")
+    private static var className = StringName("Material")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Maximum value for the ``renderPriority`` parameter.
@@ -71,32 +71,88 @@ open class Material: Resource {
     }
     
     /* Methods */
+    fileprivate static let method__get_shader_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_shader_rid")
+        return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
+            }
+            
+        }
+        
+    }()
+    
     /// Only exposed for the purpose of overriding. You cannot call this function directly. Used internally by various editor tools. Used to access the RID of the ``Material``'s ``Shader``.
     @_documentation(visibility: public)
     open func _getShaderRid() -> RID {
-        return RID ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: RID = RID ()
+        gi.object_method_bind_ptrcall(Material.method__get_shader_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__get_shader_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_shader_mode")
+        return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3392948163)!
+            }
+            
+        }
+        
+    }()
     
     /// Only exposed for the purpose of overriding. You cannot call this function directly. Used internally by various editor tools.
     @_documentation(visibility: public)
     open func _getShaderMode() -> Shader.Mode {
-        return Shader.Mode(rawValue: 0)!
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(Material.method__get_shader_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return Shader.Mode (rawValue: _result)!
     }
+    
+    fileprivate static let method__can_do_next_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_can_do_next_pass")
+        return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Only exposed for the purpose of overriding. You cannot call this function directly. Used internally to determine if ``nextPass`` should be shown in the editor or not.
     @_documentation(visibility: public)
     open func _canDoNextPass() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(Material.method__can_do_next_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__can_use_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_can_use_render_priority")
+        return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Only exposed for the purpose of overriding. You cannot call this function directly. Used internally to determine if ``renderPriority`` should be shown in the editor or not.
     @_documentation(visibility: public)
     open func _canUseRenderPriority() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(Material.method__can_use_render_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
-    fileprivate static var method_set_next_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_next_pass")
+    fileprivate static let method_set_next_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_next_pass")
         return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -108,6 +164,7 @@ open class Material: Resource {
     
     @inline(__always)
     fileprivate final func set_next_pass(_ nextPass: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: nextPass?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -121,8 +178,8 @@ open class Material: Resource {
         
     }
     
-    fileprivate static var method_get_next_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_next_pass")
+    fileprivate static let method_get_next_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next_pass")
         return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -134,13 +191,14 @@ open class Material: Resource {
     
     @inline(__always)
     fileprivate final func get_next_pass() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Material.method_get_next_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_render_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_render_priority")
+    fileprivate static let method_set_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_render_priority")
         return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -152,6 +210,7 @@ open class Material: Resource {
     
     @inline(__always)
     fileprivate final func set_render_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -165,8 +224,8 @@ open class Material: Resource {
         
     }
     
-    fileprivate static var method_get_render_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_priority")
+    fileprivate static let method_get_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_priority")
         return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -178,13 +237,14 @@ open class Material: Resource {
     
     @inline(__always)
     fileprivate final func get_render_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Material.method_get_render_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_inspect_native_shader_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("inspect_native_shader_code")
+    fileprivate static let method_inspect_native_shader_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("inspect_native_shader_code")
         return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -194,14 +254,15 @@ open class Material: Resource {
         
     }()
     
-    /// Only available when running in the editor. Opens a popup that visualizes the generated shader code, including all variants and internal shader code.
+    /// Only available when running in the editor. Opens a popup that visualizes the generated shader code, including all variants and internal shader code. See also ``Shader/inspectNativeShaderCode()``.
     public final func inspectNativeShaderCode() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Material.method_inspect_native_shader_code, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_create_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_placeholder")
+    fileprivate static let method_create_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_placeholder")
         return withUnsafePointer(to: &Material.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 121922552)!
@@ -213,12 +274,13 @@ open class Material: Resource {
     
     /// Creates a placeholder version of this resource (``PlaceholderMaterial``).
     public final func createPlaceholder() -> Resource? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Material.method_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_can_do_next_pass":
@@ -240,28 +302,32 @@ open class Material: Resource {
 // Support methods for proxies
 func _Material_proxy_can_do_next_pass (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Material>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Material else { return }
     let ret = swiftObject._canDoNextPass ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _Material_proxy_can_use_render_priority (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Material>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Material else { return }
     let ret = swiftObject._canUseRenderPriority ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _Material_proxy_get_shader_mode (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Material>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Material else { return }
     let ret = swiftObject._getShaderMode ()
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
 func _Material_proxy_get_shader_rid (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Material>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Material else { return }
     let ret = swiftObject._getShaderRid ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // RID
     ret.content = RID.zero

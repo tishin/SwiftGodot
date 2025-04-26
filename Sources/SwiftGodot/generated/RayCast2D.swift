@@ -30,7 +30,7 @@ import Musl
 /// To sweep over a region of 2D space, you can approximate the region with multiple ``RayCast2D``s or use ``ShapeCast2D``.
 /// 
 open class RayCast2D: Node2D {
-    fileprivate static var className = StringName("RayCast2D")
+    private static var className = StringName("RayCast2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -120,8 +120,8 @@ open class RayCast2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enabled")
+    fileprivate static let method_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enabled")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -133,6 +133,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -146,8 +147,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_is_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_enabled")
+    fileprivate static let method_is_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_enabled")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -159,13 +160,14 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RayCast2D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_target_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_position")
+    fileprivate static let method_set_target_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_position")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -177,6 +179,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_target_position(_ localPoint: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: localPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -190,8 +193,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_get_target_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_position")
+    fileprivate static let method_get_target_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_position")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -203,13 +206,14 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_target_position() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(RayCast2D.method_get_target_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_colliding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_colliding")
+    fileprivate static let method_is_colliding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_colliding")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -221,13 +225,14 @@ open class RayCast2D: Node2D {
     
     /// Returns whether any object is intersecting with the ray's vector (considering the vector length).
     public final func isColliding() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RayCast2D.method_is_colliding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_force_raycast_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_raycast_update")
+    fileprivate static let method_force_raycast_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_raycast_update")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -242,12 +247,13 @@ open class RayCast2D: Node2D {
     /// > Note: ``enabled`` does not need to be `true` for this to work.
     /// 
     public final func forceRaycastUpdate() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RayCast2D.method_force_raycast_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_collider: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider")
+    fileprivate static let method_get_collider: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1981248198)!
@@ -259,13 +265,14 @@ open class RayCast2D: Node2D {
     
     /// Returns the first object that the ray intersects, or `null` if no object is intersecting the ray (i.e. ``isColliding()`` returns `false`).
     public final func getCollider() -> Object? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(RayCast2D.method_get_collider, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_collider_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider_rid")
+    fileprivate static let method_get_collider_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider_rid")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -277,13 +284,14 @@ open class RayCast2D: Node2D {
     
     /// Returns the ``RID`` of the first object that the ray intersects, or an empty ``RID`` if no object is intersecting the ray (i.e. ``isColliding()`` returns `false`).
     public final func getColliderRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(RayCast2D.method_get_collider_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_collider_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider_shape")
+    fileprivate static let method_get_collider_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider_shape")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -298,13 +306,14 @@ open class RayCast2D: Node2D {
     /// To get the intersected shape node, for a ``CollisionObject2D`` target, use:
     /// 
     public final func getColliderShape() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RayCast2D.method_get_collider_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_point")
+    fileprivate static let method_get_collision_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_point")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -319,13 +328,14 @@ open class RayCast2D: Node2D {
     /// > Note: Check that ``isColliding()`` returns `true` before calling this method to ensure the returned point is valid and up-to-date.
     /// 
     public final func getCollisionPoint() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(RayCast2D.method_get_collision_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_normal")
+    fileprivate static let method_get_collision_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_normal")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -340,13 +350,14 @@ open class RayCast2D: Node2D {
     /// > Note: Check that ``isColliding()`` returns `true` before calling this method to ensure the returned normal is valid and up-to-date.
     /// 
     public final func getCollisionNormal() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(RayCast2D.method_get_collision_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_exception_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_exception_rid")
+    fileprivate static let method_add_exception_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_exception_rid")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -358,6 +369,7 @@ open class RayCast2D: Node2D {
     
     /// Adds a collision exception so the ray does not report collisions with the specified ``RID``.
     public final func addExceptionRid(_ rid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -371,8 +383,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_add_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_exception")
+    fileprivate static let method_add_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_exception")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3090941106)!
@@ -384,6 +396,7 @@ open class RayCast2D: Node2D {
     
     /// Adds a collision exception so the ray does not report collisions with the specified ``CollisionObject2D`` node.
     public final func addException(node: CollisionObject2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -397,8 +410,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_remove_exception_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_exception_rid")
+    fileprivate static let method_remove_exception_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_exception_rid")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -410,6 +423,7 @@ open class RayCast2D: Node2D {
     
     /// Removes a collision exception so the ray does report collisions with the specified ``RID``.
     public final func removeExceptionRid(_ rid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -423,8 +437,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_remove_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_exception")
+    fileprivate static let method_remove_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_exception")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3090941106)!
@@ -436,6 +450,7 @@ open class RayCast2D: Node2D {
     
     /// Removes a collision exception so the ray does report collisions with the specified ``CollisionObject2D`` node.
     public final func removeException(node: CollisionObject2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -449,8 +464,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_clear_exceptions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_exceptions")
+    fileprivate static let method_clear_exceptions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_exceptions")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -462,12 +477,13 @@ open class RayCast2D: Node2D {
     
     /// Removes all collision exceptions for this ray.
     public final func clearExceptions() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RayCast2D.method_clear_exceptions, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -479,6 +495,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -492,8 +509,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -505,13 +522,14 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RayCast2D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask_value")
+    fileprivate static let method_set_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask_value")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -523,6 +541,7 @@ open class RayCast2D: Node2D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionMask``, given a `layerNumber` between 1 and 32.
     public final func setCollisionMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -539,8 +558,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask_value")
+    fileprivate static let method_get_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask_value")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -552,6 +571,7 @@ open class RayCast2D: Node2D {
     
     /// Returns whether or not the specified layer of the ``collisionMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -566,8 +586,8 @@ open class RayCast2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_exclude_parent_body: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exclude_parent_body")
+    fileprivate static let method_set_exclude_parent_body: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exclude_parent_body")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -579,6 +599,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_exclude_parent_body(_ mask: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -592,8 +613,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_get_exclude_parent_body: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_exclude_parent_body")
+    fileprivate static let method_get_exclude_parent_body: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_exclude_parent_body")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -605,13 +626,14 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_exclude_parent_body() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RayCast2D.method_get_exclude_parent_body, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collide_with_areas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collide_with_areas")
+    fileprivate static let method_set_collide_with_areas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collide_with_areas")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -623,6 +645,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_collide_with_areas(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -636,8 +659,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_is_collide_with_areas_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_collide_with_areas_enabled")
+    fileprivate static let method_is_collide_with_areas_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_collide_with_areas_enabled")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -649,13 +672,14 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_collide_with_areas_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RayCast2D.method_is_collide_with_areas_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collide_with_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collide_with_bodies")
+    fileprivate static let method_set_collide_with_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collide_with_bodies")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -667,6 +691,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_collide_with_bodies(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -680,8 +705,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_is_collide_with_bodies_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_collide_with_bodies_enabled")
+    fileprivate static let method_is_collide_with_bodies_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_collide_with_bodies_enabled")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -693,13 +718,14 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_collide_with_bodies_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RayCast2D.method_is_collide_with_bodies_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hit_from_inside: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hit_from_inside")
+    fileprivate static let method_set_hit_from_inside: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hit_from_inside")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -711,6 +737,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_hit_from_inside(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -724,8 +751,8 @@ open class RayCast2D: Node2D {
         
     }
     
-    fileprivate static var method_is_hit_from_inside_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hit_from_inside_enabled")
+    fileprivate static let method_is_hit_from_inside_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hit_from_inside_enabled")
         return withUnsafePointer(to: &RayCast2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -737,6 +764,7 @@ open class RayCast2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_hit_from_inside_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RayCast2D.method_is_hit_from_inside_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

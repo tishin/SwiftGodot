@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translates to `sdf_to_screen_uv(sdf_pos)` in the shader language.
 open class VisualShaderNodeSDFToScreenUV: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeSDFToScreenUV")
+    private static var className = StringName("VisualShaderNodeSDFToScreenUV")
     override open class var godotClassName: StringName { className }
 }
 

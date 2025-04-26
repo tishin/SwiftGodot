@@ -28,7 +28,7 @@ import Musl
 /// See also ``ResourceImporterBMFont`` and ``ResourceImporterImageFont``.
 /// 
 open class ResourceImporterDynamicFont: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterDynamicFont")
+    private static var className = StringName("ResourceImporterDynamicFont")
     override open class var godotClassName: StringName { className }
 }
 

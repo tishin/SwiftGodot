@@ -26,7 +26,7 @@ import Musl
 /// **Example CSV file:**
 /// 
 open class ResourceImporterCSVTranslation: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterCSVTranslation")
+    private static var className = StringName("ResourceImporterCSVTranslation")
     override open class var godotClassName: StringName { className }
 }
 

@@ -40,7 +40,7 @@ import Musl
 /// - ``indexPressed``
 /// - ``menuChanged``
 open class PopupMenu: Popup {
-    fileprivate static var className = StringName("PopupMenu")
+    private static var className = StringName("PopupMenu")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -118,6 +118,9 @@ open class PopupMenu: Popup {
     }
     
     /// If `true`, ``MenuBar`` will use native menu when supported.
+    /// 
+    /// > Note: If ``PopupMenu`` is linked to ``StatusIndicator``, ``MenuBar``, or another ``PopupMenu`` item it can use native menu regardless of this property, use ``isNativeMenu()`` to check it.
+    /// 
     final public var preferNativeMenu: Bool {
         get {
             return is_prefer_native_menu ()
@@ -142,8 +145,8 @@ open class PopupMenu: Popup {
     }
     
     /* Methods */
-    fileprivate static var method_activate_item_by_event: GDExtensionMethodBindPtr = {
-        let methodName = StringName("activate_item_by_event")
+    fileprivate static let method_activate_item_by_event: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("activate_item_by_event")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3716412023)!
@@ -160,6 +163,7 @@ open class PopupMenu: Popup {
     /// > Note: Certain ``Control``s, such as ``MenuButton``, will call this method automatically.
     /// 
     public final func activateItemByEvent(_ event: InputEvent?, forGlobalOnly: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: forGlobalOnly) { pArg1 in
@@ -177,8 +181,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_set_prefer_native_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_prefer_native_menu")
+    fileprivate static let method_set_prefer_native_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_prefer_native_menu")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -190,6 +194,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_prefer_native_menu(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -203,8 +208,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_is_prefer_native_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_prefer_native_menu")
+    fileprivate static let method_is_prefer_native_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_prefer_native_menu")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -216,13 +221,33 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func is_prefer_native_menu() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PopupMenu.method_is_prefer_native_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_item")
+    fileprivate static let method_is_native_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_native_menu")
+        return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the system native menu is supported and currently used by this ``PopupMenu``.
+    public final func isNativeMenu() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(PopupMenu.method_is_native_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_add_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3674230041)!
@@ -239,6 +264,7 @@ open class PopupMenu: Popup {
     /// > Note: The provided `id` is used only in [signal id_pressed] and [signal id_focused] signals. It's not related to the `index` arguments in e.g. ``setItemChecked(index:checked:)``.
     /// 
     public final func addItem(label: String, id: Int32 = -1, accel: Key = .none) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
@@ -259,8 +285,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_icon_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_item")
+    fileprivate static let method_add_icon_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1086190128)!
@@ -275,6 +301,7 @@ open class PopupMenu: Popup {
     /// An `id` can optionally be provided, as well as an accelerator (`accel`). If no `id` is provided, one will be created from the index. If no `accel` is provided, then the default value of 0 (corresponding to ``@GlobalScope.KEY_NONE``) will be assigned to the item (which means it won't have any accelerator). See ``getItemAccelerator(index:)`` for more info on accelerators.
     /// 
     public final func addIconItem(texture: Texture2D?, label: String, id: Int32 = -1, accel: Key = .none) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             let label = GString(label)
             withUnsafePointer(to: label.content) { pArg1 in
@@ -298,8 +325,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_check_item")
+    fileprivate static let method_add_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_check_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3674230041)!
@@ -316,6 +343,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See ``setItemChecked(index:checked:)`` for more info on how to control it.
     /// 
     public final func addCheckItem(label: String, id: Int32 = -1, accel: Key = .none) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
@@ -336,8 +364,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_icon_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_check_item")
+    fileprivate static let method_add_icon_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_check_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1086190128)!
@@ -354,6 +382,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See ``setItemChecked(index:checked:)`` for more info on how to control it.
     /// 
     public final func addIconCheckItem(texture: Texture2D?, label: String, id: Int32 = -1, accel: Key = .none) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             let label = GString(label)
             withUnsafePointer(to: label.content) { pArg1 in
@@ -377,8 +406,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_radio_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_radio_check_item")
+    fileprivate static let method_add_radio_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_radio_check_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3674230041)!
@@ -395,6 +424,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See ``setItemChecked(index:checked:)`` for more info on how to control it.
     /// 
     public final func addRadioCheckItem(label: String, id: Int32 = -1, accel: Key = .none) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
@@ -415,8 +445,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_icon_radio_check_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_radio_check_item")
+    fileprivate static let method_add_icon_radio_check_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_radio_check_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1086190128)!
@@ -428,6 +458,7 @@ open class PopupMenu: Popup {
     
     /// Same as ``addIconCheckItem(texture:label:id:accel:)``, but uses a radio check button.
     public final func addIconRadioCheckItem(texture: Texture2D?, label: String, id: Int32 = -1, accel: Key = .none) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             let label = GString(label)
             withUnsafePointer(to: label.content) { pArg1 in
@@ -451,8 +482,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_multistate_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_multistate_item")
+    fileprivate static let method_add_multistate_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_multistate_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 150780458)!
@@ -470,9 +501,8 @@ open class PopupMenu: Popup {
     /// 
     /// > Note: Multistate items don't update their state automatically and must be done manually. See ``toggleItemMultistate(index:)``, ``setItemMultistate(index:state:)`` and ``getItemMultistate(index:)`` for more info on how to control it.
     /// 
-    /// Example usage:
-    /// 
     public final func addMultistateItem(label: String, maxStates: Int32, defaultState: Int32 = 0, id: Int32 = -1, accel: Key = .none) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: maxStates) { pArg1 in
@@ -499,8 +529,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_shortcut")
+    fileprivate static let method_add_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3451850107)!
@@ -517,6 +547,7 @@ open class PopupMenu: Popup {
     /// If `allowEcho` is `true`, the shortcut can be activated with echo events.
     /// 
     public final func addShortcut(_ shortcut: Shortcut?, id: Int32 = -1, global: Bool = false, allowEcho: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shortcut?.handle) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: global) { pArg2 in
@@ -539,8 +570,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_icon_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_shortcut")
+    fileprivate static let method_add_icon_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2997871092)!
@@ -557,6 +588,7 @@ open class PopupMenu: Popup {
     /// If `allowEcho` is `true`, the shortcut can be activated with echo events.
     /// 
     public final func addIconShortcut(texture: Texture2D?, shortcut: Shortcut?, id: Int32 = -1, global: Bool = false, allowEcho: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: shortcut?.handle) { pArg1 in
                 withUnsafePointer(to: id) { pArg2 in
@@ -582,8 +614,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_check_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_check_shortcut")
+    fileprivate static let method_add_check_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_check_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1642193386)!
@@ -600,6 +632,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See ``setItemChecked(index:checked:)`` for more info on how to control it.
     /// 
     public final func addCheckShortcut(_ shortcut: Shortcut?, id: Int32 = -1, global: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shortcut?.handle) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: global) { pArg2 in
@@ -619,8 +652,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_icon_check_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_check_shortcut")
+    fileprivate static let method_add_icon_check_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_check_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3856247530)!
@@ -637,6 +670,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See ``setItemChecked(index:checked:)`` for more info on how to control it.
     /// 
     public final func addIconCheckShortcut(texture: Texture2D?, shortcut: Shortcut?, id: Int32 = -1, global: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: shortcut?.handle) { pArg1 in
                 withUnsafePointer(to: id) { pArg2 in
@@ -659,8 +693,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_radio_check_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_radio_check_shortcut")
+    fileprivate static let method_add_radio_check_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_radio_check_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1642193386)!
@@ -677,6 +711,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See ``setItemChecked(index:checked:)`` for more info on how to control it.
     /// 
     public final func addRadioCheckShortcut(_ shortcut: Shortcut?, id: Int32 = -1, global: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shortcut?.handle) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: global) { pArg2 in
@@ -696,8 +731,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_icon_radio_check_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_radio_check_shortcut")
+    fileprivate static let method_add_icon_radio_check_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_radio_check_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3856247530)!
@@ -709,6 +744,7 @@ open class PopupMenu: Popup {
     
     /// Same as ``addIconCheckShortcut(texture:shortcut:id:global:)``, but uses a radio check button.
     public final func addIconRadioCheckShortcut(texture: Texture2D?, shortcut: Shortcut?, id: Int32 = -1, global: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: shortcut?.handle) { pArg1 in
                 withUnsafePointer(to: id) { pArg2 in
@@ -731,8 +767,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_submenu_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_submenu_item")
+    fileprivate static let method_add_submenu_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_submenu_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2979222410)!
@@ -747,6 +783,7 @@ open class PopupMenu: Popup {
     /// An `id` can optionally be provided. If no `id` is provided, one will be created from the index.
     /// 
     public final func addSubmenuItem(label: String, submenu: String, id: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             let submenu = GString(submenu)
@@ -768,8 +805,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_submenu_node_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_submenu_node_item")
+    fileprivate static let method_add_submenu_node_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_submenu_node_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1325455216)!
@@ -786,6 +823,7 @@ open class PopupMenu: Popup {
     /// An `id` can optionally be provided. If no `id` is provided, one will be created from the index.
     /// 
     public final func addSubmenuNodeItem(label: String, submenu: PopupMenu?, id: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: submenu?.handle) { pArg1 in
@@ -806,8 +844,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_text")
+    fileprivate static let method_set_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_text")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -819,6 +857,7 @@ open class PopupMenu: Popup {
     
     /// Sets the text of the item at the given `index`.
     public final func setItemText(index: Int32, text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             let text = GString(text)
             withUnsafePointer(to: text.content) { pArg1 in
@@ -836,8 +875,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_text_direction")
+    fileprivate static let method_set_item_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_text_direction")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1707680378)!
@@ -849,6 +888,7 @@ open class PopupMenu: Popup {
     
     /// Sets item's text base writing direction.
     public final func setItemTextDirection(index: Int32, direction: Control.TextDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -865,8 +905,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_language")
+    fileprivate static let method_set_item_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_language")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -878,6 +918,7 @@ open class PopupMenu: Popup {
     
     /// Sets language code of item's text used for line-breaking and text shaping algorithms, if left empty current locale is used instead.
     public final func setItemLanguage(index: Int32, language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             let language = GString(language)
             withUnsafePointer(to: language.content) { pArg1 in
@@ -895,8 +936,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon")
+    fileprivate static let method_set_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -908,6 +949,7 @@ open class PopupMenu: Popup {
     
     /// Replaces the ``Texture2D`` icon of the item at the given `index`.
     public final func setItemIcon(index: Int32, icon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -924,8 +966,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_icon_max_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon_max_width")
+    fileprivate static let method_set_item_icon_max_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon_max_width")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -937,6 +979,7 @@ open class PopupMenu: Popup {
     
     /// Sets the maximum allowed width of the icon for the item at the given `index`. This limit is applied on top of the default size of the icon and on top of [theme_item icon_max_width]. The height is adjusted according to the icon's ratio.
     public final func setItemIconMaxWidth(index: Int32, width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -953,8 +996,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_icon_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon_modulate")
+    fileprivate static let method_set_item_icon_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon_modulate")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -966,6 +1009,7 @@ open class PopupMenu: Popup {
     
     /// Sets a modulating ``Color`` of the item's icon at the given `index`.
     public final func setItemIconModulate(index: Int32, modulate: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: modulate) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -982,8 +1026,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_checked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_checked")
+    fileprivate static let method_set_item_checked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_checked")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -995,6 +1039,7 @@ open class PopupMenu: Popup {
     
     /// Sets the checkstate status of the item at the given `index`.
     public final func setItemChecked(index: Int32, checked: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: checked) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1011,8 +1056,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_id")
+    fileprivate static let method_set_item_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_id")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -1027,6 +1072,7 @@ open class PopupMenu: Popup {
     /// The `id` is used in [signal id_pressed] and [signal id_focused] signals.
     /// 
     public final func setItemId(index: Int32, id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1043,8 +1089,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_accelerator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_accelerator")
+    fileprivate static let method_set_item_accelerator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_accelerator")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2992817551)!
@@ -1056,6 +1102,7 @@ open class PopupMenu: Popup {
     
     /// Sets the accelerator of the item at the given `index`. An accelerator is a keyboard shortcut that can be pressed to trigger the menu button even if it's not currently open. `accel` is generally a combination of ``KeyModifierMask``s and ``Key``s using bitwise OR such as `KEY_MASK_CTRL | KEY_A` ([kbd]Ctrl + A[/kbd]).
     public final func setItemAccelerator(index: Int32, accel: Key) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: accel.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1072,8 +1119,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_metadata")
+    fileprivate static let method_set_item_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_metadata")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2152698145)!
@@ -1085,6 +1132,7 @@ open class PopupMenu: Popup {
     
     /// Sets the metadata of an item, which may be of any type. You can later get it with ``getItemMetadata(index:)``, which provides a simple way of assigning context data to items.
     public final func setItemMetadata(index: Int32, metadata: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1101,8 +1149,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_disabled")
+    fileprivate static let method_set_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_disabled")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1114,6 +1162,7 @@ open class PopupMenu: Popup {
     
     /// Enables/disables the item at the given `index`. When it is disabled, it can't be selected and its action can't be invoked.
     public final func setItemDisabled(index: Int32, disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1130,8 +1179,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_submenu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_submenu")
+    fileprivate static let method_set_item_submenu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_submenu")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -1143,6 +1192,7 @@ open class PopupMenu: Popup {
     
     /// Sets the submenu of the item at the given `index`. The submenu is the name of a child ``PopupMenu`` node that would be shown when the item is clicked.
     public final func setItemSubmenu(index: Int32, submenu: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             let submenu = GString(submenu)
             withUnsafePointer(to: submenu.content) { pArg1 in
@@ -1160,8 +1210,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_submenu_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_submenu_node")
+    fileprivate static let method_set_item_submenu_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_submenu_node")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068370740)!
@@ -1173,6 +1223,7 @@ open class PopupMenu: Popup {
     
     /// Sets the submenu of the item at the given `index`. The submenu is a ``PopupMenu`` node that would be shown when the item is clicked. It must either be a child of this ``PopupMenu`` or has no parent (in which case it will be automatically added as a child). If the `submenu` popup has another parent, this method will fail.
     public final func setItemSubmenuNode(index: Int32, submenu: PopupMenu?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: submenu?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1189,8 +1240,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_as_separator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_as_separator")
+    fileprivate static let method_set_item_as_separator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_as_separator")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1202,6 +1253,7 @@ open class PopupMenu: Popup {
     
     /// Mark the item at the given `index` as a separator, which means that it would be displayed as a line. If `false`, sets the type of the item to plain text.
     public final func setItemAsSeparator(index: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1218,8 +1270,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_as_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_as_checkable")
+    fileprivate static let method_set_item_as_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_as_checkable")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1234,6 +1286,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually.
     /// 
     public final func setItemAsCheckable(index: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1250,8 +1303,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_as_radio_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_as_radio_checkable")
+    fileprivate static let method_set_item_as_radio_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_as_radio_checkable")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1263,6 +1316,7 @@ open class PopupMenu: Popup {
     
     /// Sets the type of the item at the given `index` to radio button. If `false`, sets the type of the item to plain text.
     public final func setItemAsRadioCheckable(index: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1279,8 +1333,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_tooltip")
+    fileprivate static let method_set_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_tooltip")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -1292,6 +1346,7 @@ open class PopupMenu: Popup {
     
     /// Sets the ``String`` tooltip of the item at the given `index`.
     public final func setItemTooltip(index: Int32, tooltip: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             let tooltip = GString(tooltip)
             withUnsafePointer(to: tooltip.content) { pArg1 in
@@ -1309,8 +1364,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_shortcut")
+    fileprivate static let method_set_item_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 825127832)!
@@ -1322,6 +1377,7 @@ open class PopupMenu: Popup {
     
     /// Sets a ``Shortcut`` for the item at the given `index`.
     public final func setItemShortcut(index: Int32, shortcut: Shortcut?, global: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: shortcut?.handle) { pArg1 in
                 withUnsafePointer(to: global) { pArg2 in
@@ -1341,8 +1397,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_indent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_indent")
+    fileprivate static let method_set_item_indent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_indent")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -1354,6 +1410,7 @@ open class PopupMenu: Popup {
     
     /// Sets the horizontal offset of the item at the given `index`.
     public final func setItemIndent(index: Int32, indent: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: indent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1370,8 +1427,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_multistate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_multistate")
+    fileprivate static let method_set_item_multistate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_multistate")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -1383,6 +1440,7 @@ open class PopupMenu: Popup {
     
     /// Sets the state of a multistate item. See ``addMultistateItem(label:maxStates:defaultState:id:accel:)`` for details.
     public final func setItemMultistate(index: Int32, state: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: state) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1399,8 +1457,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_multistate_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_multistate_max")
+    fileprivate static let method_set_item_multistate_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_multistate_max")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -1412,6 +1470,7 @@ open class PopupMenu: Popup {
     
     /// Sets the max states of a multistate item. See ``addMultistateItem(label:maxStates:defaultState:id:accel:)`` for details.
     public final func setItemMultistateMax(index: Int32, maxStates: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: maxStates) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1428,8 +1487,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_item_shortcut_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_shortcut_disabled")
+    fileprivate static let method_set_item_shortcut_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_shortcut_disabled")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1441,6 +1500,7 @@ open class PopupMenu: Popup {
     
     /// Disables the ``Shortcut`` of the item at the given `index`.
     public final func setItemShortcutDisabled(index: Int32, disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1457,8 +1517,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_toggle_item_checked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("toggle_item_checked")
+    fileprivate static let method_toggle_item_checked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("toggle_item_checked")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1470,6 +1530,7 @@ open class PopupMenu: Popup {
     
     /// Toggles the check state of the item at the given `index`.
     public final func toggleItemChecked(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1483,8 +1544,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_toggle_item_multistate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("toggle_item_multistate")
+    fileprivate static let method_toggle_item_multistate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("toggle_item_multistate")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1496,6 +1557,7 @@ open class PopupMenu: Popup {
     
     /// Cycle to the next state of a multistate item. See ``addMultistateItem(label:maxStates:defaultState:id:accel:)`` for details.
     public final func toggleItemMultistate(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1509,8 +1571,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_get_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_text")
+    fileprivate static let method_get_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_text")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -1522,6 +1584,7 @@ open class PopupMenu: Popup {
     
     /// Returns the text of the item at the given `index`.
     public final func getItemText(index: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1536,8 +1599,8 @@ open class PopupMenu: Popup {
         return _result.description
     }
     
-    fileprivate static var method_get_item_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_text_direction")
+    fileprivate static let method_get_item_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_text_direction")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4235602388)!
@@ -1549,6 +1612,7 @@ open class PopupMenu: Popup {
     
     /// Returns item's text base writing direction.
     public final func getItemTextDirection(index: Int32) -> Control.TextDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1563,8 +1627,8 @@ open class PopupMenu: Popup {
         return Control.TextDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_get_item_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_language")
+    fileprivate static let method_get_item_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_language")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -1576,6 +1640,7 @@ open class PopupMenu: Popup {
     
     /// Returns item's text language code.
     public final func getItemLanguage(index: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1590,8 +1655,8 @@ open class PopupMenu: Popup {
         return _result.description
     }
     
-    fileprivate static var method_get_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_icon")
+    fileprivate static let method_get_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_icon")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -1603,6 +1668,7 @@ open class PopupMenu: Popup {
     
     /// Returns the icon of the item at the given `index`.
     public final func getItemIcon(index: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1614,11 +1680,11 @@ open class PopupMenu: Popup {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_item_icon_max_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_icon_max_width")
+    fileprivate static let method_get_item_icon_max_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_icon_max_width")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1630,6 +1696,7 @@ open class PopupMenu: Popup {
     
     /// Returns the maximum allowed width of the icon for the item at the given `index`.
     public final func getItemIconMaxWidth(index: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1644,8 +1711,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_icon_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_icon_modulate")
+    fileprivate static let method_get_item_icon_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_icon_modulate")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -1657,6 +1724,7 @@ open class PopupMenu: Popup {
     
     /// Returns a ``Color`` modulating the item's icon at the given `index`.
     public final func getItemIconModulate(index: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1671,8 +1739,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_is_item_checked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_checked")
+    fileprivate static let method_is_item_checked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_checked")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1684,6 +1752,7 @@ open class PopupMenu: Popup {
     
     /// Returns `true` if the item at the given `index` is checked.
     public final func isItemChecked(index: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1698,8 +1767,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_id")
+    fileprivate static let method_get_item_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_id")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1711,6 +1780,7 @@ open class PopupMenu: Popup {
     
     /// Returns the ID of the item at the given `index`. `id` can be manually assigned, while index can not.
     public final func getItemId(index: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1725,8 +1795,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_index")
+    fileprivate static let method_get_item_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_index")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1738,6 +1808,7 @@ open class PopupMenu: Popup {
     
     /// Returns the index of the item containing the specified `id`. Index is automatically assigned to each item by the engine and can not be set manually.
     public final func getItemIndex(id: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1752,8 +1823,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_accelerator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_accelerator")
+    fileprivate static let method_get_item_accelerator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_accelerator")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 253789942)!
@@ -1765,6 +1836,7 @@ open class PopupMenu: Popup {
     
     /// Returns the accelerator of the item at the given `index`. An accelerator is a keyboard shortcut that can be pressed to trigger the menu button even if it's not currently open. The return value is an integer which is generally a combination of ``KeyModifierMask``s and ``Key``s using bitwise OR such as `KEY_MASK_CTRL | KEY_A` ([kbd]Ctrl + A[/kbd]). If no accelerator is defined for the specified `index`, ``getItemAccelerator(index:)`` returns `0` (corresponding to ``@GlobalScope.KEY_NONE``).
     public final func getItemAccelerator(index: Int32) -> Key {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1779,8 +1851,8 @@ open class PopupMenu: Popup {
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_get_item_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_metadata")
+    fileprivate static let method_get_item_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_metadata")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
@@ -1792,6 +1864,7 @@ open class PopupMenu: Popup {
     
     /// Returns the metadata of the specified item, which might be of any type. You can set it with ``setItemMetadata(index:metadata:)``, which provides a simple way of assigning context data to items.
     public final func getItemMetadata(index: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1806,8 +1879,8 @@ open class PopupMenu: Popup {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_is_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_disabled")
+    fileprivate static let method_is_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_disabled")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1822,6 +1895,7 @@ open class PopupMenu: Popup {
     /// See ``setItemDisabled(index:disabled:)`` for more info on how to disable an item.
     /// 
     public final func isItemDisabled(index: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1836,8 +1910,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_submenu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_submenu")
+    fileprivate static let method_get_item_submenu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_submenu")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -1849,6 +1923,7 @@ open class PopupMenu: Popup {
     
     /// Returns the submenu name of the item at the given `index`. See ``addSubmenuItem(label:submenu:id:)`` for more info on how to add a submenu.
     public final func getItemSubmenu(index: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1863,8 +1938,8 @@ open class PopupMenu: Popup {
         return _result.description
     }
     
-    fileprivate static var method_get_item_submenu_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_submenu_node")
+    fileprivate static let method_get_item_submenu_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_submenu_node")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2100501353)!
@@ -1876,6 +1951,7 @@ open class PopupMenu: Popup {
     
     /// Returns the submenu of the item at the given `index`, or `null` if no submenu was added. See ``addSubmenuNodeItem(label:submenu:id:)`` for more info on how to add a submenu.
     public final func getItemSubmenuNode(index: Int32) -> PopupMenu? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1887,11 +1963,11 @@ open class PopupMenu: Popup {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_item_separator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_separator")
+    fileprivate static let method_is_item_separator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_separator")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1903,6 +1979,7 @@ open class PopupMenu: Popup {
     
     /// Returns `true` if the item is a separator. If it is, it will be displayed as a line. See ``addSeparator(label:id:)`` for more info on how to add a separator.
     public final func isItemSeparator(index: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1917,8 +1994,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_is_item_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_checkable")
+    fileprivate static let method_is_item_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_checkable")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1933,6 +2010,7 @@ open class PopupMenu: Popup {
     /// > Note: Checkable items just display a checkmark or radio button, but don't have any built-in checking behavior and must be checked/unchecked manually.
     /// 
     public final func isItemCheckable(index: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1947,8 +2025,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_is_item_radio_checkable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_radio_checkable")
+    fileprivate static let method_is_item_radio_checkable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_radio_checkable")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1963,6 +2041,7 @@ open class PopupMenu: Popup {
     /// > Note: This is purely cosmetic; you must add the logic for checking/unchecking items in radio groups.
     /// 
     public final func isItemRadioCheckable(index: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1977,8 +2056,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_is_item_shortcut_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_shortcut_disabled")
+    fileprivate static let method_is_item_shortcut_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_shortcut_disabled")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1990,6 +2069,7 @@ open class PopupMenu: Popup {
     
     /// Returns `true` if the specified item's shortcut is disabled.
     public final func isItemShortcutDisabled(index: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2004,8 +2084,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_tooltip")
+    fileprivate static let method_get_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_tooltip")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -2017,6 +2097,7 @@ open class PopupMenu: Popup {
     
     /// Returns the tooltip associated with the item at the given `index`.
     public final func getItemTooltip(index: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2031,8 +2112,8 @@ open class PopupMenu: Popup {
         return _result.description
     }
     
-    fileprivate static var method_get_item_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_shortcut")
+    fileprivate static let method_get_item_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_shortcut")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1449483325)!
@@ -2044,6 +2125,7 @@ open class PopupMenu: Popup {
     
     /// Returns the ``Shortcut`` associated with the item at the given `index`.
     public final func getItemShortcut(index: Int32) -> Shortcut? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2055,11 +2137,11 @@ open class PopupMenu: Popup {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_item_indent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_indent")
+    fileprivate static let method_get_item_indent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_indent")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -2071,6 +2153,7 @@ open class PopupMenu: Popup {
     
     /// Returns the horizontal offset of the item at the given `index`.
     public final func getItemIndent(index: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2085,8 +2168,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_multistate_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_multistate_max")
+    fileprivate static let method_get_item_multistate_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_multistate_max")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -2098,6 +2181,7 @@ open class PopupMenu: Popup {
     
     /// Returns the max states of the item at the given `index`.
     public final func getItemMultistateMax(index: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2112,8 +2196,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_get_item_multistate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_multistate")
+    fileprivate static let method_get_item_multistate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_multistate")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -2125,6 +2209,7 @@ open class PopupMenu: Popup {
     
     /// Returns the state of the item at the given `index`.
     public final func getItemMultistate(index: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2139,8 +2224,8 @@ open class PopupMenu: Popup {
         return _result
     }
     
-    fileprivate static var method_set_focused_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_focused_item")
+    fileprivate static let method_set_focused_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_focused_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2155,6 +2240,7 @@ open class PopupMenu: Popup {
     /// Passing `-1` as the index makes so that no item is focused.
     /// 
     public final func setFocusedItem(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2168,8 +2254,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_get_focused_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_focused_item")
+    fileprivate static let method_get_focused_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_focused_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2181,13 +2267,14 @@ open class PopupMenu: Popup {
     
     /// Returns the index of the currently focused item. Returns `-1` if no item is focused.
     public final func getFocusedItem() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PopupMenu.method_get_focused_item, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_count")
+    fileprivate static let method_set_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_count")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2199,6 +2286,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_item_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2212,8 +2300,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_get_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_count")
+    fileprivate static let method_get_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_count")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2225,13 +2313,14 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func get_item_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PopupMenu.method_get_item_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_scroll_to_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scroll_to_item")
+    fileprivate static let method_scroll_to_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scroll_to_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2243,6 +2332,7 @@ open class PopupMenu: Popup {
     
     /// Moves the scroll view to make the item at the given `index` visible.
     public final func scrollToItem(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2256,8 +2346,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_remove_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_item")
+    fileprivate static let method_remove_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_item")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2272,6 +2362,7 @@ open class PopupMenu: Popup {
     /// > Note: The indices of items after the removed item will be shifted by one.
     /// 
     public final func removeItem(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2285,8 +2376,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_add_separator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_separator")
+    fileprivate static let method_add_separator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_separator")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2266703459)!
@@ -2301,6 +2392,7 @@ open class PopupMenu: Popup {
     /// A `label` can optionally be provided, which will appear at the center of the separator.
     /// 
     public final func addSeparator(label: String = "", id: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
@@ -2318,8 +2410,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 107499316)!
@@ -2331,6 +2423,7 @@ open class PopupMenu: Popup {
     
     /// Removes all items from the ``PopupMenu``. If `freeSubmenus` is `true`, the submenu nodes are automatically freed.
     public final func clear(freeSubmenus: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: freeSubmenus) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2344,8 +2437,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_set_hide_on_item_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hide_on_item_selection")
+    fileprivate static let method_set_hide_on_item_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hide_on_item_selection")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2357,6 +2450,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_hide_on_item_selection(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2370,8 +2464,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_is_hide_on_item_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hide_on_item_selection")
+    fileprivate static let method_is_hide_on_item_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hide_on_item_selection")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2383,13 +2477,14 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func is_hide_on_item_selection() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_item_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hide_on_checkable_item_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hide_on_checkable_item_selection")
+    fileprivate static let method_set_hide_on_checkable_item_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hide_on_checkable_item_selection")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2401,6 +2496,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_hide_on_checkable_item_selection(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2414,8 +2510,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_is_hide_on_checkable_item_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hide_on_checkable_item_selection")
+    fileprivate static let method_is_hide_on_checkable_item_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hide_on_checkable_item_selection")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2427,13 +2523,14 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func is_hide_on_checkable_item_selection() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_checkable_item_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hide_on_state_item_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hide_on_state_item_selection")
+    fileprivate static let method_set_hide_on_state_item_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hide_on_state_item_selection")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2445,6 +2542,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_hide_on_state_item_selection(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2458,8 +2556,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_is_hide_on_state_item_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hide_on_state_item_selection")
+    fileprivate static let method_is_hide_on_state_item_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hide_on_state_item_selection")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2471,13 +2569,14 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func is_hide_on_state_item_selection() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_state_item_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_submenu_popup_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_submenu_popup_delay")
+    fileprivate static let method_set_submenu_popup_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_submenu_popup_delay")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2489,6 +2588,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_submenu_popup_delay(_ seconds: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2502,8 +2602,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_get_submenu_popup_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_submenu_popup_delay")
+    fileprivate static let method_get_submenu_popup_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_submenu_popup_delay")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2515,13 +2615,14 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func get_submenu_popup_delay() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PopupMenu.method_get_submenu_popup_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_search")
+    fileprivate static let method_set_allow_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_search")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2533,6 +2634,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_allow_search(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2546,8 +2648,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_get_allow_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_search")
+    fileprivate static let method_get_allow_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_search")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2559,13 +2661,14 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func get_allow_search() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PopupMenu.method_get_allow_search, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_system_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_system_menu")
+    fileprivate static let method_is_system_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_system_menu")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2577,13 +2680,14 @@ open class PopupMenu: Popup {
     
     /// Returns `true` if the menu is bound to the special system menu.
     public final func isSystemMenu() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PopupMenu.method_is_system_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_system_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_system_menu")
+    fileprivate static let method_set_system_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_system_menu")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 600639674)!
@@ -2595,6 +2699,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func set_system_menu(_ systemMenuId: NativeMenu.SystemMenus) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: systemMenuId.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2608,8 +2713,8 @@ open class PopupMenu: Popup {
         
     }
     
-    fileprivate static var method_get_system_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_menu")
+    fileprivate static let method_get_system_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_menu")
         return withUnsafePointer(to: &PopupMenu.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1222557358)!
@@ -2621,6 +2726,7 @@ open class PopupMenu: Popup {
     
     @inline(__always)
     fileprivate final func get_system_menu() -> NativeMenu.SystemMenus {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(PopupMenu.method_get_system_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NativeMenu.SystemMenus (rawValue: _result)!

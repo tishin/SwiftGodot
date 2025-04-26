@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This class provides a graph-like visual editor for creating a ``Shader``. Although ``VisualShader``s do not require coding, they share the same logic with script shaders. They use ``VisualShaderNode``s that can be connected to each other to control the flow of the shader. The visual shader graph is converted to a script shader behind the scenes.
 open class VisualShader: Shader {
-    fileprivate static var className = StringName("VisualShader")
+    private static var className = StringName("VisualShader")
     override open class var godotClassName: StringName { className }
     public enum GType: Int64, CaseIterable {
         /// A vertex shader, operating on vertices.
@@ -101,8 +101,8 @@ open class VisualShader: Shader {
     }
     
     /* Methods */
-    fileprivate static var method_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mode")
+    fileprivate static let method_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mode")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3978014962)!
@@ -114,6 +114,7 @@ open class VisualShader: Shader {
     
     /// Sets the mode of this shader.
     public final func setMode(_ mode: Shader.Mode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -127,8 +128,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_add_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_node")
+    fileprivate static let method_add_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_node")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1560769431)!
@@ -140,6 +141,7 @@ open class VisualShader: Shader {
     
     /// Adds the specified `node` to the shader.
     public final func addNode(type: VisualShader.GType, node: VisualShaderNode?, position: Vector2, id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: node?.handle) { pArg1 in
                 withUnsafePointer(to: position) { pArg2 in
@@ -162,8 +164,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_get_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node")
+    fileprivate static let method_get_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3784670312)!
@@ -175,6 +177,7 @@ open class VisualShader: Shader {
     
     /// Returns the shader node instance with specified `type` and `id`.
     public final func getNode(type: VisualShader.GType, id: Int32) -> VisualShaderNode? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
@@ -189,11 +192,11 @@ open class VisualShader: Shader {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_node_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_node_position")
+    fileprivate static let method_set_node_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_node_position")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726660721)!
@@ -205,6 +208,7 @@ open class VisualShader: Shader {
     
     /// Sets the position of the specified node.
     public final func setNodePosition(type: VisualShader.GType, id: Int32, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: position) { pArg2 in
@@ -224,8 +228,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_get_node_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_position")
+    fileprivate static let method_get_node_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_position")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2175036082)!
@@ -237,6 +241,7 @@ open class VisualShader: Shader {
     
     /// Returns the position of the specified node within the shader graph.
     public final func getNodePosition(type: VisualShader.GType, id: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
@@ -254,8 +259,8 @@ open class VisualShader: Shader {
         return _result
     }
     
-    fileprivate static var method_get_node_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_list")
+    fileprivate static let method_get_node_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_list")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2370592410)!
@@ -267,6 +272,7 @@ open class VisualShader: Shader {
     
     /// Returns the list of all nodes in the shader with the specified type.
     public final func getNodeList(type: VisualShader.GType) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -281,8 +287,8 @@ open class VisualShader: Shader {
         return _result
     }
     
-    fileprivate static var method_get_valid_node_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_valid_node_id")
+    fileprivate static let method_get_valid_node_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_valid_node_id")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 629467342)!
@@ -294,6 +300,7 @@ open class VisualShader: Shader {
     
     /// Returns next valid node ID that can be added to the shader graph.
     public final func getValidNodeId(type: VisualShader.GType) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -308,8 +315,8 @@ open class VisualShader: Shader {
         return _result
     }
     
-    fileprivate static var method_remove_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_node")
+    fileprivate static let method_remove_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_node")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844050912)!
@@ -321,6 +328,7 @@ open class VisualShader: Shader {
     
     /// Removes the specified node from the shader.
     public final func removeNode(type: VisualShader.GType, id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -337,8 +345,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_replace_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("replace_node")
+    fileprivate static let method_replace_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("replace_node")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3144735253)!
@@ -350,6 +358,7 @@ open class VisualShader: Shader {
     
     /// Replaces the specified node with a node of new class type.
     public final func replaceNode(type: VisualShader.GType, id: Int32, newClass: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: newClass.content) { pArg2 in
@@ -369,8 +378,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_is_node_connection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_node_connection")
+    fileprivate static let method_is_node_connection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_node_connection")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3922381898)!
@@ -382,6 +391,7 @@ open class VisualShader: Shader {
     
     /// Returns `true` if the specified node and port connection exist.
     public final func isNodeConnection(type: VisualShader.GType, fromNode: Int32, fromPort: Int32, toNode: Int32, toPort: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: fromNode) { pArg1 in
@@ -408,8 +418,8 @@ open class VisualShader: Shader {
         return _result
     }
     
-    fileprivate static var method_can_connect_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("can_connect_nodes")
+    fileprivate static let method_can_connect_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("can_connect_nodes")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3922381898)!
@@ -421,6 +431,7 @@ open class VisualShader: Shader {
     
     /// Returns `true` if the specified nodes and ports can be connected together.
     public final func canConnectNodes(type: VisualShader.GType, fromNode: Int32, fromPort: Int32, toNode: Int32, toPort: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: fromNode) { pArg1 in
@@ -447,8 +458,8 @@ open class VisualShader: Shader {
         return _result
     }
     
-    fileprivate static var method_connect_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_nodes")
+    fileprivate static let method_connect_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_nodes")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3081049573)!
@@ -460,6 +471,7 @@ open class VisualShader: Shader {
     
     /// Connects the specified nodes and ports.
     public final func connectNodes(type: VisualShader.GType, fromNode: Int32, fromPort: Int32, toNode: Int32, toPort: Int32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: fromNode) { pArg1 in
@@ -486,8 +498,8 @@ open class VisualShader: Shader {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_disconnect_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_nodes")
+    fileprivate static let method_disconnect_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_nodes")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2268060358)!
@@ -499,6 +511,7 @@ open class VisualShader: Shader {
     
     /// Connects the specified nodes and ports.
     public final func disconnectNodes(type: VisualShader.GType, fromNode: Int32, fromPort: Int32, toNode: Int32, toPort: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: fromNode) { pArg1 in
                 withUnsafePointer(to: fromPort) { pArg2 in
@@ -524,8 +537,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_connect_nodes_forced: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_nodes_forced")
+    fileprivate static let method_connect_nodes_forced: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_nodes_forced")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2268060358)!
@@ -537,6 +550,7 @@ open class VisualShader: Shader {
     
     /// Connects the specified nodes and ports, even if they can't be connected. Such connection is invalid and will not function properly.
     public final func connectNodesForced(type: VisualShader.GType, fromNode: Int32, fromPort: Int32, toNode: Int32, toPort: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: fromNode) { pArg1 in
                 withUnsafePointer(to: fromPort) { pArg2 in
@@ -562,8 +576,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_get_node_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_connections")
+    fileprivate static let method_get_node_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_connections")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1441964831)!
@@ -574,7 +588,8 @@ open class VisualShader: Shader {
     }()
     
     /// Returns the list of connected nodes with the specified type.
-    public final func getNodeConnections(type: VisualShader.GType) -> VariantCollection<GDictionary> {
+    public final func getNodeConnections(type: VisualShader.GType) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -586,11 +601,11 @@ open class VisualShader: Shader {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_set_graph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_graph_offset")
+    fileprivate static let method_set_graph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_graph_offset")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -602,6 +617,7 @@ open class VisualShader: Shader {
     
     @inline(__always)
     fileprivate final func set_graph_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -615,8 +631,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_get_graph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_graph_offset")
+    fileprivate static let method_get_graph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_graph_offset")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -628,13 +644,14 @@ open class VisualShader: Shader {
     
     @inline(__always)
     fileprivate final func get_graph_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(VisualShader.method_get_graph_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_attach_node_to_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("attach_node_to_frame")
+    fileprivate static let method_attach_node_to_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("attach_node_to_frame")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2479945279)!
@@ -646,6 +663,7 @@ open class VisualShader: Shader {
     
     /// Attaches the given node to the given frame.
     public final func attachNodeToFrame(type: VisualShader.GType, id: Int32, frame: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: frame) { pArg2 in
@@ -665,8 +683,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_detach_node_from_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("detach_node_from_frame")
+    fileprivate static let method_detach_node_from_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("detach_node_from_frame")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844050912)!
@@ -678,6 +696,7 @@ open class VisualShader: Shader {
     
     /// Detaches the given node from the frame it is attached to.
     public final func detachNodeFromFrame(type: VisualShader.GType, id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -694,8 +713,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_add_varying: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_varying")
+    fileprivate static let method_add_varying: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_varying")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2084110726)!
@@ -707,6 +726,7 @@ open class VisualShader: Shader {
     
     /// Adds a new varying value node to the shader.
     public final func addVarying(name: String, mode: VisualShader.VaryingMode, type: VisualShader.VaryingType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
@@ -727,8 +747,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_remove_varying: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_varying")
+    fileprivate static let method_remove_varying: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_varying")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -740,6 +760,7 @@ open class VisualShader: Shader {
     
     /// Removes a varying value node with the given `name`. Prints an error if a node with this name is not found.
     public final func removeVarying(name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -754,8 +775,8 @@ open class VisualShader: Shader {
         
     }
     
-    fileprivate static var method_has_varying: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_varying")
+    fileprivate static let method_has_varying: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_varying")
         return withUnsafePointer(to: &VisualShader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -767,6 +788,7 @@ open class VisualShader: Shader {
     
     /// Returns `true` if the shader has a varying with the given `name`.
     public final func hasVarying(name: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in

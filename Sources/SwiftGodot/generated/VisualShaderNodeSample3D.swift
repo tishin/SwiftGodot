@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A virtual class, use the descendants instead.
 open class VisualShaderNodeSample3D: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeSample3D")
+    private static var className = StringName("VisualShaderNodeSample3D")
     override open class var godotClassName: StringName { className }
     public enum Source: Int64, CaseIterable {
         /// Creates internal uniform and provides a way to assign it within node.
@@ -50,8 +50,8 @@ open class VisualShaderNodeSample3D: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_source")
+    fileprivate static let method_set_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_source")
         return withUnsafePointer(to: &VisualShaderNodeSample3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3315130991)!
@@ -63,6 +63,7 @@ open class VisualShaderNodeSample3D: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_source(_ value: VisualShaderNodeSample3D.Source) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -76,8 +77,8 @@ open class VisualShaderNodeSample3D: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source")
+    fileprivate static let method_get_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source")
         return withUnsafePointer(to: &VisualShaderNodeSample3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1079494121)!
@@ -89,6 +90,7 @@ open class VisualShaderNodeSample3D: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_source() -> VisualShaderNodeSample3D.Source {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeSample3D.method_get_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeSample3D.Source (rawValue: _result)!

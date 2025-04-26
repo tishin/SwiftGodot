@@ -32,7 +32,7 @@ import Musl
 /// To help control how the FABRIK joints move, a magnet vector can be passed, which can nudge the bones in a certain direction prior to solving, giving a level of control over the final result.
 /// 
 open class SkeletonModification2DFABRIK: SkeletonModification2D {
-    fileprivate static var className = StringName("SkeletonModification2DFABRIK")
+    private static var className = StringName("SkeletonModification2DFABRIK")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -62,8 +62,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_node")
+    fileprivate static let method_set_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_node")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -75,6 +75,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_target_node(_ targetNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -88,8 +89,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_node")
+    fileprivate static let method_get_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_node")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -101,13 +102,14 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_target_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_fabrik_data_chain_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fabrik_data_chain_length")
+    fileprivate static let method_set_fabrik_data_chain_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fabrik_data_chain_length")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -119,6 +121,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_fabrik_data_chain_length(_ length: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -132,8 +135,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_fabrik_data_chain_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fabrik_data_chain_length")
+    fileprivate static let method_get_fabrik_data_chain_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fabrik_data_chain_length")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -145,13 +148,14 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_fabrik_data_chain_length() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_data_chain_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fabrik_joint_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fabrik_joint_bone2d_node")
+    fileprivate static let method_set_fabrik_joint_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fabrik_joint_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761262315)!
@@ -163,6 +167,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     /// Sets the ``Bone2D`` node assigned to the FABRIK joint at `jointIdx`.
     public final func setFabrikJointBone2dNode(jointIdx: Int32, bone2dNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: bone2dNodepath.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -179,8 +184,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_fabrik_joint_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fabrik_joint_bone2d_node")
+    fileprivate static let method_get_fabrik_joint_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fabrik_joint_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 408788394)!
@@ -192,6 +197,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     /// Returns the ``Bone2D`` node assigned to the FABRIK joint at `jointIdx`.
     public final func getFabrikJointBone2dNode(jointIdx: Int32) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -206,8 +212,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_fabrik_joint_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fabrik_joint_bone_index")
+    fileprivate static let method_set_fabrik_joint_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fabrik_joint_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -219,6 +225,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     /// Sets the bone index, `boneIdx`, of the FABRIK joint at `jointIdx`. When possible, this will also update the `bone2d_node` of the FABRIK joint based on data provided by the linked skeleton.
     public final func setFabrikJointBoneIndex(jointIdx: Int32, boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: boneIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -235,8 +242,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_fabrik_joint_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fabrik_joint_bone_index")
+    fileprivate static let method_get_fabrik_joint_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fabrik_joint_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -248,6 +255,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     /// Returns the index of the ``Bone2D`` node assigned to the FABRIK joint at `jointIdx`.
     public final func getFabrikJointBoneIndex(jointIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -262,8 +270,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_fabrik_joint_magnet_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fabrik_joint_magnet_position")
+    fileprivate static let method_set_fabrik_joint_magnet_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fabrik_joint_magnet_position")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -275,6 +283,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     /// Sets the magnet position vector for the joint at `jointIdx`.
     public final func setFabrikJointMagnetPosition(jointIdx: Int32, magnetPosition: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: magnetPosition) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -291,8 +300,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_fabrik_joint_magnet_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fabrik_joint_magnet_position")
+    fileprivate static let method_get_fabrik_joint_magnet_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fabrik_joint_magnet_position")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -304,6 +313,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     /// Returns the magnet position vector for the joint at `jointIdx`.
     public final func getFabrikJointMagnetPosition(jointIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -318,8 +328,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_fabrik_joint_use_target_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fabrik_joint_use_target_rotation")
+    fileprivate static let method_set_fabrik_joint_use_target_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fabrik_joint_use_target_rotation")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -334,6 +344,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     /// > Note: This option only works for the tip/final joint in the chain. For all other nodes, this option will be ignored.
     /// 
     public final func setFabrikJointUseTargetRotation(jointIdx: Int32, useTargetRotation: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: useTargetRotation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -350,8 +361,8 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_fabrik_joint_use_target_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fabrik_joint_use_target_rotation")
+    fileprivate static let method_get_fabrik_joint_use_target_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fabrik_joint_use_target_rotation")
         return withUnsafePointer(to: &SkeletonModification2DFABRIK.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -363,6 +374,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     
     /// Returns whether the joint is using the target's rotation rather than allowing FABRIK to rotate the joint. This option only applies to the tip/final joint in the chain.
     public final func getFabrikJointUseTargetRotation(jointIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

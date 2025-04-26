@@ -28,7 +28,7 @@ import Musl
 /// You can use <a href="https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html">this tool</a> to convert a cubemap to an equirectangular sky map.
 /// 
 open class PanoramaSkyMaterial: Material {
-    fileprivate static var className = StringName("PanoramaSkyMaterial")
+    private static var className = StringName("PanoramaSkyMaterial")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -70,8 +70,8 @@ open class PanoramaSkyMaterial: Material {
     }
     
     /* Methods */
-    fileprivate static var method_set_panorama: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_panorama")
+    fileprivate static let method_set_panorama: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_panorama")
         return withUnsafePointer(to: &PanoramaSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -83,6 +83,7 @@ open class PanoramaSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_panorama(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class PanoramaSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_panorama: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_panorama")
+    fileprivate static let method_get_panorama: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_panorama")
         return withUnsafePointer(to: &PanoramaSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -109,13 +110,14 @@ open class PanoramaSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_panorama() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_get_panorama, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_filtering_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_filtering_enabled")
+    fileprivate static let method_set_filtering_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_filtering_enabled")
         return withUnsafePointer(to: &PanoramaSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -127,6 +129,7 @@ open class PanoramaSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_filtering_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -140,8 +143,8 @@ open class PanoramaSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_is_filtering_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_filtering_enabled")
+    fileprivate static let method_is_filtering_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_filtering_enabled")
         return withUnsafePointer(to: &PanoramaSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -153,13 +156,14 @@ open class PanoramaSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func is_filtering_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_is_filtering_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_energy_multiplier")
+    fileprivate static let method_set_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_energy_multiplier")
         return withUnsafePointer(to: &PanoramaSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -171,6 +175,7 @@ open class PanoramaSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_energy_multiplier(_ multiplier: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +189,8 @@ open class PanoramaSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_energy_multiplier")
+    fileprivate static let method_get_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_energy_multiplier")
         return withUnsafePointer(to: &PanoramaSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -197,6 +202,7 @@ open class PanoramaSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_energy_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_get_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

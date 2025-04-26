@@ -25,12 +25,16 @@ import Musl
 /// 
 /// Scenes are instantiated as children of the ``TileMap`` when it enters the tree. If you add/remove a scene tile in the ``TileMap`` that is already inside the tree, the ``TileMap`` will automatically instantiate/free the scene accordingly.
 /// 
+/// > Note: Scene tiles all occupy one tile slot and instead use alternate tile ID to identify scene index. ``TileSetSource/getTilesCount()`` will always return `1`. Use ``getSceneTilesCount()`` to get a number of scenes in a ``TileSetScenesCollectionSource``.
+/// 
+/// Use this code if you want to find the scene path at a given tile in ``TileMapLayer``:
+/// 
 open class TileSetScenesCollectionSource: TileSetSource {
-    fileprivate static var className = StringName("TileSetScenesCollectionSource")
+    private static var className = StringName("TileSetScenesCollectionSource")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_scene_tiles_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scene_tiles_count")
+    fileprivate static let method_get_scene_tiles_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_tiles_count")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -42,13 +46,14 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Returns the number or scene tiles this TileSet source has.
     public final func getSceneTilesCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tiles_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_scene_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scene_tile_id")
+    fileprivate static let method_get_scene_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_tile_id")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -60,6 +65,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Returns the scene tile ID of the scene tile at `index`.
     public final func getSceneTileId(index: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -74,8 +80,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_has_scene_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_scene_tile_id")
+    fileprivate static let method_has_scene_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_scene_tile_id")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
@@ -87,6 +93,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Returns whether this TileSet source has a scene tile with `id`.
     public final func hasSceneTileId(_ id: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -101,8 +108,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_create_scene_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_scene_tile")
+    fileprivate static let method_create_scene_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_scene_tile")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1117465415)!
@@ -117,6 +124,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     /// Returns a newly generated unique ID.
     /// 
     public final func createSceneTile(packedScene: PackedScene?, idOverride: Int32 = -1) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: packedScene?.handle) { pArg0 in
             withUnsafePointer(to: idOverride) { pArg1 in
@@ -134,8 +142,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_set_scene_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scene_tile_id")
+    fileprivate static let method_set_scene_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scene_tile_id")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -147,6 +155,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Changes a scene tile's ID from `id` to `newId`. This will fail if there is already a tile with an ID equal to `newId`.
     public final func setSceneTileId(_ id: Int32, newId: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: newId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -163,8 +172,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         
     }
     
-    fileprivate static var method_set_scene_tile_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scene_tile_scene")
+    fileprivate static let method_set_scene_tile_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scene_tile_scene")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3435852839)!
@@ -176,6 +185,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Assigns a ``PackedScene`` resource to the scene tile with `id`. This will fail if the scene does not extend CanvasItem, as positioning properties are needed to place the scene on the TileMap.
     public final func setSceneTileScene(id: Int32, packedScene: PackedScene?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: packedScene?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -192,8 +202,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_scene_tile_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scene_tile_scene")
+    fileprivate static let method_get_scene_tile_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_tile_scene")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 511017218)!
@@ -205,6 +215,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Returns the ``PackedScene`` resource of scene tile with `id`.
     public final func getSceneTileScene(id: Int32) -> PackedScene? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -216,11 +227,11 @@ open class TileSetScenesCollectionSource: TileSetSource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_scene_tile_display_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scene_tile_display_placeholder")
+    fileprivate static let method_set_scene_tile_display_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scene_tile_display_placeholder")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -232,6 +243,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Sets whether or not the scene tile with `id` should display a placeholder in the editor. This might be useful for scenes that are not visible.
     public final func setSceneTileDisplayPlaceholder(id: Int32, displayPlaceholder: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: displayPlaceholder) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -248,8 +260,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_scene_tile_display_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scene_tile_display_placeholder")
+    fileprivate static let method_get_scene_tile_display_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_tile_display_placeholder")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -261,6 +273,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Returns whether the scene tile with `id` displays a placeholder in the editor.
     public final func getSceneTileDisplayPlaceholder(id: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -275,8 +288,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_remove_scene_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_scene_tile")
+    fileprivate static let method_remove_scene_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_scene_tile")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -288,6 +301,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Remove the scene tile with `id`.
     public final func removeSceneTile(id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -301,8 +315,8 @@ open class TileSetScenesCollectionSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_next_scene_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_next_scene_tile_id")
+    fileprivate static let method_get_next_scene_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next_scene_tile_id")
         return withUnsafePointer(to: &TileSetScenesCollectionSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -314,6 +328,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     
     /// Returns the scene ID a following call to ``createSceneTile(packedScene:idOverride:)`` would return.
     public final func getNextSceneTileId() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_next_scene_tile_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -32,11 +32,11 @@ import Musl
 /// > Warning: ``TileSetSource`` can only be added to one TileSet at the same time. Calling ``TileSet/addSource(_:atlasSourceIdOverride:)`` on a second ``TileSet`` will remove the source from the first one.
 /// 
 open class TileSetSource: Resource {
-    fileprivate static var className = StringName("TileSetSource")
+    private static var className = StringName("TileSetSource")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_tiles_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tiles_count")
+    fileprivate static let method_get_tiles_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tiles_count")
         return withUnsafePointer(to: &TileSetSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -48,13 +48,14 @@ open class TileSetSource: Resource {
     
     /// Returns how many tiles this atlas source defines (not including alternative tiles).
     public final func getTilesCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TileSetSource.method_get_tiles_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_id")
+    fileprivate static let method_get_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_id")
         return withUnsafePointer(to: &TileSetSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 880721226)!
@@ -66,6 +67,7 @@ open class TileSetSource: Resource {
     
     /// Returns the tile coordinates ID of the tile with index `index`.
     public final func getTileId(index: Int32) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -80,8 +82,8 @@ open class TileSetSource: Resource {
         return _result
     }
     
-    fileprivate static var method_has_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_tile")
+    fileprivate static let method_has_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_tile")
         return withUnsafePointer(to: &TileSetSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3900751641)!
@@ -93,6 +95,7 @@ open class TileSetSource: Resource {
     
     /// Returns if this atlas has a tile with coordinates ID `atlasCoords`.
     public final func hasTile(atlasCoords: Vector2i) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -107,8 +110,8 @@ open class TileSetSource: Resource {
         return _result
     }
     
-    fileprivate static var method_get_alternative_tiles_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alternative_tiles_count")
+    fileprivate static let method_get_alternative_tiles_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alternative_tiles_count")
         return withUnsafePointer(to: &TileSetSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -125,6 +128,7 @@ open class TileSetSource: Resource {
     /// Returns -1 if there is not tile at the given coords.
     /// 
     public final func getAlternativeTilesCount(atlasCoords: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -139,8 +143,8 @@ open class TileSetSource: Resource {
         return _result
     }
     
-    fileprivate static var method_get_alternative_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alternative_tile_id")
+    fileprivate static let method_get_alternative_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alternative_tile_id")
         return withUnsafePointer(to: &TileSetSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 89881719)!
@@ -152,6 +156,7 @@ open class TileSetSource: Resource {
     
     /// Returns the alternative ID for the tile with coordinates ID `atlasCoords` at index `index`.
     public final func getAlternativeTileId(atlasCoords: Vector2i, index: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
@@ -169,8 +174,8 @@ open class TileSetSource: Resource {
         return _result
     }
     
-    fileprivate static var method_has_alternative_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_alternative_tile")
+    fileprivate static let method_has_alternative_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_alternative_tile")
         return withUnsafePointer(to: &TileSetSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1073731340)!
@@ -182,6 +187,7 @@ open class TileSetSource: Resource {
     
     /// Returns if the base tile at coordinates `atlasCoords` has an alternative with ID `alternativeTile`.
     public final func hasAlternativeTile(atlasCoords: Vector2i, alternativeTile: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: alternativeTile) { pArg1 in

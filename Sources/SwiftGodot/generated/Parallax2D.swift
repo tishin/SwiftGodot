@@ -26,7 +26,7 @@ import Musl
 /// > Note: Any changes to this node's position made after it enters the scene tree will be overridden if ``ignoreCameraScroll`` is `false` or ``screenOffset`` is modified.
 /// 
 open class Parallax2D: Node2D {
-    fileprivate static var className = StringName("Parallax2D")
+    private static var className = StringName("Parallax2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -158,8 +158,8 @@ open class Parallax2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_scroll_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scroll_scale")
+    fileprivate static let method_set_scroll_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scroll_scale")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -171,6 +171,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_scroll_scale(_ scale: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +185,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_scroll_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scroll_scale")
+    fileprivate static let method_get_scroll_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scroll_scale")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -197,13 +198,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_scroll_scale() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Parallax2D.method_get_scroll_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_repeat_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_repeat_size")
+    fileprivate static let method_set_repeat_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_repeat_size")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -215,6 +217,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_repeat_size(_ repeatSize: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: repeatSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -228,8 +231,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_repeat_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_repeat_size")
+    fileprivate static let method_get_repeat_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_repeat_size")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -241,13 +244,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_repeat_size() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Parallax2D.method_get_repeat_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_repeat_times: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_repeat_times")
+    fileprivate static let method_set_repeat_times: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_repeat_times")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -259,6 +263,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_repeat_times(_ repeatTimes: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: repeatTimes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -272,8 +277,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_repeat_times: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_repeat_times")
+    fileprivate static let method_get_repeat_times: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_repeat_times")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -285,13 +290,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_repeat_times() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Parallax2D.method_get_repeat_times, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autoscroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autoscroll")
+    fileprivate static let method_set_autoscroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autoscroll")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -303,6 +309,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_autoscroll(_ autoscroll: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autoscroll) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -316,8 +323,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_autoscroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autoscroll")
+    fileprivate static let method_get_autoscroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autoscroll")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -329,13 +336,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_autoscroll() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Parallax2D.method_get_autoscroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scroll_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scroll_offset")
+    fileprivate static let method_set_scroll_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scroll_offset")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -347,6 +355,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_scroll_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -360,8 +369,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_scroll_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scroll_offset")
+    fileprivate static let method_get_scroll_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scroll_offset")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -373,13 +382,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_scroll_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Parallax2D.method_get_scroll_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_screen_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_screen_offset")
+    fileprivate static let method_set_screen_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_screen_offset")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -391,6 +401,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_screen_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -404,8 +415,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_screen_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_offset")
+    fileprivate static let method_get_screen_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_offset")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -417,13 +428,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_screen_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Parallax2D.method_get_screen_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_limit_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_limit_begin")
+    fileprivate static let method_set_limit_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_limit_begin")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -435,6 +447,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_limit_begin(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -448,8 +461,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_limit_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_limit_begin")
+    fileprivate static let method_get_limit_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_limit_begin")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -461,13 +474,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_limit_begin() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Parallax2D.method_get_limit_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_limit_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_limit_end")
+    fileprivate static let method_set_limit_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_limit_end")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -479,6 +493,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_limit_end(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -492,8 +507,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_limit_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_limit_end")
+    fileprivate static let method_get_limit_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_limit_end")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -505,13 +520,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_limit_end() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Parallax2D.method_get_limit_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_follow_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_follow_viewport")
+    fileprivate static let method_set_follow_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_follow_viewport")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -523,6 +539,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_follow_viewport(_ follow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: follow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -536,8 +553,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_get_follow_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_follow_viewport")
+    fileprivate static let method_get_follow_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_follow_viewport")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -549,13 +566,14 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_follow_viewport() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Parallax2D.method_get_follow_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ignore_camera_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ignore_camera_scroll")
+    fileprivate static let method_set_ignore_camera_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ignore_camera_scroll")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -567,6 +585,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_ignore_camera_scroll(_ ignore: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -580,8 +599,8 @@ open class Parallax2D: Node2D {
         
     }
     
-    fileprivate static var method_is_ignore_camera_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ignore_camera_scroll")
+    fileprivate static let method_is_ignore_camera_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ignore_camera_scroll")
         return withUnsafePointer(to: &Parallax2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -593,6 +612,7 @@ open class Parallax2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_ignore_camera_scroll() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Parallax2D.method_is_ignore_camera_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

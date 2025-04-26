@@ -26,7 +26,7 @@ import Musl
 /// > Warning: Ignore missing nodes unless you know what you are doing. Existing properties on a missing node can be freely modified in code, regardless of the type they are intended to be.
 /// 
 open class MissingNode: Node {
-    fileprivate static var className = StringName("MissingNode")
+    private static var className = StringName("MissingNode")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -68,8 +68,8 @@ open class MissingNode: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_original_class: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_original_class")
+    fileprivate static let method_set_original_class: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_original_class")
         return withUnsafePointer(to: &MissingNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -81,6 +81,7 @@ open class MissingNode: Node {
     
     @inline(__always)
     fileprivate final func set_original_class(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -95,8 +96,8 @@ open class MissingNode: Node {
         
     }
     
-    fileprivate static var method_get_original_class: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_original_class")
+    fileprivate static let method_get_original_class: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_original_class")
         return withUnsafePointer(to: &MissingNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -108,13 +109,14 @@ open class MissingNode: Node {
     
     @inline(__always)
     fileprivate final func get_original_class() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(MissingNode.method_get_original_class, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_original_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_original_scene")
+    fileprivate static let method_set_original_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_original_scene")
         return withUnsafePointer(to: &MissingNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -126,6 +128,7 @@ open class MissingNode: Node {
     
     @inline(__always)
     fileprivate final func set_original_scene(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -140,8 +143,8 @@ open class MissingNode: Node {
         
     }
     
-    fileprivate static var method_get_original_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_original_scene")
+    fileprivate static let method_get_original_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_original_scene")
         return withUnsafePointer(to: &MissingNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -153,13 +156,14 @@ open class MissingNode: Node {
     
     @inline(__always)
     fileprivate final func get_original_scene() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(MissingNode.method_get_original_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_recording_properties: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_recording_properties")
+    fileprivate static let method_set_recording_properties: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_recording_properties")
         return withUnsafePointer(to: &MissingNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -171,6 +175,7 @@ open class MissingNode: Node {
     
     @inline(__always)
     fileprivate final func set_recording_properties(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +189,8 @@ open class MissingNode: Node {
         
     }
     
-    fileprivate static var method_is_recording_properties: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_recording_properties")
+    fileprivate static let method_is_recording_properties: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_recording_properties")
         return withUnsafePointer(to: &MissingNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -197,6 +202,7 @@ open class MissingNode: Node {
     
     @inline(__always)
     fileprivate final func is_recording_properties() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MissingNode.method_is_recording_properties, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

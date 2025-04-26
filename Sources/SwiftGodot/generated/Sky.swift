@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The ``Sky`` class uses a ``Material`` to render a 3D environment's background and the light it emits by updating the reflection/radiance cubemaps.
 open class Sky: Resource {
-    fileprivate static var className = StringName("Sky")
+    private static var className = StringName("Sky")
     override open class var godotClassName: StringName { className }
     public enum RadianceSize: Int64, CaseIterable {
         /// Radiance texture size is 32×32 pixels.
@@ -103,8 +103,8 @@ open class Sky: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_radiance_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_radiance_size")
+    fileprivate static let method_set_radiance_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_radiance_size")
         return withUnsafePointer(to: &Sky.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1512957179)!
@@ -116,6 +116,7 @@ open class Sky: Resource {
     
     @inline(__always)
     fileprivate final func set_radiance_size(_ size: Sky.RadianceSize) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -129,8 +130,8 @@ open class Sky: Resource {
         
     }
     
-    fileprivate static var method_get_radiance_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_radiance_size")
+    fileprivate static let method_get_radiance_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_radiance_size")
         return withUnsafePointer(to: &Sky.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2708733976)!
@@ -142,13 +143,14 @@ open class Sky: Resource {
     
     @inline(__always)
     fileprivate final func get_radiance_size() -> Sky.RadianceSize {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Sky.method_get_radiance_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Sky.RadianceSize (rawValue: _result)!
     }
     
-    fileprivate static var method_set_process_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_mode")
+    fileprivate static let method_set_process_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_mode")
         return withUnsafePointer(to: &Sky.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 875986769)!
@@ -160,6 +162,7 @@ open class Sky: Resource {
     
     @inline(__always)
     fileprivate final func set_process_mode(_ mode: Sky.ProcessMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -173,8 +176,8 @@ open class Sky: Resource {
         
     }
     
-    fileprivate static var method_get_process_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_mode")
+    fileprivate static let method_get_process_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_mode")
         return withUnsafePointer(to: &Sky.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 731245043)!
@@ -186,13 +189,14 @@ open class Sky: Resource {
     
     @inline(__always)
     fileprivate final func get_process_mode() -> Sky.ProcessMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Sky.method_get_process_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Sky.ProcessMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &Sky.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -204,6 +208,7 @@ open class Sky: Resource {
     
     @inline(__always)
     fileprivate final func set_material(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -217,8 +222,8 @@ open class Sky: Resource {
         
     }
     
-    fileprivate static var method_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material")
+    fileprivate static let method_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material")
         return withUnsafePointer(to: &Sky.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -230,9 +235,10 @@ open class Sky: Resource {
     
     @inline(__always)
     fileprivate final func get_material() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Sky.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

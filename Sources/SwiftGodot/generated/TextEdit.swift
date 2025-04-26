@@ -39,7 +39,7 @@ import Musl
 /// - ``gutterAdded``
 /// - ``gutterRemoved``
 open class TextEdit: Control {
-    fileprivate static var className = StringName("TextEdit")
+    private static var className = StringName("TextEdit")
     override open class var godotClassName: StringName { className }
     public enum MenuItems: Int64, CaseIterable {
         /// Cuts (copies and clears) the selected text.
@@ -102,8 +102,10 @@ open class TextEdit: Control {
         case insertWj = 28 // MENU_INSERT_WJ
         /// Inserts soft hyphen (SHY) character.
         case insertShy = 29 // MENU_INSERT_SHY
+        /// Opens system emoji and symbol picker.
+        case emojiAndSymbol = 30 // MENU_EMOJI_AND_SYMBOL
         /// Represents the size of the ``TextEdit/MenuItems`` enum.
-        case max = 30 // MENU_MAX
+        case max = 31 // MENU_MAX
     }
     
     public enum EditAction: Int64, CaseIterable {
@@ -213,6 +215,18 @@ open class TextEdit: Control {
         
     }
     
+    /// If `true`, "Emoji and Symbols" menu is enabled.
+    final public var emojiMenuEnabled: Bool {
+        get {
+            return is_emoji_menu_enabled ()
+        }
+        
+        set {
+            set_emoji_menu_enabled (newValue)
+        }
+        
+    }
+    
     /// If `true`, shortcut keys for context menu items are enabled, even if the context menu is disabled.
     final public var shortcutKeysEnabled: Bool {
         get {
@@ -287,6 +301,18 @@ open class TextEdit: Control {
         
         set {
             set_middle_mouse_paste_enabled (newValue)
+        }
+        
+    }
+    
+    /// If `true`, copying or cutting without a selection is performed on all lines with a caret. Otherwise, copy and cut require a selection.
+    final public var emptySelectionClipboardEnabled: Bool {
+        get {
+            return is_empty_selection_clipboard_enabled ()
+        }
+        
+        set {
+            set_empty_selection_clipboard_enabled (newValue)
         }
         
     }
@@ -387,7 +413,7 @@ open class TextEdit: Control {
         
     }
     
-    /// If `true`, ``TextEdit`` will disable vertical scroll and fit minimum height to the number of visible lines.
+    /// If `true`, ``TextEdit`` will disable vertical scroll and fit minimum height to the number of visible lines. When both this property and ``scrollFitContentWidth`` are `true`, no scrollbars will be displayed.
     final public var scrollFitContentHeight: Bool {
         get {
             return is_fit_content_height_enabled ()
@@ -395,6 +421,18 @@ open class TextEdit: Control {
         
         set {
             set_fit_content_height_enabled (newValue)
+        }
+        
+    }
+    
+    /// If `true`, ``TextEdit`` will disable horizontal scroll and fit minimum width to the widest line in the text. When both this property and ``scrollFitContentHeight`` are `true`, no scrollbars will be displayed.
+    final public var scrollFitContentWidth: Bool {
+        get {
+            return is_fit_content_width_enabled ()
+        }
+        
+        set {
+            set_fit_content_width_enabled (newValue)
         }
         
     }
@@ -501,7 +539,7 @@ open class TextEdit: Control {
         
     }
     
-    /// Sets if multiple carets are allowed.
+    /// If `true`, multiple carets are allowed. Left-clicking with [kbd]Alt[/kbd] adds a new caret. See ``addCaret(line:column:)`` and ``getCaretCount()``.
     final public var caretMultiple: Bool {
         get {
             return is_multiple_carets_enabled ()
@@ -549,7 +587,10 @@ open class TextEdit: Control {
         
     }
     
-    /// Sets the ``SyntaxHighlighter`` to use.
+    /// The syntax highlighter to use.
+    /// 
+    /// > Note: A ``SyntaxHighlighter`` instance should not be used across multiple ``TextEdit`` nodes.
+    /// 
     final public var syntaxHighlighter: SyntaxHighlighter? {
         get {
             return get_syntax_highlighter ()
@@ -658,7 +699,7 @@ open class TextEdit: Control {
     }
     
     /// Set additional options for BiDi override.
-    final public var structuredTextBidiOverrideOptions: GArray {
+    final public var structuredTextBidiOverrideOptions: VariantArray {
         get {
             return get_structured_text_bidi_override_options ()
         }
@@ -670,30 +711,159 @@ open class TextEdit: Control {
     }
     
     /* Methods */
+    fileprivate static let method__handle_unicode_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_handle_unicode_input")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
+            }
+            
+        }
+        
+    }()
+    
     /// Override this method to define what happens when the user types in the provided key `unicodeChar`.
     @_documentation(visibility: public)
     open func _handleUnicodeInput(unicodeChar: Int32, caretIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: unicodeChar) { pArg0 in
+            withUnsafePointer(to: caretIndex) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(TextEdit.method__handle_unicode_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__backspace: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_backspace")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define what happens when the user presses the backspace key.
     @_documentation(visibility: public)
     open func _backspace(caretIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: caretIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method__backspace, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__cut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_cut")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define what happens when the user performs a cut operation.
     @_documentation(visibility: public)
     open func _cut(caretIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: caretIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method__cut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__copy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_copy")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define what happens when the user performs a copy operation.
     @_documentation(visibility: public)
     open func _copy(caretIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: caretIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method__copy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__paste: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_paste")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define what happens when the user performs a paste operation.
     @_documentation(visibility: public)
     open func _paste(caretIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: caretIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method__paste, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__paste_primary_clipboard: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_paste_primary_clipboard")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define what happens when the user performs a paste operation with middle mouse button.
     /// 
@@ -701,10 +871,22 @@ open class TextEdit: Control {
     /// 
     @_documentation(visibility: public)
     open func _pastePrimaryClipboard(caretIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: caretIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method__paste_primary_clipboard, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_has_ime_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_ime_text")
+    fileprivate static let method_has_ime_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_ime_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -716,13 +898,14 @@ open class TextEdit: Control {
     
     /// Returns `true` if the user has text in the <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a> (IME).
     public final func hasImeText() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_has_ime_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_cancel_ime: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cancel_ime")
+    fileprivate static let method_cancel_ime: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cancel_ime")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -734,12 +917,13 @@ open class TextEdit: Control {
     
     /// Closes the <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a> (IME) if it is open. Any text in the IME will be lost.
     public final func cancelIme() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_cancel_ime, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_apply_ime: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_ime")
+    fileprivate static let method_apply_ime: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_ime")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -751,12 +935,13 @@ open class TextEdit: Control {
     
     /// Applies text from the <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a> (IME) to each caret and closes the IME if it is open.
     public final func applyIme() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_apply_ime, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_editable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_editable")
+    fileprivate static let method_set_editable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_editable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -768,6 +953,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_editable(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -781,8 +967,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_editable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_editable")
+    fileprivate static let method_is_editable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_editable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -794,13 +980,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_editable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_editable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_direction")
+    fileprivate static let method_set_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_direction")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 119160795)!
@@ -812,6 +999,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_text_direction(_ direction: Control.TextDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -825,8 +1013,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_direction")
+    fileprivate static let method_get_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_direction")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 797257663)!
@@ -838,13 +1026,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_text_direction() -> Control.TextDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextEdit.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_language")
+    fileprivate static let method_set_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_language")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -856,6 +1045,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_language(_ language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -870,8 +1060,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language")
+    fileprivate static let method_get_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -883,13 +1073,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_language() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextEdit.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override")
+    fileprivate static let method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 55961453)!
@@ -901,6 +1092,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_structured_text_bidi_override(_ parser: TextServer.StructuredTextParser) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parser.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -914,8 +1106,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override")
+    fileprivate static let method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3385126229)!
@@ -927,13 +1119,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextEdit.method_get_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.StructuredTextParser (rawValue: _result)!
     }
     
-    fileprivate static var method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override_options")
+    fileprivate static let method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override_options")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -944,7 +1137,8 @@ open class TextEdit: Control {
     }()
     
     @inline(__always)
-    fileprivate final func set_structured_text_bidi_override_options(_ args: GArray) {
+    fileprivate final func set_structured_text_bidi_override_options(_ args: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: args.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -958,8 +1152,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override_options")
+    fileprivate static let method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override_options")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -970,14 +1164,15 @@ open class TextEdit: Control {
     }()
     
     @inline(__always)
-    fileprivate final func get_structured_text_bidi_override_options() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_structured_text_bidi_override_options() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(TextEdit.method_get_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_tab_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_size")
+    fileprivate static let method_set_tab_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_size")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -989,6 +1184,7 @@ open class TextEdit: Control {
     
     /// Sets the tab size for the ``TextEdit`` to use.
     public final func setTabSize(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1002,8 +1198,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_tab_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_size")
+    fileprivate static let method_get_tab_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_size")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1015,13 +1211,14 @@ open class TextEdit: Control {
     
     /// Returns the ``TextEdit``'s' tab size.
     public final func getTabSize() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_tab_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_indent_wrapped_lines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_indent_wrapped_lines")
+    fileprivate static let method_set_indent_wrapped_lines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_indent_wrapped_lines")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1033,6 +1230,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_indent_wrapped_lines(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1046,8 +1244,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_indent_wrapped_lines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_indent_wrapped_lines")
+    fileprivate static let method_is_indent_wrapped_lines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_indent_wrapped_lines")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1059,13 +1257,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_indent_wrapped_lines() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_indent_wrapped_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_overtype_mode_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_overtype_mode_enabled")
+    fileprivate static let method_set_overtype_mode_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_overtype_mode_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1075,8 +1274,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// If `true`, sets the user into overtype mode. When the user types in this mode, it will override existing text.
+    /// If `true`, enables overtype mode. In this mode, typing overrides existing text instead of inserting text. The ``ProjectSettings/input/uiTextToggleInsertMode`` action toggles overtype mode. See ``isOvertypeModeEnabled()``.
     public final func setOvertypeModeEnabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1090,8 +1290,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_overtype_mode_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_overtype_mode_enabled")
+    fileprivate static let method_is_overtype_mode_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_overtype_mode_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1101,15 +1301,16 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns whether the user is in overtype mode.
+    /// Returns `true` if overtype mode is enabled. See ``setOvertypeModeEnabled(_:)``.
     public final func isOvertypeModeEnabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_overtype_mode_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_context_menu_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_context_menu_enabled")
+    fileprivate static let method_set_context_menu_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_context_menu_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1121,6 +1322,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_context_menu_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1134,8 +1336,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_context_menu_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_context_menu_enabled")
+    fileprivate static let method_is_context_menu_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_context_menu_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1147,13 +1349,60 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_context_menu_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_context_menu_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shortcut_keys_enabled")
+    fileprivate static let method_set_emoji_menu_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emoji_menu_enabled")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_emoji_menu_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method_set_emoji_menu_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_emoji_menu_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_emoji_menu_enabled")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_emoji_menu_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(TextEdit.method_is_emoji_menu_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shortcut_keys_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1165,6 +1414,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_shortcut_keys_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1178,8 +1428,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shortcut_keys_enabled")
+    fileprivate static let method_is_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shortcut_keys_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1191,13 +1441,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_shortcut_keys_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_shortcut_keys_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_virtual_keyboard_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_virtual_keyboard_enabled")
+    fileprivate static let method_set_virtual_keyboard_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_virtual_keyboard_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1209,6 +1460,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_virtual_keyboard_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1222,8 +1474,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_virtual_keyboard_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_virtual_keyboard_enabled")
+    fileprivate static let method_is_virtual_keyboard_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_virtual_keyboard_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1235,13 +1487,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_virtual_keyboard_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_virtual_keyboard_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_middle_mouse_paste_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_middle_mouse_paste_enabled")
+    fileprivate static let method_set_middle_mouse_paste_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_middle_mouse_paste_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1253,6 +1506,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_middle_mouse_paste_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1266,8 +1520,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_middle_mouse_paste_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_middle_mouse_paste_enabled")
+    fileprivate static let method_is_middle_mouse_paste_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_middle_mouse_paste_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1279,13 +1533,60 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_middle_mouse_paste_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_middle_mouse_paste_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_set_empty_selection_clipboard_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_empty_selection_clipboard_enabled")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_empty_selection_clipboard_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enabled) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method_set_empty_selection_clipboard_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_empty_selection_clipboard_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_empty_selection_clipboard_enabled")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_empty_selection_clipboard_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(TextEdit.method_is_empty_selection_clipboard_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1297,12 +1598,13 @@ open class TextEdit: Control {
     
     /// Performs a full reset of ``TextEdit``, including undo history.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text")
+    fileprivate static let method_set_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1314,6 +1616,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1328,8 +1631,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text")
+    fileprivate static let method_get_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1341,13 +1644,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextEdit.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_line_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_count")
+    fileprivate static let method_get_line_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_count")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1359,13 +1663,14 @@ open class TextEdit: Control {
     
     /// Returns the number of lines in the text.
     public final func getLineCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_placeholder")
+    fileprivate static let method_set_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_placeholder")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1377,6 +1682,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_placeholder(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1391,8 +1697,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_placeholder")
+    fileprivate static let method_get_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_placeholder")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1404,13 +1710,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_placeholder() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextEdit.method_get_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line")
+    fileprivate static let method_set_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -1425,6 +1732,7 @@ open class TextEdit: Control {
     /// Carets on the line will attempt to keep their visual x position.
     /// 
     public final func setLine(_ line: Int32, newText: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             let newText = GString(newText)
             withUnsafePointer(to: newText.content) { pArg1 in
@@ -1442,8 +1750,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line")
+    fileprivate static let method_get_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -1455,6 +1763,7 @@ open class TextEdit: Control {
     
     /// Returns the text of a specific line.
     public final func getLine(_ line: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1469,8 +1778,36 @@ open class TextEdit: Control {
         return _result.description
     }
     
-    fileprivate static var method_get_line_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_width")
+    fileprivate static let method_get_line_with_ime: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_with_ime")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns line text as it is currently displayed, including IME composition string.
+    public final func getLineWithIme(line: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: line) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method_get_line_with_ime, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
+    }
+    
+    fileprivate static let method_get_line_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_width")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 688195400)!
@@ -1482,6 +1819,7 @@ open class TextEdit: Control {
     
     /// Returns the width in pixels of the `wrapIndex` on `line`.
     public final func getLineWidth(line: Int32, wrapIndex: Int32 = -1) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: wrapIndex) { pArg1 in
@@ -1499,8 +1837,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_line_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_height")
+    fileprivate static let method_get_line_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_height")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1515,13 +1853,14 @@ open class TextEdit: Control {
     /// > Note: The return value is influenced by [theme_item line_spacing] and [theme_item font_size]. And it will not be less than `1`.
     /// 
     public final func getLineHeight() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_line_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_indent_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_indent_level")
+    fileprivate static let method_get_indent_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_indent_level")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1531,8 +1870,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns the number of spaces and `tab * tab_size` before the first char.
+    /// Returns the indent level of the given line. This is the number of spaces and tabs at the beginning of the line, with the tabs taking the tab size into account (see ``getTabSize()``).
     public final func getIndentLevel(line: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1547,8 +1887,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_first_non_whitespace_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_first_non_whitespace_column")
+    fileprivate static let method_get_first_non_whitespace_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_first_non_whitespace_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1558,8 +1898,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns the first column containing a non-whitespace character.
+    /// Returns the first column containing a non-whitespace character on the given line. If there is only whitespace, returns the number of characters.
     public final func getFirstNonWhitespaceColumn(line: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1574,8 +1915,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_swap_lines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("swap_lines")
+    fileprivate static let method_swap_lines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("swap_lines")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -1587,6 +1928,7 @@ open class TextEdit: Control {
     
     /// Swaps the two lines. Carets will be swapped with the lines.
     public final func swapLines(fromLine: Int32, toLine: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromLine) { pArg0 in
             withUnsafePointer(to: toLine) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1603,8 +1945,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_insert_line_at: GDExtensionMethodBindPtr = {
-        let methodName = StringName("insert_line_at")
+    fileprivate static let method_insert_line_at: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("insert_line_at")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -1616,6 +1958,7 @@ open class TextEdit: Control {
     
     /// Inserts a new line with `text` at `line`.
     public final func insertLineAt(line: Int32, text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             let text = GString(text)
             withUnsafePointer(to: text.content) { pArg1 in
@@ -1633,8 +1976,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_remove_line_at: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_line_at")
+    fileprivate static let method_remove_line_at: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_line_at")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 972357352)!
@@ -1649,6 +1992,7 @@ open class TextEdit: Control {
     /// If `moveCaretsDown` is `true` carets will move to the next line down, otherwise carets will move up.
     /// 
     public final func removeLineAt(line: Int32, moveCaretsDown: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: moveCaretsDown) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1665,8 +2009,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_insert_text_at_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("insert_text_at_caret")
+    fileprivate static let method_insert_text_at_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("insert_text_at_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2697778442)!
@@ -1678,6 +2022,7 @@ open class TextEdit: Control {
     
     /// Insert the specified text at the caret position.
     public final func insertTextAtCaret(text: String, caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: caretIndex) { pArg1 in
@@ -1695,8 +2040,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_insert_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("insert_text")
+    fileprivate static let method_insert_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("insert_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1881564334)!
@@ -1713,6 +2058,7 @@ open class TextEdit: Control {
     /// If `beforeSelectionEnd` is `true`, selections that end at `line` and `column` will be extended to the end of the inserted text. These parameters can be used to insert text inside of or outside of selections.
     /// 
     public final func insertText(_ text: String, line: Int32, column: Int32, beforeSelectionBegin: Bool = true, beforeSelectionEnd: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: line) { pArg1 in
@@ -1739,8 +2085,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_remove_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_text")
+    fileprivate static let method_remove_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4275841770)!
@@ -1752,6 +2098,7 @@ open class TextEdit: Control {
     
     /// Removes text between the given positions.
     public final func removeText(fromLine: Int32, fromColumn: Int32, toLine: Int32, toColumn: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromLine) { pArg0 in
             withUnsafePointer(to: fromColumn) { pArg1 in
                 withUnsafePointer(to: toLine) { pArg2 in
@@ -1774,8 +2121,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_last_unhidden_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_unhidden_line")
+    fileprivate static let method_get_last_unhidden_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_unhidden_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1787,13 +2134,14 @@ open class TextEdit: Control {
     
     /// Returns the last unhidden line in the entire ``TextEdit``.
     public final func getLastUnhiddenLine() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_last_unhidden_line, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_next_visible_line_offset_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_next_visible_line_offset_from")
+    fileprivate static let method_get_next_visible_line_offset_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next_visible_line_offset_from")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -1805,6 +2153,7 @@ open class TextEdit: Control {
     
     /// Returns the count to the next visible line from `line` to `line + visible_amount`. Can also count backwards. For example if a ``TextEdit`` has 5 lines with lines 2 and 3 hidden, calling this with `line = 1, visible_amount = 1` would return 3.
     public final func getNextVisibleLineOffsetFrom(line: Int32, visibleAmount: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: visibleAmount) { pArg1 in
@@ -1822,8 +2171,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_next_visible_line_index_offset_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_next_visible_line_index_offset_from")
+    fileprivate static let method_get_next_visible_line_index_offset_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next_visible_line_index_offset_from")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3386475622)!
@@ -1835,6 +2184,7 @@ open class TextEdit: Control {
     
     /// Similar to ``getNextVisibleLineOffsetFrom(line:visibleAmount:)``, but takes into account the line wrap indexes. In the returned vector, `x` is the line, `y` is the wrap index.
     public final func getNextVisibleLineIndexOffsetFrom(line: Int32, wrapIndex: Int32, visibleAmount: Int32) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: wrapIndex) { pArg1 in
@@ -1855,8 +2205,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_backspace: GDExtensionMethodBindPtr = {
-        let methodName = StringName("backspace")
+    fileprivate static let method_backspace: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("backspace")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -1868,6 +2218,7 @@ open class TextEdit: Control {
     
     /// Called when the user presses the backspace key. Can be overridden with ``_backspace(caretIndex:)``.
     public final func backspace(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1881,8 +2232,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_cut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cut")
+    fileprivate static let method_cut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cut")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -1894,6 +2245,7 @@ open class TextEdit: Control {
     
     /// Cut's the current selection. Can be overridden with ``_cut(caretIndex:)``.
     public final func cut(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1907,8 +2259,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_copy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("copy")
+    fileprivate static let method_copy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("copy")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -1920,6 +2272,7 @@ open class TextEdit: Control {
     
     /// Copies the current text selection. Can be overridden with ``_copy(caretIndex:)``.
     public final func copy(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1933,8 +2286,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_paste: GDExtensionMethodBindPtr = {
-        let methodName = StringName("paste")
+    fileprivate static let method_paste: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("paste")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -1946,6 +2299,7 @@ open class TextEdit: Control {
     
     /// Paste at the current location. Can be overridden with ``_paste(caretIndex:)``.
     public final func paste(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1959,8 +2313,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_paste_primary_clipboard: GDExtensionMethodBindPtr = {
-        let methodName = StringName("paste_primary_clipboard")
+    fileprivate static let method_paste_primary_clipboard: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("paste_primary_clipboard")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -1972,6 +2326,7 @@ open class TextEdit: Control {
     
     /// Pastes the primary clipboard.
     public final func pastePrimaryClipboard(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1985,8 +2340,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_start_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("start_action")
+    fileprivate static let method_start_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start_action")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2834827583)!
@@ -2001,6 +2356,7 @@ open class TextEdit: Control {
     /// An action will also end after a call to ``endAction()``, after ``ProjectSettings/gui/timers/textEditIdleDetectSec`` is triggered or a new undoable step outside the ``startAction(_:)`` and ``endAction()`` calls.
     /// 
     public final func startAction(_ action: TextEdit.EditAction) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: action.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2014,8 +2370,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_end_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("end_action")
+    fileprivate static let method_end_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("end_action")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2027,12 +2383,13 @@ open class TextEdit: Control {
     
     /// Marks the end of steps in the current action started with ``startAction(_:)``.
     public final func endAction() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_end_action, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_begin_complex_operation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("begin_complex_operation")
+    fileprivate static let method_begin_complex_operation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("begin_complex_operation")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2044,12 +2401,13 @@ open class TextEdit: Control {
     
     /// Starts a multipart edit. All edits will be treated as one action until ``endComplexOperation()`` is called.
     public final func beginComplexOperation() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_begin_complex_operation, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_end_complex_operation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("end_complex_operation")
+    fileprivate static let method_end_complex_operation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("end_complex_operation")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2061,12 +2419,13 @@ open class TextEdit: Control {
     
     /// Ends a multipart edit, started with ``beginComplexOperation()``. If called outside a complex operation, the current operation is pushed onto the undo/redo stack.
     public final func endComplexOperation() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_end_complex_operation, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_has_undo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_undo")
+    fileprivate static let method_has_undo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_undo")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2078,13 +2437,14 @@ open class TextEdit: Control {
     
     /// Returns `true` if an "undo" action is available.
     public final func hasUndo() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_has_undo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_redo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_redo")
+    fileprivate static let method_has_redo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_redo")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2096,13 +2456,14 @@ open class TextEdit: Control {
     
     /// Returns `true` if a "redo" action is available.
     public final func hasRedo() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_has_redo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_undo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("undo")
+    fileprivate static let method_undo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("undo")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2114,12 +2475,13 @@ open class TextEdit: Control {
     
     /// Perform undo operation.
     public final func undo() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_undo, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_redo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("redo")
+    fileprivate static let method_redo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("redo")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2131,12 +2493,13 @@ open class TextEdit: Control {
     
     /// Perform redo operation.
     public final func redo() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_redo, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear_undo_history: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_undo_history")
+    fileprivate static let method_clear_undo_history: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_undo_history")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2148,12 +2511,13 @@ open class TextEdit: Control {
     
     /// Clears the undo history.
     public final func clearUndoHistory() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_clear_undo_history, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_tag_saved_version: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tag_saved_version")
+    fileprivate static let method_tag_saved_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tag_saved_version")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2165,12 +2529,13 @@ open class TextEdit: Control {
     
     /// Tag the current version as saved.
     public final func tagSavedVersion() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_tag_saved_version, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_version: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_version")
+    fileprivate static let method_get_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_version")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2182,13 +2547,14 @@ open class TextEdit: Control {
     
     /// Returns the current version of the ``TextEdit``. The version is a count of recorded operations by the undo/redo history.
     public final func getVersion() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_saved_version: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_saved_version")
+    fileprivate static let method_get_saved_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_saved_version")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2200,13 +2566,14 @@ open class TextEdit: Control {
     
     /// Returns the last tagged saved version from ``tagSavedVersion()``.
     public final func getSavedVersion() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_saved_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_search_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_search_text")
+    fileprivate static let method_set_search_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_search_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -2218,6 +2585,7 @@ open class TextEdit: Control {
     
     /// Sets the search text. See ``setSearchFlags(_:)``.
     public final func setSearchText(_ searchText: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let searchText = GString(searchText)
         withUnsafePointer(to: searchText.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2232,8 +2600,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_set_search_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_search_flags")
+    fileprivate static let method_set_search_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_search_flags")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2245,6 +2613,7 @@ open class TextEdit: Control {
     
     /// Sets the search `flags`. This is used with ``setSearchText(_:)`` to highlight occurrences of the searched text. Search flags can be specified from the ``TextEdit/SearchFlags`` enum.
     public final func setSearchFlags(_ flags: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2258,8 +2627,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("search")
+    fileprivate static let method_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("search")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1203739136)!
@@ -2274,6 +2643,7 @@ open class TextEdit: Control {
     /// In the returned vector, `x` is the column, `y` is the line. If no results are found, both are equal to `-1`.
     /// 
     public final func search(text: String, flags: UInt32, fromLine: Int32, fromColumn: Int32) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
@@ -2298,8 +2668,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_tooltip_request_func: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tooltip_request_func")
+    fileprivate static let method_set_tooltip_request_func: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tooltip_request_func")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -2311,6 +2681,7 @@ open class TextEdit: Control {
     
     /// Provide custom tooltip text. The callback method must take the following args: `hovered_word: String`.
     public final func setTooltipRequestFunc(callback: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: callback.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2324,8 +2695,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_local_mouse_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_local_mouse_pos")
+    fileprivate static let method_get_local_mouse_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_local_mouse_pos")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -2337,13 +2708,14 @@ open class TextEdit: Control {
     
     /// Returns the local mouse position adjusted for the text direction.
     public final func getLocalMousePos() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(TextEdit.method_get_local_mouse_pos, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_word_at_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_word_at_pos")
+    fileprivate static let method_get_word_at_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_word_at_pos")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3674420000)!
@@ -2355,6 +2727,7 @@ open class TextEdit: Control {
     
     /// Returns the word at `position`.
     public final func getWordAtPos(position: Vector2) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2369,25 +2742,34 @@ open class TextEdit: Control {
         return _result.description
     }
     
-    fileprivate static var method_get_line_column_at_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_column_at_pos")
+    fileprivate static let method_get_line_column_at_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_column_at_pos")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 239517838)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3472935744)!
             }
             
         }
         
     }()
     
-    /// Returns the line and column at the given position. In the returned vector, `x` is the column, `y` is the line. If `allowOutOfBounds` is `false` and the position is not over the text, both vector values will be set to `-1`.
-    public final func getLineColumnAtPos(position: Vector2i, allowOutOfBounds: Bool = true) -> Vector2i {
+    /// Returns the line and column at the given position. In the returned vector, `x` is the column and `y` is the line.
+    /// 
+    /// If `clampLine` is `false` and `position` is below the last line, `Vector2i(-1, -1)` is returned.
+    /// 
+    /// If `clampColumn` is `false` and `position` is outside the column range of the line, `Vector2i(-1, -1)` is returned.
+    /// 
+    public final func getLineColumnAtPos(position: Vector2i, clampLine: Bool = true, clampColumn: Bool = true) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: position) { pArg0 in
-            withUnsafePointer(to: allowOutOfBounds) { pArg1 in
-                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
-                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextEdit.method_get_line_column_at_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+            withUnsafePointer(to: clampLine) { pArg1 in
+                withUnsafePointer(to: clampColumn) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(TextEdit.method_get_line_column_at_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
                     }
                     
                 }
@@ -2399,8 +2781,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_pos_at_line_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pos_at_line_column")
+    fileprivate static let method_get_pos_at_line_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pos_at_line_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 410388347)!
@@ -2415,6 +2797,7 @@ open class TextEdit: Control {
     /// > Note: The Y position corresponds to the bottom side of the line. Use ``getRectAtLineColumn(line:column:)`` to get the top side position.
     /// 
     public final func getPosAtLineColumn(line: Int32, column: Int32) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: column) { pArg1 in
@@ -2432,8 +2815,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_rect_at_line_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rect_at_line_column")
+    fileprivate static let method_get_rect_at_line_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rect_at_line_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3256618057)!
@@ -2448,6 +2831,7 @@ open class TextEdit: Control {
     /// > Note: The Y position of the returned rect corresponds to the top side of the line, unlike ``getPosAtLineColumn(line:column:)`` which returns the bottom side.
     /// 
     public final func getRectAtLineColumn(line: Int32, column: Int32) -> Rect2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: column) { pArg1 in
@@ -2465,8 +2849,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_minimap_line_at_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimap_line_at_pos")
+    fileprivate static let method_get_minimap_line_at_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimap_line_at_pos")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -2478,6 +2862,7 @@ open class TextEdit: Control {
     
     /// Returns the equivalent minimap line at `position`.
     public final func getMinimapLineAtPos(position: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2492,8 +2877,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_is_dragging_cursor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_dragging_cursor")
+    fileprivate static let method_is_dragging_cursor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_dragging_cursor")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2505,13 +2890,14 @@ open class TextEdit: Control {
     
     /// Returns `true` if the user is dragging their mouse for scrolling, selecting, or text dragging.
     public final func isDraggingCursor() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_dragging_cursor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_mouse_over_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_mouse_over_selection")
+    fileprivate static let method_is_mouse_over_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_mouse_over_selection")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1840282309)!
@@ -2521,8 +2907,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns whether the mouse is over selection. If `edges` is `true`, the edges are considered part of the selection.
+    /// Returns `true` if the mouse is over a selection. If `edges` is `true`, the edges are considered part of the selection.
     public final func isMouseOverSelection(edges: Bool, caretIndex: Int32 = -1) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: edges) { pArg0 in
             withUnsafePointer(to: caretIndex) { pArg1 in
@@ -2540,8 +2927,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_caret_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_caret_type")
+    fileprivate static let method_set_caret_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_caret_type")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1211596914)!
@@ -2553,6 +2940,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_caret_type(_ type: TextEdit.CaretType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2566,8 +2954,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_caret_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_type")
+    fileprivate static let method_get_caret_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_type")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2830252959)!
@@ -2579,13 +2967,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_caret_type() -> TextEdit.CaretType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextEdit.method_get_caret_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextEdit.CaretType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_caret_blink_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_caret_blink_enabled")
+    fileprivate static let method_set_caret_blink_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_caret_blink_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2597,6 +2986,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_caret_blink_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2610,8 +3000,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_caret_blink_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_caret_blink_enabled")
+    fileprivate static let method_is_caret_blink_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_caret_blink_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2623,13 +3013,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_caret_blink_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_caret_blink_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_caret_blink_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_caret_blink_interval")
+    fileprivate static let method_set_caret_blink_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_caret_blink_interval")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2641,6 +3032,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_caret_blink_interval(_ interval: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: interval) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2654,8 +3046,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_caret_blink_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_blink_interval")
+    fileprivate static let method_get_caret_blink_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_blink_interval")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2667,13 +3059,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_caret_blink_interval() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextEdit.method_get_caret_blink_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_draw_caret_when_editable_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_caret_when_editable_disabled")
+    fileprivate static let method_set_draw_caret_when_editable_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_caret_when_editable_disabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2685,6 +3078,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_draw_caret_when_editable_disabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2698,8 +3092,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_drawing_caret_when_editable_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_drawing_caret_when_editable_disabled")
+    fileprivate static let method_is_drawing_caret_when_editable_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_drawing_caret_when_editable_disabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2711,13 +3105,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_drawing_caret_when_editable_disabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_drawing_caret_when_editable_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_move_caret_on_right_click_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_move_caret_on_right_click_enabled")
+    fileprivate static let method_set_move_caret_on_right_click_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_move_caret_on_right_click_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2729,6 +3124,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_move_caret_on_right_click_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2742,8 +3138,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_move_caret_on_right_click_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_move_caret_on_right_click_enabled")
+    fileprivate static let method_is_move_caret_on_right_click_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_move_caret_on_right_click_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2755,13 +3151,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_move_caret_on_right_click_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_move_caret_on_right_click_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_caret_mid_grapheme_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_caret_mid_grapheme_enabled")
+    fileprivate static let method_set_caret_mid_grapheme_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_caret_mid_grapheme_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2773,6 +3170,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_caret_mid_grapheme_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2786,8 +3184,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_caret_mid_grapheme_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_caret_mid_grapheme_enabled")
+    fileprivate static let method_is_caret_mid_grapheme_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_caret_mid_grapheme_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2799,13 +3197,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_caret_mid_grapheme_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_caret_mid_grapheme_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_multiple_carets_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_multiple_carets_enabled")
+    fileprivate static let method_set_multiple_carets_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_multiple_carets_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2817,6 +3216,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_multiple_carets_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2830,8 +3230,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_multiple_carets_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_multiple_carets_enabled")
+    fileprivate static let method_is_multiple_carets_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_multiple_carets_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2843,13 +3243,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_multiple_carets_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_multiple_carets_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_caret")
+    fileprivate static let method_add_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 50157827)!
@@ -2861,6 +3262,7 @@ open class TextEdit: Control {
     
     /// Adds a new caret at the given location. Returns the index of the new caret, or `-1` if the location is invalid.
     public final func addCaret(line: Int32, column: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: column) { pArg1 in
@@ -2878,8 +3280,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_remove_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_caret")
+    fileprivate static let method_remove_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2894,6 +3296,7 @@ open class TextEdit: Control {
     /// > Note: This can result in adjustment of all other caret indices.
     /// 
     public final func removeCaret(_ caret: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caret) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2907,8 +3310,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_remove_secondary_carets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_secondary_carets")
+    fileprivate static let method_remove_secondary_carets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_secondary_carets")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2920,12 +3323,13 @@ open class TextEdit: Control {
     
     /// Removes all additional carets.
     public final func removeSecondaryCarets() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_remove_secondary_carets, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_caret_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_count")
+    fileprivate static let method_get_caret_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_count")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2937,13 +3341,14 @@ open class TextEdit: Control {
     
     /// Returns the number of carets in this ``TextEdit``.
     public final func getCaretCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_caret_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_caret_at_carets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_caret_at_carets")
+    fileprivate static let method_add_caret_at_carets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_caret_at_carets")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2955,6 +3360,7 @@ open class TextEdit: Control {
     
     /// Adds an additional caret above or below every caret. If `below` is `true` the new caret will be added below and above otherwise.
     public final func addCaretAtCarets(below: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: below) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2968,8 +3374,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_sorted_carets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sorted_carets")
+    fileprivate static let method_get_sorted_carets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sorted_carets")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2131714034)!
@@ -2984,6 +3390,7 @@ open class TextEdit: Control {
     /// If `includeIgnoredCarets` is `false`, carets from ``multicaretEditIgnoreCaret(caretIndex:)`` will be ignored.
     /// 
     public final func getSortedCarets(includeIgnoredCarets: Bool = false) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: includeIgnoredCarets) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2998,8 +3405,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_collapse_carets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("collapse_carets")
+    fileprivate static let method_collapse_carets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("collapse_carets")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 228654177)!
@@ -3018,6 +3425,7 @@ open class TextEdit: Control {
     /// ``mergeOverlappingCarets()`` will be called if any carets were collapsed.
     /// 
     public final func collapseCarets(fromLine: Int32, fromColumn: Int32, toLine: Int32, toColumn: Int32, inclusive: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromLine) { pArg0 in
             withUnsafePointer(to: fromColumn) { pArg1 in
                 withUnsafePointer(to: toLine) { pArg2 in
@@ -3043,8 +3451,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_merge_overlapping_carets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("merge_overlapping_carets")
+    fileprivate static let method_merge_overlapping_carets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("merge_overlapping_carets")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3061,12 +3469,13 @@ open class TextEdit: Control {
     /// > Note: This is not called when a caret changes position but after certain actions, so it is possible to get into a state where carets overlap.
     /// 
     public final func mergeOverlappingCarets() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_merge_overlapping_carets, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_begin_multicaret_edit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("begin_multicaret_edit")
+    fileprivate static let method_begin_multicaret_edit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("begin_multicaret_edit")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3078,15 +3487,14 @@ open class TextEdit: Control {
     
     /// Starts an edit for multiple carets. The edit must be ended with ``endMulticaretEdit()``. Multicaret edits can be used to edit text at multiple carets and delay merging the carets until the end, so the caret indexes aren't affected immediately. ``beginMulticaretEdit()`` and ``endMulticaretEdit()`` can be nested, and the merge will happen at the last ``endMulticaretEdit()``.
     /// 
-    /// Example usage:
-    /// 
     public final func beginMulticaretEdit() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_begin_multicaret_edit, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_end_multicaret_edit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("end_multicaret_edit")
+    fileprivate static let method_end_multicaret_edit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("end_multicaret_edit")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3098,12 +3506,13 @@ open class TextEdit: Control {
     
     /// Ends an edit for multiple carets, that was started with ``beginMulticaretEdit()``. If this was the last ``endMulticaretEdit()`` and ``mergeOverlappingCarets()`` was called, carets will be merged.
     public final func endMulticaretEdit() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_end_multicaret_edit, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_in_mulitcaret_edit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_in_mulitcaret_edit")
+    fileprivate static let method_is_in_mulitcaret_edit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_in_mulitcaret_edit")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3115,13 +3524,14 @@ open class TextEdit: Control {
     
     /// Returns `true` if a ``beginMulticaretEdit()`` has been called and ``endMulticaretEdit()`` has not yet been called.
     public final func isInMulitcaretEdit() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_in_mulitcaret_edit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_multicaret_edit_ignore_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multicaret_edit_ignore_caret")
+    fileprivate static let method_multicaret_edit_ignore_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multicaret_edit_ignore_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -3136,6 +3546,7 @@ open class TextEdit: Control {
     /// It is recommended to `continue` within a loop iterating on multiple carets if a caret should be ignored.
     /// 
     public final func multicaretEditIgnoreCaret(caretIndex: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3150,8 +3561,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_is_caret_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_caret_visible")
+    fileprivate static let method_is_caret_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_caret_visible")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1051549951)!
@@ -3161,8 +3572,12 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns `true` if the caret is visible on the screen.
+    /// Returns `true` if the caret is visible, `false` otherwise. A caret will be considered hidden if it is outside the scrollable area when scrolling is enabled.
+    /// 
+    /// > Note: ``isCaretVisible(caretIndex:)`` does not account for a caret being off-screen if it is still within the scrollable area. It will return `true` even if the caret is off-screen as long as it meets ``TextEdit``'s own conditions for being visible. This includes uses of ``scrollFitContentWidth`` and ``scrollFitContentHeight`` that cause the ``TextEdit`` to expand beyond the viewport's bounds.
+    /// 
     public final func isCaretVisible(caretIndex: Int32 = 0) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3177,8 +3592,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_caret_draw_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_draw_pos")
+    fileprivate static let method_get_caret_draw_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_draw_pos")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 478253731)!
@@ -3190,6 +3605,7 @@ open class TextEdit: Control {
     
     /// Returns the caret pixel draw position.
     public final func getCaretDrawPos(caretIndex: Int32 = 0) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3204,8 +3620,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_caret_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_caret_line")
+    fileprivate static let method_set_caret_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_caret_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1302582944)!
@@ -3226,6 +3642,7 @@ open class TextEdit: Control {
     /// > Note: If supporting multiple carets this will not check for any overlap. See ``mergeOverlappingCarets()``.
     /// 
     public final func setCaretLine(_ line: Int32, adjustViewport: Bool = true, canBeHidden: Bool = true, wrapIndex: Int32 = 0, caretIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: adjustViewport) { pArg1 in
                 withUnsafePointer(to: canBeHidden) { pArg2 in
@@ -3251,8 +3668,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_caret_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_line")
+    fileprivate static let method_get_caret_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -3264,6 +3681,7 @@ open class TextEdit: Control {
     
     /// Returns the line the editing caret is on.
     public final func getCaretLine(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3278,8 +3696,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_caret_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_caret_column")
+    fileprivate static let method_set_caret_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_caret_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3796796178)!
@@ -3296,6 +3714,7 @@ open class TextEdit: Control {
     /// > Note: If supporting multiple carets this will not check for any overlap. See ``mergeOverlappingCarets()``.
     /// 
     public final func setCaretColumn(_ column: Int32, adjustViewport: Bool = true, caretIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: adjustViewport) { pArg1 in
                 withUnsafePointer(to: caretIndex) { pArg2 in
@@ -3315,8 +3734,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_caret_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_column")
+    fileprivate static let method_get_caret_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -3328,6 +3747,7 @@ open class TextEdit: Control {
     
     /// Returns the column the editing caret is at.
     public final func getCaretColumn(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3342,8 +3762,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_caret_wrap_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_wrap_index")
+    fileprivate static let method_get_caret_wrap_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_wrap_index")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -3355,6 +3775,7 @@ open class TextEdit: Control {
     
     /// Returns the wrap index the editing caret is on.
     public final func getCaretWrapIndex(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3369,8 +3790,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_word_under_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_word_under_caret")
+    fileprivate static let method_get_word_under_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_word_under_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3929349208)!
@@ -3382,6 +3803,7 @@ open class TextEdit: Control {
     
     /// Returns a ``String`` text with the word under the caret's location.
     public final func getWordUnderCaret(caretIndex: Int32 = -1) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3396,8 +3818,8 @@ open class TextEdit: Control {
         return _result.description
     }
     
-    fileprivate static var method_set_use_default_word_separators: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_default_word_separators")
+    fileprivate static let method_set_use_default_word_separators: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_default_word_separators")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3409,6 +3831,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_use_default_word_separators(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3422,8 +3845,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_default_word_separators_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_default_word_separators_enabled")
+    fileprivate static let method_is_default_word_separators_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_default_word_separators_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3435,13 +3858,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_default_word_separators_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_default_word_separators_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_custom_word_separators: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_custom_word_separators")
+    fileprivate static let method_set_use_custom_word_separators: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_custom_word_separators")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3453,6 +3877,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_use_custom_word_separators(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3466,8 +3891,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_custom_word_separators_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_custom_word_separators_enabled")
+    fileprivate static let method_is_custom_word_separators_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_custom_word_separators_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3479,13 +3904,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_custom_word_separators_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_custom_word_separators_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_custom_word_separators: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_word_separators")
+    fileprivate static let method_set_custom_word_separators: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_word_separators")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -3497,6 +3923,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_custom_word_separators(_ customWordSeparators: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let customWordSeparators = GString(customWordSeparators)
         withUnsafePointer(to: customWordSeparators.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3511,8 +3938,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_custom_word_separators: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_word_separators")
+    fileprivate static let method_get_custom_word_separators: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_word_separators")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -3524,13 +3951,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_custom_word_separators() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextEdit.method_get_custom_word_separators, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_selecting_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selecting_enabled")
+    fileprivate static let method_set_selecting_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selecting_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3542,6 +3970,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_selecting_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3555,8 +3984,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_selecting_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_selecting_enabled")
+    fileprivate static let method_is_selecting_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_selecting_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3568,13 +3997,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_selecting_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_selecting_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deselect_on_focus_loss_enabled")
+    fileprivate static let method_set_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deselect_on_focus_loss_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3586,6 +4016,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_deselect_on_focus_loss_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3599,8 +4030,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_deselect_on_focus_loss_enabled")
+    fileprivate static let method_is_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_deselect_on_focus_loss_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3612,13 +4043,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_deselect_on_focus_loss_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_deselect_on_focus_loss_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drag_and_drop_selection_enabled")
+    fileprivate static let method_set_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drag_and_drop_selection_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3630,6 +4062,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_drag_and_drop_selection_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3643,8 +4076,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_drag_and_drop_selection_enabled")
+    fileprivate static let method_is_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_drag_and_drop_selection_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3656,13 +4089,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_drag_and_drop_selection_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_drag_and_drop_selection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_selection_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selection_mode")
+    fileprivate static let method_set_selection_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selection_mode")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1658801786)!
@@ -3674,6 +4108,7 @@ open class TextEdit: Control {
     
     /// Sets the current selection mode.
     public final func setSelectionMode(_ mode: TextEdit.SelectionMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3687,8 +4122,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_selection_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_mode")
+    fileprivate static let method_get_selection_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_mode")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3750106938)!
@@ -3700,13 +4135,14 @@ open class TextEdit: Control {
     
     /// Returns the current selection mode.
     public final func getSelectionMode() -> TextEdit.SelectionMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextEdit.method_get_selection_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextEdit.SelectionMode (rawValue: _result)!
     }
     
-    fileprivate static var method_select_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select_all")
+    fileprivate static let method_select_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select_all")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3721,12 +4157,13 @@ open class TextEdit: Control {
     /// If ``selectingEnabled`` is `false`, no selection will occur.
     /// 
     public final func selectAll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_select_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_select_word_under_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select_word_under_caret")
+    fileprivate static let method_select_word_under_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select_word_under_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -3738,6 +4175,7 @@ open class TextEdit: Control {
     
     /// Selects the word under the caret.
     public final func selectWordUnderCaret(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3751,8 +4189,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_add_selection_for_next_occurrence: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_selection_for_next_occurrence")
+    fileprivate static let method_add_selection_for_next_occurrence: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_selection_for_next_occurrence")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3764,12 +4202,13 @@ open class TextEdit: Control {
     
     /// Adds a selection and a caret for the next occurrence of the current selection. If there is no active selection, selects word under caret.
     public final func addSelectionForNextOccurrence() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_add_selection_for_next_occurrence, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_skip_selection_for_next_occurrence: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skip_selection_for_next_occurrence")
+    fileprivate static let method_skip_selection_for_next_occurrence: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skip_selection_for_next_occurrence")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3781,12 +4220,13 @@ open class TextEdit: Control {
     
     /// Moves a selection and a caret for the next occurrence of the current selection. If there is no active selection, moves to the next occurrence of the word under caret.
     public final func skipSelectionForNextOccurrence() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextEdit.method_skip_selection_for_next_occurrence, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_select: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select")
+    fileprivate static let method_select: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2560984452)!
@@ -3803,6 +4243,7 @@ open class TextEdit: Control {
     /// > Note: If supporting multiple carets this will not check for any overlap. See ``mergeOverlappingCarets()``.
     /// 
     public final func select(originLine: Int32, originColumn: Int32, caretLine: Int32, caretColumn: Int32, caretIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: originLine) { pArg0 in
             withUnsafePointer(to: originColumn) { pArg1 in
                 withUnsafePointer(to: caretLine) { pArg2 in
@@ -3828,8 +4269,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_has_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_selection")
+    fileprivate static let method_has_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_selection")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2824505868)!
@@ -3841,6 +4282,7 @@ open class TextEdit: Control {
     
     /// Returns `true` if the user has selected text.
     public final func hasSelection(caretIndex: Int32 = -1) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3855,8 +4297,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_selected_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected_text")
+    fileprivate static let method_get_selected_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2309358862)!
@@ -3868,6 +4310,7 @@ open class TextEdit: Control {
     
     /// Returns the text inside the selection of a caret, or all the carets if `caretIndex` is its default value `-1`.
     public final func getSelectedText(caretIndex: Int32 = -1) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3882,8 +4325,8 @@ open class TextEdit: Control {
         return _result.description
     }
     
-    fileprivate static var method_get_selection_at_line_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_at_line_column")
+    fileprivate static let method_get_selection_at_line_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_at_line_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1810224333)!
@@ -3898,6 +4341,7 @@ open class TextEdit: Control {
     /// If `includeEdges` is `false`, the position must be inside the selection and not at either end. If `onlySelections` is `false`, carets without a selection will also be considered.
     /// 
     public final func getSelectionAtLineColumn(line: Int32, column: Int32, includeEdges: Bool = true, onlySelections: Bool = true) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: column) { pArg1 in
@@ -3921,8 +4365,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_line_ranges_from_carets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_ranges_from_carets")
+    fileprivate static let method_get_line_ranges_from_carets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_ranges_from_carets")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2393089247)!
@@ -3932,11 +4376,12 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns an ``GArray`` of line ranges where `x` is the first line and `y` is the last line. All lines within these ranges will have a caret on them or be part of a selection. Each line will only be part of one line range, even if it has multiple carets on it.
+    /// Returns an ``VariantArray`` of line ranges where `x` is the first line and `y` is the last line. All lines within these ranges will have a caret on them or be part of a selection. Each line will only be part of one line range, even if it has multiple carets on it.
     /// 
     /// If a selection's end column (``getSelectionToColumn(caretIndex:)``) is at column `0`, that line will not be included. If a selection begins on the line after another selection ends and `mergeAdjacent` is `true`, or they begin and end on the same line, one line range will include both selections.
     /// 
-    public final func getLineRangesFromCarets(onlySelections: Bool = false, mergeAdjacent: Bool = true) -> VariantCollection<Vector2i> {
+    public final func getLineRangesFromCarets(onlySelections: Bool = false, mergeAdjacent: Bool = true) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: onlySelections) { pArg0 in
             withUnsafePointer(to: mergeAdjacent) { pArg1 in
@@ -3951,11 +4396,11 @@ open class TextEdit: Control {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_get_selection_origin_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_origin_line")
+    fileprivate static let method_get_selection_origin_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_origin_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -3967,6 +4412,7 @@ open class TextEdit: Control {
     
     /// Returns the origin line of the selection. This is the opposite end from the caret.
     public final func getSelectionOriginLine(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3981,8 +4427,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_selection_origin_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_origin_column")
+    fileprivate static let method_get_selection_origin_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_origin_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -3994,6 +4440,7 @@ open class TextEdit: Control {
     
     /// Returns the origin column of the selection. This is the opposite end from the caret.
     public final func getSelectionOriginColumn(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4008,8 +4455,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_selection_origin_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selection_origin_line")
+    fileprivate static let method_set_selection_origin_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selection_origin_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 195434140)!
@@ -4026,6 +4473,7 @@ open class TextEdit: Control {
     /// If `wrapIndex` is `-1`, the selection origin column will be clamped to the `line`'s length. If `wrapIndex` is greater than `-1`, the column will be moved to attempt to match the visual x position on the line's `wrapIndex` to the position from the last time ``setSelectionOriginColumn(_:caretIndex:)`` or ``select(originLine:originColumn:caretLine:caretColumn:caretIndex:)`` was called.
     /// 
     public final func setSelectionOriginLine(_ line: Int32, canBeHidden: Bool = true, wrapIndex: Int32 = -1, caretIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: canBeHidden) { pArg1 in
                 withUnsafePointer(to: wrapIndex) { pArg2 in
@@ -4048,8 +4496,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_set_selection_origin_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selection_origin_column")
+    fileprivate static let method_set_selection_origin_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selection_origin_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2230941749)!
@@ -4061,6 +4509,7 @@ open class TextEdit: Control {
     
     /// Sets the selection origin column to the `column` for the given `caretIndex`. If the selection origin is moved to the caret position, the selection will deselect.
     public final func setSelectionOriginColumn(_ column: Int32, caretIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: caretIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4077,8 +4526,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_selection_from_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_from_line")
+    fileprivate static let method_get_selection_from_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_from_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -4090,6 +4539,7 @@ open class TextEdit: Control {
     
     /// Returns the selection begin line. Returns the caret line if there is no selection.
     public final func getSelectionFromLine(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4104,8 +4554,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_selection_from_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_from_column")
+    fileprivate static let method_get_selection_from_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_from_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -4117,6 +4567,7 @@ open class TextEdit: Control {
     
     /// Returns the selection begin column. Returns the caret column if there is no selection.
     public final func getSelectionFromColumn(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4131,8 +4582,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_selection_to_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_to_line")
+    fileprivate static let method_get_selection_to_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_to_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -4144,6 +4595,7 @@ open class TextEdit: Control {
     
     /// Returns the selection end line. Returns the caret line if there is no selection.
     public final func getSelectionToLine(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4158,8 +4610,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_selection_to_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_to_column")
+    fileprivate static let method_get_selection_to_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_to_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -4171,6 +4623,7 @@ open class TextEdit: Control {
     
     /// Returns the selection end column. Returns the caret column if there is no selection.
     public final func getSelectionToColumn(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4185,8 +4638,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_is_caret_after_selection_origin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_caret_after_selection_origin")
+    fileprivate static let method_is_caret_after_selection_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_caret_after_selection_origin")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1051549951)!
@@ -4198,6 +4651,7 @@ open class TextEdit: Control {
     
     /// Returns `true` if the caret of the selection is after the selection origin. This can be used to determine the direction of the selection.
     public final func isCaretAfterSelectionOrigin(caretIndex: Int32 = 0) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4212,8 +4666,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_deselect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("deselect")
+    fileprivate static let method_deselect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("deselect")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -4225,6 +4679,7 @@ open class TextEdit: Control {
     
     /// Deselects the current selection.
     public final func deselect(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4238,8 +4693,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_delete_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("delete_selection")
+    fileprivate static let method_delete_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("delete_selection")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -4251,6 +4706,7 @@ open class TextEdit: Control {
     
     /// Deletes the selected text.
     public final func deleteSelection(caretIndex: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4264,8 +4720,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_set_line_wrapping_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_wrapping_mode")
+    fileprivate static let method_set_line_wrapping_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_wrapping_mode")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2525115309)!
@@ -4277,6 +4733,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_line_wrapping_mode(_ mode: TextEdit.LineWrappingMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4290,8 +4747,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_line_wrapping_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_wrapping_mode")
+    fileprivate static let method_get_line_wrapping_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_wrapping_mode")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3562716114)!
@@ -4303,13 +4760,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_line_wrapping_mode() -> TextEdit.LineWrappingMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextEdit.method_get_line_wrapping_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextEdit.LineWrappingMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autowrap_mode")
+    fileprivate static let method_set_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autowrap_mode")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3289138044)!
@@ -4321,6 +4779,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_autowrap_mode(_ autowrapMode: TextServer.AutowrapMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4334,8 +4793,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autowrap_mode")
+    fileprivate static let method_get_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autowrap_mode")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1549071663)!
@@ -4347,13 +4806,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextEdit.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
-    fileprivate static var method_is_line_wrapped: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_line_wrapped")
+    fileprivate static let method_is_line_wrapped: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_line_wrapped")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -4365,6 +4825,7 @@ open class TextEdit: Control {
     
     /// Returns if the given line is wrapped.
     public final func isLineWrapped(line: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4379,8 +4840,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_line_wrap_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_wrap_count")
+    fileprivate static let method_get_line_wrap_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_wrap_count")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -4392,6 +4853,7 @@ open class TextEdit: Control {
     
     /// Returns the number of times the given line is wrapped.
     public final func getLineWrapCount(line: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4406,8 +4868,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_line_wrap_index_at_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_wrap_index_at_column")
+    fileprivate static let method_get_line_wrap_index_at_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_wrap_index_at_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -4417,8 +4879,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns the wrap index of the given line column.
+    /// Returns the wrap index of the given column on the given line. This ranges from `0` to ``getLineWrapCount(line:)``.
     public final func getLineWrapIndexAtColumn(line: Int32, column: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: column) { pArg1 in
@@ -4436,8 +4899,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_line_wrapped_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_wrapped_text")
+    fileprivate static let method_get_line_wrapped_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_wrapped_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 647634434)!
@@ -4449,6 +4912,7 @@ open class TextEdit: Control {
     
     /// Returns an array of ``String``s representing each wrapped index.
     public final func getLineWrappedText(line: Int32) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4463,8 +4927,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_smooth_scroll_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_smooth_scroll_enabled")
+    fileprivate static let method_set_smooth_scroll_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_smooth_scroll_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4476,6 +4940,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_smooth_scroll_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4489,8 +4954,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_smooth_scroll_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_smooth_scroll_enabled")
+    fileprivate static let method_is_smooth_scroll_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_smooth_scroll_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4502,13 +4967,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_smooth_scroll_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_smooth_scroll_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_scroll_bar")
+    fileprivate static let method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_scroll_bar")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3226026593)!
@@ -4520,13 +4986,14 @@ open class TextEdit: Control {
     
     /// Returns the ``VScrollBar`` of the ``TextEdit``.
     public final func getVScrollBar() -> VScrollBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TextEdit.method_get_v_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_h_scroll_bar: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_scroll_bar")
+    fileprivate static let method_get_h_scroll_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_scroll_bar")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3774687988)!
@@ -4538,13 +5005,14 @@ open class TextEdit: Control {
     
     /// Returns the ``HScrollBar`` used by ``TextEdit``.
     public final func getHScrollBar() -> HScrollBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TextEdit.method_get_h_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_v_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_scroll")
+    fileprivate static let method_set_v_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_scroll")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4556,6 +5024,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_v_scroll(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4569,8 +5038,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_v_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_scroll")
+    fileprivate static let method_get_v_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_scroll")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4582,13 +5051,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_v_scroll() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextEdit.method_get_v_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_h_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_h_scroll")
+    fileprivate static let method_set_h_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_h_scroll")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -4600,6 +5070,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_h_scroll(_ value: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4613,8 +5084,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_h_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_scroll")
+    fileprivate static let method_get_h_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_scroll")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -4626,13 +5097,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_h_scroll() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_h_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scroll_past_end_of_file_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scroll_past_end_of_file_enabled")
+    fileprivate static let method_set_scroll_past_end_of_file_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scroll_past_end_of_file_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4644,6 +5116,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_scroll_past_end_of_file_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4657,8 +5130,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_scroll_past_end_of_file_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_scroll_past_end_of_file_enabled")
+    fileprivate static let method_is_scroll_past_end_of_file_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_scroll_past_end_of_file_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4670,13 +5143,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_scroll_past_end_of_file_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_scroll_past_end_of_file_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_v_scroll_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_scroll_speed")
+    fileprivate static let method_set_v_scroll_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_scroll_speed")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4688,6 +5162,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_v_scroll_speed(_ speed: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: speed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4701,8 +5176,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_v_scroll_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_scroll_speed")
+    fileprivate static let method_get_v_scroll_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_scroll_speed")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4714,13 +5189,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_v_scroll_speed() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextEdit.method_get_v_scroll_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fit_content_height_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fit_content_height_enabled")
+    fileprivate static let method_set_fit_content_height_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fit_content_height_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4732,6 +5208,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_fit_content_height_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4745,8 +5222,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_fit_content_height_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_fit_content_height_enabled")
+    fileprivate static let method_is_fit_content_height_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_fit_content_height_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4758,13 +5235,60 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_fit_content_height_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_fit_content_height_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_scroll_pos_for_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scroll_pos_for_line")
+    fileprivate static let method_set_fit_content_width_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fit_content_width_enabled")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_fit_content_width_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enabled) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextEdit.method_set_fit_content_width_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_fit_content_width_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_fit_content_width_enabled")
+        return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_fit_content_width_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(TextEdit.method_is_fit_content_width_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_scroll_pos_for_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scroll_pos_for_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3929084198)!
@@ -4776,6 +5300,7 @@ open class TextEdit: Control {
     
     /// Returns the scroll position for `wrapIndex` of `line`.
     public final func getScrollPosForLine(_ line: Int32, wrapIndex: Int32 = 0) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: wrapIndex) { pArg1 in
@@ -4793,8 +5318,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_line_as_first_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_as_first_visible")
+    fileprivate static let method_set_line_as_first_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_as_first_visible")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2230941749)!
@@ -4806,6 +5331,7 @@ open class TextEdit: Control {
     
     /// Positions the `wrapIndex` of `line` at the top of the viewport.
     public final func setLineAsFirstVisible(line: Int32, wrapIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: wrapIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4822,8 +5348,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_first_visible_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_first_visible_line")
+    fileprivate static let method_get_first_visible_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_first_visible_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -4835,13 +5361,14 @@ open class TextEdit: Control {
     
     /// Returns the first visible line.
     public final func getFirstVisibleLine() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_first_visible_line, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_line_as_center_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_as_center_visible")
+    fileprivate static let method_set_line_as_center_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_as_center_visible")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2230941749)!
@@ -4853,6 +5380,7 @@ open class TextEdit: Control {
     
     /// Positions the `wrapIndex` of `line` at the center of the viewport.
     public final func setLineAsCenterVisible(line: Int32, wrapIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: wrapIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4869,8 +5397,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_set_line_as_last_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_as_last_visible")
+    fileprivate static let method_set_line_as_last_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_as_last_visible")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2230941749)!
@@ -4882,6 +5410,7 @@ open class TextEdit: Control {
     
     /// Positions the `wrapIndex` of `line` at the bottom of the viewport.
     public final func setLineAsLastVisible(line: Int32, wrapIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: wrapIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4898,8 +5427,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_last_full_visible_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_full_visible_line")
+    fileprivate static let method_get_last_full_visible_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_full_visible_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -4911,13 +5440,14 @@ open class TextEdit: Control {
     
     /// Returns the last visible line. Use ``getLastFullVisibleLineWrapIndex()`` for the wrap index.
     public final func getLastFullVisibleLine() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_last_full_visible_line, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_last_full_visible_line_wrap_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_full_visible_line_wrap_index")
+    fileprivate static let method_get_last_full_visible_line_wrap_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_full_visible_line_wrap_index")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -4929,13 +5459,14 @@ open class TextEdit: Control {
     
     /// Returns the last visible wrap index of the last visible line.
     public final func getLastFullVisibleLineWrapIndex() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_last_full_visible_line_wrap_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_visible_line_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_line_count")
+    fileprivate static let method_get_visible_line_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_line_count")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -4945,15 +5476,16 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns the number of visible lines, including wrapped text.
+    /// Returns the number of lines that can visually fit, rounded down, based on this control's height.
     public final func getVisibleLineCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_visible_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_visible_line_count_in_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_line_count_in_range")
+    fileprivate static let method_get_visible_line_count_in_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_line_count_in_range")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -4963,8 +5495,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns the total number of visible + wrapped lines between the two lines.
+    /// Returns the total number of lines between `fromLine` and `toLine` (inclusive) in the text. This includes wrapped lines and excludes folded lines. If the range covers all lines it is equivalent to ``getTotalVisibleLineCount()``.
     public final func getVisibleLineCountInRange(fromLine: Int32, toLine: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: fromLine) { pArg0 in
             withUnsafePointer(to: toLine) { pArg1 in
@@ -4982,8 +5515,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_total_visible_line_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_visible_line_count")
+    fileprivate static let method_get_total_visible_line_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_visible_line_count")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -4993,15 +5526,16 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns the number of lines that may be drawn.
+    /// Returns the total number of lines in the text. This includes wrapped lines and excludes folded lines. If ``wrapMode`` is set to ``LineWrappingMode/none`` and no lines are folded (see ``CodeEdit/isLineFolded(line:)``) then this is equivalent to ``getLineCount()``. See ``getVisibleLineCountInRange(fromLine:toLine:)`` for a limited range of lines.
     public final func getTotalVisibleLineCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_total_visible_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_adjust_viewport_to_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("adjust_viewport_to_caret")
+    fileprivate static let method_adjust_viewport_to_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("adjust_viewport_to_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -5013,6 +5547,7 @@ open class TextEdit: Control {
     
     /// Adjust the viewport so the caret is visible.
     public final func adjustViewportToCaret(caretIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5026,8 +5561,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_center_viewport_to_caret: GDExtensionMethodBindPtr = {
-        let methodName = StringName("center_viewport_to_caret")
+    fileprivate static let method_center_viewport_to_caret: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("center_viewport_to_caret")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -5039,6 +5574,7 @@ open class TextEdit: Control {
     
     /// Centers the viewport on the line the editing caret is at. This also resets the ``scrollHorizontal`` value to `0`.
     public final func centerViewportToCaret(caretIndex: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5052,8 +5588,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_set_draw_minimap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_minimap")
+    fileprivate static let method_set_draw_minimap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_minimap")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -5065,6 +5601,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_draw_minimap(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5078,8 +5615,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_drawing_minimap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_drawing_minimap")
+    fileprivate static let method_is_drawing_minimap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_drawing_minimap")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -5091,13 +5628,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_drawing_minimap() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_drawing_minimap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_minimap_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_minimap_width")
+    fileprivate static let method_set_minimap_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_minimap_width")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -5109,6 +5647,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_minimap_width(_ width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5122,8 +5661,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_minimap_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimap_width")
+    fileprivate static let method_get_minimap_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimap_width")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5135,13 +5674,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_minimap_width() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_minimap_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_minimap_visible_lines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimap_visible_lines")
+    fileprivate static let method_get_minimap_visible_lines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimap_visible_lines")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5153,13 +5693,14 @@ open class TextEdit: Control {
     
     /// Returns the number of lines that may be drawn on the minimap.
     public final func getMinimapVisibleLines() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_minimap_visible_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_gutter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_gutter")
+    fileprivate static let method_add_gutter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_gutter")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -5171,6 +5712,7 @@ open class TextEdit: Control {
     
     /// Register a new gutter to this ``TextEdit``. Use `at` to have a specific gutter order. A value of `-1` appends the gutter to the right.
     public final func addGutter(at: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: at) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5184,8 +5726,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_remove_gutter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_gutter")
+    fileprivate static let method_remove_gutter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_gutter")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -5195,8 +5737,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Removes the gutter from this ``TextEdit``.
+    /// Removes the gutter at the given index.
     public final func removeGutter(_ gutter: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5210,8 +5753,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_gutter_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gutter_count")
+    fileprivate static let method_get_gutter_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gutter_count")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5223,13 +5766,14 @@ open class TextEdit: Control {
     
     /// Returns the number of gutters registered.
     public final func getGutterCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_gutter_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gutter_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gutter_name")
+    fileprivate static let method_set_gutter_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gutter_name")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -5239,8 +5783,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Sets the name of the gutter.
+    /// Sets the name of the gutter at the given index.
     public final func setGutterName(gutter: Int32, name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gutter) { pArg0 in
             let name = GString(name)
             withUnsafePointer(to: name.content) { pArg1 in
@@ -5258,8 +5803,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_gutter_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gutter_name")
+    fileprivate static let method_get_gutter_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gutter_name")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -5271,6 +5816,7 @@ open class TextEdit: Control {
     
     /// Returns the name of the gutter at the given index.
     public final func getGutterName(gutter: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5285,8 +5831,8 @@ open class TextEdit: Control {
         return _result.description
     }
     
-    fileprivate static var method_set_gutter_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gutter_type")
+    fileprivate static let method_set_gutter_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gutter_type")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1088959071)!
@@ -5296,8 +5842,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Sets the type of gutter. Gutters can contain icons, text, or custom visuals. See ``TextEdit.GutterType`` for options.
+    /// Sets the type of gutter at the given index. Gutters can contain icons, text, or custom visuals. See ``TextEdit.GutterType`` for options.
     public final func setGutterType(gutter: Int32, type: TextEdit.GutterType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: type.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5314,8 +5861,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_gutter_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gutter_type")
+    fileprivate static let method_get_gutter_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gutter_type")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1159699127)!
@@ -5327,6 +5874,7 @@ open class TextEdit: Control {
     
     /// Returns the type of the gutter at the given index. Gutters can contain icons, text, or custom visuals. See ``TextEdit.GutterType`` for options.
     public final func getGutterType(gutter: Int32) -> TextEdit.GutterType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5341,8 +5889,8 @@ open class TextEdit: Control {
         return TextEdit.GutterType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_gutter_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gutter_width")
+    fileprivate static let method_set_gutter_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gutter_width")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -5352,8 +5900,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Set the width of the gutter.
+    /// Set the width of the gutter at the given index.
     public final func setGutterWidth(gutter: Int32, width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5370,8 +5919,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_gutter_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gutter_width")
+    fileprivate static let method_get_gutter_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gutter_width")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -5383,6 +5932,7 @@ open class TextEdit: Control {
     
     /// Returns the width of the gutter at the given index.
     public final func getGutterWidth(gutter: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5397,8 +5947,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_gutter_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gutter_draw")
+    fileprivate static let method_set_gutter_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gutter_draw")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -5408,8 +5958,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Sets whether the gutter should be drawn.
+    /// If `true`, the gutter at the given index is drawn. The gutter type (``setGutterType(gutter:type:)``) determines how it is drawn. See ``isGutterDrawn(gutter:)``.
     public final func setGutterDraw(gutter: Int32, draw: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: draw) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5426,8 +5977,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_gutter_drawn: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_gutter_drawn")
+    fileprivate static let method_is_gutter_drawn: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_gutter_drawn")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -5437,8 +5988,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns whether the gutter is currently drawn.
+    /// Returns `true` if the gutter at the given index is currently drawn. See ``setGutterDraw(gutter:draw:)``.
     public final func isGutterDrawn(gutter: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5453,8 +6005,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_gutter_clickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gutter_clickable")
+    fileprivate static let method_set_gutter_clickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gutter_clickable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -5464,8 +6016,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Sets the gutter as clickable. This will change the mouse cursor to a pointing hand when hovering over the gutter.
+    /// If `true`, the mouse cursor will change to a pointing hand (``Control/CursorShape/pointingHand``) when hovering over the gutter at the given index. See ``isGutterClickable(gutter:)`` and ``setLineGutterClickable(line:gutter:clickable:)``.
     public final func setGutterClickable(gutter: Int32, clickable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: clickable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5482,8 +6035,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_gutter_clickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_gutter_clickable")
+    fileprivate static let method_is_gutter_clickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_gutter_clickable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -5493,8 +6046,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns whether the gutter is clickable.
+    /// Returns `true` if the gutter at the given index is clickable. See ``setGutterClickable(gutter:clickable:)``.
     public final func isGutterClickable(gutter: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5509,8 +6063,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_gutter_overwritable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gutter_overwritable")
+    fileprivate static let method_set_gutter_overwritable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gutter_overwritable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -5520,8 +6074,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Sets the gutter to overwritable. See ``mergeGutters(fromLine:toLine:)``.
+    /// If `true`, the line data of the gutter at the given index can be overridden when using ``mergeGutters(fromLine:toLine:)``. See ``isGutterOverwritable(gutter:)``.
     public final func setGutterOverwritable(gutter: Int32, overwritable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: overwritable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5538,8 +6093,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_gutter_overwritable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_gutter_overwritable")
+    fileprivate static let method_is_gutter_overwritable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_gutter_overwritable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -5549,8 +6104,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns whether the gutter is overwritable.
+    /// Returns `true` if the gutter at the given index is overwritable. See ``setGutterOverwritable(gutter:overwritable:)``.
     public final func isGutterOverwritable(gutter: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: gutter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5565,8 +6121,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_merge_gutters: GDExtensionMethodBindPtr = {
-        let methodName = StringName("merge_gutters")
+    fileprivate static let method_merge_gutters: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("merge_gutters")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -5576,8 +6132,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Merge the gutters from `fromLine` into `toLine`. Only overwritable gutters will be copied.
+    /// Merge the gutters from `fromLine` into `toLine`. Only overwritable gutters will be copied. See ``setGutterOverwritable(gutter:overwritable:)``.
     public final func mergeGutters(fromLine: Int32, toLine: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromLine) { pArg0 in
             withUnsafePointer(to: toLine) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5594,8 +6151,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_set_gutter_custom_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gutter_custom_draw")
+    fileprivate static let method_set_gutter_custom_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gutter_custom_draw")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 957362965)!
@@ -5605,8 +6162,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Set a custom draw method for the gutter. The callback method must take the following args: `line: int, gutter: int, Area: Rect2`. This only works when the gutter type is ``GutterType/custom`` (see ``setGutterType(gutter:type:)``).
+    /// Set a custom draw callback for the gutter at the given index. `drawCallback` must take the following arguments: A line index integer, a gutter index integer, and an area ``Rect2``. This callback only works when the gutter type is ``GutterType/custom`` (see ``setGutterType(gutter:type:)``).
     public final func setGutterCustomDraw(column: Int32, drawCallback: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: drawCallback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5623,8 +6181,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_total_gutter_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_gutter_width")
+    fileprivate static let method_get_total_gutter_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_gutter_width")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -5636,13 +6194,14 @@ open class TextEdit: Control {
     
     /// Returns the total width of all gutters and internal padding.
     public final func getTotalGutterWidth() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextEdit.method_get_total_gutter_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_line_gutter_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_gutter_metadata")
+    fileprivate static let method_set_line_gutter_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_gutter_metadata")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2060538656)!
@@ -5654,6 +6213,7 @@ open class TextEdit: Control {
     
     /// Sets the metadata for `gutter` on `line` to `metadata`.
     public final func setLineGutterMetadata(line: Int32, gutter: Int32, metadata: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
                 withUnsafePointer(to: metadata.content) { pArg2 in
@@ -5673,8 +6233,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_line_gutter_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_gutter_metadata")
+    fileprivate static let method_get_line_gutter_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_gutter_metadata")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 678354945)!
@@ -5686,6 +6246,7 @@ open class TextEdit: Control {
     
     /// Returns the metadata currently in `gutter` at `line`.
     public final func getLineGutterMetadata(line: Int32, gutter: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
@@ -5703,8 +6264,8 @@ open class TextEdit: Control {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_line_gutter_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_gutter_text")
+    fileprivate static let method_set_line_gutter_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_gutter_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2285447957)!
@@ -5716,6 +6277,7 @@ open class TextEdit: Control {
     
     /// Sets the text for `gutter` on `line` to `text`. This only works when the gutter type is ``GutterType/string`` (see ``setGutterType(gutter:type:)``).
     public final func setLineGutterText(line: Int32, gutter: Int32, text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
                 let text = GString(text)
@@ -5736,8 +6298,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_line_gutter_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_gutter_text")
+    fileprivate static let method_get_line_gutter_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_gutter_text")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1391810591)!
@@ -5749,6 +6311,7 @@ open class TextEdit: Control {
     
     /// Returns the text currently in `gutter` at `line`. This only works when the gutter type is ``GutterType/string`` (see ``setGutterType(gutter:type:)``).
     public final func getLineGutterText(line: Int32, gutter: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
@@ -5766,8 +6329,8 @@ open class TextEdit: Control {
         return _result.description
     }
     
-    fileprivate static var method_set_line_gutter_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_gutter_icon")
+    fileprivate static let method_set_line_gutter_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_gutter_icon")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 176101966)!
@@ -5779,6 +6342,7 @@ open class TextEdit: Control {
     
     /// Sets the icon for `gutter` on `line` to `icon`. This only works when the gutter type is ``GutterType/icon`` (see ``setGutterType(gutter:type:)``).
     public final func setLineGutterIcon(line: Int32, gutter: Int32, icon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
                 withUnsafePointer(to: icon?.handle) { pArg2 in
@@ -5798,8 +6362,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_line_gutter_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_gutter_icon")
+    fileprivate static let method_get_line_gutter_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_gutter_icon")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2584904275)!
@@ -5811,6 +6375,7 @@ open class TextEdit: Control {
     
     /// Returns the icon currently in `gutter` at `line`. This only works when the gutter type is ``GutterType/icon`` (see ``setGutterType(gutter:type:)``).
     public final func getLineGutterIcon(line: Int32, gutter: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
@@ -5825,11 +6390,11 @@ open class TextEdit: Control {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_line_gutter_item_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_gutter_item_color")
+    fileprivate static let method_set_line_gutter_item_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_gutter_item_color")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3733378741)!
@@ -5841,6 +6406,7 @@ open class TextEdit: Control {
     
     /// Sets the color for `gutter` on `line` to `color`.
     public final func setLineGutterItemColor(line: Int32, gutter: Int32, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
                 withUnsafePointer(to: color) { pArg2 in
@@ -5860,8 +6426,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_line_gutter_item_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_gutter_item_color")
+    fileprivate static let method_get_line_gutter_item_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_gutter_item_color")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2165839948)!
@@ -5873,6 +6439,7 @@ open class TextEdit: Control {
     
     /// Returns the color currently in `gutter` at `line`.
     public final func getLineGutterItemColor(line: Int32, gutter: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
@@ -5890,8 +6457,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_line_gutter_clickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_gutter_clickable")
+    fileprivate static let method_set_line_gutter_clickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_gutter_clickable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1383440665)!
@@ -5901,8 +6468,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// If `clickable` is `true`, makes the `gutter` on `line` clickable. See [signal gutter_clicked].
+    /// If `clickable` is `true`, makes the `gutter` on the given `line` clickable. This is like ``setGutterClickable(gutter:clickable:)``, but for a single line. If ``isGutterClickable(gutter:)`` is `true`, this will not have any effect. See ``isLineGutterClickable(line:gutter:)`` and [signal gutter_clicked].
     public final func setLineGutterClickable(line: Int32, gutter: Int32, clickable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
                 withUnsafePointer(to: clickable) { pArg2 in
@@ -5922,8 +6490,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_line_gutter_clickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_line_gutter_clickable")
+    fileprivate static let method_is_line_gutter_clickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_line_gutter_clickable")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
@@ -5933,8 +6501,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns whether the gutter on the given line is clickable.
+    /// Returns `true` if the gutter at the given index on the given line is clickable. See ``setLineGutterClickable(line:gutter:clickable:)``.
     public final func isLineGutterClickable(line: Int32, gutter: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: gutter) { pArg1 in
@@ -5952,8 +6521,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_line_background_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_background_color")
+    fileprivate static let method_set_line_background_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_background_color")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -5963,8 +6532,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Sets the current background color of the line. Set to `Color(0, 0, 0, 0)` for no color.
+    /// Sets the custom background color of the given line. If transparent, this color is applied on top of the default background color (See [theme_item background_color]). If set to `Color(0, 0, 0, 0)`, no additional color is applied.
     public final func setLineBackgroundColor(line: Int32, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5981,8 +6551,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_line_background_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_background_color")
+    fileprivate static let method_get_line_background_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_background_color")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -5992,8 +6562,9 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns the current background color of the line. `Color(0, 0, 0, 0)` is returned if no color is set.
+    /// Returns the custom background color of the given line. If no color is set, returns `Color(0, 0, 0, 0)`.
     public final func getLineBackgroundColor(line: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -6008,8 +6579,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_set_syntax_highlighter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_syntax_highlighter")
+    fileprivate static let method_set_syntax_highlighter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_syntax_highlighter")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2765644541)!
@@ -6021,6 +6592,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_syntax_highlighter(_ syntaxHighlighter: SyntaxHighlighter?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: syntaxHighlighter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -6034,8 +6606,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_syntax_highlighter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_syntax_highlighter")
+    fileprivate static let method_get_syntax_highlighter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_syntax_highlighter")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2721131626)!
@@ -6047,13 +6619,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_syntax_highlighter() -> SyntaxHighlighter? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TextEdit.method_get_syntax_highlighter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_highlight_current_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_highlight_current_line")
+    fileprivate static let method_set_highlight_current_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_highlight_current_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -6065,6 +6638,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_highlight_current_line(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -6078,8 +6652,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_highlight_current_line_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_highlight_current_line_enabled")
+    fileprivate static let method_is_highlight_current_line_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_highlight_current_line_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -6091,13 +6665,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_highlight_current_line_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_highlight_current_line_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_highlight_all_occurrences: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_highlight_all_occurrences")
+    fileprivate static let method_set_highlight_all_occurrences: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_highlight_all_occurrences")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -6109,6 +6684,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_highlight_all_occurrences(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -6122,8 +6698,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_highlight_all_occurrences_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_highlight_all_occurrences_enabled")
+    fileprivate static let method_is_highlight_all_occurrences_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_highlight_all_occurrences_enabled")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -6135,13 +6711,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_highlight_all_occurrences_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_highlight_all_occurrences_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_draw_control_chars: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_draw_control_chars")
+    fileprivate static let method_get_draw_control_chars: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_draw_control_chars")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -6153,13 +6730,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func get_draw_control_chars() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_get_draw_control_chars, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_draw_control_chars: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_control_chars")
+    fileprivate static let method_set_draw_control_chars: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_control_chars")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -6171,6 +6749,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_draw_control_chars(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -6184,8 +6763,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_set_draw_tabs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_tabs")
+    fileprivate static let method_set_draw_tabs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_tabs")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -6197,6 +6776,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_draw_tabs(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -6210,8 +6790,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_drawing_tabs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_drawing_tabs")
+    fileprivate static let method_is_drawing_tabs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_drawing_tabs")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -6223,13 +6803,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_drawing_tabs() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_drawing_tabs, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_draw_spaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_spaces")
+    fileprivate static let method_set_draw_spaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_spaces")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -6241,6 +6822,7 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func set_draw_spaces(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -6254,8 +6836,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_is_drawing_spaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_drawing_spaces")
+    fileprivate static let method_is_drawing_spaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_drawing_spaces")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -6267,13 +6849,14 @@ open class TextEdit: Control {
     
     @inline(__always)
     fileprivate final func is_drawing_spaces() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_drawing_spaces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_menu")
+    fileprivate static let method_get_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_menu")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 229722558)!
@@ -6290,13 +6873,14 @@ open class TextEdit: Control {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``Window/visible`` property.
     /// 
     public final func getMenu() -> PopupMenu? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TextEdit.method_get_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_menu_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_menu_visible")
+    fileprivate static let method_is_menu_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_menu_visible")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -6306,15 +6890,16 @@ open class TextEdit: Control {
         
     }()
     
-    /// Returns whether the menu is visible. Use this instead of `get_menu().visible` to improve performance (so the creation of the menu is avoided).
+    /// Returns `true` if the menu is visible. Use this instead of `get_menu().visible` to improve performance (so the creation of the menu is avoided). See ``getMenu()``.
     public final func isMenuVisible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextEdit.method_is_menu_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_menu_option: GDExtensionMethodBindPtr = {
-        let methodName = StringName("menu_option")
+    fileprivate static let method_menu_option: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("menu_option")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -6326,6 +6911,7 @@ open class TextEdit: Control {
     
     /// Executes a given action as defined in the ``TextEdit/MenuItems`` enum.
     public final func menuOption(_ option: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -6339,8 +6925,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_adjust_carets_after_edit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("adjust_carets_after_edit")
+    fileprivate static let method_adjust_carets_after_edit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("adjust_carets_after_edit")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1770277138)!
@@ -6352,6 +6938,7 @@ open class TextEdit: Control {
     
     /// This method does nothing.
     public final func adjustCaretsAfterEdit(caret: Int32, fromLine: Int32, fromCol: Int32, toLine: Int32, toCol: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: caret) { pArg0 in
             withUnsafePointer(to: fromLine) { pArg1 in
                 withUnsafePointer(to: fromCol) { pArg2 in
@@ -6377,8 +6964,8 @@ open class TextEdit: Control {
         
     }
     
-    fileprivate static var method_get_caret_index_edit_order: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_caret_index_edit_order")
+    fileprivate static let method_get_caret_index_edit_order: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_caret_index_edit_order")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -6390,13 +6977,14 @@ open class TextEdit: Control {
     
     /// Returns a list of caret indexes in their edit order, this done from bottom to top. Edit order refers to the way actions such as ``insertTextAtCaret(text:caretIndex:)`` are applied.
     public final func getCaretIndexEditOrder() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(TextEdit.method_get_caret_index_edit_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_selection_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_line")
+    fileprivate static let method_get_selection_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_line")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -6408,6 +6996,7 @@ open class TextEdit: Control {
     
     /// Returns the original start line of the selection.
     public final func getSelectionLine(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -6422,8 +7011,8 @@ open class TextEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_selection_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_column")
+    fileprivate static let method_get_selection_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_column")
         return withUnsafePointer(to: &TextEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -6435,6 +7024,7 @@ open class TextEdit: Control {
     
     /// Returns the original start column of the selection.
     public final func getSelectionColumn(caretIndex: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: caretIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -6449,7 +7039,7 @@ open class TextEdit: Control {
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_backspace":
@@ -6592,42 +7182,48 @@ open class TextEdit: Control {
 func _TextEdit_proxy_backspace (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TextEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TextEdit else { return }
     swiftObject._backspace (caretIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _TextEdit_proxy_copy (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TextEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TextEdit else { return }
     swiftObject._copy (caretIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _TextEdit_proxy_cut (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TextEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TextEdit else { return }
     swiftObject._cut (caretIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _TextEdit_proxy_handle_unicode_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TextEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TextEdit else { return }
     swiftObject._handleUnicodeInput (unicodeChar: args [0]!.assumingMemoryBound (to: Int32.self).pointee, caretIndex: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _TextEdit_proxy_paste (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TextEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TextEdit else { return }
     swiftObject._paste (caretIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _TextEdit_proxy_paste_primary_clipboard (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TextEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TextEdit else { return }
     swiftObject._pastePrimaryClipboard (caretIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 

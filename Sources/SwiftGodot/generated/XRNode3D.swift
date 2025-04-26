@@ -19,7 +19,7 @@ import Musl
 #endif
 
 
-/// A spatial node that has its position automatically updated by the ``XRServer``.
+/// A 3D node that has its position automatically updated by the ``XRServer``.
 /// 
 /// This node can be bound to a specific pose of a ``XRPositionalTracker`` and will automatically have its ``Node3D/transform`` updated by the ``XRServer``. Nodes of this type must be added as children of the ``XROrigin3D`` node.
 /// 
@@ -28,7 +28,7 @@ import Musl
 /// 
 /// - ``trackingChanged``
 open class XRNode3D: Node3D {
-    fileprivate static var className = StringName("XRNode3D")
+    private static var className = StringName("XRNode3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -76,8 +76,8 @@ open class XRNode3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_tracker: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tracker")
+    fileprivate static let method_set_tracker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tracker")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -89,6 +89,7 @@ open class XRNode3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_tracker(_ trackerName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -102,8 +103,8 @@ open class XRNode3D: Node3D {
         
     }
     
-    fileprivate static var method_get_tracker: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracker")
+    fileprivate static let method_get_tracker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracker")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -115,13 +116,14 @@ open class XRNode3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_tracker() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(XRNode3D.method_get_tracker, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_pose_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pose_name")
+    fileprivate static let method_set_pose_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pose_name")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -133,6 +135,7 @@ open class XRNode3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_pose_name(_ pose: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pose.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -146,8 +149,8 @@ open class XRNode3D: Node3D {
         
     }
     
-    fileprivate static var method_get_pose_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pose_name")
+    fileprivate static let method_get_pose_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pose_name")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -159,13 +162,14 @@ open class XRNode3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_pose_name() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(XRNode3D.method_get_pose_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_show_when_tracked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_when_tracked")
+    fileprivate static let method_set_show_when_tracked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_when_tracked")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -177,6 +181,7 @@ open class XRNode3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_show_when_tracked(_ show: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: show) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -190,8 +195,8 @@ open class XRNode3D: Node3D {
         
     }
     
-    fileprivate static var method_get_show_when_tracked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_show_when_tracked")
+    fileprivate static let method_get_show_when_tracked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_show_when_tracked")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -203,13 +208,14 @@ open class XRNode3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_show_when_tracked() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRNode3D.method_get_show_when_tracked, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_is_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_is_active")
+    fileprivate static let method_get_is_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_is_active")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -221,13 +227,14 @@ open class XRNode3D: Node3D {
     
     /// Returns `true` if the ``tracker`` has been registered and the ``pose`` is being tracked.
     public final func getIsActive() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRNode3D.method_get_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_has_tracking_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_has_tracking_data")
+    fileprivate static let method_get_has_tracking_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_has_tracking_data")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -239,13 +246,14 @@ open class XRNode3D: Node3D {
     
     /// Returns `true` if the ``tracker`` has current tracking data for the ``pose`` being tracked.
     public final func getHasTrackingData() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRNode3D.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pose")
+    fileprivate static let method_get_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pose")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2806551826)!
@@ -257,13 +265,14 @@ open class XRNode3D: Node3D {
     
     /// Returns the ``XRPose`` containing the current state of the pose being tracked. This gives access to additional properties of this pose.
     public final func getPose() -> XRPose? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(XRNode3D.method_get_pose, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_trigger_haptic_pulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("trigger_haptic_pulse")
+    fileprivate static let method_trigger_haptic_pulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("trigger_haptic_pulse")
         return withUnsafePointer(to: &XRNode3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 508576839)!
@@ -277,7 +286,16 @@ open class XRNode3D: Node3D {
     /// 
     /// `actionName` is the name of the action for this pulse.
     /// 
+    /// `frequency` is the frequency of the pulse, set to `0.0` to have the system use a default frequency.
+    /// 
+    /// `amplitude` is the amplitude of the pulse between `0.0` and `1.0`.
+    /// 
+    /// `durationSec` is the duration of the pulse in seconds.
+    /// 
+    /// `delaySec` is a delay in seconds before the pulse is given.
+    /// 
     public final func triggerHapticPulse(actionName: String, frequency: Double, amplitude: Double, durationSec: Double, delaySec: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let actionName = GString(actionName)
         withUnsafePointer(to: actionName.content) { pArg0 in
             withUnsafePointer(to: frequency) { pArg1 in

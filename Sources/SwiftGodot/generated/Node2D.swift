@@ -19,16 +19,19 @@ import Musl
 #endif
 
 
-/// A 2D game object, inherited by all 2D-related nodes. Has a position, rotation, scale, and Z index.
+/// A 2D game object, inherited by all 2D-related nodes. Has a position, rotation, scale, and skew.
 /// 
 /// A 2D game object, with a transform (position, rotation, and scale). All 2D nodes, including physics objects and sprites, inherit from Node2D. Use Node2D as a parent node to move, scale and rotate children in a 2D project. Also gives control of the node's render order.
+/// 
+/// > Note: Since both ``Node2D`` and ``Control`` inherit from ``CanvasItem``, they share several concepts from the class such as the ``CanvasItem/zIndex`` and ``CanvasItem/visible`` properties.
+/// 
 open class Node2D: CanvasItem {
-    fileprivate static var className = StringName("Node2D")
+    private static var className = StringName("Node2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
-    /// Position, relative to the node's parent.
+    /// Position, relative to the node's parent. See also ``globalPosition``.
     final public var position: Vector2 {
         get {
             return get_position ()
@@ -40,7 +43,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Rotation in radians, relative to the node's parent.
+    /// Rotation in radians, relative to the node's parent. See also ``globalRotation``.
     /// 
     /// > Note: This property is edited in the inspector in degrees. If you want to use degrees in a script, use ``rotationDegrees``.
     /// 
@@ -55,7 +58,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Helper property to access ``rotation`` in degrees instead of radians.
+    /// Helper property to access ``rotation`` in degrees instead of radians. See also ``globalRotationDegrees``.
     final public var rotationDegrees: Double {
         get {
             return get_rotation_degrees ()
@@ -67,7 +70,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// The node's scale. Unscaled value: `(1, 1)`.
+    /// The node's scale, relative to the node's parent. Unscaled value: `(1, 1)`. See also ``globalScale``.
     /// 
     /// > Note: Negative X scales in 2D are not decomposable from the transformation matrix. Due to the way scale is represented with transformation matrices in Godot, negative scales on the X axis will be changed to negative scales on the Y axis and a rotation of 180 degrees when decomposed.
     /// 
@@ -82,9 +85,11 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Slants the node.
+    /// If set to a non-zero value, slants the node in one direction or another. This can be used for pseudo-3D effects. See also ``globalSkew``.
     /// 
-    /// > Note: Skew is X axis only.
+    /// > Note: Skew is performed on the X axis only, and _between_ rotation and scaling.
+    /// 
+    /// > Note: This property is edited in the inspector in degrees. If you want to use degrees in a script, use `skew = deg_to_rad(value_in_degrees)`.
     /// 
     final public var skew: Double {
         get {
@@ -97,7 +102,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Local ``Transform2D``.
+    /// The node's ``Transform2D``, relative to the node's parent. See also ``globalTransform``.
     final public var transform: Transform2D {
         get {
             return getTransform ()
@@ -109,7 +114,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Global position.
+    /// Global position. See also ``position``.
     final public var globalPosition: Vector2 {
         get {
             return get_global_position ()
@@ -121,7 +126,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Global rotation in radians.
+    /// Global rotation in radians. See also ``rotation``.
     final public var globalRotation: Double {
         get {
             return get_global_rotation ()
@@ -133,7 +138,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Helper property to access ``globalRotation`` in degrees instead of radians.
+    /// Helper property to access ``globalRotation`` in degrees instead of radians. See also ``rotationDegrees``.
     final public var globalRotationDegrees: Double {
         get {
             return get_global_rotation_degrees ()
@@ -145,7 +150,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Global scale.
+    /// Global scale. See also ``scale``.
     final public var globalScale: Vector2 {
         get {
             return get_global_scale ()
@@ -157,7 +162,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Global skew in radians.
+    /// Global skew in radians. See also ``skew``.
     final public var globalSkew: Double {
         get {
             return get_global_skew ()
@@ -169,7 +174,7 @@ open class Node2D: CanvasItem {
         
     }
     
-    /// Global ``Transform2D``.
+    /// Global ``Transform2D``. See also ``transform``.
     final public var globalTransform: Transform2D {
         get {
             return getGlobalTransform ()
@@ -182,8 +187,8 @@ open class Node2D: CanvasItem {
     }
     
     /* Methods */
-    fileprivate static var method_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position")
+    fileprivate static let method_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -195,6 +200,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_position(_ position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -208,8 +214,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_set_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rotation")
+    fileprivate static let method_set_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rotation")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -221,6 +227,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_rotation(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -234,8 +241,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_set_rotation_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rotation_degrees")
+    fileprivate static let method_set_rotation_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rotation_degrees")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -247,6 +254,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_rotation_degrees(_ degrees: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -260,8 +268,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_set_skew: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skew")
+    fileprivate static let method_set_skew: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skew")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -273,6 +281,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_skew(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -286,8 +295,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_set_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scale")
+    fileprivate static let method_set_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scale")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -299,6 +308,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_scale(_ scale: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -312,8 +322,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -325,13 +335,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_position() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Node2D.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rotation")
+    fileprivate static let method_get_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rotation")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -343,13 +354,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_rotation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node2D.method_get_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rotation_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rotation_degrees")
+    fileprivate static let method_get_rotation_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rotation_degrees")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -361,13 +373,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_rotation_degrees() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node2D.method_get_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_skew: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skew")
+    fileprivate static let method_get_skew: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skew")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -379,13 +392,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_skew() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node2D.method_get_skew, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scale")
+    fileprivate static let method_get_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scale")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -397,13 +411,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_scale() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Node2D.method_get_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_rotate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rotate")
+    fileprivate static let method_rotate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rotate")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -415,6 +430,7 @@ open class Node2D: CanvasItem {
     
     /// Applies a rotation to the node, in radians, starting from its current rotation.
     public final func rotate(radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -428,8 +444,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_move_local_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_local_x")
+    fileprivate static let method_move_local_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_local_x")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2087892650)!
@@ -441,6 +457,7 @@ open class Node2D: CanvasItem {
     
     /// Applies a local translation on the node's X axis based on the ``Node/_process(delta:)``'s `delta`. If `scaled` is `false`, normalizes the movement.
     public final func moveLocalX(delta: Double, scaled: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: scaled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -457,8 +474,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_move_local_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_local_y")
+    fileprivate static let method_move_local_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_local_y")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2087892650)!
@@ -470,6 +487,7 @@ open class Node2D: CanvasItem {
     
     /// Applies a local translation on the node's Y axis based on the ``Node/_process(delta:)``'s `delta`. If `scaled` is `false`, normalizes the movement.
     public final func moveLocalY(delta: Double, scaled: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: scaled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -486,8 +504,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_translate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("translate")
+    fileprivate static let method_translate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("translate")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -499,6 +517,7 @@ open class Node2D: CanvasItem {
     
     /// Translates the node by the given `offset` in local coordinates.
     public final func translate(offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -512,8 +531,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_global_translate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_translate")
+    fileprivate static let method_global_translate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_translate")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -525,6 +544,7 @@ open class Node2D: CanvasItem {
     
     /// Adds the `offset` vector to the node's global position.
     public final func globalTranslate(offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -538,8 +558,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_apply_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("apply_scale")
+    fileprivate static let method_apply_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("apply_scale")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -551,6 +571,7 @@ open class Node2D: CanvasItem {
     
     /// Multiplies the current scale by the `ratio` vector.
     public final func applyScale(ratio: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -564,8 +585,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_set_global_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_position")
+    fileprivate static let method_set_global_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_position")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -577,6 +598,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_global_position(_ position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -590,8 +612,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_get_global_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_position")
+    fileprivate static let method_get_global_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_position")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -603,13 +625,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_global_position() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Node2D.method_get_global_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_global_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_rotation")
+    fileprivate static let method_set_global_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_rotation")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -621,6 +644,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_global_rotation(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -634,8 +658,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_set_global_rotation_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_rotation_degrees")
+    fileprivate static let method_set_global_rotation_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_rotation_degrees")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -647,6 +671,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_global_rotation_degrees(_ degrees: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -660,8 +685,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_get_global_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_rotation")
+    fileprivate static let method_get_global_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_rotation")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -673,13 +698,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_global_rotation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node2D.method_get_global_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_global_rotation_degrees: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_rotation_degrees")
+    fileprivate static let method_get_global_rotation_degrees: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_rotation_degrees")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -691,13 +717,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_global_rotation_degrees() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node2D.method_get_global_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_global_skew: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_skew")
+    fileprivate static let method_set_global_skew: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_skew")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -709,6 +736,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_global_skew(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -722,8 +750,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_get_global_skew: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_skew")
+    fileprivate static let method_get_global_skew: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_skew")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -735,13 +763,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_global_skew() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node2D.method_get_global_skew, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_global_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_scale")
+    fileprivate static let method_set_global_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_scale")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -753,6 +782,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_global_scale(_ scale: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -766,8 +796,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_get_global_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_scale")
+    fileprivate static let method_get_global_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_scale")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -779,13 +809,14 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func get_global_scale() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Node2D.method_get_global_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transform")
+    fileprivate static let method_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transform")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761652528)!
@@ -797,6 +828,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_transform(_ xform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -810,8 +842,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_set_global_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_transform")
+    fileprivate static let method_set_global_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_transform")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761652528)!
@@ -823,6 +855,7 @@ open class Node2D: CanvasItem {
     
     @inline(__always)
     fileprivate final func set_global_transform(_ xform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -836,8 +869,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_look_at: GDExtensionMethodBindPtr = {
-        let methodName = StringName("look_at")
+    fileprivate static let method_look_at: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("look_at")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -852,6 +885,7 @@ open class Node2D: CanvasItem {
     /// `point` should not be the same as the node's position, otherwise the node always looks to the right.
     /// 
     public final func lookAt(point: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -865,8 +899,8 @@ open class Node2D: CanvasItem {
         
     }
     
-    fileprivate static var method_get_angle_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_angle_to")
+    fileprivate static let method_get_angle_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_angle_to")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2276447920)!
@@ -881,6 +915,7 @@ open class Node2D: CanvasItem {
     /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/node2d_get_angle_to.png">Illustration of the returned angle.</a>
     /// 
     public final func getAngleTo(point: Vector2) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -895,8 +930,8 @@ open class Node2D: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_to_local: GDExtensionMethodBindPtr = {
-        let methodName = StringName("to_local")
+    fileprivate static let method_to_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("to_local")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2656412154)!
@@ -908,6 +943,7 @@ open class Node2D: CanvasItem {
     
     /// Transforms the provided global position into a position in local coordinate space. The output will be local relative to the ``Node2D`` it is called on. e.g. It is appropriate for determining the positions of child nodes, but it is not appropriate for determining its own position relative to its parent.
     public final func toLocal(globalPoint: Vector2) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: globalPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -922,8 +958,8 @@ open class Node2D: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_to_global: GDExtensionMethodBindPtr = {
-        let methodName = StringName("to_global")
+    fileprivate static let method_to_global: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("to_global")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2656412154)!
@@ -935,6 +971,7 @@ open class Node2D: CanvasItem {
     
     /// Transforms the provided local position into a position in global coordinate space. The input is expected to be local relative to the ``Node2D`` it is called on. e.g. Applying this method to the positions of child nodes will correctly transform their positions into the global coordinate space, but applying it to a node's own position will give an incorrect result, as it will incorporate the node's own transformation into its global position.
     public final func toGlobal(localPoint: Vector2) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: localPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -949,8 +986,8 @@ open class Node2D: CanvasItem {
         return _result
     }
     
-    fileprivate static var method_get_relative_transform_to_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_relative_transform_to_parent")
+    fileprivate static let method_get_relative_transform_to_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_relative_transform_to_parent")
         return withUnsafePointer(to: &Node2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 904556875)!
@@ -962,6 +999,7 @@ open class Node2D: CanvasItem {
     
     /// Returns the ``Transform2D`` relative to this node's parent.
     public final func getRelativeTransformToParent(_ parent: Node?) -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         withUnsafePointer(to: parent?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

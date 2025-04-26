@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A navigation mesh is a collection of polygons that define which areas of an environment are traversable to aid agents in pathfinding through complicated spaces.
 open class NavigationMesh: Resource {
-    fileprivate static var className = StringName("NavigationMesh")
+    private static var className = StringName("NavigationMesh")
     override open class var godotClassName: StringName { className }
     public enum SamplePartitionType: Int64, CaseIterable {
         /// Watershed partitioning. Generally the best choice if you precompute the navigation mesh, use this if you have large open areas.
@@ -390,8 +390,8 @@ open class NavigationMesh: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_sample_partition_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sample_partition_type")
+    fileprivate static let method_set_sample_partition_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sample_partition_type")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2472437533)!
@@ -403,6 +403,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_sample_partition_type(_ samplePartitionType: NavigationMesh.SamplePartitionType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: samplePartitionType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -416,8 +417,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_sample_partition_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sample_partition_type")
+    fileprivate static let method_get_sample_partition_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sample_partition_type")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 833513918)!
@@ -429,13 +430,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_sample_partition_type() -> NavigationMesh.SamplePartitionType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_sample_partition_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NavigationMesh.SamplePartitionType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_parsed_geometry_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parsed_geometry_type")
+    fileprivate static let method_set_parsed_geometry_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parsed_geometry_type")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3064713163)!
@@ -447,6 +449,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_parsed_geometry_type(_ geometryType: NavigationMesh.ParsedGeometryType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: geometryType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -460,8 +463,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_parsed_geometry_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parsed_geometry_type")
+    fileprivate static let method_get_parsed_geometry_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parsed_geometry_type")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3928011953)!
@@ -473,13 +476,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_parsed_geometry_type() -> NavigationMesh.ParsedGeometryType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_parsed_geometry_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NavigationMesh.ParsedGeometryType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -491,6 +495,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -504,8 +509,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -517,13 +522,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask_value")
+    fileprivate static let method_set_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask_value")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -535,6 +541,7 @@ open class NavigationMesh: Resource {
     
     /// Based on `value`, enables or disables the specified layer in the ``geometryCollisionMask``, given a `layerNumber` between 1 and 32.
     public final func setCollisionMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -551,8 +558,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask_value")
+    fileprivate static let method_get_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask_value")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -564,6 +571,7 @@ open class NavigationMesh: Resource {
     
     /// Returns whether or not the specified layer of the ``geometryCollisionMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -578,8 +586,8 @@ open class NavigationMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_set_source_geometry_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_source_geometry_mode")
+    fileprivate static let method_set_source_geometry_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_source_geometry_mode")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2700825194)!
@@ -591,6 +599,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_source_geometry_mode(_ mask: NavigationMesh.SourceGeometryMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -604,8 +613,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_source_geometry_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source_geometry_mode")
+    fileprivate static let method_get_source_geometry_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source_geometry_mode")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2770484141)!
@@ -617,13 +626,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_source_geometry_mode() -> NavigationMesh.SourceGeometryMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_source_geometry_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NavigationMesh.SourceGeometryMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_source_group_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_source_group_name")
+    fileprivate static let method_set_source_group_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_source_group_name")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -635,6 +645,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_source_group_name(_ mask: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -648,8 +659,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_source_group_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source_group_name")
+    fileprivate static let method_get_source_group_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source_group_name")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -661,13 +672,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_source_group_name() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_source_group_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_size")
+    fileprivate static let method_set_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -679,6 +691,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_cell_size(_ cellSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cellSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -692,8 +705,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_size")
+    fileprivate static let method_get_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -705,13 +718,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_cell_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cell_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_height")
+    fileprivate static let method_set_cell_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_height")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -723,6 +737,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_cell_height(_ cellHeight: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cellHeight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -736,8 +751,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_cell_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_height")
+    fileprivate static let method_get_cell_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_height")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -749,13 +764,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_cell_height() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_cell_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_border_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_border_size")
+    fileprivate static let method_set_border_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_border_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -767,6 +783,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_border_size(_ borderSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: borderSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -780,8 +797,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_border_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_border_size")
+    fileprivate static let method_get_border_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_border_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -793,13 +810,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_border_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_border_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_agent_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_agent_height")
+    fileprivate static let method_set_agent_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_agent_height")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -811,6 +829,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_agent_height(_ agentHeight: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: agentHeight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -824,8 +843,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_agent_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_agent_height")
+    fileprivate static let method_get_agent_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_agent_height")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -837,13 +856,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_agent_height() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_agent_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_agent_radius")
+    fileprivate static let method_set_agent_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_agent_radius")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -855,6 +875,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_agent_radius(_ agentRadius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: agentRadius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -868,8 +889,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_agent_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_agent_radius")
+    fileprivate static let method_get_agent_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_agent_radius")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -881,13 +902,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_agent_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_agent_max_climb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_agent_max_climb")
+    fileprivate static let method_set_agent_max_climb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_agent_max_climb")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -899,6 +921,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_agent_max_climb(_ agentMaxClimb: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: agentMaxClimb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -912,8 +935,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_agent_max_climb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_agent_max_climb")
+    fileprivate static let method_get_agent_max_climb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_agent_max_climb")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -925,13 +948,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_agent_max_climb() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_max_climb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_agent_max_slope: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_agent_max_slope")
+    fileprivate static let method_set_agent_max_slope: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_agent_max_slope")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -943,6 +967,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_agent_max_slope(_ agentMaxSlope: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: agentMaxSlope) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -956,8 +981,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_agent_max_slope: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_agent_max_slope")
+    fileprivate static let method_get_agent_max_slope: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_agent_max_slope")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -969,13 +994,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_agent_max_slope() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_max_slope, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_region_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_region_min_size")
+    fileprivate static let method_set_region_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_region_min_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -987,6 +1013,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_region_min_size(_ regionMinSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: regionMinSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1000,8 +1027,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_region_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_region_min_size")
+    fileprivate static let method_get_region_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_region_min_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1013,13 +1040,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_region_min_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_region_min_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_region_merge_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_region_merge_size")
+    fileprivate static let method_set_region_merge_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_region_merge_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1031,6 +1059,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_region_merge_size(_ regionMergeSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: regionMergeSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1044,8 +1073,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_region_merge_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_region_merge_size")
+    fileprivate static let method_get_region_merge_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_region_merge_size")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1057,13 +1086,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_region_merge_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_region_merge_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_edge_max_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_edge_max_length")
+    fileprivate static let method_set_edge_max_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_edge_max_length")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1075,6 +1105,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_edge_max_length(_ edgeMaxLength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: edgeMaxLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1088,8 +1119,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_edge_max_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edge_max_length")
+    fileprivate static let method_get_edge_max_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edge_max_length")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1101,13 +1132,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_edge_max_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_edge_max_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_edge_max_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_edge_max_error")
+    fileprivate static let method_set_edge_max_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_edge_max_error")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1119,6 +1151,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_edge_max_error(_ edgeMaxError: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: edgeMaxError) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1132,8 +1165,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_edge_max_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edge_max_error")
+    fileprivate static let method_get_edge_max_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edge_max_error")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1145,13 +1178,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_edge_max_error() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_edge_max_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vertices_per_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertices_per_polygon")
+    fileprivate static let method_set_vertices_per_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertices_per_polygon")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1163,6 +1197,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_vertices_per_polygon(_ verticesPerPolygon: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: verticesPerPolygon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1176,8 +1211,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_vertices_per_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertices_per_polygon")
+    fileprivate static let method_get_vertices_per_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertices_per_polygon")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1189,13 +1224,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_vertices_per_polygon() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_vertices_per_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_detail_sample_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_detail_sample_distance")
+    fileprivate static let method_set_detail_sample_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_detail_sample_distance")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1207,6 +1243,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_detail_sample_distance(_ detailSampleDist: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: detailSampleDist) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1220,8 +1257,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_detail_sample_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_detail_sample_distance")
+    fileprivate static let method_get_detail_sample_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_detail_sample_distance")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1233,13 +1270,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_detail_sample_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_detail_sample_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_detail_sample_max_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_detail_sample_max_error")
+    fileprivate static let method_set_detail_sample_max_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_detail_sample_max_error")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1251,6 +1289,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_detail_sample_max_error(_ detailSampleMaxError: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: detailSampleMaxError) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1264,8 +1303,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_detail_sample_max_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_detail_sample_max_error")
+    fileprivate static let method_get_detail_sample_max_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_detail_sample_max_error")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1277,13 +1316,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_detail_sample_max_error() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_detail_sample_max_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_filter_low_hanging_obstacles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_filter_low_hanging_obstacles")
+    fileprivate static let method_set_filter_low_hanging_obstacles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_filter_low_hanging_obstacles")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1295,6 +1335,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_filter_low_hanging_obstacles(_ filterLowHangingObstacles: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filterLowHangingObstacles) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1308,8 +1349,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_filter_low_hanging_obstacles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_filter_low_hanging_obstacles")
+    fileprivate static let method_get_filter_low_hanging_obstacles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_filter_low_hanging_obstacles")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1321,13 +1362,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_filter_low_hanging_obstacles() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_low_hanging_obstacles, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_filter_ledge_spans: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_filter_ledge_spans")
+    fileprivate static let method_set_filter_ledge_spans: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_filter_ledge_spans")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1339,6 +1381,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_filter_ledge_spans(_ filterLedgeSpans: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filterLedgeSpans) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1352,8 +1395,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_filter_ledge_spans: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_filter_ledge_spans")
+    fileprivate static let method_get_filter_ledge_spans: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_filter_ledge_spans")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1365,13 +1408,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_filter_ledge_spans() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_ledge_spans, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_filter_walkable_low_height_spans: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_filter_walkable_low_height_spans")
+    fileprivate static let method_set_filter_walkable_low_height_spans: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_filter_walkable_low_height_spans")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1383,6 +1427,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_filter_walkable_low_height_spans(_ filterWalkableLowHeightSpans: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filterWalkableLowHeightSpans) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1396,8 +1441,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_filter_walkable_low_height_spans: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_filter_walkable_low_height_spans")
+    fileprivate static let method_get_filter_walkable_low_height_spans: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_filter_walkable_low_height_spans")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1409,13 +1454,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_filter_walkable_low_height_spans() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_walkable_low_height_spans, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_filter_baking_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_filter_baking_aabb")
+    fileprivate static let method_set_filter_baking_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_filter_baking_aabb")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 259215842)!
@@ -1427,6 +1473,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_filter_baking_aabb(_ bakingAabb: AABB) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bakingAabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1440,8 +1487,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_filter_baking_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_filter_baking_aabb")
+    fileprivate static let method_get_filter_baking_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_filter_baking_aabb")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -1453,13 +1500,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_filter_baking_aabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_baking_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_filter_baking_aabb_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_filter_baking_aabb_offset")
+    fileprivate static let method_set_filter_baking_aabb_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_filter_baking_aabb_offset")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -1471,6 +1519,7 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_filter_baking_aabb_offset(_ bakingAabbOffset: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bakingAabbOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1484,8 +1533,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_filter_baking_aabb_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_filter_baking_aabb_offset")
+    fileprivate static let method_get_filter_baking_aabb_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_filter_baking_aabb_offset")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1497,13 +1546,14 @@ open class NavigationMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_filter_baking_aabb_offset() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_baking_aabb_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertices")
+    fileprivate static let method_set_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertices")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 334873810)!
@@ -1516,6 +1566,7 @@ open class NavigationMesh: Resource {
     @inline(__always)
     /// Sets the vertices that can be then indexed to create polygons with the ``addPolygon(_:)`` method.
     fileprivate final func set_vertices(_ vertices: PackedVector3Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1529,8 +1580,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertices")
+    fileprivate static let method_get_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertices")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 497664490)!
@@ -1543,13 +1594,14 @@ open class NavigationMesh: Resource {
     @inline(__always)
     /// Returns a ``PackedVector3Array`` containing all the vertices being used to create the polygons.
     fileprivate final func get_vertices() -> PackedVector3Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_add_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_polygon")
+    fileprivate static let method_add_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_polygon")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -1561,6 +1613,7 @@ open class NavigationMesh: Resource {
     
     /// Adds a polygon using the indices of the vertices you get when calling ``getVertices()``.
     public final func addPolygon(_ polygon: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1574,8 +1627,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_get_polygon_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon_count")
+    fileprivate static let method_get_polygon_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon_count")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1587,13 +1640,14 @@ open class NavigationMesh: Resource {
     
     /// Returns the number of polygons in the navigation mesh.
     public final func getPolygonCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(NavigationMesh.method_get_polygon_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon")
+    fileprivate static let method_get_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3668444399)!
@@ -1605,6 +1659,7 @@ open class NavigationMesh: Resource {
     
     /// Returns a ``PackedInt32Array`` containing the indices of the vertices of a created polygon.
     public final func getPolygon(idx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1619,8 +1674,8 @@ open class NavigationMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_clear_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_polygons")
+    fileprivate static let method_clear_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_polygons")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1632,12 +1687,13 @@ open class NavigationMesh: Resource {
     
     /// Clears the array of polygons, but it doesn't clear the array of vertices.
     public final func clearPolygons() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationMesh.method_clear_polygons, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_create_from_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_mesh")
+    fileprivate static let method_create_from_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_mesh")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 194775623)!
@@ -1652,6 +1708,7 @@ open class NavigationMesh: Resource {
     /// > Note: The given `mesh` must be of type ``Mesh/PrimitiveType/triangles`` and have an index array.
     /// 
     public final func createFromMesh(_ mesh: Mesh?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1665,8 +1722,8 @@ open class NavigationMesh: Resource {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &NavigationMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1678,6 +1735,7 @@ open class NavigationMesh: Resource {
     
     /// Clears the internal arrays for vertices and polygon indices.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationMesh.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

@@ -26,7 +26,7 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class WebSocketMultiplayerPeer: MultiplayerPeer {
-    fileprivate static var className = StringName("WebSocketMultiplayerPeer")
+    private static var className = StringName("WebSocketMultiplayerPeer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -104,8 +104,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     }
     
     /* Methods */
-    fileprivate static var method_create_client: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_client")
+    fileprivate static let method_create_client: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_client")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1966198364)!
@@ -120,6 +120,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     /// > Note: It is recommended to specify the scheme part of the URL, i.e. the `url` should start with either `ws://` or `wss://`.
     /// 
     public final func createClient(url: String, tlsClientOptions: TLSOptions? = nil) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let url = GString(url)
         withUnsafePointer(to: url.content) { pArg0 in
@@ -138,8 +139,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_create_server: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_server")
+    fileprivate static let method_create_server: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_server")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2400822951)!
@@ -151,6 +152,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     /// Starts a new multiplayer server listening on the given `port`. You can optionally specify a `bindAddress`, and provide valid `tlsServerOptions` to use TLS. See ``TLSOptions/server(key:certificate:)``.
     public final func createServer(port: Int32, bindAddress: String = "*", tlsServerOptions: TLSOptions? = nil) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: port) { pArg0 in
             let bindAddress = GString(bindAddress)
@@ -172,8 +174,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_peer")
+    fileprivate static let method_get_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_peer")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1381378851)!
@@ -185,6 +187,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     /// Returns the ``WebSocketPeer`` associated to the given `peerId`.
     public final func getPeer(peerId: Int32) -> WebSocketPeer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -196,11 +199,11 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_peer_address: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_peer_address")
+    fileprivate static let method_get_peer_address: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_peer_address")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -212,6 +215,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     /// Returns the IP address of the given peer.
     public final func getPeerAddress(id: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -226,8 +230,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         return _result.description
     }
     
-    fileprivate static var method_get_peer_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_peer_port")
+    fileprivate static let method_get_peer_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_peer_port")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -239,6 +243,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     /// Returns the remote port of the given peer.
     public final func getPeerPort(id: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -253,8 +258,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         return _result
     }
     
-    fileprivate static var method_get_supported_protocols: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_supported_protocols")
+    fileprivate static let method_get_supported_protocols: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_supported_protocols")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -266,13 +271,14 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func get_supported_protocols() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_supported_protocols, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_supported_protocols: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_supported_protocols")
+    fileprivate static let method_set_supported_protocols: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_supported_protocols")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4015028928)!
@@ -284,6 +290,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func set_supported_protocols(_ protocols: PackedStringArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -297,8 +304,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         
     }
     
-    fileprivate static var method_get_handshake_headers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_handshake_headers")
+    fileprivate static let method_get_handshake_headers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_handshake_headers")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -310,13 +317,14 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func get_handshake_headers() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_handshake_headers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_handshake_headers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_handshake_headers")
+    fileprivate static let method_set_handshake_headers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_handshake_headers")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4015028928)!
@@ -328,6 +336,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func set_handshake_headers(_ protocols: PackedStringArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -341,8 +350,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         
     }
     
-    fileprivate static var method_get_inbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inbound_buffer_size")
+    fileprivate static let method_get_inbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inbound_buffer_size")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -354,13 +363,14 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func get_inbound_buffer_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_inbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_inbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inbound_buffer_size")
+    fileprivate static let method_set_inbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inbound_buffer_size")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -372,6 +382,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func set_inbound_buffer_size(_ bufferSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -385,8 +396,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         
     }
     
-    fileprivate static var method_get_outbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outbound_buffer_size")
+    fileprivate static let method_get_outbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outbound_buffer_size")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -398,13 +409,14 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func get_outbound_buffer_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_outbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outbound_buffer_size")
+    fileprivate static let method_set_outbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outbound_buffer_size")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -416,6 +428,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func set_outbound_buffer_size(_ bufferSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -429,8 +442,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         
     }
     
-    fileprivate static var method_get_handshake_timeout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_handshake_timeout")
+    fileprivate static let method_get_handshake_timeout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_handshake_timeout")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -442,13 +455,14 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func get_handshake_timeout() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_handshake_timeout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_handshake_timeout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_handshake_timeout")
+    fileprivate static let method_set_handshake_timeout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_handshake_timeout")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -460,6 +474,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func set_handshake_timeout(_ timeout: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -473,8 +488,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         
     }
     
-    fileprivate static var method_set_max_queued_packets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_queued_packets")
+    fileprivate static let method_set_max_queued_packets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_queued_packets")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -486,6 +501,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func set_max_queued_packets(_ maxQueuedPackets: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxQueuedPackets) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -499,8 +515,8 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         
     }
     
-    fileprivate static var method_get_max_queued_packets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_queued_packets")
+    fileprivate static let method_get_max_queued_packets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_queued_packets")
         return withUnsafePointer(to: &WebSocketMultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -512,6 +528,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     
     @inline(__always)
     fileprivate final func get_max_queued_packets() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_max_queued_packets, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

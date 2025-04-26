@@ -24,18 +24,18 @@ import Musl
 /// Provides a set of helper functions to create geometric shapes, compute intersections between shapes, and process various other geometric operations in 3D.
 open class Geometry3D: Object {
     /// The shared instance of this class
-    public static var shared: Geometry3D = {
-        return withUnsafePointer (to: &Geometry3D.godotClassName.content) { ptr in
-            Geometry3D (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: Geometry3D {
+        return withUnsafePointer(to: &Geometry3D.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("Geometry3D")
+    private static var className = StringName("Geometry3D")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_compute_convex_mesh_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_convex_mesh_points")
+    fileprivate static let method_compute_convex_mesh_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_convex_mesh_points")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1936902142)!
@@ -46,7 +46,7 @@ open class Geometry3D: Object {
     }()
     
     /// Calculates and returns all the vertex points of a convex shape defined by an array of `planes`.
-    public static func computeConvexMeshPoints(planes: VariantCollection<Plane>) -> PackedVector3Array {
+    public static func computeConvexMeshPoints(planes: TypedArray<Plane>) -> PackedVector3Array {
         let _result: PackedVector3Array = PackedVector3Array ()
         withUnsafePointer(to: planes.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -61,8 +61,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_build_box_planes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("build_box_planes")
+    fileprivate static let method_build_box_planes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("build_box_planes")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3622277145)!
@@ -73,7 +73,7 @@ open class Geometry3D: Object {
     }()
     
     /// Returns an array with 6 ``Plane``s that describe the sides of a box centered at the origin. The box size is defined by `extents`, which represents one (positive) corner of the box (i.e. half its actual size).
-    public static func buildBoxPlanes(extents: Vector3) -> VariantCollection<Plane> {
+    public static func buildBoxPlanes(extents: Vector3) -> TypedArray<Plane> {
         var _result: Int64 = 0
         withUnsafePointer(to: extents) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -85,11 +85,11 @@ open class Geometry3D: Object {
             
         }
         
-        return VariantCollection<Plane>(content: _result)
+        return TypedArray<Plane>(takingOver: _result)
     }
     
-    fileprivate static var method_build_cylinder_planes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("build_cylinder_planes")
+    fileprivate static let method_build_cylinder_planes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("build_cylinder_planes")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 449920067)!
@@ -100,7 +100,7 @@ open class Geometry3D: Object {
     }()
     
     /// Returns an array of ``Plane``s closely bounding a faceted cylinder centered at the origin with radius `radius` and height `height`. The parameter `sides` defines how many planes will be generated for the round part of the cylinder. The parameter `axis` describes the axis along which the cylinder is oriented (0 for X, 1 for Y, 2 for Z).
-    public static func buildCylinderPlanes(radius: Double, height: Double, sides: Int32, axis: Vector3.Axis = .z) -> VariantCollection<Plane> {
+    public static func buildCylinderPlanes(radius: Double, height: Double, sides: Int32, axis: Vector3.Axis = .z) -> TypedArray<Plane> {
         var _result: Int64 = 0
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
@@ -121,11 +121,11 @@ open class Geometry3D: Object {
             
         }
         
-        return VariantCollection<Plane>(content: _result)
+        return TypedArray<Plane>(takingOver: _result)
     }
     
-    fileprivate static var method_build_capsule_planes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("build_capsule_planes")
+    fileprivate static let method_build_capsule_planes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("build_capsule_planes")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2113592876)!
@@ -136,7 +136,7 @@ open class Geometry3D: Object {
     }()
     
     /// Returns an array of ``Plane``s closely bounding a faceted capsule centered at the origin with radius `radius` and height `height`. The parameter `sides` defines how many planes will be generated for the side part of the capsule, whereas `lats` gives the number of latitudinal steps at the bottom and top of the capsule. The parameter `axis` describes the axis along which the capsule is oriented (0 for X, 1 for Y, 2 for Z).
-    public static func buildCapsulePlanes(radius: Double, height: Double, sides: Int32, lats: Int32, axis: Vector3.Axis = .z) -> VariantCollection<Plane> {
+    public static func buildCapsulePlanes(radius: Double, height: Double, sides: Int32, lats: Int32, axis: Vector3.Axis = .z) -> TypedArray<Plane> {
         var _result: Int64 = 0
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
@@ -160,11 +160,11 @@ open class Geometry3D: Object {
             
         }
         
-        return VariantCollection<Plane>(content: _result)
+        return TypedArray<Plane>(takingOver: _result)
     }
     
-    fileprivate static var method_get_closest_points_between_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_points_between_segments")
+    fileprivate static let method_get_closest_points_between_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_points_between_segments")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1056373962)!
@@ -199,8 +199,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_get_closest_point_to_segment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_point_to_segment")
+    fileprivate static let method_get_closest_point_to_segment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_point_to_segment")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2168193209)!
@@ -232,8 +232,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_get_closest_point_to_segment_uncapped: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_point_to_segment_uncapped")
+    fileprivate static let method_get_closest_point_to_segment_uncapped: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_point_to_segment_uncapped")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2168193209)!
@@ -265,8 +265,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_get_triangle_barycentric_coords: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_triangle_barycentric_coords")
+    fileprivate static let method_get_triangle_barycentric_coords: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_triangle_barycentric_coords")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1362048029)!
@@ -304,8 +304,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_ray_intersects_triangle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ray_intersects_triangle")
+    fileprivate static let method_ray_intersects_triangle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ray_intersects_triangle")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1718655448)!
@@ -343,8 +343,8 @@ open class Geometry3D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_segment_intersects_triangle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("segment_intersects_triangle")
+    fileprivate static let method_segment_intersects_triangle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("segment_intersects_triangle")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1718655448)!
@@ -382,8 +382,8 @@ open class Geometry3D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_segment_intersects_sphere: GDExtensionMethodBindPtr = {
-        let methodName = StringName("segment_intersects_sphere")
+    fileprivate static let method_segment_intersects_sphere: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("segment_intersects_sphere")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4080141172)!
@@ -418,8 +418,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_segment_intersects_cylinder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("segment_intersects_cylinder")
+    fileprivate static let method_segment_intersects_cylinder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("segment_intersects_cylinder")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2361316491)!
@@ -454,8 +454,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_segment_intersects_convex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("segment_intersects_convex")
+    fileprivate static let method_segment_intersects_convex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("segment_intersects_convex")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 537425332)!
@@ -466,7 +466,7 @@ open class Geometry3D: Object {
     }()
     
     /// Given a convex hull defined though the ``Plane``s in the array `planes`, tests if the segment (`from`, `to`) intersects with that hull. If an intersection is found, returns a ``PackedVector3Array`` containing the point the intersection and the hull's normal. Otherwise, returns an empty array.
-    public static func segmentIntersectsConvex(from: Vector3, to: Vector3, planes: VariantCollection<Plane>) -> PackedVector3Array {
+    public static func segmentIntersectsConvex(from: Vector3, to: Vector3, planes: TypedArray<Plane>) -> PackedVector3Array {
         let _result: PackedVector3Array = PackedVector3Array ()
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: to) { pArg1 in
@@ -487,8 +487,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_clip_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clip_polygon")
+    fileprivate static let method_clip_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clip_polygon")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2603188319)!
@@ -517,8 +517,8 @@ open class Geometry3D: Object {
         return _result
     }
     
-    fileprivate static var method_tetrahedralize_delaunay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tetrahedralize_delaunay")
+    fileprivate static let method_tetrahedralize_delaunay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tetrahedralize_delaunay")
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1230191221)!

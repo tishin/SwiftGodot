@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Abstract base class of all types of input events. See ``Node/_input(event:)``.
 open class InputEvent: Resource {
-    fileprivate static var className = StringName("InputEvent")
+    private static var className = StringName("InputEvent")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Device ID used for emulated mouse input from a touchscreen, or for emulated touch input from a mouse. This can be used to distinguish emulated mouse input from physical mouse input, or emulated touch input from physical touch input.
@@ -47,8 +47,8 @@ open class InputEvent: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_device")
+    fileprivate static let method_set_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_device")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -60,6 +60,7 @@ open class InputEvent: Resource {
     
     @inline(__always)
     fileprivate final func set_device(_ device: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -73,8 +74,8 @@ open class InputEvent: Resource {
         
     }
     
-    fileprivate static var method_get_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_device")
+    fileprivate static let method_get_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -86,13 +87,14 @@ open class InputEvent: Resource {
     
     @inline(__always)
     fileprivate final func get_device() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEvent.method_get_device, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action")
+    fileprivate static let method_is_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1558498928)!
@@ -107,6 +109,7 @@ open class InputEvent: Resource {
     /// If `exactMatch` is `false`, it ignores additional input modifiers for ``InputEventKey`` and ``InputEventMouseButton`` events, and the direction for ``InputEventJoypadMotion`` events.
     /// 
     public final func isAction(_ action: StringName, exactMatch: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: exactMatch) { pArg1 in
@@ -124,8 +127,8 @@ open class InputEvent: Resource {
         return _result
     }
     
-    fileprivate static var method_is_action_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action_pressed")
+    fileprivate static let method_is_action_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action_pressed")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1631499404)!
@@ -142,6 +145,7 @@ open class InputEvent: Resource {
     /// > Note: Due to keyboard ghosting, ``isActionPressed(action:allowEcho:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See <a href="https://docs.godotengine.org/en//tutorials/inputs/input_examples.html#keyboard-events">Input examples</a> in the documentation for more information.
     /// 
     public final func isActionPressed(action: StringName, allowEcho: Bool = false, exactMatch: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: allowEcho) { pArg1 in
@@ -162,8 +166,8 @@ open class InputEvent: Resource {
         return _result
     }
     
-    fileprivate static var method_is_action_released: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action_released")
+    fileprivate static let method_is_action_released: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action_released")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1558498928)!
@@ -178,6 +182,7 @@ open class InputEvent: Resource {
     /// If `exactMatch` is `false`, it ignores additional input modifiers for ``InputEventKey`` and ``InputEventMouseButton`` events, and the direction for ``InputEventJoypadMotion`` events.
     /// 
     public final func isActionReleased(action: StringName, exactMatch: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: exactMatch) { pArg1 in
@@ -195,8 +200,8 @@ open class InputEvent: Resource {
         return _result
     }
     
-    fileprivate static var method_get_action_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_strength")
+    fileprivate static let method_get_action_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_strength")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 801543509)!
@@ -211,6 +216,7 @@ open class InputEvent: Resource {
     /// If `exactMatch` is `false`, it ignores additional input modifiers for ``InputEventKey`` and ``InputEventMouseButton`` events, and the direction for ``InputEventJoypadMotion`` events.
     /// 
     public final func getActionStrength(action: StringName, exactMatch: Bool = false) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: exactMatch) { pArg1 in
@@ -228,8 +234,8 @@ open class InputEvent: Resource {
         return _result
     }
     
-    fileprivate static var method_is_canceled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_canceled")
+    fileprivate static let method_is_canceled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_canceled")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -241,13 +247,14 @@ open class InputEvent: Resource {
     
     /// Returns `true` if this input event has been canceled.
     public final func isCanceled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEvent.method_is_canceled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_pressed")
+    fileprivate static let method_is_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_pressed")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -262,13 +269,14 @@ open class InputEvent: Resource {
     /// > Note: Due to keyboard ghosting, ``isPressed()`` may return `false` even if one of the action's keys is pressed. See <a href="https://docs.godotengine.org/en//tutorials/inputs/input_examples.html#keyboard-events">Input examples</a> in the documentation for more information.
     /// 
     public final func isPressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEvent.method_is_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_released: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_released")
+    fileprivate static let method_is_released: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_released")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -280,13 +288,14 @@ open class InputEvent: Resource {
     
     /// Returns `true` if this input event is released. Not relevant for events of type ``InputEventMouseMotion`` or ``InputEventScreenDrag``.
     public final func isReleased() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEvent.method_is_released, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_echo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_echo")
+    fileprivate static let method_is_echo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_echo")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -301,13 +310,14 @@ open class InputEvent: Resource {
     /// > Note: The rate at which echo events are sent is typically around 20 events per second (after holding down the key for roughly half a second). However, the key repeat delay/speed can be changed by the user or disabled entirely in the operating system settings. To ensure your project works correctly on all configurations, do not assume the user has a specific key repeat configuration in your project's behavior.
     /// 
     public final func isEcho() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEvent.method_is_echo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_as_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("as_text")
+    fileprivate static let method_as_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("as_text")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -319,13 +329,14 @@ open class InputEvent: Resource {
     
     /// Returns a ``String`` representation of the event.
     public final func asText() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(InputEvent.method_as_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_match: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_match")
+    fileprivate static let method_is_match: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_match")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1754951977)!
@@ -339,7 +350,10 @@ open class InputEvent: Resource {
     /// 
     /// If `exactMatch` is `false`, it ignores additional input modifiers for ``InputEventKey`` and ``InputEventMouseButton`` events, and the direction for ``InputEventJoypadMotion`` events.
     /// 
+    /// > Note: Only considers the event configuration (such as the keyboard key or joypad axis), not state information like ``isPressed()``, ``isReleased()``, ``isEcho()``, or ``isCanceled()``.
+    /// 
     public final func isMatch(event: InputEvent?, exactMatch: Bool = true) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: exactMatch) { pArg1 in
@@ -357,8 +371,8 @@ open class InputEvent: Resource {
         return _result
     }
     
-    fileprivate static var method_is_action_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_action_type")
+    fileprivate static let method_is_action_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_action_type")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -370,13 +384,14 @@ open class InputEvent: Resource {
     
     /// Returns `true` if this input event's type is one that can be assigned to an input action.
     public final func isActionType() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEvent.method_is_action_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_accumulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("accumulate")
+    fileprivate static let method_accumulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("accumulate")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1062211774)!
@@ -391,6 +406,7 @@ open class InputEvent: Resource {
     /// The given input event's position, global position and speed will be copied. The resulting `relative` is a sum of both events. Both events' modifiers have to be identical.
     /// 
     public final func accumulate(withEvent: InputEvent?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: withEvent?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -405,8 +421,8 @@ open class InputEvent: Resource {
         return _result
     }
     
-    fileprivate static var method_xformed_by: GDExtensionMethodBindPtr = {
-        let methodName = StringName("xformed_by")
+    fileprivate static let method_xformed_by: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("xformed_by")
         return withUnsafePointer(to: &InputEvent.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1282766827)!
@@ -418,6 +434,7 @@ open class InputEvent: Resource {
     
     /// Returns a copy of the given input event which has been offset by `localOfs` and transformed by `xform`. Relevant for events of type ``InputEventMouseButton``, ``InputEventMouseMotion``, ``InputEventScreenTouch``, ``InputEventScreenDrag``, ``InputEventMagnifyGesture`` and ``InputEventPanGesture``.
     public final func xformedBy(xform: Transform2D, localOfs: Vector2 = Vector2 (x: 0, y: 0)) -> InputEvent? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: localOfs) { pArg1 in
@@ -432,7 +449,7 @@ open class InputEvent: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

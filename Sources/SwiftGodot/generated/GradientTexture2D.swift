@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A 2D texture that obtains colors from a ``Gradient`` to fill the texture data. This texture is able to transform a color transition into different patterns such as a linear or a radial gradient. The gradient is sampled individually for each pixel so it does not necessarily represent an exact copy of the gradient(see ``width`` and ``height``). See also ``GradientTexture1D``, ``CurveTexture`` and ``CurveXYZTexture``.
 open class GradientTexture2D: Texture2D {
-    fileprivate static var className = StringName("GradientTexture2D")
+    private static var className = StringName("GradientTexture2D")
     override open class var godotClassName: StringName { className }
     public enum Fill: Int64, CaseIterable {
         /// The colors are linearly interpolated in a straight line.
@@ -143,8 +143,8 @@ open class GradientTexture2D: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_gradient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gradient")
+    fileprivate static let method_set_gradient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gradient")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2756054477)!
@@ -156,6 +156,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_gradient(_ gradient: Gradient?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gradient?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -169,8 +170,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_get_gradient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gradient")
+    fileprivate static let method_get_gradient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gradient")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 132272999)!
@@ -182,13 +183,14 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func get_gradient() -> Gradient? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GradientTexture2D.method_get_gradient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -200,6 +202,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_width(_ width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -213,8 +216,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_height")
+    fileprivate static let method_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_height")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -226,6 +229,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_height(_ height: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -239,8 +243,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_set_use_hdr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_hdr")
+    fileprivate static let method_set_use_hdr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_hdr")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -252,6 +256,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_use_hdr(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -265,8 +270,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_is_using_hdr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_hdr")
+    fileprivate static let method_is_using_hdr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_hdr")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -278,13 +283,14 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func is_using_hdr() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GradientTexture2D.method_is_using_hdr, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fill: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fill")
+    fileprivate static let method_set_fill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fill")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3623927636)!
@@ -296,6 +302,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_fill(_ fill: GradientTexture2D.Fill) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fill.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -309,8 +316,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_get_fill: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fill")
+    fileprivate static let method_get_fill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fill")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1876227217)!
@@ -322,13 +329,14 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func get_fill() -> GradientTexture2D.Fill {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GradientTexture2D.Fill (rawValue: _result)!
     }
     
-    fileprivate static var method_set_fill_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fill_from")
+    fileprivate static let method_set_fill_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fill_from")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -340,6 +348,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_fill_from(_ fillFrom: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fillFrom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -353,8 +362,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_get_fill_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fill_from")
+    fileprivate static let method_get_fill_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fill_from")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -366,13 +375,14 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func get_fill_from() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill_from, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fill_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fill_to")
+    fileprivate static let method_set_fill_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fill_to")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -384,6 +394,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_fill_to(_ fillTo: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fillTo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -397,8 +408,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_get_fill_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fill_to")
+    fileprivate static let method_get_fill_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fill_to")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -410,13 +421,14 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func get_fill_to() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill_to, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_repeat")
+    fileprivate static let method_set_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_repeat")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1357597002)!
@@ -428,6 +440,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_repeat(_ `repeat`: GradientTexture2D.Repeat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `repeat`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -441,8 +454,8 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_get_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_repeat")
+    fileprivate static let method_get_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_repeat")
         return withUnsafePointer(to: &GradientTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3351758665)!
@@ -454,6 +467,7 @@ open class GradientTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func get_repeat() -> GradientTexture2D.Repeat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GradientTexture2D.method_get_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GradientTexture2D.Repeat (rawValue: _result)!

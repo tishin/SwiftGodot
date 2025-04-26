@@ -27,14 +27,14 @@ import Musl
 /// 
 open class OS: Object {
     /// The shared instance of this class
-    public static var shared: OS = {
-        return withUnsafePointer (to: &OS.godotClassName.content) { ptr in
-            OS (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: OS {
+        return withUnsafePointer(to: &OS.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("OS")
+    private static var className = StringName("OS")
     override open class var godotClassName: StringName { className }
     public enum RenderingDriver: Int64, CaseIterable {
         /// The Vulkan rendering driver. It requires Vulkan 1.0 support and automatically uses features from Vulkan 1.1 and 1.2 if available.
@@ -43,6 +43,8 @@ open class OS: Object {
         case opengl3 = 1 // RENDERING_DRIVER_OPENGL3
         /// The Direct3D 12 rendering driver.
         case d3d12 = 2 // RENDERING_DRIVER_D3D12
+        /// The Metal rendering driver.
+        case metal = 3 // RENDERING_DRIVER_METAL
     }
     
     public enum SystemDir: Int64, CaseIterable {
@@ -62,6 +64,19 @@ open class OS: Object {
         case pictures = 6 // SYSTEM_DIR_PICTURES
         /// Refers to the Ringtones directory path.
         case ringtones = 7 // SYSTEM_DIR_RINGTONES
+    }
+    
+    public enum StdHandleType: Int64, CaseIterable {
+        /// Standard I/O device is invalid. No data can be received from or sent to these standard I/O devices.
+        case invalid = 0 // STD_HANDLE_INVALID
+        /// Standard I/O device is a console. This typically occurs when Godot is run from a terminal with no redirection. This is also used for all standard I/O devices when running Godot from the editor, at least on desktop platforms.
+        case console = 1 // STD_HANDLE_CONSOLE
+        /// Standard I/O device is a regular file. This typically occurs with redirection from a terminal, e.g. `godot > stdout.txt`, `godot < stdin.txt` or `godot > stdout_stderr.txt 2>&1`.
+        case file = 2 // STD_HANDLE_FILE
+        /// Standard I/O device is a FIFO/pipe. This typically occurs with pipe usage from a terminal, e.g. `echo "Hello" | godot`.
+        case pipe = 3 // STD_HANDLE_PIPE
+        /// Standard I/O device type is unknown.
+        case unknown = 4 // STD_HANDLE_UNKNOWN
     }
     
     
@@ -113,8 +128,8 @@ open class OS: Object {
     }
     
     /* Methods */
-    fileprivate static var method_get_entropy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_entropy")
+    fileprivate static let method_get_entropy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_entropy")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 47165747)!
@@ -143,8 +158,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_system_ca_certificates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_ca_certificates")
+    fileprivate static let method_get_system_ca_certificates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_ca_certificates")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -161,8 +176,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_connected_midi_inputs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connected_midi_inputs")
+    fileprivate static let method_get_connected_midi_inputs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connected_midi_inputs")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -174,7 +189,11 @@ open class OS: Object {
     
     /// Returns an array of connected MIDI device names, if they exist. Returns an empty array if the system MIDI driver has not previously been initialized with ``openMidiInputs()``. See also ``closeMidiInputs()``.
     /// 
-    /// > Note: This method is implemented on Linux, macOS and Windows.
+    /// > Note: This method is implemented on Linux, macOS, Windows, and Web.
+    /// 
+    /// > Note: On the Web platform, Web MIDI needs to be supported by the browser. <a href="https://caniuse.com/midi">For the time being</a>, it is currently supported by all major browsers, except Safari.
+    /// 
+    /// > Note: On the Web platform, using MIDI input requires a browser permission to be granted first. This permission request is performed when calling ``openMidiInputs()``. The browser will refrain from processing MIDI input until the user accepts the permission request.
     /// 
     public static func getConnectedMidiInputs() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
@@ -182,8 +201,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_open_midi_inputs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open_midi_inputs")
+    fileprivate static let method_open_midi_inputs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open_midi_inputs")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -195,15 +214,19 @@ open class OS: Object {
     
     /// Initializes the singleton for the system MIDI driver, allowing Godot to receive ``InputEventMIDI``. See also ``getConnectedMidiInputs()`` and ``closeMidiInputs()``.
     /// 
-    /// > Note: This method is implemented on Linux, macOS and Windows.
+    /// > Note: This method is implemented on Linux, macOS, Windows, and Web.
+    /// 
+    /// > Note: On the Web platform, Web MIDI needs to be supported by the browser. <a href="https://caniuse.com/midi">For the time being</a>, it is currently supported by all major browsers, except Safari.
+    /// 
+    /// > Note: On the Web platform, using MIDI input requires a browser permission to be granted first. This permission request is performed when calling ``openMidiInputs()``. The browser will refrain from processing MIDI input until the user accepts the permission request.
     /// 
     public static func openMidiInputs() {
         gi.object_method_bind_ptrcall(method_open_midi_inputs, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
         
     }
     
-    fileprivate static var method_close_midi_inputs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close_midi_inputs")
+    fileprivate static let method_close_midi_inputs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close_midi_inputs")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -215,15 +238,15 @@ open class OS: Object {
     
     /// Shuts down the system MIDI driver. Godot will no longer receive ``InputEventMIDI``. See also ``openMidiInputs()`` and ``getConnectedMidiInputs()``.
     /// 
-    /// > Note: This method is implemented on Linux, macOS and Windows.
+    /// > Note: This method is implemented on Linux, macOS, Windows, and Web.
     /// 
     public static func closeMidiInputs() {
         gi.object_method_bind_ptrcall(method_close_midi_inputs, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
         
     }
     
-    fileprivate static var method_alert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("alert")
+    fileprivate static let method_alert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("alert")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1783970740)!
@@ -253,8 +276,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_crash: GDExtensionMethodBindPtr = {
-        let methodName = StringName("crash")
+    fileprivate static let method_crash: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("crash")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -283,8 +306,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_set_low_processor_usage_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_low_processor_usage_mode")
+    fileprivate static let method_set_low_processor_usage_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_low_processor_usage_mode")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -309,8 +332,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_is_in_low_processor_usage_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_in_low_processor_usage_mode")
+    fileprivate static let method_is_in_low_processor_usage_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_in_low_processor_usage_mode")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -327,8 +350,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_set_low_processor_usage_mode_sleep_usec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_low_processor_usage_mode_sleep_usec")
+    fileprivate static let method_set_low_processor_usage_mode_sleep_usec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_low_processor_usage_mode_sleep_usec")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -353,8 +376,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_get_low_processor_usage_mode_sleep_usec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_low_processor_usage_mode_sleep_usec")
+    fileprivate static let method_get_low_processor_usage_mode_sleep_usec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_low_processor_usage_mode_sleep_usec")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -371,8 +394,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_set_delta_smoothing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_delta_smoothing")
+    fileprivate static let method_set_delta_smoothing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_delta_smoothing")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -397,8 +420,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_is_delta_smoothing_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_delta_smoothing_enabled")
+    fileprivate static let method_is_delta_smoothing_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_delta_smoothing_enabled")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -415,8 +438,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_processor_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_processor_count")
+    fileprivate static let method_get_processor_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_processor_count")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -433,8 +456,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_processor_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_processor_name")
+    fileprivate static let method_get_processor_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_processor_name")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -454,8 +477,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_system_fonts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_fonts")
+    fileprivate static let method_get_system_fonts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_fonts")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -475,8 +498,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_system_font_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_font_path")
+    fileprivate static let method_get_system_font_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_font_path")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 626580860)!
@@ -519,8 +542,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_system_font_path_for_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_font_path_for_text")
+    fileprivate static let method_get_system_font_path_for_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_font_path_for_text")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 197317981)!
@@ -577,8 +600,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_executable_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_executable_path")
+    fileprivate static let method_get_executable_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_executable_path")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -590,7 +613,7 @@ open class OS: Object {
     
     /// Returns the file path to the current engine executable.
     /// 
-    /// > Note: On macOS, always use ``createInstance(arguments:)`` instead of relying on executable path.
+    /// > Note: On macOS, if you want to launch another instance of Godot, always use ``createInstance(arguments:)`` instead of relying on the executable path.
     /// 
     public static func getExecutablePath() -> String {
         let _result = GString ()
@@ -598,31 +621,140 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_read_string_from_stdin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("read_string_from_stdin")
+    fileprivate static let method_read_string_from_stdin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("read_string_from_stdin")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 990163283)!
             }
             
         }
         
     }()
     
-    /// Reads a user input string from the standard input (usually the terminal). This operation is _blocking_, which causes the window to freeze if ``readStringFromStdin()`` is called on the main thread. The thread calling ``readStringFromStdin()`` will block until the program receives a line break in standard input (usually by the user pressing [kbd]Enter[/kbd]).
+    /// Reads a user input as a UTF-8 encoded string from the standard input. This operation can be _blocking_, which causes the window to freeze if ``readStringFromStdin(bufferSize:)`` is called on the main thread.
     /// 
-    /// > Note: This method is implemented on Linux, macOS and Windows.
+    /// - If standard input is console, this method will block until the program receives a line break in standard input (usually by the user pressing [kbd]Enter[/kbd]).
     /// 
-    /// > Note: On exported Windows builds, run the console wrapper executable to access the terminal. Otherwise, the standard input will not work correctly. If you need a single executable with console support, use a custom build compiled with the `windows_subsystem=console` flag.
+    /// - If standard input is pipe, this method will block until a specific amount of data is read or pipe is closed.
     /// 
-    public static func readStringFromStdin() -> String {
+    /// - If standard input is a file, this method will read a specific amount of data (or less if end-of-file is reached) and return immediately.
+    /// 
+    /// > Note: This method automatically replaces `\r\n` line breaks with `\n` and removes them from the end of the string. Use ``readBufferFromStdin(bufferSize:)`` to read the unprocessed data.
+    /// 
+    /// > Note: This method is implemented on Linux, macOS, and Windows.
+    /// 
+    /// > Note: On exported Windows builds, run the console wrapper executable to access the terminal. If standard input is console, calling this method without console wrapped will freeze permanently. If standard input is pipe or file, it can be used without console wrapper. If you need a single executable with full console support, use a custom build compiled with the `windows_subsystem=console` flag.
+    /// 
+    public static func readStringFromStdin(bufferSize: Int) -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_read_string_from_stdin, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        withUnsafePointer(to: bufferSize) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_read_string_from_stdin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
         return _result.description
     }
     
-    fileprivate static var method_execute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("execute")
+    fileprivate static let method_read_buffer_from_stdin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("read_buffer_from_stdin")
+        return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 47165747)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Reads a user input as raw data from the standard input. This operation can be _blocking_, which causes the window to freeze if ``readStringFromStdin(bufferSize:)`` is called on the main thread.
+    /// 
+    /// - If standard input is console, this method will block until the program receives a line break in standard input (usually by the user pressing [kbd]Enter[/kbd]).
+    /// 
+    /// - If standard input is pipe, this method will block until a specific amount of data is read or pipe is closed.
+    /// 
+    /// - If standard input is a file, this method will read a specific amount of data (or less if end-of-file is reached) and return immediately.
+    /// 
+    /// > Note: This method is implemented on Linux, macOS, and Windows.
+    /// 
+    /// > Note: On exported Windows builds, run the console wrapper executable to access the terminal. If standard input is console, calling this method without console wrapped will freeze permanently. If standard input is pipe or file, it can be used without console wrapper. If you need a single executable with full console support, use a custom build compiled with the `windows_subsystem=console` flag.
+    /// 
+    public static func readBufferFromStdin(bufferSize: Int) -> PackedByteArray {
+        let _result: PackedByteArray = PackedByteArray ()
+        withUnsafePointer(to: bufferSize) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_read_buffer_from_stdin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_stdin_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stdin_type")
+        return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1704816237)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns type of the standard input device.
+    public static func getStdinType() -> OS.StdHandleType {
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(method_get_stdin_type, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return OS.StdHandleType (rawValue: _result)!
+    }
+    
+    fileprivate static let method_get_stdout_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stdout_type")
+        return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1704816237)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns type of the standard output device.
+    public static func getStdoutType() -> OS.StdHandleType {
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(method_get_stdout_type, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return OS.StdHandleType (rawValue: _result)!
+    }
+    
+    fileprivate static let method_get_stderr_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stderr_type")
+        return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1704816237)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns type of the standard error device.
+    public static func getStderrType() -> OS.StdHandleType {
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(method_get_stderr_type, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return OS.StdHandleType (rawValue: _result)!
+    }
+    
+    fileprivate static let method_execute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("execute")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1488299882)!
@@ -658,7 +790,7 @@ open class OS: Object {
     /// 
     /// > Note: On Android, system commands such as `dumpsys` can only be run on a rooted device.
     /// 
-    public static func execute(path: String, arguments: PackedStringArray, output: GArray = GArray (), readStderr: Bool = false, openConsole: Bool = false) -> Int32 {
+    public static func execute(path: String, arguments: PackedStringArray, output: VariantArray = VariantArray (), readStderr: Bool = false, openConsole: Bool = false) -> Int32 {
         var _result: Int32 = 0
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -686,11 +818,11 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_execute_with_pipe: GDExtensionMethodBindPtr = {
-        let methodName = StringName("execute_with_pipe")
+    fileprivate static let method_execute_with_pipe: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("execute_with_pipe")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3845631403)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2851312030)!
             }
             
         }
@@ -699,7 +831,9 @@ open class OS: Object {
     
     /// Creates a new process that runs independently of Godot with redirected IO. It will not terminate when Godot terminates. The path specified in `path` must exist and be an executable file or macOS `.app` bundle. The path is resolved based on the current platform. The `arguments` are used in the given order and separated by a space.
     /// 
-    /// If the process cannot be created, this method returns an empty ``GDictionary``. Otherwise, this method returns a ``GDictionary`` with the following keys:
+    /// If `blocking` is `false`, created pipes work in non-blocking mode, i.e. read and write operations will return immediately. Use ``FileAccess/getError()`` to check if the last read/write operation was successful.
+    /// 
+    /// If the process cannot be created, this method returns an empty ``VariantDictionary``. Otherwise, this method returns a ``VariantDictionary`` with the following keys:
     /// 
     /// - `"stdio"` - ``FileAccess`` to access the process stdin and stdout pipes (read/write).
     /// 
@@ -717,14 +851,17 @@ open class OS: Object {
     /// 
     /// > Note: On macOS, sandboxed applications are limited to run only embedded helper executables, specified during export or system .app bundle, system .app bundles will ignore arguments.
     /// 
-    public static func executeWithPipe(path: String, arguments: PackedStringArray) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func executeWithPipe(path: String, arguments: PackedStringArray, blocking: Bool = true) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: arguments.content) { pArg1 in
-                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
-                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_execute_with_pipe, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                withUnsafePointer(to: blocking) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(method_execute_with_pipe, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        }
+                        
                     }
                     
                 }
@@ -736,8 +873,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_create_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_process")
+    fileprivate static let method_create_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_process")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2903767230)!
@@ -753,7 +890,7 @@ open class OS: Object {
     /// 
     /// If the process is successfully created, this method returns its process ID, which you can use to monitor the process (and potentially terminate it with ``kill(pid:)``). Otherwise, this method returns `-1`.
     /// 
-    /// For example, running another instance of the project:
+    /// **Example:** Run another instance of the project:
     /// 
     /// See ``execute(path:arguments:output:readStderr:openConsole:)`` if you wish to run an external command and retrieve the results.
     /// 
@@ -783,8 +920,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_create_instance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_instance")
+    fileprivate static let method_create_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_instance")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1080601263)!
@@ -817,8 +954,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_kill: GDExtensionMethodBindPtr = {
-        let methodName = StringName("kill")
+    fileprivate static let method_kill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("kill")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844576869)!
@@ -849,8 +986,8 @@ open class OS: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_shell_open: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shell_open")
+    fileprivate static let method_shell_open: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shell_open")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -862,7 +999,9 @@ open class OS: Object {
     
     /// Requests the OS to open a resource identified by `uri` with the most appropriate program. For example:
     /// 
-    /// - `OS.shell_open("C:\\Users\name\Downloads")` on Windows opens the file explorer at the user's Downloads folder.
+    /// - `OS.shell_open("C:\\Users\\name\\Downloads")` on Windows opens the file explorer at the user's Downloads folder.
+    /// 
+    /// - `OS.shell_open("C:/Users/name/Downloads")` also works on Windows and opens the file explorer at the user's Downloads folder.
     /// 
     /// - `OS.shell_open("https://godotengine.org")` opens the default web browser on the official Godot website.
     /// 
@@ -890,8 +1029,8 @@ open class OS: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_shell_show_in_file_manager: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shell_show_in_file_manager")
+    fileprivate static let method_shell_show_in_file_manager: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shell_show_in_file_manager")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3565188097)!
@@ -928,8 +1067,8 @@ open class OS: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_process_running: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_process_running")
+    fileprivate static let method_is_process_running: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_process_running")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -958,8 +1097,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_process_exit_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_exit_code")
+    fileprivate static let method_get_process_exit_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_exit_code")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -972,6 +1111,8 @@ open class OS: Object {
     /// Returns the exit code of a spawned process once it has finished running (see ``isProcessRunning(pid:)``).
     /// 
     /// Returns `-1` if the `pid` is not a PID of a spawned child process, the process is still running, or the method is not implemented for the current platform.
+    /// 
+    /// > Note: Returns `-1` if the `pid` is a macOS bundled app process.
     /// 
     /// > Note: This method is implemented on Android, Linux, macOS and Windows.
     /// 
@@ -990,8 +1131,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_process_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_id")
+    fileprivate static let method_get_process_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_id")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1011,8 +1152,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_has_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_environment")
+    fileprivate static let method_has_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_environment")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -1042,8 +1183,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment")
+    fileprivate static let method_get_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -1075,8 +1216,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_set_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment")
+    fileprivate static let method_set_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3605043004)!
@@ -1109,8 +1250,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_unset_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unset_environment")
+    fileprivate static let method_unset_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unset_environment")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3089850668)!
@@ -1139,8 +1280,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1176,8 +1317,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_distribution_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_distribution_name")
+    fileprivate static let method_get_distribution_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_distribution_name")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1201,8 +1342,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_version: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_version")
+    fileprivate static let method_get_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_version")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1230,8 +1371,29 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_cmdline_args: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cmdline_args")
+    fileprivate static let method_get_version_alias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_version_alias")
+        return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the branded version used in marketing, followed by the build number (on Windows) or the version number (on macOS). Examples include `11 (build 22000)` and `Sequoia (15.0.0)`. This value can then be appended to ``getName()`` to get a full, human-readable operating system name and version combination for the operating system. Windows feature updates such as 24H2 are not contained in the resulting string, but Windows Server is recognized as such (e.g. `2025 (build 26100)` for Windows Server 2025).
+    /// 
+    /// > Note: This method is only supported on Windows and macOS. On other operating systems, it returns the same value as ``getVersion()``.
+    /// 
+    public static func getVersionAlias() -> String {
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(method_get_version_alias, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        return _result.description
+    }
+    
+    fileprivate static let method_get_cmdline_args: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cmdline_args")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -1249,7 +1411,7 @@ open class OS: Object {
     /// 
     /// You can set ``ProjectSettings/editor/run/mainRunArgs`` to define command-line arguments to be passed by the editor when running the project.
     /// 
-    /// Here's a minimal example on how to parse command-line arguments into a ``GDictionary`` using the `--key=value` form for arguments:
+    /// **Example:** Parse command-line arguments into a ``VariantDictionary`` using the `--key=value` form for arguments:
     /// 
     /// > Note: Passing custom user arguments directly is not recommended, as the engine may discard or modify them. Instead, pass the standard UNIX double dash (`--`) and then the custom arguments, which the engine will ignore by design. These can be read via ``getCmdlineUserArgs()``.
     /// 
@@ -1259,8 +1421,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_cmdline_user_args: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cmdline_user_args")
+    fileprivate static let method_get_cmdline_user_args: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cmdline_user_args")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -1280,8 +1442,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_video_adapter_driver_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_video_adapter_driver_info")
+    fileprivate static let method_get_video_adapter_driver_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_video_adapter_driver_info")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -1305,8 +1467,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_set_restart_on_exit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_restart_on_exit")
+    fileprivate static let method_set_restart_on_exit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_restart_on_exit")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3331453935)!
@@ -1341,8 +1503,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_is_restart_on_exit_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_restart_on_exit_set")
+    fileprivate static let method_is_restart_on_exit_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_restart_on_exit_set")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1359,8 +1521,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_restart_on_exit_arguments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_restart_on_exit_arguments")
+    fileprivate static let method_get_restart_on_exit_arguments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_restart_on_exit_arguments")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -1377,8 +1539,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_delay_usec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("delay_usec")
+    fileprivate static let method_delay_usec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("delay_usec")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 998575451)!
@@ -1408,8 +1570,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_delay_msec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("delay_msec")
+    fileprivate static let method_delay_msec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("delay_msec")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 998575451)!
@@ -1439,8 +1601,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_get_locale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_locale")
+    fileprivate static let method_get_locale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_locale")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1470,8 +1632,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_locale_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_locale_language")
+    fileprivate static let method_get_locale_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_locale_language")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1491,8 +1653,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_model_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_model_name")
+    fileprivate static let method_get_model_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_model_name")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1504,7 +1666,7 @@ open class OS: Object {
     
     /// Returns the model name of the current device.
     /// 
-    /// > Note: This method is implemented on Android and iOS. Returns `"GenericDevice"` on unsupported platforms.
+    /// > Note: This method is implemented on Android, iOS, macOS, and Windows. Returns `"GenericDevice"` on unsupported platforms.
     /// 
     public static func getModelName() -> String {
         let _result = GString ()
@@ -1512,8 +1674,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_is_userfs_persistent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_userfs_persistent")
+    fileprivate static let method_is_userfs_persistent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_userfs_persistent")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1530,8 +1692,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_is_stdout_verbose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_stdout_verbose")
+    fileprivate static let method_is_stdout_verbose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_stdout_verbose")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1548,8 +1710,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_is_debug_build: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_debug_build")
+    fileprivate static let method_is_debug_build: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_debug_build")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1571,8 +1733,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_static_memory_usage: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_static_memory_usage")
+    fileprivate static let method_get_static_memory_usage: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_static_memory_usage")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1589,8 +1751,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_static_memory_peak_usage: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_static_memory_peak_usage")
+    fileprivate static let method_get_static_memory_peak_usage: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_static_memory_peak_usage")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1607,8 +1769,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_memory_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_memory_info")
+    fileprivate static let method_get_memory_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_memory_info")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -1618,7 +1780,7 @@ open class OS: Object {
         
     }()
     
-    /// Returns a ``GDictionary`` containing information about the current memory with the following entries:
+    /// Returns a ``VariantDictionary`` containing information about the current memory with the following entries:
     /// 
     /// - `"physical"` - total amount of usable physical memory in bytes. This value can be slightly less than the actual physical memory amount, since it does not include memory reserved by the kernel and devices.
     /// 
@@ -1630,14 +1792,14 @@ open class OS: Object {
     /// 
     /// > Note: Each entry's value may be `-1` if it is unknown.
     /// 
-    public static func getMemoryInfo() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getMemoryInfo() -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(method_get_memory_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_move_to_trash: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_to_trash")
+    fileprivate static let method_move_to_trash: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_to_trash")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2113323047)!
@@ -1673,8 +1835,8 @@ open class OS: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_user_data_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_user_data_dir")
+    fileprivate static let method_get_user_data_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_user_data_dir")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1706,8 +1868,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_system_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_dir")
+    fileprivate static let method_get_system_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_dir")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3073895123)!
@@ -1741,8 +1903,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_config_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_config_dir")
+    fileprivate static let method_get_config_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_config_dir")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1764,8 +1926,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_data_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_data_dir")
+    fileprivate static let method_get_data_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_data_dir")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1787,8 +1949,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_cache_dir: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_dir")
+    fileprivate static let method_get_cache_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_dir")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1810,8 +1972,26 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_unique_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unique_id")
+    fileprivate static let method_get_temp_dir: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_temp_dir")
+        return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the _global_ temporary data directory according to the operating system's standards.
+    public static func getTempDir() -> String {
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(method_get_temp_dir, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        return _result.description
+    }
+    
+    fileprivate static let method_get_unique_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unique_id")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1833,8 +2013,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_keycode_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_keycode_string")
+    fileprivate static let method_get_keycode_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keycode_string")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2261993717)!
@@ -1863,8 +2043,8 @@ open class OS: Object {
         return _result.description
     }
     
-    fileprivate static var method_is_keycode_unicode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_keycode_unicode")
+    fileprivate static let method_is_keycode_unicode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_keycode_unicode")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1876,7 +2056,7 @@ open class OS: Object {
     
     /// Returns `true` if the input keycode corresponds to a Unicode character. For a list of codes, see the ``Key`` constants.
     /// 
-    public static func isKeycodeUnicode(code: Int64) -> Bool {
+    public static func isKeycodeUnicode(code: Int32) -> Bool {
         var _result: Bool = false
         withUnsafePointer(to: code) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1891,8 +2071,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_find_keycode_from_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_keycode_from_string")
+    fileprivate static let method_find_keycode_from_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_keycode_from_string")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1084858572)!
@@ -1922,8 +2102,8 @@ open class OS: Object {
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_set_use_file_access_save_and_swap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_file_access_save_and_swap")
+    fileprivate static let method_set_use_file_access_save_and_swap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_file_access_save_and_swap")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1951,8 +2131,8 @@ open class OS: Object {
         
     }
     
-    fileprivate static var method_set_thread_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_thread_name")
+    fileprivate static let method_set_thread_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_thread_name")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -1979,8 +2159,8 @@ open class OS: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_thread_caller_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_thread_caller_id")
+    fileprivate static let method_get_thread_caller_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_thread_caller_id")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2000,8 +2180,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_main_thread_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_main_thread_id")
+    fileprivate static let method_get_main_thread_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_main_thread_id")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2021,8 +2201,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_has_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_feature")
+    fileprivate static let method_has_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_feature")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -2054,8 +2234,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_is_sandboxed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sandboxed")
+    fileprivate static let method_is_sandboxed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sandboxed")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2075,8 +2255,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_request_permission: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_permission")
+    fileprivate static let method_request_permission: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_permission")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -2086,9 +2266,17 @@ open class OS: Object {
         
     }()
     
-    /// Requests permission from the OS for the given `name`. Returns `true` if the permission has been successfully granted.
+    /// Requests permission from the OS for the given `name`. Returns `true` if the permission has already been granted. See also [signal MainLoop.on_request_permissions_result].
     /// 
-    /// > Note: This method is currently only implemented on Android, to specifically request permission for `"RECORD_AUDIO"` by `AudioDriverOpenSL`.
+    /// The `name` must be the full permission name. For example:
+    /// 
+    /// - `OS.request_permission("android.permission.READ_EXTERNAL_STORAGE")`
+    /// 
+    /// - `OS.request_permission("android.permission.POST_NOTIFICATIONS")`
+    /// 
+    /// > Note: Permission must be checked during export.
+    /// 
+    /// > Note: This method is only implemented on Android.
     /// 
     public static func requestPermission(name: String) -> Bool {
         var _result: Bool = false
@@ -2106,8 +2294,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_request_permissions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_permissions")
+    fileprivate static let method_request_permissions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_permissions")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -2117,7 +2305,9 @@ open class OS: Object {
         
     }()
     
-    /// Requests _dangerous_ permissions from the OS. Returns `true` if permissions have been successfully granted.
+    /// Requests _dangerous_ permissions from the OS. Returns `true` if permissions have already been granted. See also [signal MainLoop.on_request_permissions_result].
+    /// 
+    /// > Note: Permissions must be checked during export.
     /// 
     /// > Note: This method is only implemented on Android. Normal permissions are automatically granted at install time in Android applications.
     /// 
@@ -2127,8 +2317,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_get_granted_permissions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_granted_permissions")
+    fileprivate static let method_get_granted_permissions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_granted_permissions")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -2148,8 +2338,8 @@ open class OS: Object {
         return _result
     }
     
-    fileprivate static var method_revoke_granted_permissions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("revoke_granted_permissions")
+    fileprivate static let method_revoke_granted_permissions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("revoke_granted_permissions")
         return withUnsafePointer(to: &OS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!

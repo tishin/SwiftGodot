@@ -28,7 +28,7 @@ import Musl
 /// A heightmap collision shape can also be build by using an ``Image`` reference:
 /// 
 open class HeightMapShape3D: Shape3D {
-    fileprivate static var className = StringName("HeightMapShape3D")
+    private static var className = StringName("HeightMapShape3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -70,8 +70,8 @@ open class HeightMapShape3D: Shape3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_map_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_map_width")
+    fileprivate static let method_set_map_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_map_width")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -83,6 +83,7 @@ open class HeightMapShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func set_map_width(_ width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class HeightMapShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_get_map_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_map_width")
+    fileprivate static let method_get_map_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_map_width")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -109,13 +110,14 @@ open class HeightMapShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func get_map_width() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_map_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_map_depth")
+    fileprivate static let method_set_map_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_map_depth")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -127,6 +129,7 @@ open class HeightMapShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func set_map_depth(_ height: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -140,8 +143,8 @@ open class HeightMapShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_get_map_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_map_depth")
+    fileprivate static let method_get_map_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_map_depth")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -153,13 +156,14 @@ open class HeightMapShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func get_map_depth() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_map_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_map_data")
+    fileprivate static let method_set_map_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_map_data")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2899603908)!
@@ -171,6 +175,7 @@ open class HeightMapShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func set_map_data(_ data: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +189,8 @@ open class HeightMapShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_get_map_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_map_data")
+    fileprivate static let method_get_map_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_map_data")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675695659)!
@@ -197,13 +202,14 @@ open class HeightMapShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func get_map_data() -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
         gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_min_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_height")
+    fileprivate static let method_get_min_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_height")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -215,13 +221,14 @@ open class HeightMapShape3D: Shape3D {
     
     /// Returns the smallest height value found in ``mapData``. Recalculates only when ``mapData`` changes.
     public final func getMinHeight() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_min_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_max_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_height")
+    fileprivate static let method_get_max_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_height")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -233,13 +240,14 @@ open class HeightMapShape3D: Shape3D {
     
     /// Returns the largest height value found in ``mapData``. Recalculates only when ``mapData`` changes.
     public final func getMaxHeight() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_max_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_update_map_data_from_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_map_data_from_image")
+    fileprivate static let method_update_map_data_from_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_map_data_from_image")
         return withUnsafePointer(to: &HeightMapShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2636652979)!
@@ -256,6 +264,7 @@ open class HeightMapShape3D: Shape3D {
     /// Each image pixel is read in as a float on the range from `0.0` (black pixel) to `1.0` (white pixel). This range value gets remapped to `heightMin` and `heightMax` to form the final height value.
     /// 
     public final func updateMapDataFromImage(_ image: Image?, heightMin: Double, heightMax: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: heightMin) { pArg1 in
                 withUnsafePointer(to: heightMax) { pArg2 in

@@ -23,11 +23,11 @@ import Musl
 /// 
 /// Describes the motion and collision result from ``PhysicsServer2D/bodyTestMotion(body:parameters:result:)``.
 open class PhysicsTestMotionResult2D: RefCounted {
-    fileprivate static var className = StringName("PhysicsTestMotionResult2D")
+    private static var className = StringName("PhysicsTestMotionResult2D")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_travel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_travel")
+    fileprivate static let method_get_travel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_travel")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -39,13 +39,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the moving object's travel before collision.
     public final func getTravel() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_travel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_remainder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_remainder")
+    fileprivate static let method_get_remainder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_remainder")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -57,13 +58,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the moving object's remaining movement vector.
     public final func getRemainder() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_remainder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_point")
+    fileprivate static let method_get_collision_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_point")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -75,13 +77,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the point of collision in global coordinates, if a collision occurred.
     public final func getCollisionPoint() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_normal")
+    fileprivate static let method_get_collision_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_normal")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -93,13 +96,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the colliding body's shape's normal at the point of collision, if a collision occurred.
     public final func getCollisionNormal() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collider_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider_velocity")
+    fileprivate static let method_get_collider_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider_velocity")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -111,13 +115,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the colliding body's velocity, if a collision occurred.
     public final func getColliderVelocity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collider_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider_id")
+    fileprivate static let method_get_collider_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider_id")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -129,13 +134,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the unique instance ID of the colliding body's attached ``Object``, if a collision occurred. See ``Object/getInstanceId()``.
     public final func getColliderId() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collider_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider_rid")
+    fileprivate static let method_get_collider_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider_rid")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -147,13 +153,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the colliding body's ``RID`` used by the ``PhysicsServer2D``, if a collision occurred.
     public final func getColliderRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_collider: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider")
+    fileprivate static let method_get_collider: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1981248198)!
@@ -165,13 +172,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the colliding body's attached ``Object``, if a collision occurred.
     public final func getCollider() -> Object? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_collider_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collider_shape")
+    fileprivate static let method_get_collider_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collider_shape")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -183,13 +191,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the colliding body's shape index, if a collision occurred. See ``CollisionObject2D``.
     public final func getColliderShape() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_local_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_local_shape")
+    fileprivate static let method_get_collision_local_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_local_shape")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -201,13 +210,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the moving object's colliding shape, if a collision occurred.
     public final func getCollisionLocalShape() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_local_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_depth")
+    fileprivate static let method_get_collision_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_depth")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -219,13 +229,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the length of overlap along the collision normal, if a collision occurred.
     public final func getCollisionDepth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_safe_fraction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_safe_fraction")
+    fileprivate static let method_get_collision_safe_fraction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_safe_fraction")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -237,13 +248,14 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the maximum fraction of the motion that can occur without a collision, between `0` and `1`.
     public final func getCollisionSafeFraction() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_safe_fraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_collision_unsafe_fraction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_unsafe_fraction")
+    fileprivate static let method_get_collision_unsafe_fraction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_unsafe_fraction")
         return withUnsafePointer(to: &PhysicsTestMotionResult2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -255,6 +267,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     
     /// Returns the minimum fraction of the motion needed to collide, if a collision occurred, between `0` and `1`.
     public final func getCollisionUnsafeFraction() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_unsafe_fraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

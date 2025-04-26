@@ -36,18 +36,18 @@ import Musl
 /// - ``settingsChanged``
 open class ProjectSettings: Object {
     /// The shared instance of this class
-    public static var shared: ProjectSettings = {
-        return withUnsafePointer (to: &ProjectSettings.godotClassName.content) { ptr in
-            ProjectSettings (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: ProjectSettings {
+        return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("ProjectSettings")
+    private static var className = StringName("ProjectSettings")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_has_setting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_setting")
+    fileprivate static let method_has_setting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_setting")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -74,8 +74,8 @@ open class ProjectSettings: Object {
         return _result
     }
     
-    fileprivate static var method_set_setting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_setting")
+    fileprivate static let method_set_setting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_setting")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 402577236)!
@@ -86,8 +86,6 @@ open class ProjectSettings: Object {
     }()
     
     /// Sets the value of a setting.
-    /// 
-    /// **Example:**
     /// 
     /// This can also be used to erase custom project settings. To do this change the setting value to `null`.
     /// 
@@ -109,8 +107,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_get_setting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_setting")
+    fileprivate static let method_get_setting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_setting")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 223050753)!
@@ -121,8 +119,6 @@ open class ProjectSettings: Object {
     }()
     
     /// Returns the value of the setting identified by `name`. If the setting doesn't exist and `defaultValue` is specified, the value of `defaultValue` is returned. Otherwise, `null` is returned.
-    /// 
-    /// **Example:**
     /// 
     /// > Note: This method doesn't take potential feature overrides into account automatically. Use ``getSettingWithOverride(name:)`` to handle seamlessly.
     /// 
@@ -145,8 +141,8 @@ open class ProjectSettings: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_setting_with_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_setting_with_override")
+    fileprivate static let method_get_setting_with_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_setting_with_override")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2760726917)!
@@ -158,11 +154,7 @@ open class ProjectSettings: Object {
     
     /// Similar to ``getSetting(name:defaultValue:)``, but applies feature tag overrides if any exists and is valid.
     /// 
-    /// **Example:**
-    /// 
-    /// If the following setting override exists "application/config/name.windows", and the following code is executed:
-    /// 
-    /// Then the overridden setting will be returned instead if the project is running on the _Windows_ operating system.
+    /// **Example:** If the setting override `"application/config/name.windows"` exists, and the following code is executed on a _Windows_ operating system, the overridden setting is printed instead:
     /// 
     public static func getSettingWithOverride(name: StringName) -> Variant? {
         var _result: Variant.ContentType = Variant.zero
@@ -179,8 +171,8 @@ open class ProjectSettings: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_global_class_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_class_list")
+    fileprivate static let method_get_global_class_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_class_list")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -190,7 +182,7 @@ open class ProjectSettings: Object {
         
     }()
     
-    /// Returns an ``GArray`` of registered global classes. Each global class is represented as a ``GDictionary`` that contains the following entries:
+    /// Returns an ``VariantArray`` of registered global classes. Each global class is represented as a ``VariantDictionary`` that contains the following entries:
     /// 
     /// - `base` is a name of the base class;
     /// 
@@ -204,14 +196,14 @@ open class ProjectSettings: Object {
     /// 
     /// > Note: Both the script and the icon paths are local to the project filesystem, i.e. they start with `res://`.
     /// 
-    public static func getGlobalClassList() -> VariantCollection<GDictionary> {
+    public static func getGlobalClassList() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_global_class_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_set_order: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_order")
+    fileprivate static let method_set_order: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_order")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2956805083)!
@@ -240,8 +232,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_get_order: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_order")
+    fileprivate static let method_get_order: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_order")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -268,8 +260,8 @@ open class ProjectSettings: Object {
         return _result
     }
     
-    fileprivate static var method_set_initial_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_initial_value")
+    fileprivate static let method_set_initial_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_initial_value")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 402577236)!
@@ -298,8 +290,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_set_as_basic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_as_basic")
+    fileprivate static let method_set_as_basic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_as_basic")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678287736)!
@@ -328,8 +320,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_set_as_internal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_as_internal")
+    fileprivate static let method_set_as_internal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_as_internal")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678287736)!
@@ -358,8 +350,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_add_property_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_property_info")
+    fileprivate static let method_add_property_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_property_info")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155329257)!
@@ -377,9 +369,7 @@ open class ProjectSettings: Object {
     /// 
     /// - optionally `"hint"`: integer (see ``PropertyHint``) and `"hint_string"`: ``String``
     /// 
-    /// **Example:**
-    /// 
-    public static func addPropertyInfo(hint: GDictionary) {
+    public static func addPropertyInfo(hint: VariantDictionary) {
         withUnsafePointer(to: hint.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -393,8 +383,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_set_restart_if_changed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_restart_if_changed")
+    fileprivate static let method_set_restart_if_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_restart_if_changed")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678287736)!
@@ -426,8 +416,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -453,8 +443,8 @@ open class ProjectSettings: Object {
         
     }
     
-    fileprivate static var method_localize_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("localize_path")
+    fileprivate static let method_localize_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("localize_path")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -481,8 +471,8 @@ open class ProjectSettings: Object {
         return _result.description
     }
     
-    fileprivate static var method_globalize_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("globalize_path")
+    fileprivate static let method_globalize_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("globalize_path")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -512,8 +502,8 @@ open class ProjectSettings: Object {
         return _result.description
     }
     
-    fileprivate static var method_save: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save")
+    fileprivate static let method_save: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -533,8 +523,8 @@ open class ProjectSettings: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_resource_pack: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_resource_pack")
+    fileprivate static let method_load_resource_pack: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_resource_pack")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 708980503)!
@@ -549,6 +539,8 @@ open class ProjectSettings: Object {
     /// > Note: If a file from `pack` shares the same path as a file already in the resource filesystem, any attempts to load that file will use the file from `pack` unless `replaceFiles` is set to `false`.
     /// 
     /// > Note: The optional `offset` parameter can be used to specify the offset in bytes to the start of the resource pack. This is only supported for .pck files.
+    /// 
+    /// > Note: ``DirAccess`` will not show changes made to the contents of `res://` after calling this function.
     /// 
     public static func loadResourcePack(_ pack: String, replaceFiles: Bool = true, offset: Int32 = 0) -> Bool {
         var _result: Bool = false
@@ -572,8 +564,8 @@ open class ProjectSettings: Object {
         return _result
     }
     
-    fileprivate static var method_save_custom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_custom")
+    fileprivate static let method_save_custom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_custom")
         return withUnsafePointer(to: &ProjectSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The output port of this node needs to be connected to `Model View Matrix` port of ``VisualShaderNodeOutput``.
 open class VisualShaderNodeBillboard: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeBillboard")
+    private static var className = StringName("VisualShaderNodeBillboard")
     override open class var godotClassName: StringName { className }
     public enum BillboardType: Int64, CaseIterable {
         /// Billboarding is disabled and the node does nothing.
@@ -66,8 +66,8 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_billboard_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_billboard_type")
+    fileprivate static let method_set_billboard_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_billboard_type")
         return withUnsafePointer(to: &VisualShaderNodeBillboard.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1227463289)!
@@ -79,6 +79,7 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_billboard_type(_ billboardType: VisualShaderNodeBillboard.BillboardType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: billboardType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -92,8 +93,8 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_billboard_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_billboard_type")
+    fileprivate static let method_get_billboard_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_billboard_type")
         return withUnsafePointer(to: &VisualShaderNodeBillboard.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3724188517)!
@@ -105,13 +106,14 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_billboard_type() -> VisualShaderNodeBillboard.BillboardType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_get_billboard_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeBillboard.BillboardType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_keep_scale_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_keep_scale_enabled")
+    fileprivate static let method_set_keep_scale_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_scale_enabled")
         return withUnsafePointer(to: &VisualShaderNodeBillboard.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -123,6 +125,7 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_keep_scale_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -136,8 +139,8 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
         
     }
     
-    fileprivate static var method_is_keep_scale_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_keep_scale_enabled")
+    fileprivate static let method_is_keep_scale_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_keep_scale_enabled")
         return withUnsafePointer(to: &VisualShaderNodeBillboard.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -149,6 +152,7 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func is_keep_scale_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_is_keep_scale_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

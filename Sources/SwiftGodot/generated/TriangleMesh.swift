@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Mesh type used internally for collision calculations.
 open class TriangleMesh: RefCounted {
-    fileprivate static var className = StringName("TriangleMesh")
+    private static var className = StringName("TriangleMesh")
     override open class var godotClassName: StringName { className }
 }
 

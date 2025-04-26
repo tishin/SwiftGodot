@@ -21,7 +21,7 @@ import Musl
 
 /// ``AudioStream`` that includes sub-streams and plays them back like a playlist.
 open class AudioStreamPlaylist: AudioStream {
-    fileprivate static var className = StringName("AudioStreamPlaylist")
+    private static var className = StringName("AudioStreamPlaylist")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Maximum amount of streams supported in the playlist.
@@ -782,8 +782,8 @@ open class AudioStreamPlaylist: AudioStream {
     }
     
     /* Methods */
-    fileprivate static var method_set_stream_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stream_count")
+    fileprivate static let method_set_stream_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stream_count")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -795,6 +795,7 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func set_stream_count(_ streamCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: streamCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -808,8 +809,8 @@ open class AudioStreamPlaylist: AudioStream {
         
     }
     
-    fileprivate static var method_get_stream_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream_count")
+    fileprivate static let method_get_stream_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream_count")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -821,13 +822,14 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func get_stream_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_stream_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_bpm: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bpm")
+    fileprivate static let method_get_bpm: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bpm")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -839,13 +841,14 @@ open class AudioStreamPlaylist: AudioStream {
     
     /// Returns the BPM of the playlist, which can vary depending on the clip being played.
     public final func getBpm() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_bpm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_list_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_list_stream")
+    fileprivate static let method_set_list_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_list_stream")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 111075094)!
@@ -858,6 +861,7 @@ open class AudioStreamPlaylist: AudioStream {
     @inline(__always)
     /// Sets the stream at playback position index.
     fileprivate final func set_list_stream(_ streamIndex: Int32, _ audioStream: AudioStream?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: streamIndex) { pArg0 in
             withUnsafePointer(to: audioStream?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -874,8 +878,8 @@ open class AudioStreamPlaylist: AudioStream {
         
     }
     
-    fileprivate static var method_get_list_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_list_stream")
+    fileprivate static let method_get_list_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_list_stream")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2739380747)!
@@ -888,6 +892,7 @@ open class AudioStreamPlaylist: AudioStream {
     @inline(__always)
     /// Returns the stream at playback position index.
     fileprivate final func get_list_stream(_ streamIndex: Int32) -> AudioStream? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: streamIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -899,11 +904,11 @@ open class AudioStreamPlaylist: AudioStream {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_shuffle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shuffle")
+    fileprivate static let method_set_shuffle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shuffle")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -915,6 +920,7 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func set_shuffle(_ shuffle: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shuffle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -928,8 +934,8 @@ open class AudioStreamPlaylist: AudioStream {
         
     }
     
-    fileprivate static var method_get_shuffle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shuffle")
+    fileprivate static let method_get_shuffle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shuffle")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -941,13 +947,14 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func get_shuffle() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_shuffle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fade_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fade_time")
+    fileprivate static let method_set_fade_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fade_time")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -959,6 +966,7 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func set_fade_time(_ dec: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -972,8 +980,8 @@ open class AudioStreamPlaylist: AudioStream {
         
     }
     
-    fileprivate static var method_get_fade_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fade_time")
+    fileprivate static let method_get_fade_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fade_time")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -985,13 +993,14 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func get_fade_time() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_fade_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_loop")
+    fileprivate static let method_set_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_loop")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1003,6 +1012,7 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func set_loop(_ loop: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1016,8 +1026,8 @@ open class AudioStreamPlaylist: AudioStream {
         
     }
     
-    fileprivate static var method_has_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_loop")
+    fileprivate static let method_has_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_loop")
         return withUnsafePointer(to: &AudioStreamPlaylist.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1029,6 +1039,7 @@ open class AudioStreamPlaylist: AudioStream {
     
     @inline(__always)
     fileprivate final func has_loop() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_has_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

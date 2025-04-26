@@ -28,7 +28,7 @@ import Musl
 /// > Note: The maximum image size is 16384×16384 pixels due to graphics hardware limitations. Larger images may fail to import.
 /// 
 open class Image: Resource {
-    fileprivate static var className = StringName("Image")
+    private static var className = StringName("Image")
     override open class var godotClassName: StringName { className }
     public enum Format: Int64, CaseIterable {
         /// Texture format with a single 8-bit depth representing luminance.
@@ -226,8 +226,8 @@ open class Image: Resource {
     /* Properties */
     
     /* Methods */
-    fileprivate static var method_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_width")
+    fileprivate static let method_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_width")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -239,13 +239,14 @@ open class Image: Resource {
     
     /// Returns the image's width.
     public final func getWidth() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Image.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_height")
+    fileprivate static let method_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_height")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -257,13 +258,14 @@ open class Image: Resource {
     
     /// Returns the image's height.
     public final func getHeight() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Image.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -275,13 +277,14 @@ open class Image: Resource {
     
     /// Returns the image's size (width and height).
     public final func getSize() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Image.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_mipmaps")
+    fileprivate static let method_has_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_mipmaps")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -293,13 +296,14 @@ open class Image: Resource {
     
     /// Returns `true` if the image has generated mipmaps.
     public final func hasMipmaps() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Image.method_has_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format")
+    fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3847873762)!
@@ -311,13 +315,14 @@ open class Image: Resource {
     
     /// Returns the image's format. See ``Image/Format`` constants.
     public final func getFormat() -> Image.Format {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Image.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
-    fileprivate static var method_get_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_data")
+    fileprivate static let method_get_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_data")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2362200018)!
@@ -329,13 +334,14 @@ open class Image: Resource {
     
     /// Returns a copy of the image's raw data.
     public final func getData() -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         gi.object_method_bind_ptrcall(Image.method_get_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_data_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_data_size")
+    fileprivate static let method_get_data_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_data_size")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -347,13 +353,14 @@ open class Image: Resource {
     
     /// Returns size (in bytes) of the image's raw data.
     public final func getDataSize() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(Image.method_get_data_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_convert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("convert")
+    fileprivate static let method_convert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("convert")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2120693146)!
@@ -365,6 +372,7 @@ open class Image: Resource {
     
     /// Converts the image's format. See ``Image/Format`` constants.
     public final func convert(format: Image.Format) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -378,8 +386,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_get_mipmap_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mipmap_count")
+    fileprivate static let method_get_mipmap_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mipmap_count")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -391,13 +399,14 @@ open class Image: Resource {
     
     /// Returns the number of mipmap levels or 0 if the image has no mipmaps. The largest main level image is not counted as a mipmap level by this method, so if you want to include it you can add 1 to this count.
     public final func getMipmapCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Image.method_get_mipmap_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_mipmap_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mipmap_offset")
+    fileprivate static let method_get_mipmap_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mipmap_offset")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -408,8 +417,9 @@ open class Image: Resource {
     }()
     
     /// Returns the offset where the image's mipmap with index `mipmap` is stored in the ``data`` dictionary.
-    public final func getMipmapOffset(mipmap: Int32) -> Int32 {
-        var _result: Int32 = 0
+    public final func getMipmapOffset(mipmap: Int32) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int = 0
         withUnsafePointer(to: mipmap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -423,8 +433,8 @@ open class Image: Resource {
         return _result
     }
     
-    fileprivate static var method_resize_to_po2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resize_to_po2")
+    fileprivate static let method_resize_to_po2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resize_to_po2")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4189212329)!
@@ -436,6 +446,7 @@ open class Image: Resource {
     
     /// Resizes the image to the nearest power of 2 for the width and height. If `square` is `true` then set width and height to be the same. New pixels are calculated using the `interpolation` mode defined via ``Image/Interpolation`` constants.
     public final func resizeToPo2(square: Bool = false, interpolation: Image.Interpolation = .bilinear) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: square) { pArg0 in
             withUnsafePointer(to: interpolation.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -452,8 +463,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_resize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resize")
+    fileprivate static let method_resize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resize")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 994498151)!
@@ -465,6 +476,7 @@ open class Image: Resource {
     
     /// Resizes the image to the given `width` and `height`. New pixels are calculated using the `interpolation` mode defined via ``Image/Interpolation`` constants.
     public final func resize(width: Int32, height: Int32, interpolation: Image.Interpolation = .bilinear) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: interpolation.rawValue) { pArg2 in
@@ -484,8 +496,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_shrink_x2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shrink_x2")
+    fileprivate static let method_shrink_x2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shrink_x2")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -497,12 +509,13 @@ open class Image: Resource {
     
     /// Shrinks the image by a factor of 2 on each axis (this divides the pixel count by 4).
     public final func shrinkX2() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_shrink_x2, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_crop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("crop")
+    fileprivate static let method_crop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("crop")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -514,6 +527,7 @@ open class Image: Resource {
     
     /// Crops the image to the given `width` and `height`. If the specified size is larger than the current size, the extra area is filled with black pixels.
     public final func crop(width: Int32, height: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -530,8 +544,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_flip_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("flip_x")
+    fileprivate static let method_flip_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("flip_x")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -543,12 +557,13 @@ open class Image: Resource {
     
     /// Flips the image horizontally.
     public final func flipX() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_flip_x, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_flip_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("flip_y")
+    fileprivate static let method_flip_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("flip_y")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -560,12 +575,13 @@ open class Image: Resource {
     
     /// Flips the image vertically.
     public final func flipY() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_flip_y, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_generate_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_mipmaps")
+    fileprivate static let method_generate_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_mipmaps")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1633102583)!
@@ -580,6 +596,7 @@ open class Image: Resource {
     /// It is possible to check if the image has mipmaps by calling ``hasMipmaps()`` or ``getMipmapCount()``. Calling ``generateMipmaps(renormalize:)`` on an image that already has mipmaps will replace existing mipmaps in the image.
     /// 
     public final func generateMipmaps(renormalize: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: renormalize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -594,8 +611,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_clear_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_mipmaps")
+    fileprivate static let method_clear_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_mipmaps")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -607,12 +624,13 @@ open class Image: Resource {
     
     /// Removes the image's mipmaps.
     public final func clearMipmaps() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_clear_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create")
+    fileprivate static let method_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 986942177)!
@@ -644,11 +662,11 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_empty: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_empty")
+    fileprivate static let method_create_empty: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_empty")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 986942177)!
@@ -680,11 +698,11 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_from_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_data")
+    fileprivate static let method_create_from_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_data")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 299398494)!
@@ -719,11 +737,11 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_data")
+    fileprivate static let method_set_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_data")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2740482212)!
@@ -735,6 +753,7 @@ open class Image: Resource {
     
     /// Overwrites data of an existing ``Image``. Non-static equivalent of ``createFromData(width:height:useMipmaps:format:data:)``.
     public final func setData(width: Int32, height: Int32, useMipmaps: Bool, format: Image.Format, data: PackedByteArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: useMipmaps) { pArg2 in
@@ -760,8 +779,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_is_empty: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_empty")
+    fileprivate static let method_is_empty: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_empty")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -773,13 +792,14 @@ open class Image: Resource {
     
     /// Returns `true` if the image has no data.
     public final func isEmpty() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Image.method_is_empty, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_load: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load")
+    fileprivate static let method_load: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -796,6 +816,7 @@ open class Image: Resource {
     /// See also ``ImageTexture`` description for usage examples.
     /// 
     public final func load(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -811,8 +832,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_from_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_from_file")
+    fileprivate static let method_load_from_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_from_file")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 736337515)!
@@ -836,11 +857,11 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_save_png: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_png")
+    fileprivate static let method_save_png: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_png")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2113323047)!
@@ -852,6 +873,7 @@ open class Image: Resource {
     
     /// Saves the image as a PNG file to the file at `path`.
     public final func savePng(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -867,8 +889,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_save_png_to_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_png_to_buffer")
+    fileprivate static let method_save_png_to_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_png_to_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2362200018)!
@@ -880,13 +902,14 @@ open class Image: Resource {
     
     /// Saves the image as a PNG file to a byte array.
     public final func savePngToBuffer() -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         gi.object_method_bind_ptrcall(Image.method_save_png_to_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_save_jpg: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_jpg")
+    fileprivate static let method_save_jpg: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_jpg")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2800019068)!
@@ -901,6 +924,7 @@ open class Image: Resource {
     /// > Note: JPEG does not save an alpha channel. If the ``Image`` contains an alpha channel, the image will still be saved, but the resulting JPEG file won't contain the alpha channel.
     /// 
     public final func saveJpg(path: String, quality: Double = 0.75) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -919,8 +943,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_save_jpg_to_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_jpg_to_buffer")
+    fileprivate static let method_save_jpg_to_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_jpg_to_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 592235273)!
@@ -935,6 +959,7 @@ open class Image: Resource {
     /// > Note: JPEG does not save an alpha channel. If the ``Image`` contains an alpha channel, the image will still be saved, but the resulting byte array won't contain the alpha channel.
     /// 
     public final func saveJpgToBuffer(quality: Double = 0.75) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: quality) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -949,8 +974,8 @@ open class Image: Resource {
         return _result
     }
     
-    fileprivate static var method_save_exr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_exr")
+    fileprivate static let method_save_exr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_exr")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3108122999)!
@@ -965,6 +990,7 @@ open class Image: Resource {
     /// > Note: The TinyEXR module is disabled in non-editor builds, which means ``saveExr(path:grayscale:)`` will return ``GodotError/errUnavailable`` when it is called from an exported project.
     /// 
     public final func saveExr(path: String, grayscale: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -983,8 +1009,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_save_exr_to_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_exr_to_buffer")
+    fileprivate static let method_save_exr_to_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_exr_to_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3178917920)!
@@ -999,6 +1025,7 @@ open class Image: Resource {
     /// > Note: The TinyEXR module is disabled in non-editor builds, which means ``saveExr(path:grayscale:)`` will return an empty byte array when it is called from an exported project.
     /// 
     public final func saveExrToBuffer(grayscale: Bool = false) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: grayscale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1013,8 +1040,8 @@ open class Image: Resource {
         return _result
     }
     
-    fileprivate static var method_save_webp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_webp")
+    fileprivate static let method_save_webp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_webp")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2781156876)!
@@ -1024,11 +1051,12 @@ open class Image: Resource {
         
     }()
     
-    /// Saves the image as a WebP (Web Picture) file to the file at `path`. By default it will save lossless. If `lossy` is true, the image will be saved lossy, using the `quality` setting between 0.0 and 1.0 (inclusive). Lossless WebP offers more efficient compression than PNG.
+    /// Saves the image as a WebP (Web Picture) file to the file at `path`. By default it will save lossless. If `lossy` is `true`, the image will be saved lossy, using the `quality` setting between `0.0` and `1.0` (inclusive). Lossless WebP offers more efficient compression than PNG.
     /// 
     /// > Note: The WebP format is limited to a size of 16383×16383 pixels, while PNG can save larger images.
     /// 
     public final func saveWebp(path: String, lossy: Bool = false, quality: Double = 0.75) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -1050,8 +1078,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_save_webp_to_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_webp_to_buffer")
+    fileprivate static let method_save_webp_to_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_webp_to_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1214628238)!
@@ -1061,11 +1089,12 @@ open class Image: Resource {
         
     }()
     
-    /// Saves the image as a WebP (Web Picture) file to a byte array. By default it will save lossless. If `lossy` is true, the image will be saved lossy, using the `quality` setting between 0.0 and 1.0 (inclusive). Lossless WebP offers more efficient compression than PNG.
+    /// Saves the image as a WebP (Web Picture) file to a byte array. By default it will save lossless. If `lossy` is `true`, the image will be saved lossy, using the `quality` setting between `0.0` and `1.0` (inclusive). Lossless WebP offers more efficient compression than PNG.
     /// 
     /// > Note: The WebP format is limited to a size of 16383×16383 pixels, while PNG can save larger images.
     /// 
     public final func saveWebpToBuffer(lossy: Bool = false, quality: Double = 0.75) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: lossy) { pArg0 in
             withUnsafePointer(to: quality) { pArg1 in
@@ -1083,8 +1112,8 @@ open class Image: Resource {
         return _result
     }
     
-    fileprivate static var method_detect_alpha: GDExtensionMethodBindPtr = {
-        let methodName = StringName("detect_alpha")
+    fileprivate static let method_detect_alpha: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("detect_alpha")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2030116505)!
@@ -1096,13 +1125,14 @@ open class Image: Resource {
     
     /// Returns ``AlphaMode/blend`` if the image has data for alpha values. Returns ``AlphaMode/bit`` if all the alpha values are stored in a single bit. Returns ``AlphaMode/none`` if no data for alpha values is found.
     public final func detectAlpha() -> Image.AlphaMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Image.method_detect_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Image.AlphaMode (rawValue: _result)!
     }
     
-    fileprivate static var method_is_invisible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_invisible")
+    fileprivate static let method_is_invisible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_invisible")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1114,13 +1144,14 @@ open class Image: Resource {
     
     /// Returns `true` if all the image's pixels have an alpha value of 0. Returns `false` if any pixel has an alpha value higher than 0.
     public final func isInvisible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Image.method_is_invisible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_detect_used_channels: GDExtensionMethodBindPtr = {
-        let methodName = StringName("detect_used_channels")
+    fileprivate static let method_detect_used_channels: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("detect_used_channels")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2703139984)!
@@ -1132,6 +1163,7 @@ open class Image: Resource {
     
     /// Returns the color channels used by this image, as one of the ``Image/UsedChannels`` constants. If the image is compressed, the original `source` must be specified.
     public final func detectUsedChannels(source: Image.CompressSource = .generic) -> Image.UsedChannels {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1146,8 +1178,8 @@ open class Image: Resource {
         return Image.UsedChannels (rawValue: _result)!
     }
     
-    fileprivate static var method_compress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compress")
+    fileprivate static let method_compress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compress")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2975424957)!
@@ -1164,6 +1196,7 @@ open class Image: Resource {
     /// For ASTC compression, the `astcFormat` parameter must be supplied.
     /// 
     public final func compress(mode: Image.CompressMode, source: Image.CompressSource = .generic, astcFormat: Image.ASTCFormat = .astcFormat4x4) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: source.rawValue) { pArg1 in
@@ -1184,8 +1217,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_compress_from_channels: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compress_from_channels")
+    fileprivate static let method_compress_from_channels: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compress_from_channels")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4212890953)!
@@ -1202,6 +1235,7 @@ open class Image: Resource {
     /// For ASTC compression, the `astcFormat` parameter must be supplied.
     /// 
     public final func compressFromChannels(mode: Image.CompressMode, channels: Image.UsedChannels, astcFormat: Image.ASTCFormat = .astcFormat4x4) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: channels.rawValue) { pArg1 in
@@ -1222,8 +1256,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_decompress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decompress")
+    fileprivate static let method_decompress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decompress")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -1238,13 +1272,14 @@ open class Image: Resource {
     /// > Note: The following formats can be decompressed: DXT, RGTC, BPTC. The formats ETC1 and ETC2 are not supported.
     /// 
     public final func decompress() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Image.method_decompress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_compressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_compressed")
+    fileprivate static let method_is_compressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_compressed")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1256,13 +1291,14 @@ open class Image: Resource {
     
     /// Returns `true` if the image is compressed.
     public final func isCompressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Image.method_is_compressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_rotate_90: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rotate_90")
+    fileprivate static let method_rotate_90: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rotate_90")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1901204267)!
@@ -1274,6 +1310,7 @@ open class Image: Resource {
     
     /// Rotates the image in the specified `direction` by `90` degrees. The width and height of the image must be greater than `1`. If the width and height are not equal, the image will be resized.
     public final func rotate90(direction: ClockDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1287,8 +1324,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_rotate_180: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rotate_180")
+    fileprivate static let method_rotate_180: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rotate_180")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1300,12 +1337,13 @@ open class Image: Resource {
     
     /// Rotates the image by `180` degrees. The width and height of the image must be greater than `1`.
     public final func rotate180() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_rotate_180, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_fix_alpha_edges: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fix_alpha_edges")
+    fileprivate static let method_fix_alpha_edges: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fix_alpha_edges")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1317,12 +1355,13 @@ open class Image: Resource {
     
     /// Blends low-alpha pixels with nearby pixels.
     public final func fixAlphaEdges() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_fix_alpha_edges, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_premultiply_alpha: GDExtensionMethodBindPtr = {
-        let methodName = StringName("premultiply_alpha")
+    fileprivate static let method_premultiply_alpha: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("premultiply_alpha")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1334,12 +1373,13 @@ open class Image: Resource {
     
     /// Multiplies color values with alpha values. Resulting color values for a pixel are `(color * alpha)/256`. See also ``CanvasItemMaterial/blendMode``.
     public final func premultiplyAlpha() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_premultiply_alpha, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_srgb_to_linear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("srgb_to_linear")
+    fileprivate static let method_srgb_to_linear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("srgb_to_linear")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1349,14 +1389,33 @@ open class Image: Resource {
         
     }()
     
-    /// Converts the raw data from the sRGB colorspace to a linear scale.
+    /// Converts the raw data from the sRGB colorspace to a linear scale. Only works on images with ``Format/rgb8`` or ``Format/rgba8`` formats.
     public final func srgbToLinear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_srgb_to_linear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_normal_map_to_xy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("normal_map_to_xy")
+    fileprivate static let method_linear_to_srgb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("linear_to_srgb")
+        return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Converts the entire image from the linear colorspace to the sRGB colorspace. Only works on images with ``Format/rgb8`` or ``Format/rgba8`` formats.
+    public final func linearToSrgb() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Image.method_linear_to_srgb, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_normal_map_to_xy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("normal_map_to_xy")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1368,12 +1427,13 @@ open class Image: Resource {
     
     /// Converts the image's data to represent coordinates on a 3D plane. This is used when the image represents a normal map. A normal map can add lots of detail to a 3D surface without increasing the polygon count.
     public final func normalMapToXy() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Image.method_normal_map_to_xy, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_rgbe_to_srgb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rgbe_to_srgb")
+    fileprivate static let method_rgbe_to_srgb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rgbe_to_srgb")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 564927088)!
@@ -1385,13 +1445,14 @@ open class Image: Resource {
     
     /// Converts a standard RGBE (Red Green Blue Exponent) image to an sRGB image.
     public final func rgbeToSrgb() -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Image.method_rgbe_to_srgb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_bump_map_to_normal_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bump_map_to_normal_map")
+    fileprivate static let method_bump_map_to_normal_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bump_map_to_normal_map")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3423495036)!
@@ -1403,6 +1464,7 @@ open class Image: Resource {
     
     /// Converts a bump map to a normal map. A bump map provides a height offset per-pixel, while a normal map provides a normal direction per pixel.
     public final func bumpMapToNormalMap(bumpScale: Double = 1.0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bumpScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1416,8 +1478,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_compute_image_metrics: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_image_metrics")
+    fileprivate static let method_compute_image_metrics: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_image_metrics")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3080961247)!
@@ -1431,8 +1493,9 @@ open class Image: Resource {
     /// 
     /// The dictionary contains `max`, `mean`, `mean_squared`, `root_mean_squared` and `peak_snr`.
     /// 
-    public final func computeImageMetrics(comparedImage: Image?, useLuma: Bool) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func computeImageMetrics(comparedImage: Image?, useLuma: Bool) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: comparedImage?.handle) { pArg0 in
             withUnsafePointer(to: useLuma) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1449,8 +1512,8 @@ open class Image: Resource {
         return _result
     }
     
-    fileprivate static var method_blit_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("blit_rect")
+    fileprivate static let method_blit_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("blit_rect")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2903928755)!
@@ -1461,7 +1524,11 @@ open class Image: Resource {
     }()
     
     /// Copies `srcRect` from `src` image to this image at coordinates `dst`, clipped accordingly to both image bounds. This image and `src` image **must** have the same format. `srcRect` with non-positive size is treated as empty.
+    /// 
+    /// > Note: The alpha channel data in `src` will overwrite the corresponding data in this image at the target position. To blend alpha channels, use ``blendRect(src:srcRect:dst:)`` instead.
+    /// 
     public final func blitRect(src: Image, srcRect: Rect2i, dst: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: src.handle) { pArg0 in
             withUnsafePointer(to: srcRect) { pArg1 in
                 withUnsafePointer(to: dst) { pArg2 in
@@ -1481,8 +1548,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_blit_rect_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("blit_rect_mask")
+    fileprivate static let method_blit_rect_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("blit_rect_mask")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3383581145)!
@@ -1494,6 +1561,7 @@ open class Image: Resource {
     
     /// Blits `srcRect` area from `src` image to this image at the coordinates given by `dst`, clipped accordingly to both image bounds. `src` pixel is copied onto `dst` if the corresponding `mask` pixel's alpha value is not 0. This image and `src` image **must** have the same format. `src` image and `mask` image **must** have the same size (width and height) but they can have different formats. `srcRect` with non-positive size is treated as empty.
     public final func blitRectMask(src: Image?, mask: Image?, srcRect: Rect2i, dst: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: src?.handle) { pArg0 in
             withUnsafePointer(to: mask?.handle) { pArg1 in
                 withUnsafePointer(to: srcRect) { pArg2 in
@@ -1516,8 +1584,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_blend_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("blend_rect")
+    fileprivate static let method_blend_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("blend_rect")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2903928755)!
@@ -1529,6 +1597,7 @@ open class Image: Resource {
     
     /// Alpha-blends `srcRect` from `src` image to this image at coordinates `dst`, clipped accordingly to both image bounds. This image and `src` image **must** have the same format. `srcRect` with non-positive size is treated as empty.
     public final func blendRect(src: Image?, srcRect: Rect2i, dst: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: src?.handle) { pArg0 in
             withUnsafePointer(to: srcRect) { pArg1 in
                 withUnsafePointer(to: dst) { pArg2 in
@@ -1548,8 +1617,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_blend_rect_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("blend_rect_mask")
+    fileprivate static let method_blend_rect_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("blend_rect_mask")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3383581145)!
@@ -1561,6 +1630,7 @@ open class Image: Resource {
     
     /// Alpha-blends `srcRect` from `src` image to this image using `mask` image at coordinates `dst`, clipped accordingly to both image bounds. Alpha channels are required for both `src` and `mask`. `dst` pixels and `src` pixels will blend if the corresponding mask pixel's alpha value is not 0. This image and `src` image **must** have the same format. `src` image and `mask` image **must** have the same size (width and height) but they can have different formats. `srcRect` with non-positive size is treated as empty.
     public final func blendRectMask(src: Image?, mask: Image?, srcRect: Rect2i, dst: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: src?.handle) { pArg0 in
             withUnsafePointer(to: mask?.handle) { pArg1 in
                 withUnsafePointer(to: srcRect) { pArg2 in
@@ -1583,8 +1653,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_fill: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fill")
+    fileprivate static let method_fill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fill")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -1596,6 +1666,7 @@ open class Image: Resource {
     
     /// Fills the image with `color`.
     public final func fill(color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1609,8 +1680,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_fill_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fill_rect")
+    fileprivate static let method_fill_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fill_rect")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 514693913)!
@@ -1622,6 +1693,7 @@ open class Image: Resource {
     
     /// Fills `rect` with `color`.
     public final func fillRect(_ rect: Rect2i, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1638,8 +1710,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_get_used_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_used_rect")
+    fileprivate static let method_get_used_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_used_rect")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 410525958)!
@@ -1651,13 +1723,14 @@ open class Image: Resource {
     
     /// Returns a ``Rect2i`` enclosing the visible portion of the image, considering each pixel with a non-zero alpha channel as visible.
     public final func getUsedRect() -> Rect2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
         gi.object_method_bind_ptrcall(Image.method_get_used_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_region")
+    fileprivate static let method_get_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_region")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2601441065)!
@@ -1669,6 +1742,7 @@ open class Image: Resource {
     
     /// Returns a new ``Image`` that is a copy of this ``Image``'s area specified with `region`.
     public final func getRegion(_ region: Rect2i) -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: region) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1680,11 +1754,11 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_copy_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("copy_from")
+    fileprivate static let method_copy_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("copy_from")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 532598488)!
@@ -1696,6 +1770,7 @@ open class Image: Resource {
     
     /// Copies `src` image to this image.
     public final func copyFrom(src: Image?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: src?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1709,8 +1784,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_get_pixelv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pixelv")
+    fileprivate static let method_get_pixelv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pixelv")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1532707496)!
@@ -1725,6 +1800,7 @@ open class Image: Resource {
     /// This is the same as ``getPixel(x:y:)``, but with a ``Vector2i`` argument instead of two integer arguments.
     /// 
     public final func getPixelv(point: Vector2i) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1739,8 +1815,8 @@ open class Image: Resource {
         return _result
     }
     
-    fileprivate static var method_get_pixel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pixel")
+    fileprivate static let method_get_pixel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pixel")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2165839948)!
@@ -1755,6 +1831,7 @@ open class Image: Resource {
     /// This is the same as ``getPixelv(point:)``, but with two integer arguments instead of a ``Vector2i`` argument.
     /// 
     public final func getPixel(x: Int32, y: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: x) { pArg0 in
             withUnsafePointer(to: y) { pArg1 in
@@ -1772,8 +1849,8 @@ open class Image: Resource {
         return _result
     }
     
-    fileprivate static var method_set_pixelv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pixelv")
+    fileprivate static let method_set_pixelv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pixelv")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 287851464)!
@@ -1785,11 +1862,10 @@ open class Image: Resource {
     
     /// Sets the ``Color`` of the pixel at `point` to `color`.
     /// 
-    /// **Example:**
-    /// 
     /// This is the same as ``setPixel(x:y:color:)``, but with a ``Vector2i`` argument instead of two integer arguments.
     /// 
     public final func setPixelv(point: Vector2i, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1806,8 +1882,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_set_pixel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pixel")
+    fileprivate static let method_set_pixel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pixel")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3733378741)!
@@ -1819,11 +1895,10 @@ open class Image: Resource {
     
     /// Sets the ``Color`` of the pixel at `(x, y)` to `color`.
     /// 
-    /// **Example:**
-    /// 
     /// This is the same as ``setPixelv(point:color:)``, but with a two integer arguments instead of a ``Vector2i`` argument.
     /// 
     public final func setPixel(x: Int32, y: Int32, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: x) { pArg0 in
             withUnsafePointer(to: y) { pArg1 in
                 withUnsafePointer(to: color) { pArg2 in
@@ -1843,8 +1918,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_adjust_bcs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("adjust_bcs")
+    fileprivate static let method_adjust_bcs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("adjust_bcs")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2385087082)!
@@ -1856,6 +1931,7 @@ open class Image: Resource {
     
     /// Adjusts this image's `brightness`, `contrast`, and `saturation` by the given values. Does not work if the image is compressed (see ``isCompressed()``).
     public final func adjustBcs(brightness: Double, contrast: Double, saturation: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: brightness) { pArg0 in
             withUnsafePointer(to: contrast) { pArg1 in
                 withUnsafePointer(to: saturation) { pArg2 in
@@ -1875,8 +1951,8 @@ open class Image: Resource {
         
     }
     
-    fileprivate static var method_load_png_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_png_from_buffer")
+    fileprivate static let method_load_png_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_png_from_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -1888,6 +1964,7 @@ open class Image: Resource {
     
     /// Loads an image from the binary contents of a PNG file.
     public final func loadPngFromBuffer(_ buffer: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1902,8 +1979,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_jpg_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_jpg_from_buffer")
+    fileprivate static let method_load_jpg_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_jpg_from_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -1915,6 +1992,7 @@ open class Image: Resource {
     
     /// Loads an image from the binary contents of a JPEG file.
     public final func loadJpgFromBuffer(_ buffer: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1929,8 +2007,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_webp_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_webp_from_buffer")
+    fileprivate static let method_load_webp_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_webp_from_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -1942,6 +2020,7 @@ open class Image: Resource {
     
     /// Loads an image from the binary contents of a WebP file.
     public final func loadWebpFromBuffer(_ buffer: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1956,8 +2035,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_tga_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_tga_from_buffer")
+    fileprivate static let method_load_tga_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_tga_from_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -1972,6 +2051,7 @@ open class Image: Resource {
     /// > Note: This method is only available in engine builds with the TGA module enabled. By default, the TGA module is enabled, but it can be disabled at build-time using the `module_tga_enabled=no` SCons option.
     /// 
     public final func loadTgaFromBuffer(_ buffer: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1986,8 +2066,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_bmp_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_bmp_from_buffer")
+    fileprivate static let method_load_bmp_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_bmp_from_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -2004,6 +2084,7 @@ open class Image: Resource {
     /// > Note: This method is only available in engine builds with the BMP module enabled. By default, the BMP module is enabled, but it can be disabled at build-time using the `module_bmp_enabled=no` SCons option.
     /// 
     public final func loadBmpFromBuffer(_ buffer: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2018,8 +2099,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_ktx_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_ktx_from_buffer")
+    fileprivate static let method_load_ktx_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_ktx_from_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -2036,6 +2117,7 @@ open class Image: Resource {
     /// > Note: This method is only available in engine builds with the KTX module enabled. By default, the KTX module is enabled, but it can be disabled at build-time using the `module_ktx_enabled=no` SCons option.
     /// 
     public final func loadKtxFromBuffer(_ buffer: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2050,8 +2132,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_svg_from_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_svg_from_buffer")
+    fileprivate static let method_load_svg_from_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_svg_from_buffer")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 311853421)!
@@ -2068,6 +2150,7 @@ open class Image: Resource {
     /// > Note: This method is only available in engine builds with the SVG module enabled. By default, the SVG module is enabled, but it can be disabled at build-time using the `module_svg_enabled=no` SCons option.
     /// 
     public final func loadSvgFromBuffer(_ buffer: PackedByteArray, scale: Double = 1.0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: scale) { pArg1 in
@@ -2085,8 +2168,8 @@ open class Image: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_svg_from_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_svg_from_string")
+    fileprivate static let method_load_svg_from_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_svg_from_string")
         return withUnsafePointer(to: &Image.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3254053600)!
@@ -2101,6 +2184,7 @@ open class Image: Resource {
     /// > Note: This method is only available in engine builds with the SVG module enabled. By default, the SVG module is enabled, but it can be disabled at build-time using the `module_svg_enabled=no` SCons option.
     /// 
     public final func loadSvgFromString(svgStr: String, scale: Double = 1.0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let svgStr = GString(svgStr)
         withUnsafePointer(to: svgStr.content) { pArg0 in

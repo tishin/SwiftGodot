@@ -26,11 +26,11 @@ import Musl
 /// They can be used to generate a self-signed ``X509Certificate`` via ``Crypto/generateSelfSignedCertificate(key:issuerName:notBefore:notAfter:)`` and as private key in ``StreamPeerTLS/acceptStream(_:serverOptions:)`` along with the appropriate certificate.
 /// 
 open class CryptoKey: Resource {
-    fileprivate static var className = StringName("CryptoKey")
+    private static var className = StringName("CryptoKey")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_save: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save")
+    fileprivate static let method_save: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save")
         return withUnsafePointer(to: &CryptoKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 885841341)!
@@ -45,6 +45,7 @@ open class CryptoKey: Resource {
     /// > Note: `path` should be a "*.pub" file if `publicOnly` is `true`, a "*.key" file otherwise.
     /// 
     public final func save(path: String, publicOnly: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -63,8 +64,8 @@ open class CryptoKey: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load")
+    fileprivate static let method_load: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load")
         return withUnsafePointer(to: &CryptoKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 885841341)!
@@ -79,6 +80,7 @@ open class CryptoKey: Resource {
     /// > Note: `path` should be a "*.pub" file if `publicOnly` is `true`, a "*.key" file otherwise.
     /// 
     public final func load(path: String, publicOnly: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -97,8 +99,8 @@ open class CryptoKey: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_public_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_public_only")
+    fileprivate static let method_is_public_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_public_only")
         return withUnsafePointer(to: &CryptoKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -110,13 +112,14 @@ open class CryptoKey: Resource {
     
     /// Returns `true` if this CryptoKey only has the public part, and not the private one.
     public final func isPublicOnly() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CryptoKey.method_is_public_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_save_to_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_to_string")
+    fileprivate static let method_save_to_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_to_string")
         return withUnsafePointer(to: &CryptoKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 32795936)!
@@ -128,6 +131,7 @@ open class CryptoKey: Resource {
     
     /// Returns a string containing the key in PEM format. If `publicOnly` is `true`, only the public key will be included.
     public final func saveToString(publicOnly: Bool = false) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: publicOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -142,8 +146,8 @@ open class CryptoKey: Resource {
         return _result.description
     }
     
-    fileprivate static var method_load_from_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_from_string")
+    fileprivate static let method_load_from_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_from_string")
         return withUnsafePointer(to: &CryptoKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 885841341)!
@@ -155,6 +159,7 @@ open class CryptoKey: Resource {
     
     /// Loads a key from the given `stringKey`. If `publicOnly` is `true`, only the public key will be loaded.
     public final func loadFromString(stringKey: String, publicOnly: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let stringKey = GString(stringKey)
         withUnsafePointer(to: stringKey.content) { pArg0 in

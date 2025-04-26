@@ -28,7 +28,7 @@ import Musl
 /// The UV layout is arranged in 4 horizontal strips, top to bottom: 40% of the height for the front face, 40% for the back face, 10% for the outer edges and 10% for the inner edges.
 /// 
 open class TextMesh: PrimitiveMesh {
-    fileprivate static var className = StringName("TextMesh")
+    private static var className = StringName("TextMesh")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -108,7 +108,7 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    /// Vertical space between lines in multiline ``TextMesh``.
+    /// Additional vertical spacing between lines (in pixels), spacing is added to line descent. This value can be negative.
     final public var lineSpacing: Double {
         get {
             return get_line_spacing ()
@@ -132,7 +132,7 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    /// Line fill alignment rules. For more info see ``TextServer.JustificationFlag``.
+    /// Line fill alignment rules. See ``TextServer.JustificationFlag`` for more information.
     final public var justificationFlags: TextServer.JustificationFlag {
         get {
             return get_justification_flags ()
@@ -241,7 +241,7 @@ open class TextMesh: PrimitiveMesh {
     }
     
     /// Set additional options for BiDi override.
-    final public var structuredTextBidiOverrideOptions: GArray {
+    final public var structuredTextBidiOverrideOptions: VariantArray {
         get {
             return get_structured_text_bidi_override_options ()
         }
@@ -253,8 +253,8 @@ open class TextMesh: PrimitiveMesh {
     }
     
     /* Methods */
-    fileprivate static var method_set_horizontal_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_horizontal_alignment")
+    fileprivate static let method_set_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_horizontal_alignment")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2312603777)!
@@ -266,6 +266,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_horizontal_alignment(_ alignment: HorizontalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -279,8 +280,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_horizontal_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_horizontal_alignment")
+    fileprivate static let method_get_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_horizontal_alignment")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 341400642)!
@@ -292,13 +293,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_horizontal_alignment() -> HorizontalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextMesh.method_get_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_vertical_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertical_alignment")
+    fileprivate static let method_set_vertical_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical_alignment")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1796458609)!
@@ -310,6 +312,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_vertical_alignment(_ alignment: VerticalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -323,8 +326,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_vertical_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertical_alignment")
+    fileprivate static let method_get_vertical_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertical_alignment")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3274884059)!
@@ -336,13 +339,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_vertical_alignment() -> VerticalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextMesh.method_get_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VerticalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text")
+    fileprivate static let method_set_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -354,6 +358,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -368,8 +373,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text")
+    fileprivate static let method_get_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -381,13 +386,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextMesh.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font")
+    fileprivate static let method_set_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1262170328)!
@@ -399,6 +405,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_font(_ font: Font?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -412,8 +419,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font")
+    fileprivate static let method_get_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229501585)!
@@ -425,13 +432,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_font() -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TextMesh.method_get_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_size")
+    fileprivate static let method_set_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_size")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -443,6 +451,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_font_size(_ fontSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -456,8 +465,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_size")
+    fileprivate static let method_get_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_size")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -469,13 +478,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_font_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TextMesh.method_get_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_line_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_spacing")
+    fileprivate static let method_set_line_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_spacing")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -487,6 +497,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_line_spacing(_ lineSpacing: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lineSpacing) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -500,8 +511,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_line_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_spacing")
+    fileprivate static let method_get_line_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_spacing")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -513,13 +524,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_line_spacing() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextMesh.method_get_line_spacing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autowrap_mode")
+    fileprivate static let method_set_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autowrap_mode")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3289138044)!
@@ -531,6 +543,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_autowrap_mode(_ autowrapMode: TextServer.AutowrapMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -544,8 +557,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autowrap_mode")
+    fileprivate static let method_get_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autowrap_mode")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1549071663)!
@@ -557,13 +570,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextMesh.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_justification_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_justification_flags")
+    fileprivate static let method_set_justification_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_justification_flags")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2877345813)!
@@ -575,6 +589,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_justification_flags(_ justificationFlags: TextServer.JustificationFlag) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: justificationFlags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -588,8 +603,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_justification_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_justification_flags")
+    fileprivate static let method_get_justification_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_justification_flags")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1583363614)!
@@ -601,13 +616,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_justification_flags() -> TextServer.JustificationFlag {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.JustificationFlag = TextServer.JustificationFlag ()
         gi.object_method_bind_ptrcall(TextMesh.method_get_justification_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth")
+    fileprivate static let method_set_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -619,6 +635,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_depth(_ depth: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -632,8 +649,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth")
+    fileprivate static let method_get_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -645,13 +662,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_depth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextMesh.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -663,6 +681,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_width(_ width: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -676,8 +695,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_width")
+    fileprivate static let method_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_width")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -689,13 +708,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_width() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextMesh.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pixel_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pixel_size")
+    fileprivate static let method_set_pixel_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pixel_size")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -707,6 +727,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_pixel_size(_ pixelSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pixelSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -720,8 +741,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_pixel_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pixel_size")
+    fileprivate static let method_get_pixel_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pixel_size")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -733,13 +754,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_pixel_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextMesh.method_get_pixel_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -751,6 +773,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -764,8 +787,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -777,13 +800,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(TextMesh.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_curve_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve_step")
+    fileprivate static let method_set_curve_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve_step")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -795,6 +819,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_curve_step(_ curveStep: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curveStep) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -808,8 +833,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_curve_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve_step")
+    fileprivate static let method_get_curve_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve_step")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -821,13 +846,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_curve_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextMesh.method_get_curve_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_direction")
+    fileprivate static let method_set_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_direction")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1418190634)!
@@ -839,6 +865,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_text_direction(_ direction: TextServer.Direction) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -852,8 +879,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_direction")
+    fileprivate static let method_get_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_direction")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2516697328)!
@@ -865,13 +892,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_text_direction() -> TextServer.Direction {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextMesh.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.Direction (rawValue: _result)!
     }
     
-    fileprivate static var method_set_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_language")
+    fileprivate static let method_set_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_language")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -883,6 +911,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_language(_ language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -897,8 +926,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language")
+    fileprivate static let method_get_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -910,13 +939,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_language() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextMesh.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override")
+    fileprivate static let method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 55961453)!
@@ -928,6 +958,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_structured_text_bidi_override(_ parser: TextServer.StructuredTextParser) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parser.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -941,8 +972,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override")
+    fileprivate static let method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3385126229)!
@@ -954,13 +985,14 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextMesh.method_get_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.StructuredTextParser (rawValue: _result)!
     }
     
-    fileprivate static var method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override_options")
+    fileprivate static let method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override_options")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -971,7 +1003,8 @@ open class TextMesh: PrimitiveMesh {
     }()
     
     @inline(__always)
-    fileprivate final func set_structured_text_bidi_override_options(_ args: GArray) {
+    fileprivate final func set_structured_text_bidi_override_options(_ args: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: args.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -985,8 +1018,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override_options")
+    fileprivate static let method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override_options")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -997,14 +1030,15 @@ open class TextMesh: PrimitiveMesh {
     }()
     
     @inline(__always)
-    fileprivate final func get_structured_text_bidi_override_options() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_structured_text_bidi_override_options() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(TextMesh.method_get_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_uppercase: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uppercase")
+    fileprivate static let method_set_uppercase: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uppercase")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1016,6 +1050,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_uppercase(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1029,8 +1064,8 @@ open class TextMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_is_uppercase: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_uppercase")
+    fileprivate static let method_is_uppercase: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_uppercase")
         return withUnsafePointer(to: &TextMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1042,6 +1077,7 @@ open class TextMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func is_uppercase() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextMesh.method_is_uppercase, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

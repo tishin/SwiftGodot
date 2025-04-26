@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This texture array class allows you to use a 2D array texture created directly on the ``RenderingDevice`` as a texture for materials, meshes, etc.
 open class Texture2DArrayRD: TextureLayeredRD {
-    fileprivate static var className = StringName("Texture2DArrayRD")
+    private static var className = StringName("Texture2DArrayRD")
     override open class var godotClassName: StringName { className }
 }
 

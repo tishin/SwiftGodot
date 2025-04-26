@@ -23,7 +23,7 @@ import Musl
 /// 
 /// UV polar coord node will transform UV values into polar coordinates, with specified scale, zoom strength and repeat parameters. It can be used to create various swirl distortions.
 open class VisualShaderNodeUVPolarCoord: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeUVPolarCoord")
+    private static var className = StringName("VisualShaderNodeUVPolarCoord")
     override open class var godotClassName: StringName { className }
 }
 

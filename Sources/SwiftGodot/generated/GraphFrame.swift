@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``autoshrinkChanged``
 open class GraphFrame: GraphElement {
-    fileprivate static var className = StringName("GraphFrame")
+    private static var className = StringName("GraphFrame")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -109,8 +109,8 @@ open class GraphFrame: GraphElement {
     }
     
     /* Methods */
-    fileprivate static var method_set_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_title")
+    fileprivate static let method_set_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_title")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -122,6 +122,7 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func set_title(_ title: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let title = GString(title)
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -136,8 +137,8 @@ open class GraphFrame: GraphElement {
         
     }
     
-    fileprivate static var method_get_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_title")
+    fileprivate static let method_get_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_title")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -149,13 +150,14 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func get_title() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(GraphFrame.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_titlebar_hbox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_titlebar_hbox")
+    fileprivate static let method_get_titlebar_hbox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_titlebar_hbox")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3590609951)!
@@ -170,13 +172,14 @@ open class GraphFrame: GraphElement {
     /// This can be used to add custom controls to the title bar such as option or close buttons.
     /// 
     public final func getTitlebarHbox() -> HBoxContainer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GraphFrame.method_get_titlebar_hbox, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_autoshrink_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autoshrink_enabled")
+    fileprivate static let method_set_autoshrink_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autoshrink_enabled")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -188,6 +191,7 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func set_autoshrink_enabled(_ shrink: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shrink) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -201,8 +205,8 @@ open class GraphFrame: GraphElement {
         
     }
     
-    fileprivate static var method_is_autoshrink_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_autoshrink_enabled")
+    fileprivate static let method_is_autoshrink_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_autoshrink_enabled")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -214,13 +218,14 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func is_autoshrink_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphFrame.method_is_autoshrink_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autoshrink_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autoshrink_margin")
+    fileprivate static let method_set_autoshrink_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autoshrink_margin")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -232,6 +237,7 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func set_autoshrink_margin(_ autoshrinkMargin: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autoshrinkMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -245,8 +251,8 @@ open class GraphFrame: GraphElement {
         
     }
     
-    fileprivate static var method_get_autoshrink_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autoshrink_margin")
+    fileprivate static let method_get_autoshrink_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autoshrink_margin")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -258,13 +264,14 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func get_autoshrink_margin() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GraphFrame.method_get_autoshrink_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_drag_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drag_margin")
+    fileprivate static let method_set_drag_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drag_margin")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -276,6 +283,7 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func set_drag_margin(_ dragMargin: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dragMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -289,8 +297,8 @@ open class GraphFrame: GraphElement {
         
     }
     
-    fileprivate static var method_get_drag_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_drag_margin")
+    fileprivate static let method_get_drag_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_drag_margin")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -302,13 +310,14 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func get_drag_margin() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GraphFrame.method_get_drag_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tint_color_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tint_color_enabled")
+    fileprivate static let method_set_tint_color_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tint_color_enabled")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -320,6 +329,7 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func set_tint_color_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -333,8 +343,8 @@ open class GraphFrame: GraphElement {
         
     }
     
-    fileprivate static var method_is_tint_color_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_tint_color_enabled")
+    fileprivate static let method_is_tint_color_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_tint_color_enabled")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -346,13 +356,14 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func is_tint_color_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphFrame.method_is_tint_color_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tint_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tint_color")
+    fileprivate static let method_set_tint_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tint_color")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -364,6 +375,7 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func set_tint_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -377,8 +389,8 @@ open class GraphFrame: GraphElement {
         
     }
     
-    fileprivate static var method_get_tint_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tint_color")
+    fileprivate static let method_get_tint_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tint_color")
         return withUnsafePointer(to: &GraphFrame.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -390,6 +402,7 @@ open class GraphFrame: GraphElement {
     
     @inline(__always)
     fileprivate final func get_tint_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(GraphFrame.method_get_tint_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

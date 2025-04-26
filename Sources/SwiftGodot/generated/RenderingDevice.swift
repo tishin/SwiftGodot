@@ -32,7 +32,7 @@ import Musl
 /// > Note: ``RenderingDevice`` is not available when running in headless mode or when using the Compatibility rendering method.
 /// 
 open class RenderingDevice: Object {
-    fileprivate static var className = StringName("RenderingDevice")
+    private static var className = StringName("RenderingDevice")
     override open class var godotClassName: StringName { className }
     public enum DeviceType: Int64, CaseIterable {
         /// Rendering device type does not match any of the other enum values or is unknown.
@@ -416,9 +416,9 @@ open class RenderingDevice: Object {
         case bc5UnormBlock = 140 // DATA_FORMAT_BC5_UNORM_BLOCK
         /// VRAM-compressed signed red/green channel data format with normalized value. Values are in the `[-1.0, 1.0]` range. The format's precision is 8 bits of red channel and 8 bits of green channel. Using BC5 texture compression (also known as S3TC RGTC).
         case bc5SnormBlock = 141 // DATA_FORMAT_BC5_SNORM_BLOCK
-        /// VRAM-compressed unsigned red/green/blue channel data format with the floating-point value stored as-is. The format's precision is 8 bits of red channel and 8 bits of green channel. Using BC6H texture compression (also known as BPTC HDR).
+        /// VRAM-compressed unsigned red/green/blue channel data format with the floating-point value stored as-is. The format's precision is between 10 and 13 bits for the red/green/blue channels. Using BC6H texture compression (also known as BPTC HDR).
         case bc6hUfloatBlock = 142 // DATA_FORMAT_BC6H_UFLOAT_BLOCK
-        /// VRAM-compressed signed red/green/blue channel data format with the floating-point value stored as-is. The format's precision is between 4 and 7 bits for the red/green/blue channels and between 0 and 8 bits for the alpha channel. Using BC7 texture compression (also known as BPTC HDR).
+        /// VRAM-compressed signed red/green/blue channel data format with the floating-point value stored as-is. The format's precision is between 10 and 13 bits for the red/green/blue channels. Using BC6H texture compression (also known as BPTC HDR).
         case bc6hSfloatBlock = 143 // DATA_FORMAT_BC6H_SFLOAT_BLOCK
         /// VRAM-compressed unsigned red/green/blue/alpha channel data format with normalized value. Values are in the `[0.0, 1.0]` range. The format's precision is between 4 and 7 bits for the red/green/blue channels and between 0 and 8 bits for the alpha channel. Also known as BPTC LDR.
         case bc7UnormBlock = 144 // DATA_FORMAT_BC7_UNORM_BLOCK
@@ -438,11 +438,11 @@ open class RenderingDevice: Object {
         case etc2R8g8b8a8SrgbBlock = 151 // DATA_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK
         /// 11-bit VRAM-compressed unsigned red channel data format with normalized value. Values are in the `[0.0, 1.0]` range. Using ETC2 texture compression.
         case eacR11UnormBlock = 152 // DATA_FORMAT_EAC_R11_UNORM_BLOCK
-        /// 11-bit VRAM-compressed signed red channel data format with normalized value. Values are in the `[0.0, 1.0]` range. Using ETC2 texture compression.
+        /// 11-bit VRAM-compressed signed red channel data format with normalized value. Values are in the `[-1.0, 1.0]` range. Using ETC2 texture compression.
         case eacR11SnormBlock = 153 // DATA_FORMAT_EAC_R11_SNORM_BLOCK
         /// 11-bit VRAM-compressed unsigned red/green channel data format with normalized value. Values are in the `[0.0, 1.0]` range. Using ETC2 texture compression.
         case eacR11g11UnormBlock = 154 // DATA_FORMAT_EAC_R11G11_UNORM_BLOCK
-        /// 11-bit VRAM-compressed signed red/green channel data format with normalized value. Values are in the `[0.0, 1.0]` range. Using ETC2 texture compression.
+        /// 11-bit VRAM-compressed signed red/green channel data format with normalized value. Values are in the `[-1.0, 1.0]` range. Using ETC2 texture compression.
         case eacR11g11SnormBlock = 155 // DATA_FORMAT_EAC_R11G11_SNORM_BLOCK
         /// VRAM-compressed unsigned floating-point data format with normalized value, packed in 4×4 blocks (highest quality). Values are in the `[0.0, 1.0]` range. Using ASTC compression.
         case astc4x4UnormBlock = 156 // DATA_FORMAT_ASTC_4x4_UNORM_BLOCK
@@ -568,8 +568,36 @@ open class RenderingDevice: Object {
         case g16B16r162plane422Unorm = 216 // DATA_FORMAT_G16_B16R16_2PLANE_422_UNORM
         /// 16-bit-per-channel unsigned floating-point green/blue/red channel data with normalized value, plus 6 unused bits after each channel. Stored across 3 separate planes (green + blue + red). Values are in the `[0.0, 1.0]` range.
         case g16B16R163plane444Unorm = 217 // DATA_FORMAT_G16_B16_R16_3PLANE_444_UNORM
+        /// 
+        case astc4x4SfloatBlock = 218 // DATA_FORMAT_ASTC_4x4_SFLOAT_BLOCK
+        /// 
+        case astc5x4SfloatBlock = 219 // DATA_FORMAT_ASTC_5x4_SFLOAT_BLOCK
+        /// 
+        case astc5x5SfloatBlock = 220 // DATA_FORMAT_ASTC_5x5_SFLOAT_BLOCK
+        /// 
+        case astc6x5SfloatBlock = 221 // DATA_FORMAT_ASTC_6x5_SFLOAT_BLOCK
+        /// 
+        case astc6x6SfloatBlock = 222 // DATA_FORMAT_ASTC_6x6_SFLOAT_BLOCK
+        /// 
+        case astc8x5SfloatBlock = 223 // DATA_FORMAT_ASTC_8x5_SFLOAT_BLOCK
+        /// 
+        case astc8x6SfloatBlock = 224 // DATA_FORMAT_ASTC_8x6_SFLOAT_BLOCK
+        /// 
+        case astc8x8SfloatBlock = 225 // DATA_FORMAT_ASTC_8x8_SFLOAT_BLOCK
+        /// 
+        case astc10x5SfloatBlock = 226 // DATA_FORMAT_ASTC_10x5_SFLOAT_BLOCK
+        /// 
+        case astc10x6SfloatBlock = 227 // DATA_FORMAT_ASTC_10x6_SFLOAT_BLOCK
+        /// 
+        case astc10x8SfloatBlock = 228 // DATA_FORMAT_ASTC_10x8_SFLOAT_BLOCK
+        /// 
+        case astc10x10SfloatBlock = 229 // DATA_FORMAT_ASTC_10x10_SFLOAT_BLOCK
+        /// 
+        case astc12x10SfloatBlock = 230 // DATA_FORMAT_ASTC_12x10_SFLOAT_BLOCK
+        /// 
+        case astc12x12SfloatBlock = 231 // DATA_FORMAT_ASTC_12x12_SFLOAT_BLOCK
         /// Represents the size of the ``RenderingDevice/DataFormat`` enum.
-        case max = 218 // DATA_FORMAT_MAX
+        case max = 232 // DATA_FORMAT_MAX
     }
     
     public struct BarrierMask: OptionSet, CustomDebugStringConvertible {
@@ -784,6 +812,28 @@ open class RenderingDevice: Object {
         public var debugDescription: String {
             var result = ""
             if self.contains (.storageBufferUsageDispatchIndirect) { result += "storageBufferUsageDispatchIndirect, " }
+            if result.hasSuffix (", ") { result.removeLast (2) }
+            return result
+        }
+        
+    }
+    
+    public struct BufferCreationBits: OptionSet, CustomDebugStringConvertible {
+        public let rawValue: Int
+        public init (rawValue: Int) {
+            self.rawValue = rawValue
+        }
+        
+        /// Optionally, set this flag if you wish to use ``bufferGetDeviceAddress(buffer:)`` functionality. You must first check the GPU supports it:
+        /// 
+        public static let deviceAddressBit = BufferCreationBits (rawValue: 1)
+        /// Set this flag so that it is created as storage. This is useful if Compute Shaders need access (for reading or writing) to the buffer, e.g. skeletal animations are processed in Compute Shaders which need access to vertex buffers, to be later consumed by vertex shaders as part of the regular rasterization pipeline.
+        public static let asStorageBit = BufferCreationBits (rawValue: 2)
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            var result = ""
+            if self.contains (.deviceAddressBit) { result += "deviceAddressBit, " }
+            if self.contains (.asStorageBit) { result += "asStorageBit, " }
             if result.hasSuffix (", ") { result.removeLast (2) }
             return result
         }
@@ -1121,6 +1171,11 @@ open class RenderingDevice: Object {
         case float = 2 // PIPELINE_SPECIALIZATION_CONSTANT_TYPE_FLOAT
     }
     
+    public enum Features: Int64, CaseIterable {
+        /// Features support for buffer device address extension.
+        case supportsBufferDeviceAddress = 6 // SUPPORTS_BUFFER_DEVICE_ADDRESS
+    }
+    
     public enum Limit: Int64, CaseIterable {
         /// Maximum number of uniform sets that can be bound at a given time.
         case maxBoundUniformSets = 0 // LIMIT_MAX_BOUND_UNIFORM_SETS
@@ -1196,6 +1251,16 @@ open class RenderingDevice: Object {
         case maxViewportDimensionsX = 35 // LIMIT_MAX_VIEWPORT_DIMENSIONS_X
         /// Maximum viewport height (in pixels).
         case maxViewportDimensionsY = 36 // LIMIT_MAX_VIEWPORT_DIMENSIONS_Y
+        /// Returns the smallest value for ``ProjectSettings/rendering/scaling3d/scale`` when using the MetalFX temporal upscaler.
+        /// 
+        /// > Note: The returned value is multiplied by a factor of `1000000` to preserve 6 digits of precision. It must be divided by `1000000.0` to convert the value to a floating point number.
+        /// 
+        case metalfxTemporalScalerMinScale = 46 // LIMIT_METALFX_TEMPORAL_SCALER_MIN_SCALE
+        /// Returns the largest value for ``ProjectSettings/rendering/scaling3d/scale`` when using the MetalFX temporal upscaler.
+        /// 
+        /// > Note: The returned value is multiplied by a factor of `1000000` to preserve 6 digits of precision. It must be divided by `1000000.0` to convert the value to a floating point number.
+        /// 
+        case metalfxTemporalScalerMaxScale = 47 // LIMIT_METALFX_TEMPORAL_SCALER_MAX_SCALE
     }
     
     public enum MemoryType: Int64, CaseIterable {
@@ -1207,14 +1272,136 @@ open class RenderingDevice: Object {
         case total = 2 // MEMORY_TOTAL
     }
     
+    public enum BreadcrumbMarker: Int64, CaseIterable {
+        /// 
+        case none = 0 // NONE
+        /// 
+        case reflectionProbes = 65536 // REFLECTION_PROBES
+        /// 
+        case skyPass = 131072 // SKY_PASS
+        /// 
+        case lightmapperPass = 196608 // LIGHTMAPPER_PASS
+        /// 
+        case shadowPassDirectional = 262144 // SHADOW_PASS_DIRECTIONAL
+        /// 
+        case shadowPassCube = 327680 // SHADOW_PASS_CUBE
+        /// 
+        case opaquePass = 393216 // OPAQUE_PASS
+        /// 
+        case alphaPass = 458752 // ALPHA_PASS
+        /// 
+        case transparentPass = 524288 // TRANSPARENT_PASS
+        /// 
+        case postProcessingPass = 589824 // POST_PROCESSING_PASS
+        /// 
+        case blitPass = 655360 // BLIT_PASS
+        /// 
+        case uiPass = 720896 // UI_PASS
+        /// 
+        case debugPass = 786432 // DEBUG_PASS
+    }
+    
+    public struct DrawFlags: OptionSet, CustomDebugStringConvertible {
+        public let rawValue: Int
+        public init (rawValue: Int) {
+            self.rawValue = rawValue
+        }
+        
+        /// Clear the first color attachment.
+        public static let clearColor0 = DrawFlags (rawValue: 1)
+        /// Clear the second color attachment.
+        public static let clearColor1 = DrawFlags (rawValue: 2)
+        /// Clear the third color attachment.
+        public static let clearColor2 = DrawFlags (rawValue: 4)
+        /// Clear the fourth color attachment.
+        public static let clearColor3 = DrawFlags (rawValue: 8)
+        /// Clear the fifth color attachment.
+        public static let clearColor4 = DrawFlags (rawValue: 16)
+        /// Clear the sixth color attachment.
+        public static let clearColor5 = DrawFlags (rawValue: 32)
+        /// Clear the seventh color attachment.
+        public static let clearColor6 = DrawFlags (rawValue: 64)
+        /// Clear the eighth color attachment.
+        public static let clearColor7 = DrawFlags (rawValue: 128)
+        /// Mask for clearing all color attachments.
+        public static let clearColorMask = DrawFlags (rawValue: 255)
+        /// Clear all color attachments.
+        public static let clearColorAll = DrawFlags (rawValue: 255)
+        /// Ignore the previous contents of the first color attachment.
+        public static let ignoreColor0 = DrawFlags (rawValue: 256)
+        /// Ignore the previous contents of the second color attachment.
+        public static let ignoreColor1 = DrawFlags (rawValue: 512)
+        /// Ignore the previous contents of the third color attachment.
+        public static let ignoreColor2 = DrawFlags (rawValue: 1024)
+        /// Ignore the previous contents of the fourth color attachment.
+        public static let ignoreColor3 = DrawFlags (rawValue: 2048)
+        /// Ignore the previous contents of the fifth color attachment.
+        public static let ignoreColor4 = DrawFlags (rawValue: 4096)
+        /// Ignore the previous contents of the sixth color attachment.
+        public static let ignoreColor5 = DrawFlags (rawValue: 8192)
+        /// Ignore the previous contents of the seventh color attachment.
+        public static let ignoreColor6 = DrawFlags (rawValue: 16384)
+        /// Ignore the previous contents of the eighth color attachment.
+        public static let ignoreColor7 = DrawFlags (rawValue: 32768)
+        /// Mask for ignoring all the previous contents of the color attachments.
+        public static let ignoreColorMask = DrawFlags (rawValue: 65280)
+        /// Ignore the previous contents of all color attachments.
+        public static let ignoreColorAll = DrawFlags (rawValue: 65280)
+        /// Clear the depth attachment.
+        public static let clearDepth = DrawFlags (rawValue: 65536)
+        /// Ignore the previous contents of the depth attachment.
+        public static let ignoreDepth = DrawFlags (rawValue: 131072)
+        /// Clear the stencil attachment.
+        public static let clearStencil = DrawFlags (rawValue: 262144)
+        /// Ignore the previous contents of the stencil attachment.
+        public static let ignoreStencil = DrawFlags (rawValue: 524288)
+        /// Clear all attachments.
+        public static let clearAll = DrawFlags (rawValue: 327935)
+        /// Ignore the previous contents of all attachments.
+        public static let ignoreAll = DrawFlags (rawValue: 720640)
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            var result = ""
+            if self.contains (.clearColor0) { result += "clearColor0, " }
+            if self.contains (.clearColor1) { result += "clearColor1, " }
+            if self.contains (.clearColor2) { result += "clearColor2, " }
+            if self.contains (.clearColor3) { result += "clearColor3, " }
+            if self.contains (.clearColor4) { result += "clearColor4, " }
+            if self.contains (.clearColor5) { result += "clearColor5, " }
+            if self.contains (.clearColor6) { result += "clearColor6, " }
+            if self.contains (.clearColor7) { result += "clearColor7, " }
+            if self.contains (.clearColorMask) { result += "clearColorMask, " }
+            if self.contains (.clearColorAll) { result += "clearColorAll, " }
+            if self.contains (.ignoreColor0) { result += "ignoreColor0, " }
+            if self.contains (.ignoreColor1) { result += "ignoreColor1, " }
+            if self.contains (.ignoreColor2) { result += "ignoreColor2, " }
+            if self.contains (.ignoreColor3) { result += "ignoreColor3, " }
+            if self.contains (.ignoreColor4) { result += "ignoreColor4, " }
+            if self.contains (.ignoreColor5) { result += "ignoreColor5, " }
+            if self.contains (.ignoreColor6) { result += "ignoreColor6, " }
+            if self.contains (.ignoreColor7) { result += "ignoreColor7, " }
+            if self.contains (.ignoreColorMask) { result += "ignoreColorMask, " }
+            if self.contains (.ignoreColorAll) { result += "ignoreColorAll, " }
+            if self.contains (.clearDepth) { result += "clearDepth, " }
+            if self.contains (.ignoreDepth) { result += "ignoreDepth, " }
+            if self.contains (.clearStencil) { result += "clearStencil, " }
+            if self.contains (.ignoreStencil) { result += "ignoreStencil, " }
+            if self.contains (.clearAll) { result += "clearAll, " }
+            if self.contains (.ignoreAll) { result += "ignoreAll, " }
+            if result.hasSuffix (", ") { result.removeLast (2) }
+            return result
+        }
+        
+    }
+    
     /* Constants */
     /// Returned by functions that return an ID if a value is invalid.
     public static let invalidId = -1
     /// Returned by functions that return a format ID if a value is invalid.
     public static let invalidFormatId = -1
     /* Methods */
-    fileprivate static var method_texture_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_create")
+    fileprivate static let method_texture_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3709173589)!
@@ -1230,7 +1417,8 @@ open class RenderingDevice: Object {
     /// 
     /// > Note: Not to be confused with ``RenderingServer/texture2dCreate(image:)``, which creates the Godot-specific ``Texture2D`` resource as opposed to the graphics API's own texture type.
     /// 
-    public final func textureCreate(format: RDTextureFormat?, view: RDTextureView?, data: VariantCollection<PackedByteArray> = VariantCollection<PackedByteArray> ()) -> RID {
+    public final func textureCreate(format: RDTextureFormat?, view: RDTextureView?, data: TypedArray<PackedByteArray> = TypedArray<PackedByteArray> ()) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: format?.handle) { pArg0 in
             withUnsafePointer(to: view?.handle) { pArg1 in
@@ -1251,8 +1439,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_create_shared: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_create_shared")
+    fileprivate static let method_texture_create_shared: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_create_shared")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3178156134)!
@@ -1264,6 +1452,7 @@ open class RenderingDevice: Object {
     
     /// Creates a shared texture using the specified `view` and the texture information from `withTexture`.
     public final func textureCreateShared(view: RDTextureView?, withTexture: RID) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: view?.handle) { pArg0 in
             withUnsafePointer(to: withTexture.content) { pArg1 in
@@ -1281,8 +1470,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_create_shared_from_slice: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_create_shared_from_slice")
+    fileprivate static let method_texture_create_shared_from_slice: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_create_shared_from_slice")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1808971279)!
@@ -1292,13 +1481,14 @@ open class RenderingDevice: Object {
         
     }()
     
-    /// Creates a shared texture using the specified `view` and the texture information from `withTexture`'s `layer` and `mipmap`. The number of included mipmaps from the original texture can be controlled using the `mipmaps` parameter. Only relevant for textures with multiple layers, such as 3D textures, texture arrays and cubemaps. For single-layer textures, use ``textureCreateShared(view:withTexture:)``
+    /// Creates a shared texture using the specified `view` and the texture information from `withTexture`'s `layer` and `mipmap`. The number of included mipmaps from the original texture can be controlled using the `mipmaps` parameter. Only relevant for textures with multiple layers, such as 3D textures, texture arrays and cubemaps. For single-layer textures, use ``textureCreateShared(view:withTexture:)``.
     /// 
     /// For 2D textures (which only have one layer), `layer` must be `0`.
     /// 
     /// > Note: Layer slicing is only supported for 2D texture arrays, not 3D textures or cubemaps.
     /// 
     public final func textureCreateSharedFromSlice(view: RDTextureView?, withTexture: RID, layer: UInt32, mipmap: UInt32, mipmaps: UInt32 = 1, sliceType: RenderingDevice.TextureSliceType = .textureSlice2d) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: view?.handle) { pArg0 in
             withUnsafePointer(to: withTexture.content) { pArg1 in
@@ -1328,8 +1518,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_create_from_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_create_from_extension")
+    fileprivate static let method_texture_create_from_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_create_from_extension")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1397171480)!
@@ -1341,6 +1531,7 @@ open class RenderingDevice: Object {
     
     /// Returns an RID for an existing `image` (`VkImage`) with the given `type`, `format`, `samples`, `usageFlags`, `width`, `height`, `depth`, and `layers`. This can be used to allow Godot to render onto foreign images.
     public final func textureCreateFromExtension(type: RenderingDevice.TextureType, format: RenderingDevice.DataFormat, samples: RenderingDevice.TextureSamples, usageFlags: RenderingDevice.TextureUsageBits, image: UInt, width: UInt, height: UInt, depth: UInt, layers: UInt) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: format.rawValue) { pArg1 in
@@ -1379,8 +1570,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_update")
+    fileprivate static let method_texture_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_update")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1349464008)!
@@ -1399,6 +1590,7 @@ open class RenderingDevice: Object {
     /// > Note: The existing `texture` requires the ``TextureUsageBits/canUpdateBit`` to be updatable.
     /// 
     public final func textureUpdate(texture: RID, layer: UInt32, data: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: layer) { pArg1 in
@@ -1419,8 +1611,8 @@ open class RenderingDevice: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_texture_get_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_get_data")
+    fileprivate static let method_texture_get_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_data")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1859412099)!
@@ -1436,7 +1628,10 @@ open class RenderingDevice: Object {
     /// 
     /// > Note: `texture` requires the ``TextureUsageBits/canCopyFromBit`` to be retrieved. Otherwise, an error is printed and a empty ``PackedByteArray`` is returned.
     /// 
+    /// > Note: This method will block the GPU from working until the data is retrieved. Refer to ``textureGetDataAsync(texture:layer:callback:)`` for an alternative that returns the data in more performant way.
+    /// 
     public final func textureGetData(texture: RID, layer: UInt32) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: layer) { pArg1 in
@@ -1454,8 +1649,47 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_is_format_supported_for_usage: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_is_format_supported_for_usage")
+    fileprivate static let method_texture_get_data_async: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_data_async")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 498832090)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Asynchronous version of ``textureGetData(texture:layer:)``. RenderingDevice will call `callback` in a certain amount of frames with the data the texture had at the time of the request.
+    /// 
+    /// > Note: At the moment, the delay corresponds to the amount of frames specified by ``ProjectSettings/rendering/renderingDevice/vsync/frameQueueSize``.
+    /// 
+    /// > Note: Downloading large textures can have a prohibitive cost for real-time even when using the asynchronous method due to hardware bandwidth limitations. When dealing with large resources, you can adjust settings such as ``ProjectSettings/rendering/renderingDevice/stagingBuffer/textureDownloadRegionSizePx`` and ``ProjectSettings/rendering/renderingDevice/stagingBuffer/blockSizeKb`` to improve the transfer speed at the cost of extra memory.
+    /// 
+    public final func textureGetDataAsync(texture: RID, layer: UInt32, callback: Callable) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: texture.content) { pArg0 in
+            withUnsafePointer(to: layer) { pArg1 in
+                withUnsafePointer(to: callback.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_data_async, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return GodotError (rawValue: _result)!
+    }
+    
+    fileprivate static let method_texture_is_format_supported_for_usage: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_is_format_supported_for_usage")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2592520478)!
@@ -1467,6 +1701,7 @@ open class RenderingDevice: Object {
     
     /// Returns `true` if the specified `format` is supported for the given `usageFlags`, `false` otherwise.
     public final func textureIsFormatSupportedForUsage(format: RenderingDevice.DataFormat, usageFlags: RenderingDevice.TextureUsageBits) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: usageFlags.rawValue) { pArg1 in
@@ -1484,8 +1719,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_is_shared: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_is_shared")
+    fileprivate static let method_texture_is_shared: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_is_shared")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -1497,6 +1732,7 @@ open class RenderingDevice: Object {
     
     /// Returns `true` if the `texture` is shared, `false` otherwise. See ``RDTextureView``.
     public final func textureIsShared(texture: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1511,8 +1747,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_is_valid")
+    fileprivate static let method_texture_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_is_valid")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -1524,6 +1760,7 @@ open class RenderingDevice: Object {
     
     /// Returns `true` if the `texture` is valid, `false` otherwise.
     public final func textureIsValid(texture: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1538,8 +1775,71 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_copy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_copy")
+    fileprivate static let method_texture_set_discardable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_set_discardable")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Updates the discardable property of `texture`.
+    /// 
+    /// If a texture is discardable, its contents do not need to be preserved between frames. This flag is only relevant when the texture is used as target in a draw list.
+    /// 
+    /// This information is used by ``RenderingDevice`` to figure out if a texture's contents can be discarded, eliminating unnecessary writes to memory and boosting performance.
+    /// 
+    public final func textureSetDiscardable(texture: RID, discardable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: texture.content) { pArg0 in
+            withUnsafePointer(to: discardable) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_set_discardable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_texture_is_discardable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_is_discardable")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the `texture` is discardable, `false` otherwise. See ``RDTextureFormat`` or ``textureSetDiscardable(texture:discardable:)``.
+    public final func textureIsDiscardable(texture: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: texture.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_discardable, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_texture_copy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_copy")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2859522160)!
@@ -1562,6 +1862,7 @@ open class RenderingDevice: Object {
     /// > Note: `fromTexture` and `toTexture` must be of the same type (color or depth).
     /// 
     public final func textureCopy(fromTexture: RID, toTexture: RID, fromPos: Vector3, toPos: Vector3, size: Vector3, srcMipmap: UInt32, dstMipmap: UInt32, srcLayer: UInt32, dstLayer: UInt32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fromTexture.content) { pArg0 in
             withUnsafePointer(to: toTexture.content) { pArg1 in
@@ -1600,8 +1901,8 @@ open class RenderingDevice: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_texture_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_clear")
+    fileprivate static let method_texture_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_clear")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3477703247)!
@@ -1616,6 +1917,7 @@ open class RenderingDevice: Object {
     /// > Note: `texture` can't be cleared while a draw list that uses it as part of a framebuffer is being created. Ensure the draw list is finalized (and that the color/depth texture using it is not set to ``FinalAction/`continue```) to clear this texture.
     /// 
     public final func textureClear(texture: RID, color: Color, baseMipmap: UInt32, mipmapCount: UInt32, baseLayer: UInt32, layerCount: UInt32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
@@ -1645,8 +1947,8 @@ open class RenderingDevice: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_texture_resolve_multisample: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_resolve_multisample")
+    fileprivate static let method_texture_resolve_multisample: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_resolve_multisample")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3181288260)!
@@ -1673,6 +1975,7 @@ open class RenderingDevice: Object {
     /// > Note: `toTexture` texture must **not** be multisampled and must also be 2D (or a slice of a 3D/cubemap texture).
     /// 
     public final func textureResolveMultisample(fromTexture: RID, toTexture: RID) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fromTexture.content) { pArg0 in
             withUnsafePointer(to: toTexture.content) { pArg1 in
@@ -1690,8 +1993,8 @@ open class RenderingDevice: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_texture_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_get_format")
+    fileprivate static let method_texture_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_format")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1374471690)!
@@ -1703,6 +2006,7 @@ open class RenderingDevice: Object {
     
     /// Returns the data format used to create this texture.
     public final func textureGetFormat(texture: RID) -> RDTextureFormat? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1714,11 +2018,11 @@ open class RenderingDevice: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_texture_get_native_handle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_get_native_handle")
+    fileprivate static let method_texture_get_native_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_native_handle")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3917799429)!
@@ -1733,6 +2037,7 @@ open class RenderingDevice: Object {
     /// > Note: This function returns a `uint64_t` which internally maps to a `GLuint` (OpenGL) or `VkImage` (Vulkan).
     /// 
     public final func textureGetNativeHandle(texture: RID) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1747,8 +2052,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_format_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_format_create")
+    fileprivate static let method_framebuffer_format_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_format_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 697032759)!
@@ -1762,7 +2067,8 @@ open class RenderingDevice: Object {
     /// 
     /// If `viewCount` is greater than or equal to `2`, enables multiview which is used for VR rendering. This requires support for the Vulkan multiview extension.
     /// 
-    public final func framebufferFormatCreate(attachments: ObjectCollection<RDAttachmentFormat>, viewCount: UInt32 = 1) -> Int {
+    public final func framebufferFormatCreate(attachments: TypedArray<RDAttachmentFormat?>, viewCount: UInt32 = 1) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: attachments.array.content) { pArg0 in
             withUnsafePointer(to: viewCount) { pArg1 in
@@ -1780,8 +2086,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_format_create_multipass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_format_create_multipass")
+    fileprivate static let method_framebuffer_format_create_multipass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_format_create_multipass")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2647479094)!
@@ -1792,7 +2098,8 @@ open class RenderingDevice: Object {
     }()
     
     /// Creates a multipass framebuffer format with the specified `attachments`, `passes` and `viewCount` and returns its ID. If `viewCount` is greater than or equal to `2`, enables multiview which is used for VR rendering. This requires support for the Vulkan multiview extension.
-    public final func framebufferFormatCreateMultipass(attachments: ObjectCollection<RDAttachmentFormat>, passes: ObjectCollection<RDFramebufferPass>, viewCount: UInt32 = 1) -> Int {
+    public final func framebufferFormatCreateMultipass(attachments: TypedArray<RDAttachmentFormat?>, passes: TypedArray<RDFramebufferPass?>, viewCount: UInt32 = 1) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: attachments.array.content) { pArg0 in
             withUnsafePointer(to: passes.array.content) { pArg1 in
@@ -1813,8 +2120,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_format_create_empty: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_format_create_empty")
+    fileprivate static let method_framebuffer_format_create_empty: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_format_create_empty")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 555930169)!
@@ -1826,6 +2133,7 @@ open class RenderingDevice: Object {
     
     /// Creates a new empty framebuffer format with the specified number of `samples` and returns its ID.
     public final func framebufferFormatCreateEmpty(samples: RenderingDevice.TextureSamples = .textureSamples1) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: samples.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1840,8 +2148,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_format_get_texture_samples: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_format_get_texture_samples")
+    fileprivate static let method_framebuffer_format_get_texture_samples: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_format_get_texture_samples")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4223391010)!
@@ -1853,6 +2161,7 @@ open class RenderingDevice: Object {
     
     /// Returns the number of texture samples used for the given framebuffer `format` ID (returned by ``framebufferGetFormat(framebuffer:)``).
     public final func framebufferFormatGetTextureSamples(format: Int, renderPass: UInt32 = 0) -> RenderingDevice.TextureSamples {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: format) { pArg0 in
             withUnsafePointer(to: renderPass) { pArg1 in
@@ -1870,8 +2179,8 @@ open class RenderingDevice: Object {
         return RenderingDevice.TextureSamples (rawValue: _result)!
     }
     
-    fileprivate static var method_framebuffer_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_create")
+    fileprivate static let method_framebuffer_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3284231055)!
@@ -1885,7 +2194,8 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func framebufferCreate(textures: VariantCollection<RID>, validateWithFormat: Int = -1, viewCount: UInt32 = 1) -> RID {
+    public final func framebufferCreate(textures: TypedArray<RID>, validateWithFormat: Int = -1, viewCount: UInt32 = 1) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: textures.array.content) { pArg0 in
             withUnsafePointer(to: validateWithFormat) { pArg1 in
@@ -1906,8 +2216,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_create_multipass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_create_multipass")
+    fileprivate static let method_framebuffer_create_multipass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_create_multipass")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1750306695)!
@@ -1921,7 +2231,8 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func framebufferCreateMultipass(textures: VariantCollection<RID>, passes: ObjectCollection<RDFramebufferPass>, validateWithFormat: Int = -1, viewCount: UInt32 = 1) -> RID {
+    public final func framebufferCreateMultipass(textures: TypedArray<RID>, passes: TypedArray<RDFramebufferPass?>, validateWithFormat: Int = -1, viewCount: UInt32 = 1) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: textures.array.content) { pArg0 in
             withUnsafePointer(to: passes.array.content) { pArg1 in
@@ -1945,8 +2256,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_create_empty: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_create_empty")
+    fileprivate static let method_framebuffer_create_empty: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_create_empty")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3058360618)!
@@ -1961,6 +2272,7 @@ open class RenderingDevice: Object {
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
     public final func framebufferCreateEmpty(size: Vector2i, samples: RenderingDevice.TextureSamples = .textureSamples1, validateWithFormat: Int = -1) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: samples.rawValue) { pArg1 in
@@ -1981,8 +2293,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_get_format")
+    fileprivate static let method_framebuffer_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_get_format")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3917799429)!
@@ -1994,6 +2306,7 @@ open class RenderingDevice: Object {
     
     /// Returns the format ID of the framebuffer specified by the `framebuffer` RID. This ID is guaranteed to be unique for the same formats and does not need to be freed.
     public final func framebufferGetFormat(framebuffer: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: framebuffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2008,8 +2321,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_framebuffer_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("framebuffer_is_valid")
+    fileprivate static let method_framebuffer_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("framebuffer_is_valid")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -2021,6 +2334,7 @@ open class RenderingDevice: Object {
     
     /// Returns `true` if the framebuffer specified by the `framebuffer` RID is valid, `false` otherwise.
     public final func framebufferIsValid(framebuffer: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: framebuffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2035,8 +2349,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_sampler_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sampler_create")
+    fileprivate static let method_sampler_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sampler_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2327892535)!
@@ -2051,6 +2365,7 @@ open class RenderingDevice: Object {
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
     public final func samplerCreate(state: RDSamplerState?) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2065,8 +2380,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_sampler_is_format_supported_for_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sampler_is_format_supported_for_filter")
+    fileprivate static let method_sampler_is_format_supported_for_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sampler_is_format_supported_for_filter")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2247922238)!
@@ -2078,6 +2393,7 @@ open class RenderingDevice: Object {
     
     /// Returns `true` if implementation supports using a texture of `format` with the given `samplerFilter`.
     public final func samplerIsFormatSupportedForFilter(format: RenderingDevice.DataFormat, samplerFilter: RenderingDevice.SamplerFilter) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: samplerFilter.rawValue) { pArg1 in
@@ -2095,11 +2411,11 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_vertex_buffer_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("vertex_buffer_create")
+    fileprivate static let method_vertex_buffer_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("vertex_buffer_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3410049843)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2089548973)!
             }
             
         }
@@ -2110,11 +2426,12 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func vertexBufferCreate(sizeBytes: UInt32, data: PackedByteArray = PackedByteArray(), useAsStorage: Bool = false) -> RID {
+    public final func vertexBufferCreate(sizeBytes: UInt32, data: PackedByteArray = PackedByteArray(), creationBits: RenderingDevice.BufferCreationBits = []) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: sizeBytes) { pArg0 in
             withUnsafePointer(to: data.content) { pArg1 in
-                withUnsafePointer(to: useAsStorage) { pArg2 in
+                withUnsafePointer(to: creationBits.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
                             gi.object_method_bind_ptrcall(RenderingDevice.method_vertex_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
@@ -2131,8 +2448,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_vertex_format_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("vertex_format_create")
+    fileprivate static let method_vertex_format_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("vertex_format_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1242678479)!
@@ -2143,7 +2460,8 @@ open class RenderingDevice: Object {
     }()
     
     /// Creates a new vertex format with the specified `vertexDescriptions`. Returns a unique vertex format ID corresponding to the newly created vertex format.
-    public final func vertexFormatCreate(vertexDescriptions: ObjectCollection<RDVertexAttribute>) -> Int {
+    public final func vertexFormatCreate(vertexDescriptions: TypedArray<RDVertexAttribute?>) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: vertexDescriptions.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2158,8 +2476,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_vertex_array_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("vertex_array_create")
+    fileprivate static let method_vertex_array_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("vertex_array_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3799816279)!
@@ -2170,7 +2488,8 @@ open class RenderingDevice: Object {
     }()
     
     /// Creates a vertex array based on the specified buffers. Optionally, `offsets` (in bytes) may be defined for each buffer.
-    public final func vertexArrayCreate(vertexCount: UInt32, vertexFormat: Int, srcBuffers: VariantCollection<RID>, offsets: PackedInt64Array = PackedInt64Array()) -> RID {
+    public final func vertexArrayCreate(vertexCount: UInt32, vertexFormat: Int, srcBuffers: TypedArray<RID>, offsets: PackedInt64Array = PackedInt64Array()) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: vertexCount) { pArg0 in
             withUnsafePointer(to: vertexFormat) { pArg1 in
@@ -2194,11 +2513,11 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_index_buffer_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("index_buffer_create")
+    fileprivate static let method_index_buffer_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("index_buffer_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3935920523)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2368684885)!
             }
             
         }
@@ -2209,15 +2528,19 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func indexBufferCreate(sizeIndices: UInt32, format: RenderingDevice.IndexBufferFormat, data: PackedByteArray = PackedByteArray(), useRestartIndices: Bool = false) -> RID {
+    public final func indexBufferCreate(sizeIndices: UInt32, format: RenderingDevice.IndexBufferFormat, data: PackedByteArray = PackedByteArray(), useRestartIndices: Bool = false, creationBits: RenderingDevice.BufferCreationBits = []) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: sizeIndices) { pArg0 in
             withUnsafePointer(to: format.rawValue) { pArg1 in
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: useRestartIndices) { pArg3 in
-                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
-                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_index_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        withUnsafePointer(to: creationBits.rawValue) { pArg4 in
+                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
+                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
+                                    gi.object_method_bind_ptrcall(RenderingDevice.method_index_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                }
+                                
                             }
                             
                         }
@@ -2233,8 +2556,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_index_array_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("index_array_create")
+    fileprivate static let method_index_array_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("index_array_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2256026069)!
@@ -2249,6 +2572,7 @@ open class RenderingDevice: Object {
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
     public final func indexArrayCreate(indexBuffer: RID, indexOffset: UInt32, indexCount: UInt32) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: indexBuffer.content) { pArg0 in
             withUnsafePointer(to: indexOffset) { pArg1 in
@@ -2269,8 +2593,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_shader_compile_spirv_from_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_compile_spirv_from_source")
+    fileprivate static let method_shader_compile_spirv_from_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_compile_spirv_from_source")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1178973306)!
@@ -2285,6 +2609,7 @@ open class RenderingDevice: Object {
     /// If `allowCache` is `true`, make use of the shader cache generated by Godot. This avoids a potentially lengthy shader compilation step if the shader is already in cache. If `allowCache` is `false`, Godot's shader cache is ignored and the shader will always be recompiled.
     /// 
     public final func shaderCompileSpirvFromSource(shaderSource: RDShaderSource?, allowCache: Bool = true) -> RDShaderSPIRV? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: shaderSource?.handle) { pArg0 in
             withUnsafePointer(to: allowCache) { pArg1 in
@@ -2299,11 +2624,11 @@ open class RenderingDevice: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_shader_compile_binary_from_spirv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_compile_binary_from_spirv")
+    fileprivate static let method_shader_compile_binary_from_spirv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_compile_binary_from_spirv")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 134910450)!
@@ -2318,6 +2643,7 @@ open class RenderingDevice: Object {
     /// `name` is an optional human-readable name that can be given to the compiled shader for organizational purposes.
     /// 
     public final func shaderCompileBinaryFromSpirv(spirvData: RDShaderSPIRV?, name: String = "") -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: spirvData?.handle) { pArg0 in
             let name = GString(name)
@@ -2336,8 +2662,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_shader_create_from_spirv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_create_from_spirv")
+    fileprivate static let method_shader_create_from_spirv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_create_from_spirv")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 342949005)!
@@ -2352,6 +2678,7 @@ open class RenderingDevice: Object {
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method. See also ``shaderCompileSpirvFromSource(shaderSource:allowCache:)`` and ``shaderCreateFromBytecode(binaryData:placeholderRid:)``.
     /// 
     public final func shaderCreateFromSpirv(spirvData: RDShaderSPIRV?, name: String = "") -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: spirvData?.handle) { pArg0 in
             let name = GString(name)
@@ -2370,8 +2697,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_shader_create_from_bytecode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_create_from_bytecode")
+    fileprivate static let method_shader_create_from_bytecode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_create_from_bytecode")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1687031350)!
@@ -2386,6 +2713,7 @@ open class RenderingDevice: Object {
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method. See also ``shaderCompileBinaryFromSpirv(spirvData:name:)`` and ``shaderCreateFromSpirv(spirvData:name:)``.
     /// 
     public final func shaderCreateFromBytecode(binaryData: PackedByteArray, placeholderRid: RID = RID()) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: binaryData.content) { pArg0 in
             withUnsafePointer(to: placeholderRid.content) { pArg1 in
@@ -2403,8 +2731,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_shader_create_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_create_placeholder")
+    fileprivate static let method_shader_create_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_create_placeholder")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -2416,13 +2744,14 @@ open class RenderingDevice: Object {
     
     /// Create a placeholder RID by allocating an RID without initializing it for use in ``shaderCreateFromBytecode(binaryData:placeholderRid:)``. This allows you to create an RID for a shader and pass it around, but defer compiling the shader to a later time.
     public final func shaderCreatePlaceholder() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(RenderingDevice.method_shader_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_shader_get_vertex_input_attribute_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_get_vertex_input_attribute_mask")
+    fileprivate static let method_shader_get_vertex_input_attribute_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_get_vertex_input_attribute_mask")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3917799429)!
@@ -2434,6 +2763,7 @@ open class RenderingDevice: Object {
     
     /// Returns the internal vertex input mask. Internally, the vertex input mask is an unsigned integer consisting of the locations (specified in GLSL via. `layout(location = ...)`) of the input variables (specified in GLSL by the `in` keyword).
     public final func shaderGetVertexInputAttributeMask(shader: RID) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2448,11 +2778,11 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_uniform_buffer_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("uniform_buffer_create")
+    fileprivate static let method_uniform_buffer_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("uniform_buffer_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 34556762)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2089548973)!
             }
             
         }
@@ -2463,47 +2793,15 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func uniformBufferCreate(sizeBytes: UInt32, data: PackedByteArray = PackedByteArray()) -> RID {
+    public final func uniformBufferCreate(sizeBytes: UInt32, data: PackedByteArray = PackedByteArray(), creationBits: RenderingDevice.BufferCreationBits = []) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: sizeBytes) { pArg0 in
             withUnsafePointer(to: data.content) { pArg1 in
-                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
-                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
-                    }
-                    
-                }
-                
-            }
-            
-        }
-        
-        return _result
-    }
-    
-    fileprivate static var method_storage_buffer_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("storage_buffer_create")
-        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
-            withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2316365934)!
-            }
-            
-        }
-        
-    }()
-    
-    /// Creates a <a href="https://vkguide.dev/docs/chapter-4/storage_buffers/">storage buffer</a> with the specified `data` and `usage`. It can be accessed with the RID that is returned.
-    /// 
-    /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
-    /// 
-    public final func storageBufferCreate(sizeBytes: UInt32, data: PackedByteArray = PackedByteArray(), usage: RenderingDevice.StorageBufferUsage = []) -> RID {
-        let _result: RID = RID ()
-        withUnsafePointer(to: sizeBytes) { pArg0 in
-            withUnsafePointer(to: data.content) { pArg1 in
-                withUnsafePointer(to: usage.rawValue) { pArg2 in
+                withUnsafePointer(to: creationBits.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_storage_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
                         }
                         
                     }
@@ -2517,8 +2815,48 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_texture_buffer_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_buffer_create")
+    fileprivate static let method_storage_buffer_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("storage_buffer_create")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1609052553)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Creates a <a href="https://vkguide.dev/docs/chapter-4/storage_buffers/">storage buffer</a> with the specified `data` and `usage`. It can be accessed with the RID that is returned.
+    /// 
+    /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
+    /// 
+    public final func storageBufferCreate(sizeBytes: UInt32, data: PackedByteArray = PackedByteArray(), usage: RenderingDevice.StorageBufferUsage = [], creationBits: RenderingDevice.BufferCreationBits = []) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: RID = RID ()
+        withUnsafePointer(to: sizeBytes) { pArg0 in
+            withUnsafePointer(to: data.content) { pArg1 in
+                withUnsafePointer(to: usage.rawValue) { pArg2 in
+                    withUnsafePointer(to: creationBits.rawValue) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_storage_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_texture_buffer_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_buffer_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1470338698)!
@@ -2533,6 +2871,7 @@ open class RenderingDevice: Object {
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
     public final func textureBufferCreate(sizeBytes: UInt32, format: RenderingDevice.DataFormat, data: PackedByteArray = PackedByteArray()) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: sizeBytes) { pArg0 in
             withUnsafePointer(to: format.rawValue) { pArg1 in
@@ -2553,8 +2892,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_uniform_set_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("uniform_set_create")
+    fileprivate static let method_uniform_set_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("uniform_set_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2280795797)!
@@ -2568,7 +2907,8 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func uniformSetCreate(uniforms: ObjectCollection<RDUniform>, shader: RID, shaderSet: UInt32) -> RID {
+    public final func uniformSetCreate(uniforms: TypedArray<RDUniform?>, shader: RID, shaderSet: UInt32) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: uniforms.array.content) { pArg0 in
             withUnsafePointer(to: shader.content) { pArg1 in
@@ -2589,8 +2929,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_uniform_set_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("uniform_set_is_valid")
+    fileprivate static let method_uniform_set_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("uniform_set_is_valid")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -2602,6 +2942,7 @@ open class RenderingDevice: Object {
     
     /// Checks if the `uniformSet` is valid, i.e. is owned.
     public final func uniformSetIsValid(uniformSet: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: uniformSet.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2616,8 +2957,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_buffer_copy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("buffer_copy")
+    fileprivate static let method_buffer_copy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("buffer_copy")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 864257779)!
@@ -2633,11 +2974,12 @@ open class RenderingDevice: Object {
     /// 
     /// - `size` exceeds the size of either `srcBuffer` or `dstBuffer` at their corresponding offsets
     /// 
-    /// - a draw list is currently active (created by ``drawListBegin(framebuffer:initialColorAction:finalColorAction:initialDepthAction:finalDepthAction:clearColorValues:clearDepth:clearStencil:region:)``)
+    /// - a draw list is currently active (created by ``drawListBegin(framebuffer:drawFlags:clearColorValues:clearDepthValue:clearStencilValue:region:breadcrumb:)``)
     /// 
     /// - a compute list is currently active (created by ``computeListBegin()``)
     /// 
     public final func bufferCopy(srcBuffer: RID, dstBuffer: RID, srcOffset: UInt32, dstOffset: UInt32, size: UInt32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: srcBuffer.content) { pArg0 in
             withUnsafePointer(to: dstBuffer.content) { pArg1 in
@@ -2664,8 +3006,8 @@ open class RenderingDevice: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_buffer_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("buffer_update")
+    fileprivate static let method_buffer_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("buffer_update")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3454956949)!
@@ -2681,11 +3023,12 @@ open class RenderingDevice: Object {
     /// 
     /// - the region specified by `offset` + `sizeBytes` exceeds the buffer
     /// 
-    /// - a draw list is currently active (created by ``drawListBegin(framebuffer:initialColorAction:finalColorAction:initialDepthAction:finalDepthAction:clearColorValues:clearDepth:clearStencil:region:)``)
+    /// - a draw list is currently active (created by ``drawListBegin(framebuffer:drawFlags:clearColorValues:clearDepthValue:clearStencilValue:region:breadcrumb:)``)
     /// 
     /// - a compute list is currently active (created by ``computeListBegin()``)
     /// 
     public final func bufferUpdate(buffer: RID, offset: UInt32, sizeBytes: UInt32, data: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: offset) { pArg1 in
@@ -2709,8 +3052,8 @@ open class RenderingDevice: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_buffer_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("buffer_clear")
+    fileprivate static let method_buffer_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("buffer_clear")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2452320800)!
@@ -2728,11 +3071,12 @@ open class RenderingDevice: Object {
     /// 
     /// - the region specified by `offset` + `sizeBytes` exceeds the buffer
     /// 
-    /// - a draw list is currently active (created by ``drawListBegin(framebuffer:initialColorAction:finalColorAction:initialDepthAction:finalDepthAction:clearColorValues:clearDepth:clearStencil:region:)``)
+    /// - a draw list is currently active (created by ``drawListBegin(framebuffer:drawFlags:clearColorValues:clearDepthValue:clearStencilValue:region:breadcrumb:)``)
     /// 
     /// - a compute list is currently active (created by ``computeListBegin()``)
     /// 
     public final func bufferClear(buffer: RID, offset: UInt32, sizeBytes: UInt32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: offset) { pArg1 in
@@ -2753,8 +3097,8 @@ open class RenderingDevice: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_buffer_get_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("buffer_get_data")
+    fileprivate static let method_buffer_get_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("buffer_get_data")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3101830688)!
@@ -2765,7 +3109,11 @@ open class RenderingDevice: Object {
     }()
     
     /// Returns a copy of the data of the specified `buffer`, optionally `offsetBytes` and `sizeBytes` can be set to copy only a portion of the buffer.
+    /// 
+    /// > Note: This method will block the GPU from working until the data is retrieved. Refer to ``bufferGetDataAsync(buffer:callback:offsetBytes:sizeBytes:)`` for an alternative that returns the data in more performant way.
+    /// 
     public final func bufferGetData(buffer: RID, offsetBytes: UInt32 = 0, sizeBytes: UInt32 = 0) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: offsetBytes) { pArg1 in
@@ -2786,8 +3134,81 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_render_pipeline_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("render_pipeline_create")
+    fileprivate static let method_buffer_get_data_async: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("buffer_get_data_async")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2370287848)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Asynchronous version of ``bufferGetData(buffer:offsetBytes:sizeBytes:)``. RenderingDevice will call `callback` in a certain amount of frames with the data the buffer had at the time of the request.
+    /// 
+    /// > Note: At the moment, the delay corresponds to the amount of frames specified by ``ProjectSettings/rendering/renderingDevice/vsync/frameQueueSize``.
+    /// 
+    /// > Note: Downloading large buffers can have a prohibitive cost for real-time even when using the asynchronous method due to hardware bandwidth limitations. When dealing with large resources, you can adjust settings such as ``ProjectSettings/rendering/renderingDevice/stagingBuffer/blockSizeKb`` to improve the transfer speed at the cost of extra memory.
+    /// 
+    public final func bufferGetDataAsync(buffer: RID, callback: Callable, offsetBytes: UInt32 = 0, sizeBytes: UInt32 = 0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: buffer.content) { pArg0 in
+            withUnsafePointer(to: callback.content) { pArg1 in
+                withUnsafePointer(to: offsetBytes) { pArg2 in
+                    withUnsafePointer(to: sizeBytes) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_data_async, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return GodotError (rawValue: _result)!
+    }
+    
+    fileprivate static let method_buffer_get_device_address: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("buffer_get_device_address")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3917799429)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the address of the given `buffer` which can be passed to shaders in any way to access underlying data. Buffer must have been created with this feature enabled.
+    /// 
+    /// > Note: You must check that the GPU supports this functionality by calling ``hasFeature(_:)`` with ``Features/supportsBufferDeviceAddress`` as a parameter.
+    /// 
+    public final func bufferGetDeviceAddress(buffer: RID) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        withUnsafePointer(to: buffer.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_device_address, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_render_pipeline_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("render_pipeline_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2385451958)!
@@ -2801,7 +3222,8 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func renderPipelineCreate(shader: RID, framebufferFormat: Int, vertexFormat: Int, primitive: RenderingDevice.RenderPrimitive, rasterizationState: RDPipelineRasterizationState?, multisampleState: RDPipelineMultisampleState?, stencilState: RDPipelineDepthStencilState?, colorBlendState: RDPipelineColorBlendState?, dynamicStateFlags: RenderingDevice.PipelineDynamicStateFlags = [], forRenderPass: UInt32 = 0, specializationConstants: ObjectCollection<RDPipelineSpecializationConstant>) -> RID {
+    public final func renderPipelineCreate(shader: RID, framebufferFormat: Int, vertexFormat: Int, primitive: RenderingDevice.RenderPrimitive, rasterizationState: RDPipelineRasterizationState?, multisampleState: RDPipelineMultisampleState?, stencilState: RDPipelineDepthStencilState?, colorBlendState: RDPipelineColorBlendState?, dynamicStateFlags: RenderingDevice.PipelineDynamicStateFlags = [], forRenderPass: UInt32 = 0, specializationConstants: TypedArray<RDPipelineSpecializationConstant?>) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: framebufferFormat) { pArg1 in
@@ -2846,8 +3268,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_render_pipeline_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("render_pipeline_is_valid")
+    fileprivate static let method_render_pipeline_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("render_pipeline_is_valid")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -2859,6 +3281,7 @@ open class RenderingDevice: Object {
     
     /// Returns `true` if the render pipeline specified by the `renderPipeline` RID is valid, `false` otherwise.
     public final func renderPipelineIsValid(renderPipeline: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: renderPipeline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2873,8 +3296,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_compute_pipeline_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_pipeline_create")
+    fileprivate static let method_compute_pipeline_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_pipeline_create")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1448838280)!
@@ -2888,7 +3311,8 @@ open class RenderingDevice: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
-    public final func computePipelineCreate(shader: RID, specializationConstants: ObjectCollection<RDPipelineSpecializationConstant>) -> RID {
+    public final func computePipelineCreate(shader: RID, specializationConstants: TypedArray<RDPipelineSpecializationConstant?>) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: specializationConstants.array.content) { pArg1 in
@@ -2906,8 +3330,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_compute_pipeline_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_pipeline_is_valid")
+    fileprivate static let method_compute_pipeline_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_pipeline_is_valid")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -2919,6 +3343,7 @@ open class RenderingDevice: Object {
     
     /// Returns `true` if the compute pipeline specified by the `computePipeline` RID is valid, `false` otherwise.
     public final func computePipelineIsValid(computePipeline: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: computePipeline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2933,8 +3358,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_width")
+    fileprivate static let method_screen_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_width")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -2949,6 +3374,7 @@ open class RenderingDevice: Object {
     /// > Note: Only the main ``RenderingDevice`` returned by ``RenderingServer/getRenderingDevice()`` has a width. If called on a local ``RenderingDevice``, this method prints an error and returns ``invalidId``.
     /// 
     public final func screenGetWidth(screen: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2963,8 +3389,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_height")
+    fileprivate static let method_screen_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_height")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -2979,6 +3405,7 @@ open class RenderingDevice: Object {
     /// > Note: Only the main ``RenderingDevice`` returned by ``RenderingServer/getRenderingDevice()`` has a height. If called on a local ``RenderingDevice``, this method prints an error and returns ``invalidId``.
     /// 
     public final func screenGetHeight(screen: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2993,8 +3420,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_screen_get_framebuffer_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_get_framebuffer_format")
+    fileprivate static let method_screen_get_framebuffer_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_get_framebuffer_format")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1591665591)!
@@ -3009,6 +3436,7 @@ open class RenderingDevice: Object {
     /// > Note: Only the main ``RenderingDevice`` returned by ``RenderingServer/getRenderingDevice()`` has a format. If called on a local ``RenderingDevice``, this method prints an error and returns ``invalidId``.
     /// 
     public final func screenGetFramebufferFormat(screen: Int32 = 0) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3023,8 +3451,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_draw_list_begin_for_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_begin_for_screen")
+    fileprivate static let method_draw_list_begin_for_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_begin_for_screen")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3988079995)!
@@ -3034,11 +3462,12 @@ open class RenderingDevice: Object {
         
     }()
     
-    /// High-level variant of ``drawListBegin(framebuffer:initialColorAction:finalColorAction:initialDepthAction:finalDepthAction:clearColorValues:clearDepth:clearStencil:region:)``, with the parameters automatically being adjusted for drawing onto the window specified by the `screen` ID.
+    /// High-level variant of ``drawListBegin(framebuffer:drawFlags:clearColorValues:clearDepthValue:clearStencilValue:region:breadcrumb:)``, with the parameters automatically being adjusted for drawing onto the window specified by the `screen` ID.
     /// 
     /// > Note: Cannot be used with local RenderingDevices, as these don't have a screen. If called on a local RenderingDevice, ``drawListBeginForScreen(_:clearColor:)`` returns ``invalidId``.
     /// 
     public final func drawListBeginForScreen(_ screen: Int32 = 0, clearColor: Color = Color (r: 0, g: 0, b: 0, a: 1)) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: clearColor) { pArg1 in
@@ -3056,11 +3485,11 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_draw_list_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_begin")
+    fileprivate static let method_draw_list_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_begin")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2686605154)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1317926357)!
             }
             
         }
@@ -3073,24 +3502,25 @@ open class RenderingDevice: Object {
     /// 
     /// A simple drawing operation might look like this (code is not a complete example):
     /// 
-    public final func drawListBegin(framebuffer: RID, initialColorAction: RenderingDevice.InitialAction, finalColorAction: RenderingDevice.FinalAction, initialDepthAction: RenderingDevice.InitialAction, finalDepthAction: RenderingDevice.FinalAction, clearColorValues: PackedColorArray = PackedColorArray(), clearDepth: Double = 1.0, clearStencil: UInt32 = 0, region: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0)) -> Int {
+    /// The `drawFlags` indicates if the texture attachments of the framebuffer should be cleared or ignored. Only one of the two flags can be used for each individual attachment. Ignoring an attachment means that any contents that existed before the draw list will be completely discarded, reducing the memory bandwidth used by the render pass but producing garbage results if the pixels aren't replaced. The default behavior allows the engine to figure out the right operation to use if the texture is discardable, which can result in increased performance. See ``RDTextureFormat`` or ``textureSetDiscardable(texture:discardable:)``.
+    /// 
+    /// The `breadcrumb` parameter can be an arbitrary 32-bit integer that is useful to diagnose GPU crashes. If Godot is built in dev or debug mode; when the GPU crashes Godot will dump all shaders that were being executed at the time of the crash and the breadcrumb is useful to diagnose what passes did those shaders belong to.
+    /// 
+    /// It does not affect rendering behavior and can be set to 0. It is recommended to use ``RenderingDevice/BreadcrumbMarker`` enumerations for consistency but it's not required. It is also possible to use bitwise operations to add extra data. e.g.
+    /// 
+    public final func drawListBegin(framebuffer: RID, drawFlags: RenderingDevice.DrawFlags = [], clearColorValues: PackedColorArray = PackedColorArray(), clearDepthValue: Double = 1.0, clearStencilValue: UInt32 = 0, region: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0), breadcrumb: UInt32 = 0) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: framebuffer.content) { pArg0 in
-            withUnsafePointer(to: initialColorAction.rawValue) { pArg1 in
-                withUnsafePointer(to: finalColorAction.rawValue) { pArg2 in
-                    withUnsafePointer(to: initialDepthAction.rawValue) { pArg3 in
-                        withUnsafePointer(to: finalDepthAction.rawValue) { pArg4 in
-                            withUnsafePointer(to: clearColorValues.content) { pArg5 in
-                                withUnsafePointer(to: clearDepth) { pArg6 in
-                                    withUnsafePointer(to: clearStencil) { pArg7 in
-                                        withUnsafePointer(to: region) { pArg8 in
-                                            withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
-                                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
-                                                }
-                                                
-                                            }
-                                            
+            withUnsafePointer(to: drawFlags.rawValue) { pArg1 in
+                withUnsafePointer(to: clearColorValues.content) { pArg2 in
+                    withUnsafePointer(to: clearDepthValue) { pArg3 in
+                        withUnsafePointer(to: clearStencilValue) { pArg4 in
+                            withUnsafePointer(to: region) { pArg5 in
+                                withUnsafePointer(to: breadcrumb) { pArg6 in
+                                    withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
+                                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
+                                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                                         }
                                         
                                     }
@@ -3112,8 +3542,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_draw_list_begin_split: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_begin_split")
+    fileprivate static let method_draw_list_begin_split: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_begin_split")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2406300660)!
@@ -3124,7 +3554,8 @@ open class RenderingDevice: Object {
     }()
     
     /// This method does nothing and always returns an empty ``PackedInt64Array``.
-    public final func drawListBeginSplit(framebuffer: RID, splits: UInt32, initialColorAction: RenderingDevice.InitialAction, finalColorAction: RenderingDevice.FinalAction, initialDepthAction: RenderingDevice.InitialAction, finalDepthAction: RenderingDevice.FinalAction, clearColorValues: PackedColorArray = PackedColorArray(), clearDepth: Double = 1.0, clearStencil: UInt32 = 0, region: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0), storageTextures: VariantCollection<RID> = VariantCollection<RID> ()) -> PackedInt64Array {
+    public final func drawListBeginSplit(framebuffer: RID, splits: UInt32, initialColorAction: RenderingDevice.InitialAction, finalColorAction: RenderingDevice.FinalAction, initialDepthAction: RenderingDevice.InitialAction, finalDepthAction: RenderingDevice.FinalAction, clearColorValues: PackedColorArray = PackedColorArray(), clearDepth: Double = 1.0, clearStencil: UInt32 = 0, region: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0), storageTextures: TypedArray<RID> = TypedArray<RID> ()) -> PackedInt64Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
         withUnsafePointer(to: framebuffer.content) { pArg0 in
             withUnsafePointer(to: splits) { pArg1 in
@@ -3169,8 +3600,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_draw_list_set_blend_constants: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_set_blend_constants")
+    fileprivate static let method_draw_list_set_blend_constants: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_set_blend_constants")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -3182,6 +3613,7 @@ open class RenderingDevice: Object {
     
     /// Sets blend constants for the specified `drawList` to `color`. Blend constants are used only if the graphics pipeline is created with ``PipelineDynamicStateFlags/blendConstants`` flag set.
     public final func drawListSetBlendConstants(drawList: Int, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3198,8 +3630,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_bind_render_pipeline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_bind_render_pipeline")
+    fileprivate static let method_draw_list_bind_render_pipeline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_bind_render_pipeline")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4040184819)!
@@ -3211,6 +3643,7 @@ open class RenderingDevice: Object {
     
     /// Binds `renderPipeline` to the specified `drawList`.
     public final func drawListBindRenderPipeline(drawList: Int, renderPipeline: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: renderPipeline.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3227,8 +3660,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_bind_uniform_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_bind_uniform_set")
+    fileprivate static let method_draw_list_bind_uniform_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_bind_uniform_set")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 749655778)!
@@ -3240,6 +3673,7 @@ open class RenderingDevice: Object {
     
     /// Binds `uniformSet` to the specified `drawList`. A `setIndex` must also be specified, which is an identifier starting from `0` that must match the one expected by the draw list.
     public final func drawListBindUniformSet(drawList: Int, uniformSet: RID, setIndex: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: uniformSet.content) { pArg1 in
                 withUnsafePointer(to: setIndex) { pArg2 in
@@ -3259,8 +3693,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_bind_vertex_array: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_bind_vertex_array")
+    fileprivate static let method_draw_list_bind_vertex_array: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_bind_vertex_array")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4040184819)!
@@ -3272,6 +3706,7 @@ open class RenderingDevice: Object {
     
     /// Binds `vertexArray` to the specified `drawList`.
     public final func drawListBindVertexArray(drawList: Int, vertexArray: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: vertexArray.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3288,8 +3723,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_bind_index_array: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_bind_index_array")
+    fileprivate static let method_draw_list_bind_index_array: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_bind_index_array")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4040184819)!
@@ -3301,6 +3736,7 @@ open class RenderingDevice: Object {
     
     /// Binds `indexArray` to the specified `drawList`.
     public final func drawListBindIndexArray(drawList: Int, indexArray: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: indexArray.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3317,8 +3753,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_set_push_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_set_push_constant")
+    fileprivate static let method_draw_list_set_push_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_set_push_constant")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2772371345)!
@@ -3330,6 +3766,7 @@ open class RenderingDevice: Object {
     
     /// Sets the push constant data to `buffer` for the specified `drawList`. The shader determines how this binary data is used. The buffer's size in bytes must also be specified in `sizeBytes` (this can be obtained by calling the ``PackedByteArray/size()`` method on the passed `buffer`).
     public final func drawListSetPushConstant(drawList: Int, buffer: PackedByteArray, sizeBytes: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: buffer.content) { pArg1 in
                 withUnsafePointer(to: sizeBytes) { pArg2 in
@@ -3349,8 +3786,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_draw")
+    fileprivate static let method_draw_list_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_draw")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4230067973)!
@@ -3362,6 +3799,7 @@ open class RenderingDevice: Object {
     
     /// Submits `drawList` for rendering on the GPU. This is the raster equivalent to ``computeListDispatch(computeList:xGroups:yGroups:zGroups:)``.
     public final func drawListDraw(drawList: Int, useIndices: Bool, instances: UInt32, proceduralVertexCount: UInt32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: useIndices) { pArg1 in
                 withUnsafePointer(to: instances) { pArg2 in
@@ -3384,8 +3822,50 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_enable_scissor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_enable_scissor")
+    fileprivate static let method_draw_list_draw_indirect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_draw_indirect")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1092133571)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Submits `drawList` for rendering on the GPU with the given parameters stored in the `buffer` at `offset`. Parameters being integers: vertex count, instance count, first vertex, first instance. And when using indices: index count, instance count, first index, vertex offset, first instance. Buffer must have been created with ``StorageBufferUsage/storageBufferUsageDispatchIndirect`` flag.
+    public final func drawListDrawIndirect(drawList: Int, useIndices: Bool, buffer: RID, offset: UInt32 = 0, drawCount: UInt32 = 1, stride: UInt32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: drawList) { pArg0 in
+            withUnsafePointer(to: useIndices) { pArg1 in
+                withUnsafePointer(to: buffer.content) { pArg2 in
+                    withUnsafePointer(to: offset) { pArg3 in
+                        withUnsafePointer(to: drawCount) { pArg4 in
+                            withUnsafePointer(to: stride) { pArg5 in
+                                withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
+                                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
+                                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_draw_indirect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_draw_list_enable_scissor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_enable_scissor")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 244650101)!
@@ -3400,6 +3880,7 @@ open class RenderingDevice: Object {
     /// > Note: The specified `rect` is automatically intersected with the screen's dimensions, which means it cannot exceed the screen's dimensions.
     /// 
     public final func drawListEnableScissor(drawList: Int, rect: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3416,8 +3897,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_disable_scissor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_disable_scissor")
+    fileprivate static let method_draw_list_disable_scissor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_disable_scissor")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3429,6 +3910,7 @@ open class RenderingDevice: Object {
     
     /// Removes and disables the scissor rectangle for the specified `drawList`. See also ``drawListEnableScissor(drawList:rect:)``.
     public final func drawListDisableScissor(drawList: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3442,8 +3924,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_list_switch_to_next_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_switch_to_next_pass")
+    fileprivate static let method_draw_list_switch_to_next_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_switch_to_next_pass")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -3455,13 +3937,14 @@ open class RenderingDevice: Object {
     
     /// Switches to the next draw pass.
     public final func drawListSwitchToNextPass() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_switch_to_next_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_draw_list_switch_to_next_pass_split: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_switch_to_next_pass_split")
+    fileprivate static let method_draw_list_switch_to_next_pass_split: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_switch_to_next_pass_split")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2865087369)!
@@ -3473,6 +3956,7 @@ open class RenderingDevice: Object {
     
     /// This method does nothing and always returns an empty ``PackedInt64Array``.
     public final func drawListSwitchToNextPassSplit(splits: UInt32) -> PackedInt64Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
         withUnsafePointer(to: splits) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3487,8 +3971,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_draw_list_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_list_end")
+    fileprivate static let method_draw_list_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_list_end")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3500,12 +3984,13 @@ open class RenderingDevice: Object {
     
     /// Finishes a list of raster drawing commands created with the `draw_*` methods.
     public final func drawListEnd() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_compute_list_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_begin")
+    fileprivate static let method_compute_list_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_begin")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -3522,13 +4007,14 @@ open class RenderingDevice: Object {
     /// A simple compute operation might look like this (code is not a complete example):
     /// 
     public final func computeListBegin() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_compute_list_bind_compute_pipeline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_bind_compute_pipeline")
+    fileprivate static let method_compute_list_bind_compute_pipeline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_bind_compute_pipeline")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4040184819)!
@@ -3540,6 +4026,7 @@ open class RenderingDevice: Object {
     
     /// Tells the GPU what compute pipeline to use when processing the compute list. If the shader has changed since the last time this function was called, Godot will unbind all descriptor sets and will re-bind them inside ``computeListDispatch(computeList:xGroups:yGroups:zGroups:)``.
     public final func computeListBindComputePipeline(computeList: Int, computePipeline: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: computeList) { pArg0 in
             withUnsafePointer(to: computePipeline.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3556,8 +4043,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_compute_list_set_push_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_set_push_constant")
+    fileprivate static let method_compute_list_set_push_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_set_push_constant")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2772371345)!
@@ -3569,6 +4056,7 @@ open class RenderingDevice: Object {
     
     /// Sets the push constant data to `buffer` for the specified `computeList`. The shader determines how this binary data is used. The buffer's size in bytes must also be specified in `sizeBytes` (this can be obtained by calling the ``PackedByteArray/size()`` method on the passed `buffer`).
     public final func computeListSetPushConstant(computeList: Int, buffer: PackedByteArray, sizeBytes: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: computeList) { pArg0 in
             withUnsafePointer(to: buffer.content) { pArg1 in
                 withUnsafePointer(to: sizeBytes) { pArg2 in
@@ -3588,8 +4076,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_compute_list_bind_uniform_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_bind_uniform_set")
+    fileprivate static let method_compute_list_bind_uniform_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_bind_uniform_set")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 749655778)!
@@ -3601,6 +4089,7 @@ open class RenderingDevice: Object {
     
     /// Binds the `uniformSet` to this `computeList`. Godot ensures that all textures in the uniform set have the correct Vulkan access masks. If Godot had to change access masks of textures, it will raise a Vulkan image memory barrier.
     public final func computeListBindUniformSet(computeList: Int, uniformSet: RID, setIndex: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: computeList) { pArg0 in
             withUnsafePointer(to: uniformSet.content) { pArg1 in
                 withUnsafePointer(to: setIndex) { pArg2 in
@@ -3620,8 +4109,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_compute_list_dispatch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_dispatch")
+    fileprivate static let method_compute_list_dispatch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_dispatch")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4275841770)!
@@ -3633,6 +4122,7 @@ open class RenderingDevice: Object {
     
     /// Submits the compute list for processing on the GPU. This is the compute equivalent to ``drawListDraw(drawList:useIndices:instances:proceduralVertexCount:)``.
     public final func computeListDispatch(computeList: Int, xGroups: UInt32, yGroups: UInt32, zGroups: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: computeList) { pArg0 in
             withUnsafePointer(to: xGroups) { pArg1 in
                 withUnsafePointer(to: yGroups) { pArg2 in
@@ -3655,8 +4145,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_compute_list_dispatch_indirect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_dispatch_indirect")
+    fileprivate static let method_compute_list_dispatch_indirect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_dispatch_indirect")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 749655778)!
@@ -3668,6 +4158,7 @@ open class RenderingDevice: Object {
     
     /// Submits the compute list for processing on the GPU with the given group counts stored in the `buffer` at `offset`. Buffer must have been created with ``StorageBufferUsage/storageBufferUsageDispatchIndirect`` flag.
     public final func computeListDispatchIndirect(computeList: Int, buffer: RID, offset: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: computeList) { pArg0 in
             withUnsafePointer(to: buffer.content) { pArg1 in
                 withUnsafePointer(to: offset) { pArg2 in
@@ -3687,8 +4178,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_compute_list_add_barrier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_add_barrier")
+    fileprivate static let method_compute_list_add_barrier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_add_barrier")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3700,6 +4191,7 @@ open class RenderingDevice: Object {
     
     /// Raises a Vulkan compute barrier in the specified `computeList`.
     public final func computeListAddBarrier(computeList: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: computeList) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3713,8 +4205,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_compute_list_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compute_list_end")
+    fileprivate static let method_compute_list_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compute_list_end")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3726,12 +4218,13 @@ open class RenderingDevice: Object {
     
     /// Finishes a list of compute commands created with the `compute_*` methods.
     public final func computeListEnd() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_free_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("free_rid")
+    fileprivate static let method_free_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("free_rid")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -3743,6 +4236,7 @@ open class RenderingDevice: Object {
     
     /// Tries to free an object in the RenderingDevice. To avoid memory leaks, this should be called after using an object as memory management does not occur automatically when using RenderingDevice directly.
     public final func freeRid(_ rid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3756,8 +4250,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_capture_timestamp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("capture_timestamp")
+    fileprivate static let method_capture_timestamp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("capture_timestamp")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -3769,6 +4263,7 @@ open class RenderingDevice: Object {
     
     /// Creates a timestamp marker with the specified `name`. This is used for performance reporting with the ``getCapturedTimestampCpuTime(index:)``, ``getCapturedTimestampGpuTime(index:)`` and ``getCapturedTimestampName(index:)`` methods.
     public final func captureTimestamp(name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3783,8 +4278,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_get_captured_timestamps_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_captured_timestamps_count")
+    fileprivate static let method_get_captured_timestamps_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_captured_timestamps_count")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3796,13 +4291,14 @@ open class RenderingDevice: Object {
     
     /// Returns the total number of timestamps (rendering steps) available for profiling.
     public final func getCapturedTimestampsCount() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamps_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_captured_timestamps_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_captured_timestamps_frame")
+    fileprivate static let method_get_captured_timestamps_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_captured_timestamps_frame")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3814,13 +4310,14 @@ open class RenderingDevice: Object {
     
     /// Returns the index of the last frame rendered that has rendering timestamps available for querying.
     public final func getCapturedTimestampsFrame() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamps_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_captured_timestamp_gpu_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_captured_timestamp_gpu_time")
+    fileprivate static let method_get_captured_timestamp_gpu_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_captured_timestamp_gpu_time")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -3832,6 +4329,7 @@ open class RenderingDevice: Object {
     
     /// Returns the timestamp in GPU time for the rendering step specified by `index` (in microseconds since the engine started). See also ``getCapturedTimestampCpuTime(index:)`` and ``captureTimestamp(name:)``.
     public final func getCapturedTimestampGpuTime(index: UInt32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3846,8 +4344,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_get_captured_timestamp_cpu_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_captured_timestamp_cpu_time")
+    fileprivate static let method_get_captured_timestamp_cpu_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_captured_timestamp_cpu_time")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -3859,6 +4357,7 @@ open class RenderingDevice: Object {
     
     /// Returns the timestamp in CPU time for the rendering step specified by `index` (in microseconds since the engine started). See also ``getCapturedTimestampGpuTime(index:)`` and ``captureTimestamp(name:)``.
     public final func getCapturedTimestampCpuTime(index: UInt32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3873,8 +4372,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_get_captured_timestamp_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_captured_timestamp_name")
+    fileprivate static let method_get_captured_timestamp_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_captured_timestamp_name")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -3886,6 +4385,7 @@ open class RenderingDevice: Object {
     
     /// Returns the timestamp's name for the rendering step specified by `index`. See also ``captureTimestamp(name:)``.
     public final func getCapturedTimestampName(index: UInt32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3900,8 +4400,36 @@ open class RenderingDevice: Object {
         return _result.description
     }
     
-    fileprivate static var method_limit_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("limit_get")
+    fileprivate static let method_has_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_feature")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1772728326)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the `feature` is supported by the GPU.
+    public final func hasFeature(_ feature: RenderingDevice.Features) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: feature.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_has_feature, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_limit_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("limit_get")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1559202131)!
@@ -3916,6 +4444,7 @@ open class RenderingDevice: Object {
     /// Limits for various graphics hardware can be found in the <a href="https://vulkan.gpuinfo.org/">Vulkan Hardware Database</a>.
     /// 
     public final func limitGet(limit: RenderingDevice.Limit) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: limit.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3930,8 +4459,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_get_frame_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_delay")
+    fileprivate static let method_get_frame_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_delay")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3943,13 +4472,14 @@ open class RenderingDevice: Object {
     
     /// Returns the frame count kept by the graphics API. Higher values result in higher input lag, but with more consistent throughput. For the main ``RenderingDevice``, frames are cycled (usually 3 with triple-buffered V-Sync enabled). However, local ``RenderingDevice``s only have 1 frame.
     public final func getFrameDelay() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RenderingDevice.method_get_frame_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_submit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("submit")
+    fileprivate static let method_submit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("submit")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3964,12 +4494,13 @@ open class RenderingDevice: Object {
     /// > Note: Only available in local RenderingDevices.
     /// 
     public final func submit() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RenderingDevice.method_submit, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sync")
+    fileprivate static let method_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sync")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3986,12 +4517,13 @@ open class RenderingDevice: Object {
     /// > Note: ``sync()`` can only be called after a ``submit()``.
     /// 
     public final func sync() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RenderingDevice.method_sync, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_barrier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("barrier")
+    fileprivate static let method_barrier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("barrier")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3718155691)!
@@ -4003,6 +4535,7 @@ open class RenderingDevice: Object {
     
     /// This method does nothing.
     public final func barrier(from: RenderingDevice.BarrierMask = [.vertex, .fragment, .compute, .transfer, .raster, .allBarriers], to: RenderingDevice.BarrierMask = [.vertex, .fragment, .compute, .transfer, .raster, .allBarriers]) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: from.rawValue) { pArg0 in
             withUnsafePointer(to: to.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4019,8 +4552,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_full_barrier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("full_barrier")
+    fileprivate static let method_full_barrier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("full_barrier")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -4032,12 +4565,13 @@ open class RenderingDevice: Object {
     
     /// This method does nothing.
     public final func fullBarrier() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RenderingDevice.method_full_barrier, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_create_local_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_local_device")
+    fileprivate static let method_create_local_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_local_device")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2846302423)!
@@ -4049,13 +4583,14 @@ open class RenderingDevice: Object {
     
     /// Create a new local ``RenderingDevice``. This is most useful for performing compute operations on the GPU independently from the rest of the engine.
     public final func createLocalDevice() -> RenderingDevice? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(RenderingDevice.method_create_local_device, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_resource_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_resource_name")
+    fileprivate static let method_set_resource_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_resource_name")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -4072,6 +4607,7 @@ open class RenderingDevice: Object {
     /// > Note: Resource names are only set when the engine runs in verbose mode (``OS/isStdoutVerbose()`` = `true`), or when using an engine build compiled with the `dev_mode=yes` SCons option. The graphics driver must also support the `VK_EXT_DEBUG_UTILS_EXTENSION_NAME` Vulkan extension for named resources to work.
     /// 
     public final func setResourceName(id: RID, name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id.content) { pArg0 in
             let name = GString(name)
             withUnsafePointer(to: name.content) { pArg1 in
@@ -4089,8 +4625,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_command_begin_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_command_begin_label")
+    fileprivate static let method_draw_command_begin_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_command_begin_label")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1636512886)!
@@ -4105,6 +4641,7 @@ open class RenderingDevice: Object {
     /// The `VK_EXT_DEBUG_UTILS_EXTENSION_NAME` Vulkan extension must be available and enabled for command buffer debug label region to work. See also ``drawCommandEndLabel()``.
     /// 
     public final func drawCommandBeginLabel(name: String, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
@@ -4122,8 +4659,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_command_insert_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_command_insert_label")
+    fileprivate static let method_draw_command_insert_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_command_insert_label")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1636512886)!
@@ -4135,6 +4672,7 @@ open class RenderingDevice: Object {
     
     /// This method does nothing.
     public final func drawCommandInsertLabel(name: String, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
@@ -4152,8 +4690,8 @@ open class RenderingDevice: Object {
         
     }
     
-    fileprivate static var method_draw_command_end_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_command_end_label")
+    fileprivate static let method_draw_command_end_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_command_end_label")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -4165,12 +4703,13 @@ open class RenderingDevice: Object {
     
     /// Ends the command buffer debug label region started by a ``drawCommandBeginLabel(name:color:)`` call.
     public final func drawCommandEndLabel() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RenderingDevice.method_draw_command_end_label, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_device_vendor_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_device_vendor_name")
+    fileprivate static let method_get_device_vendor_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_vendor_name")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -4182,13 +4721,14 @@ open class RenderingDevice: Object {
     
     /// Returns the vendor of the video adapter (e.g. "NVIDIA Corporation"). Equivalent to ``RenderingServer/getVideoAdapterVendor()``. See also ``getDeviceName()``.
     public final func getDeviceVendorName() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_vendor_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_device_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_device_name")
+    fileprivate static let method_get_device_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_name")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -4200,13 +4740,14 @@ open class RenderingDevice: Object {
     
     /// Returns the name of the video adapter (e.g. "GeForce GTX 1080/PCIe/SSE2"). Equivalent to ``RenderingServer/getVideoAdapterName()``. See also ``getDeviceVendorName()``.
     public final func getDeviceName() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_device_pipeline_cache_uuid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_device_pipeline_cache_uuid")
+    fileprivate static let method_get_device_pipeline_cache_uuid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_pipeline_cache_uuid")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -4218,13 +4759,14 @@ open class RenderingDevice: Object {
     
     /// Returns the universally unique identifier for the pipeline cache. This is used to cache shader files on disk, which avoids shader recompilations on subsequent engine runs. This UUID varies depending on the graphics card model, but also the driver version. Therefore, updating graphics drivers will invalidate the shader cache.
     public final func getDevicePipelineCacheUuid() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_pipeline_cache_uuid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_memory_usage: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_memory_usage")
+    fileprivate static let method_get_memory_usage: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_memory_usage")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 251690689)!
@@ -4236,6 +4778,7 @@ open class RenderingDevice: Object {
     
     /// Returns the memory usage in bytes corresponding to the given `type`. When using Vulkan, these statistics are calculated by <a href="https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator">Vulkan Memory Allocator</a>.
     public final func getMemoryUsage(type: RenderingDevice.MemoryType) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4250,8 +4793,8 @@ open class RenderingDevice: Object {
         return _result
     }
     
-    fileprivate static var method_get_driver_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_driver_resource")
+    fileprivate static let method_get_driver_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_driver_resource")
         return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501815484)!
@@ -4263,6 +4806,7 @@ open class RenderingDevice: Object {
     
     /// Returns the unique identifier of the driver `resource` for the specified `rid`. Some driver resource types ignore the specified `rid` (see ``RenderingDevice/DriverResource`` descriptions). `index` is always ignored but must be specified anyway.
     public final func getDriverResource(_ resource: RenderingDevice.DriverResource, rid: RID, index: UInt) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: resource.rawValue) { pArg0 in
             withUnsafePointer(to: rid.content) { pArg1 in
@@ -4274,6 +4818,352 @@ open class RenderingDevice: Object {
                         
                     }
                     
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_perf_report: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_perf_report")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a string with a performance report from the past frame. Updates every frame.
+    public final func getPerfReport() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_perf_report, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
+    }
+    
+    fileprivate static let method_get_driver_and_device_memory_report: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_driver_and_device_memory_report")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns string report in CSV format using the following methods:
+    /// 
+    /// - ``getTrackedObjectName(typeIndex:)``
+    /// 
+    /// - ``getTrackedObjectTypeCount()``
+    /// 
+    /// - ``getDriverTotalMemory()``
+    /// 
+    /// - ``getDriverAllocationCount()``
+    /// 
+    /// - ``getDriverMemoryByObjectType(_:)``
+    /// 
+    /// - ``getDriverAllocsByObjectType(_:)``
+    /// 
+    /// - ``getDeviceTotalMemory()``
+    /// 
+    /// - ``getDeviceAllocationCount()``
+    /// 
+    /// - ``getDeviceMemoryByObjectType(_:)``
+    /// 
+    /// - ``getDeviceAllocsByObjectType(_:)``
+    /// 
+    /// This is only used by Vulkan in debug builds. Godot must also be started with the `--extra-gpu-memory-tracking` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>.
+    /// 
+    public final func getDriverAndDeviceMemoryReport() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_and_device_memory_report, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
+    }
+    
+    fileprivate static let method_get_tracked_object_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracked_object_name")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the name of the type of object for the given `typeIndex`. This value must be in range `[0; get_tracked_object_type_count - 1]`. If ``getTrackedObjectTypeCount()`` is 0, then type argument is ignored and always returns the same string.
+    /// 
+    /// The return value is important because it gives meaning to the types passed to ``getDriverMemoryByObjectType(_:)``, ``getDriverAllocsByObjectType(_:)``, ``getDeviceMemoryByObjectType(_:)``, and ``getDeviceAllocsByObjectType(_:)``. Examples of strings it can return (not exhaustive):
+    /// 
+    /// - DEVICE_MEMORY
+    /// 
+    /// - PIPELINE_CACHE
+    /// 
+    /// - SWAPCHAIN_KHR
+    /// 
+    /// - COMMAND_POOL
+    /// 
+    /// Thus if e.g. `get_tracked_object_name(5)` returns "COMMAND_POOL", then `get_device_memory_by_object_type(5)` returns the bytes used by the GPU for command pools.
+    /// 
+    /// This is only used by Vulkan in debug builds. Godot must also be started with the `--extra-gpu-memory-tracking` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>.
+    /// 
+    public final func getTrackedObjectName(typeIndex: UInt32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: typeIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_tracked_object_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
+    }
+    
+    fileprivate static let method_get_tracked_object_type_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracked_object_type_count")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns how many types of trackable objects are.
+    /// 
+    /// This is only used by Vulkan in debug builds. Godot must also be started with the `--extra-gpu-memory-tracking` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>.
+    /// 
+    public final func getTrackedObjectTypeCount() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_tracked_object_type_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_driver_total_memory: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_driver_total_memory")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns how much bytes the GPU driver is using for internal driver structures.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDriverTotalMemory() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_total_memory, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_driver_allocation_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_driver_allocation_count")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns how many allocations the GPU driver has performed for internal driver structures.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDriverAllocationCount() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_allocation_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_driver_memory_by_object_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_driver_memory_by_object_type")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Same as ``getDriverTotalMemory()`` but filtered for a given object type.
+    /// 
+    /// The type argument must be in range `[0; get_tracked_object_type_count - 1]`. If ``getTrackedObjectTypeCount()`` is 0, then type argument is ignored and always returns 0.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDriverMemoryByObjectType(_ type: UInt32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        withUnsafePointer(to: type) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_memory_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_driver_allocs_by_object_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_driver_allocs_by_object_type")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Same as ``getDriverAllocationCount()`` but filtered for a given object type.
+    /// 
+    /// The type argument must be in range `[0; get_tracked_object_type_count - 1]`. If ``getTrackedObjectTypeCount()`` is 0, then type argument is ignored and always returns 0.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDriverAllocsByObjectType(_ type: UInt32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        withUnsafePointer(to: type) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_allocs_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_device_total_memory: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_total_memory")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns how much bytes the GPU is using.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDeviceTotalMemory() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_total_memory, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_device_allocation_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_allocation_count")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns how many allocations the GPU has performed for internal driver structures.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDeviceAllocationCount() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_allocation_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_device_memory_by_object_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_memory_by_object_type")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Same as ``getDeviceTotalMemory()`` but filtered for a given object type.
+    /// 
+    /// The type argument must be in range `[0; get_tracked_object_type_count - 1]`. If ``getTrackedObjectTypeCount()`` is 0, then type argument is ignored and always returns 0.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDeviceMemoryByObjectType(_ type: UInt32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        withUnsafePointer(to: type) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_memory_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_device_allocs_by_object_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_device_allocs_by_object_type")
+        return withUnsafePointer(to: &RenderingDevice.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Same as ``getDeviceAllocationCount()`` but filtered for a given object type.
+    /// 
+    /// The type argument must be in range `[0; get_tracked_object_type_count - 1]`. If ``getTrackedObjectTypeCount()`` is 0, then type argument is ignored and always returns 0.
+    /// 
+    /// This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
+    /// 
+    public final func getDeviceAllocsByObjectType(_ type: UInt32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        withUnsafePointer(to: type) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_allocs_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }

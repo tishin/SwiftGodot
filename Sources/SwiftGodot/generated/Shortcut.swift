@@ -23,10 +23,10 @@ import Musl
 /// 
 /// Shortcuts are commonly used for interacting with a ``Control`` element from an ``InputEvent`` (also known as hotkeys).
 /// 
-/// One shortcut can contain multiple ``InputEvent``'s, allowing the possibility of triggering one action with multiple different inputs.
+/// One shortcut can contain multiple ``InputEvent``s, allowing the possibility of triggering one action with multiple different inputs.
 /// 
 open class Shortcut: Resource {
-    fileprivate static var className = StringName("Shortcut")
+    private static var className = StringName("Shortcut")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -35,7 +35,7 @@ open class Shortcut: Resource {
     /// 
     /// Generally the ``InputEvent`` used is an ``InputEventKey``, though it can be any ``InputEvent``, including an ``InputEventAction``.
     /// 
-    final public var events: GArray {
+    final public var events: VariantArray {
         get {
             return get_events ()
         }
@@ -47,8 +47,8 @@ open class Shortcut: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_events: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_events")
+    fileprivate static let method_set_events: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_events")
         return withUnsafePointer(to: &Shortcut.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -59,7 +59,8 @@ open class Shortcut: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func set_events(_ events: GArray) {
+    fileprivate final func set_events(_ events: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: events.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -73,8 +74,8 @@ open class Shortcut: Resource {
         
     }
     
-    fileprivate static var method_get_events: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_events")
+    fileprivate static let method_get_events: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_events")
         return withUnsafePointer(to: &Shortcut.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -85,14 +86,15 @@ open class Shortcut: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func get_events() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_events() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(Shortcut.method_get_events, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_has_valid_event: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_valid_event")
+    fileprivate static let method_has_valid_event: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_valid_event")
         return withUnsafePointer(to: &Shortcut.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -104,13 +106,14 @@ open class Shortcut: Resource {
     
     /// Returns whether ``events`` contains an ``InputEvent`` which is valid.
     public final func hasValidEvent() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Shortcut.method_has_valid_event, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_matches_event: GDExtensionMethodBindPtr = {
-        let methodName = StringName("matches_event")
+    fileprivate static let method_matches_event: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("matches_event")
         return withUnsafePointer(to: &Shortcut.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3738334489)!
@@ -120,8 +123,9 @@ open class Shortcut: Resource {
         
     }()
     
-    /// Returns whether any ``InputEvent`` in ``events`` equals `event`.
+    /// Returns whether any ``InputEvent`` in ``events`` equals `event`. This uses ``InputEvent/isMatch(event:exactMatch:)`` to compare events.
     public final func matchesEvent(_ event: InputEvent?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -136,8 +140,8 @@ open class Shortcut: Resource {
         return _result
     }
     
-    fileprivate static var method_get_as_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_as_text")
+    fileprivate static let method_get_as_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_as_text")
         return withUnsafePointer(to: &Shortcut.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -149,6 +153,7 @@ open class Shortcut: Resource {
     
     /// Returns the shortcut's first valid ``InputEvent`` as a ``String``.
     public final func getAsText() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Shortcut.method_get_as_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

@@ -30,7 +30,7 @@ import Musl
 /// > Note: This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).
 /// 
 open class PlaceholderTexture2D: Texture2D {
-    fileprivate static var className = StringName("PlaceholderTexture2D")
+    private static var className = StringName("PlaceholderTexture2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -48,8 +48,8 @@ open class PlaceholderTexture2D: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &PlaceholderTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -61,6 +61,7 @@ open class PlaceholderTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

@@ -28,7 +28,7 @@ import Musl
 /// The `new` method of a script subclass creates a new instance. ``Object/setScript(_:)`` extends an existing object, if that object's class matches one of the script's base classes.
 /// 
 open class Script: Resource {
-    fileprivate static var className = StringName("Script")
+    private static var className = StringName("Script")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class Script: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_can_instantiate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("can_instantiate")
+    fileprivate static let method_can_instantiate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("can_instantiate")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -59,13 +59,14 @@ open class Script: Resource {
     
     /// Returns `true` if the script can be instantiated.
     public final func canInstantiate() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Script.method_can_instantiate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_instance_has: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_has")
+    fileprivate static let method_instance_has: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_has")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 397768994)!
@@ -77,6 +78,7 @@ open class Script: Resource {
     
     /// Returns `true` if `baseObject` is an instance of this script.
     public final func instanceHas(baseObject: Object?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: baseObject?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -91,8 +93,8 @@ open class Script: Resource {
         return _result
     }
     
-    fileprivate static var method_has_source_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_source_code")
+    fileprivate static let method_has_source_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_source_code")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -103,14 +105,18 @@ open class Script: Resource {
     }()
     
     /// Returns `true` if the script contains non-empty source code.
+    /// 
+    /// > Note: If a script does not have source code, this does not mean that it is invalid or unusable. For example, a ``GDScript`` that was exported with binary tokenization has no source code, but still behaves as expected and could be instantiated. This can be checked with ``canInstantiate()``.
+    /// 
     public final func hasSourceCode() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Script.method_has_source_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_source_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source_code")
+    fileprivate static let method_get_source_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source_code")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -122,13 +128,14 @@ open class Script: Resource {
     
     @inline(__always)
     fileprivate final func get_source_code() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Script.method_get_source_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_source_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_source_code")
+    fileprivate static let method_set_source_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_source_code")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -140,6 +147,7 @@ open class Script: Resource {
     
     @inline(__always)
     fileprivate final func set_source_code(_ source: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let source = GString(source)
         withUnsafePointer(to: source.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -154,8 +162,8 @@ open class Script: Resource {
         
     }
     
-    fileprivate static var method_reload: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reload")
+    fileprivate static let method_reload: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reload")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1633102583)!
@@ -167,6 +175,7 @@ open class Script: Resource {
     
     /// Reloads the script's class implementation. Returns an error code.
     public final func reload(keepState: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: keepState) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -181,8 +190,8 @@ open class Script: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_base_script: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_base_script")
+    fileprivate static let method_get_base_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_base_script")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 278624046)!
@@ -194,13 +203,14 @@ open class Script: Resource {
     
     /// Returns the script directly inherited by this script.
     public final func getBaseScript() -> Script? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Script.method_get_base_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_instance_base_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_base_type")
+    fileprivate static let method_get_instance_base_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_base_type")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -212,13 +222,14 @@ open class Script: Resource {
     
     /// Returns the script's base type.
     public final func getInstanceBaseType() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(Script.method_get_instance_base_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_global_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_name")
+    fileprivate static let method_get_global_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_name")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -233,13 +244,14 @@ open class Script: Resource {
     /// To give the script a global name, you can use the `class_name` keyword in GDScript and the ```GlobalClass``` attribute in C#.
     /// 
     public final func getGlobalName() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(Script.method_get_global_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_has_script_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_script_signal")
+    fileprivate static let method_has_script_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_script_signal")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -251,6 +263,7 @@ open class Script: Resource {
     
     /// Returns `true` if the script, or a base class, defines a signal with the given name.
     public final func hasScriptSignal(signalName: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: signalName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -265,8 +278,8 @@ open class Script: Resource {
         return _result
     }
     
-    fileprivate static var method_get_script_property_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_property_list")
+    fileprivate static let method_get_script_property_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_property_list")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -277,14 +290,15 @@ open class Script: Resource {
     }()
     
     /// Returns the list of properties in this ``Script``.
-    public final func getScriptPropertyList() -> VariantCollection<GDictionary> {
+    public final func getScriptPropertyList() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Script.method_get_script_property_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_script_method_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_method_list")
+    fileprivate static let method_get_script_method_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_method_list")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -295,14 +309,15 @@ open class Script: Resource {
     }()
     
     /// Returns the list of methods in this ``Script``.
-    public final func getScriptMethodList() -> VariantCollection<GDictionary> {
+    public final func getScriptMethodList() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Script.method_get_script_method_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_script_signal_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_signal_list")
+    fileprivate static let method_get_script_signal_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_signal_list")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -313,14 +328,15 @@ open class Script: Resource {
     }()
     
     /// Returns the list of user signals defined in this ``Script``.
-    public final func getScriptSignalList() -> VariantCollection<GDictionary> {
+    public final func getScriptSignalList() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Script.method_get_script_signal_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_script_constant_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_constant_map")
+    fileprivate static let method_get_script_constant_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_constant_map")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2382534195)!
@@ -331,14 +347,15 @@ open class Script: Resource {
     }()
     
     /// Returns a dictionary containing constant names and their values.
-    public final func getScriptConstantMap() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getScriptConstantMap() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(Script.method_get_script_constant_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_property_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_property_default_value")
+    fileprivate static let method_get_property_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_property_default_value")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2138907829)!
@@ -350,6 +367,7 @@ open class Script: Resource {
     
     /// Returns the default value of the specified property.
     public final func getPropertyDefaultValue(property: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -364,8 +382,8 @@ open class Script: Resource {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_is_tool: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_tool")
+    fileprivate static let method_is_tool: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_tool")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -377,13 +395,14 @@ open class Script: Resource {
     
     /// Returns `true` if the script is a tool script. A tool script can run in the editor.
     public final func isTool() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Script.method_is_tool, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_abstract: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_abstract")
+    fileprivate static let method_is_abstract: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_abstract")
         return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -395,9 +414,29 @@ open class Script: Resource {
     
     /// Returns `true` if the script is an abstract script. An abstract script does not have a constructor and cannot be instantiated.
     public final func isAbstract() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Script.method_is_abstract, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
+    }
+    
+    fileprivate static let method_get_rpc_config: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rpc_config")
+        return withUnsafePointer(to: &Script.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1214101251)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a ``VariantDictionary`` mapping method names to their RPC configuration defined by this script.
+    public final func getRpcConfig() -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        gi.object_method_bind_ptrcall(Script.method_get_rpc_config, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return Variant(takingOver: _result)
     }
     
 }

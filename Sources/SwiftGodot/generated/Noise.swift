@@ -28,11 +28,11 @@ import Musl
 /// Inheriting noise classes can optionally override this function to provide a more optimal algorithm.
 /// 
 open class Noise: Resource {
-    fileprivate static var className = StringName("Noise")
+    private static var className = StringName("Noise")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_noise_1d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_noise_1d")
+    fileprivate static let method_get_noise_1d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_noise_1d")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3919130443)!
@@ -44,6 +44,7 @@ open class Noise: Resource {
     
     /// Returns the 1D noise value at the given (x) coordinate.
     public final func getNoise1d(x: Double) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: x) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -58,8 +59,8 @@ open class Noise: Resource {
         return _result
     }
     
-    fileprivate static var method_get_noise_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_noise_2d")
+    fileprivate static let method_get_noise_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_noise_2d")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2753205203)!
@@ -71,6 +72,7 @@ open class Noise: Resource {
     
     /// Returns the 2D noise value at the given position.
     public final func getNoise2d(x: Double, y: Double) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: x) { pArg0 in
             withUnsafePointer(to: y) { pArg1 in
@@ -88,8 +90,8 @@ open class Noise: Resource {
         return _result
     }
     
-    fileprivate static var method_get_noise_2dv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_noise_2dv")
+    fileprivate static let method_get_noise_2dv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_noise_2dv")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2276447920)!
@@ -101,6 +103,7 @@ open class Noise: Resource {
     
     /// Returns the 2D noise value at the given position.
     public final func getNoise2dv(v: Vector2) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: v) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -115,8 +118,8 @@ open class Noise: Resource {
         return _result
     }
     
-    fileprivate static var method_get_noise_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_noise_3d")
+    fileprivate static let method_get_noise_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_noise_3d")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 973811851)!
@@ -128,6 +131,7 @@ open class Noise: Resource {
     
     /// Returns the 3D noise value at the given position.
     public final func getNoise3d(x: Double, y: Double, z: Double) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: x) { pArg0 in
             withUnsafePointer(to: y) { pArg1 in
@@ -148,8 +152,8 @@ open class Noise: Resource {
         return _result
     }
     
-    fileprivate static var method_get_noise_3dv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_noise_3dv")
+    fileprivate static let method_get_noise_3dv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_noise_3dv")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1109078154)!
@@ -161,6 +165,7 @@ open class Noise: Resource {
     
     /// Returns the 3D noise value at the given position.
     public final func getNoise3dv(v: Vector3) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: v) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -175,8 +180,8 @@ open class Noise: Resource {
         return _result
     }
     
-    fileprivate static var method_get_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_image")
+    fileprivate static let method_get_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_image")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3180683109)!
@@ -191,6 +196,7 @@ open class Noise: Resource {
     /// > Note: With `normalize` set to `false`, the default implementation expects the noise generator to return values in the range `-1.0` to `1.0`.
     /// 
     public final func getImage(width: Int32, height: Int32, invert: Bool = false, in3dSpace: Bool = false, normalize: Bool = true) -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
@@ -214,11 +220,11 @@ open class Noise: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_seamless_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_seamless_image")
+    fileprivate static let method_get_seamless_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_seamless_image")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2770743602)!
@@ -233,6 +239,7 @@ open class Noise: Resource {
     /// > Note: With `normalize` set to `false`, the default implementation expects the noise generator to return values in the range `-1.0` to `1.0`.
     /// 
     public final func getSeamlessImage(width: Int32, height: Int32, invert: Bool = false, in3dSpace: Bool = false, skirt: Double = 0.1, normalize: Bool = true) -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
@@ -259,11 +266,11 @@ open class Noise: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_image_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_image_3d")
+    fileprivate static let method_get_image_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_image_3d")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3977814329)!
@@ -273,11 +280,12 @@ open class Noise: Resource {
         
     }()
     
-    /// Returns an ``GArray`` of ``Image``s containing 3D noise values for use with ``ImageTexture3D/create(format:width:height:depth:useMipmaps:data:)``.
+    /// Returns an ``VariantArray`` of ``Image``s containing 3D noise values for use with ``ImageTexture3D/create(format:width:height:depth:useMipmaps:data:)``.
     /// 
     /// > Note: With `normalize` set to `false`, the default implementation expects the noise generator to return values in the range `-1.0` to `1.0`.
     /// 
-    public final func getImage3d(width: Int32, height: Int32, depth: Int32, invert: Bool = false, normalize: Bool = true) -> ObjectCollection<Image> {
+    public final func getImage3d(width: Int32, height: Int32, depth: Int32, invert: Bool = false, normalize: Bool = true) -> TypedArray<Image?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
@@ -301,11 +309,11 @@ open class Noise: Resource {
             
         }
         
-        return ObjectCollection<Image>(content: _result)
+        return TypedArray<Image?>(takingOver: _result)
     }
     
-    fileprivate static var method_get_seamless_image_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_seamless_image_3d")
+    fileprivate static let method_get_seamless_image_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_seamless_image_3d")
         return withUnsafePointer(to: &Noise.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 451006340)!
@@ -315,11 +323,12 @@ open class Noise: Resource {
         
     }()
     
-    /// Returns an ``GArray`` of ``Image``s containing seamless 3D noise values for use with ``ImageTexture3D/create(format:width:height:depth:useMipmaps:data:)``.
+    /// Returns an ``VariantArray`` of ``Image``s containing seamless 3D noise values for use with ``ImageTexture3D/create(format:width:height:depth:useMipmaps:data:)``.
     /// 
     /// > Note: With `normalize` set to `false`, the default implementation expects the noise generator to return values in the range `-1.0` to `1.0`.
     /// 
-    public final func getSeamlessImage3d(width: Int32, height: Int32, depth: Int32, invert: Bool = false, skirt: Double = 0.1, normalize: Bool = true) -> ObjectCollection<Image> {
+    public final func getSeamlessImage3d(width: Int32, height: Int32, depth: Int32, invert: Bool = false, skirt: Double = 0.1, normalize: Bool = true) -> TypedArray<Image?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
@@ -346,7 +355,7 @@ open class Noise: Resource {
             
         }
         
-        return ObjectCollection<Image>(content: _result)
+        return TypedArray<Image?>(takingOver: _result)
     }
     
 }

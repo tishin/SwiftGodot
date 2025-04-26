@@ -26,7 +26,7 @@ import Musl
 /// This class is used internally by the editor inspector and script debugger, but can also be used in plugins to pass and display objects as their IDs.
 /// 
 open class EncodedObjectAsID: RefCounted {
-    fileprivate static var className = StringName("EncodedObjectAsID")
+    private static var className = StringName("EncodedObjectAsID")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class EncodedObjectAsID: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_object_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_object_id")
+    fileprivate static let method_set_object_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_object_id")
         return withUnsafePointer(to: &EncodedObjectAsID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -57,6 +57,7 @@ open class EncodedObjectAsID: RefCounted {
     
     @inline(__always)
     fileprivate final func set_object_id(_ id: UInt) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class EncodedObjectAsID: RefCounted {
         
     }
     
-    fileprivate static var method_get_object_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_object_id")
+    fileprivate static let method_get_object_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_object_id")
         return withUnsafePointer(to: &EncodedObjectAsID.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -83,6 +84,7 @@ open class EncodedObjectAsID: RefCounted {
     
     @inline(__always)
     fileprivate final func get_object_id() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(EncodedObjectAsID.method_get_object_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

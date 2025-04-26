@@ -19,9 +19,9 @@ import Musl
 #endif
 
 
-/// GLTFTexture represents a texture in a GLTF file.
+/// GLTFTexture represents a texture in a glTF file.
 open class GLTFTexture: Resource {
-    fileprivate static var className = StringName("GLTFTexture")
+    private static var className = StringName("GLTFTexture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -51,8 +51,8 @@ open class GLTFTexture: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_src_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_src_image")
+    fileprivate static let method_get_src_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_src_image")
         return withUnsafePointer(to: &GLTFTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -64,13 +64,14 @@ open class GLTFTexture: Resource {
     
     @inline(__always)
     fileprivate final func get_src_image() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFTexture.method_get_src_image, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_src_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_src_image")
+    fileprivate static let method_set_src_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_src_image")
         return withUnsafePointer(to: &GLTFTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -82,6 +83,7 @@ open class GLTFTexture: Resource {
     
     @inline(__always)
     fileprivate final func set_src_image(_ srcImage: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: srcImage) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -95,8 +97,8 @@ open class GLTFTexture: Resource {
         
     }
     
-    fileprivate static var method_get_sampler: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sampler")
+    fileprivate static let method_get_sampler: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sampler")
         return withUnsafePointer(to: &GLTFTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -108,13 +110,14 @@ open class GLTFTexture: Resource {
     
     @inline(__always)
     fileprivate final func get_sampler() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFTexture.method_get_sampler, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sampler: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sampler")
+    fileprivate static let method_set_sampler: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sampler")
         return withUnsafePointer(to: &GLTFTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -126,6 +129,7 @@ open class GLTFTexture: Resource {
     
     @inline(__always)
     fileprivate final func set_sampler(_ sampler: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sampler) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

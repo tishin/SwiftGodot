@@ -26,11 +26,11 @@ import Musl
 /// Below a small example of how to use it:
 /// 
 open class DTLSServer: RefCounted {
-    fileprivate static var className = StringName("DTLSServer")
+    private static var className = StringName("DTLSServer")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_setup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("setup")
+    fileprivate static let method_setup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("setup")
         return withUnsafePointer(to: &DTLSServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1262296096)!
@@ -42,6 +42,7 @@ open class DTLSServer: RefCounted {
     
     /// Setup the DTLS server to use the given `serverOptions`. See ``TLSOptions/server(key:certificate:)``.
     public final func setup(serverOptions: TLSOptions?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: serverOptions?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -56,8 +57,8 @@ open class DTLSServer: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_take_connection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("take_connection")
+    fileprivate static let method_take_connection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("take_connection")
         return withUnsafePointer(to: &DTLSServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3946580474)!
@@ -72,6 +73,7 @@ open class DTLSServer: RefCounted {
     /// > Note: You must check that the state of the return PacketPeerUDP is ``PacketPeerDTLS/Status/handshaking``, as it is normal that 50% of the new connections will be invalid due to cookie exchange.
     /// 
     public final func takeConnection(udpPeer: PacketPeerUDP?) -> PacketPeerDTLS? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: udpPeer?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -83,7 +85,7 @@ open class DTLSServer: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

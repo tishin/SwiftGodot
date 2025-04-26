@@ -21,17 +21,19 @@ import Musl
 
 /// A CSG Mesh shape that uses a mesh resource.
 /// 
-/// This CSG node allows you to use any mesh resource as a CSG shape, provided it is closed, does not self-intersect, does not contain internal faces and has no edges that connect to more than two faces. See also ``CSGPolygon3D`` for drawing 2D extruded polygons to be used as CSG nodes.
+/// This CSG node allows you to use any mesh resource as a CSG shape, provided it is _manifold_. A manifold shape is closed, does not self-intersect, does not contain internal faces and has no edges that connect to more than two faces. See also ``CSGPolygon3D`` for drawing 2D extruded polygons to be used as CSG nodes.
 /// 
 /// > Note: CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a ``MeshInstance3D`` with a ``PrimitiveMesh``. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.
 /// 
 open class CSGMesh3D: CSGPrimitive3D {
-    fileprivate static var className = StringName("CSGMesh3D")
+    private static var className = StringName("CSGMesh3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /// The ``Mesh`` resource to use as a CSG shape.
+    /// 
+    /// > Note: Some ``Mesh`` types such as ``PlaneMesh``, ``PointMesh``, ``QuadMesh``, and ``RibbonTrailMesh`` are excluded from the type hint for this property, as these primitives are non-_manifold_ and thus not compatible with the CSG algorithm.
     /// 
     /// > Note: When using an ``ArrayMesh``, all vertex attributes except ``Mesh/ArrayType/vertex``, ``Mesh/ArrayType/normal`` and ``Mesh/ArrayType/texUv`` are left unused. Only ``Mesh/ArrayType/vertex`` and ``Mesh/ArrayType/texUv`` will be passed to the GPU.
     /// 
@@ -61,8 +63,8 @@ open class CSGMesh3D: CSGPrimitive3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mesh")
+    fileprivate static let method_set_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mesh")
         return withUnsafePointer(to: &CSGMesh3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 194775623)!
@@ -74,6 +76,7 @@ open class CSGMesh3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_mesh(_ mesh: Mesh?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -87,8 +90,8 @@ open class CSGMesh3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh")
+    fileprivate static let method_get_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh")
         return withUnsafePointer(to: &CSGMesh3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4081188045)!
@@ -100,13 +103,14 @@ open class CSGMesh3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_mesh() -> Mesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CSGMesh3D.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &CSGMesh3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -118,6 +122,7 @@ open class CSGMesh3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_material(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -131,8 +136,8 @@ open class CSGMesh3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material")
+    fileprivate static let method_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material")
         return withUnsafePointer(to: &CSGMesh3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -144,9 +149,10 @@ open class CSGMesh3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_material() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CSGMesh3D.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``VisualShaderNodeParticleEmitter`` that makes the particles emitted in box shape with the specified extents.
 open class VisualShaderNodeParticleBoxEmitter: VisualShaderNodeParticleEmitter {
-    fileprivate static var className = StringName("VisualShaderNodeParticleBoxEmitter")
+    private static var className = StringName("VisualShaderNodeParticleBoxEmitter")
     override open class var godotClassName: StringName { className }
 }
 

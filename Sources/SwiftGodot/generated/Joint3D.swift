@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Abstract base class for all joints in 3D physics. 3D joints bind together two physics bodies (``nodeA`` and ``nodeB``) and apply a constraint. If only one body is defined, it is attached to a fixed ``StaticBody3D`` without collision shapes.
 open class Joint3D: Node3D {
-    fileprivate static var className = StringName("Joint3D")
+    private static var className = StringName("Joint3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -83,8 +83,8 @@ open class Joint3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_node_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_node_a")
+    fileprivate static let method_set_node_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_node_a")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -96,6 +96,7 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_node_a(_ node: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -109,8 +110,8 @@ open class Joint3D: Node3D {
         
     }
     
-    fileprivate static var method_get_node_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_a")
+    fileprivate static let method_get_node_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_a")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -122,13 +123,14 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_node_a() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(Joint3D.method_get_node_a, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_node_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_node_b")
+    fileprivate static let method_set_node_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_node_b")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -140,6 +142,7 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_node_b(_ node: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -153,8 +156,8 @@ open class Joint3D: Node3D {
         
     }
     
-    fileprivate static var method_get_node_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_b")
+    fileprivate static let method_get_node_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_b")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -166,13 +169,14 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_node_b() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(Joint3D.method_get_node_b, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_solver_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_solver_priority")
+    fileprivate static let method_set_solver_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_solver_priority")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -184,6 +188,7 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_solver_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -197,8 +202,8 @@ open class Joint3D: Node3D {
         
     }
     
-    fileprivate static var method_get_solver_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_solver_priority")
+    fileprivate static let method_get_solver_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_solver_priority")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -210,13 +215,14 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_solver_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Joint3D.method_get_solver_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_exclude_nodes_from_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exclude_nodes_from_collision")
+    fileprivate static let method_set_exclude_nodes_from_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exclude_nodes_from_collision")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -228,6 +234,7 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_exclude_nodes_from_collision(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -241,8 +248,8 @@ open class Joint3D: Node3D {
         
     }
     
-    fileprivate static var method_get_exclude_nodes_from_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_exclude_nodes_from_collision")
+    fileprivate static let method_get_exclude_nodes_from_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_exclude_nodes_from_collision")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -254,13 +261,14 @@ open class Joint3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_exclude_nodes_from_collision() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Joint3D.method_get_exclude_nodes_from_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rid")
+    fileprivate static let method_get_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rid")
         return withUnsafePointer(to: &Joint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -272,6 +280,7 @@ open class Joint3D: Node3D {
     
     /// Returns the joint's internal ``RID`` from the ``PhysicsServer3D``.
     public final func getRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(Joint3D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

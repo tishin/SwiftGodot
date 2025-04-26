@@ -39,7 +39,7 @@ import Musl
 /// - ``connectionFailed``
 /// - ``serverDisconnected``
 open class MultiplayerAPI: RefCounted {
-    fileprivate static var className = StringName("MultiplayerAPI")
+    private static var className = StringName("MultiplayerAPI")
     override open class var godotClassName: StringName { className }
     public enum RPCMode: Int64, CaseIterable {
         /// Used with ``Node/rpcConfig(method:config:)`` to disable a method or property for all RPC calls, making it unavailable. Default for all methods.
@@ -66,8 +66,8 @@ open class MultiplayerAPI: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_has_multiplayer_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_multiplayer_peer")
+    fileprivate static let method_has_multiplayer_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_multiplayer_peer")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -79,13 +79,14 @@ open class MultiplayerAPI: RefCounted {
     
     /// Returns `true` if there is a ``multiplayerPeer`` set.
     public final func hasMultiplayerPeer() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MultiplayerAPI.method_has_multiplayer_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_multiplayer_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_multiplayer_peer")
+    fileprivate static let method_get_multiplayer_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_multiplayer_peer")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3223692825)!
@@ -97,13 +98,14 @@ open class MultiplayerAPI: RefCounted {
     
     @inline(__always)
     fileprivate final func get_multiplayer_peer() -> MultiplayerPeer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_multiplayer_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_multiplayer_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_multiplayer_peer")
+    fileprivate static let method_set_multiplayer_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_multiplayer_peer")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3694835298)!
@@ -115,6 +117,7 @@ open class MultiplayerAPI: RefCounted {
     
     @inline(__always)
     fileprivate final func set_multiplayer_peer(_ peer: MultiplayerPeer?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: peer?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -128,8 +131,8 @@ open class MultiplayerAPI: RefCounted {
         
     }
     
-    fileprivate static var method_get_unique_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unique_id")
+    fileprivate static let method_get_unique_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unique_id")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -141,13 +144,14 @@ open class MultiplayerAPI: RefCounted {
     
     /// Returns the unique peer ID of this MultiplayerAPI's ``multiplayerPeer``.
     public final func getUniqueId() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_server: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_server")
+    fileprivate static let method_is_server: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_server")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -159,13 +163,14 @@ open class MultiplayerAPI: RefCounted {
     
     /// Returns `true` if this MultiplayerAPI's ``multiplayerPeer`` is valid and in server mode (listening for connections).
     public final func isServer() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MultiplayerAPI.method_is_server, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_remote_sender_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_remote_sender_id")
+    fileprivate static let method_get_remote_sender_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_remote_sender_id")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -180,13 +185,14 @@ open class MultiplayerAPI: RefCounted {
     /// > Note: This method returns `0` when called outside of an RPC. As such, the original peer ID may be lost when code execution is delayed (such as with GDScript's `await` keyword).
     /// 
     public final func getRemoteSenderId() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_remote_sender_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -201,13 +207,14 @@ open class MultiplayerAPI: RefCounted {
     /// > Note: This method results in RPCs being called, so they will be executed in the same context of this function (e.g. `_process`, `physics`, ``Thread``).
     /// 
     public final func poll() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(MultiplayerAPI.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_rpc: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rpc")
+    fileprivate static let method_rpc: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rpc")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2077486355)!
@@ -219,9 +226,10 @@ open class MultiplayerAPI: RefCounted {
     
     /// Sends an RPC to the target `peer`. The given `method` will be called on the remote `object` with the provided `arguments`. The RPC may also be called locally depending on the implementation and RPC configuration. See ``Node/rpc(method:)`` and ``Node/rpcConfig(method:config:)``.
     /// 
-    /// > Note: Prefer using ``Node/rpc(method:)``, ``Node/rpcId(peerId:method:)``, or `my_method.rpc(peer, arg1, arg2, ...)` (in GDScript), since they are faster. This method is mostly useful in conjunction with ``MultiplayerAPIExtension`` when augmenting or replacing the multiplayer capabilities.
+    /// > Note: Prefer using ``Node/rpc(method:)``, ``Node/rpcId(peerId:method:)``, or `my_method.rpc(peer, arg1, arg2, ...)` (in GDScript), since they are faster. This method is mostly useful in conjunction with ``MultiplayerAPIExtension`` when extending or replacing the multiplayer capabilities.
     /// 
-    public final func rpc(peer: Int32, object: Object?, method: StringName, arguments: GArray = GArray ()) -> GodotError {
+    public final func rpc(peer: Int32, object: Object?, method: StringName, arguments: VariantArray = VariantArray ()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: peer) { pArg0 in
             withUnsafePointer(to: object?.handle) { pArg1 in
@@ -245,8 +253,8 @@ open class MultiplayerAPI: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_object_configuration_add: GDExtensionMethodBindPtr = {
-        let methodName = StringName("object_configuration_add")
+    fileprivate static let method_object_configuration_add: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("object_configuration_add")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1171879464)!
@@ -261,6 +269,7 @@ open class MultiplayerAPI: RefCounted {
     /// > Note: This method is mostly relevant when extending or overriding the MultiplayerAPI behavior via ``MultiplayerAPIExtension``.
     /// 
     public final func objectConfigurationAdd(object: Object?, configuration: Variant?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: configuration.content) { pArg1 in
@@ -278,8 +287,8 @@ open class MultiplayerAPI: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_object_configuration_remove: GDExtensionMethodBindPtr = {
-        let methodName = StringName("object_configuration_remove")
+    fileprivate static let method_object_configuration_remove: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("object_configuration_remove")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1171879464)!
@@ -294,6 +303,7 @@ open class MultiplayerAPI: RefCounted {
     /// > Note: This method is mostly relevant when extending or overriding the MultiplayerAPI behavior via ``MultiplayerAPIExtension``.
     /// 
     public final func objectConfigurationRemove(object: Object?, configuration: Variant?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: configuration.content) { pArg1 in
@@ -311,8 +321,8 @@ open class MultiplayerAPI: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_peers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_peers")
+    fileprivate static let method_get_peers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_peers")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -324,13 +334,14 @@ open class MultiplayerAPI: RefCounted {
     
     /// Returns the peer IDs of all connected peers of this MultiplayerAPI's ``multiplayerPeer``.
     public final func getPeers() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_peers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_default_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_interface")
+    fileprivate static let method_set_default_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_interface")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -355,8 +366,8 @@ open class MultiplayerAPI: RefCounted {
         
     }
     
-    fileprivate static var method_get_default_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_interface")
+    fileprivate static let method_get_default_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_interface")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2737447660)!
@@ -373,8 +384,8 @@ open class MultiplayerAPI: RefCounted {
         return _result
     }
     
-    fileprivate static var method_create_default_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_default_interface")
+    fileprivate static let method_create_default_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_default_interface")
         return withUnsafePointer(to: &MultiplayerAPI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3294156723)!
@@ -388,7 +399,7 @@ open class MultiplayerAPI: RefCounted {
     public static func createDefaultInterface() -> MultiplayerAPI? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_create_default_interface, nil, nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

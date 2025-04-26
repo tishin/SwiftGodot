@@ -26,7 +26,7 @@ import Musl
 /// > Note: ``CanvasTexture`` cannot be used in 3D. It will not display correctly when applied to any ``VisualInstance3D``, such as ``Sprite3D`` or ``Decal``. For physically-based materials in 3D, use ``BaseMaterial3D`` instead.
 /// 
 open class CanvasTexture: Texture2D {
-    fileprivate static var className = StringName("CanvasTexture")
+    private static var className = StringName("CanvasTexture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -119,8 +119,8 @@ open class CanvasTexture: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_diffuse_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_diffuse_texture")
+    fileprivate static let method_set_diffuse_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_diffuse_texture")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -132,6 +132,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_diffuse_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -145,8 +146,8 @@ open class CanvasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_diffuse_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_diffuse_texture")
+    fileprivate static let method_get_diffuse_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_diffuse_texture")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -158,13 +159,14 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_diffuse_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CanvasTexture.method_get_diffuse_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_normal_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_normal_texture")
+    fileprivate static let method_set_normal_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_normal_texture")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -176,6 +178,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_normal_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -189,8 +192,8 @@ open class CanvasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_normal_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_normal_texture")
+    fileprivate static let method_get_normal_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_normal_texture")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -202,13 +205,14 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_normal_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CanvasTexture.method_get_normal_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_specular_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_specular_texture")
+    fileprivate static let method_set_specular_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_specular_texture")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -220,6 +224,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_specular_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -233,8 +238,8 @@ open class CanvasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_specular_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_specular_texture")
+    fileprivate static let method_get_specular_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_specular_texture")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -246,13 +251,14 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_specular_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CanvasTexture.method_get_specular_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_specular_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_specular_color")
+    fileprivate static let method_set_specular_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_specular_color")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -264,6 +270,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_specular_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -277,8 +284,8 @@ open class CanvasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_specular_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_specular_color")
+    fileprivate static let method_get_specular_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_specular_color")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -290,13 +297,14 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_specular_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(CanvasTexture.method_get_specular_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_specular_shininess: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_specular_shininess")
+    fileprivate static let method_set_specular_shininess: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_specular_shininess")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -308,6 +316,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_specular_shininess(_ shininess: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shininess) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -321,8 +330,8 @@ open class CanvasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_specular_shininess: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_specular_shininess")
+    fileprivate static let method_get_specular_shininess: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_specular_shininess")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -334,13 +343,14 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_specular_shininess() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CanvasTexture.method_get_specular_shininess, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_filter")
+    fileprivate static let method_set_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_filter")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1037999706)!
@@ -352,6 +362,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_texture_filter(_ filter: CanvasItem.TextureFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -365,8 +376,8 @@ open class CanvasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_filter")
+    fileprivate static let method_get_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_filter")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 121960042)!
@@ -378,13 +389,14 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_texture_filter() -> CanvasItem.TextureFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CanvasTexture.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CanvasItem.TextureFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_repeat")
+    fileprivate static let method_set_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_repeat")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1716472974)!
@@ -396,6 +408,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_texture_repeat(_ `repeat`: CanvasItem.TextureRepeat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `repeat`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -409,8 +422,8 @@ open class CanvasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_repeat")
+    fileprivate static let method_get_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_repeat")
         return withUnsafePointer(to: &CanvasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2667158319)!
@@ -422,6 +435,7 @@ open class CanvasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_texture_repeat() -> CanvasItem.TextureRepeat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CanvasTexture.method_get_texture_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CanvasItem.TextureRepeat (rawValue: _result)!

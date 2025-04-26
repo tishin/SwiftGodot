@@ -26,7 +26,7 @@ import Musl
 /// > Note: CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a ``MeshInstance3D`` with a ``PrimitiveMesh``. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.
 /// 
 open class CSGTorus3D: CSGPrimitive3D {
-    fileprivate static var className = StringName("CSGTorus3D")
+    private static var className = StringName("CSGTorus3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -104,8 +104,8 @@ open class CSGTorus3D: CSGPrimitive3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_inner_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inner_radius")
+    fileprivate static let method_set_inner_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inner_radius")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -117,6 +117,7 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_inner_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -130,8 +131,8 @@ open class CSGTorus3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_inner_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inner_radius")
+    fileprivate static let method_get_inner_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inner_radius")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -143,13 +144,14 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_inner_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGTorus3D.method_get_inner_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outer_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outer_radius")
+    fileprivate static let method_set_outer_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outer_radius")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -161,6 +163,7 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_outer_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -174,8 +177,8 @@ open class CSGTorus3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_outer_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outer_radius")
+    fileprivate static let method_get_outer_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outer_radius")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -187,13 +190,14 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_outer_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGTorus3D.method_get_outer_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sides")
+    fileprivate static let method_set_sides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sides")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -205,6 +209,7 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_sides(_ sides: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sides) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -218,8 +223,8 @@ open class CSGTorus3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_sides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sides")
+    fileprivate static let method_get_sides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sides")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -231,13 +236,14 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_sides() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CSGTorus3D.method_get_sides, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ring_sides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ring_sides")
+    fileprivate static let method_set_ring_sides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ring_sides")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -249,6 +255,7 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_ring_sides(_ sides: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sides) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -262,8 +269,8 @@ open class CSGTorus3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_ring_sides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ring_sides")
+    fileprivate static let method_get_ring_sides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ring_sides")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -275,13 +282,14 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_ring_sides() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CSGTorus3D.method_get_ring_sides, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -293,6 +301,7 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_material(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -306,8 +315,8 @@ open class CSGTorus3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material")
+    fileprivate static let method_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -319,13 +328,14 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_material() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CSGTorus3D.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_smooth_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_smooth_faces")
+    fileprivate static let method_set_smooth_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_smooth_faces")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -337,6 +347,7 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func set_smooth_faces(_ smoothFaces: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: smoothFaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -350,8 +361,8 @@ open class CSGTorus3D: CSGPrimitive3D {
         
     }
     
-    fileprivate static var method_get_smooth_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_smooth_faces")
+    fileprivate static let method_get_smooth_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_smooth_faces")
         return withUnsafePointer(to: &CSGTorus3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -363,6 +374,7 @@ open class CSGTorus3D: CSGPrimitive3D {
     
     @inline(__always)
     fileprivate final func get_smooth_faces() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGTorus3D.method_get_smooth_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

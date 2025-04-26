@@ -35,7 +35,7 @@ import Musl
 /// 
 /// - ``visibilityChanged``
 open class CanvasLayer: Node {
-    fileprivate static var className = StringName("CanvasLayer")
+    private static var className = StringName("CanvasLayer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -130,9 +130,9 @@ open class CanvasLayer: Node {
         
     }
     
-    /// If enabled, the ``CanvasLayer`` will use the viewport's transform, so it will move when camera moves instead of being anchored in a fixed position on the screen.
+    /// If enabled, the ``CanvasLayer`` stays in a fixed position on the screen. If disabled, the ``CanvasLayer`` maintains its position in world space.
     /// 
-    /// Together with ``followViewportScale`` it can be used for a pseudo 3D effect.
+    /// Together with ``followViewportScale``, this can be used for a pseudo-3D effect.
     /// 
     final public var followViewportEnabled: Bool {
         get {
@@ -158,8 +158,8 @@ open class CanvasLayer: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer")
+    fileprivate static let method_set_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -171,6 +171,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_layer(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +185,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_get_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer")
+    fileprivate static let method_get_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -197,13 +198,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func get_layer() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visible")
+    fileprivate static let method_set_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visible")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -215,6 +217,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -228,8 +231,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_is_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_visible")
+    fileprivate static let method_is_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_visible")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -241,13 +244,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func is_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CanvasLayer.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_show: GDExtensionMethodBindPtr = {
-        let methodName = StringName("show")
+    fileprivate static let method_show: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("show")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -259,12 +263,13 @@ open class CanvasLayer: Node {
     
     /// Shows any ``CanvasItem`` under this ``CanvasLayer``. This is equivalent to setting ``visible`` to `true`.
     public final func show() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(CanvasLayer.method_show, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_hide: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hide")
+    fileprivate static let method_hide: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hide")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -276,12 +281,13 @@ open class CanvasLayer: Node {
     
     /// Hides any ``CanvasItem`` under this ``CanvasLayer``. This is equivalent to setting ``visible`` to `false`.
     public final func hide() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(CanvasLayer.method_hide, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transform")
+    fileprivate static let method_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transform")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761652528)!
@@ -293,6 +299,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_transform(_ transform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -306,8 +313,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transform")
+    fileprivate static let method_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transform")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
@@ -319,13 +326,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func get_transform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_final_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_final_transform")
+    fileprivate static let method_get_final_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_final_transform")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
@@ -337,13 +345,14 @@ open class CanvasLayer: Node {
     
     /// Returns the transform from the ``CanvasLayer``s coordinate system to the ``Viewport``s coordinate system.
     public final func getFinalTransform() -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_final_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -355,6 +364,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -368,8 +378,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -381,13 +391,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func get_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rotation")
+    fileprivate static let method_set_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rotation")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -399,6 +410,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_rotation(_ radians: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -412,8 +424,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_get_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rotation")
+    fileprivate static let method_get_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rotation")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -425,13 +437,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func get_rotation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scale")
+    fileprivate static let method_set_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scale")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -443,6 +456,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_scale(_ scale: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -456,8 +470,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_get_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scale")
+    fileprivate static let method_get_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scale")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -469,13 +483,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func get_scale() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_follow_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_follow_viewport")
+    fileprivate static let method_set_follow_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_follow_viewport")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -487,6 +502,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_follow_viewport(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -500,8 +516,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_is_following_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_following_viewport")
+    fileprivate static let method_is_following_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_following_viewport")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -513,13 +529,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func is_following_viewport() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CanvasLayer.method_is_following_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_follow_viewport_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_follow_viewport_scale")
+    fileprivate static let method_set_follow_viewport_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_follow_viewport_scale")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -531,6 +548,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_follow_viewport_scale(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -544,8 +562,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_get_follow_viewport_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_follow_viewport_scale")
+    fileprivate static let method_get_follow_viewport_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_follow_viewport_scale")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -557,13 +575,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func get_follow_viewport_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_follow_viewport_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_custom_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_viewport")
+    fileprivate static let method_set_custom_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_viewport")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -575,6 +594,7 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func set_custom_viewport(_ viewport: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: viewport?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -588,8 +608,8 @@ open class CanvasLayer: Node {
         
     }
     
-    fileprivate static var method_get_custom_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_viewport")
+    fileprivate static let method_get_custom_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_viewport")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3160264692)!
@@ -601,13 +621,14 @@ open class CanvasLayer: Node {
     
     @inline(__always)
     fileprivate final func get_custom_viewport() -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_custom_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_canvas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_canvas")
+    fileprivate static let method_get_canvas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_canvas")
         return withUnsafePointer(to: &CanvasLayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -619,6 +640,7 @@ open class CanvasLayer: Node {
     
     /// Returns the RID of the canvas used by this layer.
     public final func getCanvas() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(CanvasLayer.method_get_canvas, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

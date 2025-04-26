@@ -26,7 +26,7 @@ import Musl
 /// > Note: ``ResourceImporterTextureAtlas`` does not handle importing ``TileSetAtlasSource``, which is created using the ``TileSet`` editor instead.
 /// 
 open class ResourceImporterTextureAtlas: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterTextureAtlas")
+    private static var className = StringName("ResourceImporterTextureAtlas")
     override open class var godotClassName: StringName { className }
 }
 

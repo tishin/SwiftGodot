@@ -26,14 +26,14 @@ import Musl
 /// GDScript has a simplified ``@GDScript.preload`` built-in method which can be used in most situations, leaving the use of ``ResourcePreloader`` for more advanced scenarios.
 /// 
 open class ResourcePreloader: Node {
-    fileprivate static var className = StringName("ResourcePreloader")
+    private static var className = StringName("ResourcePreloader")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /* Methods */
-    fileprivate static var method_add_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_resource")
+    fileprivate static let method_add_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_resource")
         return withUnsafePointer(to: &ResourcePreloader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1168801743)!
@@ -45,6 +45,7 @@ open class ResourcePreloader: Node {
     
     /// Adds a resource to the preloader with the given `name`. If a resource with the given `name` already exists, the new resource will be renamed to "`name` N" where N is an incrementing number starting from 2.
     public final func addResource(name: StringName, resource: Resource?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: resource?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -61,8 +62,8 @@ open class ResourcePreloader: Node {
         
     }
     
-    fileprivate static var method_remove_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_resource")
+    fileprivate static let method_remove_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_resource")
         return withUnsafePointer(to: &ResourcePreloader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -74,6 +75,7 @@ open class ResourcePreloader: Node {
     
     /// Removes the resource associated to `name` from the preloader.
     public final func removeResource(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -87,8 +89,8 @@ open class ResourcePreloader: Node {
         
     }
     
-    fileprivate static var method_rename_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_resource")
+    fileprivate static let method_rename_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_resource")
         return withUnsafePointer(to: &ResourcePreloader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -100,6 +102,7 @@ open class ResourcePreloader: Node {
     
     /// Renames a resource inside the preloader from `name` to `newname`.
     public final func renameResource(name: StringName, newname: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: newname.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -116,8 +119,8 @@ open class ResourcePreloader: Node {
         
     }
     
-    fileprivate static var method_has_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_resource")
+    fileprivate static let method_has_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_resource")
         return withUnsafePointer(to: &ResourcePreloader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -129,6 +132,7 @@ open class ResourcePreloader: Node {
     
     /// Returns `true` if the preloader contains a resource associated to `name`.
     public final func hasResource(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -143,8 +147,8 @@ open class ResourcePreloader: Node {
         return _result
     }
     
-    fileprivate static var method_get_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resource")
+    fileprivate static let method_get_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resource")
         return withUnsafePointer(to: &ResourcePreloader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3742749261)!
@@ -156,6 +160,7 @@ open class ResourcePreloader: Node {
     
     /// Returns the resource associated to `name`.
     public final func getResource(name: StringName) -> Resource? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -167,11 +172,11 @@ open class ResourcePreloader: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_resource_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resource_list")
+    fileprivate static let method_get_resource_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resource_list")
         return withUnsafePointer(to: &ResourcePreloader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -183,6 +188,7 @@ open class ResourcePreloader: Node {
     
     /// Returns the list of resources inside the preloader.
     public final func getResourceList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(ResourcePreloader.method_get_resource_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

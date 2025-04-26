@@ -23,10 +23,18 @@ import Musl
 /// 
 /// This is the CSG base class that provides CSG operation support to the various CSG nodes in Godot.
 /// 
-/// > Note: CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a ``MeshInstance3D`` with a ``PrimitiveMesh``. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.
+/// **Performance:** CSG nodes are only intended for prototyping as they have a significant CPU performance cost.
+/// 
+/// Consider baking final CSG operation results into static geometry that replaces the CSG nodes.
+/// 
+/// Individual CSG root node results can be baked to nodes with static resources with the editor menu that appears when a CSG root node is selected.
+/// 
+/// Individual CSG root nodes can also be baked to static resources with scripts by calling ``bakeStaticMesh()`` for the visual mesh or ``bakeCollisionShape()`` for the physics collision.
+/// 
+/// Entire scenes of CSG nodes can be baked to static geometry and exported with the editor gltf scene exporter.
 /// 
 open class CSGShape3D: GeometryInstance3D {
-    fileprivate static var className = StringName("CSGShape3D")
+    private static var className = StringName("CSGShape3D")
     override open class var godotClassName: StringName { className }
     public enum Operation: Int64, CaseIterable {
         /// Geometry of both primitives is merged, intersecting geometry is removed.
@@ -52,7 +60,7 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    /// Snap makes the mesh vertices snap to a given distance so that the faces of two meshes can be perfectly aligned. A lower value results in greater precision but may be harder to adjust. The top-level CSG shape's snap value is used for the entire CSG tree.
+    /// This property does nothing.
     final public var snap: Double {
         get {
             return get_snap ()
@@ -130,8 +138,8 @@ open class CSGShape3D: GeometryInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_is_root_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_root_shape")
+    fileprivate static let method_is_root_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_root_shape")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -143,13 +151,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     /// Returns `true` if this is a root shape and is thus the object that is rendered.
     public final func isRootShape() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGShape3D.method_is_root_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_operation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_operation")
+    fileprivate static let method_set_operation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_operation")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 811425055)!
@@ -161,6 +170,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_operation(_ operation: CSGShape3D.Operation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: operation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -174,8 +184,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_operation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_operation")
+    fileprivate static let method_get_operation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_operation")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2662425879)!
@@ -187,13 +197,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_operation() -> CSGShape3D.Operation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CSGShape3D.method_get_operation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CSGShape3D.Operation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_snap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_snap")
+    fileprivate static let method_set_snap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_snap")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -205,6 +216,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_snap(_ snap: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: snap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -218,8 +230,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_snap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_snap")
+    fileprivate static let method_get_snap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_snap")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -231,13 +243,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_snap() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGShape3D.method_get_snap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_collision")
+    fileprivate static let method_set_use_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_collision")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -249,6 +262,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_use_collision(_ operation: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: operation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -262,8 +276,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_is_using_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_collision")
+    fileprivate static let method_is_using_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_collision")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -275,13 +289,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func is_using_collision() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGShape3D.method_is_using_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer")
+    fileprivate static let method_set_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -293,6 +308,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_collision_layer(_ layer: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -306,8 +322,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer")
+    fileprivate static let method_get_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -319,13 +335,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_collision_layer() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(CSGShape3D.method_get_collision_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -337,6 +354,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -350,8 +368,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -363,13 +381,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(CSGShape3D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask_value")
+    fileprivate static let method_set_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask_value")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -381,6 +400,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionMask``, given a `layerNumber` between 1 and 32.
     public final func setCollisionMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -397,8 +417,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask_value")
+    fileprivate static let method_get_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask_value")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -410,6 +430,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     /// Returns whether or not the specified layer of the ``collisionMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -424,8 +445,8 @@ open class CSGShape3D: GeometryInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer_value")
+    fileprivate static let method_set_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer_value")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -437,6 +458,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionLayer``, given a `layerNumber` between 1 and 32.
     public final func setCollisionLayerValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -453,8 +475,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer_value")
+    fileprivate static let method_get_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer_value")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -466,6 +488,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     /// Returns whether or not the specified layer of the ``collisionLayer`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionLayerValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -480,8 +503,8 @@ open class CSGShape3D: GeometryInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_priority")
+    fileprivate static let method_set_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_priority")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -493,6 +516,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_collision_priority(_ priority: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -506,8 +530,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_priority")
+    fileprivate static let method_get_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_priority")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -519,13 +543,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_collision_priority() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CSGShape3D.method_get_collision_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_calculate_tangents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_calculate_tangents")
+    fileprivate static let method_set_calculate_tangents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_calculate_tangents")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -537,6 +562,7 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_calculate_tangents(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -550,8 +576,8 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_is_calculating_tangents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_calculating_tangents")
+    fileprivate static let method_is_calculating_tangents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_calculating_tangents")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -563,13 +589,14 @@ open class CSGShape3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func is_calculating_tangents() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CSGShape3D.method_is_calculating_tangents, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_meshes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_meshes")
+    fileprivate static let method_get_meshes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_meshes")
         return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -579,11 +606,53 @@ open class CSGShape3D: GeometryInstance3D {
         
     }()
     
-    /// Returns an ``GArray`` with two elements, the first is the ``Transform3D`` of this node and the second is the root ``Mesh`` of this node. Only works when this node is the root shape.
-    public final func getMeshes() -> GArray {
-        let _result: GArray = GArray ()
+    /// Returns an ``VariantArray`` with two elements, the first is the ``Transform3D`` of this node and the second is the root ``Mesh`` of this node. Only works when this node is the root shape.
+    public final func getMeshes() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(CSGShape3D.method_get_meshes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
+    }
+    
+    fileprivate static let method_bake_static_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake_static_mesh")
+        return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1605880883)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a baked static ``ArrayMesh`` of this node's CSG operation result. Materials from involved CSG nodes are added as extra mesh surfaces. Returns an empty mesh if the node is not a CSG root node or has no valid geometry.
+    public final func bakeStaticMesh() -> ArrayMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(CSGShape3D.method_bake_static_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_bake_collision_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake_collision_shape")
+        return withUnsafePointer(to: &CSGShape3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36102322)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a baked physics ``ConcavePolygonShape3D`` of this node's CSG operation result. Returns an empty shape if the node is not a CSG root node or has no valid geometry.
+    /// 
+    /// **Performance:** If the CSG operation results in a very detailed geometry with many faces physics performance will be very slow. Concave shapes should in general only be used for static level geometry and not with dynamic objects that are moving.
+    /// 
+    public final func bakeCollisionShape() -> ConcavePolygonShape3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(CSGShape3D.method_bake_collision_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -25,10 +25,10 @@ import Musl
 /// 
 /// Multiple ``AtlasTexture`` resources can be cropped from the same ``atlas``. Packing many smaller textures into a singular large texture helps to optimize video memory costs and render calls.
 /// 
-/// > Note: ``AtlasTexture`` cannot be used in an ``AnimatedTexture``, and may not tile properly in nodes such as ``TextureRect``, when inside other ``AtlasTexture`` resources.
+/// > Note: ``AtlasTexture`` cannot be used in an ``AnimatedTexture``, and will not tile properly in nodes such as ``TextureRect`` or ``Sprite2D``. To tile an ``AtlasTexture``, modify its ``region`` instead.
 /// 
 open class AtlasTexture: Texture2D {
-    fileprivate static var className = StringName("AtlasTexture")
+    private static var className = StringName("AtlasTexture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -45,7 +45,7 @@ open class AtlasTexture: Texture2D {
         
     }
     
-    /// The region used to draw the ``atlas``.
+    /// The region used to draw the ``atlas``. If either dimension of the region's size is `0`, the value from ``atlas`` size will be used for that axis instead.
     final public var region: Rect2 {
         get {
             return get_region ()
@@ -82,8 +82,8 @@ open class AtlasTexture: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_atlas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_atlas")
+    fileprivate static let method_set_atlas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_atlas")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -95,6 +95,7 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_atlas(_ atlas: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlas?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -108,8 +109,8 @@ open class AtlasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_atlas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_atlas")
+    fileprivate static let method_get_atlas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_atlas")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -121,13 +122,14 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_atlas() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AtlasTexture.method_get_atlas, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_region")
+    fileprivate static let method_set_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_region")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -139,6 +141,7 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_region(_ region: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: region) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -152,8 +155,8 @@ open class AtlasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_region")
+    fileprivate static let method_get_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_region")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -165,13 +168,14 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_region() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(AtlasTexture.method_get_region, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_margin")
+    fileprivate static let method_set_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_margin")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -183,6 +187,7 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_margin(_ margin: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -196,8 +201,8 @@ open class AtlasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_margin")
+    fileprivate static let method_get_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_margin")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -209,13 +214,14 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_margin() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(AtlasTexture.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_filter_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_filter_clip")
+    fileprivate static let method_set_filter_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_filter_clip")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -227,6 +233,7 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_filter_clip(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -240,8 +247,8 @@ open class AtlasTexture: Texture2D {
         
     }
     
-    fileprivate static var method_has_filter_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_filter_clip")
+    fileprivate static let method_has_filter_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_filter_clip")
         return withUnsafePointer(to: &AtlasTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -253,6 +260,7 @@ open class AtlasTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func has_filter_clip() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AtlasTexture.method_has_filter_clip, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

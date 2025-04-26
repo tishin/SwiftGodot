@@ -37,11 +37,11 @@ import Musl
 /// - ``replaceInFilesRequested``
 /// - ``goToMethod``
 open class ScriptEditorBase: VBoxContainer {
-    fileprivate static var className = StringName("ScriptEditorBase")
+    private static var className = StringName("ScriptEditorBase")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_base_editor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_base_editor")
+    fileprivate static let method_get_base_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_base_editor")
         return withUnsafePointer(to: &ScriptEditorBase.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -53,13 +53,14 @@ open class ScriptEditorBase: VBoxContainer {
     
     /// Returns the underlying ``Control`` used for editing scripts. For text scripts, this is a ``CodeEdit``.
     public final func getBaseEditor() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ScriptEditorBase.method_get_base_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_syntax_highlighter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_syntax_highlighter")
+    fileprivate static let method_add_syntax_highlighter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_syntax_highlighter")
         return withUnsafePointer(to: &ScriptEditorBase.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1092774468)!
@@ -71,6 +72,7 @@ open class ScriptEditorBase: VBoxContainer {
     
     /// Adds a ``EditorSyntaxHighlighter`` to the open script.
     public final func addSyntaxHighlighter(_ highlighter: EditorSyntaxHighlighter?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: highlighter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -175,11 +177,11 @@ open class ScriptEditorBase: VBoxContainer {
     /// 
     /// Example:
     /// ```swift
-    /// obj.requestSavePreviousState.connect { line in
+    /// obj.requestSavePreviousState.connect { state in
     ///    print ("caught signal")
     /// }
     /// ```
-    public var requestSavePreviousState: SignalWithArguments<Int64> { SignalWithArguments<Int64> (target: self, signalName: "request_save_previous_state") }
+    public var requestSavePreviousState: SignalWithArguments<VariantDictionary> { SignalWithArguments<VariantDictionary> (target: self, signalName: "request_save_previous_state") }
     
     /// Emitted when the user requests a specific documentation page.
     ///

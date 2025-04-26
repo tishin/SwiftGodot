@@ -34,11 +34,11 @@ import Musl
 /// - ``breaked``
 /// - ``continued``
 open class EditorDebuggerSession: RefCounted {
-    fileprivate static var className = StringName("EditorDebuggerSession")
+    private static var className = StringName("EditorDebuggerSession")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_send_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("send_message")
+    fileprivate static let method_send_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("send_message")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 85656714)!
@@ -49,7 +49,8 @@ open class EditorDebuggerSession: RefCounted {
     }()
     
     /// Sends the given `message` to the attached remote instance, optionally passing additionally `data`. See ``EngineDebugger`` for how to retrieve those messages.
-    public final func sendMessage(_ message: String, data: GArray = GArray ()) {
+    public final func sendMessage(_ message: String, data: VariantArray = VariantArray ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let message = GString(message)
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: data.content) { pArg1 in
@@ -67,8 +68,8 @@ open class EditorDebuggerSession: RefCounted {
         
     }
     
-    fileprivate static var method_toggle_profiler: GDExtensionMethodBindPtr = {
-        let methodName = StringName("toggle_profiler")
+    fileprivate static let method_toggle_profiler: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("toggle_profiler")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1198443697)!
@@ -79,7 +80,8 @@ open class EditorDebuggerSession: RefCounted {
     }()
     
     /// Toggle the given `profiler` on the attached remote instance, optionally passing additionally `data`. See ``EngineProfiler`` for more details.
-    public final func toggleProfiler(_ profiler: String, enable: Bool, data: GArray = GArray ()) {
+    public final func toggleProfiler(_ profiler: String, enable: Bool, data: VariantArray = VariantArray ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let profiler = GString(profiler)
         withUnsafePointer(to: profiler.content) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
@@ -100,8 +102,8 @@ open class EditorDebuggerSession: RefCounted {
         
     }
     
-    fileprivate static var method_is_breaked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_breaked")
+    fileprivate static let method_is_breaked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_breaked")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -113,13 +115,14 @@ open class EditorDebuggerSession: RefCounted {
     
     /// Returns `true` if the attached remote instance is currently in the debug loop.
     public final func isBreaked() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_breaked, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_debuggable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_debuggable")
+    fileprivate static let method_is_debuggable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_debuggable")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -131,13 +134,14 @@ open class EditorDebuggerSession: RefCounted {
     
     /// Returns `true` if the attached remote instance can be debugged.
     public final func isDebuggable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_debuggable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_active")
+    fileprivate static let method_is_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_active")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -149,13 +153,14 @@ open class EditorDebuggerSession: RefCounted {
     
     /// Returns `true` if the debug session is currently attached to a remote instance.
     public final func isActive() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_session_tab: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_session_tab")
+    fileprivate static let method_add_session_tab: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_session_tab")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
@@ -165,8 +170,9 @@ open class EditorDebuggerSession: RefCounted {
         
     }()
     
-    /// Adds the given `control` to the debug session UI in the debugger bottom panel.
+    /// Adds the given `control` to the debug session UI in the debugger bottom panel. The `control`'s node name will be used as the tab title.
     public final func addSessionTab(control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -180,8 +186,8 @@ open class EditorDebuggerSession: RefCounted {
         
     }
     
-    fileprivate static var method_remove_session_tab: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_session_tab")
+    fileprivate static let method_remove_session_tab: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_session_tab")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
@@ -193,6 +199,7 @@ open class EditorDebuggerSession: RefCounted {
     
     /// Removes the given `control` from the debug session UI in the debugger bottom panel.
     public final func removeSessionTab(control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -206,8 +213,8 @@ open class EditorDebuggerSession: RefCounted {
         
     }
     
-    fileprivate static var method_set_breakpoint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_breakpoint")
+    fileprivate static let method_set_breakpoint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_breakpoint")
         return withUnsafePointer(to: &EditorDebuggerSession.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4108344793)!
@@ -219,6 +226,7 @@ open class EditorDebuggerSession: RefCounted {
     
     /// Enables or disables a specific breakpoint based on `enabled`, updating the Editor Breakpoint Panel accordingly.
     public final func setBreakpoint(path: String, line: Int32, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: line) { pArg1 in

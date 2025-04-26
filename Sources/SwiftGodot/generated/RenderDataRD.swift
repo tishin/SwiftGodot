@@ -29,7 +29,7 @@ import Musl
 /// > Note: This is an internal rendering server object only exposed for GDExtension plugins.
 /// 
 open class RenderDataRD: RenderData {
-    fileprivate static var className = StringName("RenderDataRD")
+    private static var className = StringName("RenderDataRD")
     override open class var godotClassName: StringName { className }
 }
 

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translates to `texture_sdf(sdf_pos)` in the shader language.
 open class VisualShaderNodeTextureSDF: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeTextureSDF")
+    private static var className = StringName("VisualShaderNodeTextureSDF")
     override open class var godotClassName: StringName { className }
 }
 

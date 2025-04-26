@@ -23,16 +23,16 @@ import Musl
 /// 
 /// Allows frequencies other than the ``cutoffHz`` to pass.
 open class AudioEffectFilter: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectFilter")
+    private static var className = StringName("AudioEffectFilter")
     override open class var godotClassName: StringName { className }
     public enum FilterDB: Int64, CaseIterable {
-        /// 
+        /// Cutting off at 6dB per octave.
         case filter6db = 0 // FILTER_6DB
-        /// 
+        /// Cutting off at 12dB per octave.
         case filter12db = 1 // FILTER_12DB
-        /// 
+        /// Cutting off at 18dB per octave.
         case filter18db = 2 // FILTER_18DB
-        /// 
+        /// Cutting off at 24dB per octave.
         case filter24db = 3 // FILTER_24DB
     }
     
@@ -75,6 +75,7 @@ open class AudioEffectFilter: AudioEffect {
         
     }
     
+    /// Steepness of the cutoff curve in dB per octave, also known as the order of the filter. Higher orders have a more aggressive cutoff.
     final public var db: AudioEffectFilter.FilterDB {
         get {
             return get_db ()
@@ -87,8 +88,8 @@ open class AudioEffectFilter: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_cutoff: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cutoff")
+    fileprivate static let method_set_cutoff: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cutoff")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -100,6 +101,7 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_cutoff(_ freq: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: freq) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -113,8 +115,8 @@ open class AudioEffectFilter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_cutoff: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cutoff")
+    fileprivate static let method_get_cutoff: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cutoff")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -126,13 +128,14 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_cutoff() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_cutoff, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_resonance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_resonance")
+    fileprivate static let method_set_resonance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_resonance")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -144,6 +147,7 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_resonance(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -157,8 +161,8 @@ open class AudioEffectFilter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_resonance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resonance")
+    fileprivate static let method_get_resonance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resonance")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -170,13 +174,14 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_resonance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_resonance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gain")
+    fileprivate static let method_set_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gain")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -188,6 +193,7 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_gain(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -201,8 +207,8 @@ open class AudioEffectFilter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gain")
+    fileprivate static let method_get_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gain")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -214,13 +220,14 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_gain() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_db")
+    fileprivate static let method_set_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_db")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 771740901)!
@@ -232,6 +239,7 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_db(_ amount: AudioEffectFilter.FilterDB) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -245,8 +253,8 @@ open class AudioEffectFilter: AudioEffect {
         
     }
     
-    fileprivate static var method_get_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_db")
+    fileprivate static let method_get_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_db")
         return withUnsafePointer(to: &AudioEffectFilter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3981721890)!
@@ -258,6 +266,7 @@ open class AudioEffectFilter: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_db() -> AudioEffectFilter.FilterDB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AudioEffectFilter.FilterDB (rawValue: _result)!

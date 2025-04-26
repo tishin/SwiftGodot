@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``VisualShaderNodeParticleEmitter`` that makes the particles emitted in a shape of the assigned ``mesh``. It will emit from the mesh's surfaces, either all or only the specified one.
 open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter {
-    fileprivate static var className = StringName("VisualShaderNodeParticleMeshEmitter")
+    private static var className = StringName("VisualShaderNodeParticleMeshEmitter")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -65,8 +65,8 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
     }
     
     /* Methods */
-    fileprivate static var method_set_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mesh")
+    fileprivate static let method_set_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mesh")
         return withUnsafePointer(to: &VisualShaderNodeParticleMeshEmitter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 194775623)!
@@ -78,6 +78,7 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
     
     @inline(__always)
     fileprivate final func set_mesh(_ mesh: Mesh?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -91,8 +92,8 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
         
     }
     
-    fileprivate static var method_get_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh")
+    fileprivate static let method_get_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh")
         return withUnsafePointer(to: &VisualShaderNodeParticleMeshEmitter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1808005922)!
@@ -104,13 +105,14 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
     
     @inline(__always)
     fileprivate final func get_mesh() -> Mesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(VisualShaderNodeParticleMeshEmitter.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_use_all_surfaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_all_surfaces")
+    fileprivate static let method_set_use_all_surfaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_all_surfaces")
         return withUnsafePointer(to: &VisualShaderNodeParticleMeshEmitter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -122,6 +124,7 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
     
     @inline(__always)
     fileprivate final func set_use_all_surfaces(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -135,8 +138,8 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
         
     }
     
-    fileprivate static var method_is_use_all_surfaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_use_all_surfaces")
+    fileprivate static let method_is_use_all_surfaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_use_all_surfaces")
         return withUnsafePointer(to: &VisualShaderNodeParticleMeshEmitter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -148,13 +151,14 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
     
     @inline(__always)
     fileprivate final func is_use_all_surfaces() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisualShaderNodeParticleMeshEmitter.method_is_use_all_surfaces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_surface_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_surface_index")
+    fileprivate static let method_set_surface_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_surface_index")
         return withUnsafePointer(to: &VisualShaderNodeParticleMeshEmitter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -166,6 +170,7 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
     
     @inline(__always)
     fileprivate final func set_surface_index(_ surfaceIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: surfaceIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -179,8 +184,8 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
         
     }
     
-    fileprivate static var method_get_surface_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_index")
+    fileprivate static let method_get_surface_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_index")
         return withUnsafePointer(to: &VisualShaderNodeParticleMeshEmitter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -192,6 +197,7 @@ open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter 
     
     @inline(__always)
     fileprivate final func get_surface_index() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(VisualShaderNodeParticleMeshEmitter.method_get_surface_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

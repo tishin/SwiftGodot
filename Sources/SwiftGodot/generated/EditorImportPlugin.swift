@@ -30,98 +30,363 @@ import Musl
 /// To use ``EditorImportPlugin``, register it using the ``EditorPlugin/addImportPlugin(importer:firstPriority:)`` method first.
 /// 
 open class EditorImportPlugin: ResourceImporter {
-    fileprivate static var className = StringName("EditorImportPlugin")
+    private static var className = StringName("EditorImportPlugin")
     override open class var godotClassName: StringName { className }
     /* Methods */
+    fileprivate static let method__get_importer_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_importer_name")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
     /// Gets the unique name of the importer.
     @_documentation(visibility: public)
     open func _getImporterName() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_importer_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_visible_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_visible_name")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the name to display in the import window. You should choose this name as a continuation to "Import as", e.g. "Import as Special Mesh".
     @_documentation(visibility: public)
     open func _getVisibleName() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_visible_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_preset_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_preset_count")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the number of initial presets defined by the plugin. Use ``_getImportOptions(path:presetIndex:)`` to get the default options for the preset and ``_getPresetName(presetIndex:)`` to get the name of the preset.
     @_documentation(visibility: public)
     open func _getPresetCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_preset_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_preset_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_preset_name")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the name of the options preset at this index.
     @_documentation(visibility: public)
     open func _getPresetName(presetIndex: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: presetIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_preset_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_recognized_extensions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_recognized_extensions")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the list of file extensions to associate with this loader (case-insensitive). e.g. `["obj"]`.
     @_documentation(visibility: public)
     open func _getRecognizedExtensions() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__get_import_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_import_options")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 520498173)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the options and default values for the preset at this index. Returns an Array of Dictionaries with the following keys: `name`, `default_value`, `property_hint` (optional), `hint_string` (optional), `usage` (optional).
     @_documentation(visibility: public)
-    open func _getImportOptions(path: String, presetIndex: Int32) -> VariantCollection<GDictionary> {
-        return VariantCollection<GDictionary>()
+    open func _getImportOptions(path: String, presetIndex: Int32) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: presetIndex) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_import_options, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
+    
+    fileprivate static let method__get_save_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_save_extension")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the extension used to save this resource in the `.godot/imported` directory (see ``ProjectSettings/application/config/useHiddenProjectDataDirectory``).
     @_documentation(visibility: public)
     open func _getSaveExtension() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_save_extension, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_resource_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_resource_type")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the Godot resource type associated with this loader. e.g. `"Mesh"` or `"Animation"`.
     @_documentation(visibility: public)
     open func _getResourceType() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_resource_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_priority")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the priority of this plugin for the recognized extension. Higher priority plugins will be preferred. The default priority is `1.0`.
     @_documentation(visibility: public)
     open func _getPriority() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_import_order: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_import_order")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the order of this importer to be run when importing resources. Importers with _lower_ import orders will be called first, and higher values will be called later. Use this to ensure the importer runs after the dependencies are already imported. The default import order is `0` unless overridden by a specific importer. See ``ResourceImporter.ImportOrder`` for some predefined values.
     @_documentation(visibility: public)
     open func _getImportOrder() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_import_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
-    /// This method can be overridden to hide specific import options if conditions are met. This is mainly useful for hiding options that depend on others if one of them is disabled. For example:
+    fileprivate static let method__get_format_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_format_version")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Gets the format version of this importer. Increment this version when making incompatible changes to the format of the imported resources.
+    @_documentation(visibility: public)
+    open func _getFormatVersion() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_format_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method__get_option_visibility: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_option_visibility")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 240466755)!
+            }
+            
+        }
+        
+    }()
+    
+    /// This method can be overridden to hide specific import options if conditions are met. This is mainly useful for hiding options that depend on others if one of them is disabled.
     /// 
     /// Returns `true` to make all options always visible.
     /// 
     @_documentation(visibility: public)
-    open func _getOptionVisibility(path: String, optionName: StringName, options: GDictionary) -> Bool {
-        return false
+    open func _getOptionVisibility(path: String, optionName: StringName, options: VariantDictionary) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: optionName.content) { pArg1 in
+                withUnsafePointer(to: options.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_option_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__import: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_import")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4108152118)!
+            }
+            
+        }
+        
+    }()
     
     /// Imports `sourceFile` into `savePath` with the import `options` specified. The `platformVariants` and `genFiles` arrays will be modified by this function.
     /// 
     /// This method must be overridden to do the actual importing work. See this class' description for an example of overriding this method.
     /// 
     @_documentation(visibility: public)
-    open func _import(sourceFile: String, savePath: String, options: GDictionary, platformVariants: VariantCollection<String>, genFiles: VariantCollection<String>) -> GodotError {
-        return .ok
+    open func _import(sourceFile: String, savePath: String, options: VariantDictionary, platformVariants: TypedArray<String>, genFiles: TypedArray<String>) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        let sourceFile = GString(sourceFile)
+        withUnsafePointer(to: sourceFile.content) { pArg0 in
+            let savePath = GString(savePath)
+            withUnsafePointer(to: savePath.content) { pArg1 in
+                withUnsafePointer(to: options.content) { pArg2 in
+                    withUnsafePointer(to: platformVariants.array.content) { pArg3 in
+                        withUnsafePointer(to: genFiles.array.content) { pArg4 in
+                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
+                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
+                                    gi.object_method_bind_ptrcall(EditorImportPlugin.method__import, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return GodotError (rawValue: _result)!
     }
+    
+    fileprivate static let method__can_import_threaded: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_can_import_threaded")
+        return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Tells whether this importer can be run in parallel on threads, or, on the contrary, it's only safe for the editor to call it from the main thread, for one file at a time.
     /// 
-    /// If this method is not overridden, it will return `true` by default (i.e., safe for parallel importing).
+    /// If this method is not overridden, it will return `false` by default.
+    /// 
+    /// If this importer's implementation is thread-safe and can be run in parallel, override this with `true` to optimize for concurrency.
     /// 
     @_documentation(visibility: public)
     open func _canImportThreaded() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__can_import_threaded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
-    fileprivate static var method_append_import_external_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("append_import_external_resource")
+    fileprivate static let method_append_import_external_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_import_external_resource")
         return withUnsafePointer(to: &EditorImportPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 320493106)!
@@ -131,8 +396,9 @@ open class EditorImportPlugin: ResourceImporter {
         
     }()
     
-    /// This function can only be called during the ``_import(sourceFile:savePath:options:platformVariants:genFiles:)`` callback and it allows manually importing resources from it. This is useful when the imported file generates external resources that require importing (as example, images). Custom parameters for the ".import" file can be passed via the `customOptions`. Additionally, in cases where multiple importers can handle a file, the `customImporter` ca be specified to force a specific one. This function performs a resource import and returns immediately with a success or error code. `generatorParameters` defines optional extra metadata which will be stored as [code skip-lint]generator_parameters` in the `remap` section of the `.import` file, for example to store a md5 hash of the source data.
-    public final func appendImportExternalResource(path: String, customOptions: GDictionary = GDictionary (), customImporter: String = "", generatorParameters: Variant?) -> GodotError {
+    /// This function can only be called during the ``_import(sourceFile:savePath:options:platformVariants:genFiles:)`` callback and it allows manually importing resources from it. This is useful when the imported file generates external resources that require importing (as example, images). Custom parameters for the ".import" file can be passed via the `customOptions`. Additionally, in cases where multiple importers can handle a file, the `customImporter` can be specified to force a specific one. This function performs a resource import and returns immediately with a success or error code. `generatorParameters` defines optional extra metadata which will be stored as [code skip-lint]generator_parameters` in the `remap` section of the `.import` file, for example to store a md5 hash of the source data.
+    public final func appendImportExternalResource(path: String, customOptions: VariantDictionary = VariantDictionary (), customImporter: String = "", generatorParameters: Variant?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -158,11 +424,13 @@ open class EditorImportPlugin: ResourceImporter {
         return GodotError (rawValue: _result)!
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_can_import_threaded":
                 return _EditorImportPlugin_proxy_can_import_threaded
+            case "_get_format_version":
+                return _EditorImportPlugin_proxy_get_format_version
             case "_get_import_options":
                 return _EditorImportPlugin_proxy_get_import_options
             case "_get_import_order":
@@ -198,29 +466,41 @@ open class EditorImportPlugin: ResourceImporter {
 // Support methods for proxies
 func _EditorImportPlugin_proxy_can_import_threaded (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = swiftObject._canImportThreaded ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
+}
+
+func _EditorImportPlugin_proxy_get_format_version (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
+    guard let instance else { return }
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
+    let ret = swiftObject._getFormatVersion ()
+    retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _EditorImportPlugin_proxy_get_import_options (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = swiftObject._getImportOptions (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", presetIndex: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.array.content, as: type (of: ret.array.content)) // typedarray::Dictionary
 }
 
 func _EditorImportPlugin_proxy_get_import_order (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = swiftObject._getImportOrder ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _EditorImportPlugin_proxy_get_importer_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = GString (swiftObject._getImporterName ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -229,14 +509,16 @@ func _EditorImportPlugin_proxy_get_importer_name (instance: UnsafeMutableRawPoin
 func _EditorImportPlugin_proxy_get_option_visibility (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let ret = swiftObject._getOptionVisibility (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", optionName: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), options: GDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
+    let ret = swiftObject._getOptionVisibility (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", optionName: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), options: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _EditorImportPlugin_proxy_get_preset_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = swiftObject._getPresetCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -244,7 +526,8 @@ func _EditorImportPlugin_proxy_get_preset_count (instance: UnsafeMutableRawPoint
 func _EditorImportPlugin_proxy_get_preset_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = GString (swiftObject._getPresetName (presetIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -252,14 +535,16 @@ func _EditorImportPlugin_proxy_get_preset_name (instance: UnsafeMutableRawPointe
 
 func _EditorImportPlugin_proxy_get_priority (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = swiftObject._getPriority ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _EditorImportPlugin_proxy_get_recognized_extensions (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = swiftObject._getRecognizedExtensions ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -267,7 +552,8 @@ func _EditorImportPlugin_proxy_get_recognized_extensions (instance: UnsafeMutabl
 
 func _EditorImportPlugin_proxy_get_resource_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = GString (swiftObject._getResourceType ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -275,7 +561,8 @@ func _EditorImportPlugin_proxy_get_resource_type (instance: UnsafeMutableRawPoin
 
 func _EditorImportPlugin_proxy_get_save_extension (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = GString (swiftObject._getSaveExtension ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -283,7 +570,8 @@ func _EditorImportPlugin_proxy_get_save_extension (instance: UnsafeMutableRawPoi
 
 func _EditorImportPlugin_proxy_get_visible_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
     let ret = GString (swiftObject._getVisibleName ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -292,8 +580,9 @@ func _EditorImportPlugin_proxy_get_visible_name (instance: UnsafeMutableRawPoint
 func _EditorImportPlugin_proxy_import (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorImportPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let ret = swiftObject._import (sourceFile: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", savePath: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", options: GDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), platformVariants: args [3]!.assumingMemoryBound (to: VariantCollection<String>.self).pointee, genFiles: args [4]!.assumingMemoryBound (to: VariantCollection<String>.self).pointee)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorImportPlugin else { return }
+    let ret = swiftObject._import (sourceFile: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", savePath: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", options: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), platformVariants: args [3]!.assumingMemoryBound (to: TypedArray<String>.self).pointee, genFiles: args [4]!.assumingMemoryBound (to: TypedArray<String>.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

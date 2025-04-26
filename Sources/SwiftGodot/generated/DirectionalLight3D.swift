@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A directional light is a type of ``Light3D`` node that models an infinite number of parallel rays covering the entire scene. It is used for lights with strong intensity that are located far away from the scene to model sunlight or moonlight. The worldspace location of the DirectionalLight3D transform (origin) is ignored. Only the basis is used to determine light direction.
 open class DirectionalLight3D: Light3D {
-    fileprivate static var className = StringName("DirectionalLight3D")
+    private static var className = StringName("DirectionalLight3D")
     override open class var godotClassName: StringName { className }
     public enum ShadowMode: Int64, CaseIterable {
         /// Renders the entire scene's shadow map from an orthogonal point of view. This is the fastest directional shadow mode. May result in blurrier shadows on close objects.
@@ -155,8 +155,8 @@ open class DirectionalLight3D: Light3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_shadow_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_mode")
+    fileprivate static let method_set_shadow_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_mode")
         return withUnsafePointer(to: &DirectionalLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1261211726)!
@@ -168,6 +168,7 @@ open class DirectionalLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func set_shadow_mode(_ mode: DirectionalLight3D.ShadowMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -181,8 +182,8 @@ open class DirectionalLight3D: Light3D {
         
     }
     
-    fileprivate static var method_get_shadow_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_mode")
+    fileprivate static let method_get_shadow_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_mode")
         return withUnsafePointer(to: &DirectionalLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2765228544)!
@@ -194,13 +195,14 @@ open class DirectionalLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func get_shadow_mode() -> DirectionalLight3D.ShadowMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(DirectionalLight3D.method_get_shadow_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return DirectionalLight3D.ShadowMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_blend_splits: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_splits")
+    fileprivate static let method_set_blend_splits: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_splits")
         return withUnsafePointer(to: &DirectionalLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -212,6 +214,7 @@ open class DirectionalLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func set_blend_splits(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -225,8 +228,8 @@ open class DirectionalLight3D: Light3D {
         
     }
     
-    fileprivate static var method_is_blend_splits_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_blend_splits_enabled")
+    fileprivate static let method_is_blend_splits_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_blend_splits_enabled")
         return withUnsafePointer(to: &DirectionalLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -238,13 +241,14 @@ open class DirectionalLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func is_blend_splits_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(DirectionalLight3D.method_is_blend_splits_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sky_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_mode")
+    fileprivate static let method_set_sky_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_mode")
         return withUnsafePointer(to: &DirectionalLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2691194817)!
@@ -256,6 +260,7 @@ open class DirectionalLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func set_sky_mode(_ mode: DirectionalLight3D.SkyMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -269,8 +274,8 @@ open class DirectionalLight3D: Light3D {
         
     }
     
-    fileprivate static var method_get_sky_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_mode")
+    fileprivate static let method_get_sky_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_mode")
         return withUnsafePointer(to: &DirectionalLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3819982774)!
@@ -282,6 +287,7 @@ open class DirectionalLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func get_sky_mode() -> DirectionalLight3D.SkyMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(DirectionalLight3D.method_get_sky_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return DirectionalLight3D.SkyMode (rawValue: _result)!

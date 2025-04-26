@@ -21,12 +21,12 @@ import Musl
 
 /// A 1D texture where the red, green, and blue color channels correspond to points on 3 curves.
 /// 
-/// A 1D texture where the red, green, and blue color channels correspond to points on 3 ``Curve`` resources. Compared to using separate ``CurveTexture``s, this further simplifies the task of saving curves as image files.
+/// A 1D texture where the red, green, and blue color channels correspond to points on 3 unit ``Curve`` resources. Compared to using separate ``CurveTexture``s, this further simplifies the task of saving curves as image files.
 /// 
 /// If you only need to store one curve within a single texture, use ``CurveTexture`` instead. See also ``GradientTexture1D`` and ``GradientTexture2D``.
 /// 
 open class CurveXYZTexture: Texture2D {
-    fileprivate static var className = StringName("CurveXYZTexture")
+    private static var className = StringName("CurveXYZTexture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -43,7 +43,7 @@ open class CurveXYZTexture: Texture2D {
         
     }
     
-    /// The ``Curve`` that is rendered onto the texture's red channel.
+    /// The ``Curve`` that is rendered onto the texture's red channel. Should be a unit ``Curve``.
     final public var curveX: Curve? {
         get {
             return get_curve_x ()
@@ -55,7 +55,7 @@ open class CurveXYZTexture: Texture2D {
         
     }
     
-    /// The ``Curve`` that is rendered onto the texture's green channel.
+    /// The ``Curve`` that is rendered onto the texture's green channel. Should be a unit ``Curve``.
     final public var curveY: Curve? {
         get {
             return get_curve_y ()
@@ -67,7 +67,7 @@ open class CurveXYZTexture: Texture2D {
         
     }
     
-    /// The ``Curve`` that is rendered onto the texture's blue channel.
+    /// The ``Curve`` that is rendered onto the texture's blue channel. Should be a unit ``Curve``.
     final public var curveZ: Curve? {
         get {
             return get_curve_z ()
@@ -80,8 +80,8 @@ open class CurveXYZTexture: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &CurveXYZTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -93,6 +93,7 @@ open class CurveXYZTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_width(_ width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -106,8 +107,8 @@ open class CurveXYZTexture: Texture2D {
         
     }
     
-    fileprivate static var method_set_curve_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve_x")
+    fileprivate static let method_set_curve_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve_x")
         return withUnsafePointer(to: &CurveXYZTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -119,6 +120,7 @@ open class CurveXYZTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_curve_x(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -132,8 +134,8 @@ open class CurveXYZTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_curve_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve_x")
+    fileprivate static let method_get_curve_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve_x")
         return withUnsafePointer(to: &CurveXYZTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -145,13 +147,14 @@ open class CurveXYZTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_curve_x() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CurveXYZTexture.method_get_curve_x, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_curve_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve_y")
+    fileprivate static let method_set_curve_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve_y")
         return withUnsafePointer(to: &CurveXYZTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -163,6 +166,7 @@ open class CurveXYZTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_curve_y(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -176,8 +180,8 @@ open class CurveXYZTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_curve_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve_y")
+    fileprivate static let method_get_curve_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve_y")
         return withUnsafePointer(to: &CurveXYZTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -189,13 +193,14 @@ open class CurveXYZTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_curve_y() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CurveXYZTexture.method_get_curve_y, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_curve_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve_z")
+    fileprivate static let method_set_curve_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve_z")
         return withUnsafePointer(to: &CurveXYZTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -207,6 +212,7 @@ open class CurveXYZTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_curve_z(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -220,8 +226,8 @@ open class CurveXYZTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_curve_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve_z")
+    fileprivate static let method_get_curve_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve_z")
         return withUnsafePointer(to: &CurveXYZTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -233,9 +239,10 @@ open class CurveXYZTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_curve_z() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(CurveXYZTexture.method_get_curve_z, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

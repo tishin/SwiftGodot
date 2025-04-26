@@ -28,8 +28,17 @@ import Musl
 /// Adding vertices and polygon indices manually.
 /// 
 open class NavigationPolygon: Resource {
-    fileprivate static var className = StringName("NavigationPolygon")
+    private static var className = StringName("NavigationPolygon")
     override open class var godotClassName: StringName { className }
+    public enum SamplePartitionType: Int64, CaseIterable {
+        /// Convex partitioning that yields navigation mesh with convex polygons.
+        case convexPartition = 0 // SAMPLE_PARTITION_CONVEX_PARTITION
+        /// Triangulation partitioning that yields navigation mesh with triangle polygons.
+        case triangulate = 1 // SAMPLE_PARTITION_TRIANGULATE
+        /// Represents the size of the ``NavigationPolygon/SamplePartitionType`` enum.
+        case max = 2 // SAMPLE_PARTITION_MAX
+    }
+    
     public enum ParsedGeometryType: Int64, CaseIterable {
         /// Parses mesh instances as obstruction geometry. This includes ``Polygon2D``, ``MeshInstance2D``, ``MultiMeshInstance2D``, and ``TileMap`` nodes.
         /// 
@@ -65,6 +74,18 @@ open class NavigationPolygon: Resource {
         
         set {
             set_vertices (newValue)
+        }
+        
+    }
+    
+    /// Partitioning algorithm for creating the navigation mesh polys. See ``NavigationPolygon/SamplePartitionType`` for possible values.
+    final public var samplePartitionType: NavigationPolygon.SamplePartitionType {
+        get {
+            return get_sample_partition_type ()
+        }
+        
+        set {
+            set_sample_partition_type (newValue)
         }
         
     }
@@ -187,8 +208,8 @@ open class NavigationPolygon: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertices")
+    fileprivate static let method_set_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertices")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -201,6 +222,7 @@ open class NavigationPolygon: Resource {
     @inline(__always)
     /// Sets the vertices that can be then indexed to create polygons with the ``addPolygon(_:)`` method.
     fileprivate final func set_vertices(_ vertices: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -214,8 +236,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertices")
+    fileprivate static let method_get_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertices")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -228,13 +250,14 @@ open class NavigationPolygon: Resource {
     @inline(__always)
     /// Returns a ``PackedVector2Array`` containing all the vertices being used to create the polygons.
     fileprivate final func get_vertices() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_add_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_polygon")
+    fileprivate static let method_add_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_polygon")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -246,6 +269,7 @@ open class NavigationPolygon: Resource {
     
     /// Adds a polygon using the indices of the vertices you get when calling ``getVertices()``.
     public final func addPolygon(_ polygon: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -259,8 +283,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_polygon_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon_count")
+    fileprivate static let method_get_polygon_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon_count")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -272,13 +296,14 @@ open class NavigationPolygon: Resource {
     
     /// Returns the count of all polygons.
     public final func getPolygonCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_polygon_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon")
+    fileprivate static let method_get_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3668444399)!
@@ -290,6 +315,7 @@ open class NavigationPolygon: Resource {
     
     /// Returns a ``PackedInt32Array`` containing the indices of the vertices of a created polygon.
     public final func getPolygon(idx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -304,8 +330,8 @@ open class NavigationPolygon: Resource {
         return _result
     }
     
-    fileprivate static var method_clear_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_polygons")
+    fileprivate static let method_clear_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_polygons")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -317,12 +343,13 @@ open class NavigationPolygon: Resource {
     
     /// Clears the array of polygons, but it doesn't clear the array of outlines and vertices.
     public final func clearPolygons() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationPolygon.method_clear_polygons, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_mesh")
+    fileprivate static let method_get_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_mesh")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 330232164)!
@@ -334,13 +361,14 @@ open class NavigationPolygon: Resource {
     
     /// Returns the ``NavigationMesh`` resulting from this navigation polygon. This navigation mesh can be used to update the navigation mesh of a region with the ``NavigationServer3D/regionSetNavigationMesh(region:navigationMesh:)`` API directly (as 2D uses the 3D server behind the scene).
     public final func getNavigationMesh() -> NavigationMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_outline")
+    fileprivate static let method_add_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_outline")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -352,6 +380,7 @@ open class NavigationPolygon: Resource {
     
     /// Appends a ``PackedVector2Array`` that contains the vertices of an outline to the internal array that contains all the outlines.
     public final func addOutline(_ outline: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: outline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -365,8 +394,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_add_outline_at_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_outline_at_index")
+    fileprivate static let method_add_outline_at_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_outline_at_index")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1569738947)!
@@ -378,6 +407,7 @@ open class NavigationPolygon: Resource {
     
     /// Adds a ``PackedVector2Array`` that contains the vertices of an outline to the internal array that contains all the outlines at a fixed position.
     public final func addOutlineAtIndex(outline: PackedVector2Array, index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: outline.content) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -394,8 +424,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_outline_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outline_count")
+    fileprivate static let method_get_outline_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outline_count")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -407,13 +437,14 @@ open class NavigationPolygon: Resource {
     
     /// Returns the number of outlines that were created in the editor or by script.
     public final func getOutlineCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_outline_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outline")
+    fileprivate static let method_set_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outline")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1201971903)!
@@ -425,6 +456,7 @@ open class NavigationPolygon: Resource {
     
     /// Changes an outline created in the editor or by script. You have to call ``makePolygonsFromOutlines()`` for the polygons to update.
     public final func setOutline(idx: Int32, outline: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: outline.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -441,8 +473,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outline")
+    fileprivate static let method_get_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outline")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3946907486)!
@@ -454,6 +486,7 @@ open class NavigationPolygon: Resource {
     
     /// Returns a ``PackedVector2Array`` containing the vertices of an outline that was created in the editor or by script.
     public final func getOutline(idx: Int32) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -468,8 +501,8 @@ open class NavigationPolygon: Resource {
         return _result
     }
     
-    fileprivate static var method_remove_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_outline")
+    fileprivate static let method_remove_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_outline")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -481,6 +514,7 @@ open class NavigationPolygon: Resource {
     
     /// Removes an outline created in the editor or by script. You have to call ``makePolygonsFromOutlines()`` for the polygons to update.
     public final func removeOutline(idx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -494,8 +528,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_clear_outlines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_outlines")
+    fileprivate static let method_clear_outlines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_outlines")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -507,12 +541,13 @@ open class NavigationPolygon: Resource {
     
     /// Clears the array of the outlines, but it doesn't clear the vertices and the polygons that were created by them.
     public final func clearOutlines() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationPolygon.method_clear_outlines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_make_polygons_from_outlines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_polygons_from_outlines")
+    fileprivate static let method_make_polygons_from_outlines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_polygons_from_outlines")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -524,12 +559,13 @@ open class NavigationPolygon: Resource {
     
     /// Creates polygons from the outlines added in the editor or by script.
     public final func makePolygonsFromOutlines() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationPolygon.method_make_polygons_from_outlines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_size")
+    fileprivate static let method_set_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_size")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -541,6 +577,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_cell_size(_ cellSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cellSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -554,8 +591,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_size")
+    fileprivate static let method_get_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_size")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -567,13 +604,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_cell_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_border_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_border_size")
+    fileprivate static let method_set_border_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_border_size")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -585,6 +623,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_border_size(_ borderSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: borderSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -598,8 +637,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_border_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_border_size")
+    fileprivate static let method_get_border_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_border_size")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -611,13 +650,60 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_border_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_border_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_parsed_geometry_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parsed_geometry_type")
+    fileprivate static let method_set_sample_partition_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sample_partition_type")
+        return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2441478482)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_sample_partition_type(_ samplePartitionType: NavigationPolygon.SamplePartitionType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: samplePartitionType.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_sample_partition_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_sample_partition_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sample_partition_type")
+        return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3887422851)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_sample_partition_type() -> NavigationPolygon.SamplePartitionType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_sample_partition_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return NavigationPolygon.SamplePartitionType (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_parsed_geometry_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parsed_geometry_type")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2507971764)!
@@ -629,6 +715,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_parsed_geometry_type(_ geometryType: NavigationPolygon.ParsedGeometryType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: geometryType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -642,8 +729,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_parsed_geometry_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parsed_geometry_type")
+    fileprivate static let method_get_parsed_geometry_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parsed_geometry_type")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1073219508)!
@@ -655,13 +742,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_parsed_geometry_type() -> NavigationPolygon.ParsedGeometryType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_geometry_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NavigationPolygon.ParsedGeometryType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_parsed_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parsed_collision_mask")
+    fileprivate static let method_set_parsed_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parsed_collision_mask")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -673,6 +761,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_parsed_collision_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -686,8 +775,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_parsed_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parsed_collision_mask")
+    fileprivate static let method_get_parsed_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parsed_collision_mask")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -699,13 +788,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_parsed_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_parsed_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parsed_collision_mask_value")
+    fileprivate static let method_set_parsed_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parsed_collision_mask_value")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -717,6 +807,7 @@ open class NavigationPolygon: Resource {
     
     /// Based on `value`, enables or disables the specified layer in the ``parsedCollisionMask``, given a `layerNumber` between 1 and 32.
     public final func setParsedCollisionMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -733,8 +824,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_parsed_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parsed_collision_mask_value")
+    fileprivate static let method_get_parsed_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parsed_collision_mask_value")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -746,6 +837,7 @@ open class NavigationPolygon: Resource {
     
     /// Returns whether or not the specified layer of the ``parsedCollisionMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getParsedCollisionMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -760,8 +852,8 @@ open class NavigationPolygon: Resource {
         return _result
     }
     
-    fileprivate static var method_set_source_geometry_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_source_geometry_mode")
+    fileprivate static let method_set_source_geometry_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_source_geometry_mode")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4002316705)!
@@ -773,6 +865,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_source_geometry_mode(_ geometryMode: NavigationPolygon.SourceGeometryMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: geometryMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -786,8 +879,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_source_geometry_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source_geometry_mode")
+    fileprivate static let method_get_source_geometry_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source_geometry_mode")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 459686762)!
@@ -799,13 +892,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_source_geometry_mode() -> NavigationPolygon.SourceGeometryMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_source_geometry_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return NavigationPolygon.SourceGeometryMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_source_geometry_group_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_source_geometry_group_name")
+    fileprivate static let method_set_source_geometry_group_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_source_geometry_group_name")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -817,6 +911,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_source_geometry_group_name(_ groupName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: groupName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -830,8 +925,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_source_geometry_group_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source_geometry_group_name")
+    fileprivate static let method_get_source_geometry_group_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source_geometry_group_name")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -843,13 +938,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_source_geometry_group_name() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_source_geometry_group_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_agent_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_agent_radius")
+    fileprivate static let method_set_agent_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_agent_radius")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -861,6 +957,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_agent_radius(_ agentRadius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: agentRadius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -874,8 +971,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_agent_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_agent_radius")
+    fileprivate static let method_get_agent_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_agent_radius")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -887,13 +984,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_agent_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_agent_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_baking_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_baking_rect")
+    fileprivate static let method_set_baking_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_baking_rect")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -905,6 +1003,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_baking_rect(_ rect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -918,8 +1017,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_baking_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_baking_rect")
+    fileprivate static let method_get_baking_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_baking_rect")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -931,13 +1030,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_baking_rect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_baking_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_baking_rect_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_baking_rect_offset")
+    fileprivate static let method_set_baking_rect_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_baking_rect_offset")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -949,6 +1049,7 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func set_baking_rect_offset(_ rectOffset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rectOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -962,8 +1063,8 @@ open class NavigationPolygon: Resource {
         
     }
     
-    fileprivate static var method_get_baking_rect_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_baking_rect_offset")
+    fileprivate static let method_get_baking_rect_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_baking_rect_offset")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -975,13 +1076,14 @@ open class NavigationPolygon: Resource {
     
     @inline(__always)
     fileprivate final func get_baking_rect_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(NavigationPolygon.method_get_baking_rect_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &NavigationPolygon.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -993,6 +1095,7 @@ open class NavigationPolygon: Resource {
     
     /// Clears the internal arrays for vertices and polygon indices.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationPolygon.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

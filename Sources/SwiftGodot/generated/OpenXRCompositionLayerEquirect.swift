@@ -23,7 +23,7 @@ import Musl
 /// 
 /// An OpenXR composition layer that allows rendering a ``SubViewport`` on an internal slice of a sphere.
 open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
-    fileprivate static var className = StringName("OpenXRCompositionLayerEquirect")
+    private static var className = StringName("OpenXRCompositionLayerEquirect")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -89,8 +89,8 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     }
     
     /* Methods */
-    fileprivate static var method_set_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_radius")
+    fileprivate static let method_set_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_radius")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -102,6 +102,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func set_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -115,8 +116,8 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         
     }
     
-    fileprivate static var method_get_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_radius")
+    fileprivate static let method_get_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_radius")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -128,13 +129,14 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func get_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_central_horizontal_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_central_horizontal_angle")
+    fileprivate static let method_set_central_horizontal_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_central_horizontal_angle")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -146,6 +148,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func set_central_horizontal_angle(_ angle: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -159,8 +162,8 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         
     }
     
-    fileprivate static var method_get_central_horizontal_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_central_horizontal_angle")
+    fileprivate static let method_get_central_horizontal_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_central_horizontal_angle")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -172,13 +175,14 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func get_central_horizontal_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_central_horizontal_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_upper_vertical_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_upper_vertical_angle")
+    fileprivate static let method_set_upper_vertical_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_upper_vertical_angle")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -190,6 +194,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func set_upper_vertical_angle(_ angle: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -203,8 +208,8 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         
     }
     
-    fileprivate static var method_get_upper_vertical_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_upper_vertical_angle")
+    fileprivate static let method_get_upper_vertical_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_upper_vertical_angle")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -216,13 +221,14 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func get_upper_vertical_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_upper_vertical_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_lower_vertical_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lower_vertical_angle")
+    fileprivate static let method_set_lower_vertical_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lower_vertical_angle")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -234,6 +240,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func set_lower_vertical_angle(_ angle: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -247,8 +254,8 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         
     }
     
-    fileprivate static var method_get_lower_vertical_angle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lower_vertical_angle")
+    fileprivate static let method_get_lower_vertical_angle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lower_vertical_angle")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -260,13 +267,14 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func get_lower_vertical_angle() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_lower_vertical_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fallback_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fallback_segments")
+    fileprivate static let method_set_fallback_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fallback_segments")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -278,6 +286,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func set_fallback_segments(_ segments: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -291,8 +300,8 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         
     }
     
-    fileprivate static var method_get_fallback_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fallback_segments")
+    fileprivate static let method_get_fallback_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fallback_segments")
         return withUnsafePointer(to: &OpenXRCompositionLayerEquirect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -304,6 +313,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     
     @inline(__always)
     fileprivate final func get_fallback_segments() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_fallback_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

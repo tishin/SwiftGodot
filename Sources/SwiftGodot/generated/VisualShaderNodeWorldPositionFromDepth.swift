@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The WorldPositionFromDepth node reconstructs the depth position of the pixel in world space. This can be used to obtain world space UVs for projection mapping like Caustics.
 open class VisualShaderNodeWorldPositionFromDepth: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeWorldPositionFromDepth")
+    private static var className = StringName("VisualShaderNodeWorldPositionFromDepth")
     override open class var godotClassName: StringName { className }
 }
 

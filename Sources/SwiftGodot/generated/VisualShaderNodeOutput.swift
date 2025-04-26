@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This visual shader node is present in all shader graphs in form of "Output" block with multiple output value ports.
 open class VisualShaderNodeOutput: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeOutput")
+    private static var className = StringName("VisualShaderNodeOutput")
     override open class var godotClassName: StringName { className }
 }
 

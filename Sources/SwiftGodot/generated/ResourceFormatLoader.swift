@@ -28,7 +28,7 @@ import Musl
 /// > Note: You can also extend ``EditorImportPlugin`` if the resource type you need exists but Godot is unable to load its format. Choosing one way over another depends on if the format is suitable or not for the final exported game. For example, it's better to import `.png` textures as `.ctex` (``CompressedTexture2D``) first, so they can be loaded with better efficiency on the graphics card.
 /// 
 open class ResourceFormatLoader: RefCounted {
-    fileprivate static var className = StringName("ResourceFormatLoader")
+    private static var className = StringName("ResourceFormatLoader")
     override open class var godotClassName: StringName { className }
     public enum CacheMode: Int64, CaseIterable {
         /// Neither the main resource (the one requested to be loaded) nor any of its subresources are retrieved from cache nor stored into it. Dependencies (external resources) are loaded with ``CacheMode/reuse``.
@@ -44,11 +44,36 @@ open class ResourceFormatLoader: RefCounted {
     }
     
     /* Methods */
+    fileprivate static let method__get_recognized_extensions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_recognized_extensions")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
+    
     /// Gets the list of extensions for files this loader is able to read.
     @_documentation(visibility: public)
     open func _getRecognizedExtensions() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__recognize_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_recognize_path")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2594487047)!
+            }
+            
+        }
+        
+    }()
     
     /// Tells whether or not this loader should load a resource from its resource path for a given type.
     /// 
@@ -56,8 +81,35 @@ open class ResourceFormatLoader: RefCounted {
     /// 
     @_documentation(visibility: public)
     open func _recognizePath(_ path: String, type: StringName) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: type.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__recognize_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__handles_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_handles_type")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
+            }
+            
+        }
+        
+    }()
     
     /// Tells which resource class this loader can load.
     /// 
@@ -65,8 +117,31 @@ open class ResourceFormatLoader: RefCounted {
     /// 
     @_documentation(visibility: public)
     open func _handlesType(_ type: StringName) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: type.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__handles_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_resource_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_resource_type")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
+            }
+            
+        }
+        
+    }()
     
     /// Gets the class name of the resource associated with the given path. If the loader cannot handle it, it should return `""`.
     /// 
@@ -74,20 +149,92 @@ open class ResourceFormatLoader: RefCounted {
     /// 
     @_documentation(visibility: public)
     open func _getResourceType(path: String) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_resource_script_class: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_resource_script_class")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the script class name associated with the ``Resource`` under the given `path`. If the resource has no script or the script isn't a named class, it should return `""`.
     @_documentation(visibility: public)
     open func _getResourceScriptClass(path: String) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_script_class, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
     
-    /// 
+    fileprivate static let method__get_resource_uid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_resource_uid")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Should return the unique ID for the resource associated with the given path. If this method is not overridden, a `.uid` file is generated along with the resource file, containing the unique ID.
     @_documentation(visibility: public)
     open func _getResourceUid(path: String) -> Int {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int = 0
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_uid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_dependencies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_dependencies")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 6257701)!
+            }
+            
+        }
+        
+    }()
     
     /// If implemented, gets the dependencies of a given resource. If `addTypes` is `true`, paths should be appended `::TypeName`, where `TypeName` is the class name of the dependency.
     /// 
@@ -95,29 +242,131 @@ open class ResourceFormatLoader: RefCounted {
     /// 
     @_documentation(visibility: public)
     open func _getDependencies(path: String, addTypes: Bool) -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: addTypes) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_dependencies, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__rename_dependencies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_rename_dependencies")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 223715120)!
+            }
+            
+        }
+        
+    }()
     
     /// If implemented, renames dependencies within the given resource and saves it. `renames` is a dictionary `{ String => String }` mapping old dependency paths to new paths.
     /// 
     /// Returns ``GodotError/ok`` on success, or an ``GodotError`` constant in case of failure.
     /// 
     @_documentation(visibility: public)
-    open func _renameDependencies(path: String, renames: GDictionary) -> GodotError {
-        return .ok
+    open func _renameDependencies(path: String, renames: VariantDictionary) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: renames.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__rename_dependencies, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return GodotError (rawValue: _result)!
     }
+    
+    fileprivate static let method__exists: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_exists")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _exists(path: String) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__exists, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_classes_used: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_classes_used")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4291131558)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getClassesUsed(path: String) -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_classes_used, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__load: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_load")
+        return withUnsafePointer(to: &ResourceFormatLoader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2885906527)!
+            }
+            
+        }
+        
+    }()
     
     /// Loads a resource when the engine finds this loader to be compatible. If the loaded resource is the result of an import, `originalPath` will target the source file. Returns a ``Resource`` object on success, or an ``GodotError`` constant in case of failure.
     /// 
@@ -125,10 +374,33 @@ open class ResourceFormatLoader: RefCounted {
     /// 
     @_documentation(visibility: public)
     open func _load(path: String, originalPath: String, useSubThreads: Bool, cacheMode: Int32) -> Variant? {
-        return nil
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            let originalPath = GString(originalPath)
+            withUnsafePointer(to: originalPath.content) { pArg1 in
+                withUnsafePointer(to: useSubThreads) { pArg2 in
+                    withUnsafePointer(to: cacheMode) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(ResourceFormatLoader.method__load, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_exists":
@@ -165,7 +437,8 @@ open class ResourceFormatLoader: RefCounted {
 func _ResourceFormatLoader_proxy_exists (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._exists (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -173,7 +446,8 @@ func _ResourceFormatLoader_proxy_exists (instance: UnsafeMutableRawPointer?, arg
 func _ResourceFormatLoader_proxy_get_classes_used (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._getClassesUsed (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -182,7 +456,8 @@ func _ResourceFormatLoader_proxy_get_classes_used (instance: UnsafeMutableRawPoi
 func _ResourceFormatLoader_proxy_get_dependencies (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._getDependencies (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", addTypes: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -190,7 +465,8 @@ func _ResourceFormatLoader_proxy_get_dependencies (instance: UnsafeMutableRawPoi
 
 func _ResourceFormatLoader_proxy_get_recognized_extensions (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._getRecognizedExtensions ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -199,7 +475,8 @@ func _ResourceFormatLoader_proxy_get_recognized_extensions (instance: UnsafeMuta
 func _ResourceFormatLoader_proxy_get_resource_script_class (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = GString (swiftObject._getResourceScriptClass (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? ""))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -208,7 +485,8 @@ func _ResourceFormatLoader_proxy_get_resource_script_class (instance: UnsafeMuta
 func _ResourceFormatLoader_proxy_get_resource_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = GString (swiftObject._getResourceType (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? ""))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -217,7 +495,8 @@ func _ResourceFormatLoader_proxy_get_resource_type (instance: UnsafeMutableRawPo
 func _ResourceFormatLoader_proxy_get_resource_uid (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._getResourceUid (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Int.self)
 }
@@ -225,7 +504,8 @@ func _ResourceFormatLoader_proxy_get_resource_uid (instance: UnsafeMutableRawPoi
 func _ResourceFormatLoader_proxy_handles_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._handlesType (StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -233,7 +513,8 @@ func _ResourceFormatLoader_proxy_handles_type (instance: UnsafeMutableRawPointer
 func _ResourceFormatLoader_proxy_load (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._load (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", originalPath: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", useSubThreads: args [2]!.assumingMemoryBound (to: Bool.self).pointee, cacheMode: args [3]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes(of: ret.content, as: Variant.ContentType.self)
     ret?.content = Variant.zero
@@ -242,7 +523,8 @@ func _ResourceFormatLoader_proxy_load (instance: UnsafeMutableRawPointer?, args:
 func _ResourceFormatLoader_proxy_recognize_path (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
     let ret = swiftObject._recognizePath (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", type: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -250,8 +532,9 @@ func _ResourceFormatLoader_proxy_recognize_path (instance: UnsafeMutableRawPoint
 func _ResourceFormatLoader_proxy_rename_dependencies (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ResourceFormatLoader>.fromOpaque(instance).takeUnretainedValue()
-    let ret = swiftObject._renameDependencies (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", renames: GDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee))
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ResourceFormatLoader else { return }
+    let ret = swiftObject._renameDependencies (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", renames: VariantDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

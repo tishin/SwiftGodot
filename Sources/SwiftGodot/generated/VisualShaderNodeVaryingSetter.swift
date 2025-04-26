@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Inputs a value to a varying defined in the shader. You need to first create a varying that can be used in the given function, e.g. varying setter in Fragment shader requires a varying with mode set to ``VisualShader/VaryingMode/fragToLight``.
 open class VisualShaderNodeVaryingSetter: VisualShaderNodeVarying {
-    fileprivate static var className = StringName("VisualShaderNodeVaryingSetter")
+    private static var className = StringName("VisualShaderNodeVaryingSetter")
     override open class var godotClassName: StringName { className }
 }
 

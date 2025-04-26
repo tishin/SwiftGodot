@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``animationPlayerChanged``
 open class AnimationTree: AnimationMixer {
-    fileprivate static var className = StringName("AnimationTree")
+    private static var className = StringName("AnimationTree")
     override open class var godotClassName: StringName { className }
     public enum AnimationProcessCallback: Int64, CaseIterable {
         /// 
@@ -82,8 +82,8 @@ open class AnimationTree: AnimationMixer {
     }
     
     /* Methods */
-    fileprivate static var method_set_tree_root: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tree_root")
+    fileprivate static let method_set_tree_root: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tree_root")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2581683800)!
@@ -95,6 +95,7 @@ open class AnimationTree: AnimationMixer {
     
     @inline(__always)
     fileprivate final func set_tree_root(_ animationNode: AnimationRootNode?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: animationNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -108,8 +109,8 @@ open class AnimationTree: AnimationMixer {
         
     }
     
-    fileprivate static var method_get_tree_root: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tree_root")
+    fileprivate static let method_get_tree_root: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tree_root")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4110384712)!
@@ -121,13 +122,14 @@ open class AnimationTree: AnimationMixer {
     
     @inline(__always)
     fileprivate final func get_tree_root() -> AnimationRootNode? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AnimationTree.method_get_tree_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_advance_expression_base_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_advance_expression_base_node")
+    fileprivate static let method_set_advance_expression_base_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_advance_expression_base_node")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -139,6 +141,7 @@ open class AnimationTree: AnimationMixer {
     
     @inline(__always)
     fileprivate final func set_advance_expression_base_node(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -152,8 +155,8 @@ open class AnimationTree: AnimationMixer {
         
     }
     
-    fileprivate static var method_get_advance_expression_base_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_advance_expression_base_node")
+    fileprivate static let method_get_advance_expression_base_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_advance_expression_base_node")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -165,13 +168,14 @@ open class AnimationTree: AnimationMixer {
     
     @inline(__always)
     fileprivate final func get_advance_expression_base_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(AnimationTree.method_get_advance_expression_base_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_animation_player: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_animation_player")
+    fileprivate static let method_set_animation_player: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_animation_player")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -183,6 +187,7 @@ open class AnimationTree: AnimationMixer {
     
     @inline(__always)
     fileprivate final func set_animation_player(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -196,8 +201,8 @@ open class AnimationTree: AnimationMixer {
         
     }
     
-    fileprivate static var method_get_animation_player: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_player")
+    fileprivate static let method_get_animation_player: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_player")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -209,13 +214,14 @@ open class AnimationTree: AnimationMixer {
     
     @inline(__always)
     fileprivate final func get_animation_player() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(AnimationTree.method_get_animation_player, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_process_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_callback")
+    fileprivate static let method_set_process_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_callback")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1723352826)!
@@ -227,6 +233,7 @@ open class AnimationTree: AnimationMixer {
     
     /// Sets the process notification in which to update animations.
     public final func setProcessCallback(mode: AnimationTree.AnimationProcessCallback) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -240,8 +247,8 @@ open class AnimationTree: AnimationMixer {
         
     }
     
-    fileprivate static var method_get_process_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_callback")
+    fileprivate static let method_get_process_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_callback")
         return withUnsafePointer(to: &AnimationTree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 891317132)!
@@ -253,6 +260,7 @@ open class AnimationTree: AnimationMixer {
     
     /// Returns the process notification in which to update animations.
     public final func getProcessCallback() -> AnimationTree.AnimationProcessCallback {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationTree.method_get_process_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationTree.AnimationProcessCallback (rawValue: _result)!

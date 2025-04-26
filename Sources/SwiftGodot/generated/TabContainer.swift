@@ -37,7 +37,7 @@ import Musl
 /// - ``tabButtonPressed``
 /// - ``prePopupPressed``
 open class TabContainer: Container {
-    fileprivate static var className = StringName("TabContainer")
+    private static var className = StringName("TabContainer")
     override open class var godotClassName: StringName { className }
     public enum TabPosition: Int64, CaseIterable {
         /// Places the tab bar at the top.
@@ -193,8 +193,8 @@ open class TabContainer: Container {
     }
     
     /* Methods */
-    fileprivate static var method_get_tab_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_count")
+    fileprivate static let method_get_tab_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_count")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -206,13 +206,14 @@ open class TabContainer: Container {
     
     /// Returns the number of tabs.
     public final func getTabCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TabContainer.method_get_tab_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_current_tab: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_current_tab")
+    fileprivate static let method_set_current_tab: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_current_tab")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -224,6 +225,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_current_tab(_ tabIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -237,8 +239,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_current_tab: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_tab")
+    fileprivate static let method_get_current_tab: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_tab")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -250,13 +252,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_current_tab() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TabContainer.method_get_current_tab, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_previous_tab: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_previous_tab")
+    fileprivate static let method_get_previous_tab: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_previous_tab")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -268,13 +271,14 @@ open class TabContainer: Container {
     
     /// Returns the previously active tab index.
     public final func getPreviousTab() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TabContainer.method_get_previous_tab, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_select_previous_available: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select_previous_available")
+    fileprivate static let method_select_previous_available: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select_previous_available")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -286,13 +290,14 @@ open class TabContainer: Container {
     
     /// Selects the first available tab with lower index than the currently selected. Returns `true` if tab selection changed.
     public final func selectPreviousAvailable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_select_previous_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_select_next_available: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select_next_available")
+    fileprivate static let method_select_next_available: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select_next_available")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -304,13 +309,14 @@ open class TabContainer: Container {
     
     /// Selects the first available tab with greater index than the currently selected. Returns `true` if tab selection changed.
     public final func selectNextAvailable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_select_next_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_current_tab_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_tab_control")
+    fileprivate static let method_get_current_tab_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_tab_control")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -322,13 +328,14 @@ open class TabContainer: Container {
     
     /// Returns the child ``Control`` node located at the active tab index.
     public final func getCurrentTabControl() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TabContainer.method_get_current_tab_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_tab_bar: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_bar")
+    fileprivate static let method_get_tab_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_bar")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1865451809)!
@@ -343,13 +350,14 @@ open class TabContainer: Container {
     /// > Warning: This is a required internal node, removing and freeing it or editing its tabs may cause a crash. If you wish to edit the tabs, use the methods provided in ``TabContainer``.
     /// 
     public final func getTabBar() -> TabBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TabContainer.method_get_tab_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_tab_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_control")
+    fileprivate static let method_get_tab_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_control")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1065994134)!
@@ -361,6 +369,7 @@ open class TabContainer: Container {
     
     /// Returns the ``Control`` node from the tab at index `tabIdx`.
     public final func getTabControl(tabIdx: Int32) -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -372,11 +381,11 @@ open class TabContainer: Container {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_tab_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_alignment")
+    fileprivate static let method_set_tab_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_alignment")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2413632353)!
@@ -388,6 +397,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_tab_alignment(_ alignment: TabBar.AlignmentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -401,8 +411,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_alignment")
+    fileprivate static let method_get_tab_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_alignment")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2178122193)!
@@ -414,13 +424,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_tab_alignment() -> TabBar.AlignmentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TabContainer.method_get_tab_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TabBar.AlignmentMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_tabs_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tabs_position")
+    fileprivate static let method_set_tabs_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tabs_position")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 256673370)!
@@ -432,6 +443,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_tabs_position(_ tabsPosition: TabContainer.TabPosition) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabsPosition.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -445,8 +457,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tabs_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tabs_position")
+    fileprivate static let method_get_tabs_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tabs_position")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 919937023)!
@@ -458,13 +470,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_tabs_position() -> TabContainer.TabPosition {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TabContainer.method_get_tabs_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TabContainer.TabPosition (rawValue: _result)!
     }
     
-    fileprivate static var method_set_clip_tabs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_tabs")
+    fileprivate static let method_set_clip_tabs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_tabs")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -476,6 +489,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_clip_tabs(_ clipTabs: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clipTabs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -489,8 +503,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_clip_tabs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clip_tabs")
+    fileprivate static let method_get_clip_tabs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clip_tabs")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -502,13 +516,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_clip_tabs() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_get_clip_tabs, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tabs_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tabs_visible")
+    fileprivate static let method_set_tabs_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tabs_visible")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -520,6 +535,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_tabs_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -533,8 +549,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_are_tabs_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("are_tabs_visible")
+    fileprivate static let method_are_tabs_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("are_tabs_visible")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -546,13 +562,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func are_tabs_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_are_tabs_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_all_tabs_in_front: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_all_tabs_in_front")
+    fileprivate static let method_set_all_tabs_in_front: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_all_tabs_in_front")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -564,6 +581,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_all_tabs_in_front(_ isFront: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: isFront) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -577,8 +595,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_is_all_tabs_in_front: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_all_tabs_in_front")
+    fileprivate static let method_is_all_tabs_in_front: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_all_tabs_in_front")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -590,13 +608,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func is_all_tabs_in_front() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_is_all_tabs_in_front, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tab_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_title")
+    fileprivate static let method_set_tab_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_title")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -608,6 +627,7 @@ open class TabContainer: Container {
     
     /// Sets a custom title for the tab at index `tabIdx` (tab titles default to the name of the indexed child node). Set it back to the child's name to make the tab default to it again.
     public final func setTabTitle(tabIdx: Int32, title: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             let title = GString(title)
             withUnsafePointer(to: title.content) { pArg1 in
@@ -625,8 +645,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_title")
+    fileprivate static let method_get_tab_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_title")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -638,6 +658,7 @@ open class TabContainer: Container {
     
     /// Returns the title of the tab at index `tabIdx`. Tab titles default to the name of the indexed child node, but this can be overridden with ``setTabTitle(tabIdx:title:)``.
     public final func getTabTitle(tabIdx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -652,8 +673,8 @@ open class TabContainer: Container {
         return _result.description
     }
     
-    fileprivate static var method_set_tab_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_tooltip")
+    fileprivate static let method_set_tab_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_tooltip")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -668,6 +689,7 @@ open class TabContainer: Container {
     /// > Note: By default, if the `tooltip` is empty and the tab text is truncated (not all characters fit into the tab), the title will be displayed as a tooltip. To hide the tooltip, assign `" "` as the `tooltip` text.
     /// 
     public final func setTabTooltip(tabIdx: Int32, tooltip: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             let tooltip = GString(tooltip)
             withUnsafePointer(to: tooltip.content) { pArg1 in
@@ -685,8 +707,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_tooltip")
+    fileprivate static let method_get_tab_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_tooltip")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -698,6 +720,7 @@ open class TabContainer: Container {
     
     /// Returns the tooltip text of the tab at index `tabIdx`.
     public final func getTabTooltip(tabIdx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -712,8 +735,8 @@ open class TabContainer: Container {
         return _result.description
     }
     
-    fileprivate static var method_set_tab_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_icon")
+    fileprivate static let method_set_tab_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_icon")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -725,6 +748,7 @@ open class TabContainer: Container {
     
     /// Sets an icon for the tab at index `tabIdx`.
     public final func setTabIcon(tabIdx: Int32, icon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -741,8 +765,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_icon")
+    fileprivate static let method_get_tab_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_icon")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -754,6 +778,7 @@ open class TabContainer: Container {
     
     /// Returns the ``Texture2D`` for the tab at index `tabIdx` or `null` if the tab has no ``Texture2D``.
     public final func getTabIcon(tabIdx: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -765,11 +790,11 @@ open class TabContainer: Container {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_tab_icon_max_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_icon_max_width")
+    fileprivate static let method_set_tab_icon_max_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_icon_max_width")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -781,6 +806,7 @@ open class TabContainer: Container {
     
     /// Sets the maximum allowed width of the icon for the tab at index `tabIdx`. This limit is applied on top of the default size of the icon and on top of [theme_item icon_max_width]. The height is adjusted according to the icon's ratio.
     public final func setTabIconMaxWidth(tabIdx: Int32, width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -797,8 +823,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_icon_max_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_icon_max_width")
+    fileprivate static let method_get_tab_icon_max_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_icon_max_width")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -810,6 +836,7 @@ open class TabContainer: Container {
     
     /// Returns the maximum allowed width of the icon for the tab at index `tabIdx`.
     public final func getTabIconMaxWidth(tabIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -824,8 +851,8 @@ open class TabContainer: Container {
         return _result
     }
     
-    fileprivate static var method_set_tab_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_disabled")
+    fileprivate static let method_set_tab_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_disabled")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -837,6 +864,7 @@ open class TabContainer: Container {
     
     /// If `disabled` is `true`, disables the tab at index `tabIdx`, making it non-interactable.
     public final func setTabDisabled(tabIdx: Int32, disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -853,8 +881,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_is_tab_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_tab_disabled")
+    fileprivate static let method_is_tab_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_tab_disabled")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -866,6 +894,7 @@ open class TabContainer: Container {
     
     /// Returns `true` if the tab at index `tabIdx` is disabled.
     public final func isTabDisabled(tabIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -880,8 +909,8 @@ open class TabContainer: Container {
         return _result
     }
     
-    fileprivate static var method_set_tab_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_hidden")
+    fileprivate static let method_set_tab_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_hidden")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -893,6 +922,7 @@ open class TabContainer: Container {
     
     /// If `hidden` is `true`, hides the tab at index `tabIdx`, making it disappear from the tab area.
     public final func setTabHidden(tabIdx: Int32, hidden: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: hidden) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -909,8 +939,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_is_tab_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_tab_hidden")
+    fileprivate static let method_is_tab_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_tab_hidden")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -922,6 +952,7 @@ open class TabContainer: Container {
     
     /// Returns `true` if the tab at index `tabIdx` is hidden.
     public final func isTabHidden(tabIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -936,8 +967,8 @@ open class TabContainer: Container {
         return _result
     }
     
-    fileprivate static var method_set_tab_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_metadata")
+    fileprivate static let method_set_tab_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_metadata")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2152698145)!
@@ -949,6 +980,7 @@ open class TabContainer: Container {
     
     /// Sets the metadata value for the tab at index `tabIdx`, which can be retrieved later using ``getTabMetadata(tabIdx:)``.
     public final func setTabMetadata(tabIdx: Int32, metadata: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -965,8 +997,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_metadata")
+    fileprivate static let method_get_tab_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_metadata")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
@@ -978,6 +1010,7 @@ open class TabContainer: Container {
     
     /// Returns the metadata value set to the tab at index `tabIdx` using ``setTabMetadata(tabIdx:metadata:)``. If no metadata was previously set, returns `null` by default.
     public final func getTabMetadata(tabIdx: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -992,8 +1025,8 @@ open class TabContainer: Container {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_tab_button_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_button_icon")
+    fileprivate static let method_set_tab_button_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_button_icon")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -1005,6 +1038,7 @@ open class TabContainer: Container {
     
     /// Sets the button icon from the tab at index `tabIdx`.
     public final func setTabButtonIcon(tabIdx: Int32, icon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1021,8 +1055,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_button_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_button_icon")
+    fileprivate static let method_get_tab_button_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_button_icon")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -1034,6 +1068,7 @@ open class TabContainer: Container {
     
     /// Returns the button icon from the tab at index `tabIdx`.
     public final func getTabButtonIcon(tabIdx: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1045,11 +1080,11 @@ open class TabContainer: Container {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_tab_idx_at_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_idx_at_point")
+    fileprivate static let method_get_tab_idx_at_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_idx_at_point")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3820158470)!
@@ -1061,6 +1096,7 @@ open class TabContainer: Container {
     
     /// Returns the index of the tab at local coordinates `point`. Returns `-1` if the point is outside the control boundaries or if there's no tab at the queried position.
     public final func getTabIdxAtPoint(_ point: Vector2) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1075,8 +1111,8 @@ open class TabContainer: Container {
         return _result
     }
     
-    fileprivate static var method_get_tab_idx_from_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_idx_from_control")
+    fileprivate static let method_get_tab_idx_from_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_idx_from_control")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2787397975)!
@@ -1088,6 +1124,7 @@ open class TabContainer: Container {
     
     /// Returns the index of the tab tied to the given `control`. The control must be a child of the ``TabContainer``.
     public final func getTabIdxFromControl(_ control: Control?) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1102,8 +1139,8 @@ open class TabContainer: Container {
         return _result
     }
     
-    fileprivate static var method_set_popup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_popup")
+    fileprivate static let method_set_popup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_popup")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -1115,6 +1152,7 @@ open class TabContainer: Container {
     
     /// If set on a ``Popup`` node instance, a popup menu icon appears in the top-right corner of the ``TabContainer`` (setting it to `null` will make it go away). Clicking it will expand the ``Popup`` node.
     public final func setPopup(_ popup: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: popup?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1128,8 +1166,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_popup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_popup")
+    fileprivate static let method_get_popup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_popup")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 111095082)!
@@ -1144,13 +1182,14 @@ open class TabContainer: Container {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``Window/visible`` property.
     /// 
     public final func getPopup() -> Popup? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TabContainer.method_get_popup, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_drag_to_rearrange_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drag_to_rearrange_enabled")
+    fileprivate static let method_set_drag_to_rearrange_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drag_to_rearrange_enabled")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1162,6 +1201,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_drag_to_rearrange_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1175,8 +1215,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_drag_to_rearrange_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_drag_to_rearrange_enabled")
+    fileprivate static let method_get_drag_to_rearrange_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_drag_to_rearrange_enabled")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1188,13 +1228,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_drag_to_rearrange_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_get_drag_to_rearrange_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tabs_rearrange_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tabs_rearrange_group")
+    fileprivate static let method_set_tabs_rearrange_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tabs_rearrange_group")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1206,6 +1247,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_tabs_rearrange_group(_ groupId: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: groupId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1219,8 +1261,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tabs_rearrange_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tabs_rearrange_group")
+    fileprivate static let method_get_tabs_rearrange_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tabs_rearrange_group")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1232,13 +1274,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_tabs_rearrange_group() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TabContainer.method_get_tabs_rearrange_group, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_hidden_tabs_for_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_hidden_tabs_for_min_size")
+    fileprivate static let method_set_use_hidden_tabs_for_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_hidden_tabs_for_min_size")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1250,6 +1293,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_use_hidden_tabs_for_min_size(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1263,8 +1307,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_use_hidden_tabs_for_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_hidden_tabs_for_min_size")
+    fileprivate static let method_get_use_hidden_tabs_for_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_hidden_tabs_for_min_size")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1276,13 +1320,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_use_hidden_tabs_for_min_size() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_get_use_hidden_tabs_for_min_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tab_focus_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_focus_mode")
+    fileprivate static let method_set_tab_focus_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_focus_mode")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3232914922)!
@@ -1294,6 +1339,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_tab_focus_mode(_ focusMode: Control.FocusMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: focusMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1307,8 +1353,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_tab_focus_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_focus_mode")
+    fileprivate static let method_get_tab_focus_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_focus_mode")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2132829277)!
@@ -1320,13 +1366,14 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_tab_focus_mode() -> Control.FocusMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TabContainer.method_get_tab_focus_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.FocusMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_deselect_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deselect_enabled")
+    fileprivate static let method_set_deselect_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deselect_enabled")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1338,6 +1385,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func set_deselect_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1351,8 +1399,8 @@ open class TabContainer: Container {
         
     }
     
-    fileprivate static var method_get_deselect_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_deselect_enabled")
+    fileprivate static let method_get_deselect_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_deselect_enabled")
         return withUnsafePointer(to: &TabContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1364,6 +1412,7 @@ open class TabContainer: Container {
     
     @inline(__always)
     fileprivate final func get_deselect_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TabContainer.method_get_deselect_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

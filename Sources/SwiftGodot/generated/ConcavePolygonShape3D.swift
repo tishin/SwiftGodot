@@ -32,7 +32,7 @@ import Musl
 /// **Performance:** Due to its complexity, ``ConcavePolygonShape3D`` is the slowest 3D collision shape to check collisions against. Its use should generally be limited to level geometry. For convex geometry, ``ConvexPolygonShape3D`` should be used. For dynamic physics bodies that need concave collision, several ``ConvexPolygonShape3D``s can be used to represent its collision by using convex decomposition; see ``ConvexPolygonShape3D``'s documentation for instructions.
 /// 
 open class ConcavePolygonShape3D: Shape3D {
-    fileprivate static var className = StringName("ConcavePolygonShape3D")
+    private static var className = StringName("ConcavePolygonShape3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -61,8 +61,8 @@ open class ConcavePolygonShape3D: Shape3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_faces")
+    fileprivate static let method_set_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_faces")
         return withUnsafePointer(to: &ConcavePolygonShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 334873810)!
@@ -75,6 +75,7 @@ open class ConcavePolygonShape3D: Shape3D {
     @inline(__always)
     /// Sets the faces of the trimesh shape from an array of vertices. The `faces` array should be composed of triples such that each triple of vertices defines a triangle.
     fileprivate final func set_faces(_ faces: PackedVector3Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: faces.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -88,8 +89,8 @@ open class ConcavePolygonShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_get_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_faces")
+    fileprivate static let method_get_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_faces")
         return withUnsafePointer(to: &ConcavePolygonShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 497664490)!
@@ -102,13 +103,14 @@ open class ConcavePolygonShape3D: Shape3D {
     @inline(__always)
     /// Returns the faces of the trimesh shape as an array of vertices. The array (of length divisible by three) is naturally divided into triples; each triple of vertices defines a triangle.
     fileprivate final func get_faces() -> PackedVector3Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
         gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_get_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_backface_collision_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_backface_collision_enabled")
+    fileprivate static let method_set_backface_collision_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_backface_collision_enabled")
         return withUnsafePointer(to: &ConcavePolygonShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -120,6 +122,7 @@ open class ConcavePolygonShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func set_backface_collision_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -133,8 +136,8 @@ open class ConcavePolygonShape3D: Shape3D {
         
     }
     
-    fileprivate static var method_is_backface_collision_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_backface_collision_enabled")
+    fileprivate static let method_is_backface_collision_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_backface_collision_enabled")
         return withUnsafePointer(to: &ConcavePolygonShape3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -146,6 +149,7 @@ open class ConcavePolygonShape3D: Shape3D {
     
     @inline(__always)
     fileprivate final func is_backface_collision_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_is_backface_collision_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

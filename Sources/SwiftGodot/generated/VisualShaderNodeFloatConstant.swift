@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translated to [code skip-lint]float` in the shader language.
 open class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
-    fileprivate static var className = StringName("VisualShaderNodeFloatConstant")
+    private static var className = StringName("VisualShaderNodeFloatConstant")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
     }
     
     /* Methods */
-    fileprivate static var method_set_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constant")
+    fileprivate static let method_set_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constant")
         return withUnsafePointer(to: &VisualShaderNodeFloatConstant.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -54,6 +54,7 @@ open class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
     
     @inline(__always)
     fileprivate final func set_constant(_ constant: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: constant) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
         
     }
     
-    fileprivate static var method_get_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant")
+    fileprivate static let method_get_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant")
         return withUnsafePointer(to: &VisualShaderNodeFloatConstant.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -80,6 +81,7 @@ open class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
     
     @inline(__always)
     fileprivate final func get_constant() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VisualShaderNodeFloatConstant.method_get_constant, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

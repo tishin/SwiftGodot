@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Creates a 4×4 transform matrix using four vectors of type `vec3`. Each vector is one row in the matrix and the last column is a `vec4(0, 0, 0, 1)`.
 open class VisualShaderNodeTransformCompose: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeTransformCompose")
+    private static var className = StringName("VisualShaderNodeTransformCompose")
     override open class var godotClassName: StringName { className }
 }
 

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``Camera3D`` is a special node that displays what is visible from its current location. Cameras register themselves in the nearest ``Viewport`` node (when ascending the tree). Only one camera can be active per viewport. If no viewport is available ascending the tree, the camera will register in the global viewport. In other words, a camera just provides 3D display capabilities to a ``Viewport``, and, without one, a scene registered in that ``Viewport`` (or higher viewports) can't be displayed.
 open class Camera3D: Node3D {
-    fileprivate static var className = StringName("Camera3D")
+    private static var className = StringName("Camera3D")
     override open class var godotClassName: StringName { className }
     public enum ProjectionType: Int64, CaseIterable {
         /// Perspective projection. Objects on the screen becomes smaller when they are far away.
@@ -258,8 +258,8 @@ open class Camera3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_project_ray_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("project_ray_normal")
+    fileprivate static let method_project_ray_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("project_ray_normal")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1718073306)!
@@ -271,6 +271,7 @@ open class Camera3D: Node3D {
     
     /// Returns a normal vector in world space, that is the result of projecting a point on the ``Viewport`` rectangle by the inverse camera projection. This is useful for casting rays in the form of (origin, normal) for object intersection or picking.
     public final func projectRayNormal(screenPoint: Vector2) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: screenPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -285,8 +286,8 @@ open class Camera3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_project_local_ray_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("project_local_ray_normal")
+    fileprivate static let method_project_local_ray_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("project_local_ray_normal")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1718073306)!
@@ -298,6 +299,7 @@ open class Camera3D: Node3D {
     
     /// Returns a normal vector from the screen point location directed along the camera. Orthogonal cameras are normalized. Perspective cameras account for perspective, screen width/height, etc.
     public final func projectLocalRayNormal(screenPoint: Vector2) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: screenPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -312,8 +314,8 @@ open class Camera3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_project_ray_origin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("project_ray_origin")
+    fileprivate static let method_project_ray_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("project_ray_origin")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1718073306)!
@@ -325,6 +327,7 @@ open class Camera3D: Node3D {
     
     /// Returns a 3D position in world space, that is the result of projecting a point on the ``Viewport`` rectangle by the inverse camera projection. This is useful for casting rays in the form of (origin, normal) for object intersection or picking.
     public final func projectRayOrigin(screenPoint: Vector2) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: screenPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -339,8 +342,8 @@ open class Camera3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_unproject_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unproject_position")
+    fileprivate static let method_unproject_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unproject_position")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3758901831)!
@@ -355,6 +358,7 @@ open class Camera3D: Node3D {
     /// > Note: When using this to position GUI elements over a 3D viewport, use ``isPositionBehind(worldPoint:)`` to prevent them from appearing if the 3D point is behind the camera:
     /// 
     public final func unprojectPosition(worldPoint: Vector3) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: worldPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -369,8 +373,8 @@ open class Camera3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_is_position_behind: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_position_behind")
+    fileprivate static let method_is_position_behind: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_position_behind")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3108956480)!
@@ -385,6 +389,7 @@ open class Camera3D: Node3D {
     /// > Note: A position which returns `false` may still be outside the camera's field of view.
     /// 
     public final func isPositionBehind(worldPoint: Vector3) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: worldPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -399,8 +404,8 @@ open class Camera3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_project_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("project_position")
+    fileprivate static let method_project_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("project_position")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2171975744)!
@@ -412,6 +417,7 @@ open class Camera3D: Node3D {
     
     /// Returns the 3D point in world space that maps to the given 2D coordinate in the ``Viewport`` rectangle on a plane that is the given `zDepth` distance into the scene away from the camera.
     public final func projectPosition(screenPoint: Vector2, zDepth: Double) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: screenPoint) { pArg0 in
             withUnsafePointer(to: zDepth) { pArg1 in
@@ -429,8 +435,8 @@ open class Camera3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_perspective: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_perspective")
+    fileprivate static let method_set_perspective: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_perspective")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2385087082)!
@@ -442,6 +448,7 @@ open class Camera3D: Node3D {
     
     /// Sets the camera projection to perspective mode (see ``ProjectionType/perspective``), by specifying a `fov` (field of view) angle in degrees, and the `zNear` and `zFar` clip planes in world space units.
     public final func setPerspective(fov: Double, zNear: Double, zFar: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fov) { pArg0 in
             withUnsafePointer(to: zNear) { pArg1 in
                 withUnsafePointer(to: zFar) { pArg2 in
@@ -461,8 +468,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_orthogonal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_orthogonal")
+    fileprivate static let method_set_orthogonal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_orthogonal")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2385087082)!
@@ -474,6 +481,7 @@ open class Camera3D: Node3D {
     
     /// Sets the camera projection to orthogonal mode (see ``ProjectionType/orthogonal``), by specifying a `size`, and the `zNear` and `zFar` clip planes in world space units. (As a hint, 2D games often use this projection, with values specified in pixels.)
     public final func setOrthogonal(size: Double, zNear: Double, zFar: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: zNear) { pArg1 in
                 withUnsafePointer(to: zFar) { pArg2 in
@@ -493,8 +501,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_frustum: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frustum")
+    fileprivate static let method_set_frustum: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frustum")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 354890663)!
@@ -506,6 +514,7 @@ open class Camera3D: Node3D {
     
     /// Sets the camera projection to frustum mode (see ``ProjectionType/frustum``), by specifying a `size`, an `offset`, and the `zNear` and `zFar` clip planes in world space units. See also ``frustumOffset``.
     public final func setFrustum(size: Double, offset: Vector2, zNear: Double, zFar: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: offset) { pArg1 in
                 withUnsafePointer(to: zNear) { pArg2 in
@@ -528,8 +537,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_make_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_current")
+    fileprivate static let method_make_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_current")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -541,12 +550,13 @@ open class Camera3D: Node3D {
     
     /// Makes this camera the current camera for the ``Viewport`` (see class description). If the camera node is outside the scene tree, it will attempt to become current once it's added.
     public final func makeCurrent() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Camera3D.method_make_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_current")
+    fileprivate static let method_clear_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_current")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3216645846)!
@@ -558,6 +568,7 @@ open class Camera3D: Node3D {
     
     /// If this is the current camera, remove it from being current. If `enableNext` is `true`, request to make the next camera current, if any.
     public final func clearCurrent(enableNext: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enableNext) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -571,8 +582,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_current")
+    fileprivate static let method_set_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_current")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -584,6 +595,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_current(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -597,8 +609,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_is_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_current")
+    fileprivate static let method_is_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_current")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -610,13 +622,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func is_current() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Camera3D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_camera_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_transform")
+    fileprivate static let method_get_camera_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_transform")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -628,13 +641,14 @@ open class Camera3D: Node3D {
     
     /// Returns the transform of the camera plus the vertical (``vOffset``) and horizontal (``hOffset``) offsets; and any other adjustments made to the position and orientation of the camera by subclassed cameras such as ``XRCamera3D``.
     public final func getCameraTransform() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(Camera3D.method_get_camera_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_camera_projection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_projection")
+    fileprivate static let method_get_camera_projection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_projection")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2910717950)!
@@ -646,13 +660,14 @@ open class Camera3D: Node3D {
     
     /// Returns the projection matrix that this camera uses to render to its associated viewport. The camera must be part of the scene tree to function.
     public final func getCameraProjection() -> Projection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Projection = Projection ()
         gi.object_method_bind_ptrcall(Camera3D.method_get_camera_projection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_fov: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fov")
+    fileprivate static let method_get_fov: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fov")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -664,13 +679,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_fov() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Camera3D.method_get_fov, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_frustum_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frustum_offset")
+    fileprivate static let method_get_frustum_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frustum_offset")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -682,13 +698,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_frustum_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Camera3D.method_get_frustum_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -700,13 +717,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Camera3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_far: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_far")
+    fileprivate static let method_get_far: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_far")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -718,13 +736,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_far() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Camera3D.method_get_far, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_near: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_near")
+    fileprivate static let method_get_near: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_near")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -736,13 +755,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_near() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Camera3D.method_get_near, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fov: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fov")
+    fileprivate static let method_set_fov: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fov")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -754,6 +774,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_fov(_ fov: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fov) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -767,8 +788,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_frustum_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frustum_offset")
+    fileprivate static let method_set_frustum_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frustum_offset")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -780,6 +801,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_frustum_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -793,8 +815,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -806,6 +828,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -819,8 +842,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_far: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_far")
+    fileprivate static let method_set_far: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_far")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -832,6 +855,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_far(_ far: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: far) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -845,8 +869,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_near: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_near")
+    fileprivate static let method_set_near: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_near")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -858,6 +882,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_near(_ near: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: near) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -871,8 +896,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_projection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_projection")
+    fileprivate static let method_get_projection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_projection")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2624185235)!
@@ -884,13 +909,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_projection() -> Camera3D.ProjectionType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Camera3D.method_get_projection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Camera3D.ProjectionType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_projection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_projection")
+    fileprivate static let method_set_projection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_projection")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4218540108)!
@@ -902,6 +928,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_projection(_ mode: Camera3D.ProjectionType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -915,8 +942,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_set_h_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_h_offset")
+    fileprivate static let method_set_h_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_h_offset")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -928,6 +955,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_h_offset(_ offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -941,8 +969,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_h_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_offset")
+    fileprivate static let method_get_h_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_offset")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -954,13 +982,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_h_offset() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Camera3D.method_get_h_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_v_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_offset")
+    fileprivate static let method_set_v_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_offset")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -972,6 +1001,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_v_offset(_ offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -985,8 +1015,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_v_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_offset")
+    fileprivate static let method_get_v_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_offset")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -998,13 +1028,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_v_offset() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Camera3D.method_get_v_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mask")
+    fileprivate static let method_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mask")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1016,6 +1047,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_cull_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1029,8 +1061,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mask")
+    fileprivate static let method_get_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mask")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1042,13 +1074,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_cull_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(Camera3D.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment")
+    fileprivate static let method_set_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4143518816)!
@@ -1060,6 +1093,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_environment(_ env: Environment?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1073,8 +1107,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment")
+    fileprivate static let method_get_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3082064660)!
@@ -1086,13 +1120,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_environment() -> Environment? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Camera3D.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_attributes")
+    fileprivate static let method_set_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_attributes")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2817810567)!
@@ -1104,6 +1139,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_attributes(_ env: CameraAttributes?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1117,8 +1153,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_attributes")
+    fileprivate static let method_get_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_attributes")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3921283215)!
@@ -1130,13 +1166,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_attributes() -> CameraAttributes? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Camera3D.method_get_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_compositor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_compositor")
+    fileprivate static let method_set_compositor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_compositor")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1586754307)!
@@ -1148,6 +1185,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_compositor(_ compositor: Compositor?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: compositor?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1161,8 +1199,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_compositor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_compositor")
+    fileprivate static let method_get_compositor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_compositor")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3647707413)!
@@ -1174,13 +1212,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_compositor() -> Compositor? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Camera3D.method_get_compositor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_keep_aspect_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_keep_aspect_mode")
+    fileprivate static let method_set_keep_aspect_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_aspect_mode")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740651252)!
@@ -1192,6 +1231,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_keep_aspect_mode(_ mode: Camera3D.KeepAspect) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1205,8 +1245,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_keep_aspect_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_keep_aspect_mode")
+    fileprivate static let method_get_keep_aspect_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keep_aspect_mode")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2790278316)!
@@ -1218,13 +1258,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_keep_aspect_mode() -> Camera3D.KeepAspect {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Camera3D.method_get_keep_aspect_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Camera3D.KeepAspect (rawValue: _result)!
     }
     
-    fileprivate static var method_set_doppler_tracking: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_doppler_tracking")
+    fileprivate static let method_set_doppler_tracking: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_doppler_tracking")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3109431270)!
@@ -1236,6 +1277,7 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_doppler_tracking(_ mode: Camera3D.DopplerTracking) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1249,8 +1291,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_doppler_tracking: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_doppler_tracking")
+    fileprivate static let method_get_doppler_tracking: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_doppler_tracking")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1584483649)!
@@ -1262,13 +1304,14 @@ open class Camera3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_doppler_tracking() -> Camera3D.DopplerTracking {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Camera3D.method_get_doppler_tracking, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Camera3D.DopplerTracking (rawValue: _result)!
     }
     
-    fileprivate static var method_get_frustum: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frustum")
+    fileprivate static let method_get_frustum: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frustum")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -1279,14 +1322,15 @@ open class Camera3D: Node3D {
     }()
     
     /// Returns the camera's frustum planes in world space units as an array of ``Plane``s in the following order: near, far, left, top, right, bottom. Not to be confused with ``frustumOffset``.
-    public final func getFrustum() -> VariantCollection<Plane> {
+    public final func getFrustum() -> TypedArray<Plane> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Camera3D.method_get_frustum, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<Plane>(content: _result)
+        return TypedArray<Plane>(takingOver: _result)
     }
     
-    fileprivate static var method_is_position_in_frustum: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_position_in_frustum")
+    fileprivate static let method_is_position_in_frustum: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_position_in_frustum")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3108956480)!
@@ -1298,6 +1342,7 @@ open class Camera3D: Node3D {
     
     /// Returns `true` if the given position is inside the camera's frustum (the green part of the linked diagram). <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png">See this diagram</a> for an overview of position query methods.
     public final func isPositionInFrustum(worldPoint: Vector3) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: worldPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1312,8 +1357,8 @@ open class Camera3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_camera_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_rid")
+    fileprivate static let method_get_camera_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_rid")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -1325,13 +1370,14 @@ open class Camera3D: Node3D {
     
     /// Returns the camera's RID from the ``RenderingServer``.
     public final func getCameraRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(Camera3D.method_get_camera_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_pyramid_shape_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pyramid_shape_rid")
+    fileprivate static let method_get_pyramid_shape_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pyramid_shape_rid")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -1343,13 +1389,14 @@ open class Camera3D: Node3D {
     
     /// Returns the RID of a pyramid shape encompassing the camera's view frustum, ignoring the camera's near plane. The tip of the pyramid represents the position of the camera.
     public final func getPyramidShapeRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(Camera3D.method_get_pyramid_shape_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_cull_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mask_value")
+    fileprivate static let method_set_cull_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mask_value")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1361,6 +1408,7 @@ open class Camera3D: Node3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``cullMask``, given a `layerNumber` between 1 and 20.
     public final func setCullMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1377,8 +1425,8 @@ open class Camera3D: Node3D {
         
     }
     
-    fileprivate static var method_get_cull_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mask_value")
+    fileprivate static let method_get_cull_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mask_value")
         return withUnsafePointer(to: &Camera3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1390,6 +1438,7 @@ open class Camera3D: Node3D {
     
     /// Returns whether or not the specified layer of the ``cullMask`` is enabled, given a `layerNumber` between 1 and 20.
     public final func getCullMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

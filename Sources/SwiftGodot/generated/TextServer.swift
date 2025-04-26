@@ -28,7 +28,7 @@ import Musl
 /// This is an abstract class, so to get the currently active ``TextServer`` instance, use the following code:
 /// 
 open class TextServer: RefCounted {
-    fileprivate static var className = StringName("TextServer")
+    private static var className = StringName("TextServer")
     override open class var godotClassName: StringName { className }
     public enum FontAntialiasing: Int64, CaseIterable {
         /// Font glyphs are rasterized as 1-bit bitmaps.
@@ -165,6 +165,9 @@ open class TextServer: RefCounted {
     
     public enum VisibleCharactersBehavior: Int64, CaseIterable {
         /// Trims text before the shaping. e.g, increasing ``Label/visibleCharacters`` or ``RichTextLabel/visibleCharacters`` value is visually identical to typing the text.
+        /// 
+        /// > Note: In this mode, trimmed text is not processed at all. It is not accounted for in line breaking and size calculations.
+        /// 
         case charsBeforeShaping = 0 // VC_CHARS_BEFORE_SHAPING
         /// Displays glyphs that are mapped to the first ``Label/visibleCharacters`` or ``RichTextLabel/visibleCharacters`` characters from the beginning of the text.
         case charsAfterShaping = 1 // VC_CHARS_AFTER_SHAPING
@@ -416,8 +419,8 @@ open class TextServer: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_has_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_feature")
+    fileprivate static let method_has_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_feature")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3967367083)!
@@ -429,6 +432,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if the server supports a feature.
     public final func hasFeature(_ feature: TextServer.Feature) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -443,8 +447,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -456,13 +460,14 @@ open class TextServer: RefCounted {
     
     /// Returns the name of the server interface.
     public final func getName() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextServer.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_features: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_features")
+    fileprivate static let method_get_features: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_features")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -474,13 +479,14 @@ open class TextServer: RefCounted {
     
     /// Returns text server features, see ``TextServer/Feature``.
     public final func getFeatures() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(TextServer.method_get_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_load_support_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_support_data")
+    fileprivate static let method_load_support_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_support_data")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -495,6 +501,7 @@ open class TextServer: RefCounted {
     /// > Note: This function should be called before any other TextServer functions used, otherwise it won't have any effect.
     /// 
     public final func loadSupportData(filename: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let filename = GString(filename)
         withUnsafePointer(to: filename.content) { pArg0 in
@@ -510,8 +517,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_support_data_filename: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_support_data_filename")
+    fileprivate static let method_get_support_data_filename: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_support_data_filename")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -523,13 +530,14 @@ open class TextServer: RefCounted {
     
     /// Returns default TextServer database (e.g. ICU break iterators and dictionaries) filename.
     public final func getSupportDataFilename() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextServer.method_get_support_data_filename, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_support_data_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_support_data_info")
+    fileprivate static let method_get_support_data_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_support_data_info")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -541,13 +549,14 @@ open class TextServer: RefCounted {
     
     /// Returns TextServer database (e.g. ICU break iterators and dictionaries) description.
     public final func getSupportDataInfo() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextServer.method_get_support_data_info, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_save_support_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_support_data")
+    fileprivate static let method_save_support_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_support_data")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -562,6 +571,7 @@ open class TextServer: RefCounted {
     /// > Note: This function is used by during project export, to include TextServer database.
     /// 
     public final func saveSupportData(filename: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let filename = GString(filename)
         withUnsafePointer(to: filename.content) { pArg0 in
@@ -577,8 +587,27 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_is_locale_right_to_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_locale_right_to_left")
+    fileprivate static let method_get_support_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_support_data")
+        return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2362200018)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns default TextServer database (e.g. ICU break iterators and dictionaries).
+    public final func getSupportData() -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: PackedByteArray = PackedByteArray ()
+        gi.object_method_bind_ptrcall(TextServer.method_get_support_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
+    }
+    
+    fileprivate static let method_is_locale_right_to_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_locale_right_to_left")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -590,6 +619,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if locale is right-to-left.
     public final func isLocaleRightToLeft(locale: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let locale = GString(locale)
         withUnsafePointer(to: locale.content) { pArg0 in
@@ -605,8 +635,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_name_to_tag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("name_to_tag")
+    fileprivate static let method_name_to_tag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("name_to_tag")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -618,6 +648,7 @@ open class TextServer: RefCounted {
     
     /// Converts readable feature, variation, script, or language name to OpenType tag.
     public final func nameToTag(name: String) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -633,8 +664,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_tag_to_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tag_to_name")
+    fileprivate static let method_tag_to_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tag_to_name")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -646,6 +677,7 @@ open class TextServer: RefCounted {
     
     /// Converts OpenType tag to readable feature, variation, script, or language name.
     public final func tagToName(tag: Int) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: tag) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -660,8 +692,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_has: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has")
+    fileprivate static let method_has: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -673,6 +705,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if `rid` is valid resource owned by this text server.
     public final func has(rid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -687,8 +720,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_free_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("free_rid")
+    fileprivate static let method_free_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("free_rid")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -700,6 +733,7 @@ open class TextServer: RefCounted {
     
     /// Frees an object created by this ``TextServer``.
     public final func freeRid(_ rid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -713,8 +747,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_create_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_font")
+    fileprivate static let method_create_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_font")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -726,13 +760,14 @@ open class TextServer: RefCounted {
     
     /// Creates a new, empty font cache entry resource. To free the resulting resource, use the ``freeRid(_:)`` method.
     public final func createFont() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(TextServer.method_create_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_create_font_linked_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_font_linked_variation")
+    fileprivate static let method_create_font_linked_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_font_linked_variation")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 41030802)!
@@ -744,6 +779,7 @@ open class TextServer: RefCounted {
     
     /// Creates a new variation existing font which is reusing the same glyph cache and font data. To free the resulting resource, use the ``freeRid(_:)`` method.
     public final func createFontLinkedVariation(fontRid: RID) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -758,8 +794,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_data")
+    fileprivate static let method_font_set_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_data")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1355495400)!
@@ -771,6 +807,7 @@ open class TextServer: RefCounted {
     
     /// Sets font source data, e.g contents of the dynamic font source file.
     public final func fontSetData(fontRid: RID, data: PackedByteArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -787,8 +824,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_set_face_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_face_index")
+    fileprivate static let method_font_set_face_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_face_index")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -800,6 +837,7 @@ open class TextServer: RefCounted {
     
     /// Sets an active face index in the TrueType / OpenType collection.
     public final func fontSetFaceIndex(fontRid: RID, faceIndex: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: faceIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -816,8 +854,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_face_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_face_index")
+    fileprivate static let method_font_get_face_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_face_index")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -829,6 +867,7 @@ open class TextServer: RefCounted {
     
     /// Returns an active face index in the TrueType / OpenType collection.
     public final func fontGetFaceIndex(fontRid: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -843,8 +882,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_face_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_face_count")
+    fileprivate static let method_font_get_face_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_face_count")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -856,6 +895,7 @@ open class TextServer: RefCounted {
     
     /// Returns number of faces in the TrueType / OpenType collection.
     public final func fontGetFaceCount(fontRid: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -870,8 +910,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_style: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_style")
+    fileprivate static let method_font_set_style: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_style")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 898466325)!
@@ -886,6 +926,7 @@ open class TextServer: RefCounted {
     /// > Note: This value is used for font matching only and will not affect font rendering. Use ``fontSetFaceIndex(fontRid:faceIndex:)``, ``fontSetVariationCoordinates(fontRid:variationCoordinates:)``, ``fontSetEmbolden(fontRid:strength:)``, or ``fontSetTransform(fontRid:transform:)`` instead.
     /// 
     public final func fontSetStyle(fontRid: RID, style: TextServer.FontStyle) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: style.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -902,8 +943,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_style: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_style")
+    fileprivate static let method_font_get_style: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_style")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3082502592)!
@@ -915,6 +956,7 @@ open class TextServer: RefCounted {
     
     /// Returns font style flags, see ``TextServer/FontStyle``.
     public final func fontGetStyle(fontRid: RID) -> TextServer.FontStyle {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.FontStyle = TextServer.FontStyle ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -929,8 +971,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_name")
+    fileprivate static let method_font_set_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_name")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -942,6 +984,7 @@ open class TextServer: RefCounted {
     
     /// Sets the font family name.
     public final func fontSetName(fontRid: RID, name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let name = GString(name)
             withUnsafePointer(to: name.content) { pArg1 in
@@ -959,8 +1002,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_name")
+    fileprivate static let method_font_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_name")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642473191)!
@@ -972,6 +1015,7 @@ open class TextServer: RefCounted {
     
     /// Returns font family name.
     public final func fontGetName(fontRid: RID) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -986,8 +1030,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_font_get_ot_name_strings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_ot_name_strings")
+    fileprivate static let method_font_get_ot_name_strings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_ot_name_strings")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1882737106)!
@@ -997,9 +1041,10 @@ open class TextServer: RefCounted {
         
     }()
     
-    /// Returns ``GDictionary`` with OpenType font name strings (localized font names, version, description, license information, sample text, etc.).
-    public final func fontGetOtNameStrings(fontRid: RID) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    /// Returns ``VariantDictionary`` with OpenType font name strings (localized font names, version, description, license information, sample text, etc.).
+    public final func fontGetOtNameStrings(fontRid: RID) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1013,8 +1058,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_style_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_style_name")
+    fileprivate static let method_font_set_style_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_style_name")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -1026,6 +1071,7 @@ open class TextServer: RefCounted {
     
     /// Sets the font style name.
     public final func fontSetStyleName(fontRid: RID, name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let name = GString(name)
             withUnsafePointer(to: name.content) { pArg1 in
@@ -1043,8 +1089,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_style_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_style_name")
+    fileprivate static let method_font_get_style_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_style_name")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642473191)!
@@ -1056,6 +1102,7 @@ open class TextServer: RefCounted {
     
     /// Returns font style name.
     public final func fontGetStyleName(fontRid: RID) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1070,8 +1117,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_font_set_weight: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_weight")
+    fileprivate static let method_font_set_weight: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_weight")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1086,6 +1133,7 @@ open class TextServer: RefCounted {
     /// > Note: This value is used for font matching only and will not affect font rendering. Use ``fontSetFaceIndex(fontRid:faceIndex:)``, ``fontSetVariationCoordinates(fontRid:variationCoordinates:)``, or ``fontSetEmbolden(fontRid:strength:)`` instead.
     /// 
     public final func fontSetWeight(fontRid: RID, weight: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: weight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1102,8 +1150,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_weight: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_weight")
+    fileprivate static let method_font_get_weight: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_weight")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1115,6 +1163,7 @@ open class TextServer: RefCounted {
     
     /// Returns weight (boldness) of the font. A value in the `100...999` range, normal font weight is `400`, bold font weight is `700`.
     public final func fontGetWeight(fontRid: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1129,8 +1178,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_stretch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_stretch")
+    fileprivate static let method_font_set_stretch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_stretch")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1145,6 +1194,7 @@ open class TextServer: RefCounted {
     /// > Note: This value is used for font matching only and will not affect font rendering. Use ``fontSetFaceIndex(fontRid:faceIndex:)``, ``fontSetVariationCoordinates(fontRid:variationCoordinates:)``, or ``fontSetTransform(fontRid:transform:)`` instead.
     /// 
     public final func fontSetStretch(fontRid: RID, weight: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: weight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1161,8 +1211,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_stretch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_stretch")
+    fileprivate static let method_font_get_stretch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_stretch")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1174,6 +1224,7 @@ open class TextServer: RefCounted {
     
     /// Returns font stretch amount, compared to a normal width. A percentage value between `50%` and `200%`.
     public final func fontGetStretch(fontRid: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1188,8 +1239,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_antialiasing")
+    fileprivate static let method_font_set_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_antialiasing")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 958337235)!
@@ -1201,6 +1252,7 @@ open class TextServer: RefCounted {
     
     /// Sets font anti-aliasing mode.
     public final func fontSetAntialiasing(fontRid: RID, antialiasing: TextServer.FontAntialiasing) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: antialiasing.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1217,8 +1269,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_antialiasing")
+    fileprivate static let method_font_get_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_antialiasing")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3389420495)!
@@ -1230,6 +1282,7 @@ open class TextServer: RefCounted {
     
     /// Returns font anti-aliasing mode.
     public final func fontGetAntialiasing(fontRid: RID) -> TextServer.FontAntialiasing {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1244,8 +1297,8 @@ open class TextServer: RefCounted {
         return TextServer.FontAntialiasing (rawValue: _result)!
     }
     
-    fileprivate static var method_font_set_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_disable_embedded_bitmaps")
+    fileprivate static let method_font_set_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_disable_embedded_bitmaps")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1257,6 +1310,7 @@ open class TextServer: RefCounted {
     
     /// If set to `true`, embedded font bitmap loading is disabled (bitmap-only and color fonts ignore this property).
     public final func fontSetDisableEmbeddedBitmaps(fontRid: RID, disableEmbeddedBitmaps: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: disableEmbeddedBitmaps) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1273,8 +1327,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_disable_embedded_bitmaps")
+    fileprivate static let method_font_get_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_disable_embedded_bitmaps")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1286,6 +1340,7 @@ open class TextServer: RefCounted {
     
     /// Returns whether the font's embedded bitmap loading is disabled.
     public final func fontGetDisableEmbeddedBitmaps(fontRid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1300,8 +1355,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_generate_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_generate_mipmaps")
+    fileprivate static let method_font_set_generate_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_generate_mipmaps")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1313,6 +1368,7 @@ open class TextServer: RefCounted {
     
     /// If set to `true` font texture mipmap generation is enabled.
     public final func fontSetGenerateMipmaps(fontRid: RID, generateMipmaps: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: generateMipmaps) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1329,8 +1385,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_generate_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_generate_mipmaps")
+    fileprivate static let method_font_get_generate_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_generate_mipmaps")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1342,6 +1398,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if font texture mipmap generation is enabled.
     public final func fontGetGenerateMipmaps(fontRid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1356,8 +1413,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_multichannel_signed_distance_field")
+    fileprivate static let method_font_set_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_multichannel_signed_distance_field")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1372,6 +1429,7 @@ open class TextServer: RefCounted {
     /// > Note: MSDF font rendering does not render glyphs with overlapping shapes correctly. Overlapping shapes are not valid per the OpenType standard, but are still commonly found in many font files, especially those converted by Google Fonts. To avoid issues with overlapping glyphs, consider downloading the font file directly from the type foundry instead of relying on Google Fonts.
     /// 
     public final func fontSetMultichannelSignedDistanceField(fontRid: RID, msdf: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: msdf) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1388,8 +1446,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_is_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_is_multichannel_signed_distance_field")
+    fileprivate static let method_font_is_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_is_multichannel_signed_distance_field")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1401,6 +1459,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if glyphs of all sizes are rendered using single multichannel signed distance field generated from the dynamic font vector data.
     public final func fontIsMultichannelSignedDistanceField(fontRid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1415,8 +1474,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_msdf_pixel_range")
+    fileprivate static let method_font_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_msdf_pixel_range")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1428,6 +1487,7 @@ open class TextServer: RefCounted {
     
     /// Sets the width of the range around the shape between the minimum and maximum representable signed distance.
     public final func fontSetMsdfPixelRange(fontRid: RID, msdfPixelRange: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: msdfPixelRange) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1444,8 +1504,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_msdf_pixel_range")
+    fileprivate static let method_font_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_msdf_pixel_range")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1457,6 +1517,7 @@ open class TextServer: RefCounted {
     
     /// Returns the width of the range around the shape between the minimum and maximum representable signed distance.
     public final func fontGetMsdfPixelRange(fontRid: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1471,8 +1532,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_msdf_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_msdf_size")
+    fileprivate static let method_font_set_msdf_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_msdf_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1484,6 +1545,7 @@ open class TextServer: RefCounted {
     
     /// Sets source font size used to generate MSDF textures.
     public final func fontSetMsdfSize(fontRid: RID, msdfSize: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: msdfSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1500,8 +1562,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_msdf_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_msdf_size")
+    fileprivate static let method_font_get_msdf_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_msdf_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1513,6 +1575,7 @@ open class TextServer: RefCounted {
     
     /// Returns source font size used to generate MSDF textures.
     public final func fontGetMsdfSize(fontRid: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1527,8 +1590,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_fixed_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_fixed_size")
+    fileprivate static let method_font_set_fixed_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_fixed_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1540,6 +1603,7 @@ open class TextServer: RefCounted {
     
     /// Sets bitmap font fixed size. If set to value greater than zero, same cache entry will be used for all font sizes.
     public final func fontSetFixedSize(fontRid: RID, fixedSize: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: fixedSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1556,8 +1620,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_fixed_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_fixed_size")
+    fileprivate static let method_font_get_fixed_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_fixed_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1569,6 +1633,7 @@ open class TextServer: RefCounted {
     
     /// Returns bitmap font fixed size.
     public final func fontGetFixedSize(fontRid: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1583,8 +1648,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_fixed_size_scale_mode")
+    fileprivate static let method_font_set_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_fixed_size_scale_mode")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1029390307)!
@@ -1596,6 +1661,7 @@ open class TextServer: RefCounted {
     
     /// Sets bitmap font scaling mode. This property is used only if `fixed_size` is greater than zero.
     public final func fontSetFixedSizeScaleMode(fontRid: RID, fixedSizeScaleMode: TextServer.FixedSizeScaleMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: fixedSizeScaleMode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1612,8 +1678,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_fixed_size_scale_mode")
+    fileprivate static let method_font_get_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_fixed_size_scale_mode")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4113120379)!
@@ -1625,6 +1691,7 @@ open class TextServer: RefCounted {
     
     /// Returns bitmap font scaling mode.
     public final func fontGetFixedSizeScaleMode(fontRid: RID) -> TextServer.FixedSizeScaleMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1639,8 +1706,8 @@ open class TextServer: RefCounted {
         return TextServer.FixedSizeScaleMode (rawValue: _result)!
     }
     
-    fileprivate static var method_font_set_allow_system_fallback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_allow_system_fallback")
+    fileprivate static let method_font_set_allow_system_fallback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_allow_system_fallback")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1652,6 +1719,7 @@ open class TextServer: RefCounted {
     
     /// If set to `true`, system fonts can be automatically used as fallbacks.
     public final func fontSetAllowSystemFallback(fontRid: RID, allowSystemFallback: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: allowSystemFallback) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1668,8 +1736,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_is_allow_system_fallback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_is_allow_system_fallback")
+    fileprivate static let method_font_is_allow_system_fallback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_is_allow_system_fallback")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1681,6 +1749,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if system fonts can be automatically used as fallbacks.
     public final func fontIsAllowSystemFallback(fontRid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1695,8 +1764,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_force_autohinter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_force_autohinter")
+    fileprivate static let method_font_set_force_autohinter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_force_autohinter")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1708,6 +1777,7 @@ open class TextServer: RefCounted {
     
     /// If set to `true` auto-hinting is preferred over font built-in hinting.
     public final func fontSetForceAutohinter(fontRid: RID, forceAutohinter: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: forceAutohinter) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1724,8 +1794,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_is_force_autohinter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_is_force_autohinter")
+    fileprivate static let method_font_is_force_autohinter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_is_force_autohinter")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1737,6 +1807,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if auto-hinting is supported and preferred over font built-in hinting. Used by dynamic fonts only.
     public final func fontIsForceAutohinter(fontRid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1751,8 +1822,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_hinting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_hinting")
+    fileprivate static let method_font_set_hinting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_hinting")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1520010864)!
@@ -1764,6 +1835,7 @@ open class TextServer: RefCounted {
     
     /// Sets font hinting mode. Used by dynamic fonts only.
     public final func fontSetHinting(fontRid: RID, hinting: TextServer.Hinting) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: hinting.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1780,8 +1852,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_hinting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_hinting")
+    fileprivate static let method_font_get_hinting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_hinting")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3971592737)!
@@ -1793,6 +1865,7 @@ open class TextServer: RefCounted {
     
     /// Returns the font hinting mode. Used by dynamic fonts only.
     public final func fontGetHinting(fontRid: RID) -> TextServer.Hinting {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1807,8 +1880,8 @@ open class TextServer: RefCounted {
         return TextServer.Hinting (rawValue: _result)!
     }
     
-    fileprivate static var method_font_set_subpixel_positioning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_subpixel_positioning")
+    fileprivate static let method_font_set_subpixel_positioning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_subpixel_positioning")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3830459669)!
@@ -1820,6 +1893,7 @@ open class TextServer: RefCounted {
     
     /// Sets font subpixel glyph positioning mode.
     public final func fontSetSubpixelPositioning(fontRid: RID, subpixelPositioning: TextServer.SubpixelPositioning) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: subpixelPositioning.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1836,8 +1910,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_subpixel_positioning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_subpixel_positioning")
+    fileprivate static let method_font_get_subpixel_positioning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_subpixel_positioning")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2752233671)!
@@ -1849,6 +1923,7 @@ open class TextServer: RefCounted {
     
     /// Returns font subpixel glyph positioning mode.
     public final func fontGetSubpixelPositioning(fontRid: RID) -> TextServer.SubpixelPositioning {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1863,8 +1938,66 @@ open class TextServer: RefCounted {
         return TextServer.SubpixelPositioning (rawValue: _result)!
     }
     
-    fileprivate static var method_font_set_embolden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_embolden")
+    fileprivate static let method_font_set_keep_rounding_remainders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_keep_rounding_remainders")
+        return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets glyph position rounding behavior. If set to `true`, when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled.
+    public final func fontSetKeepRoundingRemainders(fontRid: RID, keepRoundingRemainders: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: fontRid.content) { pArg0 in
+            withUnsafePointer(to: keepRoundingRemainders) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_font_get_keep_rounding_remainders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_keep_rounding_remainders")
+        return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns glyph position rounding behavior. If set to `true`, when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled.
+    public final func fontGetKeepRoundingRemainders(fontRid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: fontRid.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_font_set_embolden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_embolden")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -1876,6 +2009,7 @@ open class TextServer: RefCounted {
     
     /// Sets font embolden strength. If `strength` is not equal to zero, emboldens the font outlines. Negative values reduce the outline thickness.
     public final func fontSetEmbolden(fontRid: RID, strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: strength) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1892,8 +2026,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_embolden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_embolden")
+    fileprivate static let method_font_get_embolden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_embolden")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -1905,6 +2039,7 @@ open class TextServer: RefCounted {
     
     /// Returns font embolden strength.
     public final func fontGetEmbolden(fontRid: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1919,8 +2054,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_spacing")
+    fileprivate static let method_font_set_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_spacing")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1307259930)!
@@ -1932,6 +2067,7 @@ open class TextServer: RefCounted {
     
     /// Sets the spacing for `spacing` (see ``TextServer.SpacingType``) to `value` in pixels (not relative to the font size).
     public final func fontSetSpacing(fontRid: RID, spacing: TextServer.SpacingType, value: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
                 withUnsafePointer(to: value) { pArg2 in
@@ -1951,8 +2087,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_spacing")
+    fileprivate static let method_font_get_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_spacing")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1213653558)!
@@ -1964,6 +2100,7 @@ open class TextServer: RefCounted {
     
     /// Returns the spacing for `spacing` (see ``TextServer.SpacingType``) in pixels (not relative to the font size).
     public final func fontGetSpacing(fontRid: RID, spacing: TextServer.SpacingType) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
@@ -1981,8 +2118,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_baseline_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_baseline_offset")
+    fileprivate static let method_font_set_baseline_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_baseline_offset")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -1994,6 +2131,7 @@ open class TextServer: RefCounted {
     
     /// Sets extra baseline offset (as a fraction of font height).
     public final func fontSetBaselineOffset(fontRid: RID, baselineOffset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: baselineOffset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2010,8 +2148,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_baseline_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_baseline_offset")
+    fileprivate static let method_font_get_baseline_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_baseline_offset")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2023,6 +2161,7 @@ open class TextServer: RefCounted {
     
     /// Returns extra baseline offset (as a fraction of font height).
     public final func fontGetBaselineOffset(fontRid: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2037,8 +2176,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_transform")
+    fileprivate static let method_font_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_transform")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -2053,6 +2192,7 @@ open class TextServer: RefCounted {
     /// For example, to simulate italic typeface by slanting, apply the following transform `Transform2D(1.0, slant, 0.0, 1.0, 0.0, 0.0)`.
     /// 
     public final func fontSetTransform(fontRid: RID, transform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2069,8 +2209,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_transform")
+    fileprivate static let method_font_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_transform")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 213527486)!
@@ -2082,6 +2222,7 @@ open class TextServer: RefCounted {
     
     /// Returns 2D transform applied to the font outlines.
     public final func fontGetTransform(fontRid: RID) -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2096,8 +2237,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_variation_coordinates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_variation_coordinates")
+    fileprivate static let method_font_set_variation_coordinates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_variation_coordinates")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1217542888)!
@@ -2108,7 +2249,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Sets variation coordinates for the specified font cache entry. See ``fontSupportedVariationList(fontRid:)`` for more info.
-    public final func fontSetVariationCoordinates(fontRid: RID, variationCoordinates: GDictionary) {
+    public final func fontSetVariationCoordinates(fontRid: RID, variationCoordinates: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: variationCoordinates.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2125,8 +2267,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_variation_coordinates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_variation_coordinates")
+    fileprivate static let method_font_get_variation_coordinates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_variation_coordinates")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1882737106)!
@@ -2137,8 +2279,9 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns variation coordinates for the specified font cache entry. See ``fontSupportedVariationList(fontRid:)`` for more info.
-    public final func fontGetVariationCoordinates(fontRid: RID) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func fontGetVariationCoordinates(fontRid: RID) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2152,8 +2295,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_oversampling")
+    fileprivate static let method_font_set_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_oversampling")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2165,6 +2308,7 @@ open class TextServer: RefCounted {
     
     /// Sets font oversampling factor, if set to `0.0` global oversampling factor is used instead. Used by dynamic fonts only.
     public final func fontSetOversampling(fontRid: RID, oversampling: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: oversampling) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2181,8 +2325,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_oversampling")
+    fileprivate static let method_font_get_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_oversampling")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2194,6 +2338,7 @@ open class TextServer: RefCounted {
     
     /// Returns font oversampling factor, if set to `0.0` global oversampling factor is used instead. Used by dynamic fonts only.
     public final func fontGetOversampling(fontRid: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2208,8 +2353,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_size_cache_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_size_cache_list")
+    fileprivate static let method_font_get_size_cache_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_size_cache_list")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -2220,7 +2365,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns list of the font sizes in the cache. Each size is ``Vector2i`` with font size and outline size.
-    public final func fontGetSizeCacheList(fontRid: RID) -> VariantCollection<Vector2i> {
+    public final func fontGetSizeCacheList(fontRid: RID) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2232,11 +2378,11 @@ open class TextServer: RefCounted {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_font_clear_size_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_clear_size_cache")
+    fileprivate static let method_font_clear_size_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_clear_size_cache")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -2248,6 +2394,7 @@ open class TextServer: RefCounted {
     
     /// Removes all font sizes from the cache entry.
     public final func fontClearSizeCache(fontRid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2261,8 +2408,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_remove_size_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_remove_size_cache")
+    fileprivate static let method_font_remove_size_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_remove_size_cache")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2450610377)!
@@ -2274,6 +2421,7 @@ open class TextServer: RefCounted {
     
     /// Removes specified font size from the cache entry.
     public final func fontRemoveSizeCache(fontRid: RID, size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2290,8 +2438,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_set_ascent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_ascent")
+    fileprivate static let method_font_set_ascent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_ascent")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1892459533)!
@@ -2303,6 +2451,7 @@ open class TextServer: RefCounted {
     
     /// Sets the font ascent (number of pixels above the baseline).
     public final func fontSetAscent(fontRid: RID, size: Int, ascent: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: ascent) { pArg2 in
@@ -2322,8 +2471,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_ascent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_ascent")
+    fileprivate static let method_font_get_ascent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_ascent")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 755457166)!
@@ -2335,6 +2484,7 @@ open class TextServer: RefCounted {
     
     /// Returns the font ascent (number of pixels above the baseline).
     public final func fontGetAscent(fontRid: RID, size: Int) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2352,8 +2502,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_descent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_descent")
+    fileprivate static let method_font_set_descent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_descent")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1892459533)!
@@ -2365,6 +2515,7 @@ open class TextServer: RefCounted {
     
     /// Sets the font descent (number of pixels below the baseline).
     public final func fontSetDescent(fontRid: RID, size: Int, descent: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: descent) { pArg2 in
@@ -2384,8 +2535,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_descent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_descent")
+    fileprivate static let method_font_get_descent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_descent")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 755457166)!
@@ -2397,6 +2548,7 @@ open class TextServer: RefCounted {
     
     /// Returns the font descent (number of pixels below the baseline).
     public final func fontGetDescent(fontRid: RID, size: Int) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2414,8 +2566,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_underline_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_underline_position")
+    fileprivate static let method_font_set_underline_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_underline_position")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1892459533)!
@@ -2427,6 +2579,7 @@ open class TextServer: RefCounted {
     
     /// Sets pixel offset of the underline below the baseline.
     public final func fontSetUnderlinePosition(fontRid: RID, size: Int, underlinePosition: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: underlinePosition) { pArg2 in
@@ -2446,8 +2599,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_underline_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_underline_position")
+    fileprivate static let method_font_get_underline_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_underline_position")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 755457166)!
@@ -2459,6 +2612,7 @@ open class TextServer: RefCounted {
     
     /// Returns pixel offset of the underline below the baseline.
     public final func fontGetUnderlinePosition(fontRid: RID, size: Int) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2476,8 +2630,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_underline_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_underline_thickness")
+    fileprivate static let method_font_set_underline_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_underline_thickness")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1892459533)!
@@ -2489,6 +2643,7 @@ open class TextServer: RefCounted {
     
     /// Sets thickness of the underline in pixels.
     public final func fontSetUnderlineThickness(fontRid: RID, size: Int, underlineThickness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: underlineThickness) { pArg2 in
@@ -2508,8 +2663,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_underline_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_underline_thickness")
+    fileprivate static let method_font_get_underline_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_underline_thickness")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 755457166)!
@@ -2521,6 +2676,7 @@ open class TextServer: RefCounted {
     
     /// Returns thickness of the underline in pixels.
     public final func fontGetUnderlineThickness(fontRid: RID, size: Int) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2538,8 +2694,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_scale")
+    fileprivate static let method_font_set_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_scale")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1892459533)!
@@ -2551,6 +2707,7 @@ open class TextServer: RefCounted {
     
     /// Sets scaling factor of the color bitmap font.
     public final func fontSetScale(fontRid: RID, size: Int, scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: scale) { pArg2 in
@@ -2570,8 +2727,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_scale")
+    fileprivate static let method_font_get_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_scale")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 755457166)!
@@ -2583,6 +2740,7 @@ open class TextServer: RefCounted {
     
     /// Returns scaling factor of the color bitmap font.
     public final func fontGetScale(fontRid: RID, size: Int) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2600,8 +2758,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_texture_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_texture_count")
+    fileprivate static let method_font_get_texture_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_texture_count")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1311001310)!
@@ -2613,6 +2771,7 @@ open class TextServer: RefCounted {
     
     /// Returns number of textures used by font cache entry.
     public final func fontGetTextureCount(fontRid: RID, size: Vector2i) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2630,8 +2789,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_clear_textures: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_clear_textures")
+    fileprivate static let method_font_clear_textures: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_clear_textures")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2450610377)!
@@ -2646,6 +2805,7 @@ open class TextServer: RefCounted {
     /// > Note: This function will not remove glyphs associated with the texture, use ``fontRemoveGlyph(fontRid:size:glyph:)`` to remove them manually.
     /// 
     public final func fontClearTextures(fontRid: RID, size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2662,8 +2822,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_remove_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_remove_texture")
+    fileprivate static let method_font_remove_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_remove_texture")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3810512262)!
@@ -2678,6 +2838,7 @@ open class TextServer: RefCounted {
     /// > Note: This function will not remove glyphs associated with the texture, remove them manually, using ``fontRemoveGlyph(fontRid:size:glyph:)``.
     /// 
     public final func fontRemoveTexture(fontRid: RID, size: Vector2i, textureIndex: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
@@ -2697,8 +2858,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_set_texture_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_texture_image")
+    fileprivate static let method_font_set_texture_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_texture_image")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2354485091)!
@@ -2710,6 +2871,7 @@ open class TextServer: RefCounted {
     
     /// Sets font cache texture image data.
     public final func fontSetTextureImage(fontRid: RID, size: Vector2i, textureIndex: Int, image: Image?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
@@ -2732,8 +2894,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_texture_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_texture_image")
+    fileprivate static let method_font_get_texture_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_texture_image")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2451761155)!
@@ -2745,6 +2907,7 @@ open class TextServer: RefCounted {
     
     /// Returns font cache texture image data.
     public final func fontGetTextureImage(fontRid: RID, size: Vector2i, textureIndex: Int) -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2762,11 +2925,11 @@ open class TextServer: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_font_set_texture_offsets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_texture_offsets")
+    fileprivate static let method_font_set_texture_offsets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_texture_offsets")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3005398047)!
@@ -2778,6 +2941,7 @@ open class TextServer: RefCounted {
     
     /// Sets array containing glyph packing data.
     public final func fontSetTextureOffsets(fontRid: RID, size: Vector2i, textureIndex: Int, offset: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
@@ -2800,8 +2964,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_texture_offsets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_texture_offsets")
+    fileprivate static let method_font_get_texture_offsets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_texture_offsets")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3420028887)!
@@ -2813,6 +2977,7 @@ open class TextServer: RefCounted {
     
     /// Returns array containing glyph packing data.
     public final func fontGetTextureOffsets(fontRid: RID, size: Vector2i, textureIndex: Int) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2833,8 +2998,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_glyph_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_list")
+    fileprivate static let method_font_get_glyph_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_list")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 46086620)!
@@ -2846,6 +3011,7 @@ open class TextServer: RefCounted {
     
     /// Returns list of rendered glyphs in the cache entry.
     public final func fontGetGlyphList(fontRid: RID, size: Vector2i) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2863,8 +3029,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_clear_glyphs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_clear_glyphs")
+    fileprivate static let method_font_clear_glyphs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_clear_glyphs")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2450610377)!
@@ -2879,6 +3045,7 @@ open class TextServer: RefCounted {
     /// > Note: This function will not remove textures associated with the glyphs, use ``fontRemoveTexture(fontRid:size:textureIndex:)`` to remove them manually.
     /// 
     public final func fontClearGlyphs(fontRid: RID, size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2895,8 +3062,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_remove_glyph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_remove_glyph")
+    fileprivate static let method_font_remove_glyph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_remove_glyph")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3810512262)!
@@ -2911,6 +3078,7 @@ open class TextServer: RefCounted {
     /// > Note: This function will not remove textures associated with the glyphs, use ``fontRemoveTexture(fontRid:size:textureIndex:)`` to remove them manually.
     /// 
     public final func fontRemoveGlyph(fontRid: RID, size: Vector2i, glyph: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -2930,8 +3098,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_glyph_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_advance")
+    fileprivate static let method_font_get_glyph_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_advance")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2555689501)!
@@ -2946,6 +3114,7 @@ open class TextServer: RefCounted {
     /// > Note: Advance for glyphs outlines is the same as the base glyph advance and is not saved.
     /// 
     public final func fontGetGlyphAdvance(fontRid: RID, size: Int, glyph: Int) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2966,8 +3135,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_glyph_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_glyph_advance")
+    fileprivate static let method_font_set_glyph_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_glyph_advance")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3219397315)!
@@ -2982,6 +3151,7 @@ open class TextServer: RefCounted {
     /// > Note: Advance for glyphs outlines is the same as the base glyph advance and is not saved.
     /// 
     public final func fontSetGlyphAdvance(fontRid: RID, size: Int, glyph: Int, advance: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -3004,8 +3174,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_glyph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_offset")
+    fileprivate static let method_font_get_glyph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_offset")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 513728628)!
@@ -3017,6 +3187,7 @@ open class TextServer: RefCounted {
     
     /// Returns glyph offset from the baseline.
     public final func fontGetGlyphOffset(fontRid: RID, size: Vector2i, glyph: Int) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3037,8 +3208,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_glyph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_glyph_offset")
+    fileprivate static let method_font_set_glyph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_glyph_offset")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1812632090)!
@@ -3050,6 +3221,7 @@ open class TextServer: RefCounted {
     
     /// Sets glyph offset from the baseline.
     public final func fontSetGlyphOffset(fontRid: RID, size: Vector2i, glyph: Int, offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -3072,8 +3244,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_glyph_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_size")
+    fileprivate static let method_font_get_glyph_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 513728628)!
@@ -3085,6 +3257,7 @@ open class TextServer: RefCounted {
     
     /// Returns size of the glyph.
     public final func fontGetGlyphSize(fontRid: RID, size: Vector2i, glyph: Int) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3105,8 +3278,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_glyph_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_glyph_size")
+    fileprivate static let method_font_set_glyph_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_glyph_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1812632090)!
@@ -3118,6 +3291,7 @@ open class TextServer: RefCounted {
     
     /// Sets size of the glyph.
     public final func fontSetGlyphSize(fontRid: RID, size: Vector2i, glyph: Int, glSize: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -3140,8 +3314,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_glyph_uv_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_uv_rect")
+    fileprivate static let method_font_get_glyph_uv_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_uv_rect")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2274268786)!
@@ -3153,6 +3327,7 @@ open class TextServer: RefCounted {
     
     /// Returns rectangle in the cache texture containing the glyph.
     public final func fontGetGlyphUvRect(fontRid: RID, size: Vector2i, glyph: Int) -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3173,8 +3348,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_glyph_uv_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_glyph_uv_rect")
+    fileprivate static let method_font_set_glyph_uv_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_glyph_uv_rect")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1973324081)!
@@ -3186,6 +3361,7 @@ open class TextServer: RefCounted {
     
     /// Sets rectangle in the cache texture containing the glyph.
     public final func fontSetGlyphUvRect(fontRid: RID, size: Vector2i, glyph: Int, uvRect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -3208,8 +3384,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_glyph_texture_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_texture_idx")
+    fileprivate static let method_font_get_glyph_texture_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_texture_idx")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4292800474)!
@@ -3221,6 +3397,7 @@ open class TextServer: RefCounted {
     
     /// Returns index of the cache texture containing the glyph.
     public final func fontGetGlyphTextureIdx(fontRid: RID, size: Vector2i, glyph: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3241,8 +3418,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_glyph_texture_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_glyph_texture_idx")
+    fileprivate static let method_font_set_glyph_texture_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_glyph_texture_idx")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4254580980)!
@@ -3254,6 +3431,7 @@ open class TextServer: RefCounted {
     
     /// Sets index of the cache texture containing the glyph.
     public final func fontSetGlyphTextureIdx(fontRid: RID, size: Vector2i, glyph: Int, textureIdx: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -3276,8 +3454,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_glyph_texture_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_texture_rid")
+    fileprivate static let method_font_get_glyph_texture_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_texture_rid")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1451696141)!
@@ -3292,6 +3470,7 @@ open class TextServer: RefCounted {
     /// > Note: If there are pending glyphs to render, calling this function might trigger the texture cache update.
     /// 
     public final func fontGetGlyphTextureRid(fontRid: RID, size: Vector2i, glyph: Int) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3312,8 +3491,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_glyph_texture_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_texture_size")
+    fileprivate static let method_font_get_glyph_texture_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_texture_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 513728628)!
@@ -3328,6 +3507,7 @@ open class TextServer: RefCounted {
     /// > Note: If there are pending glyphs to render, calling this function might trigger the texture cache update.
     /// 
     public final func fontGetGlyphTextureSize(fontRid: RID, size: Vector2i, glyph: Int) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3348,8 +3528,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_glyph_contours: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_contours")
+    fileprivate static let method_font_get_glyph_contours: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_contours")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2903964473)!
@@ -3359,7 +3539,7 @@ open class TextServer: RefCounted {
         
     }()
     
-    /// Returns outline contours of the glyph as a ``GDictionary`` with the following contents:
+    /// Returns outline contours of the glyph as a ``VariantDictionary`` with the following contents:
     /// 
     /// `points`         - ``PackedVector3Array``, containing outline points. `x` and `y` are point coordinates. `z` is the type of the point, using the ``TextServer/ContourPointTag`` values.
     /// 
@@ -3367,8 +3547,19 @@ open class TextServer: RefCounted {
     /// 
     /// `orientation`    - [bool], contour orientation. If `true`, clockwise contours must be filled.
     /// 
-    public final func fontGetGlyphContours(font: RID, size: Int, index: Int) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    /// - Two successive ``ContourPointTag/on`` points indicate a line segment.
+    /// 
+    /// - One ``ContourPointTag/offConic`` point between two ``ContourPointTag/on`` points indicates a single conic (quadratic) Bézier arc.
+    /// 
+    /// - Two ``ContourPointTag/offCubic`` points between two ``ContourPointTag/on`` points indicate a single cubic Bézier arc.
+    /// 
+    /// - Two successive ``ContourPointTag/offConic`` points indicate two successive conic (quadratic) Bézier arcs with a virtual ``ContourPointTag/on`` point at their middle.
+    /// 
+    /// - Each contour is closed. The last point of a contour uses the first point of a contour as its next point, and vice versa. The first point can be ``ContourPointTag/offConic`` point.
+    /// 
+    public final func fontGetGlyphContours(font: RID, size: Int, index: Int) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: font.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: index) { pArg2 in
@@ -3388,8 +3579,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_kerning_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_kerning_list")
+    fileprivate static let method_font_get_kerning_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_kerning_list")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1778388067)!
@@ -3400,7 +3591,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns list of the kerning overrides.
-    public final func fontGetKerningList(fontRid: RID, size: Int) -> VariantCollection<Vector2i> {
+    public final func fontGetKerningList(fontRid: RID, size: Int) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3415,11 +3607,11 @@ open class TextServer: RefCounted {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_font_clear_kerning_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_clear_kerning_map")
+    fileprivate static let method_font_clear_kerning_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_clear_kerning_map")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3431,6 +3623,7 @@ open class TextServer: RefCounted {
     
     /// Removes all kerning overrides.
     public final func fontClearKerningMap(fontRid: RID, size: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3447,8 +3640,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_remove_kerning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_remove_kerning")
+    fileprivate static let method_font_remove_kerning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_remove_kerning")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2141860016)!
@@ -3460,6 +3653,7 @@ open class TextServer: RefCounted {
     
     /// Removes kerning override for the pair of glyphs.
     public final func fontRemoveKerning(fontRid: RID, size: Int, glyphPair: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyphPair) { pArg2 in
@@ -3479,8 +3673,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_set_kerning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_kerning")
+    fileprivate static let method_font_set_kerning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_kerning")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3630965883)!
@@ -3492,6 +3686,7 @@ open class TextServer: RefCounted {
     
     /// Sets kerning for the pair of glyphs.
     public final func fontSetKerning(fontRid: RID, size: Int, glyphPair: Vector2i, kerning: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyphPair) { pArg2 in
@@ -3514,8 +3709,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_kerning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_kerning")
+    fileprivate static let method_font_get_kerning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_kerning")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1019980169)!
@@ -3527,6 +3722,7 @@ open class TextServer: RefCounted {
     
     /// Returns kerning for the pair of glyphs.
     public final func fontGetKerning(fontRid: RID, size: Int, glyphPair: Vector2i) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3547,8 +3743,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_glyph_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_glyph_index")
+    fileprivate static let method_font_get_glyph_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_glyph_index")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1765635060)!
@@ -3560,6 +3756,7 @@ open class TextServer: RefCounted {
     
     /// Returns the glyph index of a `char`, optionally modified by the `variationSelector`. See ``fontGetCharFromGlyphIndex(fontRid:size:glyphIndex:)``.
     public final func fontGetGlyphIndex(fontRid: RID, size: Int, char: Int, variationSelector: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3583,8 +3780,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_char_from_glyph_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_char_from_glyph_index")
+    fileprivate static let method_font_get_char_from_glyph_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_char_from_glyph_index")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2156738276)!
@@ -3596,6 +3793,7 @@ open class TextServer: RefCounted {
     
     /// Returns character code associated with `glyphIndex`, or `0` if `glyphIndex` is invalid. See ``fontGetGlyphIndex(fontRid:size:char:variationSelector:)``.
     public final func fontGetCharFromGlyphIndex(fontRid: RID, size: Int, glyphIndex: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -3616,8 +3814,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_has_char: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_has_char")
+    fileprivate static let method_font_has_char: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_has_char")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3120086654)!
@@ -3629,6 +3827,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if a Unicode `char` is available in the font.
     public final func fontHasChar(fontRid: RID, char: Int) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: char) { pArg1 in
@@ -3646,8 +3845,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_supported_chars: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_supported_chars")
+    fileprivate static let method_font_get_supported_chars: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_supported_chars")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642473191)!
@@ -3659,6 +3858,7 @@ open class TextServer: RefCounted {
     
     /// Returns a string containing all the characters available in the font.
     public final func fontGetSupportedChars(fontRid: RID) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3673,8 +3873,36 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_font_render_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_render_range")
+    fileprivate static let method_font_get_supported_glyphs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_supported_glyphs")
+        return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 788230395)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns an array containing all glyph indices in the font.
+    public final func fontGetSupportedGlyphs(fontRid: RID) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: PackedInt32Array = PackedInt32Array ()
+        withUnsafePointer(to: fontRid.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_supported_glyphs, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_font_render_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_render_range")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4254580980)!
@@ -3686,6 +3914,7 @@ open class TextServer: RefCounted {
     
     /// Renders the range of characters to the font cache texture.
     public final func fontRenderRange(fontRid: RID, size: Vector2i, start: Int, end: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: start) { pArg2 in
@@ -3708,8 +3937,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_render_glyph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_render_glyph")
+    fileprivate static let method_font_render_glyph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_render_glyph")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3810512262)!
@@ -3721,6 +3950,7 @@ open class TextServer: RefCounted {
     
     /// Renders specified glyph to the font cache texture.
     public final func fontRenderGlyph(fontRid: RID, size: Vector2i, index: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: index) { pArg2 in
@@ -3740,8 +3970,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_draw_glyph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_draw_glyph")
+    fileprivate static let method_font_draw_glyph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_draw_glyph")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1339057948)!
@@ -3758,6 +3988,7 @@ open class TextServer: RefCounted {
     /// > Note: If there are pending glyphs to render, calling this function might trigger the texture cache update.
     /// 
     public final func fontDrawGlyph(fontRid: RID, canvas: RID, size: Int, pos: Vector2, index: Int, color: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: size) { pArg2 in
@@ -3786,8 +4017,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_draw_glyph_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_draw_glyph_outline")
+    fileprivate static let method_font_draw_glyph_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_draw_glyph_outline")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2626165733)!
@@ -3804,6 +4035,7 @@ open class TextServer: RefCounted {
     /// > Note: If there are pending glyphs to render, calling this function might trigger the texture cache update.
     /// 
     public final func fontDrawGlyphOutline(fontRid: RID, canvas: RID, size: Int, outlineSize: Int, pos: Vector2, index: Int, color: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: size) { pArg2 in
@@ -3835,8 +4067,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_is_language_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_is_language_supported")
+    fileprivate static let method_font_is_language_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_is_language_supported")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3199320846)!
@@ -3848,6 +4080,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true`, if font supports given language (<a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639</a> code).
     public final func fontIsLanguageSupported(fontRid: RID, language: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let language = GString(language)
@@ -3866,8 +4099,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_language_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_language_support_override")
+    fileprivate static let method_font_set_language_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_language_support_override")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2313957094)!
@@ -3879,6 +4112,7 @@ open class TextServer: RefCounted {
     
     /// Adds override for ``fontIsLanguageSupported(fontRid:language:)``.
     public final func fontSetLanguageSupportOverride(fontRid: RID, language: String, supported: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let language = GString(language)
             withUnsafePointer(to: language.content) { pArg1 in
@@ -3899,8 +4133,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_language_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_language_support_override")
+    fileprivate static let method_font_get_language_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_language_support_override")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2829184646)!
@@ -3912,6 +4146,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if support override is enabled for the `language`.
     public final func fontGetLanguageSupportOverride(fontRid: RID, language: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let language = GString(language)
@@ -3930,8 +4165,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_remove_language_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_remove_language_support_override")
+    fileprivate static let method_font_remove_language_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_remove_language_support_override")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -3943,6 +4178,7 @@ open class TextServer: RefCounted {
     
     /// Remove language support override.
     public final func fontRemoveLanguageSupportOverride(fontRid: RID, language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let language = GString(language)
             withUnsafePointer(to: language.content) { pArg1 in
@@ -3960,8 +4196,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_language_support_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_language_support_overrides")
+    fileprivate static let method_font_get_language_support_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_language_support_overrides")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2801473409)!
@@ -3973,6 +4209,7 @@ open class TextServer: RefCounted {
     
     /// Returns list of language support overrides.
     public final func fontGetLanguageSupportOverrides(fontRid: RID) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3987,8 +4224,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_is_script_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_is_script_supported")
+    fileprivate static let method_font_is_script_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_is_script_supported")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3199320846)!
@@ -4000,6 +4237,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true`, if font supports given script (ISO 15924 code).
     public final func fontIsScriptSupported(fontRid: RID, script: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let script = GString(script)
@@ -4018,8 +4256,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_script_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_script_support_override")
+    fileprivate static let method_font_set_script_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_script_support_override")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2313957094)!
@@ -4031,6 +4269,7 @@ open class TextServer: RefCounted {
     
     /// Adds override for ``fontIsScriptSupported(fontRid:script:)``.
     public final func fontSetScriptSupportOverride(fontRid: RID, script: String, supported: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let script = GString(script)
             withUnsafePointer(to: script.content) { pArg1 in
@@ -4051,8 +4290,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_script_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_script_support_override")
+    fileprivate static let method_font_get_script_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_script_support_override")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2829184646)!
@@ -4064,6 +4303,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if support override is enabled for the `script`.
     public final func fontGetScriptSupportOverride(fontRid: RID, script: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let script = GString(script)
@@ -4082,8 +4322,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_remove_script_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_remove_script_support_override")
+    fileprivate static let method_font_remove_script_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_remove_script_support_override")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -4095,6 +4335,7 @@ open class TextServer: RefCounted {
     
     /// Removes script support override.
     public final func fontRemoveScriptSupportOverride(fontRid: RID, script: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             let script = GString(script)
             withUnsafePointer(to: script.content) { pArg1 in
@@ -4112,8 +4353,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_script_support_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_script_support_overrides")
+    fileprivate static let method_font_get_script_support_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_script_support_overrides")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2801473409)!
@@ -4125,6 +4366,7 @@ open class TextServer: RefCounted {
     
     /// Returns list of script support overrides.
     public final func fontGetScriptSupportOverrides(fontRid: RID) -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4139,8 +4381,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_set_opentype_feature_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_opentype_feature_overrides")
+    fileprivate static let method_font_set_opentype_feature_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_opentype_feature_overrides")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1217542888)!
@@ -4151,7 +4393,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Sets font OpenType feature set override.
-    public final func fontSetOpentypeFeatureOverrides(fontRid: RID, overrides: GDictionary) {
+    public final func fontSetOpentypeFeatureOverrides(fontRid: RID, overrides: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: overrides.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4168,8 +4411,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_font_get_opentype_feature_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_opentype_feature_overrides")
+    fileprivate static let method_font_get_opentype_feature_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_opentype_feature_overrides")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1882737106)!
@@ -4180,8 +4423,9 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns font OpenType feature set override.
-    public final func fontGetOpentypeFeatureOverrides(fontRid: RID) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func fontGetOpentypeFeatureOverrides(fontRid: RID) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4195,8 +4439,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_supported_feature_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_supported_feature_list")
+    fileprivate static let method_font_supported_feature_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_supported_feature_list")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1882737106)!
@@ -4207,8 +4451,9 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns the dictionary of the supported OpenType features.
-    public final func fontSupportedFeatureList(fontRid: RID) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func fontSupportedFeatureList(fontRid: RID) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4222,8 +4467,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_supported_variation_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_supported_variation_list")
+    fileprivate static let method_font_supported_variation_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_supported_variation_list")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1882737106)!
@@ -4234,8 +4479,9 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns the dictionary of the supported OpenType variation coordinates.
-    public final func fontSupportedVariationList(fontRid: RID) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func fontSupportedVariationList(fontRid: RID) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4249,8 +4495,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_font_get_global_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_get_global_oversampling")
+    fileprivate static let method_font_get_global_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_get_global_oversampling")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4262,13 +4508,14 @@ open class TextServer: RefCounted {
     
     /// Returns the font oversampling factor, shared by all fonts in the TextServer.
     public final func fontGetGlobalOversampling() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextServer.method_font_get_global_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_font_set_global_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("font_set_global_oversampling")
+    fileprivate static let method_font_set_global_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("font_set_global_oversampling")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4283,6 +4530,7 @@ open class TextServer: RefCounted {
     /// > Note: This value can be automatically changed by display server.
     /// 
     public final func fontSetGlobalOversampling(_ oversampling: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oversampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4296,8 +4544,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_get_hex_code_box_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hex_code_box_size")
+    fileprivate static let method_get_hex_code_box_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hex_code_box_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3016396712)!
@@ -4309,6 +4557,7 @@ open class TextServer: RefCounted {
     
     /// Returns size of the replacement character (box with character hexadecimal code that is drawn in place of invalid characters).
     public final func getHexCodeBoxSize(_ size: Int, index: Int) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
@@ -4326,8 +4575,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_draw_hex_code_box: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_hex_code_box")
+    fileprivate static let method_draw_hex_code_box: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_hex_code_box")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602046441)!
@@ -4339,6 +4588,7 @@ open class TextServer: RefCounted {
     
     /// Draws box displaying character hexadecimal code. Used for replacing missing characters.
     public final func drawHexCodeBox(canvas: RID, size: Int, pos: Vector2, index: Int, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canvas.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: pos) { pArg2 in
@@ -4364,8 +4614,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_create_shaped_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_shaped_text")
+    fileprivate static let method_create_shaped_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_shaped_text")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1231398698)!
@@ -4382,6 +4632,7 @@ open class TextServer: RefCounted {
     /// > Note: Orientation is ignored if server does not support ``Feature/verticalLayout`` feature (supported by ``TextServerAdvanced``).
     /// 
     public final func createShapedText(direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: orientation.rawValue) { pArg1 in
@@ -4399,8 +4650,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_clear")
+    fileprivate static let method_shaped_text_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_clear")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -4412,6 +4663,7 @@ open class TextServer: RefCounted {
     
     /// Clears text buffer (removes text and inline objects).
     public final func shapedTextClear(rid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4425,8 +4677,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_set_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_direction")
+    fileprivate static let method_shaped_text_set_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_direction")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1551430183)!
@@ -4441,6 +4693,7 @@ open class TextServer: RefCounted {
     /// > Note: Direction is ignored if server does not support ``Feature/bidiLayout`` feature (supported by ``TextServerAdvanced``).
     /// 
     public final func shapedTextSetDirection(shaped: RID, direction: TextServer.Direction = .auto) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4457,8 +4710,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_direction")
+    fileprivate static let method_shaped_text_get_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_direction")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3065904362)!
@@ -4470,6 +4723,7 @@ open class TextServer: RefCounted {
     
     /// Returns direction of the text.
     public final func shapedTextGetDirection(shaped: RID) -> TextServer.Direction {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4484,8 +4738,8 @@ open class TextServer: RefCounted {
         return TextServer.Direction (rawValue: _result)!
     }
     
-    fileprivate static var method_shaped_text_get_inferred_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_inferred_direction")
+    fileprivate static let method_shaped_text_get_inferred_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_inferred_direction")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3065904362)!
@@ -4497,6 +4751,7 @@ open class TextServer: RefCounted {
     
     /// Returns direction of the text, inferred by the BiDi algorithm.
     public final func shapedTextGetInferredDirection(shaped: RID) -> TextServer.Direction {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4511,8 +4766,8 @@ open class TextServer: RefCounted {
         return TextServer.Direction (rawValue: _result)!
     }
     
-    fileprivate static var method_shaped_text_set_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_bidi_override")
+    fileprivate static let method_shaped_text_set_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_bidi_override")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 684822712)!
@@ -4526,7 +4781,8 @@ open class TextServer: RefCounted {
     /// 
     /// Override ranges should cover full source text without overlaps. BiDi algorithm will be used on each range separately.
     /// 
-    public final func shapedTextSetBidiOverride(shaped: RID, override: GArray) {
+    public final func shapedTextSetBidiOverride(shaped: RID, override: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: override.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4543,8 +4799,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_set_custom_punctuation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_custom_punctuation")
+    fileprivate static let method_shaped_text_set_custom_punctuation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_custom_punctuation")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -4556,6 +4812,7 @@ open class TextServer: RefCounted {
     
     /// Sets custom punctuation character list, used for word breaking. If set to empty string, server defaults are used.
     public final func shapedTextSetCustomPunctuation(shaped: RID, punct: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             let punct = GString(punct)
             withUnsafePointer(to: punct.content) { pArg1 in
@@ -4573,8 +4830,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_custom_punctuation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_custom_punctuation")
+    fileprivate static let method_shaped_text_get_custom_punctuation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_custom_punctuation")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642473191)!
@@ -4586,6 +4843,7 @@ open class TextServer: RefCounted {
     
     /// Returns custom punctuation character list, used for word breaking. If set to empty string, server defaults are used.
     public final func shapedTextGetCustomPunctuation(shaped: RID) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4600,8 +4858,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_shaped_text_set_custom_ellipsis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_custom_ellipsis")
+    fileprivate static let method_shaped_text_set_custom_ellipsis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_custom_ellipsis")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -4613,6 +4871,7 @@ open class TextServer: RefCounted {
     
     /// Sets ellipsis character used for text clipping.
     public final func shapedTextSetCustomEllipsis(shaped: RID, char: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: char) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4629,8 +4888,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_custom_ellipsis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_custom_ellipsis")
+    fileprivate static let method_shaped_text_get_custom_ellipsis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_custom_ellipsis")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -4642,6 +4901,7 @@ open class TextServer: RefCounted {
     
     /// Returns ellipsis character used for text clipping.
     public final func shapedTextGetCustomEllipsis(shaped: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4656,8 +4916,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_set_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_orientation")
+    fileprivate static let method_shaped_text_set_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_orientation")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3019609126)!
@@ -4672,6 +4932,7 @@ open class TextServer: RefCounted {
     /// > Note: Orientation is ignored if server does not support ``Feature/verticalLayout`` feature (supported by ``TextServerAdvanced``).
     /// 
     public final func shapedTextSetOrientation(shaped: RID, orientation: TextServer.Orientation = .horizontal) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: orientation.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4688,8 +4949,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_orientation")
+    fileprivate static let method_shaped_text_get_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_orientation")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3142708106)!
@@ -4701,6 +4962,7 @@ open class TextServer: RefCounted {
     
     /// Returns text orientation.
     public final func shapedTextGetOrientation(shaped: RID) -> TextServer.Orientation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4715,8 +4977,8 @@ open class TextServer: RefCounted {
         return TextServer.Orientation (rawValue: _result)!
     }
     
-    fileprivate static var method_shaped_text_set_preserve_invalid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_preserve_invalid")
+    fileprivate static let method_shaped_text_set_preserve_invalid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_preserve_invalid")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4728,6 +4990,7 @@ open class TextServer: RefCounted {
     
     /// If set to `true` text buffer will display invalid characters as hexadecimal codes, otherwise nothing is displayed.
     public final func shapedTextSetPreserveInvalid(shaped: RID, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4744,8 +5007,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_preserve_invalid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_preserve_invalid")
+    fileprivate static let method_shaped_text_get_preserve_invalid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_preserve_invalid")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -4760,6 +5023,7 @@ open class TextServer: RefCounted {
     /// > Note: If set to `false`, nothing is displayed in place of invalid characters.
     /// 
     public final func shapedTextGetPreserveInvalid(shaped: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4774,8 +5038,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_set_preserve_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_preserve_control")
+    fileprivate static let method_shaped_text_set_preserve_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_preserve_control")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4787,6 +5051,7 @@ open class TextServer: RefCounted {
     
     /// If set to `true` text buffer will display control characters.
     public final func shapedTextSetPreserveControl(shaped: RID, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -4803,8 +5068,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_preserve_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_preserve_control")
+    fileprivate static let method_shaped_text_get_preserve_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_preserve_control")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -4816,6 +5081,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if text buffer is configured to display control characters.
     public final func shapedTextGetPreserveControl(shaped: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -4830,8 +5096,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_set_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_set_spacing")
+    fileprivate static let method_shaped_text_set_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_set_spacing")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1307259930)!
@@ -4843,6 +5109,7 @@ open class TextServer: RefCounted {
     
     /// Sets extra spacing added between glyphs or lines in pixels.
     public final func shapedTextSetSpacing(shaped: RID, spacing: TextServer.SpacingType, value: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
                 withUnsafePointer(to: value) { pArg2 in
@@ -4862,8 +5129,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_spacing")
+    fileprivate static let method_shaped_text_get_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_spacing")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1213653558)!
@@ -4875,6 +5142,7 @@ open class TextServer: RefCounted {
     
     /// Returns extra spacing added between glyphs or lines in pixels.
     public final func shapedTextGetSpacing(shaped: RID, spacing: TextServer.SpacingType) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
@@ -4892,8 +5160,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_add_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_add_string")
+    fileprivate static let method_shaped_text_add_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_add_string")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 623473029)!
@@ -4904,7 +5172,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Adds text span and font to draw it to the text buffer.
-    public final func shapedTextAddString(shaped: RID, text: String, fonts: VariantCollection<RID>, size: Int, opentypeFeatures: GDictionary = GDictionary (), language: String = "", meta: Variant?) -> Bool {
+    public final func shapedTextAddString(shaped: RID, text: String, fonts: TypedArray<RID>, size: Int, opentypeFeatures: VariantDictionary = VariantDictionary (), language: String = "", meta: Variant?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             let text = GString(text)
@@ -4939,8 +5208,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_add_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_add_object")
+    fileprivate static let method_shaped_text_add_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_add_object")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3664424789)!
@@ -4952,6 +5221,7 @@ open class TextServer: RefCounted {
     
     /// Adds inline object to the text buffer, `key` must be unique. In the text, object is represented as `length` object replacement characters.
     public final func shapedTextAddObject(shaped: RID, key: Variant?, size: Vector2, inlineAlign: InlineAlignment = .center, length: Int = 1, baseline: Double = 0.0) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: key.content) { pArg1 in
@@ -4981,8 +5251,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_resize_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_resize_object")
+    fileprivate static let method_shaped_text_resize_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_resize_object")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 790361552)!
@@ -4994,6 +5264,7 @@ open class TextServer: RefCounted {
     
     /// Sets new size and alignment of embedded object.
     public final func shapedTextResizeObject(shaped: RID, key: Variant?, size: Vector2, inlineAlign: InlineAlignment = .center, baseline: Double = 0.0) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: key.content) { pArg1 in
@@ -5020,8 +5291,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_get_span_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_get_span_count")
+    fileprivate static let method_shaped_get_span_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_get_span_count")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -5033,6 +5304,7 @@ open class TextServer: RefCounted {
     
     /// Returns number of text spans added using ``shapedTextAddString(shaped:text:fonts:size:opentypeFeatures:language:meta:)`` or ``shapedTextAddObject(shaped:key:size:inlineAlign:length:baseline:)``.
     public final func shapedGetSpanCount(shaped: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5047,8 +5319,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_get_span_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_get_span_meta")
+    fileprivate static let method_shaped_get_span_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_get_span_meta")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4069510997)!
@@ -5060,6 +5332,7 @@ open class TextServer: RefCounted {
     
     /// Returns text span metadata.
     public final func shapedGetSpanMeta(shaped: RID, index: Int) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
@@ -5077,8 +5350,39 @@ open class TextServer: RefCounted {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_shaped_set_span_update_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_set_span_update_font")
+    fileprivate static let method_shaped_get_span_embedded_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_get_span_embedded_object")
+        return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4069510997)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns text embedded object key.
+    public final func shapedGetSpanEmbeddedObject(shaped: RID, index: Int) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: shaped.content) { pArg0 in
+            withUnsafePointer(to: index) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_get_span_embedded_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
+    }
+    
+    fileprivate static let method_shaped_set_span_update_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_set_span_update_font")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2022725822)!
@@ -5089,7 +5393,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Changes text span font, font size, and OpenType features, without changing the text.
-    public final func shapedSetSpanUpdateFont(shaped: RID, index: Int, fonts: VariantCollection<RID>, size: Int, opentypeFeatures: GDictionary = GDictionary ()) {
+    public final func shapedSetSpanUpdateFont(shaped: RID, index: Int, fonts: TypedArray<RID>, size: Int, opentypeFeatures: VariantDictionary = VariantDictionary ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: fonts.array.content) { pArg2 in
@@ -5115,8 +5420,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_substr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_substr")
+    fileprivate static let method_shaped_text_substr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_substr")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1937682086)!
@@ -5128,6 +5433,7 @@ open class TextServer: RefCounted {
     
     /// Returns text buffer for the substring of the text in the `shaped` text buffer (including inline objects).
     public final func shapedTextSubstr(shaped: RID, start: Int, length: Int) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: start) { pArg1 in
@@ -5148,8 +5454,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_parent")
+    fileprivate static let method_shaped_text_get_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_parent")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -5161,6 +5467,7 @@ open class TextServer: RefCounted {
     
     /// Returns the parent buffer from which the substring originates.
     public final func shapedTextGetParent(shaped: RID) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5175,8 +5482,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_fit_to_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_fit_to_width")
+    fileprivate static let method_shaped_text_fit_to_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_fit_to_width")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 530670926)!
@@ -5188,6 +5495,7 @@ open class TextServer: RefCounted {
     
     /// Adjusts text width to fit to specified width, returns new text width.
     public final func shapedTextFitToWidth(shaped: RID, width: Double, justificationFlags: TextServer.JustificationFlag = [.kashida, .wordBound]) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
@@ -5208,8 +5516,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_tab_align: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_tab_align")
+    fileprivate static let method_shaped_text_tab_align: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_tab_align")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1283669550)!
@@ -5221,6 +5529,7 @@ open class TextServer: RefCounted {
     
     /// Aligns shaped text to the given tab-stops.
     public final func shapedTextTabAlign(shaped: RID, tabStops: PackedFloat32Array) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: tabStops.content) { pArg1 in
@@ -5238,8 +5547,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_shape")
+    fileprivate static let method_shaped_text_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_shape")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -5254,6 +5563,7 @@ open class TextServer: RefCounted {
     /// > Note: It is not necessary to call this function manually, buffer will be shaped automatically as soon as any of its output data is requested.
     /// 
     public final func shapedTextShape(shaped: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5268,8 +5578,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_is_ready: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_is_ready")
+    fileprivate static let method_shaped_text_is_ready: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_is_ready")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -5281,6 +5591,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if buffer is successfully shaped.
     public final func shapedTextIsReady(shaped: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5295,8 +5606,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_has_visible_chars: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_has_visible_chars")
+    fileprivate static let method_shaped_text_has_visible_chars: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_has_visible_chars")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -5308,6 +5619,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if text buffer contains any visible characters.
     public final func shapedTextHasVisibleChars(shaped: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5322,8 +5634,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_glyphs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_glyphs")
+    fileprivate static let method_shaped_text_get_glyphs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_glyphs")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -5334,7 +5646,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns an array of glyphs in the visual order.
-    public final func shapedTextGetGlyphs(shaped: RID) -> VariantCollection<GDictionary> {
+    public final func shapedTextGetGlyphs(shaped: RID) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5346,11 +5659,11 @@ open class TextServer: RefCounted {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_shaped_text_sort_logical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_sort_logical")
+    fileprivate static let method_shaped_text_sort_logical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_sort_logical")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2670461153)!
@@ -5361,7 +5674,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns text glyphs in the logical order.
-    public final func shapedTextSortLogical(shaped: RID) -> VariantCollection<GDictionary> {
+    public final func shapedTextSortLogical(shaped: RID) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5373,11 +5687,11 @@ open class TextServer: RefCounted {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_shaped_text_get_glyph_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_glyph_count")
+    fileprivate static let method_shaped_text_get_glyph_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_glyph_count")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -5389,6 +5703,7 @@ open class TextServer: RefCounted {
     
     /// Returns number of glyphs in the buffer.
     public final func shapedTextGetGlyphCount(shaped: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5403,8 +5718,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_range")
+    fileprivate static let method_shaped_text_get_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_range")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 733700038)!
@@ -5416,6 +5731,7 @@ open class TextServer: RefCounted {
     
     /// Returns substring buffer character range in the parent buffer.
     public final func shapedTextGetRange(shaped: RID) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5430,8 +5746,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_line_breaks_adv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_line_breaks_adv")
+    fileprivate static let method_shaped_text_get_line_breaks_adv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_line_breaks_adv")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2376991424)!
@@ -5443,6 +5759,7 @@ open class TextServer: RefCounted {
     
     /// Breaks text to the lines and columns. Returns character ranges for each segment.
     public final func shapedTextGetLineBreaksAdv(shaped: RID, width: PackedFloat32Array, start: Int = 0, once: Bool = true, breakFlags: TextServer.LineBreakFlag = [.mandatory, .wordBound]) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: width.content) { pArg1 in
@@ -5469,8 +5786,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_line_breaks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_line_breaks")
+    fileprivate static let method_shaped_text_get_line_breaks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_line_breaks")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2651359741)!
@@ -5482,6 +5799,7 @@ open class TextServer: RefCounted {
     
     /// Breaks text to the lines and returns character ranges for each line.
     public final func shapedTextGetLineBreaks(shaped: RID, width: Double, start: Int = 0, breakFlags: TextServer.LineBreakFlag = [.mandatory, .wordBound]) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
@@ -5505,8 +5823,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_word_breaks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_word_breaks")
+    fileprivate static let method_shaped_text_get_word_breaks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_word_breaks")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4099476853)!
@@ -5518,6 +5836,7 @@ open class TextServer: RefCounted {
     
     /// Breaks text into words and returns array of character ranges. Use `graphemeFlags` to set what characters are used for breaking (see ``TextServer/GraphemeFlag``).
     public final func shapedTextGetWordBreaks(shaped: RID, graphemeFlags: TextServer.GraphemeFlag = [.space, .punctuation], skipGraphemeFlags: TextServer.GraphemeFlag = [.virtual]) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: graphemeFlags.rawValue) { pArg1 in
@@ -5538,8 +5857,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_trim_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_trim_pos")
+    fileprivate static let method_shaped_text_get_trim_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_trim_pos")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -5551,6 +5870,7 @@ open class TextServer: RefCounted {
     
     /// Returns the position of the overrun trim.
     public final func shapedTextGetTrimPos(shaped: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5565,8 +5885,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_ellipsis_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_ellipsis_pos")
+    fileprivate static let method_shaped_text_get_ellipsis_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_ellipsis_pos")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -5578,6 +5898,7 @@ open class TextServer: RefCounted {
     
     /// Returns position of the ellipsis.
     public final func shapedTextGetEllipsisPos(shaped: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5592,8 +5913,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_ellipsis_glyphs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_ellipsis_glyphs")
+    fileprivate static let method_shaped_text_get_ellipsis_glyphs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_ellipsis_glyphs")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -5604,7 +5925,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns array of the glyphs in the ellipsis.
-    public final func shapedTextGetEllipsisGlyphs(shaped: RID) -> VariantCollection<GDictionary> {
+    public final func shapedTextGetEllipsisGlyphs(shaped: RID) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5616,11 +5938,11 @@ open class TextServer: RefCounted {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_shaped_text_get_ellipsis_glyph_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_ellipsis_glyph_count")
+    fileprivate static let method_shaped_text_get_ellipsis_glyph_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_ellipsis_glyph_count")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -5632,6 +5954,7 @@ open class TextServer: RefCounted {
     
     /// Returns number of glyphs in the ellipsis.
     public final func shapedTextGetEllipsisGlyphCount(shaped: RID) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5646,8 +5969,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_overrun_trim_to_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_overrun_trim_to_width")
+    fileprivate static let method_shaped_text_overrun_trim_to_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_overrun_trim_to_width")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2723146520)!
@@ -5659,6 +5982,7 @@ open class TextServer: RefCounted {
     
     /// Trims text if it exceeds the given width.
     public final func shapedTextOverrunTrimToWidth(shaped: RID, width: Double = 0, overrunTrimFlags: TextServer.TextOverrunFlag = []) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: overrunTrimFlags.rawValue) { pArg2 in
@@ -5678,8 +6002,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_objects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_objects")
+    fileprivate static let method_shaped_text_get_objects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_objects")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -5690,8 +6014,9 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns array of inline objects.
-    public final func shapedTextGetObjects(shaped: RID) -> GArray {
-        let _result: GArray = GArray ()
+    public final func shapedTextGetObjects(shaped: RID) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5705,8 +6030,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_object_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_object_rect")
+    fileprivate static let method_shaped_text_get_object_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_object_rect")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 447978354)!
@@ -5718,6 +6043,7 @@ open class TextServer: RefCounted {
     
     /// Returns bounding rectangle of the inline object.
     public final func shapedTextGetObjectRect(shaped: RID, key: Variant?) -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: key.content) { pArg1 in
@@ -5735,8 +6061,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_object_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_object_range")
+    fileprivate static let method_shaped_text_get_object_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_object_range")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2524675647)!
@@ -5748,6 +6074,7 @@ open class TextServer: RefCounted {
     
     /// Returns the character range of the inline object.
     public final func shapedTextGetObjectRange(shaped: RID, key: Variant?) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: key.content) { pArg1 in
@@ -5765,8 +6092,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_object_glyph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_object_glyph")
+    fileprivate static let method_shaped_text_get_object_glyph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_object_glyph")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1260085030)!
@@ -5778,6 +6105,7 @@ open class TextServer: RefCounted {
     
     /// Returns the glyph index of the inline object.
     public final func shapedTextGetObjectGlyph(shaped: RID, key: Variant?) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: key.content) { pArg1 in
@@ -5795,8 +6123,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_size")
+    fileprivate static let method_shaped_text_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_size")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2440833711)!
@@ -5808,6 +6136,7 @@ open class TextServer: RefCounted {
     
     /// Returns size of the text.
     public final func shapedTextGetSize(shaped: RID) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5822,8 +6151,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_ascent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_ascent")
+    fileprivate static let method_shaped_text_get_ascent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_ascent")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -5838,6 +6167,7 @@ open class TextServer: RefCounted {
     /// > Note: Overall ascent can be higher than font ascent, if some glyphs are displaced from the baseline.
     /// 
     public final func shapedTextGetAscent(shaped: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5852,8 +6182,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_descent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_descent")
+    fileprivate static let method_shaped_text_get_descent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_descent")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -5868,6 +6198,7 @@ open class TextServer: RefCounted {
     /// > Note: Overall descent can be higher than font descent, if some glyphs are displaced from the baseline.
     /// 
     public final func shapedTextGetDescent(shaped: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5882,8 +6213,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_width")
+    fileprivate static let method_shaped_text_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_width")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -5895,6 +6226,7 @@ open class TextServer: RefCounted {
     
     /// Returns width (for horizontal layout) or height (for vertical) of the text.
     public final func shapedTextGetWidth(shaped: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5909,8 +6241,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_underline_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_underline_position")
+    fileprivate static let method_shaped_text_get_underline_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_underline_position")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -5922,6 +6254,7 @@ open class TextServer: RefCounted {
     
     /// Returns pixel offset of the underline below the baseline.
     public final func shapedTextGetUnderlinePosition(shaped: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5936,8 +6269,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_underline_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_underline_thickness")
+    fileprivate static let method_shaped_text_get_underline_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_underline_thickness")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -5949,6 +6282,7 @@ open class TextServer: RefCounted {
     
     /// Returns thickness of the underline.
     public final func shapedTextGetUnderlineThickness(shaped: RID) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -5963,8 +6297,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_carets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_carets")
+    fileprivate static let method_shaped_text_get_carets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_carets")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1574219346)!
@@ -5975,8 +6309,9 @@ open class TextServer: RefCounted {
     }()
     
     /// Returns shapes of the carets corresponding to the character offset `position` in the text. Returned caret shape is 1 pixel wide rectangle.
-    public final func shapedTextGetCarets(shaped: RID, position: Int) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func shapedTextGetCarets(shaped: RID, position: Int) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -5993,8 +6328,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_selection")
+    fileprivate static let method_shaped_text_get_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_selection")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3714187733)!
@@ -6006,6 +6341,7 @@ open class TextServer: RefCounted {
     
     /// Returns selection rectangles for the specified character range.
     public final func shapedTextGetSelection(shaped: RID, start: Int, end: Int) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: start) { pArg1 in
@@ -6026,8 +6362,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_hit_test_grapheme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_hit_test_grapheme")
+    fileprivate static let method_shaped_text_hit_test_grapheme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_hit_test_grapheme")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3149310417)!
@@ -6039,6 +6375,7 @@ open class TextServer: RefCounted {
     
     /// Returns grapheme index at the specified pixel offset at the baseline, or `-1` if none is found.
     public final func shapedTextHitTestGrapheme(shaped: RID, coords: Double) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
@@ -6056,8 +6393,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_hit_test_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_hit_test_position")
+    fileprivate static let method_shaped_text_hit_test_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_hit_test_position")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3149310417)!
@@ -6069,6 +6406,7 @@ open class TextServer: RefCounted {
     
     /// Returns caret character offset at the specified pixel offset at the baseline. This function always returns a valid position.
     public final func shapedTextHitTestPosition(shaped: RID, coords: Double) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
@@ -6086,8 +6424,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_grapheme_bounds: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_grapheme_bounds")
+    fileprivate static let method_shaped_text_get_grapheme_bounds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_grapheme_bounds")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2546185844)!
@@ -6099,6 +6437,7 @@ open class TextServer: RefCounted {
     
     /// Returns composite character's bounds as offsets from the start of the line.
     public final func shapedTextGetGraphemeBounds(shaped: RID, pos: Int) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
@@ -6116,8 +6455,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_next_grapheme_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_next_grapheme_pos")
+    fileprivate static let method_shaped_text_next_grapheme_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_next_grapheme_pos")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -6129,6 +6468,7 @@ open class TextServer: RefCounted {
     
     /// Returns grapheme end position closest to the `pos`.
     public final func shapedTextNextGraphemePos(shaped: RID, pos: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
@@ -6146,8 +6486,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_prev_grapheme_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_prev_grapheme_pos")
+    fileprivate static let method_shaped_text_prev_grapheme_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_prev_grapheme_pos")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -6159,6 +6499,7 @@ open class TextServer: RefCounted {
     
     /// Returns grapheme start position closest to the `pos`.
     public final func shapedTextPrevGraphemePos(shaped: RID, pos: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
@@ -6176,8 +6517,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_get_character_breaks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_character_breaks")
+    fileprivate static let method_shaped_text_get_character_breaks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_character_breaks")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 788230395)!
@@ -6189,6 +6530,7 @@ open class TextServer: RefCounted {
     
     /// Returns array of the composite character boundaries.
     public final func shapedTextGetCharacterBreaks(shaped: RID) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -6203,8 +6545,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_next_character_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_next_character_pos")
+    fileprivate static let method_shaped_text_next_character_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_next_character_pos")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -6216,6 +6558,7 @@ open class TextServer: RefCounted {
     
     /// Returns composite character end position closest to the `pos`.
     public final func shapedTextNextCharacterPos(shaped: RID, pos: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
@@ -6233,8 +6576,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_prev_character_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_prev_character_pos")
+    fileprivate static let method_shaped_text_prev_character_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_prev_character_pos")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -6246,6 +6589,7 @@ open class TextServer: RefCounted {
     
     /// Returns composite character start position closest to the `pos`.
     public final func shapedTextPrevCharacterPos(shaped: RID, pos: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
@@ -6263,8 +6607,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_closest_character_pos: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_closest_character_pos")
+    fileprivate static let method_shaped_text_closest_character_pos: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_closest_character_pos")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1120910005)!
@@ -6276,6 +6620,7 @@ open class TextServer: RefCounted {
     
     /// Returns composite character position closest to the `pos`.
     public final func shapedTextClosestCharacterPos(shaped: RID, pos: Int) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
@@ -6293,8 +6638,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_shaped_text_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_draw")
+    fileprivate static let method_shaped_text_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_draw")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 880389142)!
@@ -6306,6 +6651,7 @@ open class TextServer: RefCounted {
     
     /// Draw shaped text into a canvas item at a given position, with `color`. `pos` specifies the leftmost point of the baseline (for horizontal layout) or topmost point of the baseline (for vertical layout).
     public final func shapedTextDraw(shaped: RID, canvas: RID, pos: Vector2, clipL: Double = -1, clipR: Double = -1, color: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: pos) { pArg2 in
@@ -6334,8 +6680,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_draw_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_draw_outline")
+    fileprivate static let method_shaped_text_draw_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_draw_outline")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2559184194)!
@@ -6347,6 +6693,7 @@ open class TextServer: RefCounted {
     
     /// Draw the outline of the shaped text into a canvas item at a given position, with `color`. `pos` specifies the leftmost point of the baseline (for horizontal layout) or topmost point of the baseline (for vertical layout).
     public final func shapedTextDrawOutline(shaped: RID, canvas: RID, pos: Vector2, clipL: Double = -1, clipR: Double = -1, outlineSize: Int = 1, color: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: pos) { pArg2 in
@@ -6378,8 +6725,8 @@ open class TextServer: RefCounted {
         
     }
     
-    fileprivate static var method_shaped_text_get_dominant_direction_in_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shaped_text_get_dominant_direction_in_range")
+    fileprivate static let method_shaped_text_get_dominant_direction_in_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shaped_text_get_dominant_direction_in_range")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3326907668)!
@@ -6391,6 +6738,7 @@ open class TextServer: RefCounted {
     
     /// Returns dominant direction of in the range of text.
     public final func shapedTextGetDominantDirectionInRange(shaped: RID, start: Int, end: Int) -> TextServer.Direction {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: start) { pArg1 in
@@ -6411,8 +6759,8 @@ open class TextServer: RefCounted {
         return TextServer.Direction (rawValue: _result)!
     }
     
-    fileprivate static var method_format_number: GDExtensionMethodBindPtr = {
-        let methodName = StringName("format_number")
+    fileprivate static let method_format_number: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("format_number")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2664628024)!
@@ -6427,6 +6775,7 @@ open class TextServer: RefCounted {
     /// If `language` is omitted, the active locale will be used.
     /// 
     public final func formatNumber(_ number: String, language: String = "") -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let number = GString(number)
         withUnsafePointer(to: number.content) { pArg0 in
@@ -6446,8 +6795,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_parse_number: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse_number")
+    fileprivate static let method_parse_number: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse_number")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2664628024)!
@@ -6459,6 +6808,7 @@ open class TextServer: RefCounted {
     
     /// Converts `number` from the numeral systems used in `language` to Western Arabic (0..9).
     public final func parseNumber(_ number: String, language: String = "") -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let number = GString(number)
         withUnsafePointer(to: number.content) { pArg0 in
@@ -6478,8 +6828,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_percent_sign: GDExtensionMethodBindPtr = {
-        let methodName = StringName("percent_sign")
+    fileprivate static let method_percent_sign: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("percent_sign")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 993269549)!
@@ -6491,6 +6841,7 @@ open class TextServer: RefCounted {
     
     /// Returns percent sign used in the `language`.
     public final func percentSign(language: String = "") -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
@@ -6506,8 +6857,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_string_get_word_breaks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("string_get_word_breaks")
+    fileprivate static let method_string_get_word_breaks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("string_get_word_breaks")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 581857818)!
@@ -6522,6 +6873,7 @@ open class TextServer: RefCounted {
     /// When `charsPerLine` is greater than zero, line break boundaries are returned instead.
     /// 
     public final func stringGetWordBreaks(string: String, language: String = "", charsPerLine: Int = 0) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6544,8 +6896,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_string_get_character_breaks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("string_get_character_breaks")
+    fileprivate static let method_string_get_character_breaks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("string_get_character_breaks")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2333794773)!
@@ -6558,6 +6910,7 @@ open class TextServer: RefCounted {
     /// Returns array of the composite character boundaries.
     /// 
     public final func stringGetCharacterBreaks(string: String, language: String = "") -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6577,8 +6930,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_is_confusable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_confusable")
+    fileprivate static let method_is_confusable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_confusable")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1433197768)!
@@ -6595,6 +6948,7 @@ open class TextServer: RefCounted {
     /// > Note: Always returns `-1` if the server does not support the ``Feature/unicodeSecurity`` feature.
     /// 
     public final func isConfusable(string: String, dict: PackedStringArray) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6613,8 +6967,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_spoof_check: GDExtensionMethodBindPtr = {
-        let methodName = StringName("spoof_check")
+    fileprivate static let method_spoof_check: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("spoof_check")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -6629,6 +6983,7 @@ open class TextServer: RefCounted {
     /// > Note: Always returns `false` if the server does not support the ``Feature/unicodeSecurity`` feature.
     /// 
     public final func spoofCheck(string: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6644,8 +6999,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_strip_diacritics: GDExtensionMethodBindPtr = {
-        let methodName = StringName("strip_diacritics")
+    fileprivate static let method_strip_diacritics: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("strip_diacritics")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
@@ -6660,6 +7015,7 @@ open class TextServer: RefCounted {
     /// > Note: The result may be longer or shorter than the original.
     /// 
     public final func stripDiacritics(string: String) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6675,8 +7031,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_is_valid_identifier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_valid_identifier")
+    fileprivate static let method_is_valid_identifier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_valid_identifier")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -6705,6 +7061,7 @@ open class TextServer: RefCounted {
     /// - May contain Unicode characters of class XID_Continue in the other positions.
     /// 
     public final func isValidIdentifier(string: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6720,8 +7077,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_is_valid_letter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_valid_letter")
+    fileprivate static let method_is_valid_letter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_valid_letter")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -6733,6 +7090,7 @@ open class TextServer: RefCounted {
     
     /// Returns `true` if the given code point is a valid letter, i.e. it belongs to the Unicode category "L".
     public final func isValidLetter(unicode: UInt) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: unicode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -6747,8 +7105,8 @@ open class TextServer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_string_to_upper: GDExtensionMethodBindPtr = {
-        let methodName = StringName("string_to_upper")
+    fileprivate static let method_string_to_upper: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("string_to_upper")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2664628024)!
@@ -6765,6 +7123,7 @@ open class TextServer: RefCounted {
     /// > Note: The result may be longer or shorter than the original.
     /// 
     public final func stringToUpper(string: String, language: String = "") -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6784,8 +7143,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_string_to_lower: GDExtensionMethodBindPtr = {
-        let methodName = StringName("string_to_lower")
+    fileprivate static let method_string_to_lower: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("string_to_lower")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2664628024)!
@@ -6802,6 +7161,7 @@ open class TextServer: RefCounted {
     /// > Note: The result may be longer or shorter than the original.
     /// 
     public final func stringToLower(string: String, language: String = "") -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6821,8 +7181,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_string_to_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("string_to_title")
+    fileprivate static let method_string_to_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("string_to_title")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2664628024)!
@@ -6839,6 +7199,7 @@ open class TextServer: RefCounted {
     /// > Note: The result may be longer or shorter than the original.
     /// 
     public final func stringToTitle(string: String, language: String = "") -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
@@ -6858,8 +7219,8 @@ open class TextServer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_parse_structured_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse_structured_text")
+    fileprivate static let method_parse_structured_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse_structured_text")
         return withUnsafePointer(to: &TextServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3310685015)!
@@ -6870,7 +7231,8 @@ open class TextServer: RefCounted {
     }()
     
     /// Default implementation of the BiDi algorithm override function. See ``TextServer/StructuredTextParser`` for more info.
-    public final func parseStructuredText(parserType: TextServer.StructuredTextParser, args: GArray, text: String) -> VariantCollection<Vector3i> {
+    public final func parseStructuredText(parserType: TextServer.StructuredTextParser, args: VariantArray, text: String) -> TypedArray<Vector3i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: parserType.rawValue) { pArg0 in
             withUnsafePointer(to: args.content) { pArg1 in
@@ -6889,7 +7251,7 @@ open class TextServer: RefCounted {
             
         }
         
-        return VariantCollection<Vector3i>(content: _result)
+        return TypedArray<Vector3i>(takingOver: _result)
     }
     
 }

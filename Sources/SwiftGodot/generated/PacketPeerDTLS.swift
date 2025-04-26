@@ -28,7 +28,7 @@ import Musl
 /// > Warning: TLS certificate revocation and certificate pinning are currently not supported. Revoked certificates are accepted as long as they are otherwise valid. If this is a concern, you may want to use automatically managed certificates with a short validity period.
 /// 
 open class PacketPeerDTLS: PacketPeer {
-    fileprivate static var className = StringName("PacketPeerDTLS")
+    private static var className = StringName("PacketPeerDTLS")
     override open class var godotClassName: StringName { className }
     public enum Status: Int64, CaseIterable {
         /// A status representing a ``PacketPeerDTLS`` that is disconnected.
@@ -44,8 +44,8 @@ open class PacketPeerDTLS: PacketPeer {
     }
     
     /* Methods */
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &PacketPeerDTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -57,12 +57,13 @@ open class PacketPeerDTLS: PacketPeer {
     
     /// Poll the connection to check for incoming packets. Call this frequently to update the status and keep the connection working.
     public final func poll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(PacketPeerDTLS.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_connect_to_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_to_peer")
+    fileprivate static let method_connect_to_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_to_peer")
         return withUnsafePointer(to: &PacketPeerDTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2880188099)!
@@ -74,6 +75,7 @@ open class PacketPeerDTLS: PacketPeer {
     
     /// Connects a `packetPeer` beginning the DTLS handshake using the underlying ``PacketPeerUDP`` which must be connected (see ``PacketPeerUDP/connectToHost(_:port:)``). You can optionally specify the `clientOptions` to be used while verifying the TLS connections. See ``TLSOptions/client(trustedChain:commonNameOverride:)`` and ``TLSOptions/clientUnsafe(trustedChain:)``.
     public final func connectToPeer(packetPeer: PacketPeerUDP?, hostname: String, clientOptions: TLSOptions? = nil) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: packetPeer?.handle) { pArg0 in
             let hostname = GString(hostname)
@@ -95,8 +97,8 @@ open class PacketPeerDTLS: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_status")
+    fileprivate static let method_get_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_status")
         return withUnsafePointer(to: &PacketPeerDTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3248654679)!
@@ -108,13 +110,14 @@ open class PacketPeerDTLS: PacketPeer {
     
     /// Returns the status of the connection. See ``PacketPeerDTLS/Status`` for values.
     public final func getStatus() -> PacketPeerDTLS.Status {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(PacketPeerDTLS.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return PacketPeerDTLS.Status (rawValue: _result)!
     }
     
-    fileprivate static var method_disconnect_from_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_from_peer")
+    fileprivate static let method_disconnect_from_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_from_peer")
         return withUnsafePointer(to: &PacketPeerDTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -126,6 +129,7 @@ open class PacketPeerDTLS: PacketPeer {
     
     /// Disconnects this peer, terminating the DTLS session.
     public final func disconnectFromPeer() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(PacketPeerDTLS.method_disconnect_from_peer, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

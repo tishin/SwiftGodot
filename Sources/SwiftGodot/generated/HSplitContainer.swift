@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A container that accepts only two child controls, then arranges them horizontally and creates a divisor between them. The divisor can be dragged around to change the size relation between the child controls.
 open class HSplitContainer: SplitContainer {
-    fileprivate static var className = StringName("HSplitContainer")
+    private static var className = StringName("HSplitContainer")
     override open class var godotClassName: StringName { className }
 }
 

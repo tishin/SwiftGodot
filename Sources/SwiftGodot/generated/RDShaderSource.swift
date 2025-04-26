@@ -26,7 +26,7 @@ import Musl
 /// See also ``RDShaderFile``. ``RDShaderSource`` is only meant to be used with the ``RenderingDevice`` API. It should not be confused with Godot's own ``Shader`` resource, which is what Godot's various nodes use for high-level shader programming.
 /// 
 open class RDShaderSource: RefCounted {
-    fileprivate static var className = StringName("RDShaderSource")
+    private static var className = StringName("RDShaderSource")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -104,8 +104,8 @@ open class RDShaderSource: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_stage_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stage_source")
+    fileprivate static let method_set_stage_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stage_source")
         return withUnsafePointer(to: &RDShaderSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 620821314)!
@@ -117,7 +117,11 @@ open class RDShaderSource: RefCounted {
     
     @inline(__always)
     /// Sets `source` code for the specified shader `stage`. Equivalent to setting one of ``sourceCompute``, ``sourceFragment``, ``sourceTesselationControl``, ``sourceTesselationEvaluation`` or ``sourceVertex``.
+    /// 
+    /// > Note: If you set the compute shader source code using this method directly, remember to remove the Godot-specific hint `#[compute]`.
+    /// 
     fileprivate final func set_stage_source(_ stage: RenderingDevice.ShaderStage, _ source: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             let source = GString(source)
             withUnsafePointer(to: source.content) { pArg1 in
@@ -135,8 +139,8 @@ open class RDShaderSource: RefCounted {
         
     }
     
-    fileprivate static var method_get_stage_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stage_source")
+    fileprivate static let method_get_stage_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stage_source")
         return withUnsafePointer(to: &RDShaderSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3354920045)!
@@ -149,6 +153,7 @@ open class RDShaderSource: RefCounted {
     @inline(__always)
     /// Returns source code for the specified shader `stage`. Equivalent to getting one of ``sourceCompute``, ``sourceFragment``, ``sourceTesselationControl``, ``sourceTesselationEvaluation`` or ``sourceVertex``.
     fileprivate final func get_stage_source(_ stage: RenderingDevice.ShaderStage) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -163,8 +168,8 @@ open class RDShaderSource: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_set_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_language")
+    fileprivate static let method_set_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_language")
         return withUnsafePointer(to: &RDShaderSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3422186742)!
@@ -176,6 +181,7 @@ open class RDShaderSource: RefCounted {
     
     @inline(__always)
     fileprivate final func set_language(_ language: RenderingDevice.ShaderLanguage) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: language.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -189,8 +195,8 @@ open class RDShaderSource: RefCounted {
         
     }
     
-    fileprivate static var method_get_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language")
+    fileprivate static let method_get_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language")
         return withUnsafePointer(to: &RDShaderSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1063538261)!
@@ -202,6 +208,7 @@ open class RDShaderSource: RefCounted {
     
     @inline(__always)
     fileprivate final func get_language() -> RenderingDevice.ShaderLanguage {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDShaderSource.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.ShaderLanguage (rawValue: _result)!

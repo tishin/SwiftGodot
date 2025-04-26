@@ -24,7 +24,7 @@ import Musl
 /// SkeletonIK3D is used to rotate all bones of a ``Skeleton3D`` bone chain a way that places the end bone at a desired 3D position. A typical scenario for IK in games is to place a character's feet on the ground or a character's hands on a currently held object. SkeletonIK uses FabrikInverseKinematic internally to solve the bone chain and applies the results to the ``Skeleton3D`` `bones_global_pose_override` property for all affected bones in the chain. If fully applied, this overwrites any bone transform from ``Animation``s or bone custom poses set by users. The applied amount can be controlled with the ``SkeletonModifier3D/influence`` property.
 /// 
 open class SkeletonIK3D: SkeletonModifier3D {
-    fileprivate static var className = StringName("SkeletonIK3D")
+    private static var className = StringName("SkeletonIK3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -150,8 +150,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_root_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_root_bone")
+    fileprivate static let method_set_root_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_bone")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -163,6 +163,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_root_bone(_ rootBone: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rootBone.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -176,8 +177,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_root_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_bone")
+    fileprivate static let method_get_root_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_bone")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -189,13 +190,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_root_bone() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_root_bone, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_tip_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tip_bone")
+    fileprivate static let method_set_tip_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tip_bone")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -207,6 +209,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_tip_bone(_ tipBone: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tipBone.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -220,8 +223,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_tip_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tip_bone")
+    fileprivate static let method_get_tip_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tip_bone")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -233,13 +236,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_tip_bone() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_tip_bone, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_target_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_transform")
+    fileprivate static let method_set_target_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_transform")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2952846383)!
@@ -251,6 +255,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_target_transform(_ target: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: target) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -264,8 +269,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_target_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_transform")
+    fileprivate static let method_get_target_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_transform")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -277,13 +282,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_target_transform() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_target_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_node")
+    fileprivate static let method_set_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_node")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -295,6 +301,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_target_node(_ node: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -308,8 +315,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_node")
+    fileprivate static let method_get_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_node")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 277076166)!
@@ -321,13 +328,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_target_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_override_tip_basis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_override_tip_basis")
+    fileprivate static let method_set_override_tip_basis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_override_tip_basis")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -339,6 +347,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_override_tip_basis(_ override: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: override) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -352,8 +361,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_is_override_tip_basis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_override_tip_basis")
+    fileprivate static let method_is_override_tip_basis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_override_tip_basis")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -365,13 +374,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func is_override_tip_basis() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_is_override_tip_basis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_magnet: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_magnet")
+    fileprivate static let method_set_use_magnet: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_magnet")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -383,6 +393,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_use_magnet(_ use: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: use) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -396,8 +407,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_is_using_magnet: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_magnet")
+    fileprivate static let method_is_using_magnet: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_magnet")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -409,13 +420,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func is_using_magnet() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_is_using_magnet, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_magnet_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_magnet_position")
+    fileprivate static let method_set_magnet_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_magnet_position")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -427,6 +439,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_magnet_position(_ localPosition: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: localPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -440,8 +453,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_magnet_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_magnet_position")
+    fileprivate static let method_get_magnet_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_magnet_position")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -453,13 +466,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_magnet_position() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_magnet_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_parent_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parent_skeleton")
+    fileprivate static let method_get_parent_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parent_skeleton")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1488626673)!
@@ -469,15 +483,16 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }()
     
-    /// Returns the parent ``Skeleton3D`` Node that was present when SkeletonIK entered the ``SceneTree``. Returns null if the parent node was not a ``Skeleton3D`` Node when SkeletonIK3D entered the ``SceneTree``.
+    /// Returns the parent ``Skeleton3D`` node that was present when SkeletonIK entered the scene tree. Returns `null` if the parent node was not a ``Skeleton3D`` node when SkeletonIK3D entered the scene tree.
     public final func getParentSkeleton() -> Skeleton3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_parent_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_running: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_running")
+    fileprivate static let method_is_running: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_running")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -489,13 +504,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     /// Returns `true` if SkeletonIK is applying IK effects on continues frames to the ``Skeleton3D`` bones. Returns `false` if SkeletonIK is stopped or ``start(oneTime:)`` was used with the `one_time` parameter set to `true`.
     public final func isRunning() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_is_running, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_min_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_distance")
+    fileprivate static let method_set_min_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_distance")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -507,6 +523,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_min_distance(_ minDistance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -520,8 +537,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_min_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_distance")
+    fileprivate static let method_get_min_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_distance")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -533,13 +550,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_min_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_min_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_iterations: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_iterations")
+    fileprivate static let method_set_max_iterations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_iterations")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -551,6 +569,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_max_iterations(_ iterations: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: iterations) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -564,8 +583,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_max_iterations: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_iterations")
+    fileprivate static let method_get_max_iterations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_iterations")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -577,13 +596,14 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_max_iterations() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_max_iterations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_start: GDExtensionMethodBindPtr = {
-        let methodName = StringName("start")
+    fileprivate static let method_start: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 107499316)!
@@ -595,6 +615,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     /// Starts applying IK effects on each frame to the ``Skeleton3D`` bones but will only take effect starting on the next frame. If `oneTime` is `true`, this will take effect immediately but also reset on the next frame.
     public final func start(oneTime: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oneTime) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -608,8 +629,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop")
+    fileprivate static let method_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -621,12 +642,13 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     /// Stops applying IK effects on each frame to the ``Skeleton3D`` bones and also calls ``Skeleton3D/clearBonesGlobalPoseOverride()`` to remove existing overrides on all bones.
     public final func stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_interpolation")
+    fileprivate static let method_set_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_interpolation")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -638,6 +660,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_interpolation(_ interpolation: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: interpolation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -651,8 +674,8 @@ open class SkeletonIK3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interpolation")
+    fileprivate static let method_get_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interpolation")
         return withUnsafePointer(to: &SkeletonIK3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -664,6 +687,7 @@ open class SkeletonIK3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_interpolation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonIK3D.method_get_interpolation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

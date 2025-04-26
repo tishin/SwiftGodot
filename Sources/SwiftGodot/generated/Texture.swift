@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``Texture`` is the base class for all texture types. Common texture types are ``Texture2D`` and ``ImageTexture``. See also ``Image``.
 open class Texture: Resource {
-    fileprivate static var className = StringName("Texture")
+    private static var className = StringName("Texture")
     override open class var godotClassName: StringName { className }
 }
 

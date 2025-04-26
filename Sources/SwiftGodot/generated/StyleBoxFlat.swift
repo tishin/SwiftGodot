@@ -23,14 +23,12 @@ import Musl
 /// 
 /// By configuring various properties of this style box, you can achieve many common looks without the need of a texture. This includes optionally rounded borders, antialiasing, shadows, and skew.
 /// 
-/// Setting corner radius to high values is allowed. As soon as corners overlap, the stylebox will switch to a relative system.
-/// 
-/// **Example:**
+/// Setting corner radius to high values is allowed. As soon as corners overlap, the stylebox will switch to a relative system:
 /// 
 /// The relative system now would take the 1:2 ratio of the two left corners to calculate the actual corner width. Both corners added will **never** be more than the height. Result:
 /// 
 open class StyleBoxFlat: StyleBox {
-    fileprivate static var className = StringName("StyleBoxFlat")
+    private static var className = StringName("StyleBoxFlat")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -338,8 +336,8 @@ open class StyleBoxFlat: StyleBox {
     }
     
     /* Methods */
-    fileprivate static var method_set_bg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bg_color")
+    fileprivate static let method_set_bg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bg_color")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -351,6 +349,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_bg_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -364,8 +363,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_bg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bg_color")
+    fileprivate static let method_get_bg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bg_color")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -377,13 +376,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_bg_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_bg_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_border_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_border_color")
+    fileprivate static let method_set_border_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_border_color")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -395,6 +395,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_border_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -408,8 +409,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_border_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_border_color")
+    fileprivate static let method_get_border_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_border_color")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -421,13 +422,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_border_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_border_width_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_border_width_all")
+    fileprivate static let method_set_border_width_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_border_width_all")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -439,6 +441,7 @@ open class StyleBoxFlat: StyleBox {
     
     /// Sets the border width to `width` pixels for all sides.
     public final func setBorderWidthAll(width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -452,8 +455,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_border_width_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_border_width_min")
+    fileprivate static let method_get_border_width_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_border_width_min")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -465,13 +468,14 @@ open class StyleBoxFlat: StyleBox {
     
     /// Returns the smallest border width out of all four borders.
     public final func getBorderWidthMin() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_width_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_border_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_border_width")
+    fileprivate static let method_set_border_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_border_width")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 437707142)!
@@ -484,6 +488,7 @@ open class StyleBoxFlat: StyleBox {
     @inline(__always)
     /// Sets the specified ``Side``'s border width to `width` pixels.
     fileprivate final func set_border_width(_ margin: Side, _ width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -500,8 +505,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_border_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_border_width")
+    fileprivate static let method_get_border_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_border_width")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1983885014)!
@@ -514,6 +519,7 @@ open class StyleBoxFlat: StyleBox {
     @inline(__always)
     /// Returns the specified ``Side``'s border width.
     fileprivate final func get_border_width(_ margin: Side) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -528,8 +534,8 @@ open class StyleBoxFlat: StyleBox {
         return _result
     }
     
-    fileprivate static var method_set_border_blend: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_border_blend")
+    fileprivate static let method_set_border_blend: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_border_blend")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -541,6 +547,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_border_blend(_ blend: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: blend) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -554,8 +561,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_border_blend: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_border_blend")
+    fileprivate static let method_get_border_blend: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_border_blend")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -567,13 +574,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_border_blend() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_blend, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_corner_radius_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_corner_radius_all")
+    fileprivate static let method_set_corner_radius_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_corner_radius_all")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -585,6 +593,7 @@ open class StyleBoxFlat: StyleBox {
     
     /// Sets the corner radius to `radius` pixels for all corners.
     public final func setCornerRadiusAll(radius: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -598,8 +607,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_set_corner_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_corner_radius")
+    fileprivate static let method_set_corner_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_corner_radius")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2696158768)!
@@ -612,6 +621,7 @@ open class StyleBoxFlat: StyleBox {
     @inline(__always)
     /// Sets the corner radius to `radius` pixels for the given `corner`. See ``Corner`` for possible values.
     fileprivate final func set_corner_radius(_ corner: Corner, _ radius: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: corner.rawValue) { pArg0 in
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -628,8 +638,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_corner_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_corner_radius")
+    fileprivate static let method_get_corner_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_corner_radius")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3982397690)!
@@ -642,6 +652,7 @@ open class StyleBoxFlat: StyleBox {
     @inline(__always)
     /// Returns the given `corner`'s radius. See ``Corner`` for possible values.
     fileprivate final func get_corner_radius(_ corner: Corner) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: corner.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -656,8 +667,8 @@ open class StyleBoxFlat: StyleBox {
         return _result
     }
     
-    fileprivate static var method_set_expand_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_expand_margin")
+    fileprivate static let method_set_expand_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_expand_margin")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4290182280)!
@@ -670,6 +681,7 @@ open class StyleBoxFlat: StyleBox {
     @inline(__always)
     /// Sets the expand margin to `size` pixels for the specified ``Side``.
     fileprivate final func set_expand_margin(_ margin: Side, _ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -686,8 +698,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_set_expand_margin_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_expand_margin_all")
+    fileprivate static let method_set_expand_margin_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_expand_margin_all")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -699,6 +711,7 @@ open class StyleBoxFlat: StyleBox {
     
     /// Sets the expand margin to `size` pixels for all sides.
     public final func setExpandMarginAll(size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -712,8 +725,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_expand_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_expand_margin")
+    fileprivate static let method_get_expand_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_expand_margin")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2869120046)!
@@ -726,6 +739,7 @@ open class StyleBoxFlat: StyleBox {
     @inline(__always)
     /// Returns the size of the specified ``Side``'s expand margin.
     fileprivate final func get_expand_margin(_ margin: Side) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -740,8 +754,8 @@ open class StyleBoxFlat: StyleBox {
         return _result
     }
     
-    fileprivate static var method_set_draw_center: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_center")
+    fileprivate static let method_set_draw_center: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_center")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -753,6 +767,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_draw_center(_ drawCenter: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: drawCenter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -766,8 +781,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_is_draw_center_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_draw_center_enabled")
+    fileprivate static let method_is_draw_center_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_draw_center_enabled")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -779,13 +794,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func is_draw_center_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_is_draw_center_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_skew: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skew")
+    fileprivate static let method_set_skew: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skew")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -797,6 +813,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_skew(_ skew: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skew) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -810,8 +827,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_skew: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skew")
+    fileprivate static let method_get_skew: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skew")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -823,13 +840,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_skew() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_skew, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_color")
+    fileprivate static let method_set_shadow_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_color")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -841,6 +859,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_shadow_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -854,8 +873,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_shadow_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_color")
+    fileprivate static let method_get_shadow_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_color")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -867,13 +886,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_shadow_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_size")
+    fileprivate static let method_set_shadow_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_size")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -885,6 +905,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_shadow_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -898,8 +919,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_shadow_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_size")
+    fileprivate static let method_get_shadow_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_size")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -911,13 +932,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_shadow_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_offset")
+    fileprivate static let method_set_shadow_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_offset")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -929,6 +951,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_shadow_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -942,8 +965,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_shadow_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_offset")
+    fileprivate static let method_get_shadow_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_offset")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -955,13 +978,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_shadow_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_anti_aliased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anti_aliased")
+    fileprivate static let method_set_anti_aliased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anti_aliased")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -973,6 +997,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_anti_aliased(_ antiAliased: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: antiAliased) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -986,8 +1011,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_is_anti_aliased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_anti_aliased")
+    fileprivate static let method_is_anti_aliased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_anti_aliased")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -999,13 +1024,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func is_anti_aliased() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_is_anti_aliased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_aa_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_aa_size")
+    fileprivate static let method_set_aa_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_aa_size")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1017,6 +1043,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_aa_size(_ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1030,8 +1057,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_aa_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_aa_size")
+    fileprivate static let method_get_aa_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_aa_size")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1043,13 +1070,14 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_aa_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_aa_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_corner_detail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_corner_detail")
+    fileprivate static let method_set_corner_detail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_corner_detail")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1061,6 +1089,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func set_corner_detail(_ detail: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: detail) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1074,8 +1103,8 @@ open class StyleBoxFlat: StyleBox {
         
     }
     
-    fileprivate static var method_get_corner_detail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_corner_detail")
+    fileprivate static let method_get_corner_detail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_corner_detail")
         return withUnsafePointer(to: &StyleBoxFlat.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1087,6 +1116,7 @@ open class StyleBoxFlat: StyleBox {
     
     @inline(__always)
     fileprivate final func get_corner_detail() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_corner_detail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

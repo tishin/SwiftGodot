@@ -32,7 +32,7 @@ import Musl
 /// **Performance:** Due to its complexity, ``ConcavePolygonShape2D`` is the slowest 2D collision shape to check collisions against. Its use should generally be limited to level geometry. If the polyline is closed, ``CollisionPolygon2D``'s ``CollisionPolygon2D/BuildMode/solids`` mode can be used, which decomposes the polygon into convex ones; see ``ConvexPolygonShape2D``'s documentation for instructions.
 /// 
 open class ConcavePolygonShape2D: Shape2D {
-    fileprivate static var className = StringName("ConcavePolygonShape2D")
+    private static var className = StringName("ConcavePolygonShape2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -50,8 +50,8 @@ open class ConcavePolygonShape2D: Shape2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_segments")
+    fileprivate static let method_set_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_segments")
         return withUnsafePointer(to: &ConcavePolygonShape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -63,6 +63,7 @@ open class ConcavePolygonShape2D: Shape2D {
     
     @inline(__always)
     fileprivate final func set_segments(_ segments: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: segments.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -76,8 +77,8 @@ open class ConcavePolygonShape2D: Shape2D {
         
     }
     
-    fileprivate static var method_get_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_segments")
+    fileprivate static let method_get_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_segments")
         return withUnsafePointer(to: &ConcavePolygonShape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -89,6 +90,7 @@ open class ConcavePolygonShape2D: Shape2D {
     
     @inline(__always)
     fileprivate final func get_segments() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(ConcavePolygonShape2D.method_get_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

@@ -32,11 +32,11 @@ import Musl
 /// - When a ``Thread``'s reference count reaches zero and it is therefore destroyed, it must not be waiting on any semaphore.
 /// 
 open class Semaphore: RefCounted {
-    fileprivate static var className = StringName("Semaphore")
+    private static var className = StringName("Semaphore")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_wait: GDExtensionMethodBindPtr = {
-        let methodName = StringName("wait")
+    fileprivate static let method_wait: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("wait")
         return withUnsafePointer(to: &Semaphore.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -48,12 +48,13 @@ open class Semaphore: RefCounted {
     
     /// Waits for the ``Semaphore``, if its value is zero, blocks until non-zero.
     public final func wait() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Semaphore.method_wait, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_try_wait: GDExtensionMethodBindPtr = {
-        let methodName = StringName("try_wait")
+    fileprivate static let method_try_wait: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("try_wait")
         return withUnsafePointer(to: &Semaphore.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -65,25 +66,36 @@ open class Semaphore: RefCounted {
     
     /// Like ``wait()``, but won't block, so if the value is zero, fails immediately and returns `false`. If non-zero, it returns `true` to report success.
     public final func tryWait() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Semaphore.method_try_wait, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_post: GDExtensionMethodBindPtr = {
-        let methodName = StringName("post")
+    fileprivate static let method_post: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("post")
         return withUnsafePointer(to: &Semaphore.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1667783136)!
             }
             
         }
         
     }()
     
-    /// Lowers the ``Semaphore``, allowing one more thread in.
-    public final func post() {
-        gi.object_method_bind_ptrcall(Semaphore.method_post, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+    /// Lowers the ``Semaphore``, allowing one thread in, or more if `count` is specified.
+    public final func post(count: Int32 = 1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: count) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Semaphore.method_post, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
         
     }
     

@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``profileUpdated``
 open class SkeletonProfile: Resource {
-    fileprivate static var className = StringName("SkeletonProfile")
+    private static var className = StringName("SkeletonProfile")
     override open class var godotClassName: StringName { className }
     public enum TailDirection: Int64, CaseIterable {
         /// Direction to the average coordinates of bone children.
@@ -100,8 +100,8 @@ open class SkeletonProfile: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_root_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_root_bone")
+    fileprivate static let method_set_root_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_bone")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -113,6 +113,7 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func set_root_bone(_ boneName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -126,8 +127,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_root_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_bone")
+    fileprivate static let method_get_root_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_bone")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2737447660)!
@@ -139,13 +140,14 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func get_root_bone() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(SkeletonProfile.method_get_root_bone, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_scale_base_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scale_base_bone")
+    fileprivate static let method_set_scale_base_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scale_base_bone")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -157,6 +159,7 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func set_scale_base_bone(_ boneName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -170,8 +173,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_scale_base_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scale_base_bone")
+    fileprivate static let method_get_scale_base_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scale_base_bone")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2737447660)!
@@ -183,13 +186,14 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func get_scale_base_bone() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(SkeletonProfile.method_get_scale_base_bone, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_group_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_group_size")
+    fileprivate static let method_set_group_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_group_size")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -201,6 +205,7 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func set_group_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -214,8 +219,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_group_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_group_size")
+    fileprivate static let method_get_group_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_group_size")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -227,13 +232,14 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func get_group_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonProfile.method_get_group_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_group_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_group_name")
+    fileprivate static let method_get_group_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_group_name")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -245,6 +251,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the name of the group at `groupIdx` that will be the drawing group in the ``BoneMap`` editor.
     public final func getGroupName(groupIdx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: groupIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -259,8 +266,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_group_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_group_name")
+    fileprivate static let method_set_group_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_group_name")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -272,6 +279,7 @@ open class SkeletonProfile: Resource {
     
     /// Sets the name of the group at `groupIdx` that will be the drawing group in the ``BoneMap`` editor.
     public final func setGroupName(groupIdx: Int32, groupName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: groupIdx) { pArg0 in
             withUnsafePointer(to: groupName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -288,8 +296,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -301,6 +309,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the texture of the group at `groupIdx` that will be the drawing group background image in the ``BoneMap`` editor.
     public final func getTexture(groupIdx: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: groupIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -312,11 +321,11 @@ open class SkeletonProfile: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -328,6 +337,7 @@ open class SkeletonProfile: Resource {
     
     /// Sets the texture of the group at `groupIdx` that will be the drawing group background image in the ``BoneMap`` editor.
     public final func setTexture(groupIdx: Int32, texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: groupIdx) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -344,8 +354,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_set_bone_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_size")
+    fileprivate static let method_set_bone_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_size")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -357,6 +367,7 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func set_bone_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -370,8 +381,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_bone_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_size")
+    fileprivate static let method_get_bone_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_size")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -383,13 +394,14 @@ open class SkeletonProfile: Resource {
     
     @inline(__always)
     fileprivate final func get_bone_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonProfile.method_get_bone_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_find_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_bone")
+    fileprivate static let method_find_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_bone")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2458036349)!
@@ -401,6 +413,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the bone index that matches `boneName` as its name.
     public final func findBone(boneName: StringName) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -415,8 +428,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_get_bone_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_name")
+    fileprivate static let method_get_bone_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_name")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -431,6 +444,7 @@ open class SkeletonProfile: Resource {
     /// In the retargeting process, the returned bone name is the bone name of the target skeleton.
     /// 
     public final func getBoneName(boneIdx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -445,8 +459,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_bone_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_name")
+    fileprivate static let method_set_bone_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_name")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -461,6 +475,7 @@ open class SkeletonProfile: Resource {
     /// In the retargeting process, the setting bone name is the bone name of the target skeleton.
     /// 
     public final func setBoneName(boneIdx: Int32, boneName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: boneName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -477,8 +492,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_bone_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_parent")
+    fileprivate static let method_get_bone_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_parent")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -490,6 +505,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the name of the bone which is the parent to the bone at `boneIdx`. The result is empty if the bone has no parent.
     public final func getBoneParent(boneIdx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -504,8 +520,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_bone_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_parent")
+    fileprivate static let method_set_bone_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_parent")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -517,6 +533,7 @@ open class SkeletonProfile: Resource {
     
     /// Sets the bone with name `boneParent` as the parent of the bone at `boneIdx`. If an empty string is passed, then the bone has no parent.
     public final func setBoneParent(boneIdx: Int32, boneParent: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: boneParent.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -533,8 +550,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_tail_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tail_direction")
+    fileprivate static let method_get_tail_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tail_direction")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2675997574)!
@@ -546,6 +563,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the tail direction of the bone at `boneIdx`.
     public final func getTailDirection(boneIdx: Int32) -> SkeletonProfile.TailDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -560,8 +578,8 @@ open class SkeletonProfile: Resource {
         return SkeletonProfile.TailDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_tail_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tail_direction")
+    fileprivate static let method_set_tail_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tail_direction")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1231951015)!
@@ -576,6 +594,7 @@ open class SkeletonProfile: Resource {
     /// > Note: This only specifies the method of calculation. The actual coordinates required should be stored in an external skeleton, so the calculation itself needs to be done externally.
     /// 
     public final func setTailDirection(boneIdx: Int32, tailDirection: SkeletonProfile.TailDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: tailDirection.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -592,8 +611,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_bone_tail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_tail")
+    fileprivate static let method_get_bone_tail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_tail")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -605,6 +624,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the name of the bone which is the tail of the bone at `boneIdx`.
     public final func getBoneTail(boneIdx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -619,8 +639,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_bone_tail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_tail")
+    fileprivate static let method_set_bone_tail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_tail")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -632,6 +652,7 @@ open class SkeletonProfile: Resource {
     
     /// Sets the bone with name `boneTail` as the tail of the bone at `boneIdx`.
     public final func setBoneTail(boneIdx: Int32, boneTail: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: boneTail.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -648,8 +669,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_reference_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_reference_pose")
+    fileprivate static let method_get_reference_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_reference_pose")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -661,6 +682,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the reference pose transform for bone `boneIdx`.
     public final func getReferencePose(boneIdx: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -675,8 +697,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_reference_pose: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_reference_pose")
+    fileprivate static let method_set_reference_pose: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_reference_pose")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3616898986)!
@@ -688,6 +710,7 @@ open class SkeletonProfile: Resource {
     
     /// Sets the reference pose transform for bone `boneIdx`.
     public final func setReferencePose(boneIdx: Int32, boneName: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: boneName) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -704,8 +727,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_handle_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_handle_offset")
+    fileprivate static let method_get_handle_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_handle_offset")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -720,6 +743,7 @@ open class SkeletonProfile: Resource {
     /// This is the offset with origin at the top left corner of the square.
     /// 
     public final func getHandleOffset(boneIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -734,8 +758,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_handle_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_handle_offset")
+    fileprivate static let method_set_handle_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_handle_offset")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -750,6 +774,7 @@ open class SkeletonProfile: Resource {
     /// This is the offset with origin at the top left corner of the square.
     /// 
     public final func setHandleOffset(boneIdx: Int32, handleOffset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: handleOffset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -766,8 +791,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_get_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_group")
+    fileprivate static let method_get_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_group")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -779,6 +804,7 @@ open class SkeletonProfile: Resource {
     
     /// Returns the group of the bone at `boneIdx`.
     public final func getGroup(boneIdx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -793,8 +819,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_group")
+    fileprivate static let method_set_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_group")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -806,6 +832,7 @@ open class SkeletonProfile: Resource {
     
     /// Sets the group of the bone at `boneIdx`.
     public final func setGroup(boneIdx: Int32, group: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: group.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -822,8 +849,8 @@ open class SkeletonProfile: Resource {
         
     }
     
-    fileprivate static var method_is_required: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_required")
+    fileprivate static let method_is_required: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_required")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -838,6 +865,7 @@ open class SkeletonProfile: Resource {
     /// This value is used by the bone map editor. If this method returns `true`, and no bone is assigned, the handle color will be red on the bone map editor.
     /// 
     public final func isRequired(boneIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -852,8 +880,8 @@ open class SkeletonProfile: Resource {
         return _result
     }
     
-    fileprivate static var method_set_required: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_required")
+    fileprivate static let method_set_required: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_required")
         return withUnsafePointer(to: &SkeletonProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -865,6 +893,7 @@ open class SkeletonProfile: Resource {
     
     /// Sets the required status for bone `boneIdx` to `required`.
     public final func setRequired(boneIdx: Int32, required: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: required) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in

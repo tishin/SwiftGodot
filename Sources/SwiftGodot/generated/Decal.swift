@@ -34,7 +34,7 @@ import Musl
 /// > Note: When using the Mobile rendering method, decals will only correctly affect meshes whose visibility AABB intersects with the decal's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, ``GeometryInstance3D/extraCullMargin`` must be increased on the mesh. Otherwise, the decal may not be visible on the mesh.
 /// 
 open class Decal: VisualInstance3D {
-    fileprivate static var className = StringName("Decal")
+    private static var className = StringName("Decal")
     override open class var godotClassName: StringName { className }
     public enum DecalTexture: Int64, CaseIterable {
         /// ``Texture2D`` corresponding to ``textureAlbedo``.
@@ -255,8 +255,8 @@ open class Decal: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -268,6 +268,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -281,8 +282,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -294,13 +295,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(Decal.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2086764391)!
@@ -318,6 +320,7 @@ open class Decal: VisualInstance3D {
     /// One case where this is better than accessing the texture directly is when you want to copy one Decal's textures to another. For example:
     /// 
     fileprivate final func set_texture(_ type: Decal.DecalTexture, _ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -334,8 +337,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3244119503)!
@@ -353,6 +356,7 @@ open class Decal: VisualInstance3D {
     /// One case where this is better than accessing the texture directly is when you want to copy one Decal's textures to another. For example:
     /// 
     fileprivate final func get_texture(_ type: Decal.DecalTexture) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -364,11 +368,11 @@ open class Decal: VisualInstance3D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_emission_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emission_energy")
+    fileprivate static let method_set_emission_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emission_energy")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -380,6 +384,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_emission_energy(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -393,8 +398,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_emission_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_emission_energy")
+    fileprivate static let method_get_emission_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_emission_energy")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -406,13 +411,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_emission_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Decal.method_get_emission_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_albedo_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_albedo_mix")
+    fileprivate static let method_set_albedo_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_albedo_mix")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -424,6 +430,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_albedo_mix(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -437,8 +444,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_albedo_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_albedo_mix")
+    fileprivate static let method_get_albedo_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_albedo_mix")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -450,13 +457,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_albedo_mix() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Decal.method_get_albedo_mix, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_modulate")
+    fileprivate static let method_set_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_modulate")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -468,6 +476,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_modulate(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -481,8 +490,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modulate")
+    fileprivate static let method_get_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modulate")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -494,13 +503,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_modulate() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Decal.method_get_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_upper_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_upper_fade")
+    fileprivate static let method_set_upper_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_upper_fade")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -512,6 +522,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_upper_fade(_ fade: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -525,8 +536,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_upper_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_upper_fade")
+    fileprivate static let method_get_upper_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_upper_fade")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -538,13 +549,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_upper_fade() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Decal.method_get_upper_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_lower_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lower_fade")
+    fileprivate static let method_set_lower_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lower_fade")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -556,6 +568,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_lower_fade(_ fade: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -569,8 +582,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_lower_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lower_fade")
+    fileprivate static let method_get_lower_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lower_fade")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -582,13 +595,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_lower_fade() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Decal.method_get_lower_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_normal_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_normal_fade")
+    fileprivate static let method_set_normal_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_normal_fade")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -600,6 +614,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_normal_fade(_ fade: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -613,8 +628,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_normal_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_normal_fade")
+    fileprivate static let method_get_normal_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_normal_fade")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -626,13 +641,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_normal_fade() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Decal.method_get_normal_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_distance_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_distance_fade")
+    fileprivate static let method_set_enable_distance_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_distance_fade")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -644,6 +660,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_enable_distance_fade(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -657,8 +674,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_distance_fade_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_distance_fade_enabled")
+    fileprivate static let method_is_distance_fade_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_distance_fade_enabled")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -670,13 +687,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_distance_fade_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Decal.method_is_distance_fade_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_distance_fade_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_distance_fade_begin")
+    fileprivate static let method_set_distance_fade_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_distance_fade_begin")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -688,6 +706,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_distance_fade_begin(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -701,8 +720,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_distance_fade_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_distance_fade_begin")
+    fileprivate static let method_get_distance_fade_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_distance_fade_begin")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -714,13 +733,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_distance_fade_begin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Decal.method_get_distance_fade_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_distance_fade_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_distance_fade_length")
+    fileprivate static let method_set_distance_fade_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_distance_fade_length")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -732,6 +752,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_distance_fade_length(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -745,8 +766,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_distance_fade_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_distance_fade_length")
+    fileprivate static let method_get_distance_fade_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_distance_fade_length")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -758,13 +779,14 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_distance_fade_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Decal.method_get_distance_fade_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mask")
+    fileprivate static let method_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mask")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -776,6 +798,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_cull_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -789,8 +812,8 @@ open class Decal: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mask")
+    fileprivate static let method_get_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mask")
         return withUnsafePointer(to: &Decal.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -802,6 +825,7 @@ open class Decal: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_cull_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(Decal.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -32,11 +32,11 @@ import Musl
 /// > Note: Godot uses clockwise <a href="https://learnopengl.com/Advanced-OpenGL/Face-culling">winding order</a> for front faces of triangle primitive modes.
 /// 
 open class MeshDataTool: RefCounted {
-    fileprivate static var className = StringName("MeshDataTool")
+    private static var className = StringName("MeshDataTool")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -48,12 +48,13 @@ open class MeshDataTool: RefCounted {
     
     /// Clears all data currently in MeshDataTool.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(MeshDataTool.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_create_from_surface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_surface")
+    fileprivate static let method_create_from_surface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_surface")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2727020678)!
@@ -68,6 +69,7 @@ open class MeshDataTool: RefCounted {
     /// Requires ``Mesh`` with primitive type ``Mesh/PrimitiveType/triangles``.
     /// 
     public final func createFromSurface(mesh: ArrayMesh?, surface: Int32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: surface) { pArg1 in
@@ -85,8 +87,8 @@ open class MeshDataTool: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_commit_to_surface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("commit_to_surface")
+    fileprivate static let method_commit_to_surface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("commit_to_surface")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2021686445)!
@@ -98,6 +100,7 @@ open class MeshDataTool: RefCounted {
     
     /// Adds a new surface to specified ``Mesh`` with edited data.
     public final func commitToSurface(mesh: ArrayMesh?, compressionFlags: UInt = 0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: compressionFlags) { pArg1 in
@@ -115,8 +118,8 @@ open class MeshDataTool: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format")
+    fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -128,13 +131,14 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the ``Mesh``'s format as a combination of the ``Mesh.ArrayFormat`` flags. For example, a mesh containing both vertices and normals would return a format of `3` because ``Mesh/ArrayFormat/formatVertex`` is `1` and ``Mesh/ArrayFormat/formatNormal`` is `2`.
     public final func getFormat() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(MeshDataTool.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_vertex_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_count")
+    fileprivate static let method_get_vertex_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_count")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -146,13 +150,14 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the total number of vertices in ``Mesh``.
     public final func getVertexCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_edge_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edge_count")
+    fileprivate static let method_get_edge_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edge_count")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -164,13 +169,14 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the number of edges in this ``Mesh``.
     public final func getEdgeCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_face_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_face_count")
+    fileprivate static let method_get_face_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_face_count")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -182,13 +188,14 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the number of faces in this ``Mesh``.
     public final func getFaceCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vertex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex")
+    fileprivate static let method_set_vertex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1530502735)!
@@ -200,6 +207,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the position of the given vertex.
     public final func setVertex(idx: Int32, vertex: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: vertex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -216,8 +224,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex")
+    fileprivate static let method_get_vertex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 711720468)!
@@ -229,6 +237,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the position of the given vertex.
     public final func getVertex(idx: Int32) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -243,8 +252,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_normal")
+    fileprivate static let method_set_vertex_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_normal")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1530502735)!
@@ -256,6 +265,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the normal of the given vertex.
     public final func setVertexNormal(idx: Int32, normal: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: normal) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -272,8 +282,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_normal")
+    fileprivate static let method_get_vertex_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_normal")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 711720468)!
@@ -285,6 +295,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the normal of the given vertex.
     public final func getVertexNormal(idx: Int32) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -299,8 +310,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_tangent")
+    fileprivate static let method_set_vertex_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_tangent")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1104099133)!
@@ -312,6 +323,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the tangent of the given vertex.
     public final func setVertexTangent(idx: Int32, tangent: Plane) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: tangent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -328,8 +340,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_tangent")
+    fileprivate static let method_get_vertex_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_tangent")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1372055458)!
@@ -341,6 +353,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the tangent of the given vertex.
     public final func getVertexTangent(idx: Int32) -> Plane {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Plane = Plane ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -355,8 +368,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_uv")
+    fileprivate static let method_set_vertex_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_uv")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -368,6 +381,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the UV of the given vertex.
     public final func setVertexUv(idx: Int32, uv: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: uv) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -384,8 +398,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_uv")
+    fileprivate static let method_get_vertex_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_uv")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -397,6 +411,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the UV of the given vertex.
     public final func getVertexUv(idx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -411,8 +426,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_uv2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_uv2")
+    fileprivate static let method_set_vertex_uv2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_uv2")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -424,6 +439,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the UV2 of the given vertex.
     public final func setVertexUv2(idx: Int32, uv2: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: uv2) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -440,8 +456,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_uv2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_uv2")
+    fileprivate static let method_get_vertex_uv2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_uv2")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -453,6 +469,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the UV2 of the given vertex.
     public final func getVertexUv2(idx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -467,8 +484,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_color")
+    fileprivate static let method_set_vertex_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_color")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -480,6 +497,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the color of the given vertex.
     public final func setVertexColor(idx: Int32, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -496,8 +514,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_color")
+    fileprivate static let method_get_vertex_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_color")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -509,6 +527,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the color of the given vertex.
     public final func getVertexColor(idx: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -523,8 +542,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_bones")
+    fileprivate static let method_set_vertex_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_bones")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3500328261)!
@@ -536,6 +555,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the bones of the given vertex.
     public final func setVertexBones(idx: Int32, bones: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: bones.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -552,8 +572,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_bones")
+    fileprivate static let method_get_vertex_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_bones")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1706082319)!
@@ -565,6 +585,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the bones of the given vertex.
     public final func getVertexBones(idx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -579,8 +600,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_weights: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_weights")
+    fileprivate static let method_set_vertex_weights: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_weights")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1345852415)!
@@ -592,6 +613,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the bone weights of the given vertex.
     public final func setVertexWeights(idx: Int32, weights: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: weights.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -608,8 +630,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_weights: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_weights")
+    fileprivate static let method_get_vertex_weights: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_weights")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1542882410)!
@@ -621,6 +643,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns bone weights of the given vertex.
     public final func getVertexWeights(idx: Int32) -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -635,8 +658,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_vertex_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_meta")
+    fileprivate static let method_set_vertex_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_meta")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2152698145)!
@@ -648,6 +671,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the metadata associated with the given vertex.
     public final func setVertexMeta(idx: Int32, meta: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: meta.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -664,8 +688,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_vertex_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_meta")
+    fileprivate static let method_get_vertex_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_meta")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
@@ -677,6 +701,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the metadata associated with the given vertex.
     public final func getVertexMeta(idx: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -691,8 +716,8 @@ open class MeshDataTool: RefCounted {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_vertex_edges: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_edges")
+    fileprivate static let method_get_vertex_edges: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_edges")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1706082319)!
@@ -704,6 +729,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns an array of edges that share the given vertex.
     public final func getVertexEdges(idx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -718,8 +744,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_vertex_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_faces")
+    fileprivate static let method_get_vertex_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_faces")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1706082319)!
@@ -731,6 +757,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns an array of faces that share the given vertex.
     public final func getVertexFaces(idx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -745,8 +772,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_edge_vertex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edge_vertex")
+    fileprivate static let method_get_edge_vertex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edge_vertex")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -761,6 +788,7 @@ open class MeshDataTool: RefCounted {
     /// Vertex argument can only be 0 or 1 because edges are comprised of two vertices.
     /// 
     public final func getEdgeVertex(idx: Int32, vertex: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: vertex) { pArg1 in
@@ -778,8 +806,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_edge_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edge_faces")
+    fileprivate static let method_get_edge_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edge_faces")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1706082319)!
@@ -791,6 +819,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns array of faces that touch given edge.
     public final func getEdgeFaces(idx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -805,8 +834,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_edge_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_edge_meta")
+    fileprivate static let method_set_edge_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_edge_meta")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2152698145)!
@@ -818,6 +847,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the metadata of the given edge.
     public final func setEdgeMeta(idx: Int32, meta: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: meta.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -834,8 +864,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_edge_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edge_meta")
+    fileprivate static let method_get_edge_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edge_meta")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
@@ -847,6 +877,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns meta information assigned to given edge.
     public final func getEdgeMeta(idx: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -861,8 +892,8 @@ open class MeshDataTool: RefCounted {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_face_vertex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_face_vertex")
+    fileprivate static let method_get_face_vertex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_face_vertex")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -874,11 +905,10 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the specified vertex index of the given face.
     /// 
-    /// Vertex argument must be either 0, 1, or 2 because faces contain three vertices.
-    /// 
-    /// **Example:**
+    /// `vertex` must be either `0`, `1`, or `2` because faces contain three vertices.
     /// 
     public final func getFaceVertex(idx: Int32, vertex: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: vertex) { pArg1 in
@@ -896,8 +926,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_face_edge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_face_edge")
+    fileprivate static let method_get_face_edge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_face_edge")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -912,6 +942,7 @@ open class MeshDataTool: RefCounted {
     /// Edge argument must be either 0, 1, or 2 because a face only has three edges.
     /// 
     public final func getFaceEdge(idx: Int32, edge: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: edge) { pArg1 in
@@ -929,8 +960,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_face_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_face_meta")
+    fileprivate static let method_set_face_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_face_meta")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2152698145)!
@@ -942,6 +973,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the metadata of the given face.
     public final func setFaceMeta(idx: Int32, meta: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: meta.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -958,8 +990,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_face_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_face_meta")
+    fileprivate static let method_get_face_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_face_meta")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
@@ -971,6 +1003,7 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the metadata associated with the given face.
     public final func getFaceMeta(idx: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -985,8 +1018,8 @@ open class MeshDataTool: RefCounted {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_face_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_face_normal")
+    fileprivate static let method_get_face_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_face_normal")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 711720468)!
@@ -998,6 +1031,7 @@ open class MeshDataTool: RefCounted {
     
     /// Calculates and returns the face normal of the given face.
     public final func getFaceNormal(idx: Int32) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1012,8 +1046,8 @@ open class MeshDataTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -1025,6 +1059,7 @@ open class MeshDataTool: RefCounted {
     
     /// Sets the material to be used by newly-constructed ``Mesh``.
     public final func setMaterial(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1038,8 +1073,8 @@ open class MeshDataTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_material")
+    fileprivate static let method_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_material")
         return withUnsafePointer(to: &MeshDataTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 5934680)!
@@ -1051,9 +1086,10 @@ open class MeshDataTool: RefCounted {
     
     /// Returns the material assigned to the ``Mesh``.
     public final func getMaterial() -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(MeshDataTool.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

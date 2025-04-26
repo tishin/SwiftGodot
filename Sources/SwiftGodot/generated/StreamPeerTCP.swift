@@ -26,7 +26,7 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class StreamPeerTCP: StreamPeer {
-    fileprivate static var className = StringName("StreamPeerTCP")
+    private static var className = StringName("StreamPeerTCP")
     override open class var godotClassName: StringName { className }
     public enum Status: Int64, CaseIterable {
         /// The initial status of the ``StreamPeerTCP``. This is also the status after disconnecting.
@@ -40,8 +40,8 @@ open class StreamPeerTCP: StreamPeer {
     }
     
     /* Methods */
-    fileprivate static var method_bind: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bind")
+    fileprivate static let method_bind: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bind")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3167955072)!
@@ -56,6 +56,7 @@ open class StreamPeerTCP: StreamPeer {
     /// This method is generally not needed, and only used to force the subsequent call to ``connectToHost(_:port:)`` to use the specified `host` and `port` as source address. This can be desired in some NAT punchthrough techniques, or when forcing the source network interface.
     /// 
     public final func bind(port: Int32, host: String = "*") -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: port) { pArg0 in
             let host = GString(host)
@@ -74,8 +75,8 @@ open class StreamPeerTCP: StreamPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_connect_to_host: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_to_host")
+    fileprivate static let method_connect_to_host: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_to_host")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 993915709)!
@@ -87,6 +88,7 @@ open class StreamPeerTCP: StreamPeer {
     
     /// Connects to the specified `host:port` pair. A hostname will be resolved if valid. Returns ``GodotError/ok`` on success.
     public final func connectToHost(_ host: String, port: Int32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
@@ -105,8 +107,8 @@ open class StreamPeerTCP: StreamPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -118,13 +120,14 @@ open class StreamPeerTCP: StreamPeer {
     
     /// Poll the socket, updating its state. See ``getStatus()``.
     public final func poll() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(StreamPeerTCP.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_status")
+    fileprivate static let method_get_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_status")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 859471121)!
@@ -136,13 +139,14 @@ open class StreamPeerTCP: StreamPeer {
     
     /// Returns the status of the connection, see ``StreamPeerTCP/Status``.
     public final func getStatus() -> StreamPeerTCP.Status {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return StreamPeerTCP.Status (rawValue: _result)!
     }
     
-    fileprivate static var method_get_connected_host: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connected_host")
+    fileprivate static let method_get_connected_host: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connected_host")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -154,13 +158,14 @@ open class StreamPeerTCP: StreamPeer {
     
     /// Returns the IP of this peer.
     public final func getConnectedHost() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_connected_host, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_connected_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connected_port")
+    fileprivate static let method_get_connected_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connected_port")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -172,13 +177,14 @@ open class StreamPeerTCP: StreamPeer {
     
     /// Returns the port of this peer.
     public final func getConnectedPort() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_connected_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_local_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_local_port")
+    fileprivate static let method_get_local_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_local_port")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -190,13 +196,14 @@ open class StreamPeerTCP: StreamPeer {
     
     /// Returns the local port to which this peer is bound.
     public final func getLocalPort() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_disconnect_from_host: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_from_host")
+    fileprivate static let method_disconnect_from_host: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_from_host")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -208,12 +215,13 @@ open class StreamPeerTCP: StreamPeer {
     
     /// Disconnects from host.
     public final func disconnectFromHost() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(StreamPeerTCP.method_disconnect_from_host, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_no_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_no_delay")
+    fileprivate static let method_set_no_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_no_delay")
         return withUnsafePointer(to: &StreamPeerTCP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -228,6 +236,7 @@ open class StreamPeerTCP: StreamPeer {
     /// > Note: It's recommended to leave this disabled for applications that send large packets or need to transfer a lot of data, as enabling this can decrease the total available bandwidth.
     /// 
     public final func setNoDelay(enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

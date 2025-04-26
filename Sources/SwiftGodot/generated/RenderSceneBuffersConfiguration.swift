@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This configuration object is created and populated by the render engine on a viewport change and used to (re)configure a ``RenderSceneBuffers`` object.
 open class RenderSceneBuffersConfiguration: RefCounted {
-    fileprivate static var className = StringName("RenderSceneBuffersConfiguration")
+    private static var className = StringName("RenderSceneBuffersConfiguration")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -136,9 +136,21 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
+    /// Level of the anisotropic filter.
+    final public var anisotropicFilteringLevel: RenderingServer.ViewportAnisotropicFiltering {
+        get {
+            return get_anisotropic_filtering_level ()
+        }
+        
+        set {
+            set_anisotropic_filtering_level (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_get_render_target: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_target")
+    fileprivate static let method_get_render_target: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_target")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -150,13 +162,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_render_target() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_render_target, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_render_target: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_render_target")
+    fileprivate static let method_set_render_target: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_render_target")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -168,6 +181,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_render_target(_ renderTarget: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: renderTarget.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -181,8 +195,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_internal_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_internal_size")
+    fileprivate static let method_get_internal_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_internal_size")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -194,13 +208,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_internal_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_internal_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_internal_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_internal_size")
+    fileprivate static let method_set_internal_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_internal_size")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -212,6 +227,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_internal_size(_ internalSize: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: internalSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -225,8 +241,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_target_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_size")
+    fileprivate static let method_get_target_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_size")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -238,13 +254,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_target_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_target_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_target_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_size")
+    fileprivate static let method_set_target_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_size")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -256,6 +273,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_target_size(_ targetSize: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: targetSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -269,8 +287,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_view_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_view_count")
+    fileprivate static let method_get_view_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_view_count")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -282,13 +300,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_view_count() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_view_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_view_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_view_count")
+    fileprivate static let method_set_view_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_view_count")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -300,6 +319,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_view_count(_ viewCount: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: viewCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -313,8 +333,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_scaling_3d_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scaling_3d_mode")
+    fileprivate static let method_get_scaling_3d_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scaling_3d_mode")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 976778074)!
@@ -326,13 +346,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_scaling_3d_mode() -> RenderingServer.ViewportScaling3DMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_scaling_3d_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingServer.ViewportScaling3DMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_scaling_3d_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scaling_3d_mode")
+    fileprivate static let method_set_scaling_3d_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scaling_3d_mode")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 447477857)!
@@ -344,6 +365,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_scaling_3d_mode(_ scaling3dMode: RenderingServer.ViewportScaling3DMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scaling3dMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -357,8 +379,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_msaa_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msaa_3d")
+    fileprivate static let method_get_msaa_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msaa_3d")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3109158617)!
@@ -370,13 +392,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_msaa_3d() -> RenderingServer.ViewportMSAA {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_msaa_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingServer.ViewportMSAA (rawValue: _result)!
     }
     
-    fileprivate static var method_set_msaa_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msaa_3d")
+    fileprivate static let method_set_msaa_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msaa_3d")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3952630748)!
@@ -388,6 +411,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_msaa_3d(_ msaa3d: RenderingServer.ViewportMSAA) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msaa3d.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -401,8 +425,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_screen_space_aa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_screen_space_aa")
+    fileprivate static let method_get_screen_space_aa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_screen_space_aa")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 641513172)!
@@ -414,13 +438,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_screen_space_aa() -> RenderingServer.ViewportScreenSpaceAA {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_screen_space_aa, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingServer.ViewportScreenSpaceAA (rawValue: _result)!
     }
     
-    fileprivate static var method_set_screen_space_aa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_screen_space_aa")
+    fileprivate static let method_set_screen_space_aa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_screen_space_aa")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 139543108)!
@@ -432,6 +457,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_screen_space_aa(_ screenSpaceAa: RenderingServer.ViewportScreenSpaceAA) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: screenSpaceAa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -445,8 +471,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_fsr_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fsr_sharpness")
+    fileprivate static let method_get_fsr_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fsr_sharpness")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -458,13 +484,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_fsr_sharpness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_fsr_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fsr_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fsr_sharpness")
+    fileprivate static let method_set_fsr_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fsr_sharpness")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -476,6 +503,7 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_fsr_sharpness(_ fsrSharpness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fsrSharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -489,8 +517,8 @@ open class RenderSceneBuffersConfiguration: RefCounted {
         
     }
     
-    fileprivate static var method_get_texture_mipmap_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_mipmap_bias")
+    fileprivate static let method_get_texture_mipmap_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_mipmap_bias")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -502,13 +530,14 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func get_texture_mipmap_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_texture_mipmap_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_mipmap_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_mipmap_bias")
+    fileprivate static let method_set_texture_mipmap_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_mipmap_bias")
         return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -520,10 +549,57 @@ open class RenderSceneBuffersConfiguration: RefCounted {
     
     @inline(__always)
     fileprivate final func set_texture_mipmap_bias(_ textureMipmapBias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: textureMipmapBias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_set_texture_mipmap_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_anisotropic_filtering_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_anisotropic_filtering_level")
+        return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1617414954)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_anisotropic_filtering_level() -> RenderingServer.ViewportAnisotropicFiltering {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_get_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return RenderingServer.ViewportAnisotropicFiltering (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_anisotropic_filtering_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anisotropic_filtering_level")
+        return withUnsafePointer(to: &RenderSceneBuffersConfiguration.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2559658741)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_anisotropic_filtering_level(_ anisotropicFilteringLevel: RenderingServer.ViewportAnisotropicFiltering) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: anisotropicFilteringLevel.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersConfiguration.method_set_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
                 }
                 
             }

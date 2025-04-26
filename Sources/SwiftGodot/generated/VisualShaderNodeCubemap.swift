@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translated to `texture(cubemap, vec3)` in the shader language. Returns a color vector and alpha channel as scalar.
 open class VisualShaderNodeCubemap: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeCubemap")
+    private static var className = StringName("VisualShaderNodeCubemap")
     override open class var godotClassName: StringName { className }
     public enum Source: Int64, CaseIterable {
         /// Use the ``Cubemap`` set via ``cubeMap``. If this is set to ``source``, the `samplerCube` port is ignored.
@@ -61,7 +61,7 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     }
     
     /// The ``Cubemap`` texture to sample when using ``Source/texture`` as ``source``.
-    final public var cubeMap: Cubemap? {
+    final public var cubeMap: TextureLayered? {
         get {
             return get_cube_map ()
         }
@@ -85,8 +85,8 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_source")
+    fileprivate static let method_set_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_source")
         return withUnsafePointer(to: &VisualShaderNodeCubemap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1625400621)!
@@ -98,6 +98,7 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_source(_ value: VisualShaderNodeCubemap.Source) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -111,8 +112,8 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_source")
+    fileprivate static let method_get_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_source")
         return withUnsafePointer(to: &VisualShaderNodeCubemap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2222048781)!
@@ -124,16 +125,17 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_source() -> VisualShaderNodeCubemap.Source {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeCubemap.method_get_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeCubemap.Source (rawValue: _result)!
     }
     
-    fileprivate static var method_set_cube_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cube_map")
+    fileprivate static let method_set_cube_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cube_map")
         return withUnsafePointer(to: &VisualShaderNodeCubemap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2219800736)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1278366092)!
             }
             
         }
@@ -141,7 +143,8 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     }()
     
     @inline(__always)
-    fileprivate final func set_cube_map(_ value: Cubemap?) {
+    fileprivate final func set_cube_map(_ value: TextureLayered?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -155,11 +158,11 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_cube_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cube_map")
+    fileprivate static let method_get_cube_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cube_map")
         return withUnsafePointer(to: &VisualShaderNodeCubemap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1772111058)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3984243839)!
             }
             
         }
@@ -167,14 +170,15 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     }()
     
     @inline(__always)
-    fileprivate final func get_cube_map() -> Cubemap? {
+    fileprivate final func get_cube_map() -> TextureLayered? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(VisualShaderNodeCubemap.method_get_cube_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_type")
+    fileprivate static let method_set_texture_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_type")
         return withUnsafePointer(to: &VisualShaderNodeCubemap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1899718876)!
@@ -186,6 +190,7 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_texture_type(_ value: VisualShaderNodeCubemap.TextureType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -199,8 +204,8 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_texture_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_type")
+    fileprivate static let method_get_texture_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_type")
         return withUnsafePointer(to: &VisualShaderNodeCubemap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3356498888)!
@@ -212,6 +217,7 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_texture_type() -> VisualShaderNodeCubemap.TextureType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeCubemap.method_get_texture_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeCubemap.TextureType (rawValue: _result)!

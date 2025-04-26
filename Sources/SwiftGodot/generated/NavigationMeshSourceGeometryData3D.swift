@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Container for parsed source geometry data used in navigation mesh baking.
 open class NavigationMeshSourceGeometryData3D: Resource {
-    fileprivate static var className = StringName("NavigationMeshSourceGeometryData3D")
+    private static var className = StringName("NavigationMeshSourceGeometryData3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -50,7 +50,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    final public var projectedObstructions: GArray {
+    final public var projectedObstructions: VariantArray {
         get {
             return get_projected_obstructions ()
         }
@@ -62,8 +62,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertices")
+    fileprivate static let method_set_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertices")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2899603908)!
@@ -79,6 +79,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     /// > Warning: Inappropriate data can crash the baking process of the involved third-party libraries.
     /// 
     fileprivate final func set_vertices(_ vertices: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -92,8 +93,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_get_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertices")
+    fileprivate static let method_get_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertices")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675695659)!
@@ -106,13 +107,14 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     @inline(__always)
     /// Returns the parsed source geometry data vertices array.
     fileprivate final func get_vertices() -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
         gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_indices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_indices")
+    fileprivate static let method_set_indices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_indices")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -128,6 +130,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     /// > Warning: Inappropriate data can crash the baking process of the involved third-party libraries.
     /// 
     fileprivate final func set_indices(_ indices: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: indices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -141,8 +144,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_get_indices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_indices")
+    fileprivate static let method_get_indices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_indices")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -155,13 +158,14 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     @inline(__always)
     /// Returns the parsed source geometry data indices array.
     fileprivate final func get_indices() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_indices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_append_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("append_arrays")
+    fileprivate static let method_append_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_arrays")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3117535015)!
@@ -173,6 +177,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Appends arrays of `vertices` and `indices` at the end of the existing arrays. Adds the existing index as an offset to the appended indices.
     public final func appendArrays(vertices: PackedFloat32Array, indices: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: indices.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -189,8 +194,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -202,12 +207,13 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Clears the internal data.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_has_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_data")
+    fileprivate static let method_has_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_data")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -219,13 +225,14 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Returns `true` when parsed source geometry data exists.
     public final func hasData() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_has_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_mesh")
+    fileprivate static let method_add_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_mesh")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 975462459)!
@@ -237,6 +244,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Adds the geometry data of a ``Mesh`` resource to the navigation mesh baking data. The mesh must have valid triangulated mesh data to be considered. Since ``NavigationMesh`` resources have no transform, all vertex positions need to be offset by the node's transform using `xform`.
     public final func addMesh(_ mesh: Mesh?, xform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: xform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -253,8 +261,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_add_mesh_array: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_mesh_array")
+    fileprivate static let method_add_mesh_array: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_mesh_array")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4235710913)!
@@ -264,8 +272,9 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }()
     
-    /// Adds an ``GArray`` the size of ``Mesh/ArrayType/max`` and with vertices at index ``Mesh/ArrayType/vertex`` and indices at index ``Mesh/ArrayType/index`` to the navigation mesh baking data. The array must have valid triangulated mesh data to be considered. Since ``NavigationMesh`` resources have no transform, all vertex positions need to be offset by the node's transform using `xform`.
-    public final func addMeshArray(_ meshArray: GArray, xform: Transform3D) {
+    /// Adds an ``VariantArray`` the size of ``Mesh/ArrayType/max`` and with vertices at index ``Mesh/ArrayType/vertex`` and indices at index ``Mesh/ArrayType/index`` to the navigation mesh baking data. The array must have valid triangulated mesh data to be considered. Since ``NavigationMesh`` resources have no transform, all vertex positions need to be offset by the node's transform using `xform`.
+    public final func addMeshArray(_ meshArray: VariantArray, xform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: meshArray.content) { pArg0 in
             withUnsafePointer(to: xform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -282,8 +291,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_add_faces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_faces")
+    fileprivate static let method_add_faces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_faces")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1440358797)!
@@ -295,6 +304,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Adds an array of vertex positions to the geometry data for navigation mesh baking to form triangulated faces. For each face the array must have three vertex positions in clockwise winding order. Since ``NavigationMesh`` resources have no transform, all vertex positions need to be offset by the node's transform using `xform`.
     public final func addFaces(_ faces: PackedVector3Array, xform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: faces.content) { pArg0 in
             withUnsafePointer(to: xform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -311,8 +321,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_merge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("merge")
+    fileprivate static let method_merge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("merge")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 655828145)!
@@ -324,6 +334,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Adds the geometry data of another ``NavigationMeshSourceGeometryData3D`` to the navigation mesh baking data.
     public final func merge(otherGeometry: NavigationMeshSourceGeometryData3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: otherGeometry?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -337,8 +348,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_add_projected_obstruction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_projected_obstruction")
+    fileprivate static let method_add_projected_obstruction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_projected_obstruction")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3351846707)!
@@ -350,6 +361,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Adds a projected obstruction shape to the source geometry. The `vertices` are considered projected on a xz-axes plane, placed at the global y-axis `elevation` and extruded by `height`. If `carve` is `true` the carved shape will not be affected by additional offsets (e.g. agent radius) of the navigation mesh baking process.
     public final func addProjectedObstruction(vertices: PackedVector3Array, elevation: Double, height: Double, carve: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: elevation) { pArg1 in
                 withUnsafePointer(to: height) { pArg2 in
@@ -372,8 +384,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_clear_projected_obstructions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_projected_obstructions")
+    fileprivate static let method_clear_projected_obstructions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_projected_obstructions")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -385,12 +397,13 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     
     /// Clears all projected obstructions.
     public final func clearProjectedObstructions() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_clear_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_projected_obstructions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_projected_obstructions")
+    fileprivate static let method_set_projected_obstructions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_projected_obstructions")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -403,7 +416,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     @inline(__always)
     /// Sets the projected obstructions with an Array of Dictionaries with the following key value pairs:
     /// 
-    fileprivate final func set_projected_obstructions(_ projectedObstructions: GArray) {
+    fileprivate final func set_projected_obstructions(_ projectedObstructions: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: projectedObstructions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -417,8 +431,8 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         
     }
     
-    fileprivate static var method_get_projected_obstructions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_projected_obstructions")
+    fileprivate static let method_get_projected_obstructions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_projected_obstructions")
         return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -429,7 +443,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     }()
     
     @inline(__always)
-    /// Returns the projected obstructions as an ``GArray`` of dictionaries. Each ``GDictionary`` contains the following entries:
+    /// Returns the projected obstructions as an ``VariantArray`` of dictionaries. Each ``VariantDictionary`` contains the following entries:
     /// 
     /// - `vertices` - A ``PackedFloat32Array`` that defines the outline points of the projected shape.
     /// 
@@ -439,9 +453,29 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     /// 
     /// - `carve` - A [bool] that defines how the obstacle affects the navigation mesh baking. If `true` the projected shape will not be affected by addition offsets, e.g. agent radius.
     /// 
-    fileprivate final func get_projected_obstructions() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_projected_obstructions() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
+    }
+    
+    fileprivate static let method_get_bounds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bounds")
+        return withUnsafePointer(to: &NavigationMeshSourceGeometryData3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1021181044)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns an axis-aligned bounding box that covers all the stored geometry data. The bounds are calculated when calling this function with the result cached until further geometry changes are made.
+    public final func getBounds() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: AABB = AABB ()
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_bounds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     

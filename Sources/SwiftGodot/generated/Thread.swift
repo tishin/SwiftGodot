@@ -34,7 +34,7 @@ import Musl
 /// - ``waitToFinish()`` should have been called on it.
 /// 
 open class Thread: RefCounted {
-    fileprivate static var className = StringName("Thread")
+    private static var className = StringName("Thread")
     override open class var godotClassName: StringName { className }
     public enum Priority: Int64, CaseIterable {
         /// A thread running with lower priority than normally.
@@ -46,8 +46,8 @@ open class Thread: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_start: GDExtensionMethodBindPtr = {
-        let methodName = StringName("start")
+    fileprivate static let method_start: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start")
         return withUnsafePointer(to: &Thread.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1327203254)!
@@ -66,6 +66,7 @@ open class Thread: RefCounted {
     /// Returns ``GodotError/ok`` on success, or ``GodotError/errCantCreate`` on failure.
     /// 
     public final func start(callable: Callable, priority: Thread.Priority = .normal) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: priority.rawValue) { pArg1 in
@@ -83,8 +84,8 @@ open class Thread: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_id")
+    fileprivate static let method_get_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_id")
         return withUnsafePointer(to: &Thread.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -96,13 +97,14 @@ open class Thread: RefCounted {
     
     /// Returns the current ``Thread``'s ID, uniquely identifying it among all threads. If the ``Thread`` has not started running or if ``waitToFinish()`` has been called, this returns an empty string.
     public final func getId() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Thread.method_get_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_started: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_started")
+    fileprivate static let method_is_started: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_started")
         return withUnsafePointer(to: &Thread.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -114,13 +116,14 @@ open class Thread: RefCounted {
     
     /// Returns `true` if this ``Thread`` has been started. Once started, this will return `true` until it is joined using ``waitToFinish()``. For checking if a ``Thread`` is still executing its task, use ``isAlive()``.
     public final func isStarted() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Thread.method_is_started, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_alive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_alive")
+    fileprivate static let method_is_alive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_alive")
         return withUnsafePointer(to: &Thread.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -135,13 +138,14 @@ open class Thread: RefCounted {
     /// To check if a ``Thread`` is joinable, use ``isStarted()``.
     /// 
     public final func isAlive() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Thread.method_is_alive, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_wait_to_finish: GDExtensionMethodBindPtr = {
-        let methodName = StringName("wait_to_finish")
+    fileprivate static let method_wait_to_finish: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("wait_to_finish")
         return withUnsafePointer(to: &Thread.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1460262497)!
@@ -158,13 +162,14 @@ open class Thread: RefCounted {
     /// To determine if this can be called without blocking the calling thread, check if ``isAlive()`` is `false`.
     /// 
     public final func waitToFinish() -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         gi.object_method_bind_ptrcall(Thread.method_wait_to_finish, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_thread_safety_checks_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_thread_safety_checks_enabled")
+    fileprivate static let method_set_thread_safety_checks_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_thread_safety_checks_enabled")
         return withUnsafePointer(to: &Thread.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!

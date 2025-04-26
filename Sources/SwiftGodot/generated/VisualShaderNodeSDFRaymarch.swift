@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Casts a ray against the screen SDF (signed-distance field) and returns the distance travelled.
 open class VisualShaderNodeSDFRaymarch: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeSDFRaymarch")
+    private static var className = StringName("VisualShaderNodeSDFRaymarch")
     override open class var godotClassName: StringName { className }
 }
 

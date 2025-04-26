@@ -29,8 +29,10 @@ import Musl
 /// 
 /// > Note: Godot does not support MIDI output, so there is no way to emit MIDI messages from Godot. Only MIDI input is supported.
 /// 
+/// > Note: On the Web platform, using MIDI input requires a browser permission to be granted first. This permission request is performed when calling ``OS/openMidiInputs()``. MIDI input will not work until the user accepts the permission request.
+/// 
 open class InputEventMIDI: InputEvent {
-    fileprivate static var className = StringName("InputEventMIDI")
+    private static var className = StringName("InputEventMIDI")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -147,8 +149,8 @@ open class InputEventMIDI: InputEvent {
     }
     
     /* Methods */
-    fileprivate static var method_set_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_channel")
+    fileprivate static let method_set_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_channel")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -160,6 +162,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_channel(_ channel: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -173,8 +176,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_channel")
+    fileprivate static let method_get_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_channel")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -186,13 +189,14 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_channel() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_message")
+    fileprivate static let method_set_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_message")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1064271510)!
@@ -204,6 +208,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_message(_ message: MIDIMessage) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: message.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -217,8 +222,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_message")
+    fileprivate static let method_get_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_message")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1936512097)!
@@ -230,13 +235,14 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_message() -> MIDIMessage {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_message, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MIDIMessage (rawValue: _result)!
     }
     
-    fileprivate static var method_set_pitch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pitch")
+    fileprivate static let method_set_pitch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pitch")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -248,6 +254,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_pitch(_ pitch: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pitch) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -261,8 +268,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_pitch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pitch")
+    fileprivate static let method_get_pitch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pitch")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -274,13 +281,14 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_pitch() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_pitch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_velocity")
+    fileprivate static let method_set_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_velocity")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -292,6 +300,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_velocity(_ velocity: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -305,8 +314,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_velocity")
+    fileprivate static let method_get_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_velocity")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -318,13 +327,14 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_velocity() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_instrument: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_instrument")
+    fileprivate static let method_set_instrument: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_instrument")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -336,6 +346,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_instrument(_ instrument: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: instrument) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -349,8 +360,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_instrument: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instrument")
+    fileprivate static let method_get_instrument: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instrument")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -362,13 +373,14 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_instrument() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_instrument, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressure")
+    fileprivate static let method_set_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressure")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -380,6 +392,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_pressure(_ pressure: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -393,8 +406,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pressure")
+    fileprivate static let method_get_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pressure")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -406,13 +419,14 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_pressure() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_pressure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_controller_number: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_controller_number")
+    fileprivate static let method_set_controller_number: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_controller_number")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -424,6 +438,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_controller_number(_ controllerNumber: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: controllerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -437,8 +452,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_controller_number: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_controller_number")
+    fileprivate static let method_get_controller_number: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_controller_number")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -450,13 +465,14 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_controller_number() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_controller_number, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_controller_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_controller_value")
+    fileprivate static let method_set_controller_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_controller_value")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -468,6 +484,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func set_controller_value(_ controllerValue: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: controllerValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -481,8 +498,8 @@ open class InputEventMIDI: InputEvent {
         
     }
     
-    fileprivate static var method_get_controller_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_controller_value")
+    fileprivate static let method_get_controller_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_controller_value")
         return withUnsafePointer(to: &InputEventMIDI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -494,6 +511,7 @@ open class InputEventMIDI: InputEvent {
     
     @inline(__always)
     fileprivate final func get_controller_value() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventMIDI.method_get_controller_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

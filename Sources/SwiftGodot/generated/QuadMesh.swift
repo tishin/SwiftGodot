@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Class representing a square ``PrimitiveMesh``. This flat mesh does not have a thickness. By default, this mesh is aligned on the X and Y axes; this rotation is more suited for use with billboarded materials. A ``QuadMesh`` is equivalent to a ``PlaneMesh`` except its default ``PlaneMesh/orientation`` is ``PlaneMesh/Orientation/z``.
 open class QuadMesh: PlaneMesh {
-    fileprivate static var className = StringName("QuadMesh")
+    private static var className = StringName("QuadMesh")
     override open class var godotClassName: StringName { className }
 }
 

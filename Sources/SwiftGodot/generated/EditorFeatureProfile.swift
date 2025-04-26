@@ -26,7 +26,7 @@ import Musl
 /// To manage editor feature profiles visually, use **Editor > Manage Feature Profiles...** at the top of the editor window.
 /// 
 open class EditorFeatureProfile: RefCounted {
-    fileprivate static var className = StringName("EditorFeatureProfile")
+    private static var className = StringName("EditorFeatureProfile")
     override open class var godotClassName: StringName { className }
     public enum Feature: Int64, CaseIterable {
         /// The 3D editor. If this feature is disabled, the 3D editor won't display but 3D nodes will still display in the Create New Node dialog.
@@ -45,13 +45,15 @@ open class EditorFeatureProfile: RefCounted {
         case importDock = 6 // FEATURE_IMPORT_DOCK
         /// The History dock. If this feature is disabled, the History dock won't be visible.
         case historyDock = 7 // FEATURE_HISTORY_DOCK
+        /// The Game tab, which allows embedding the game window and selecting nodes by clicking inside of it. If this feature is disabled, the Game tab won't display.
+        case game = 8 // FEATURE_GAME
         /// Represents the size of the ``EditorFeatureProfile/Feature`` enum.
-        case max = 8 // FEATURE_MAX
+        case max = 9 // FEATURE_MAX
     }
     
     /* Methods */
-    fileprivate static var method_set_disable_class: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_class")
+    fileprivate static let method_set_disable_class: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_class")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2524380260)!
@@ -63,6 +65,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// If `disable` is `true`, disables the class specified by `className`. When disabled, the class won't appear in the Create New Node dialog.
     public final func setDisableClass(className: StringName, disable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -79,8 +82,8 @@ open class EditorFeatureProfile: RefCounted {
         
     }
     
-    fileprivate static var method_is_class_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_class_disabled")
+    fileprivate static let method_is_class_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_class_disabled")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -92,6 +95,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// Returns `true` if the class specified by `className` is disabled. When disabled, the class won't appear in the Create New Node dialog.
     public final func isClassDisabled(className: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -106,8 +110,8 @@ open class EditorFeatureProfile: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_disable_class_editor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_class_editor")
+    fileprivate static let method_set_disable_class_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_class_editor")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2524380260)!
@@ -119,6 +123,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// If `disable` is `true`, disables editing for the class specified by `className`. When disabled, the class will still appear in the Create New Node dialog but the Inspector will be read-only when selecting a node that extends the class.
     public final func setDisableClassEditor(className: StringName, disable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -135,8 +140,8 @@ open class EditorFeatureProfile: RefCounted {
         
     }
     
-    fileprivate static var method_is_class_editor_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_class_editor_disabled")
+    fileprivate static let method_is_class_editor_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_class_editor_disabled")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -148,6 +153,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// Returns `true` if editing for the class specified by `className` is disabled. When disabled, the class will still appear in the Create New Node dialog but the Inspector will be read-only when selecting a node that extends the class.
     public final func isClassEditorDisabled(className: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -162,8 +168,8 @@ open class EditorFeatureProfile: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_disable_class_property: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_class_property")
+    fileprivate static let method_set_disable_class_property: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_class_property")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 865197084)!
@@ -175,6 +181,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// If `disable` is `true`, disables editing for `property` in the class specified by `className`. When a property is disabled, it won't appear in the Inspector when selecting a node that extends the class specified by `className`.
     public final func setDisableClassProperty(className: StringName, property: StringName, disable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: disable) { pArg2 in
@@ -194,8 +201,8 @@ open class EditorFeatureProfile: RefCounted {
         
     }
     
-    fileprivate static var method_is_class_property_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_class_property_disabled")
+    fileprivate static let method_is_class_property_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_class_property_disabled")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 471820014)!
@@ -207,6 +214,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// Returns `true` if `property` is disabled in the class specified by `className`. When a property is disabled, it won't appear in the Inspector when selecting a node that extends the class specified by `className`.
     public final func isClassPropertyDisabled(className: StringName, property: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: property.content) { pArg1 in
@@ -224,8 +232,8 @@ open class EditorFeatureProfile: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_disable_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_feature")
+    fileprivate static let method_set_disable_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_feature")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1884871044)!
@@ -237,6 +245,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// If `disable` is `true`, disables the editor feature specified in `feature`. When a feature is disabled, it will disappear from the editor entirely.
     public final func setDisableFeature(_ feature: EditorFeatureProfile.Feature, disable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -253,8 +262,8 @@ open class EditorFeatureProfile: RefCounted {
         
     }
     
-    fileprivate static var method_is_feature_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_feature_disabled")
+    fileprivate static let method_is_feature_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_feature_disabled")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2974403161)!
@@ -266,6 +275,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// Returns `true` if the `feature` is disabled. When a feature is disabled, it will disappear from the editor entirely.
     public final func isFeatureDisabled(feature: EditorFeatureProfile.Feature) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -280,8 +290,8 @@ open class EditorFeatureProfile: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_feature_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feature_name")
+    fileprivate static let method_get_feature_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feature_name")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3401335809)!
@@ -293,6 +303,7 @@ open class EditorFeatureProfile: RefCounted {
     
     /// Returns the specified `feature`'s human-readable name.
     public final func getFeatureName(feature: EditorFeatureProfile.Feature) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -307,8 +318,8 @@ open class EditorFeatureProfile: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_save_to_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_to_file")
+    fileprivate static let method_save_to_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_to_file")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -323,6 +334,7 @@ open class EditorFeatureProfile: RefCounted {
     /// > Note: Feature profiles created via the user interface are saved in the `feature_profiles` directory, as a file with the `.profile` extension. The editor configuration folder can be found by using ``EditorPaths/getConfigDir()``.
     /// 
     public final func saveToFile(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -338,8 +350,8 @@ open class EditorFeatureProfile: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_from_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_from_file")
+    fileprivate static let method_load_from_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_from_file")
         return withUnsafePointer(to: &EditorFeatureProfile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -354,6 +366,7 @@ open class EditorFeatureProfile: RefCounted {
     /// > Note: Feature profiles created via the user interface are loaded from the `feature_profiles` directory, as a file with the `.profile` extension. The editor configuration folder can be found by using ``EditorPaths/getConfigDir()``.
     /// 
     public final func loadFromFile(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in

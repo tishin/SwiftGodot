@@ -28,7 +28,7 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class ENetPacketPeer: PacketPeer {
-    fileprivate static var className = StringName("ENetPacketPeer")
+    private static var className = StringName("ENetPacketPeer")
     override open class var godotClassName: StringName { className }
     public enum PeerState: Int64, CaseIterable {
         /// The peer is disconnected.
@@ -96,8 +96,8 @@ open class ENetPacketPeer: PacketPeer {
     /// Mark the packet to be sent unreliable even if the packet is too big and needs fragmentation (increasing the chance of it being dropped).
     public static let flagUnreliableFragment = 8
     /* Methods */
-    fileprivate static var method_peer_disconnect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("peer_disconnect")
+    fileprivate static let method_peer_disconnect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("peer_disconnect")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -109,6 +109,7 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Request a disconnection from a peer. An ``ENetConnection/EventType/disconnect`` will be generated during ``ENetConnection/service(timeout:)`` once the disconnection is complete.
     public final func peerDisconnect(data: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -122,8 +123,8 @@ open class ENetPacketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_peer_disconnect_later: GDExtensionMethodBindPtr = {
-        let methodName = StringName("peer_disconnect_later")
+    fileprivate static let method_peer_disconnect_later: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("peer_disconnect_later")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -135,6 +136,7 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Request a disconnection from a peer, but only after all queued outgoing packets are sent. An ``ENetConnection/EventType/disconnect`` will be generated during ``ENetConnection/service(timeout:)`` once the disconnection is complete.
     public final func peerDisconnectLater(data: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -148,8 +150,8 @@ open class ENetPacketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_peer_disconnect_now: GDExtensionMethodBindPtr = {
-        let methodName = StringName("peer_disconnect_now")
+    fileprivate static let method_peer_disconnect_now: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("peer_disconnect_now")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -161,6 +163,7 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Force an immediate disconnection from a peer. No ``ENetConnection/EventType/disconnect`` will be generated. The foreign peer is not guaranteed to receive the disconnect notification, and is reset immediately upon return from this function.
     public final func peerDisconnectNow(data: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -174,8 +177,8 @@ open class ENetPacketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_ping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ping")
+    fileprivate static let method_ping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ping")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -187,12 +190,13 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Sends a ping request to a peer. ENet automatically pings all connected peers at regular intervals, however, this function may be called to ensure more frequent ping requests.
     public final func ping() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ENetPacketPeer.method_ping, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_ping_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ping_interval")
+    fileprivate static let method_ping_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ping_interval")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -204,6 +208,7 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Sets the `pingInterval` in milliseconds at which pings will be sent to a peer. Pings are used both to monitor the liveness of the connection and also to dynamically adjust the throttle during periods of low traffic so that the throttle has reasonable responsiveness during traffic spikes. The default ping interval is `500` milliseconds.
     public final func pingInterval(pingInterval: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pingInterval) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -217,8 +222,8 @@ open class ENetPacketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_reset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reset")
+    fileprivate static let method_reset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -230,12 +235,13 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Forcefully disconnects a peer. The foreign host represented by the peer is not notified of the disconnection and will timeout on its connection to the local host.
     public final func reset() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ENetPacketPeer.method_reset, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_send: GDExtensionMethodBindPtr = {
-        let methodName = StringName("send")
+    fileprivate static let method_send: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("send")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 120522849)!
@@ -247,6 +253,7 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Queues a `packet` to be sent over the specified `channel`. See `FLAG_*` constants for available packet flags.
     public final func send(channel: Int32, packet: PackedByteArray, flags: Int32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: channel) { pArg0 in
             withUnsafePointer(to: packet.content) { pArg1 in
@@ -267,8 +274,8 @@ open class ENetPacketPeer: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_throttle_configure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("throttle_configure")
+    fileprivate static let method_throttle_configure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("throttle_configure")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1649997291)!
@@ -289,6 +296,7 @@ open class ENetPacketPeer: PacketPeer {
     /// Intermediate values for the throttle represent intermediate probabilities between 0% and 100% of unreliable packets being sent. The bandwidth limits of the local and foreign hosts are taken into account to determine a sensible limit for the throttle probability above which it should not raise even in the best of conditions.
     /// 
     public final func throttleConfigure(interval: Int32, acceleration: Int32, deceleration: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: interval) { pArg0 in
             withUnsafePointer(to: acceleration) { pArg1 in
                 withUnsafePointer(to: deceleration) { pArg2 in
@@ -308,8 +316,8 @@ open class ENetPacketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_set_timeout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_timeout")
+    fileprivate static let method_set_timeout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_timeout")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1649997291)!
@@ -324,6 +332,7 @@ open class ENetPacketPeer: PacketPeer {
     /// The `timeout` is a factor that, multiplied by a value based on the average round trip time, will determine the timeout limit for a reliable packet. When that limit is reached, the timeout will be doubled, and the peer will be disconnected if that limit has reached `timeoutMin`. The `timeoutMax` parameter, on the other hand, defines a fixed timeout for which any packet must be acknowledged or the peer will be dropped.
     /// 
     public final func setTimeout(_ timeout: Int32, timeoutMin: Int32, timeoutMax: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: timeoutMin) { pArg1 in
                 withUnsafePointer(to: timeoutMax) { pArg2 in
@@ -343,8 +352,27 @@ open class ENetPacketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_remote_address: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_remote_address")
+    fileprivate static let method_get_packet_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_flags")
+        return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the ENet flags of the next packet in the received queue. See `FLAG_*` constants for available packet flags. Note that not all flags are replicated from the sending peer to the receiving peer.
+    public final func getPacketFlags() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_packet_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_remote_address: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_remote_address")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -356,13 +384,14 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Returns the IP address of this peer.
     public final func getRemoteAddress() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_remote_address, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_remote_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_remote_port")
+    fileprivate static let method_get_remote_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_remote_port")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -374,13 +403,14 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Returns the remote port of this peer.
     public final func getRemotePort() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_remote_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_statistic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_statistic")
+    fileprivate static let method_get_statistic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_statistic")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1642578323)!
@@ -392,6 +422,7 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Returns the requested `statistic` for this peer. See ``ENetPacketPeer/PeerStatistic``.
     public final func getStatistic(_ statistic: ENetPacketPeer.PeerStatistic) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: statistic.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -406,8 +437,8 @@ open class ENetPacketPeer: PacketPeer {
         return _result
     }
     
-    fileprivate static var method_get_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_state")
+    fileprivate static let method_get_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_state")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 711068532)!
@@ -419,13 +450,14 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Returns the current peer state. See ``ENetPacketPeer/PeerState``.
     public final func getState() -> ENetPacketPeer.PeerState {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ENetPacketPeer.PeerState (rawValue: _result)!
     }
     
-    fileprivate static var method_get_channels: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_channels")
+    fileprivate static let method_get_channels: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_channels")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -437,13 +469,14 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Returns the number of channels allocated for communication with peer.
     public final func getChannels() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_channels, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_active")
+    fileprivate static let method_is_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_active")
         return withUnsafePointer(to: &ENetPacketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -455,6 +488,7 @@ open class ENetPacketPeer: PacketPeer {
     
     /// Returns `true` if the peer is currently active (i.e. the associated ``ENetConnection`` is still valid).
     public final func isActive() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ENetPacketPeer.method_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

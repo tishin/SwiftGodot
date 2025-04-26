@@ -23,6 +23,8 @@ import Musl
 /// 
 /// A control for displaying text that can contain custom fonts, images, and basic formatting. ``RichTextLabel`` manages these as an internal tag stack. It also adapts itself to given width/heights.
 /// 
+/// > Note: ``newline()``, ``pushParagraph(alignment:baseDirection:language:stParser:justificationFlags:tabStops:)``, `"\n"`, `"\r\n"`, `p` tag, and alignment tags start a new paragraph. Each paragraph is processed independently, in its own BiDi context. If you want to force line wrapping within paragraph, any other line breaking character can be used, for example, Form Feed (U+000C), Next Line (U+0085), Line Separator (U+2028).
+/// 
 /// > Note: Assignments to ``text`` clear the tag stack and reconstruct it from the property's contents. Any edits made to ``text`` will erase previous edits made from other manual sources such as ``appendText(bbcode:)`` and the `push_*` / ``pop()`` methods.
 /// 
 /// > Note: RichTextLabel doesn't support entangled BBCode tags. For example, instead of using [code skip-lint]**bold_bold italic**italic_`, use [code skip-lint]**bold_bold italic_**_italic_`.
@@ -40,7 +42,7 @@ import Musl
 /// - ``metaHoverEnded``
 /// - ``finished``
 open class RichTextLabel: Control {
-    fileprivate static var className = StringName("RichTextLabel")
+    private static var className = StringName("RichTextLabel")
     override open class var godotClassName: StringName { className }
     public enum ListType: Int64, CaseIterable {
         /// Each list item has a number marker.
@@ -227,11 +229,59 @@ open class RichTextLabel: Control {
         
     }
     
+    /// Controls the text's horizontal alignment. Supports left, center, right, and fill, or justify. Set it to one of the ``HorizontalAlignment`` constants.
+    final public var horizontalAlignment: HorizontalAlignment {
+        get {
+            return get_horizontal_alignment ()
+        }
+        
+        set {
+            set_horizontal_alignment (newValue)
+        }
+        
+    }
+    
+    /// Controls the text's vertical alignment. Supports top, center, bottom, and fill. Set it to one of the ``VerticalAlignment`` constants.
+    final public var verticalAlignment: VerticalAlignment {
+        get {
+            return get_vertical_alignment ()
+        }
+        
+        set {
+            set_vertical_alignment (newValue)
+        }
+        
+    }
+    
+    /// Line fill alignment rules. See ``TextServer.JustificationFlag`` for more information.
+    final public var justificationFlags: TextServer.JustificationFlag {
+        get {
+            return get_justification_flags ()
+        }
+        
+        set {
+            set_justification_flags (newValue)
+        }
+        
+    }
+    
+    /// Aligns text to the given tab-stops.
+    final public var tabStops: PackedFloat32Array {
+        get {
+            return get_tab_stops ()
+        }
+        
+        set {
+            set_tab_stops (newValue)
+        }
+        
+    }
+    
     /// The currently installed custom effects. This is an array of ``RichTextEffect``s.
     /// 
     /// To add a custom effect, it's more convenient to use ``installEffect(_:)``.
     /// 
-    final public var customEffects: GArray {
+    final public var customEffects: VariantArray {
         get {
             return get_effects ()
         }
@@ -408,7 +458,7 @@ open class RichTextLabel: Control {
     }
     
     /// Set additional options for BiDi override.
-    final public var structuredTextBidiOverrideOptions: GArray {
+    final public var structuredTextBidiOverrideOptions: VariantArray {
         get {
             return get_structured_text_bidi_override_options ()
         }
@@ -420,8 +470,8 @@ open class RichTextLabel: Control {
     }
     
     /* Methods */
-    fileprivate static var method_get_parsed_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parsed_text")
+    fileprivate static let method_get_parsed_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parsed_text")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -433,13 +483,14 @@ open class RichTextLabel: Control {
     
     /// Returns the text without BBCode mark-up.
     public final func getParsedText() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_parsed_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_add_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_text")
+    fileprivate static let method_add_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_text")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -451,6 +502,7 @@ open class RichTextLabel: Control {
     
     /// Adds raw non-BBCode-parsed text to the tag stack.
     public final func addText(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -465,8 +517,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_set_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text")
+    fileprivate static let method_set_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -478,6 +530,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -492,8 +545,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_add_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_image")
+    fileprivate static let method_add_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_image")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3017663154)!
@@ -516,6 +569,7 @@ open class RichTextLabel: Control {
     /// If `sizeInPercent` is set, `width` and `height` values are percentages of the control width instead of pixels.
     /// 
     public final func addImage(_ image: Texture2D?, width: Int32 = 0, height: Int32 = 0, color: Color = Color (r: 1, g: 1, b: 1, a: 1), inlineAlign: InlineAlignment = .center, region: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0), key: Variant?, pad: Bool = false, tooltip: String = "", sizeInPercent: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: height) { pArg2 in
@@ -557,8 +611,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_update_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_image")
+    fileprivate static let method_update_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_image")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 815048486)!
@@ -570,6 +624,7 @@ open class RichTextLabel: Control {
     
     /// Updates the existing images with the key `key`. Only properties specified by `mask` bits are updated. See ``addImage(_:width:height:color:inlineAlign:region:key:pad:tooltip:sizeInPercent:)``.
     public final func updateImage(key: Variant?, mask: RichTextLabel.ImageUpdateMask, image: Texture2D?, width: Int32 = 0, height: Int32 = 0, color: Color = Color (r: 1, g: 1, b: 1, a: 1), inlineAlign: InlineAlignment = .center, region: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0), pad: Bool = false, tooltip: String = "", sizeInPercent: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: key.content) { pArg0 in
             withUnsafePointer(to: mask.rawValue) { pArg1 in
                 withUnsafePointer(to: image?.handle) { pArg2 in
@@ -614,8 +669,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_newline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("newline")
+    fileprivate static let method_newline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("newline")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -627,12 +682,13 @@ open class RichTextLabel: Control {
     
     /// Adds a newline tag to the tag stack.
     public final func newline() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_newline, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_remove_paragraph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_paragraph")
+    fileprivate static let method_remove_paragraph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_paragraph")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3262369265)!
@@ -649,6 +705,7 @@ open class RichTextLabel: Control {
     /// If `noInvalidate` is set to `true`, cache for the subsequent paragraphs is not invalidated. Use it for faster updates if deleted paragraph is fully self-contained (have no unclosed tags), or this call is part of the complex edit operation and ``invalidateParagraph(_:)`` will be called at the end of operation.
     /// 
     public final func removeParagraph(_ paragraph: Int32, noInvalidate: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: paragraph) { pArg0 in
             withUnsafePointer(to: noInvalidate) { pArg1 in
@@ -666,8 +723,8 @@ open class RichTextLabel: Control {
         return _result
     }
     
-    fileprivate static var method_invalidate_paragraph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("invalidate_paragraph")
+    fileprivate static let method_invalidate_paragraph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("invalidate_paragraph")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
@@ -679,6 +736,7 @@ open class RichTextLabel: Control {
     
     /// Invalidates `paragraph` and all subsequent paragraphs cache.
     public final func invalidateParagraph(_ paragraph: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: paragraph) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -693,8 +751,8 @@ open class RichTextLabel: Control {
         return _result
     }
     
-    fileprivate static var method_push_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_font")
+    fileprivate static let method_push_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_font")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2347424842)!
@@ -709,6 +767,7 @@ open class RichTextLabel: Control {
     /// Passing `0` to `fontSize` will use the existing default font size.
     /// 
     public final func pushFont(_ font: Font?, fontSize: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: fontSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -725,8 +784,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_font_size")
+    fileprivate static let method_push_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_font_size")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -738,6 +797,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][font_size]` tag to the tag stack. Overrides default font size for its duration.
     public final func pushFontSize(_ fontSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -751,8 +811,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_normal")
+    fileprivate static let method_push_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_normal")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -764,12 +824,13 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][font]` tag with a normal font to the tag stack.
     public final func pushNormal() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_normal, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_bold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_bold")
+    fileprivate static let method_push_bold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_bold")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -781,12 +842,13 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][font]` tag with a bold font to the tag stack. This is the same as adding a [code skip-lint]**` tag if not currently in a [code skip-lint]_` tag.
     public final func pushBold() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_bold, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_bold_italics: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_bold_italics")
+    fileprivate static let method_push_bold_italics: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_bold_italics")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -798,12 +860,13 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][font]` tag with a bold italics font to the tag stack.
     public final func pushBoldItalics() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_bold_italics, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_italics: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_italics")
+    fileprivate static let method_push_italics: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_italics")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -815,12 +878,13 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][font]` tag with an italics font to the tag stack. This is the same as adding an [code skip-lint]_` tag if not currently in a [code skip-lint]**` tag.
     public final func pushItalics() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_italics, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_mono: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_mono")
+    fileprivate static let method_push_mono: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_mono")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -832,12 +896,13 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][font]` tag with a monospace font to the tag stack.
     public final func pushMono() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_mono, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_color")
+    fileprivate static let method_push_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_color")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -849,6 +914,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][color]` tag to the tag stack.
     public final func pushColor(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -862,8 +928,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_outline_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_outline_size")
+    fileprivate static let method_push_outline_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_outline_size")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -875,6 +941,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][outline_size]` tag to the tag stack. Overrides default text outline size for its duration.
     public final func pushOutlineSize(_ outlineSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: outlineSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -888,8 +955,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_outline_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_outline_color")
+    fileprivate static let method_push_outline_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_outline_color")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -901,6 +968,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][outline_color]` tag to the tag stack. Adds text outline for its duration.
     public final func pushOutlineColor(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -914,8 +982,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_paragraph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_paragraph")
+    fileprivate static let method_push_paragraph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_paragraph")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3089306873)!
@@ -927,6 +995,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][p]` tag to the tag stack.
     public final func pushParagraph(alignment: HorizontalAlignment, baseDirection: Control.TextDirection = .auto, language: String = "", stParser: TextServer.StructuredTextParser = .`default`, justificationFlags: TextServer.JustificationFlag = [.kashida, .wordBound, .skipLastLine, .doNotSkipSingleLine], tabStops: PackedFloat32Array = PackedFloat32Array()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: baseDirection.rawValue) { pArg1 in
                 let language = GString(language)
@@ -956,8 +1025,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_indent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_indent")
+    fileprivate static let method_push_indent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_indent")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -969,6 +1038,7 @@ open class RichTextLabel: Control {
     
     /// Adds an [code skip-lint][indent]` tag to the tag stack. Multiplies `level` by current ``tabSize`` to determine new margin length.
     public final func pushIndent(level: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: level) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -982,8 +1052,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_list")
+    fileprivate static let method_push_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_list")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3017143144)!
@@ -995,6 +1065,7 @@ open class RichTextLabel: Control {
     
     /// Adds [code skip-lint][ol]` or [code skip-lint][ul]` tag to the tag stack. Multiplies `level` by current ``tabSize`` to determine new margin length.
     public final func pushList(level: Int32, type: RichTextLabel.ListType, capitalize: Bool, bullet: String = "•") {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: level) { pArg0 in
             withUnsafePointer(to: type.rawValue) { pArg1 in
                 withUnsafePointer(to: capitalize) { pArg2 in
@@ -1018,11 +1089,11 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_meta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_meta")
+    fileprivate static let method_push_meta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_meta")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2206155733)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3765356747)!
             }
             
         }
@@ -1035,12 +1106,17 @@ open class RichTextLabel: Control {
     /// 
     /// > Note: Meta tags do nothing by default when clicked. To assign behavior when clicked, connect [signal meta_clicked] to a function that is called when the meta tag is clicked.
     /// 
-    public final func pushMeta(data: Variant?, underlineMode: RichTextLabel.MetaUnderline = .always) {
+    public final func pushMeta(data: Variant?, underlineMode: RichTextLabel.MetaUnderline = .always, tooltip: String = "") {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: underlineMode.rawValue) { pArg1 in
-                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
-                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RichTextLabel.method_push_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                let tooltip = GString(tooltip)
+                withUnsafePointer(to: tooltip.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(RichTextLabel.method_push_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        }
+                        
                     }
                     
                 }
@@ -1052,8 +1128,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_hint")
+    fileprivate static let method_push_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_hint")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1065,6 +1141,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][hint]` tag to the tag stack. Same as BBCode [code skip-lint][hint=something]{text}[/hint]`.
     public final func pushHint(description: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let description = GString(description)
         withUnsafePointer(to: description.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1079,8 +1156,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_language")
+    fileprivate static let method_push_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_language")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1092,6 +1169,7 @@ open class RichTextLabel: Control {
     
     /// Adds language code used for text shaping algorithm and Open-Type font features.
     public final func pushLanguage(_ language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1106,8 +1184,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_underline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_underline")
+    fileprivate static let method_push_underline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_underline")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1119,12 +1197,13 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][u]` tag to the tag stack.
     public final func pushUnderline() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_underline, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_strikethrough: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_strikethrough")
+    fileprivate static let method_push_strikethrough: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_strikethrough")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1136,12 +1215,13 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][s]` tag to the tag stack.
     public final func pushStrikethrough() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_strikethrough, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_table: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_table")
+    fileprivate static let method_push_table: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_table")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2623499273)!
@@ -1151,8 +1231,9 @@ open class RichTextLabel: Control {
         
     }()
     
-    /// Adds a [code skip-lint][table=columns,inline_align]` tag to the tag stack. Use ``setTableColumnExpand(column:expand:ratio:)`` to set column expansion ratio. Use ``pushCell()`` to add cells.
+    /// Adds a [code skip-lint][table=columns,inline_align]` tag to the tag stack. Use ``setTableColumnExpand(column:expand:ratio:shrink:)`` to set column expansion ratio. Use ``pushCell()`` to add cells.
     public final func pushTable(columns: Int32, inlineAlign: InlineAlignment = .top, alignToRow: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: columns) { pArg0 in
             withUnsafePointer(to: inlineAlign.rawValue) { pArg1 in
                 withUnsafePointer(to: alignToRow) { pArg2 in
@@ -1172,8 +1253,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_dropcap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_dropcap")
+    fileprivate static let method_push_dropcap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_dropcap")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4061635501)!
@@ -1185,6 +1266,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][dropcap]` tag to the tag stack. Drop cap (dropped capital) is a decorative element at the beginning of a paragraph that is larger than the rest of the text.
     public final func pushDropcap(string: String, font: Font?, size: Int32, dropcapMargins: Rect2 = Rect2 (x: 0, y: 0, width: 0, height: 0), color: Color = Color (r: 1, g: 1, b: 1, a: 1), outlineSize: Int32 = 0, outlineColor: Color = Color (r: 0, g: 0, b: 0, a: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: font?.handle) { pArg1 in
@@ -1217,11 +1299,11 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_set_table_column_expand: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_table_column_expand")
+    fileprivate static let method_set_table_column_expand: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_table_column_expand")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2185176273)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 117236061)!
             }
             
         }
@@ -1234,13 +1316,17 @@ open class RichTextLabel: Control {
     /// 
     /// If `expand` is `false`, the column will not contribute to the total ratio.
     /// 
-    public final func setTableColumnExpand(column: Int32, expand: Bool, ratio: Int32 = 1) {
+    public final func setTableColumnExpand(column: Int32, expand: Bool, ratio: Int32 = 1, shrink: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: expand) { pArg1 in
                 withUnsafePointer(to: ratio) { pArg2 in
-                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
-                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RichTextLabel.method_set_table_column_expand, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    withUnsafePointer(to: shrink) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(RichTextLabel.method_set_table_column_expand, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            }
+                            
                         }
                         
                     }
@@ -1254,8 +1340,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_set_cell_row_background_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_row_background_color")
+    fileprivate static let method_set_cell_row_background_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_row_background_color")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3465483165)!
@@ -1267,6 +1353,7 @@ open class RichTextLabel: Control {
     
     /// Sets color of a table cell. Separate colors for alternating rows can be specified.
     public final func setCellRowBackgroundColor(oddRowBg: Color, evenRowBg: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oddRowBg) { pArg0 in
             withUnsafePointer(to: evenRowBg) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1283,8 +1370,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_set_cell_border_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_border_color")
+    fileprivate static let method_set_cell_border_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_border_color")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -1296,6 +1383,7 @@ open class RichTextLabel: Control {
     
     /// Sets color of a table cell border.
     public final func setCellBorderColor(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1309,8 +1397,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_set_cell_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_size_override")
+    fileprivate static let method_set_cell_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_size_override")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3108078480)!
@@ -1322,6 +1410,7 @@ open class RichTextLabel: Control {
     
     /// Sets minimum and maximum size overrides for a table cell.
     public final func setCellSizeOverride(minSize: Vector2, maxSize: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minSize) { pArg0 in
             withUnsafePointer(to: maxSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1338,8 +1427,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_set_cell_padding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_padding")
+    fileprivate static let method_set_cell_padding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_padding")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -1351,6 +1440,7 @@ open class RichTextLabel: Control {
     
     /// Sets inner padding of a table cell.
     public final func setCellPadding(_ padding: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: padding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1364,8 +1454,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_cell: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_cell")
+    fileprivate static let method_push_cell: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_cell")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1375,14 +1465,15 @@ open class RichTextLabel: Control {
         
     }()
     
-    /// Adds a [code skip-lint][cell]` tag to the tag stack. Must be inside a [code skip-lint][table]` tag. See ``pushTable(columns:inlineAlign:alignToRow:)`` for details. Use ``setTableColumnExpand(column:expand:ratio:)`` to set column expansion ratio, ``setCellBorderColor(_:)`` to set cell border, ``setCellRowBackgroundColor(oddRowBg:evenRowBg:)`` to set cell background, ``setCellSizeOverride(minSize:maxSize:)`` to override cell size, and ``setCellPadding(_:)`` to set padding.
+    /// Adds a [code skip-lint][cell]` tag to the tag stack. Must be inside a [code skip-lint][table]` tag. See ``pushTable(columns:inlineAlign:alignToRow:)`` for details. Use ``setTableColumnExpand(column:expand:ratio:shrink:)`` to set column expansion ratio, ``setCellBorderColor(_:)`` to set cell border, ``setCellRowBackgroundColor(oddRowBg:evenRowBg:)`` to set cell background, ``setCellSizeOverride(minSize:maxSize:)`` to override cell size, and ``setCellPadding(_:)`` to set padding.
     public final func pushCell() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_cell, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_push_fgcolor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_fgcolor")
+    fileprivate static let method_push_fgcolor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_fgcolor")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -1394,6 +1485,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][fgcolor]` tag to the tag stack.
     public final func pushFgcolor(_ fgcolor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fgcolor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1407,8 +1499,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_bgcolor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_bgcolor")
+    fileprivate static let method_push_bgcolor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_bgcolor")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -1420,6 +1512,7 @@ open class RichTextLabel: Control {
     
     /// Adds a [code skip-lint][bgcolor]` tag to the tag stack.
     public final func pushBgcolor(_ bgcolor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bgcolor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1433,8 +1526,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_customfx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_customfx")
+    fileprivate static let method_push_customfx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_customfx")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2337942958)!
@@ -1445,7 +1538,8 @@ open class RichTextLabel: Control {
     }()
     
     /// Adds a custom effect tag to the tag stack. The effect does not need to be in ``customEffects``. The environment is directly passed to the effect.
-    public final func pushCustomfx(effect: RichTextEffect?, env: GDictionary) {
+    public final func pushCustomfx(effect: RichTextEffect?, env: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: effect?.handle) { pArg0 in
             withUnsafePointer(to: env.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1462,8 +1556,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_push_context: GDExtensionMethodBindPtr = {
-        let methodName = StringName("push_context")
+    fileprivate static let method_push_context: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("push_context")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1475,12 +1569,13 @@ open class RichTextLabel: Control {
     
     /// Adds a context marker to the tag stack. See ``popContext()``.
     public final func pushContext() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_push_context, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_pop_context: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pop_context")
+    fileprivate static let method_pop_context: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pop_context")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1492,12 +1587,13 @@ open class RichTextLabel: Control {
     
     /// Terminates tags opened after the last ``pushContext()`` call (including context marker), or all tags if there's no context marker on the stack.
     public final func popContext() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_pop_context, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_pop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pop")
+    fileprivate static let method_pop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pop")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1509,12 +1605,13 @@ open class RichTextLabel: Control {
     
     /// Terminates the current tag. Use after `push_*` methods to close BBCodes manually. Does not need to follow `add_*` methods.
     public final func pop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_pop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_pop_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pop_all")
+    fileprivate static let method_pop_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pop_all")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1526,12 +1623,13 @@ open class RichTextLabel: Control {
     
     /// Terminates all tags opened by `push_*` methods.
     public final func popAll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_pop_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1546,12 +1644,13 @@ open class RichTextLabel: Control {
     /// > Note: This method does not affect ``text``, and its contents will show again if the label is redrawn. However, setting ``text`` to an empty ``String`` also clears the stack.
     /// 
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override")
+    fileprivate static let method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 55961453)!
@@ -1563,6 +1662,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_structured_text_bidi_override(_ parser: TextServer.StructuredTextParser) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parser.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1576,8 +1676,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override")
+    fileprivate static let method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3385126229)!
@@ -1589,13 +1689,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.StructuredTextParser (rawValue: _result)!
     }
     
-    fileprivate static var method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override_options")
+    fileprivate static let method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override_options")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -1606,7 +1707,8 @@ open class RichTextLabel: Control {
     }()
     
     @inline(__always)
-    fileprivate final func set_structured_text_bidi_override_options(_ args: GArray) {
+    fileprivate final func set_structured_text_bidi_override_options(_ args: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: args.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1620,8 +1722,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override_options")
+    fileprivate static let method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override_options")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -1632,14 +1734,15 @@ open class RichTextLabel: Control {
     }()
     
     @inline(__always)
-    fileprivate final func get_structured_text_bidi_override_options() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_structured_text_bidi_override_options() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_direction")
+    fileprivate static let method_set_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_direction")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 119160795)!
@@ -1651,6 +1754,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_text_direction(_ direction: Control.TextDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1664,8 +1768,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_direction")
+    fileprivate static let method_get_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_direction")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 797257663)!
@@ -1677,13 +1781,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_text_direction() -> Control.TextDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_language")
+    fileprivate static let method_set_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_language")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1695,6 +1800,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_language(_ language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1709,8 +1815,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language")
+    fileprivate static let method_get_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1722,13 +1828,198 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_language() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autowrap_mode")
+    fileprivate static let method_set_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_horizontal_alignment")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2312603777)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_horizontal_alignment(_ alignment: HorizontalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: alignment.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_horizontal_alignment")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 341400642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_horizontal_alignment() -> HorizontalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return HorizontalAlignment (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_vertical_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical_alignment")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1796458609)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_vertical_alignment(_ alignment: VerticalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: alignment.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_vertical_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertical_alignment")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3274884059)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_vertical_alignment() -> VerticalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return VerticalAlignment (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_justification_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_justification_flags")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2877345813)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_justification_flags(_ justificationFlags: TextServer.JustificationFlag) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: justificationFlags.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_justification_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_justification_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_justification_flags")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1583363614)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_justification_flags() -> TextServer.JustificationFlag {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: TextServer.JustificationFlag = TextServer.JustificationFlag ()
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_justification_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_tab_stops: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_stops")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2899603908)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_tab_stops(_ tabStops: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: tabStops.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_tab_stops, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_tab_stops: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_stops")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 675695659)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_tab_stops() -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: PackedFloat32Array = PackedFloat32Array ()
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_tab_stops, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
+    }
+    
+    fileprivate static let method_set_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autowrap_mode")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3289138044)!
@@ -1740,6 +2031,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_autowrap_mode(_ autowrapMode: TextServer.AutowrapMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1753,8 +2045,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autowrap_mode")
+    fileprivate static let method_get_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autowrap_mode")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1549071663)!
@@ -1766,13 +2058,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_meta_underline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_meta_underline")
+    fileprivate static let method_set_meta_underline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_meta_underline")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1784,6 +2077,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_meta_underline(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1797,8 +2091,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_meta_underlined: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_meta_underlined")
+    fileprivate static let method_is_meta_underlined: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_meta_underlined")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1810,13 +2104,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_meta_underlined() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_meta_underlined, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hint_underline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hint_underline")
+    fileprivate static let method_set_hint_underline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hint_underline")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1828,6 +2123,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_hint_underline(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1841,8 +2137,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_hint_underlined: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hint_underlined")
+    fileprivate static let method_is_hint_underlined: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hint_underlined")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1854,13 +2150,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_hint_underlined() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_hint_underlined, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scroll_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scroll_active")
+    fileprivate static let method_set_scroll_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scroll_active")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1872,6 +2169,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_scroll_active(_ active: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1885,8 +2183,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_scroll_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_scroll_active")
+    fileprivate static let method_is_scroll_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_scroll_active")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1898,13 +2196,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_scroll_active() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_scroll_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scroll_follow: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scroll_follow")
+    fileprivate static let method_set_scroll_follow: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scroll_follow")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1916,6 +2215,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_scroll_follow(_ follow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: follow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1929,8 +2229,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_scroll_following: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_scroll_following")
+    fileprivate static let method_is_scroll_following: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_scroll_following")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1942,13 +2242,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_scroll_following() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_scroll_following, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_scroll_bar")
+    fileprivate static let method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_scroll_bar")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2630340773)!
@@ -1963,13 +2264,14 @@ open class RichTextLabel: Control {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``CanvasItem/visible`` property.
     /// 
     public final func getVScrollBar() -> VScrollBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_v_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_scroll_to_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scroll_to_line")
+    fileprivate static let method_scroll_to_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scroll_to_line")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1981,6 +2283,7 @@ open class RichTextLabel: Control {
     
     /// Scrolls the window's top line to match `line`.
     public final func scrollToLine(_ line: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1994,8 +2297,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_scroll_to_paragraph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scroll_to_paragraph")
+    fileprivate static let method_scroll_to_paragraph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scroll_to_paragraph")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2007,6 +2310,7 @@ open class RichTextLabel: Control {
     
     /// Scrolls the window's top line to match first line of the `paragraph`.
     public final func scrollToParagraph(_ paragraph: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: paragraph) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2020,8 +2324,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_scroll_to_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scroll_to_selection")
+    fileprivate static let method_scroll_to_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scroll_to_selection")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2033,12 +2337,13 @@ open class RichTextLabel: Control {
     
     /// Scrolls to the beginning of the current selection.
     public final func scrollToSelection() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_scroll_to_selection, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_tab_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tab_size")
+    fileprivate static let method_set_tab_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tab_size")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2050,6 +2355,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_tab_size(_ spaces: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2063,8 +2369,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_tab_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tab_size")
+    fileprivate static let method_get_tab_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tab_size")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2076,13 +2382,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_tab_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_tab_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fit_content: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fit_content")
+    fileprivate static let method_set_fit_content: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fit_content")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2094,6 +2401,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_fit_content(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2107,8 +2415,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_fit_content_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_fit_content_enabled")
+    fileprivate static let method_is_fit_content_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_fit_content_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2120,13 +2428,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_fit_content_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_fit_content_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_selection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selection_enabled")
+    fileprivate static let method_set_selection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selection_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2138,6 +2447,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_selection_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2151,8 +2461,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_selection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_selection_enabled")
+    fileprivate static let method_is_selection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_selection_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2164,13 +2474,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_selection_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_selection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_context_menu_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_context_menu_enabled")
+    fileprivate static let method_set_context_menu_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_context_menu_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2182,6 +2493,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_context_menu_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2195,8 +2507,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_context_menu_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_context_menu_enabled")
+    fileprivate static let method_is_context_menu_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_context_menu_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2208,13 +2520,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_context_menu_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_context_menu_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shortcut_keys_enabled")
+    fileprivate static let method_set_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shortcut_keys_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2226,6 +2539,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_shortcut_keys_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2239,8 +2553,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shortcut_keys_enabled")
+    fileprivate static let method_is_shortcut_keys_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shortcut_keys_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2252,13 +2566,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_shortcut_keys_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_shortcut_keys_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deselect_on_focus_loss_enabled")
+    fileprivate static let method_set_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deselect_on_focus_loss_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2270,6 +2585,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_deselect_on_focus_loss_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2283,8 +2599,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_deselect_on_focus_loss_enabled")
+    fileprivate static let method_is_deselect_on_focus_loss_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_deselect_on_focus_loss_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2296,13 +2612,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_deselect_on_focus_loss_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_deselect_on_focus_loss_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drag_and_drop_selection_enabled")
+    fileprivate static let method_set_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drag_and_drop_selection_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2314,6 +2631,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_drag_and_drop_selection_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2327,8 +2645,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_drag_and_drop_selection_enabled")
+    fileprivate static let method_is_drag_and_drop_selection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_drag_and_drop_selection_enabled")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2340,13 +2658,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_drag_and_drop_selection_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_drag_and_drop_selection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_selection_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_from")
+    fileprivate static let method_get_selection_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_from")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2358,13 +2677,14 @@ open class RichTextLabel: Control {
     
     /// Returns the current selection first character index if a selection is active, `-1` otherwise. Does not include BBCodes.
     public final func getSelectionFrom() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_from, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_selection_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection_to")
+    fileprivate static let method_get_selection_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_to")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2376,13 +2696,33 @@ open class RichTextLabel: Control {
     
     /// Returns the current selection last character index if a selection is active, `-1` otherwise. Does not include BBCodes.
     public final func getSelectionTo() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_to, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_select_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select_all")
+    fileprivate static let method_get_selection_line_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection_line_offset")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the current selection vertical line offset if a selection is active, `-1.0` otherwise.
+    public final func getSelectionLineOffset() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_line_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_select_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select_all")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2397,12 +2737,13 @@ open class RichTextLabel: Control {
     /// If ``selectionEnabled`` is `false`, no selection will occur.
     /// 
     public final func selectAll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_select_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_selected_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected_text")
+    fileprivate static let method_get_selected_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected_text")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -2414,13 +2755,14 @@ open class RichTextLabel: Control {
     
     /// Returns the current selection text. Does not include BBCodes.
     public final func getSelectedText() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_selected_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_deselect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("deselect")
+    fileprivate static let method_deselect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("deselect")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2432,12 +2774,13 @@ open class RichTextLabel: Control {
     
     /// Clears the current selection.
     public final func deselect() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RichTextLabel.method_deselect, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_parse_bbcode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse_bbcode")
+    fileprivate static let method_parse_bbcode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse_bbcode")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -2449,6 +2792,7 @@ open class RichTextLabel: Control {
     
     /// The assignment version of ``appendText(bbcode:)``. Clears the tag stack and inserts the new content.
     public final func parseBbcode(_ bbcode: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let bbcode = GString(bbcode)
         withUnsafePointer(to: bbcode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2463,8 +2807,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_append_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("append_text")
+    fileprivate static let method_append_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_text")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -2479,6 +2823,7 @@ open class RichTextLabel: Control {
     /// > Note: Using this method, you can't close a tag that was opened in a previous ``appendText(bbcode:)`` call. This is done to improve performance, especially when updating large RichTextLabels since rebuilding the whole BBCode every time would be slower. If you absolutely need to close a tag in a future method call, append the ``text`` instead of using ``appendText(bbcode:)``.
     /// 
     public final func appendText(bbcode: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let bbcode = GString(bbcode)
         withUnsafePointer(to: bbcode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2493,8 +2838,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text")
+    fileprivate static let method_get_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -2506,13 +2851,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_ready: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ready")
+    fileprivate static let method_is_ready: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ready")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2524,13 +2870,33 @@ open class RichTextLabel: Control {
     
     /// If ``threaded`` is enabled, returns `true` if the background thread has finished text processing, otherwise always return `true`.
     public final func isReady() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_ready, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_threaded: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_threaded")
+    fileprivate static let method_is_finished: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_finished")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    /// If ``threaded`` is enabled, returns `true` if the background thread has finished text processing, otherwise always return `true`.
+    public final func isFinished() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_finished, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_threaded: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_threaded")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2542,6 +2908,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_threaded(_ threaded: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threaded) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2555,8 +2922,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_threaded: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_threaded")
+    fileprivate static let method_is_threaded: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_threaded")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2568,13 +2935,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_threaded() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_threaded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_progress_bar_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_progress_bar_delay")
+    fileprivate static let method_set_progress_bar_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_progress_bar_delay")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2586,6 +2954,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_progress_bar_delay(_ delayMs: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: delayMs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2599,8 +2968,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_progress_bar_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_progress_bar_delay")
+    fileprivate static let method_get_progress_bar_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_progress_bar_delay")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2612,13 +2981,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_progress_bar_delay() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_progress_bar_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visible_characters: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visible_characters")
+    fileprivate static let method_set_visible_characters: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visible_characters")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2630,6 +3000,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_visible_characters(_ amount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2643,8 +3014,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_visible_characters: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_characters")
+    fileprivate static let method_get_visible_characters: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_characters")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2656,13 +3027,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_visible_characters() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_characters, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_visible_characters_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_characters_behavior")
+    fileprivate static let method_get_visible_characters_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_characters_behavior")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 258789322)!
@@ -2674,13 +3046,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_visible_characters_behavior() -> TextServer.VisibleCharactersBehavior {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_characters_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.VisibleCharactersBehavior (rawValue: _result)!
     }
     
-    fileprivate static var method_set_visible_characters_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visible_characters_behavior")
+    fileprivate static let method_set_visible_characters_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visible_characters_behavior")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3383839701)!
@@ -2692,6 +3065,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_visible_characters_behavior(_ behavior: TextServer.VisibleCharactersBehavior) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: behavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2705,8 +3079,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_set_visible_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visible_ratio")
+    fileprivate static let method_set_visible_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visible_ratio")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2718,6 +3092,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_visible_ratio(_ ratio: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2731,8 +3106,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_visible_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_ratio")
+    fileprivate static let method_get_visible_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_ratio")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2744,13 +3119,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func get_visible_ratio() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_character_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_character_line")
+    fileprivate static let method_get_character_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_character_line")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -2762,9 +3138,10 @@ open class RichTextLabel: Control {
     
     /// Returns the line number of the character position provided. Line and character numbers are both zero-indexed.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getCharacterLine(character: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: character) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2779,8 +3156,8 @@ open class RichTextLabel: Control {
         return _result
     }
     
-    fileprivate static var method_get_character_paragraph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_character_paragraph")
+    fileprivate static let method_get_character_paragraph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_character_paragraph")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -2792,9 +3169,10 @@ open class RichTextLabel: Control {
     
     /// Returns the paragraph number of the character position provided. Paragraph and character numbers are both zero-indexed.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getCharacterParagraph(character: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: character) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2809,8 +3187,8 @@ open class RichTextLabel: Control {
         return _result
     }
     
-    fileprivate static var method_get_total_character_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_character_count")
+    fileprivate static let method_get_total_character_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_character_count")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2822,13 +3200,14 @@ open class RichTextLabel: Control {
     
     /// Returns the total number of characters from text tags. Does not include BBCodes.
     public final func getTotalCharacterCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_total_character_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_bbcode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_bbcode")
+    fileprivate static let method_set_use_bbcode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_bbcode")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2840,6 +3219,7 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func set_use_bbcode(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2853,8 +3233,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_is_using_bbcode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_bbcode")
+    fileprivate static let method_is_using_bbcode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_bbcode")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2866,13 +3246,14 @@ open class RichTextLabel: Control {
     
     @inline(__always)
     fileprivate final func is_using_bbcode() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_using_bbcode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_line_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_count")
+    fileprivate static let method_get_line_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_count")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2884,16 +3265,52 @@ open class RichTextLabel: Control {
     
     /// Returns the total number of lines in the text. Wrapped text is counted as multiple lines.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``visibleCharactersBehavior`` is set to ``TextServer/VisibleCharactersBehavior/charsBeforeShaping`` only visible wrapped lines are counted.
+    /// 
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getLineCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_visible_line_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_line_count")
+    fileprivate static let method_get_line_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_range")
+        return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3665014314)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the indexes of the first and last visible characters for the given `line`, as a ``Vector2i``.
+    /// 
+    /// > Note: If ``visibleCharactersBehavior`` is set to ``TextServer/VisibleCharactersBehavior/charsBeforeShaping`` only visible wrapped lines are counted.
+    /// 
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
+    /// 
+    public final func getLineRange(line: Int32) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2i = Vector2i ()
+        withUnsafePointer(to: line) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_visible_line_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_line_count")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2905,16 +3322,17 @@ open class RichTextLabel: Control {
     
     /// Returns the number of visible lines.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getVisibleLineCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_paragraph_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_paragraph_count")
+    fileprivate static let method_get_paragraph_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_paragraph_count")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2926,13 +3344,14 @@ open class RichTextLabel: Control {
     
     /// Returns the total number of paragraphs (newlines or `p` tags in the tag stack's text tags). Considers wrapped text as one paragraph.
     public final func getParagraphCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_paragraph_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_visible_paragraph_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_paragraph_count")
+    fileprivate static let method_get_visible_paragraph_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_paragraph_count")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2944,16 +3363,17 @@ open class RichTextLabel: Control {
     
     /// Returns the number of visible paragraphs. A paragraph is considered visible if at least one of its lines is visible.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getVisibleParagraphCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_paragraph_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_content_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_content_height")
+    fileprivate static let method_get_content_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_content_height")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2965,16 +3385,17 @@ open class RichTextLabel: Control {
     
     /// Returns the height of the content.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getContentHeight() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_content_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_content_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_content_width")
+    fileprivate static let method_get_content_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_content_width")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2986,16 +3407,17 @@ open class RichTextLabel: Control {
     
     /// Returns the width of the content.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getContentWidth() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_content_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_line_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_offset")
+    fileprivate static let method_get_line_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_offset")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4025615559)!
@@ -3007,9 +3429,10 @@ open class RichTextLabel: Control {
     
     /// Returns the vertical offset of the line found at the provided index.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getLineOffset(line: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3024,8 +3447,8 @@ open class RichTextLabel: Control {
         return _result
     }
     
-    fileprivate static var method_get_paragraph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_paragraph_offset")
+    fileprivate static let method_get_paragraph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_paragraph_offset")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4025615559)!
@@ -3037,9 +3460,10 @@ open class RichTextLabel: Control {
     
     /// Returns the vertical offset of the paragraph found at the provided index.
     /// 
-    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isReady()`` or [signal finished] to determine whether document is fully loaded.
+    /// > Note: If ``threaded`` is enabled, this method returns a value for the loaded part of the document. Use ``isFinished()`` or [signal finished] to determine whether document is fully loaded.
     /// 
     public final func getParagraphOffset(paragraph: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: paragraph) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3054,8 +3478,8 @@ open class RichTextLabel: Control {
         return _result
     }
     
-    fileprivate static var method_parse_expressions_for_values: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse_expressions_for_values")
+    fileprivate static let method_parse_expressions_for_values: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse_expressions_for_values")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1522900837)!
@@ -3066,8 +3490,9 @@ open class RichTextLabel: Control {
     }()
     
     /// Parses BBCode parameter `expressions` into a dictionary.
-    public final func parseExpressionsForValues(expressions: PackedStringArray) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func parseExpressionsForValues(expressions: PackedStringArray) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: expressions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3081,8 +3506,8 @@ open class RichTextLabel: Control {
         return _result
     }
     
-    fileprivate static var method_set_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_effects")
+    fileprivate static let method_set_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_effects")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -3093,7 +3518,8 @@ open class RichTextLabel: Control {
     }()
     
     @inline(__always)
-    fileprivate final func set_effects(_ effects: GArray) {
+    fileprivate final func set_effects(_ effects: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: effects.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3107,8 +3533,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_effects")
+    fileprivate static let method_get_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_effects")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -3119,14 +3545,15 @@ open class RichTextLabel: Control {
     }()
     
     @inline(__always)
-    fileprivate final func get_effects() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_effects() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_effects, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_install_effect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("install_effect")
+    fileprivate static let method_install_effect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("install_effect")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1114965689)!
@@ -3136,13 +3563,14 @@ open class RichTextLabel: Control {
         
     }()
     
-    /// Installs a custom effect. This can also be done in the RichTextLabel inspector using the ``customEffects`` property. `effect` should be a valid ``RichTextEffect``.
+    /// Installs a custom effect. This can also be done in the Inspector through the ``customEffects`` property. `effect` should be a valid ``RichTextEffect``.
     /// 
-    /// Example RichTextEffect:
+    /// **Example:** With the following script extending from ``RichTextEffect``:
     /// 
-    /// Registering the above effect in RichTextLabel from script:
+    /// The above effect can be installed in ``RichTextLabel`` from a script:
     /// 
     public final func installEffect(_ effect: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: effect.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3156,8 +3584,8 @@ open class RichTextLabel: Control {
         
     }
     
-    fileprivate static var method_get_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_menu")
+    fileprivate static let method_get_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_menu")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 229722558)!
@@ -3174,13 +3602,14 @@ open class RichTextLabel: Control {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``Window/visible`` property.
     /// 
     public final func getMenu() -> PopupMenu? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(RichTextLabel.method_get_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_menu_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_menu_visible")
+    fileprivate static let method_is_menu_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_menu_visible")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3192,13 +3621,14 @@ open class RichTextLabel: Control {
     
     /// Returns whether the menu is visible. Use this instead of `get_menu().visible` to improve performance (so the creation of the menu is avoided).
     public final func isMenuVisible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RichTextLabel.method_is_menu_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_menu_option: GDExtensionMethodBindPtr = {
-        let methodName = StringName("menu_option")
+    fileprivate static let method_menu_option: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("menu_option")
         return withUnsafePointer(to: &RichTextLabel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3210,6 +3640,7 @@ open class RichTextLabel: Control {
     
     /// Executes a given action as defined in the ``RichTextLabel/MenuItems`` enum.
     public final func menuOption(_ option: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3224,7 +3655,7 @@ open class RichTextLabel: Control {
     }
     
     // Signals 
-    /// Triggered when the user clicks on content between meta (URL) tags. If the meta is defined in BBCode, e.g. [code skip-lint]<a href="{"key": "value"}">Text</a>`, then the parameter for this signal will always be a ``String`` type. If a particular type or an object is desired, the ``pushMeta(data:underlineMode:)`` method must be used to manually insert the data into the tag stack. Alternatively, you can convert the ``String`` input to the desired type based on its contents (such as calling ``JSON/parse(jsonText:keepText:)`` on it).
+    /// Triggered when the user clicks on content between meta (URL) tags. If the meta is defined in BBCode, e.g. [code skip-lint]<a href="{"key": "value"}">Text</a>`, then the parameter for this signal will always be a ``String`` type. If a particular type or an object is desired, the ``pushMeta(data:underlineMode:tooltip:)`` method must be used to manually insert the data into the tag stack. Alternatively, you can convert the ``String`` input to the desired type based on its contents (such as calling ``JSON/parse(jsonText:keepText:)`` on it).
     /// 
     /// For example, the following method can be connected to [signal meta_clicked] to open clicked URLs using the user's default web browser:
     /// 
@@ -3276,6 +3707,9 @@ open class RichTextLabel: Control {
     public var metaHoverEnded: SimpleSignal { SimpleSignal (target: self, signalName: "meta_hover_ended") }
     
     /// Triggered when the document is fully loaded.
+    /// 
+    /// > Note: This can happen before the text is processed for drawing. Scrolling values may not be valid until the document is drawn for the first time after this signal.
+    /// 
     ///
     /// To connect to this signal, reference this property and call the
     /// 

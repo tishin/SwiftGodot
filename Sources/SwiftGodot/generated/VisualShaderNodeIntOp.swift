@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Applies ```operator``` to two integer inputs: `a` and `b`.
 open class VisualShaderNodeIntOp: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeIntOp")
+    private static var className = StringName("VisualShaderNodeIntOp")
     override open class var godotClassName: StringName { className }
     public enum Operator: Int64, CaseIterable {
         /// Sums two numbers using `a + b`.
@@ -70,8 +70,8 @@ open class VisualShaderNodeIntOp: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_operator")
+    fileprivate static let method_set_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_operator")
         return withUnsafePointer(to: &VisualShaderNodeIntOp.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1677909323)!
@@ -83,6 +83,7 @@ open class VisualShaderNodeIntOp: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_operator(_ op: VisualShaderNodeIntOp.Operator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: op.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class VisualShaderNodeIntOp: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_operator")
+    fileprivate static let method_get_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_operator")
         return withUnsafePointer(to: &VisualShaderNodeIntOp.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1236987913)!
@@ -109,6 +110,7 @@ open class VisualShaderNodeIntOp: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_operator() -> VisualShaderNodeIntOp.Operator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeIntOp.method_get_operator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeIntOp.Operator (rawValue: _result)!

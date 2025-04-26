@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``playAreaChanged``
 open class XRInterface: RefCounted {
-    fileprivate static var className = StringName("XRInterface")
+    private static var className = StringName("XRInterface")
     override open class var godotClassName: StringName { className }
     public enum Capabilities: Int64, CaseIterable {
         /// No XR capabilities.
@@ -137,8 +137,8 @@ open class XRInterface: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -150,13 +150,14 @@ open class XRInterface: RefCounted {
     
     /// Returns the name of this interface (`"OpenXR"`, `"OpenVR"`, `"OpenHMD"`, `"ARKit"`, etc.).
     public final func getName() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(XRInterface.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_capabilities: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_capabilities")
+    fileprivate static let method_get_capabilities: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_capabilities")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -168,13 +169,14 @@ open class XRInterface: RefCounted {
     
     /// Returns a combination of ``XRInterface/Capabilities`` flags providing information about the capabilities of this interface.
     public final func getCapabilities() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(XRInterface.method_get_capabilities, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_primary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_primary")
+    fileprivate static let method_is_primary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_primary")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -186,13 +188,14 @@ open class XRInterface: RefCounted {
     
     @inline(__always)
     fileprivate final func is_primary() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRInterface.method_is_primary, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_primary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_primary")
+    fileprivate static let method_set_primary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_primary")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -204,6 +207,7 @@ open class XRInterface: RefCounted {
     
     @inline(__always)
     fileprivate final func set_primary(_ primary: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: primary) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -217,8 +221,8 @@ open class XRInterface: RefCounted {
         
     }
     
-    fileprivate static var method_is_initialized: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_initialized")
+    fileprivate static let method_is_initialized: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_initialized")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -230,13 +234,14 @@ open class XRInterface: RefCounted {
     
     /// Returns `true` if this interface has been initialized.
     public final func isInitialized() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRInterface.method_is_initialized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_initialize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("initialize")
+    fileprivate static let method_initialize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("initialize")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -257,13 +262,14 @@ open class XRInterface: RefCounted {
     /// While currently not used, you can activate additional interfaces. You may wish to do this if you want to track controllers from other platforms. However, at this point in time only one interface can render to an HMD.
     /// 
     public final func initialize() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRInterface.method_initialize, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_uninitialize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("uninitialize")
+    fileprivate static let method_uninitialize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("uninitialize")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -275,12 +281,13 @@ open class XRInterface: RefCounted {
     
     /// Turns the interface off.
     public final func uninitialize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(XRInterface.method_uninitialize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_system_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_system_info")
+    fileprivate static let method_get_system_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_system_info")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2382534195)!
@@ -290,18 +297,19 @@ open class XRInterface: RefCounted {
         
     }()
     
-    /// Returns a ``GDictionary`` with extra system info. Interfaces are expected to return `XRRuntimeName` and `XRRuntimeVersion` providing info about the used XR runtime. Additional entries may be provided specific to an interface.
+    /// Returns a ``VariantDictionary`` with extra system info. Interfaces are expected to return `XRRuntimeName` and `XRRuntimeVersion` providing info about the used XR runtime. Additional entries may be provided specific to an interface.
     /// 
     /// > Note:This information may only be available after ``initialize()`` was successfully called.
     /// 
-    public final func getSystemInfo() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getSystemInfo() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(XRInterface.method_get_system_info, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_tracking_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tracking_status")
+    fileprivate static let method_get_tracking_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tracking_status")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 167423259)!
@@ -313,13 +321,14 @@ open class XRInterface: RefCounted {
     
     /// If supported, returns the status of our tracking. This will allow you to provide feedback to the user whether there are issues with positional tracking.
     public final func getTrackingStatus() -> XRInterface.TrackingStatus {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRInterface.method_get_tracking_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRInterface.TrackingStatus (rawValue: _result)!
     }
     
-    fileprivate static var method_get_render_target_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_target_size")
+    fileprivate static let method_get_render_target_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_target_size")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1497962370)!
@@ -331,13 +340,14 @@ open class XRInterface: RefCounted {
     
     /// Returns the resolution at which we should render our intermediate results before things like lens distortion are applied by the VR platform.
     public final func getRenderTargetSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(XRInterface.method_get_render_target_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_view_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_view_count")
+    fileprivate static let method_get_view_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_view_count")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -349,13 +359,14 @@ open class XRInterface: RefCounted {
     
     /// Returns the number of views that need to be rendered for this device. 1 for Monoscopic, 2 for Stereoscopic.
     public final func getViewCount() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(XRInterface.method_get_view_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_trigger_haptic_pulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("trigger_haptic_pulse")
+    fileprivate static let method_trigger_haptic_pulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("trigger_haptic_pulse")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3752640163)!
@@ -371,7 +382,16 @@ open class XRInterface: RefCounted {
     /// 
     /// `trackerName` is optional and can be used to direct the pulse to a specific device provided that device is bound to this haptic.
     /// 
+    /// `frequency` is the frequency of the pulse, set to `0.0` to have the system use a default frequency.
+    /// 
+    /// `amplitude` is the amplitude of the pulse between `0.0` and `1.0`.
+    /// 
+    /// `durationSec` is the duration of the pulse in seconds.
+    /// 
+    /// `delaySec` is a delay in seconds before the pulse is given.
+    /// 
     public final func triggerHapticPulse(actionName: String, trackerName: StringName, frequency: Double, amplitude: Double, durationSec: Double, delaySec: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let actionName = GString(actionName)
         withUnsafePointer(to: actionName.content) { pArg0 in
             withUnsafePointer(to: trackerName.content) { pArg1 in
@@ -401,8 +421,8 @@ open class XRInterface: RefCounted {
         
     }
     
-    fileprivate static var method_supports_play_area_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("supports_play_area_mode")
+    fileprivate static let method_supports_play_area_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("supports_play_area_mode")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3429955281)!
@@ -414,6 +434,7 @@ open class XRInterface: RefCounted {
     
     /// Call this to find out if a given play area mode is supported by this interface.
     public final func supportsPlayAreaMode(_ mode: XRInterface.PlayAreaMode) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -428,8 +449,8 @@ open class XRInterface: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_play_area_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_play_area_mode")
+    fileprivate static let method_get_play_area_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_play_area_mode")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1615132885)!
@@ -441,13 +462,14 @@ open class XRInterface: RefCounted {
     
     @inline(__always)
     fileprivate final func get_play_area_mode() -> XRInterface.PlayAreaMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRInterface.method_get_play_area_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRInterface.PlayAreaMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_play_area_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_play_area_mode")
+    fileprivate static let method_set_play_area_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_play_area_mode")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3429955281)!
@@ -463,6 +485,7 @@ open class XRInterface: RefCounted {
     /// > Note: Changing this after the interface has already been initialized can be jarring for the player, so it's recommended to recenter on the HMD with ``XRServer/centerOnHmd(rotationMode:keepHeight:)`` (if switching to ``XRInterface/PlayAreaMode/stage``) or make the switch during a scene change.
     /// 
     fileprivate final func set_play_area_mode(_ mode: XRInterface.PlayAreaMode) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -477,8 +500,8 @@ open class XRInterface: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_play_area: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_play_area")
+    fileprivate static let method_get_play_area: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_play_area")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 497664490)!
@@ -490,13 +513,14 @@ open class XRInterface: RefCounted {
     
     /// Returns an array of vectors that represent the physical play area mapped to the virtual space around the ``XROrigin3D`` point. The points form a convex polygon that can be used to react to or visualize the play area. This returns an empty array if this feature is not supported or if the information is not yet available.
     public final func getPlayArea() -> PackedVector3Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
         gi.object_method_bind_ptrcall(XRInterface.method_get_play_area, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_anchor_detection_is_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_anchor_detection_is_enabled")
+    fileprivate static let method_get_anchor_detection_is_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_anchor_detection_is_enabled")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -508,13 +532,14 @@ open class XRInterface: RefCounted {
     
     @inline(__always)
     fileprivate final func get_anchor_detection_is_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRInterface.method_get_anchor_detection_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_anchor_detection_is_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anchor_detection_is_enabled")
+    fileprivate static let method_set_anchor_detection_is_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anchor_detection_is_enabled")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -526,6 +551,7 @@ open class XRInterface: RefCounted {
     
     @inline(__always)
     fileprivate final func set_anchor_detection_is_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -539,8 +565,8 @@ open class XRInterface: RefCounted {
         
     }
     
-    fileprivate static var method_get_camera_feed_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_feed_id")
+    fileprivate static let method_get_camera_feed_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_feed_id")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -552,13 +578,14 @@ open class XRInterface: RefCounted {
     
     /// If this is an AR interface that requires displaying a camera feed as the background, this method returns the feed ID in the ``CameraServer`` for this interface.
     public final func getCameraFeedId() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(XRInterface.method_get_camera_feed_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_passthrough_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_passthrough_supported")
+    fileprivate static let method_is_passthrough_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_passthrough_supported")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -570,13 +597,14 @@ open class XRInterface: RefCounted {
     
     /// Returns `true` if this interface supports passthrough.
     public final func isPassthroughSupported() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRInterface.method_is_passthrough_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_passthrough_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_passthrough_enabled")
+    fileprivate static let method_is_passthrough_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_passthrough_enabled")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -588,13 +616,14 @@ open class XRInterface: RefCounted {
     
     /// Returns `true` if passthrough is enabled.
     public final func isPassthroughEnabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRInterface.method_is_passthrough_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_start_passthrough: GDExtensionMethodBindPtr = {
-        let methodName = StringName("start_passthrough")
+    fileprivate static let method_start_passthrough: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start_passthrough")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -609,13 +638,14 @@ open class XRInterface: RefCounted {
     /// > Note: The viewport used for XR must have a transparent background, otherwise passthrough may not properly render.
     /// 
     public final func startPassthrough() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRInterface.method_start_passthrough, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_stop_passthrough: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop_passthrough")
+    fileprivate static let method_stop_passthrough: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop_passthrough")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -627,12 +657,13 @@ open class XRInterface: RefCounted {
     
     /// Stops passthrough.
     public final func stopPassthrough() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(XRInterface.method_stop_passthrough, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_transform_for_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transform_for_view")
+    fileprivate static let method_get_transform_for_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transform_for_view")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 518934792)!
@@ -649,6 +680,7 @@ open class XRInterface: RefCounted {
     /// `camTransform` is the transform that maps device coordinates to scene coordinates, typically the ``Node3D/globalTransform`` of the current XROrigin3D.
     /// 
     public final func getTransformForView(_ view: UInt32, camTransform: Transform3D) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: view) { pArg0 in
             withUnsafePointer(to: camTransform) { pArg1 in
@@ -666,8 +698,8 @@ open class XRInterface: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_projection_for_view: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_projection_for_view")
+    fileprivate static let method_get_projection_for_view: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_projection_for_view")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3766090294)!
@@ -679,6 +711,7 @@ open class XRInterface: RefCounted {
     
     /// Returns the projection matrix for a view/eye.
     public final func getProjectionForView(_ view: UInt32, aspect: Double, near: Double, far: Double) -> Projection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Projection = Projection ()
         withUnsafePointer(to: view) { pArg0 in
             withUnsafePointer(to: aspect) { pArg1 in
@@ -702,8 +735,8 @@ open class XRInterface: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_supported_environment_blend_modes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_supported_environment_blend_modes")
+    fileprivate static let method_get_supported_environment_blend_modes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_supported_environment_blend_modes")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -714,14 +747,15 @@ open class XRInterface: RefCounted {
     }()
     
     /// Returns the an array of supported environment blend modes, see ``XRInterface.EnvironmentBlendMode``.
-    public final func getSupportedEnvironmentBlendModes() -> GArray {
-        let _result: GArray = GArray ()
+    public final func getSupportedEnvironmentBlendModes() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(XRInterface.method_get_supported_environment_blend_modes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_environment_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment_blend_mode")
+    fileprivate static let method_set_environment_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment_blend_mode")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 551152418)!
@@ -739,6 +773,7 @@ open class XRInterface: RefCounted {
     /// > Note: Not all runtimes support all environment blend modes, so it is important to check this at startup. For example:
     /// 
     fileprivate final func set_environment_blend_mode(_ mode: XRInterface.EnvironmentBlendMode) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -753,8 +788,8 @@ open class XRInterface: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_environment_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment_blend_mode")
+    fileprivate static let method_get_environment_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment_blend_mode")
         return withUnsafePointer(to: &XRInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1984334071)!
@@ -766,6 +801,7 @@ open class XRInterface: RefCounted {
     
     @inline(__always)
     fileprivate final func get_environment_blend_mode() -> XRInterface.EnvironmentBlendMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRInterface.method_get_environment_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRInterface.EnvironmentBlendMode (rawValue: _result)!

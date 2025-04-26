@@ -32,7 +32,7 @@ import Musl
 /// This resource is intended to be created from code.
 /// 
 open class PortableCompressedTexture2D: Texture2D {
-    fileprivate static var className = StringName("PortableCompressedTexture2D")
+    private static var className = StringName("PortableCompressedTexture2D")
     override open class var godotClassName: StringName { className }
     public enum CompressionMode: Int64, CaseIterable {
         /// 
@@ -80,8 +80,8 @@ open class PortableCompressedTexture2D: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_create_from_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_image")
+    fileprivate static let method_create_from_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_image")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3679243433)!
@@ -98,6 +98,7 @@ open class PortableCompressedTexture2D: Texture2D {
     /// If lossy compression is requested, the quality setting can optionally be provided. This maps to Lossy WebP compression quality.
     /// 
     public final func createFromImage(_ image: Image?, compressionMode: PortableCompressedTexture2D.CompressionMode, normalMap: Bool = false, lossyQuality: Double = 0.8) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: compressionMode.rawValue) { pArg1 in
                 withUnsafePointer(to: normalMap) { pArg2 in
@@ -120,8 +121,8 @@ open class PortableCompressedTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format")
+    fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3847873762)!
@@ -133,13 +134,14 @@ open class PortableCompressedTexture2D: Texture2D {
     
     /// Return the image format used (valid after initialized).
     public final func getFormat() -> Image.Format {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
-    fileprivate static var method_get_compression_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_compression_mode")
+    fileprivate static let method_get_compression_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_compression_mode")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3265612739)!
@@ -151,13 +153,14 @@ open class PortableCompressedTexture2D: Texture2D {
     
     /// Return the compression mode used (valid after initialized).
     public final func getCompressionMode() -> PortableCompressedTexture2D.CompressionMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_compression_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return PortableCompressedTexture2D.CompressionMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size_override")
+    fileprivate static let method_set_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size_override")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -169,6 +172,7 @@ open class PortableCompressedTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_size_override(_ size: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -182,8 +186,8 @@ open class PortableCompressedTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_get_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size_override")
+    fileprivate static let method_get_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size_override")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -195,13 +199,14 @@ open class PortableCompressedTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func get_size_override() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_size_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_keep_compressed_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_keep_compressed_buffer")
+    fileprivate static let method_set_keep_compressed_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_compressed_buffer")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -213,6 +218,7 @@ open class PortableCompressedTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func set_keep_compressed_buffer(_ keep: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: keep) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -226,8 +232,8 @@ open class PortableCompressedTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_is_keeping_compressed_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_keeping_compressed_buffer")
+    fileprivate static let method_is_keeping_compressed_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_keeping_compressed_buffer")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -239,13 +245,14 @@ open class PortableCompressedTexture2D: Texture2D {
     
     @inline(__always)
     fileprivate final func is_keeping_compressed_buffer() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_is_keeping_compressed_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_keep_all_compressed_buffers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_keep_all_compressed_buffers")
+    fileprivate static let method_set_keep_all_compressed_buffers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_all_compressed_buffers")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -270,8 +277,8 @@ open class PortableCompressedTexture2D: Texture2D {
         
     }
     
-    fileprivate static var method_is_keeping_all_compressed_buffers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_keeping_all_compressed_buffers")
+    fileprivate static let method_is_keeping_all_compressed_buffers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_keeping_all_compressed_buffers")
         return withUnsafePointer(to: &PortableCompressedTexture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!

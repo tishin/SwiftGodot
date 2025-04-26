@@ -28,7 +28,7 @@ import Musl
 /// When events are compared, properties are checked in the following priority - ``keycode``, ``physicalKeycode`` and ``unicode``. Events with the first matching value will be considered equal.
 /// 
 open class InputEventKey: InputEventWithModifiers {
-    fileprivate static var className = StringName("InputEventKey")
+    private static var className = StringName("InputEventKey")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -93,7 +93,7 @@ open class InputEventKey: InputEventWithModifiers {
     }
     
     /// The key Unicode character code (when relevant), shifted by modifier keys. Unicode character codes for composite characters and complex scripts may not be available unless IME input mode is active. See ``Window/setImeActive(_:)`` for more information.
-    final public var unicode: Int64 {
+    final public var unicode: Int32 {
         get {
             return get_unicode ()
         }
@@ -132,8 +132,8 @@ open class InputEventKey: InputEventWithModifiers {
     }
     
     /* Methods */
-    fileprivate static var method_set_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressed")
+    fileprivate static let method_set_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressed")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -145,6 +145,7 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -158,8 +159,8 @@ open class InputEventKey: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_set_keycode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_keycode")
+    fileprivate static let method_set_keycode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keycode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 888074362)!
@@ -171,6 +172,7 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_keycode(_ keycode: Key) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: keycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -184,8 +186,8 @@ open class InputEventKey: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_keycode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_keycode")
+    fileprivate static let method_get_keycode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keycode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1585896689)!
@@ -197,13 +199,14 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func get_keycode() -> Key {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventKey.method_get_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_set_physical_keycode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physical_keycode")
+    fileprivate static let method_set_physical_keycode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physical_keycode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 888074362)!
@@ -215,6 +218,7 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_physical_keycode(_ physicalKeycode: Key) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: physicalKeycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -228,8 +232,8 @@ open class InputEventKey: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_physical_keycode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physical_keycode")
+    fileprivate static let method_get_physical_keycode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physical_keycode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1585896689)!
@@ -241,13 +245,14 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func get_physical_keycode() -> Key {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventKey.method_get_physical_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_set_key_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_key_label")
+    fileprivate static let method_set_key_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_key_label")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 888074362)!
@@ -259,6 +264,7 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_key_label(_ keyLabel: Key) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: keyLabel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -272,8 +278,8 @@ open class InputEventKey: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_key_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_key_label")
+    fileprivate static let method_get_key_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_key_label")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1585896689)!
@@ -285,13 +291,14 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func get_key_label() -> Key {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventKey.method_get_key_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_set_unicode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_unicode")
+    fileprivate static let method_set_unicode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_unicode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -302,7 +309,8 @@ open class InputEventKey: InputEventWithModifiers {
     }()
     
     @inline(__always)
-    fileprivate final func set_unicode(_ unicode: Int64) {
+    fileprivate final func set_unicode(_ unicode: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: unicode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -316,8 +324,8 @@ open class InputEventKey: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_unicode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unicode")
+    fileprivate static let method_get_unicode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unicode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -328,14 +336,15 @@ open class InputEventKey: InputEventWithModifiers {
     }()
     
     @inline(__always)
-    fileprivate final func get_unicode() -> Int64 {
-        var _result: Int64 = 0
+    fileprivate final func get_unicode() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventKey.method_get_unicode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_location: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_location")
+    fileprivate static let method_set_location: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_location")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 634453155)!
@@ -347,6 +356,7 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_location(_ location: KeyLocation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: location.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -360,8 +370,8 @@ open class InputEventKey: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_location: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_location")
+    fileprivate static let method_get_location: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_location")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 211810873)!
@@ -373,13 +383,14 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func get_location() -> KeyLocation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventKey.method_get_location, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return KeyLocation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_echo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_echo")
+    fileprivate static let method_set_echo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_echo")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -391,6 +402,7 @@ open class InputEventKey: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_echo(_ echo: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: echo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -404,8 +416,8 @@ open class InputEventKey: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_keycode_with_modifiers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_keycode_with_modifiers")
+    fileprivate static let method_get_keycode_with_modifiers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keycode_with_modifiers")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1585896689)!
@@ -420,13 +432,14 @@ open class InputEventKey: InputEventWithModifiers {
     /// To get a human-readable representation of the ``InputEventKey`` with modifiers, use `OS.get_keycode_string(event.get_keycode_with_modifiers())` where `event` is the ``InputEventKey``.
     /// 
     public final func getKeycodeWithModifiers() -> Key {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventKey.method_get_keycode_with_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_get_physical_keycode_with_modifiers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physical_keycode_with_modifiers")
+    fileprivate static let method_get_physical_keycode_with_modifiers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physical_keycode_with_modifiers")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1585896689)!
@@ -441,13 +454,14 @@ open class InputEventKey: InputEventWithModifiers {
     /// To get a human-readable representation of the ``InputEventKey`` with modifiers, use `OS.get_keycode_string(event.get_physical_keycode_with_modifiers())` where `event` is the ``InputEventKey``.
     /// 
     public final func getPhysicalKeycodeWithModifiers() -> Key {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventKey.method_get_physical_keycode_with_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_get_key_label_with_modifiers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_key_label_with_modifiers")
+    fileprivate static let method_get_key_label_with_modifiers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_key_label_with_modifiers")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1585896689)!
@@ -462,13 +476,14 @@ open class InputEventKey: InputEventWithModifiers {
     /// To get a human-readable representation of the ``InputEventKey`` with modifiers, use `OS.get_keycode_string(event.get_key_label_with_modifiers())` where `event` is the ``InputEventKey``.
     /// 
     public final func getKeyLabelWithModifiers() -> Key {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventKey.method_get_key_label_with_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Key (rawValue: _result)!
     }
     
-    fileprivate static var method_as_text_keycode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("as_text_keycode")
+    fileprivate static let method_as_text_keycode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("as_text_keycode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -480,13 +495,14 @@ open class InputEventKey: InputEventWithModifiers {
     
     /// Returns a ``String`` representation of the event's ``keycode`` and modifiers.
     public final func asTextKeycode() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(InputEventKey.method_as_text_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_as_text_physical_keycode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("as_text_physical_keycode")
+    fileprivate static let method_as_text_physical_keycode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("as_text_physical_keycode")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -498,13 +514,14 @@ open class InputEventKey: InputEventWithModifiers {
     
     /// Returns a ``String`` representation of the event's ``physicalKeycode`` and modifiers.
     public final func asTextPhysicalKeycode() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(InputEventKey.method_as_text_physical_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_as_text_key_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("as_text_key_label")
+    fileprivate static let method_as_text_key_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("as_text_key_label")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -516,13 +533,14 @@ open class InputEventKey: InputEventWithModifiers {
     
     /// Returns a ``String`` representation of the event's ``keyLabel`` and modifiers.
     public final func asTextKeyLabel() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(InputEventKey.method_as_text_key_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_as_text_location: GDExtensionMethodBindPtr = {
-        let methodName = StringName("as_text_location")
+    fileprivate static let method_as_text_location: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("as_text_location")
         return withUnsafePointer(to: &InputEventKey.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -534,6 +552,7 @@ open class InputEventKey: InputEventWithModifiers {
     
     /// Returns a ``String`` representation of the event's ``location``. This will be a blank string if the event is not specific to a location.
     public final func asTextLocation() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(InputEventKey.method_as_text_location, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

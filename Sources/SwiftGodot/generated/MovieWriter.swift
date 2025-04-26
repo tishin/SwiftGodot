@@ -36,39 +36,158 @@ import Musl
 /// > Note: MovieWriter is available for use in both the editor and exported projects, but it is _not_ designed for use by end users to record videos while playing. Players wishing to record gameplay videos should install tools such as <a href="https://obsproject.com/">OBS Studio</a> or <a href="https://www.maartenbaert.be/simplescreenrecorder/">SimpleScreenRecorder</a> instead.
 /// 
 open class MovieWriter: Object {
-    fileprivate static var className = StringName("MovieWriter")
+    private static var className = StringName("MovieWriter")
     override open class var godotClassName: StringName { className }
     /* Methods */
+    fileprivate static let method__get_audio_mix_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_audio_mix_rate")
+        return withUnsafePointer(to: &MovieWriter.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called when the audio sample rate used for recording the audio is requested by the engine. The value returned must be specified in Hz. Defaults to 48000 Hz if ``_getAudioMixRate()`` is not overridden.
     @_documentation(visibility: public)
     open func _getAudioMixRate() -> UInt32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt32 = 0
+        gi.object_method_bind_ptrcall(MovieWriter.method__get_audio_mix_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_audio_speaker_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_audio_speaker_mode")
+        return withUnsafePointer(to: &MovieWriter.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2549190337)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the audio speaker mode used for recording the audio is requested by the engine. This can affect the number of output channels in the resulting audio file/stream. Defaults to ``AudioServer/SpeakerMode/modeStereo`` if ``_getAudioSpeakerMode()`` is not overridden.
     @_documentation(visibility: public)
     open func _getAudioSpeakerMode() -> AudioServer.SpeakerMode {
-        return AudioServer.SpeakerMode(rawValue: 0)!
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(MovieWriter.method__get_audio_speaker_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return AudioServer.SpeakerMode (rawValue: _result)!
     }
+    
+    fileprivate static let method__handles_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_handles_file")
+        return withUnsafePointer(to: &MovieWriter.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the engine determines whether this ``MovieWriter`` is able to handle the file at `path`. Must return `true` if this ``MovieWriter`` is able to handle the given file path, `false` otherwise. Typically, ``_handlesFile(path:)`` is overridden as follows to allow the user to record a file at any path with a given file extension:
     /// 
     @_documentation(visibility: public)
     open func _handlesFile(path: String) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(MovieWriter.method__handles_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__write_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_write_begin")
+        return withUnsafePointer(to: &MovieWriter.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1866453460)!
+            }
+            
+        }
+        
+    }()
     
     /// Called once before the engine starts writing video and audio data. `movieSize` is the width and height of the video to save. `fps` is the number of frames per second specified in the project settings or using the `--fixed-fps <fps>` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>.
     @_documentation(visibility: public)
     open func _writeBegin(movieSize: Vector2i, fps: UInt32, basePath: String) -> GodotError {
-        return .ok
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: movieSize) { pArg0 in
+            withUnsafePointer(to: fps) { pArg1 in
+                let basePath = GString(basePath)
+                withUnsafePointer(to: basePath.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(MovieWriter.method__write_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return GodotError (rawValue: _result)!
     }
+    
+    fileprivate static let method__write_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_write_frame")
+        return withUnsafePointer(to: &MovieWriter.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2784607037)!
+            }
+            
+        }
+        
+    }()
     
     /// Called at the end of every rendered frame. The `frameImage` and `audioFrameBlock` function arguments should be written to.
     @_documentation(visibility: public)
     open func _writeFrame(frameImage: Image?, audioFrameBlock: OpaquePointer?) -> GodotError {
-        return .ok
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: frameImage?.handle) { pArg0 in
+            withUnsafePointer(to: audioFrameBlock) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(MovieWriter.method__write_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return GodotError (rawValue: _result)!
     }
+    
+    fileprivate static let method__write_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_write_end")
+        return withUnsafePointer(to: &MovieWriter.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the engine finishes writing. This occurs when the engine quits by pressing the window manager's close button, or when ``SceneTree/quit(exitCode:)`` is called.
     /// 
@@ -76,10 +195,13 @@ open class MovieWriter: Object {
     /// 
     @_documentation(visibility: public)
     open func _writeEnd() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(MovieWriter.method__write_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
     
-    fileprivate static var method_add_writer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_writer")
+    fileprivate static let method_add_writer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_writer")
         return withUnsafePointer(to: &MovieWriter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4023702871)!
@@ -107,7 +229,7 @@ open class MovieWriter: Object {
         
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_audio_mix_rate":
@@ -133,14 +255,16 @@ open class MovieWriter: Object {
 // Support methods for proxies
 func _MovieWriter_proxy_get_audio_mix_rate (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<MovieWriter>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MovieWriter else { return }
     let ret = swiftObject._getAudioMixRate ()
     retPtr!.storeBytes (of: ret, as: UInt32.self)
 }
 
 func _MovieWriter_proxy_get_audio_speaker_mode (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<MovieWriter>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MovieWriter else { return }
     let ret = swiftObject._getAudioSpeakerMode ()
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
@@ -148,7 +272,8 @@ func _MovieWriter_proxy_get_audio_speaker_mode (instance: UnsafeMutableRawPointe
 func _MovieWriter_proxy_handles_file (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<MovieWriter>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MovieWriter else { return }
     let ret = swiftObject._handlesFile (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -156,24 +281,27 @@ func _MovieWriter_proxy_handles_file (instance: UnsafeMutableRawPointer?, args: 
 func _MovieWriter_proxy_write_begin (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<MovieWriter>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MovieWriter else { return }
     let ret = swiftObject._writeBegin (movieSize: args [0]!.assumingMemoryBound (to: Vector2i.self).pointee, fps: args [1]!.assumingMemoryBound (to: UInt32.self).pointee, basePath: GString.stringFromGStringPtr (ptr: args [2]!) ?? "")
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
 func _MovieWriter_proxy_write_end (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<MovieWriter>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MovieWriter else { return }
     swiftObject._writeEnd ()
 }
 
 func _MovieWriter_proxy_write_frame (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<MovieWriter>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MovieWriter else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._writeFrame (frameImage: lookupLiveObject (handleAddress: resolved_0) as? Image ?? Image (nativeHandle: resolved_0), audioFrameBlock: args [1]!.assumingMemoryBound (to: OpaquePointer?.self).pointee)
+    let ret = swiftObject._writeFrame (frameImage: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Image, audioFrameBlock: args [1]!.assumingMemoryBound (to: OpaquePointer?.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

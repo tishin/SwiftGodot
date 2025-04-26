@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Stores position, muting, solo, bypass, effects, effect position, volume, and the connections between buses. See ``AudioServer`` for usage.
 open class AudioBusLayout: Resource {
-    fileprivate static var className = StringName("AudioBusLayout")
+    private static var className = StringName("AudioBusLayout")
     override open class var godotClassName: StringName { className }
 }
 

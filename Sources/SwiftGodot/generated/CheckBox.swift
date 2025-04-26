@@ -28,7 +28,7 @@ import Musl
 /// When ``BaseButton/buttonGroup`` specifies a ``ButtonGroup``, ``CheckBox`` changes its appearance to that of a radio button and uses the various `radio_*` theme properties.
 /// 
 open class CheckBox: Button {
-    fileprivate static var className = StringName("CheckBox")
+    private static var className = StringName("CheckBox")
     override open class var godotClassName: StringName { className }
 }
 

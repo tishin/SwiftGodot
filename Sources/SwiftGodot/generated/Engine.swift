@@ -24,14 +24,14 @@ import Musl
 /// The ``Engine`` singleton allows you to query and modify the project's run-time parameters, such as frames per second, time scale, and others. It also stores information about the current build of Godot, such as the current version.
 open class Engine: Object {
     /// The shared instance of this class
-    public static var shared: Engine = {
-        return withUnsafePointer (to: &Engine.godotClassName.content) { ptr in
-            Engine (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: Engine {
+        return withUnsafePointer(to: &Engine.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("Engine")
+    private static var className = StringName("Engine")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -49,6 +49,21 @@ open class Engine: Object {
         
         set {
             set_print_error_messages (newValue)
+        }
+        
+    }
+    
+    /// If `false`, stops printing messages (for example using ``@GlobalScope.print``) to the console, log files, and editor Output log. This property is equivalent to the ``ProjectSettings/application/run/disableStdout`` project setting.
+    /// 
+    /// > Note: This does not stop printing errors or warnings produced by scripts to the console or log files, for more details see ``printErrorMessages``.
+    /// 
+    static public var printToStdout: Bool {
+        get {
+            return is_printing_to_stdout ()
+        }
+        
+        set {
+            set_print_to_stdout (newValue)
         }
         
     }
@@ -147,8 +162,8 @@ open class Engine: Object {
     }
     
     /* Methods */
-    fileprivate static var method_set_physics_ticks_per_second: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_ticks_per_second")
+    fileprivate static let method_set_physics_ticks_per_second: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_ticks_per_second")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -173,8 +188,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_get_physics_ticks_per_second: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_ticks_per_second")
+    fileprivate static let method_get_physics_ticks_per_second: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_ticks_per_second")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -191,8 +206,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_set_max_physics_steps_per_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_physics_steps_per_frame")
+    fileprivate static let method_set_max_physics_steps_per_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_physics_steps_per_frame")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -217,8 +232,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_get_max_physics_steps_per_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_physics_steps_per_frame")
+    fileprivate static let method_get_max_physics_steps_per_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_physics_steps_per_frame")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -235,8 +250,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_set_physics_jitter_fix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_jitter_fix")
+    fileprivate static let method_set_physics_jitter_fix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_jitter_fix")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -261,8 +276,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_get_physics_jitter_fix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_jitter_fix")
+    fileprivate static let method_get_physics_jitter_fix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_jitter_fix")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -279,8 +294,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_physics_interpolation_fraction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_interpolation_fraction")
+    fileprivate static let method_get_physics_interpolation_fraction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_interpolation_fraction")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -297,8 +312,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_set_max_fps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_fps")
+    fileprivate static let method_set_max_fps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_fps")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -323,8 +338,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_get_max_fps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_fps")
+    fileprivate static let method_get_max_fps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_fps")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -341,8 +356,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_set_time_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_time_scale")
+    fileprivate static let method_set_time_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_time_scale")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -367,8 +382,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_get_time_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_scale")
+    fileprivate static let method_get_time_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_scale")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -385,8 +400,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_frames_drawn: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frames_drawn")
+    fileprivate static let method_get_frames_drawn: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frames_drawn")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -406,8 +421,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_frames_per_second: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frames_per_second")
+    fileprivate static let method_get_frames_per_second: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frames_per_second")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -424,8 +439,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_physics_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_frames")
+    fileprivate static let method_get_physics_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_frames")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -445,8 +460,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_process_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_frames")
+    fileprivate static let method_get_process_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_frames")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -466,8 +481,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_main_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_main_loop")
+    fileprivate static let method_get_main_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_main_loop")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1016888095)!
@@ -484,11 +499,11 @@ open class Engine: Object {
     public static func getMainLoop() -> MainLoop? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_main_loop, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_version_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_version_info")
+    fileprivate static let method_get_version_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_version_info")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -498,7 +513,7 @@ open class Engine: Object {
         
     }()
     
-    /// Returns the current engine version information as a ``GDictionary`` containing the following entries:
+    /// Returns the current engine version information as a ``VariantDictionary`` containing the following entries:
     /// 
     /// - `major` - Major version number as an int;
     /// 
@@ -522,14 +537,14 @@ open class Engine: Object {
     /// 
     /// > Note: The `hex` value is still an integer internally, and printing it will give you its decimal representation, which is not particularly meaningful. Use hexadecimal literals for quick version comparisons from code:
     /// 
-    public static func getVersionInfo() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getVersionInfo() -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(method_get_version_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_author_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_author_info")
+    fileprivate static let method_get_author_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_author_info")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -539,15 +554,15 @@ open class Engine: Object {
         
     }()
     
-    /// Returns the engine author information as a ``GDictionary``, where each entry is an ``GArray`` of strings with the names of notable contributors to the Godot Engine: `lead_developers`, `founders`, `project_managers`, and `developers`.
-    public static func getAuthorInfo() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    /// Returns the engine author information as a ``VariantDictionary``, where each entry is an ``VariantArray`` of strings with the names of notable contributors to the Godot Engine: `lead_developers`, `founders`, `project_managers`, and `developers`.
+    public static func getAuthorInfo() -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(method_get_author_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_copyright_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_copyright_info")
+    fileprivate static let method_get_copyright_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_copyright_info")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -557,24 +572,24 @@ open class Engine: Object {
         
     }()
     
-    /// Returns an ``GArray`` of dictionaries with copyright information for every component of Godot's source code.
+    /// Returns an ``VariantArray`` of dictionaries with copyright information for every component of Godot's source code.
     /// 
-    /// Every ``GDictionary`` contains a `name` identifier, and a `parts` array of dictionaries. It describes the component in detail with the following entries:
+    /// Every ``VariantDictionary`` contains a `name` identifier, and a `parts` array of dictionaries. It describes the component in detail with the following entries:
     /// 
-    /// - `files` - ``GArray`` of file paths from the source code affected by this component;
+    /// - `files` - ``VariantArray`` of file paths from the source code affected by this component;
     /// 
-    /// - `copyright` - ``GArray`` of owners of this component;
+    /// - `copyright` - ``VariantArray`` of owners of this component;
     /// 
     /// - `license` - The license applied to this component (such as "<a href="https://en.wikipedia.org/wiki/MIT_License#Ambiguity_and_variants">Expat</a>" or "<a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>").
     /// 
-    public static func getCopyrightInfo() -> VariantCollection<GDictionary> {
+    public static func getCopyrightInfo() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_copyright_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_donor_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_donor_info")
+    fileprivate static let method_get_donor_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_donor_info")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -584,18 +599,18 @@ open class Engine: Object {
         
     }()
     
-    /// Returns a ``GDictionary`` of categorized donor names. Each entry is an ``GArray`` of strings:
+    /// Returns a ``VariantDictionary`` of categorized donor names. Each entry is an ``VariantArray`` of strings:
     /// 
     /// {`platinum_sponsors`, `gold_sponsors`, `silver_sponsors`, `bronze_sponsors`, `mini_sponsors`, `gold_donors`, `silver_donors`, `bronze_donors`}
     /// 
-    public static func getDonorInfo() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getDonorInfo() -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(method_get_donor_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_license_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_license_info")
+    fileprivate static let method_get_license_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_license_info")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -605,15 +620,15 @@ open class Engine: Object {
         
     }()
     
-    /// Returns a ``GDictionary`` of licenses used by Godot and included third party components. Each entry is a license name (such as "<a href="https://en.wikipedia.org/wiki/MIT_License#Ambiguity_and_variants">Expat</a>") and its associated text.
-    public static func getLicenseInfo() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    /// Returns a ``VariantDictionary`` of licenses used by Godot and included third party components. Each entry is a license name (such as "<a href="https://en.wikipedia.org/wiki/MIT_License#Ambiguity_and_variants">Expat</a>") and its associated text.
+    public static func getLicenseInfo() -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(method_get_license_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_license_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_license_text")
+    fileprivate static let method_get_license_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_license_text")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -630,8 +645,8 @@ open class Engine: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_architecture_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_architecture_name")
+    fileprivate static let method_get_architecture_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_architecture_name")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -643,7 +658,7 @@ open class Engine: Object {
     
     /// Returns the name of the CPU architecture the Godot binary was built for. Possible return values include `"x86_64"`, `"x86_32"`, `"arm64"`, `"arm32"`, `"rv64"`, `"riscv"`, `"ppc64"`, `"ppc"`, `"wasm64"`, and `"wasm32"`.
     /// 
-    /// To detect whether the current build is 64-bit, you can use the fact that all 64-bit architecture names contain `64` in their name:
+    /// To detect whether the current build is 64-bit, or the type of architecture, don't use the architecture name. Instead, use ``OS/hasFeature(tagName:)`` to check for the `"64"` feature tag, or tags such as `"x86"` or `"arm"`. See the <a href="https://docs.godotengine.org/en//tutorials/export/feature_tags.html">Feature Tags</a> documentation for more details.
     /// 
     /// > Note: This method does _not_ return the name of the system's CPU architecture (like ``OS/getProcessorName()``). For example, when running an `x86_32` Godot binary on an `x86_64` system, the returned value will still be `"x86_32"`.
     /// 
@@ -653,8 +668,8 @@ open class Engine: Object {
         return _result.description
     }
     
-    fileprivate static var method_is_in_physics_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_in_physics_frame")
+    fileprivate static let method_is_in_physics_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_in_physics_frame")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -672,8 +687,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_has_singleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_singleton")
+    fileprivate static let method_has_singleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_singleton")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -702,8 +717,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_singleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_singleton")
+    fileprivate static let method_get_singleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_singleton")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1371597918)!
@@ -729,11 +744,11 @@ open class Engine: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_register_singleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_singleton")
+    fileprivate static let method_register_singleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_singleton")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 965313290)!
@@ -761,8 +776,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_unregister_singleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unregister_singleton")
+    fileprivate static let method_unregister_singleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unregister_singleton")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -787,8 +802,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_get_singleton_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_singleton_list")
+    fileprivate static let method_get_singleton_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_singleton_list")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -805,8 +820,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_register_script_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_script_language")
+    fileprivate static let method_register_script_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_script_language")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1850254898)!
@@ -841,8 +856,8 @@ open class Engine: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_unregister_script_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unregister_script_language")
+    fileprivate static let method_unregister_script_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unregister_script_language")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1850254898)!
@@ -875,8 +890,8 @@ open class Engine: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_script_language_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_language_count")
+    fileprivate static let method_get_script_language_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_language_count")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -893,8 +908,8 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_script_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_language")
+    fileprivate static let method_get_script_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_language")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2151255799)!
@@ -917,11 +932,11 @@ open class Engine: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_editor_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_editor_hint")
+    fileprivate static let method_is_editor_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_editor_hint")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -943,8 +958,26 @@ open class Engine: Object {
         return _result
     }
     
-    fileprivate static var method_get_write_movie_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_write_movie_path")
+    fileprivate static let method_is_embedded_in_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_embedded_in_editor")
+        return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the engine is running embedded in the editor. This is useful to prevent attempting to update window mode or window flags that are not supported when running the project embedded in the editor.
+    public static func isEmbeddedInEditor() -> Bool {
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(method_is_embedded_in_editor, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_write_movie_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_write_movie_path")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -961,8 +994,52 @@ open class Engine: Object {
         return _result.description
     }
     
-    fileprivate static var method_set_print_error_messages: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_print_error_messages")
+    fileprivate static let method_set_print_to_stdout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_print_to_stdout")
+        return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate static func set_print_to_stdout(_ enabled: Bool) {
+        withUnsafePointer(to: enabled) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_set_print_to_stdout, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_printing_to_stdout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_printing_to_stdout")
+        return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate static func is_printing_to_stdout() -> Bool {
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(method_is_printing_to_stdout, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_print_error_messages: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_print_error_messages")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -987,8 +1064,8 @@ open class Engine: Object {
         
     }
     
-    fileprivate static var method_is_printing_error_messages: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_printing_error_messages")
+    fileprivate static let method_is_printing_error_messages: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_printing_error_messages")
         return withUnsafePointer(to: &Engine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!

@@ -28,7 +28,7 @@ import Musl
 /// > Note: There are many known bugs in ``SoftBody3D``. Therefore, it's not recommended to use them for things that can affect gameplay (such as trampolines).
 /// 
 open class SoftBody3D: MeshInstance3D {
-    fileprivate static var className = StringName("SoftBody3D")
+    private static var className = StringName("SoftBody3D")
     override open class var godotClassName: StringName { className }
     public enum DisableMode: Int64, CaseIterable {
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, remove from the physics simulation to stop all physics interactions with this ``SoftBody3D``.
@@ -185,8 +185,8 @@ open class SoftBody3D: MeshInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_get_physics_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_rid")
+    fileprivate static let method_get_physics_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_rid")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -198,13 +198,14 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Returns the internal ``RID`` used by the ``PhysicsServer3D`` for this body.
     public final func getPhysicsRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_physics_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -216,6 +217,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ collisionMask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: collisionMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -229,8 +231,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -242,13 +244,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer")
+    fileprivate static let method_set_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -260,6 +263,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_collision_layer(_ collisionLayer: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: collisionLayer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -273,8 +277,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer")
+    fileprivate static let method_get_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -286,13 +290,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_collision_layer() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask_value")
+    fileprivate static let method_set_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask_value")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -304,6 +309,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionMask``, given a `layerNumber` between 1 and 32.
     public final func setCollisionMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -320,8 +326,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask_value")
+    fileprivate static let method_get_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask_value")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -333,6 +339,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Returns whether or not the specified layer of the ``collisionMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -347,8 +354,8 @@ open class SoftBody3D: MeshInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer_value")
+    fileprivate static let method_set_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer_value")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -360,6 +367,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionLayer``, given a `layerNumber` between 1 and 32.
     public final func setCollisionLayerValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -376,8 +384,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer_value")
+    fileprivate static let method_get_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer_value")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -389,6 +397,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Returns whether or not the specified layer of the ``collisionLayer`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionLayerValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -403,8 +412,8 @@ open class SoftBody3D: MeshInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_parent_collision_ignore: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parent_collision_ignore")
+    fileprivate static let method_set_parent_collision_ignore: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parent_collision_ignore")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -416,6 +425,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_parent_collision_ignore(_ parentCollisionIgnore: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parentCollisionIgnore.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -429,8 +439,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_parent_collision_ignore: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parent_collision_ignore")
+    fileprivate static let method_get_parent_collision_ignore: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parent_collision_ignore")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -442,13 +452,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_parent_collision_ignore() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_parent_collision_ignore, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_disable_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_mode")
+    fileprivate static let method_set_disable_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_mode")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1104158384)!
@@ -460,6 +471,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_disable_mode(_ mode: SoftBody3D.DisableMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -473,8 +485,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_disable_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_disable_mode")
+    fileprivate static let method_get_disable_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_disable_mode")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4135042476)!
@@ -486,13 +498,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_disable_mode() -> SoftBody3D.DisableMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_disable_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return SoftBody3D.DisableMode (rawValue: _result)!
     }
     
-    fileprivate static var method_get_collision_exceptions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_exceptions")
+    fileprivate static let method_get_collision_exceptions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_exceptions")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -503,14 +516,15 @@ open class SoftBody3D: MeshInstance3D {
     }()
     
     /// Returns an array of nodes that were added as collision exceptions for this body.
-    public final func getCollisionExceptions() -> ObjectCollection<PhysicsBody3D> {
+    public final func getCollisionExceptions() -> TypedArray<PhysicsBody3D?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_exceptions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<PhysicsBody3D>(content: _result)
+        return TypedArray<PhysicsBody3D?>(takingOver: _result)
     }
     
-    fileprivate static var method_add_collision_exception_with: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_collision_exception_with")
+    fileprivate static let method_add_collision_exception_with: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_collision_exception_with")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -522,6 +536,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Adds a body to the list of bodies that this body can't collide with.
     public final func addCollisionExceptionWith(body: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -535,8 +550,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_remove_collision_exception_with: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_collision_exception_with")
+    fileprivate static let method_remove_collision_exception_with: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_collision_exception_with")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -548,6 +563,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Removes a body from the list of bodies that this body can't collide with.
     public final func removeCollisionExceptionWith(body: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -561,8 +577,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_set_simulation_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_simulation_precision")
+    fileprivate static let method_set_simulation_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_simulation_precision")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -574,6 +590,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_simulation_precision(_ simulationPrecision: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: simulationPrecision) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -587,8 +604,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_simulation_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_simulation_precision")
+    fileprivate static let method_get_simulation_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_simulation_precision")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -600,13 +617,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_simulation_precision() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_simulation_precision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_total_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_total_mass")
+    fileprivate static let method_set_total_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_total_mass")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -618,6 +636,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_total_mass(_ mass: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -631,8 +650,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_total_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_total_mass")
+    fileprivate static let method_get_total_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_total_mass")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -644,13 +663,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_total_mass() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_total_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_linear_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_linear_stiffness")
+    fileprivate static let method_set_linear_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_linear_stiffness")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -662,6 +682,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_linear_stiffness(_ linearStiffness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: linearStiffness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -675,8 +696,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_linear_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_linear_stiffness")
+    fileprivate static let method_get_linear_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_linear_stiffness")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -688,13 +709,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_linear_stiffness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_linear_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pressure_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressure_coefficient")
+    fileprivate static let method_set_pressure_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressure_coefficient")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -706,6 +728,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_pressure_coefficient(_ pressureCoefficient: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressureCoefficient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -719,8 +742,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_pressure_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pressure_coefficient")
+    fileprivate static let method_get_pressure_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pressure_coefficient")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -732,13 +755,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_pressure_coefficient() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_pressure_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_damping_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_damping_coefficient")
+    fileprivate static let method_set_damping_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_damping_coefficient")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -750,6 +774,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_damping_coefficient(_ dampingCoefficient: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dampingCoefficient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -763,8 +788,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_damping_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_damping_coefficient")
+    fileprivate static let method_get_damping_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_damping_coefficient")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -776,13 +801,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_damping_coefficient() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_damping_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_drag_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drag_coefficient")
+    fileprivate static let method_set_drag_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drag_coefficient")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -794,6 +820,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_drag_coefficient(_ dragCoefficient: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dragCoefficient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -807,8 +834,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_get_drag_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_drag_coefficient")
+    fileprivate static let method_get_drag_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_drag_coefficient")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -820,13 +847,14 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func get_drag_coefficient() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SoftBody3D.method_get_drag_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_point_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_transform")
+    fileprivate static let method_get_point_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_transform")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 871989493)!
@@ -838,6 +866,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Returns local translation of a vertex in the surface array.
     public final func getPointTransform(pointIndex: Int32) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: pointIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -852,11 +881,11 @@ open class SoftBody3D: MeshInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_point_pinned: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_pinned")
+    fileprivate static let method_set_point_pinned: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_pinned")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3814935226)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 528784402)!
             }
             
         }
@@ -864,13 +893,17 @@ open class SoftBody3D: MeshInstance3D {
     }()
     
     /// Sets the pinned state of a surface vertex. When set to `true`, the optional `attachmentPath` can define a ``Node3D`` the pinned vertex will be attached to.
-    public final func setPointPinned(pointIndex: Int32, pinned: Bool, attachmentPath: NodePath = NodePath("")) {
+    public final func setPointPinned(pointIndex: Int32, pinned: Bool, attachmentPath: NodePath = NodePath(""), insertAt: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pointIndex) { pArg0 in
             withUnsafePointer(to: pinned) { pArg1 in
                 withUnsafePointer(to: attachmentPath.content) { pArg2 in
-                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
-                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SoftBody3D.method_set_point_pinned, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    withUnsafePointer(to: insertAt) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(SoftBody3D.method_set_point_pinned, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            }
+                            
                         }
                         
                     }
@@ -884,8 +917,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_is_point_pinned: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_point_pinned")
+    fileprivate static let method_is_point_pinned: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_point_pinned")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -897,6 +930,7 @@ open class SoftBody3D: MeshInstance3D {
     
     /// Returns `true` if vertex is set to pinned.
     public final func isPointPinned(pointIndex: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: pointIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -911,8 +945,8 @@ open class SoftBody3D: MeshInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_ray_pickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ray_pickable")
+    fileprivate static let method_set_ray_pickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ray_pickable")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -924,6 +958,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func set_ray_pickable(_ rayPickable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rayPickable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -937,8 +972,8 @@ open class SoftBody3D: MeshInstance3D {
         
     }
     
-    fileprivate static var method_is_ray_pickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ray_pickable")
+    fileprivate static let method_is_ray_pickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ray_pickable")
         return withUnsafePointer(to: &SoftBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -950,6 +985,7 @@ open class SoftBody3D: MeshInstance3D {
     
     @inline(__always)
     fileprivate final func is_ray_pickable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SoftBody3D.method_is_ray_pickable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

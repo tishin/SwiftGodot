@@ -40,7 +40,7 @@ import Musl
 /// See ``Texture2DArray`` for a general description of texture arrays.
 /// 
 open class CompressedTexture2DArray: CompressedTextureLayered {
-    fileprivate static var className = StringName("CompressedTexture2DArray")
+    private static var className = StringName("CompressedTexture2DArray")
     override open class var godotClassName: StringName { className }
 }
 

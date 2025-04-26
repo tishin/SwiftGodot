@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Input event type for gamepad buttons. For gamepad analog sticks and joysticks, see ``InputEventJoypadMotion``.
 open class InputEventJoypadButton: InputEvent {
-    fileprivate static var className = StringName("InputEventJoypadButton")
+    private static var className = StringName("InputEventJoypadButton")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -64,8 +64,8 @@ open class InputEventJoypadButton: InputEvent {
     }
     
     /* Methods */
-    fileprivate static var method_set_button_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_button_index")
+    fileprivate static let method_set_button_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_button_index")
         return withUnsafePointer(to: &InputEventJoypadButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1466368136)!
@@ -77,6 +77,7 @@ open class InputEventJoypadButton: InputEvent {
     
     @inline(__always)
     fileprivate final func set_button_index(_ buttonIndex: JoyButton) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: buttonIndex.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -90,8 +91,8 @@ open class InputEventJoypadButton: InputEvent {
         
     }
     
-    fileprivate static var method_get_button_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_button_index")
+    fileprivate static let method_get_button_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_button_index")
         return withUnsafePointer(to: &InputEventJoypadButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 595588182)!
@@ -103,13 +104,14 @@ open class InputEventJoypadButton: InputEvent {
     
     @inline(__always)
     fileprivate final func get_button_index() -> JoyButton {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventJoypadButton.method_get_button_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return JoyButton (rawValue: _result)!
     }
     
-    fileprivate static var method_set_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressure")
+    fileprivate static let method_set_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressure")
         return withUnsafePointer(to: &InputEventJoypadButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -121,6 +123,7 @@ open class InputEventJoypadButton: InputEvent {
     
     @inline(__always)
     fileprivate final func set_pressure(_ pressure: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -134,8 +137,8 @@ open class InputEventJoypadButton: InputEvent {
         
     }
     
-    fileprivate static var method_get_pressure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pressure")
+    fileprivate static let method_get_pressure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pressure")
         return withUnsafePointer(to: &InputEventJoypadButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -147,13 +150,14 @@ open class InputEventJoypadButton: InputEvent {
     
     @inline(__always)
     fileprivate final func get_pressure() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(InputEventJoypadButton.method_get_pressure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressed")
+    fileprivate static let method_set_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressed")
         return withUnsafePointer(to: &InputEventJoypadButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -165,6 +169,7 @@ open class InputEventJoypadButton: InputEvent {
     
     @inline(__always)
     fileprivate final func set_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

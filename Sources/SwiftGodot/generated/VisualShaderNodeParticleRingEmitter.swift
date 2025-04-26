@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``VisualShaderNodeParticleEmitter`` that makes the particles emitted in ring shape with the specified inner and outer radii and height.
 open class VisualShaderNodeParticleRingEmitter: VisualShaderNodeParticleEmitter {
-    fileprivate static var className = StringName("VisualShaderNodeParticleRingEmitter")
+    private static var className = StringName("VisualShaderNodeParticleRingEmitter")
     override open class var godotClassName: StringName { className }
 }
 

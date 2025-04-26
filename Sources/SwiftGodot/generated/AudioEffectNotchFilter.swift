@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Attenuates frequencies in a narrow band around the ``AudioEffectFilter/cutoffHz`` and cuts frequencies outside of this range.
 open class AudioEffectNotchFilter: AudioEffectFilter {
-    fileprivate static var className = StringName("AudioEffectNotchFilter")
+    private static var className = StringName("AudioEffectNotchFilter")
     override open class var godotClassName: StringName { className }
 }
 

@@ -28,10 +28,10 @@ import Musl
 /// 
 /// - ``finished``
 open class Tweener: RefCounted {
-    fileprivate static var className = StringName("Tweener")
+    private static var className = StringName("Tweener")
     override open class var godotClassName: StringName { className }
     // Signals 
-    /// Emitted when the ``Tweener`` has just finished its job.
+    /// Emitted when the ``Tweener`` has just finished its job or became invalid (e.g. due to a freed object).
     ///
     /// To connect to this signal, reference this property and call the
     /// 

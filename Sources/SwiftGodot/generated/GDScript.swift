@@ -28,11 +28,11 @@ import Musl
 /// If you are looking for GDScript's built-in functions, see [@GDScript] instead.
 /// 
 open class GDScript: Script {
-    fileprivate static var className = StringName("GDScript")
+    private static var className = StringName("GDScript")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_new: GDExtensionMethodBindPtr = {
-        let methodName = StringName("new")
+    fileprivate static let method_new: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("new")
         return withUnsafePointer(to: &GDScript.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1545262638)!
@@ -44,9 +44,8 @@ open class GDScript: Script {
     
     /// Returns a new instance of the script.
     /// 
-    /// For example:
-    /// 
     public final func new(_ arguments: Variant?...) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         if arguments.isEmpty {
             gi.object_method_bind_call(GDScript.method_new, UnsafeMutableRawPointer(mutating: handle), nil, 0, &_result, nil) // no arguments

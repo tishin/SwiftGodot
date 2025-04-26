@@ -29,11 +29,11 @@ import Musl
 /// 
 /// - ``scriptCreated``
 open class ScriptCreateDialog: ConfirmationDialog {
-    fileprivate static var className = StringName("ScriptCreateDialog")
+    private static var className = StringName("ScriptCreateDialog")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_config: GDExtensionMethodBindPtr = {
-        let methodName = StringName("config")
+    fileprivate static let method_config: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("config")
         return withUnsafePointer(to: &ScriptCreateDialog.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 869314288)!
@@ -45,6 +45,7 @@ open class ScriptCreateDialog: ConfirmationDialog {
     
     /// Prefills required fields to configure the ScriptCreateDialog for use.
     public final func config(inherits: String, path: String, builtInEnabled: Bool = true, loadEnabled: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let inherits = GString(inherits)
         withUnsafePointer(to: inherits.content) { pArg0 in
             let path = GString(path)

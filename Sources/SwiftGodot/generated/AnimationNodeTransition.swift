@@ -28,7 +28,7 @@ import Musl
 /// > Note: When using a cross-fade, `current_state` and `current_index` change to the next state immediately after the cross-fade begins.
 /// 
 open class AnimationNodeTransition: AnimationNodeSync {
-    fileprivate static var className = StringName("AnimationNodeTransition")
+    private static var className = StringName("AnimationNodeTransition")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -48,7 +48,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    /// Determines how cross-fading between animations is eased. If empty, the transition will be linear.
+    /// Determines how cross-fading between animations is eased. If empty, the transition will be linear. Should be a unit ``Curve``.
     final public var xfadeCurve: Curve? {
         get {
             return get_xfade_curve ()
@@ -85,8 +85,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
     }
     
     /* Methods */
-    fileprivate static var method_set_input_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_count")
+    fileprivate static let method_set_input_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_count")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -98,6 +98,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_input_count(_ inputCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: inputCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -111,8 +112,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_set_input_as_auto_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_as_auto_advance")
+    fileprivate static let method_set_input_as_auto_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_as_auto_advance")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -124,6 +125,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     /// Enables or disables auto-advance for the given `input` index. If enabled, state changes to the next input after playing the animation once. If enabled for the last input state, it loops to the first.
     public final func setInputAsAutoAdvance(input: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -140,8 +142,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_is_input_set_as_auto_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_input_set_as_auto_advance")
+    fileprivate static let method_is_input_set_as_auto_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_input_set_as_auto_advance")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -153,6 +155,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     /// Returns `true` if auto-advance is enabled for the given `input` index.
     public final func isInputSetAsAutoAdvance(input: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -167,8 +170,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         return _result
     }
     
-    fileprivate static var method_set_input_break_loop_at_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_break_loop_at_end")
+    fileprivate static let method_set_input_break_loop_at_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_break_loop_at_end")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -180,6 +183,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     /// If `true`, breaks the loop at the end of the loop cycle for transition, even if the animation is looping.
     public final func setInputBreakLoopAtEnd(input: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -196,8 +200,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_is_input_loop_broken_at_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_input_loop_broken_at_end")
+    fileprivate static let method_is_input_loop_broken_at_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_input_loop_broken_at_end")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -209,6 +213,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     /// Returns whether the animation breaks the loop at the end of the loop cycle for transition.
     public final func isInputLoopBrokenAtEnd(input: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -223,8 +228,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         return _result
     }
     
-    fileprivate static var method_set_input_reset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_reset")
+    fileprivate static let method_set_input_reset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_reset")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -236,6 +241,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     /// If `true`, the destination animation is restarted when the animation transitions.
     public final func setInputReset(input: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -252,8 +258,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_is_input_reset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_input_reset")
+    fileprivate static let method_is_input_reset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_input_reset")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -265,6 +271,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     /// Returns whether the animation restarts when the animation transitions from the other animation.
     public final func isInputReset(input: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -279,8 +286,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         return _result
     }
     
-    fileprivate static var method_set_xfade_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_xfade_time")
+    fileprivate static let method_set_xfade_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_xfade_time")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -292,6 +299,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_xfade_time(_ time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -305,8 +313,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_xfade_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_xfade_time")
+    fileprivate static let method_get_xfade_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_xfade_time")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -318,13 +326,14 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_xfade_time() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimationNodeTransition.method_get_xfade_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_xfade_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_xfade_curve")
+    fileprivate static let method_set_xfade_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_xfade_curve")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -336,6 +345,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_xfade_curve(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -349,8 +359,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_get_xfade_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_xfade_curve")
+    fileprivate static let method_get_xfade_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_xfade_curve")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -362,13 +372,14 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func get_xfade_curve() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AnimationNodeTransition.method_get_xfade_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_allow_transition_to_self: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_transition_to_self")
+    fileprivate static let method_set_allow_transition_to_self: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_transition_to_self")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -380,6 +391,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func set_allow_transition_to_self(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -393,8 +405,8 @@ open class AnimationNodeTransition: AnimationNodeSync {
         
     }
     
-    fileprivate static var method_is_allow_transition_to_self: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_allow_transition_to_self")
+    fileprivate static let method_is_allow_transition_to_self: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_allow_transition_to_self")
         return withUnsafePointer(to: &AnimationNodeTransition.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -406,6 +418,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     
     @inline(__always)
     fileprivate final func is_allow_transition_to_self() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_allow_transition_to_self, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

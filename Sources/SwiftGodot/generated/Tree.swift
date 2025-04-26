@@ -49,7 +49,7 @@ import Musl
 /// - ``columnTitleClicked``
 /// - ``nothingSelected``
 open class Tree: Control {
-    fileprivate static var className = StringName("Tree")
+    private static var className = StringName("Tree")
     override open class var godotClassName: StringName { className }
     public enum SelectMode: Int64, CaseIterable {
         /// Allows selection of a single cell at a time. From the perspective of items, only a single item is allowed to be selected. And there is only one column selected in the selected item.
@@ -237,9 +237,21 @@ open class Tree: Control {
         
     }
     
+    /// If `true`, tree items with no tooltip assigned display their text as their tooltip. See also ``TreeItem/getTooltipText(column:)`` and ``TreeItem/getButtonTooltipText(column:buttonIndex:)``.
+    final public var autoTooltip: Bool {
+        get {
+            return is_auto_tooltip_enabled ()
+        }
+        
+        set {
+            set_auto_tooltip (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -251,12 +263,13 @@ open class Tree: Control {
     
     /// Clears the tree. This removes all items.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Tree.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_create_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_item")
+    fileprivate static let method_create_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_item")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 528467046)!
@@ -273,6 +286,7 @@ open class Tree: Control {
     /// The new item will be the `index`-th child of parent, or it will be the last child if there are not enough siblings.
     /// 
     public final func createItem(parent: TreeItem? = nil, index: Int32 = -1) -> TreeItem? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: parent?.handle) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
@@ -287,11 +301,11 @@ open class Tree: Control {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_root: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root")
+    fileprivate static let method_get_root: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1514277247)!
@@ -303,13 +317,14 @@ open class Tree: Control {
     
     /// Returns the tree's root item, or `null` if the tree is empty.
     public final func getRoot() -> TreeItem? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Tree.method_get_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_column_custom_minimum_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_custom_minimum_width")
+    fileprivate static let method_set_column_custom_minimum_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_custom_minimum_width")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -321,6 +336,7 @@ open class Tree: Control {
     
     /// Overrides the calculated minimum width of a column. It can be set to `0` to restore the default behavior. Columns that have the "Expand" flag will use their "min_width" in a similar fashion to ``Control/sizeFlagsStretchRatio``.
     public final func setColumnCustomMinimumWidth(column: Int32, minWidth: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: minWidth) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -337,8 +353,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_set_column_expand: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_expand")
+    fileprivate static let method_set_column_expand: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_expand")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -350,6 +366,7 @@ open class Tree: Control {
     
     /// If `true`, the column will have the "Expand" flag of ``Control``. Columns that have the "Expand" flag will use their expand ratio in a similar fashion to ``Control/sizeFlagsStretchRatio`` (see ``setColumnExpandRatio(column:ratio:)``).
     public final func setColumnExpand(column: Int32, expand: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: expand) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -366,8 +383,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_set_column_expand_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_expand_ratio")
+    fileprivate static let method_set_column_expand_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_expand_ratio")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -379,6 +396,7 @@ open class Tree: Control {
     
     /// Sets the relative expand ratio for a column. See ``setColumnExpand(column:expand:)``.
     public final func setColumnExpandRatio(column: Int32, ratio: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -395,8 +413,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_set_column_clip_content: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_clip_content")
+    fileprivate static let method_set_column_clip_content: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_clip_content")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -408,6 +426,7 @@ open class Tree: Control {
     
     /// Allows to enable clipping for column's content, making the content size ignored.
     public final func setColumnClipContent(column: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -424,8 +443,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_is_column_expanding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_column_expanding")
+    fileprivate static let method_is_column_expanding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_column_expanding")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -437,6 +456,7 @@ open class Tree: Control {
     
     /// Returns `true` if the column has enabled expanding (see ``setColumnExpand(column:expand:)``).
     public final func isColumnExpanding(column: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -451,8 +471,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_is_column_clipping_content: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_column_clipping_content")
+    fileprivate static let method_is_column_clipping_content: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_column_clipping_content")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -464,6 +484,7 @@ open class Tree: Control {
     
     /// Returns `true` if the column has enabled clipping (see ``setColumnClipContent(column:enable:)``).
     public final func isColumnClippingContent(column: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -478,8 +499,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_get_column_expand_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_column_expand_ratio")
+    fileprivate static let method_get_column_expand_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_column_expand_ratio")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -491,6 +512,7 @@ open class Tree: Control {
     
     /// Returns the expand ratio assigned to the column.
     public final func getColumnExpandRatio(column: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -505,8 +527,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_get_column_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_column_width")
+    fileprivate static let method_get_column_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_column_width")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -518,6 +540,7 @@ open class Tree: Control {
     
     /// Returns the column's width in pixels.
     public final func getColumnWidth(column: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -532,8 +555,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_set_hide_root: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hide_root")
+    fileprivate static let method_set_hide_root: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hide_root")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -545,6 +568,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_hide_root(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -558,8 +582,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_is_root_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_root_hidden")
+    fileprivate static let method_is_root_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_root_hidden")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -571,13 +595,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func is_root_hidden() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_is_root_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_next_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_next_selected")
+    fileprivate static let method_get_next_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next_selected")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 873446299)!
@@ -592,6 +617,7 @@ open class Tree: Control {
     /// If `from` is `null`, this returns the first selected item.
     /// 
     public final func getNextSelected(from: TreeItem?) -> TreeItem? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: from?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -603,11 +629,11 @@ open class Tree: Control {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected")
+    fileprivate static let method_get_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1514277247)!
@@ -624,13 +650,14 @@ open class Tree: Control {
     /// To get the currently selected item(s), use ``getNextSelected(from:)``.
     /// 
     public final func getSelected() -> TreeItem? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Tree.method_get_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selected")
+    fileprivate static let method_set_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selected")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2662547442)!
@@ -642,6 +669,7 @@ open class Tree: Control {
     
     /// Selects the specified ``TreeItem`` and column.
     public final func setSelected(item: TreeItem?, column: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: item?.handle) { pArg0 in
             withUnsafePointer(to: column) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -658,8 +686,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_selected_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected_column")
+    fileprivate static let method_get_selected_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected_column")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -676,13 +704,14 @@ open class Tree: Control {
     /// To tell whether a column of an item is selected, use ``TreeItem/isSelected(column:)``.
     /// 
     public final func getSelectedColumn() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Tree.method_get_selected_column, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_pressed_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pressed_button")
+    fileprivate static let method_get_pressed_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pressed_button")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -694,13 +723,14 @@ open class Tree: Control {
     
     /// Returns the last pressed button's index.
     public final func getPressedButton() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Tree.method_get_pressed_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_select_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_select_mode")
+    fileprivate static let method_set_select_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_select_mode")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3223887270)!
@@ -712,6 +742,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_select_mode(_ mode: Tree.SelectMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -725,8 +756,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_select_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_select_mode")
+    fileprivate static let method_get_select_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_select_mode")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 100748571)!
@@ -738,13 +769,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func get_select_mode() -> Tree.SelectMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Tree.method_get_select_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Tree.SelectMode (rawValue: _result)!
     }
     
-    fileprivate static var method_deselect_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("deselect_all")
+    fileprivate static let method_deselect_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("deselect_all")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -756,12 +788,13 @@ open class Tree: Control {
     
     /// Deselects all tree items (rows and columns). In ``SelectMode/multi`` mode also removes selection cursor.
     public final func deselectAll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Tree.method_deselect_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_columns")
+    fileprivate static let method_set_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_columns")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -773,6 +806,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_columns(_ amount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -786,8 +820,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_columns")
+    fileprivate static let method_get_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_columns")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -799,13 +833,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func get_columns() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Tree.method_get_columns, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_edited: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edited")
+    fileprivate static let method_get_edited: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edited")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1514277247)!
@@ -818,13 +853,14 @@ open class Tree: Control {
     /// Returns the currently edited item. Can be used with [signal item_edited] to get the item that was modified.
     /// 
     public final func getEdited() -> TreeItem? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Tree.method_get_edited, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_edited_column: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edited_column")
+    fileprivate static let method_get_edited_column: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edited_column")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -836,13 +872,14 @@ open class Tree: Control {
     
     /// Returns the column for the currently edited item.
     public final func getEditedColumn() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Tree.method_get_edited_column, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_edit_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("edit_selected")
+    fileprivate static let method_edit_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("edit_selected")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2595650253)!
@@ -859,6 +896,7 @@ open class Tree: Control {
     /// Returns `true` if the item could be edited. Fails if no item is selected.
     /// 
     public final func editSelected(forceEdit: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: forceEdit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -873,8 +911,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_get_custom_popup_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_popup_rect")
+    fileprivate static let method_get_custom_popup_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_popup_rect")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -886,13 +924,14 @@ open class Tree: Control {
     
     /// Returns the rectangle for custom popups. Helper to create custom cell controls that display a popup. See ``TreeItem/setCellMode(column:mode:)``.
     public final func getCustomPopupRect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(Tree.method_get_custom_popup_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_item_area_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_area_rect")
+    fileprivate static let method_get_item_area_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_area_rect")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 47968679)!
@@ -904,6 +943,7 @@ open class Tree: Control {
     
     /// Returns the rectangle area for the specified ``TreeItem``. If `column` is specified, only get the position and size of that column, otherwise get the rectangle containing all columns. If a button index is specified, the rectangle of that button will be returned.
     public final func getItemAreaRect(item: TreeItem?, column: Int32 = -1, buttonIndex: Int32 = -1) -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         withUnsafePointer(to: item?.handle) { pArg0 in
             withUnsafePointer(to: column) { pArg1 in
@@ -924,8 +964,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_get_item_at_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_at_position")
+    fileprivate static let method_get_item_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_at_position")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4193340126)!
@@ -937,6 +977,7 @@ open class Tree: Control {
     
     /// Returns the tree item at the specified position (relative to the tree origin position).
     public final func getItemAtPosition(_ position: Vector2) -> TreeItem? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -948,11 +989,11 @@ open class Tree: Control {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_column_at_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_column_at_position")
+    fileprivate static let method_get_column_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_column_at_position")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3820158470)!
@@ -964,6 +1005,7 @@ open class Tree: Control {
     
     /// Returns the column index at `position`, or -1 if no item is there.
     public final func getColumnAtPosition(_ position: Vector2) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -978,8 +1020,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_get_drop_section_at_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_drop_section_at_position")
+    fileprivate static let method_get_drop_section_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_drop_section_at_position")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3820158470)!
@@ -996,6 +1038,7 @@ open class Tree: Control {
     /// To get the item which the returned drop section is relative to, use ``getItemAtPosition(_:)``.
     /// 
     public final func getDropSectionAtPosition(_ position: Vector2) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1010,8 +1053,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_get_button_id_at_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_button_id_at_position")
+    fileprivate static let method_get_button_id_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_button_id_at_position")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3820158470)!
@@ -1023,6 +1066,7 @@ open class Tree: Control {
     
     /// Returns the button ID at `position`, or -1 if no button is there.
     public final func getButtonIdAtPosition(_ position: Vector2) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1037,8 +1081,8 @@ open class Tree: Control {
         return _result
     }
     
-    fileprivate static var method_ensure_cursor_is_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ensure_cursor_is_visible")
+    fileprivate static let method_ensure_cursor_is_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ensure_cursor_is_visible")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1055,12 +1099,13 @@ open class Tree: Control {
     /// > Note: Despite the name of this method, the focus cursor itself is only visible in ``SelectMode/multi`` mode.
     /// 
     public final func ensureCursorIsVisible() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Tree.method_ensure_cursor_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_column_titles_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_titles_visible")
+    fileprivate static let method_set_column_titles_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_titles_visible")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1072,6 +1117,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_column_titles_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1085,8 +1131,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_are_column_titles_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("are_column_titles_visible")
+    fileprivate static let method_are_column_titles_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("are_column_titles_visible")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1098,13 +1144,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func are_column_titles_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_are_column_titles_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_column_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_title")
+    fileprivate static let method_set_column_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_title")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -1116,6 +1163,7 @@ open class Tree: Control {
     
     /// Sets the title of a column.
     public final func setColumnTitle(column: Int32, title: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             let title = GString(title)
             withUnsafePointer(to: title.content) { pArg1 in
@@ -1133,8 +1181,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_column_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_column_title")
+    fileprivate static let method_get_column_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_column_title")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -1146,6 +1194,7 @@ open class Tree: Control {
     
     /// Returns the column's title.
     public final func getColumnTitle(column: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1160,8 +1209,8 @@ open class Tree: Control {
         return _result.description
     }
     
-    fileprivate static var method_set_column_title_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_title_alignment")
+    fileprivate static let method_set_column_title_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_title_alignment")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3276431499)!
@@ -1173,6 +1222,7 @@ open class Tree: Control {
     
     /// Sets the column title alignment. Note that ``@GlobalScope.HORIZONTAL_ALIGNMENT_FILL`` is not supported for column titles.
     public final func setColumnTitleAlignment(column: Int32, titleAlignment: HorizontalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: titleAlignment.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1189,8 +1239,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_column_title_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_column_title_alignment")
+    fileprivate static let method_get_column_title_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_column_title_alignment")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4171562184)!
@@ -1202,6 +1252,7 @@ open class Tree: Control {
     
     /// Returns the column title alignment.
     public final func getColumnTitleAlignment(column: Int32) -> HorizontalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1216,8 +1267,8 @@ open class Tree: Control {
         return HorizontalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_column_title_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_title_direction")
+    fileprivate static let method_set_column_title_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_title_direction")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1707680378)!
@@ -1229,6 +1280,7 @@ open class Tree: Control {
     
     /// Sets column title base writing direction.
     public final func setColumnTitleDirection(column: Int32, direction: Control.TextDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1245,8 +1297,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_column_title_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_column_title_direction")
+    fileprivate static let method_get_column_title_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_column_title_direction")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4235602388)!
@@ -1258,6 +1310,7 @@ open class Tree: Control {
     
     /// Returns column title base writing direction.
     public final func getColumnTitleDirection(column: Int32) -> Control.TextDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1272,8 +1325,8 @@ open class Tree: Control {
         return Control.TextDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_column_title_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_column_title_language")
+    fileprivate static let method_set_column_title_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_column_title_language")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -1285,6 +1338,7 @@ open class Tree: Control {
     
     /// Sets language code of column title used for line-breaking and text shaping algorithms, if left empty current locale is used instead.
     public final func setColumnTitleLanguage(column: Int32, language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: column) { pArg0 in
             let language = GString(language)
             withUnsafePointer(to: language.content) { pArg1 in
@@ -1302,8 +1356,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_column_title_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_column_title_language")
+    fileprivate static let method_get_column_title_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_column_title_language")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -1315,6 +1369,7 @@ open class Tree: Control {
     
     /// Returns column title language code.
     public final func getColumnTitleLanguage(column: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1329,8 +1384,8 @@ open class Tree: Control {
         return _result.description
     }
     
-    fileprivate static var method_get_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scroll")
+    fileprivate static let method_get_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scroll")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1342,13 +1397,14 @@ open class Tree: Control {
     
     /// Returns the current scrolling position.
     public final func getScroll() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Tree.method_get_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_scroll_to_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scroll_to_item")
+    fileprivate static let method_scroll_to_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scroll_to_item")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1314737213)!
@@ -1360,6 +1416,7 @@ open class Tree: Control {
     
     /// Causes the ``Tree`` to jump to the specified ``TreeItem``.
     public final func scrollToItem(_ item: TreeItem?, centerOnItem: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: item?.handle) { pArg0 in
             withUnsafePointer(to: centerOnItem) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1376,8 +1433,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_set_h_scroll_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_h_scroll_enabled")
+    fileprivate static let method_set_h_scroll_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_h_scroll_enabled")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1389,6 +1446,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_h_scroll_enabled(_ hScroll: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hScroll) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1402,8 +1460,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_is_h_scroll_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_h_scroll_enabled")
+    fileprivate static let method_is_h_scroll_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_h_scroll_enabled")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1415,13 +1473,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func is_h_scroll_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_is_h_scroll_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_v_scroll_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_scroll_enabled")
+    fileprivate static let method_set_v_scroll_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_scroll_enabled")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1433,6 +1492,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_v_scroll_enabled(_ hScroll: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hScroll) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1446,8 +1506,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_is_v_scroll_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_v_scroll_enabled")
+    fileprivate static let method_is_v_scroll_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_v_scroll_enabled")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1459,13 +1519,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func is_v_scroll_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_is_v_scroll_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hide_folding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hide_folding")
+    fileprivate static let method_set_hide_folding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hide_folding")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1477,6 +1538,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_hide_folding(_ hide: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hide) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1490,8 +1552,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_is_folding_hidden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_folding_hidden")
+    fileprivate static let method_is_folding_hidden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_folding_hidden")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1503,13 +1565,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func is_folding_hidden() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_is_folding_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_recursive_folding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_recursive_folding")
+    fileprivate static let method_set_enable_recursive_folding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_recursive_folding")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1521,6 +1584,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_enable_recursive_folding(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1534,8 +1598,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_is_recursive_folding_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_recursive_folding_enabled")
+    fileprivate static let method_is_recursive_folding_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_recursive_folding_enabled")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1547,13 +1611,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func is_recursive_folding_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_is_recursive_folding_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_drop_mode_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_drop_mode_flags")
+    fileprivate static let method_set_drop_mode_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_drop_mode_flags")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1565,6 +1630,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_drop_mode_flags(_ flags: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1578,8 +1644,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_drop_mode_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_drop_mode_flags")
+    fileprivate static let method_get_drop_mode_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_drop_mode_flags")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1591,13 +1657,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func get_drop_mode_flags() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Tree.method_get_drop_mode_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_rmb_select: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_rmb_select")
+    fileprivate static let method_set_allow_rmb_select: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_rmb_select")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1609,6 +1676,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_allow_rmb_select(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1622,8 +1690,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_allow_rmb_select: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_rmb_select")
+    fileprivate static let method_get_allow_rmb_select: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_rmb_select")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1635,13 +1703,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func get_allow_rmb_select() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_get_allow_rmb_select, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_reselect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_reselect")
+    fileprivate static let method_set_allow_reselect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_reselect")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1653,6 +1722,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_allow_reselect(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1666,8 +1736,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_allow_reselect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_reselect")
+    fileprivate static let method_get_allow_reselect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_reselect")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1679,13 +1749,14 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func get_allow_reselect() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_get_allow_reselect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_search")
+    fileprivate static let method_set_allow_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_search")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1697,6 +1768,7 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func set_allow_search(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1710,8 +1782,8 @@ open class Tree: Control {
         
     }
     
-    fileprivate static var method_get_allow_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_search")
+    fileprivate static let method_get_allow_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_search")
         return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1723,8 +1795,55 @@ open class Tree: Control {
     
     @inline(__always)
     fileprivate final func get_allow_search() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Tree.method_get_allow_search, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_auto_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_tooltip")
+        return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_auto_tooltip(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Tree.method_set_auto_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_auto_tooltip_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_auto_tooltip_enabled")
+        return withUnsafePointer(to: &Tree.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_auto_tooltip_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(Tree.method_is_auto_tooltip_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     

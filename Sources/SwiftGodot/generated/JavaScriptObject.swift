@@ -23,12 +23,10 @@ import Musl
 /// 
 /// JavaScriptObject is used to interact with JavaScript objects retrieved or created via ``JavaScriptBridge/getInterface(_:)``, ``JavaScriptBridge/createObject(_:)``, or ``JavaScriptBridge/createCallback(callable:)``.
 /// 
-/// **Example:**
-/// 
 /// > Note: Only available in the Web platform.
 /// 
 open class JavaScriptObject: RefCounted {
-    fileprivate static var className = StringName("JavaScriptObject")
+    private static var className = StringName("JavaScriptObject")
     override open class var godotClassName: StringName { className }
 }
 

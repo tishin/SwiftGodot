@@ -20,7 +20,7 @@ import Musl
 
 
 open class EditorSceneFormatImporterGLTF: EditorSceneFormatImporter {
-    fileprivate static var className = StringName("EditorSceneFormatImporterGLTF")
+    private static var className = StringName("EditorSceneFormatImporterGLTF")
     override open class var godotClassName: StringName { className }
 }
 

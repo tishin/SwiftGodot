@@ -26,7 +26,7 @@ import Musl
 /// > Note: Godot on Web is rendered inside a `<canvas>` tag. Normally, the canvas cannot be positioned or resized manually, but otherwise acts as the main ``Window`` of the application.
 /// 
 open class EditorExportPlatformWeb: EditorExportPlatform {
-    fileprivate static var className = StringName("EditorExportPlatformWeb")
+    private static var className = StringName("EditorExportPlatformWeb")
     override open class var godotClassName: StringName { className }
 }
 

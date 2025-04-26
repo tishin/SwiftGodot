@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Base resource type for all video streams. Classes that derive from ``VideoStream`` can all be used as resource types to play back videos in ``VideoStreamPlayer``.
 open class VideoStream: Resource {
-    fileprivate static var className = StringName("VideoStream")
+    private static var className = StringName("VideoStream")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,14 +44,28 @@ open class VideoStream: Resource {
     }
     
     /* Methods */
+    fileprivate static let method__instantiate_playback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_instantiate_playback")
+        return withUnsafePointer(to: &VideoStream.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 294648086)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called when the video starts playing, to initialize and return a subclass of ``VideoStreamPlayback``.
     @_documentation(visibility: public)
     open func _instantiatePlayback() -> VideoStreamPlayback? {
-        return VideoStreamPlayback ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(VideoStream.method__instantiate_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_file")
+    fileprivate static let method_set_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_file")
         return withUnsafePointer(to: &VideoStream.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -63,6 +77,7 @@ open class VideoStream: Resource {
     
     @inline(__always)
     fileprivate final func set_file(_ file: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let file = GString(file)
         withUnsafePointer(to: file.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -77,8 +92,8 @@ open class VideoStream: Resource {
         
     }
     
-    fileprivate static var method_get_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file")
+    fileprivate static let method_get_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file")
         return withUnsafePointer(to: &VideoStream.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -90,12 +105,13 @@ open class VideoStream: Resource {
     
     @inline(__always)
     fileprivate final func get_file() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VideoStream.method_get_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_instantiate_playback":
@@ -111,7 +127,8 @@ open class VideoStream: Resource {
 // Support methods for proxies
 func _VideoStream_proxy_instantiate_playback (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStream>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStream else { return }
     let ret = swiftObject._instantiatePlayback ()
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // VideoStreamPlayback
 }

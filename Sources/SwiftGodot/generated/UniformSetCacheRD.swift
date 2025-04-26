@@ -23,11 +23,11 @@ import Musl
 /// 
 /// Uniform set cache manager for Rendering Device based renderers. Provides a way to create a uniform set and reuse it in subsequent calls for as long as the uniform set exists. Uniform set will automatically be cleaned up when dependent objects are freed.
 open class UniformSetCacheRD: Object {
-    fileprivate static var className = StringName("UniformSetCacheRD")
+    private static var className = StringName("UniformSetCacheRD")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache")
+    fileprivate static let method_get_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache")
         return withUnsafePointer(to: &UniformSetCacheRD.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 658571723)!
@@ -38,7 +38,7 @@ open class UniformSetCacheRD: Object {
     }()
     
     /// Creates/returns a cached uniform set based on the provided uniforms for a given shader.
-    public static func getCache(shader: RID, set: UInt32, uniforms: ObjectCollection<RDUniform>) -> RID {
+    public static func getCache(shader: RID, set: UInt32, uniforms: TypedArray<RDUniform?>) -> RID {
         let _result: RID = RID ()
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: set) { pArg1 in

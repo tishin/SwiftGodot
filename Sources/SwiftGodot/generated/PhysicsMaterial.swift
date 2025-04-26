@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Holds physics-related properties of a surface, namely its roughness and bounciness. This class is used to apply these properties to a physics body.
 open class PhysicsMaterial: Resource {
-    fileprivate static var className = StringName("PhysicsMaterial")
+    private static var className = StringName("PhysicsMaterial")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -80,8 +80,8 @@ open class PhysicsMaterial: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_friction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_friction")
+    fileprivate static let method_set_friction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_friction")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -93,6 +93,7 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func set_friction(_ friction: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: friction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -106,8 +107,8 @@ open class PhysicsMaterial: Resource {
         
     }
     
-    fileprivate static var method_get_friction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_friction")
+    fileprivate static let method_get_friction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_friction")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -119,13 +120,14 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func get_friction() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsMaterial.method_get_friction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rough: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rough")
+    fileprivate static let method_set_rough: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rough")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -137,6 +139,7 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func set_rough(_ rough: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rough) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -150,8 +153,8 @@ open class PhysicsMaterial: Resource {
         
     }
     
-    fileprivate static var method_is_rough: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_rough")
+    fileprivate static let method_is_rough: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_rough")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -163,13 +166,14 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func is_rough() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsMaterial.method_is_rough, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bounce: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bounce")
+    fileprivate static let method_set_bounce: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bounce")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -181,6 +185,7 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func set_bounce(_ bounce: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bounce) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -194,8 +199,8 @@ open class PhysicsMaterial: Resource {
         
     }
     
-    fileprivate static var method_get_bounce: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bounce")
+    fileprivate static let method_get_bounce: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bounce")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -207,13 +212,14 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func get_bounce() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(PhysicsMaterial.method_get_bounce, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_absorbent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_absorbent")
+    fileprivate static let method_set_absorbent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_absorbent")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -225,6 +231,7 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func set_absorbent(_ absorbent: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: absorbent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -238,8 +245,8 @@ open class PhysicsMaterial: Resource {
         
     }
     
-    fileprivate static var method_is_absorbent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_absorbent")
+    fileprivate static let method_is_absorbent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_absorbent")
         return withUnsafePointer(to: &PhysicsMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -251,6 +258,7 @@ open class PhysicsMaterial: Resource {
     
     @inline(__always)
     fileprivate final func is_absorbent() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PhysicsMaterial.method_is_absorbent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

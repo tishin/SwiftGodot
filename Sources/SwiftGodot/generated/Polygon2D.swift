@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A Polygon2D is defined by a set of points. Each point is connected to the next, with the final point being connected to the first, resulting in a closed polygon. Polygon2Ds can be filled with color (solid or gradient) or filled with a given texture.
 open class Polygon2D: Node2D {
-    fileprivate static var className = StringName("Polygon2D")
+    private static var className = StringName("Polygon2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -185,7 +185,7 @@ open class Polygon2D: Node2D {
     }
     
     /// The list of polygons, in case more than one is being represented. Every individual polygon is stored as a ``PackedInt32Array`` where each integer is an index to a point in ``polygon``. If empty, this property will be ignored, and the resulting single polygon will be composed of all points in ``polygon``, using the order they are stored in.
-    final public var polygons: GArray {
+    final public var polygons: VariantArray {
         get {
             return get_polygons ()
         }
@@ -209,8 +209,8 @@ open class Polygon2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_polygon")
+    fileprivate static let method_set_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_polygon")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -222,6 +222,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_polygon(_ polygon: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -235,8 +236,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon")
+    fileprivate static let method_get_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -248,13 +249,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_polygon() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv")
+    fileprivate static let method_set_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -266,6 +268,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_uv(_ uv: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: uv.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -279,8 +282,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv")
+    fileprivate static let method_get_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -292,13 +295,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_uv() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_uv, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color")
+    fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -310,6 +314,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -323,8 +328,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color")
+    fileprivate static let method_get_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -336,13 +341,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_polygons")
+    fileprivate static let method_set_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_polygons")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -353,7 +359,8 @@ open class Polygon2D: Node2D {
     }()
     
     @inline(__always)
-    fileprivate final func set_polygons(_ polygons: GArray) {
+    fileprivate final func set_polygons(_ polygons: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygons.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -367,8 +374,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_polygons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygons")
+    fileprivate static let method_get_polygons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygons")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -379,14 +386,15 @@ open class Polygon2D: Node2D {
     }()
     
     @inline(__always)
-    fileprivate final func get_polygons() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_polygons() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_polygons, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_vertex_colors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertex_colors")
+    fileprivate static let method_set_vertex_colors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertex_colors")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3546319833)!
@@ -398,6 +406,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_vertex_colors(_ vertexColors: PackedColorArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertexColors.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -411,8 +420,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_vertex_colors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertex_colors")
+    fileprivate static let method_get_vertex_colors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertex_colors")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1392750486)!
@@ -424,13 +433,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_vertex_colors() -> PackedColorArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_vertex_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -442,6 +452,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -455,8 +466,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -468,13 +479,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Polygon2D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_offset")
+    fileprivate static let method_set_texture_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_offset")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -486,6 +498,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_texture_offset(_ textureOffset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: textureOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -499,8 +512,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_texture_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_offset")
+    fileprivate static let method_get_texture_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_offset")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -512,13 +525,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_texture_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_rotation")
+    fileprivate static let method_set_texture_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_rotation")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -530,6 +544,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_texture_rotation(_ textureRotation: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: textureRotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -543,8 +558,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_texture_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_rotation")
+    fileprivate static let method_get_texture_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_rotation")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -556,13 +571,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_texture_rotation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_scale")
+    fileprivate static let method_set_texture_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_scale")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -574,6 +590,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_texture_scale(_ textureScale: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: textureScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -587,8 +604,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_texture_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_scale")
+    fileprivate static let method_get_texture_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_scale")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -600,13 +617,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_texture_scale() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_invert_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_invert_enabled")
+    fileprivate static let method_set_invert_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_invert_enabled")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -618,6 +636,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_invert_enabled(_ invert: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: invert) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -631,8 +650,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_invert_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_invert_enabled")
+    fileprivate static let method_get_invert_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_invert_enabled")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -644,13 +663,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_invert_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Polygon2D.method_get_invert_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_antialiased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_antialiased")
+    fileprivate static let method_set_antialiased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_antialiased")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -662,6 +682,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_antialiased(_ antialiased: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: antialiased) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -675,8 +696,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_antialiased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_antialiased")
+    fileprivate static let method_get_antialiased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_antialiased")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -688,13 +709,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_antialiased() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Polygon2D.method_get_antialiased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_invert_border: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_invert_border")
+    fileprivate static let method_set_invert_border: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_invert_border")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -706,6 +728,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_invert_border(_ invertBorder: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: invertBorder) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -719,8 +742,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_invert_border: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_invert_border")
+    fileprivate static let method_get_invert_border: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_invert_border")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -732,13 +755,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_invert_border() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Polygon2D.method_get_invert_border, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -750,6 +774,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -763,8 +788,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -776,13 +801,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_bone")
+    fileprivate static let method_add_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_bone")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 703042815)!
@@ -794,6 +820,7 @@ open class Polygon2D: Node2D {
     
     /// Adds a bone with the specified `path` and `weights`.
     public final func addBone(path: NodePath, weights: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: weights.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -810,8 +837,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_bone_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_count")
+    fileprivate static let method_get_bone_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_count")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -823,13 +850,14 @@ open class Polygon2D: Node2D {
     
     /// Returns the number of bones in this ``Polygon2D``.
     public final func getBoneCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Polygon2D.method_get_bone_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_bone_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_path")
+    fileprivate static let method_get_bone_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_path")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 408788394)!
@@ -841,6 +869,7 @@ open class Polygon2D: Node2D {
     
     /// Returns the path to the node associated with the specified bone.
     public final func getBonePath(index: Int32) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -855,8 +884,8 @@ open class Polygon2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_bone_weights: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_weights")
+    fileprivate static let method_get_bone_weights: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_weights")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1542882410)!
@@ -868,6 +897,7 @@ open class Polygon2D: Node2D {
     
     /// Returns the weight values of the specified bone.
     public final func getBoneWeights(index: Int32) -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -882,8 +912,8 @@ open class Polygon2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_erase_bone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("erase_bone")
+    fileprivate static let method_erase_bone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("erase_bone")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -895,6 +925,7 @@ open class Polygon2D: Node2D {
     
     /// Removes the specified bone from this ``Polygon2D``.
     public final func eraseBone(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -908,8 +939,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_clear_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_bones")
+    fileprivate static let method_clear_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_bones")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -921,12 +952,13 @@ open class Polygon2D: Node2D {
     
     /// Removes all bones from this ``Polygon2D``.
     public final func clearBones() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Polygon2D.method_clear_bones, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_bone_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_path")
+    fileprivate static let method_set_bone_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_path")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761262315)!
@@ -938,6 +970,7 @@ open class Polygon2D: Node2D {
     
     /// Sets the path to the node associated with the specified bone.
     public final func setBonePath(index: Int32, path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -954,8 +987,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_set_bone_weights: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_weights")
+    fileprivate static let method_set_bone_weights: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_weights")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1345852415)!
@@ -967,6 +1000,7 @@ open class Polygon2D: Node2D {
     
     /// Sets the weight values for the specified bone.
     public final func setBoneWeights(index: Int32, weights: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: weights.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -983,8 +1017,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_set_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skeleton")
+    fileprivate static let method_set_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skeleton")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -996,6 +1030,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_skeleton(_ skeleton: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skeleton.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1009,8 +1044,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skeleton")
+    fileprivate static let method_get_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skeleton")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -1022,13 +1057,14 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_skeleton() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(Polygon2D.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_internal_vertex_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_internal_vertex_count")
+    fileprivate static let method_set_internal_vertex_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_internal_vertex_count")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1040,6 +1076,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_internal_vertex_count(_ internalVertexCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: internalVertexCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1053,8 +1090,8 @@ open class Polygon2D: Node2D {
         
     }
     
-    fileprivate static var method_get_internal_vertex_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_internal_vertex_count")
+    fileprivate static let method_get_internal_vertex_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_internal_vertex_count")
         return withUnsafePointer(to: &Polygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1066,6 +1103,7 @@ open class Polygon2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_internal_vertex_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Polygon2D.method_get_internal_vertex_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

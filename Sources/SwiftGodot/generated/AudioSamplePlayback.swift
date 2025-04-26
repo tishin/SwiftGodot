@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Meta class for playing back audio samples.
 open class AudioSamplePlayback: RefCounted {
-    fileprivate static var className = StringName("AudioSamplePlayback")
+    private static var className = StringName("AudioSamplePlayback")
     override open class var godotClassName: StringName { className }
 }
 

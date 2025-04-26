@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A multiplication operation on a transform (4×4 matrix) and a vector, with support for different multiplication operators.
 open class VisualShaderNodeTransformVecMult: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeTransformVecMult")
+    private static var className = StringName("VisualShaderNodeTransformVecMult")
     override open class var godotClassName: StringName { className }
     public enum Operator: Int64, CaseIterable {
         /// Multiplies transform `a` by the vector `b`.
@@ -54,8 +54,8 @@ open class VisualShaderNodeTransformVecMult: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_operator")
+    fileprivate static let method_set_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_operator")
         return withUnsafePointer(to: &VisualShaderNodeTransformVecMult.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1785665912)!
@@ -67,6 +67,7 @@ open class VisualShaderNodeTransformVecMult: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_operator(_ op: VisualShaderNodeTransformVecMult.Operator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: op.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -80,8 +81,8 @@ open class VisualShaderNodeTransformVecMult: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_operator")
+    fileprivate static let method_get_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_operator")
         return withUnsafePointer(to: &VisualShaderNodeTransformVecMult.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1622088722)!
@@ -93,6 +94,7 @@ open class VisualShaderNodeTransformVecMult: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_operator() -> VisualShaderNodeTransformVecMult.Operator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeTransformVecMult.method_get_operator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeTransformVecMult.Operator (rawValue: _result)!

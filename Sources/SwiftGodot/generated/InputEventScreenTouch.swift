@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Stores information about multi-touch press/release input events. Supports touch press, touch release and ``index`` for multi-touch count and order.
 open class InputEventScreenTouch: InputEventFromWindow {
-    fileprivate static var className = StringName("InputEventScreenTouch")
+    private static var className = StringName("InputEventScreenTouch")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -89,8 +89,8 @@ open class InputEventScreenTouch: InputEventFromWindow {
     }
     
     /* Methods */
-    fileprivate static var method_set_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_index")
+    fileprivate static let method_set_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_index")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -102,6 +102,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_index(_ index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -115,8 +116,8 @@ open class InputEventScreenTouch: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_index")
+    fileprivate static let method_get_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_index")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -128,13 +129,14 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_index() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventScreenTouch.method_get_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position")
+    fileprivate static let method_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -146,6 +148,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_position(_ position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -159,8 +162,8 @@ open class InputEventScreenTouch: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -172,13 +175,14 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func get_position() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventScreenTouch.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressed")
+    fileprivate static let method_set_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressed")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -190,6 +194,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -203,8 +208,8 @@ open class InputEventScreenTouch: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_set_canceled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_canceled")
+    fileprivate static let method_set_canceled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_canceled")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -216,6 +221,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_canceled(_ canceled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canceled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -229,8 +235,8 @@ open class InputEventScreenTouch: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_set_double_tap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_double_tap")
+    fileprivate static let method_set_double_tap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_double_tap")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -242,6 +248,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_double_tap(_ doubleTap: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: doubleTap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -255,8 +262,8 @@ open class InputEventScreenTouch: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_is_double_tap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_double_tap")
+    fileprivate static let method_is_double_tap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_double_tap")
         return withUnsafePointer(to: &InputEventScreenTouch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -268,6 +275,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func is_double_tap() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventScreenTouch.method_is_double_tap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

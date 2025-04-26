@@ -21,7 +21,7 @@ import Musl
 
 /// A rectangular region of 2D space that detects whether it is visible on screen.
 /// 
-/// ``VisibleOnScreenEnabler2D`` represents a rectangular region of 2D space. When any part of this region becomes visible on screen or in a viewport, it will emit a [signal screen_entered] signal, and likewise it will emit a [signal screen_exited] signal when no part of it remains visible.
+/// ``VisibleOnScreenNotifier2D`` represents a rectangular region of 2D space. When any part of this region becomes visible on screen or in a viewport, it will emit a [signal screen_entered] signal, and likewise it will emit a [signal screen_exited] signal when no part of it remains visible.
 /// 
 /// If you want a node to be enabled automatically when this region is visible on screen, use ``VisibleOnScreenEnabler2D``.
 /// 
@@ -34,7 +34,7 @@ import Musl
 /// - ``screenEntered``
 /// - ``screenExited``
 open class VisibleOnScreenNotifier2D: Node2D {
-    fileprivate static var className = StringName("VisibleOnScreenNotifier2D")
+    private static var className = StringName("VisibleOnScreenNotifier2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -52,8 +52,8 @@ open class VisibleOnScreenNotifier2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rect")
+    fileprivate static let method_set_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rect")
         return withUnsafePointer(to: &VisibleOnScreenNotifier2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -65,6 +65,7 @@ open class VisibleOnScreenNotifier2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_rect(_ rect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -78,8 +79,8 @@ open class VisibleOnScreenNotifier2D: Node2D {
         
     }
     
-    fileprivate static var method_get_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rect")
+    fileprivate static let method_get_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rect")
         return withUnsafePointer(to: &VisibleOnScreenNotifier2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -91,13 +92,14 @@ open class VisibleOnScreenNotifier2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_rect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_on_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_screen")
+    fileprivate static let method_is_on_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_screen")
         return withUnsafePointer(to: &VisibleOnScreenNotifier2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -112,6 +114,7 @@ open class VisibleOnScreenNotifier2D: Node2D {
     /// > Note: It takes one frame for the ``VisibleOnScreenNotifier2D``'s visibility to be determined once added to the scene tree, so this method will always return `false` right after it is instantiated, before the draw pass.
     /// 
     public final func isOnScreen() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_is_on_screen, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A ``StyleBox`` that displays a single line of a given color and thickness. The line can be either horizontal or vertical. Useful for separators.
 open class StyleBoxLine: StyleBox {
-    fileprivate static var className = StringName("StyleBoxLine")
+    private static var className = StringName("StyleBoxLine")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -89,8 +89,8 @@ open class StyleBoxLine: StyleBox {
     }
     
     /* Methods */
-    fileprivate static var method_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color")
+    fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -102,6 +102,7 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func set_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -115,8 +116,8 @@ open class StyleBoxLine: StyleBox {
         
     }
     
-    fileprivate static var method_get_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color")
+    fileprivate static let method_get_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -128,13 +129,14 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func get_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(StyleBoxLine.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_thickness")
+    fileprivate static let method_set_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_thickness")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -146,6 +148,7 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func set_thickness(_ thickness: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: thickness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -159,8 +162,8 @@ open class StyleBoxLine: StyleBox {
         
     }
     
-    fileprivate static var method_get_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_thickness")
+    fileprivate static let method_get_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_thickness")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -172,13 +175,14 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func get_thickness() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StyleBoxLine.method_get_thickness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_grow_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_grow_begin")
+    fileprivate static let method_set_grow_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_grow_begin")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -190,6 +194,7 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func set_grow_begin(_ offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -203,8 +208,8 @@ open class StyleBoxLine: StyleBox {
         
     }
     
-    fileprivate static var method_get_grow_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_grow_begin")
+    fileprivate static let method_get_grow_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_grow_begin")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -216,13 +221,14 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func get_grow_begin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(StyleBoxLine.method_get_grow_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_grow_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_grow_end")
+    fileprivate static let method_set_grow_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_grow_end")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -234,6 +240,7 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func set_grow_end(_ offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -247,8 +254,8 @@ open class StyleBoxLine: StyleBox {
         
     }
     
-    fileprivate static var method_get_grow_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_grow_end")
+    fileprivate static let method_get_grow_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_grow_end")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -260,13 +267,14 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func get_grow_end() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(StyleBoxLine.method_get_grow_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vertical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertical")
+    fileprivate static let method_set_vertical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -278,6 +286,7 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func set_vertical(_ vertical: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertical) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -291,8 +300,8 @@ open class StyleBoxLine: StyleBox {
         
     }
     
-    fileprivate static var method_is_vertical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_vertical")
+    fileprivate static let method_is_vertical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_vertical")
         return withUnsafePointer(to: &StyleBoxLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -304,6 +313,7 @@ open class StyleBoxLine: StyleBox {
     
     @inline(__always)
     fileprivate final func is_vertical() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(StyleBoxLine.method_is_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

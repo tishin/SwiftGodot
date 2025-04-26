@@ -26,20 +26,45 @@ import Musl
 /// In order for the node to be registered as an editor addon, you must use the `@tool` annotation and provide a `class_name` for your custom script. For example:
 /// 
 open class VisualShaderNodeCustom: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeCustom")
+    private static var className = StringName("VisualShaderNodeCustom")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /* Methods */
+    fileprivate static let method__get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_name")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
     /// Override this method to define the name of the associated custom node in the Visual Shader Editor's members dialog and graph.
     /// 
     /// Defining this method is **optional**, but recommended. If not overridden, the node will be named as "Unnamed".
     /// 
     @_documentation(visibility: public)
     open func _getName() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_description: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_description")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the description of the associated custom node in the Visual Shader Editor's members dialog.
     /// 
@@ -47,8 +72,22 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getDescription() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_description, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_category: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_category")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the path to the associated custom node in the Visual Shader Editor's members dialog. The path may look like `"MyGame/MyFunctions/Noise"`.
     /// 
@@ -56,8 +95,22 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getCategory() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_category, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_return_icon_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_return_icon_type")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1287173294)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the return icon of the associated custom node in the Visual Shader Editor's members dialog.
     /// 
@@ -65,8 +118,22 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getReturnIconType() -> VisualShaderNode.PortType {
-        return VisualShaderNode.PortType(rawValue: 0)!
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_return_icon_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return VisualShaderNode.PortType (rawValue: _result)!
     }
+    
+    fileprivate static let method__get_input_port_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_input_port_count")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the number of input ports of the associated custom node.
     /// 
@@ -74,8 +141,22 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getInputPortCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_input_port_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_input_port_type")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4102573379)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the returned type of each input port of the associated custom node (see ``VisualShaderNode.PortType`` for possible types).
     /// 
@@ -83,8 +164,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getInputPortType(port: Int32) -> VisualShaderNode.PortType {
-        return VisualShaderNode.PortType(rawValue: 0)!
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: port) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return VisualShaderNode.PortType (rawValue: _result)!
     }
+    
+    fileprivate static let method__get_input_port_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_input_port_name")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the names of input ports of the associated custom node. The names are used both for the input slots in the editor and as identifiers in the shader code, and are passed in the `input_vars` array in ``_getCode(inputVars:outputVars:mode:type:)``.
     /// 
@@ -92,8 +196,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getInputPortName(port: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: port) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_input_port_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_input_port_default_value")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the default value for the specified input port. Prefer use this over ``VisualShaderNode/setInputPortDefaultValue(port:value:prevValue:)``.
     /// 
@@ -101,8 +228,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getInputPortDefaultValue(port: Int32) -> Variant? {
-        return nil
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: port) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_default_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
     }
+    
+    fileprivate static let method__get_default_input_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_default_input_port")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1894493699)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the input port which should be connected by default when this node is created as a result of dragging a connection from an existing node to the empty space on the graph.
     /// 
@@ -110,8 +260,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getDefaultInputPort(type: VisualShaderNode.PortType) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: type.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_default_input_port, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_output_port_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_output_port_count")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the number of output ports of the associated custom node.
     /// 
@@ -119,8 +292,22 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getOutputPortCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_output_port_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_output_port_type")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4102573379)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the returned type of each output port of the associated custom node (see ``VisualShaderNode.PortType`` for possible types).
     /// 
@@ -128,8 +315,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getOutputPortType(port: Int32) -> VisualShaderNode.PortType {
-        return VisualShaderNode.PortType(rawValue: 0)!
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: port) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return VisualShaderNode.PortType (rawValue: _result)!
     }
+    
+    fileprivate static let method__get_output_port_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_output_port_name")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the names of output ports of the associated custom node. The names are used both for the output slots in the editor and as identifiers in the shader code, and are passed in the `output_vars` array in ``_getCode(inputVars:outputVars:mode:type:)``.
     /// 
@@ -137,8 +347,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getOutputPortName(port: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: port) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_property_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_property_count")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the number of the properties.
     /// 
@@ -146,8 +379,22 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getPropertyCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_property_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_property_name")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the names of the property of the associated custom node.
     /// 
@@ -155,8 +402,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getPropertyName(index: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_property_default_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_property_default_index")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the default index of the property of the associated custom node.
     /// 
@@ -164,8 +434,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getPropertyDefaultIndex(_ index: Int32) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_default_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_property_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_property_options")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 647634434)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the options inside the drop-down list property of the associated custom node.
     /// 
@@ -173,8 +466,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getPropertyOptions(index: Int32) -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        withUnsafePointer(to: index) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_options, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_code")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4287175357)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to define the actual shader code of the associated custom node. The shader code should be returned as a string, which can have multiple lines (the `"""` multiline string construct can be used for convenience).
     /// 
@@ -187,9 +503,41 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// Defining this method is **required**.
     /// 
     @_documentation(visibility: public)
-    open func _getCode(inputVars: VariantCollection<String>, outputVars: VariantCollection<String>, mode: Shader.Mode, type: VisualShader.GType) -> String {
-        return String ()
+    open func _getCode(inputVars: TypedArray<String>, outputVars: TypedArray<String>, mode: Shader.Mode, type: VisualShader.GType) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: inputVars.array.content) { pArg0 in
+            withUnsafePointer(to: outputVars.array.content) { pArg1 in
+                withUnsafePointer(to: mode.rawValue) { pArg2 in
+                    withUnsafePointer(to: type.rawValue) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_func_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_func_code")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1924221678)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to add a shader code to the beginning of each shader function (once). The shader code should be returned as a string, which can have multiple lines (the `"""` multiline string construct can be used for convenience).
     /// 
@@ -201,8 +549,34 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getFuncCode(mode: Shader.Mode, type: VisualShader.GType) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: mode.rawValue) { pArg0 in
+            withUnsafePointer(to: type.rawValue) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_func_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__get_global_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_global_code")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3956542358)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to add shader code on top of the global shader, to define your own standard library of reusable methods, varyings, constants, uniforms, etc. The shader code should be returned as a string, which can have multiple lines (the `"""` multiline string construct can be used for convenience).
     /// 
@@ -214,8 +588,31 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _getGlobalCode(mode: Shader.Mode) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: mode.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_global_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__is_highend: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_highend")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to enable high-end mark in the Visual Shader Editor's members dialog.
     /// 
@@ -223,8 +620,22 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _isHighend() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__is_highend, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__is_available: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_available")
+        return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1932120545)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to prevent the node to be visible in the member dialog for the certain `mode` (see ``Shader.Mode``) and/or `type` (see ``VisualShader.GType``).
     /// 
@@ -232,11 +643,26 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     /// 
     @_documentation(visibility: public)
     open func _isAvailable(mode: Shader.Mode, type: VisualShader.GType) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: mode.rawValue) { pArg0 in
+            withUnsafePointer(to: type.rawValue) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__is_available, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
     
-    fileprivate static var method_get_option_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_option_index")
+    fileprivate static let method_get_option_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_option_index")
         return withUnsafePointer(to: &VisualShaderNodeCustom.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -248,6 +674,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     
     /// Returns the selected index of the drop-down list option within a graph. You may use this function to define the specific behavior in the ``_getCode(inputVars:outputVars:mode:type:)`` or ``_getGlobalCode(mode:)``.
     public final func getOptionIndex(option: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -262,7 +689,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_category":
@@ -318,7 +745,8 @@ open class VisualShaderNodeCustom: VisualShaderNode {
 // Support methods for proxies
 func _VisualShaderNodeCustom_proxy_get_category (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getCategory ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -327,8 +755,9 @@ func _VisualShaderNodeCustom_proxy_get_category (instance: UnsafeMutableRawPoint
 func _VisualShaderNodeCustom_proxy_get_code (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
-    let ret = GString (swiftObject._getCode (inputVars: args [0]!.assumingMemoryBound (to: VariantCollection<String>.self).pointee, outputVars: args [1]!.assumingMemoryBound (to: VariantCollection<String>.self).pointee, mode: args [2]!.assumingMemoryBound (to: Shader.Mode.self).pointee, type: args [3]!.assumingMemoryBound (to: VisualShader.GType.self).pointee))
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
+    let ret = GString (swiftObject._getCode (inputVars: args [0]!.assumingMemoryBound (to: TypedArray<String>.self).pointee, outputVars: args [1]!.assumingMemoryBound (to: TypedArray<String>.self).pointee, mode: args [2]!.assumingMemoryBound (to: Shader.Mode.self).pointee, type: args [3]!.assumingMemoryBound (to: VisualShader.GType.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
 }
@@ -336,14 +765,16 @@ func _VisualShaderNodeCustom_proxy_get_code (instance: UnsafeMutableRawPointer?,
 func _VisualShaderNodeCustom_proxy_get_default_input_port (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getDefaultInputPort (type: args [0]!.assumingMemoryBound (to: VisualShaderNode.PortType.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _VisualShaderNodeCustom_proxy_get_description (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getDescription ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -352,7 +783,8 @@ func _VisualShaderNodeCustom_proxy_get_description (instance: UnsafeMutableRawPo
 func _VisualShaderNodeCustom_proxy_get_func_code (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getFuncCode (mode: args [0]!.assumingMemoryBound (to: Shader.Mode.self).pointee, type: args [1]!.assumingMemoryBound (to: VisualShader.GType.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -361,7 +793,8 @@ func _VisualShaderNodeCustom_proxy_get_func_code (instance: UnsafeMutableRawPoin
 func _VisualShaderNodeCustom_proxy_get_global_code (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getGlobalCode (mode: args [0]!.assumingMemoryBound (to: Shader.Mode.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -369,7 +802,8 @@ func _VisualShaderNodeCustom_proxy_get_global_code (instance: UnsafeMutableRawPo
 
 func _VisualShaderNodeCustom_proxy_get_input_port_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getInputPortCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -377,7 +811,8 @@ func _VisualShaderNodeCustom_proxy_get_input_port_count (instance: UnsafeMutable
 func _VisualShaderNodeCustom_proxy_get_input_port_default_value (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getInputPortDefaultValue (port: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes(of: ret.content, as: Variant.ContentType.self)
     ret?.content = Variant.zero
@@ -386,7 +821,8 @@ func _VisualShaderNodeCustom_proxy_get_input_port_default_value (instance: Unsaf
 func _VisualShaderNodeCustom_proxy_get_input_port_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getInputPortName (port: args [0]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -395,14 +831,16 @@ func _VisualShaderNodeCustom_proxy_get_input_port_name (instance: UnsafeMutableR
 func _VisualShaderNodeCustom_proxy_get_input_port_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getInputPortType (port: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
 func _VisualShaderNodeCustom_proxy_get_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getName ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -410,7 +848,8 @@ func _VisualShaderNodeCustom_proxy_get_name (instance: UnsafeMutableRawPointer?,
 
 func _VisualShaderNodeCustom_proxy_get_output_port_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getOutputPortCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -418,7 +857,8 @@ func _VisualShaderNodeCustom_proxy_get_output_port_count (instance: UnsafeMutabl
 func _VisualShaderNodeCustom_proxy_get_output_port_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getOutputPortName (port: args [0]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -427,14 +867,16 @@ func _VisualShaderNodeCustom_proxy_get_output_port_name (instance: UnsafeMutable
 func _VisualShaderNodeCustom_proxy_get_output_port_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getOutputPortType (port: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
 func _VisualShaderNodeCustom_proxy_get_property_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getPropertyCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -442,7 +884,8 @@ func _VisualShaderNodeCustom_proxy_get_property_count (instance: UnsafeMutableRa
 func _VisualShaderNodeCustom_proxy_get_property_default_index (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getPropertyDefaultIndex (args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -450,7 +893,8 @@ func _VisualShaderNodeCustom_proxy_get_property_default_index (instance: UnsafeM
 func _VisualShaderNodeCustom_proxy_get_property_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = GString (swiftObject._getPropertyName (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -459,7 +903,8 @@ func _VisualShaderNodeCustom_proxy_get_property_name (instance: UnsafeMutableRaw
 func _VisualShaderNodeCustom_proxy_get_property_options (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getPropertyOptions (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -467,7 +912,8 @@ func _VisualShaderNodeCustom_proxy_get_property_options (instance: UnsafeMutable
 
 func _VisualShaderNodeCustom_proxy_get_return_icon_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._getReturnIconType ()
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
@@ -475,14 +921,16 @@ func _VisualShaderNodeCustom_proxy_get_return_icon_type (instance: UnsafeMutable
 func _VisualShaderNodeCustom_proxy_is_available (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._isAvailable (mode: args [0]!.assumingMemoryBound (to: Shader.Mode.self).pointee, type: args [1]!.assumingMemoryBound (to: VisualShader.GType.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _VisualShaderNodeCustom_proxy_is_highend (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualShaderNodeCustom>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualShaderNodeCustom else { return }
     let ret = swiftObject._isHighend ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }

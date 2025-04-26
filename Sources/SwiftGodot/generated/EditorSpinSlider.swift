@@ -31,10 +31,11 @@ import Musl
 /// 
 /// - ``grabbed``
 /// - ``ungrabbed``
+/// - ``updownPressed``
 /// - ``valueFocusEntered``
 /// - ``valueFocusExited``
 open class EditorSpinSlider: Range {
-    fileprivate static var className = StringName("EditorSpinSlider")
+    private static var className = StringName("EditorSpinSlider")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -99,9 +100,21 @@ open class EditorSpinSlider: Range {
         
     }
     
+    /// If `true`, the ``EditorSpinSlider`` is considered to be editing an integer value. If `false`, the ``EditorSpinSlider`` is considered to be editing a floating-point value. This is used to determine whether a slider should be drawn. The slider is only drawn for floats; integers use up-down arrows similar to ``SpinBox`` instead.
+    final public var editingInteger: Bool {
+        get {
+            return is_editing_integer ()
+        }
+        
+        set {
+            set_editing_integer (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_set_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_label")
+    fileprivate static let method_set_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_label")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -113,6 +126,7 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func set_label(_ label: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -127,8 +141,8 @@ open class EditorSpinSlider: Range {
         
     }
     
-    fileprivate static var method_get_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_label")
+    fileprivate static let method_get_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_label")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -140,13 +154,14 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func get_label() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorSpinSlider.method_get_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_suffix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_suffix")
+    fileprivate static let method_set_suffix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_suffix")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -158,6 +173,7 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func set_suffix(_ suffix: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let suffix = GString(suffix)
         withUnsafePointer(to: suffix.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -172,8 +188,8 @@ open class EditorSpinSlider: Range {
         
     }
     
-    fileprivate static var method_get_suffix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_suffix")
+    fileprivate static let method_get_suffix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_suffix")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -185,13 +201,14 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func get_suffix() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorSpinSlider.method_get_suffix, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_read_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_read_only")
+    fileprivate static let method_set_read_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_read_only")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -203,6 +220,7 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func set_read_only(_ readOnly: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: readOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -216,8 +234,8 @@ open class EditorSpinSlider: Range {
         
     }
     
-    fileprivate static var method_is_read_only: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_read_only")
+    fileprivate static let method_is_read_only: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_read_only")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -229,13 +247,14 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func is_read_only() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_read_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_flat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flat")
+    fileprivate static let method_set_flat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flat")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -247,6 +266,7 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func set_flat(_ flat: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flat) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -260,8 +280,8 @@ open class EditorSpinSlider: Range {
         
     }
     
-    fileprivate static var method_is_flat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_flat")
+    fileprivate static let method_is_flat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_flat")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -273,13 +293,14 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func is_flat() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_flat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hide_slider: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hide_slider")
+    fileprivate static let method_set_hide_slider: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hide_slider")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -291,6 +312,7 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func set_hide_slider(_ hideSlider: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hideSlider) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -304,8 +326,8 @@ open class EditorSpinSlider: Range {
         
     }
     
-    fileprivate static var method_is_hiding_slider: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hiding_slider")
+    fileprivate static let method_is_hiding_slider: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hiding_slider")
         return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -317,8 +339,55 @@ open class EditorSpinSlider: Range {
     
     @inline(__always)
     fileprivate final func is_hiding_slider() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_hiding_slider, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_editing_integer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_editing_integer")
+        return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_editing_integer(_ editingInteger: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: editingInteger) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_editing_integer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_editing_integer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_editing_integer")
+        return withUnsafePointer(to: &EditorSpinSlider.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_editing_integer() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_editing_integer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
@@ -354,6 +423,22 @@ open class EditorSpinSlider: Range {
     /// }
     /// ```
     public var ungrabbed: SimpleSignal { SimpleSignal (target: self, signalName: "ungrabbed") }
+    
+    /// Emitted when the updown button is pressed.
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.updownPressed.connect {
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var updownPressed: SimpleSignal { SimpleSignal (target: self, signalName: "updown_pressed") }
     
     /// Emitted when the value form gains focus.
     ///

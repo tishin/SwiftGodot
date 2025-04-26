@@ -26,11 +26,11 @@ import Musl
 /// A pattern always start at the `(0,0)` coordinates and cannot have cells with negative coordinates.
 /// 
 open class TileMapPattern: Resource {
-    fileprivate static var className = StringName("TileMapPattern")
+    private static var className = StringName("TileMapPattern")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_set_cell: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell")
+    fileprivate static let method_set_cell: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2224802556)!
@@ -42,6 +42,7 @@ open class TileMapPattern: Resource {
     
     /// Sets the tile identifiers for the cell at coordinates `coords`. See ``TileMap/setCell(layer:coords:sourceId:atlasCoords:alternativeTile:)``.
     public final func setCell(coords: Vector2i, sourceId: Int32 = -1, atlasCoords: Vector2i = Vector2i (x: -1, y: -1), alternativeTile: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: sourceId) { pArg1 in
                 withUnsafePointer(to: atlasCoords) { pArg2 in
@@ -64,8 +65,8 @@ open class TileMapPattern: Resource {
         
     }
     
-    fileprivate static var method_has_cell: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_cell")
+    fileprivate static let method_has_cell: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_cell")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3900751641)!
@@ -77,6 +78,7 @@ open class TileMapPattern: Resource {
     
     /// Returns whether the pattern has a tile at the given coordinates.
     public final func hasCell(coords: Vector2i) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -91,8 +93,8 @@ open class TileMapPattern: Resource {
         return _result
     }
     
-    fileprivate static var method_remove_cell: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_cell")
+    fileprivate static let method_remove_cell: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_cell")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4153096796)!
@@ -104,6 +106,7 @@ open class TileMapPattern: Resource {
     
     /// Remove the cell at the given coordinates.
     public final func removeCell(coords: Vector2i, updateSize: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: updateSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -120,8 +123,8 @@ open class TileMapPattern: Resource {
         
     }
     
-    fileprivate static var method_get_cell_source_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_source_id")
+    fileprivate static let method_get_cell_source_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_source_id")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -133,6 +136,7 @@ open class TileMapPattern: Resource {
     
     /// Returns the tile source ID of the cell at `coords`.
     public final func getCellSourceId(coords: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -147,8 +151,8 @@ open class TileMapPattern: Resource {
         return _result
     }
     
-    fileprivate static var method_get_cell_atlas_coords: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_atlas_coords")
+    fileprivate static let method_get_cell_atlas_coords: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_atlas_coords")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3050897911)!
@@ -160,6 +164,7 @@ open class TileMapPattern: Resource {
     
     /// Returns the tile atlas coordinates ID of the cell at `coords`.
     public final func getCellAtlasCoords(_ coords: Vector2i) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -174,8 +179,8 @@ open class TileMapPattern: Resource {
         return _result
     }
     
-    fileprivate static var method_get_cell_alternative_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_alternative_tile")
+    fileprivate static let method_get_cell_alternative_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_alternative_tile")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -187,6 +192,7 @@ open class TileMapPattern: Resource {
     
     /// Returns the tile alternative ID of the cell at `coords`.
     public final func getCellAlternativeTile(coords: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -201,8 +207,8 @@ open class TileMapPattern: Resource {
         return _result
     }
     
-    fileprivate static var method_get_used_cells: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_used_cells")
+    fileprivate static let method_get_used_cells: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_used_cells")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -213,14 +219,15 @@ open class TileMapPattern: Resource {
     }()
     
     /// Returns the list of used cell coordinates in the pattern.
-    public final func getUsedCells() -> VariantCollection<Vector2i> {
+    public final func getUsedCells() -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(TileMapPattern.method_get_used_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -232,13 +239,14 @@ open class TileMapPattern: Resource {
     
     /// Returns the size, in cells, of the pattern.
     public final func getSize() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(TileMapPattern.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -250,6 +258,7 @@ open class TileMapPattern: Resource {
     
     /// Sets the size of the pattern.
     public final func setSize(_ size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -263,8 +272,8 @@ open class TileMapPattern: Resource {
         
     }
     
-    fileprivate static var method_is_empty: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_empty")
+    fileprivate static let method_is_empty: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_empty")
         return withUnsafePointer(to: &TileMapPattern.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -276,6 +285,7 @@ open class TileMapPattern: Resource {
     
     /// Returns whether the pattern is empty or not.
     public final func isEmpty() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TileMapPattern.method_is_empty, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

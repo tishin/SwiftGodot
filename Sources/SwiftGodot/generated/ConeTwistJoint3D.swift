@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A physics joint that connects two 3D physics bodies in a way that simulates a ball-and-socket joint. The twist axis is initiated as the X axis of the ``ConeTwistJoint3D``. Once the physics bodies swing, the twist axis is calculated as the middle of the X axes of the joint in the local space of the two physics bodies. Useful for limbs like shoulders and hips, lamps hanging off a ceiling, etc.
 open class ConeTwistJoint3D: Joint3D {
-    fileprivate static var className = StringName("ConeTwistJoint3D")
+    private static var className = StringName("ConeTwistJoint3D")
     override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// Swing is rotation from side to side, around the axis perpendicular to the twist axis.
@@ -130,8 +130,8 @@ open class ConeTwistJoint3D: Joint3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_param")
+    fileprivate static let method_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_param")
         return withUnsafePointer(to: &ConeTwistJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1062470226)!
@@ -144,6 +144,7 @@ open class ConeTwistJoint3D: Joint3D {
     @inline(__always)
     /// Sets the value of the specified parameter.
     final func set_param(_ param: ConeTwistJoint3D.Param, _ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -160,8 +161,8 @@ open class ConeTwistJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_param")
+    fileprivate static let method_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_param")
         return withUnsafePointer(to: &ConeTwistJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2928790850)!
@@ -174,6 +175,7 @@ open class ConeTwistJoint3D: Joint3D {
     @inline(__always)
     /// Returns the value of the specified parameter.
     final func get_param(_ param: ConeTwistJoint3D.Param) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

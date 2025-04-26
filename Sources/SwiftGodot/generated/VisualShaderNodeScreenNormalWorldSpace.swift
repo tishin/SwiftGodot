@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The ScreenNormalWorldSpace node allows to create outline effects.
 open class VisualShaderNodeScreenNormalWorldSpace: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeScreenNormalWorldSpace")
+    private static var className = StringName("VisualShaderNodeScreenNormalWorldSpace")
     override open class var godotClassName: StringName { className }
 }
 

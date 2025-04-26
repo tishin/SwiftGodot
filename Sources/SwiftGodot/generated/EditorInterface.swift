@@ -27,14 +27,14 @@ import Musl
 /// 
 open class EditorInterface: Object {
     /// The shared instance of this class
-    public static var shared: EditorInterface = {
-        return withUnsafePointer (to: &EditorInterface.godotClassName.content) { ptr in
-            EditorInterface (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: EditorInterface {
+        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("EditorInterface")
+    private static var className = StringName("EditorInterface")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -64,8 +64,8 @@ open class EditorInterface: Object {
     }
     
     /* Methods */
-    fileprivate static var method_restart_editor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("restart_editor")
+    fileprivate static let method_restart_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("restart_editor")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3216645846)!
@@ -77,6 +77,7 @@ open class EditorInterface: Object {
     
     /// Restarts the editor. This closes the editor and then opens the same project. If `save` is `true`, the project will be saved before restarting.
     public final func restartEditor(save: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: save) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -90,8 +91,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_get_command_palette: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_command_palette")
+    fileprivate static let method_get_command_palette: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_command_palette")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2471163807)!
@@ -106,13 +107,14 @@ open class EditorInterface: Object {
     /// > Warning: Removing and freeing this node will render a part of the editor useless and may cause a crash.
     /// 
     public final func getCommandPalette() -> EditorCommandPalette? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_command_palette, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_resource_filesystem: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resource_filesystem")
+    fileprivate static let method_get_resource_filesystem: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resource_filesystem")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 780151678)!
@@ -124,13 +126,14 @@ open class EditorInterface: Object {
     
     /// Returns the editor's ``EditorFileSystem`` instance.
     public final func getResourceFilesystem() -> EditorFileSystem? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_resource_filesystem, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_editor_paths: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_paths")
+    fileprivate static let method_get_editor_paths: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_paths")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1595760068)!
@@ -142,13 +145,14 @@ open class EditorInterface: Object {
     
     /// Returns the ``EditorPaths`` singleton.
     public final func getEditorPaths() -> EditorPaths? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_resource_previewer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resource_previewer")
+    fileprivate static let method_get_resource_previewer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resource_previewer")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 943486957)!
@@ -160,13 +164,14 @@ open class EditorInterface: Object {
     
     /// Returns the editor's ``EditorResourcePreview`` instance.
     public final func getResourcePreviewer() -> EditorResourcePreview? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_resource_previewer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_selection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selection")
+    fileprivate static let method_get_selection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selection")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2690272531)!
@@ -178,13 +183,14 @@ open class EditorInterface: Object {
     
     /// Returns the editor's ``EditorSelection`` instance.
     public final func getSelection() -> EditorSelection? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_editor_settings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_settings")
+    fileprivate static let method_get_editor_settings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_settings")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4086932459)!
@@ -196,13 +202,52 @@ open class EditorInterface: Object {
     
     /// Returns the editor's ``EditorSettings`` instance.
     public final func getEditorSettings() -> EditorSettings? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_settings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_make_mesh_previews: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_mesh_previews")
+    fileprivate static let method_get_editor_toaster: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_toaster")
+        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3612675797)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the editor's ``EditorToaster``.
+    public final func getEditorToaster() -> EditorToaster? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_toaster, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_get_editor_undo_redo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_undo_redo")
+        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3819628421)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the editor's ``EditorUndoRedoManager``.
+    public final func getEditorUndoRedo() -> EditorUndoRedoManager? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_undo_redo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_make_mesh_previews: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_mesh_previews")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 878078554)!
@@ -212,8 +257,9 @@ open class EditorInterface: Object {
         
     }()
     
-    /// Returns mesh previews rendered at the given size as an ``GArray`` of ``Texture2D``s.
-    public final func makeMeshPreviews(meshes: ObjectCollection<Mesh>, previewSize: Int32) -> ObjectCollection<Texture2D> {
+    /// Returns mesh previews rendered at the given size as an ``VariantArray`` of ``Texture2D``s.
+    public final func makeMeshPreviews(meshes: TypedArray<Mesh?>, previewSize: Int32) -> TypedArray<Texture2D?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: meshes.array.content) { pArg0 in
             withUnsafePointer(to: previewSize) { pArg1 in
@@ -228,11 +274,11 @@ open class EditorInterface: Object {
             
         }
         
-        return ObjectCollection<Texture2D>(content: _result)
+        return TypedArray<Texture2D?>(takingOver: _result)
     }
     
-    fileprivate static var method_set_plugin_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_plugin_enabled")
+    fileprivate static let method_set_plugin_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_plugin_enabled")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678287736)!
@@ -244,6 +290,7 @@ open class EditorInterface: Object {
     
     /// Sets the enabled status of a plugin. The plugin name is the same as its directory name.
     public final func setPluginEnabled(plugin: String, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let plugin = GString(plugin)
         withUnsafePointer(to: plugin.content) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
@@ -261,8 +308,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_is_plugin_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_plugin_enabled")
+    fileprivate static let method_is_plugin_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_plugin_enabled")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -274,6 +321,7 @@ open class EditorInterface: Object {
     
     /// Returns `true` if the specified `plugin` is enabled. The plugin name is the same as its directory name.
     public final func isPluginEnabled(plugin: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let plugin = GString(plugin)
         withUnsafePointer(to: plugin.content) { pArg0 in
@@ -289,8 +337,8 @@ open class EditorInterface: Object {
         return _result
     }
     
-    fileprivate static var method_get_editor_theme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_theme")
+    fileprivate static let method_get_editor_theme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_theme")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3846893731)!
@@ -305,13 +353,14 @@ open class EditorInterface: Object {
     /// > Note: When creating custom editor UI, prefer accessing theme items directly from your GUI nodes using the `get_theme_*` methods.
     /// 
     public final func getEditorTheme() -> Theme? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_theme, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_base_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_base_control")
+    fileprivate static let method_get_base_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_base_control")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2783021301)!
@@ -326,13 +375,14 @@ open class EditorInterface: Object {
     /// > Warning: Removing and freeing this node will render the editor useless and may cause a crash.
     /// 
     public final func getBaseControl() -> Control? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_base_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_editor_main_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_main_screen")
+    fileprivate static let method_get_editor_main_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_main_screen")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1706218421)!
@@ -349,13 +399,14 @@ open class EditorInterface: Object {
     /// > Warning: Removing and freeing this node will render a part of the editor useless and may cause a crash.
     /// 
     public final func getEditorMainScreen() -> VBoxContainer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_main_screen, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_script_editor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_editor")
+    fileprivate static let method_get_script_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_editor")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 90868003)!
@@ -370,13 +421,14 @@ open class EditorInterface: Object {
     /// > Warning: Removing and freeing this node will render a part of the editor useless and may cause a crash.
     /// 
     public final func getScriptEditor() -> ScriptEditor? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_script_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_editor_viewport_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_viewport_2d")
+    fileprivate static let method_get_editor_viewport_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_viewport_2d")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3750751911)!
@@ -388,13 +440,14 @@ open class EditorInterface: Object {
     
     /// Returns the 2D editor ``SubViewport``. It does not have a camera. Instead, the view transforms are done directly and can be accessed with ``Viewport/globalCanvasTransform``.
     public final func getEditorViewport2d() -> SubViewport? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_viewport_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_editor_viewport_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_viewport_3d")
+    fileprivate static let method_get_editor_viewport_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_viewport_3d")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1970834490)!
@@ -406,6 +459,7 @@ open class EditorInterface: Object {
     
     /// Returns the specified 3D editor ``SubViewport``, from `0` to `3`. The viewport can be used to access the active editor cameras with ``Viewport/getCamera3d()``.
     public final func getEditorViewport3d(idx: Int32 = 0) -> SubViewport? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -417,11 +471,11 @@ open class EditorInterface: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_main_screen_editor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_main_screen_editor")
+    fileprivate static let method_set_main_screen_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_main_screen_editor")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -433,6 +487,7 @@ open class EditorInterface: Object {
     
     /// Sets the editor's current main screen to the one specified in `name`. `name` must match the title of the tab in question exactly (e.g. `2D`, `3D`, [code skip-lint]Script`, or `AssetLib` for default tabs).
     public final func setMainScreenEditor(name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -447,8 +502,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_set_distraction_free_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_distraction_free_mode")
+    fileprivate static let method_set_distraction_free_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_distraction_free_mode")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -460,6 +515,7 @@ open class EditorInterface: Object {
     
     @inline(__always)
     fileprivate final func set_distraction_free_mode(_ enter: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -473,8 +529,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_is_distraction_free_mode_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_distraction_free_mode_enabled")
+    fileprivate static let method_is_distraction_free_mode_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_distraction_free_mode_enabled")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -486,13 +542,14 @@ open class EditorInterface: Object {
     
     @inline(__always)
     fileprivate final func is_distraction_free_mode_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorInterface.method_is_distraction_free_mode_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_multi_window_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_multi_window_enabled")
+    fileprivate static let method_is_multi_window_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_multi_window_enabled")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -511,13 +568,14 @@ open class EditorInterface: Object {
     /// - ``Viewport/guiEmbedSubwindows`` is `false`. This is forced to `true` on platforms that don't support multiple windows such as Web, or when the `--single-window` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a> is used.
     /// 
     public final func isMultiWindowEnabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorInterface.method_is_multi_window_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_editor_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_scale")
+    fileprivate static let method_get_editor_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_scale")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -532,13 +590,14 @@ open class EditorInterface: Object {
     /// > Note: This value is set via the `interface/editor/display_scale` and `interface/editor/custom_display_scale` editor settings. Editor must be restarted for changes to be properly applied.
     /// 
     public final func getEditorScale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_popup_dialog: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_dialog")
+    fileprivate static let method_popup_dialog: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_dialog")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2015770942)!
@@ -553,6 +612,7 @@ open class EditorInterface: Object {
     /// See also ``Window/setUnparentWhenInvisible(unparent:)``.
     /// 
     public final func popupDialog(_ dialog: Window?, rect: Rect2i = Rect2i (x: 0, y: 0, width: 0, height: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dialog?.handle) { pArg0 in
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -569,8 +629,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_popup_dialog_centered: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_dialog_centered")
+    fileprivate static let method_popup_dialog_centered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_dialog_centered")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 346557367)!
@@ -585,6 +645,7 @@ open class EditorInterface: Object {
     /// See also ``Window/setUnparentWhenInvisible(unparent:)``.
     /// 
     public final func popupDialogCentered(dialog: Window?, minsize: Vector2i = Vector2i (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dialog?.handle) { pArg0 in
             withUnsafePointer(to: minsize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -601,8 +662,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_popup_dialog_centered_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_dialog_centered_ratio")
+    fileprivate static let method_popup_dialog_centered_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_dialog_centered_ratio")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2093669136)!
@@ -617,6 +678,7 @@ open class EditorInterface: Object {
     /// See also ``Window/setUnparentWhenInvisible(unparent:)``.
     /// 
     public final func popupDialogCenteredRatio(dialog: Window?, ratio: Double = 0.8) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dialog?.handle) { pArg0 in
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -633,8 +695,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_popup_dialog_centered_clamped: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_dialog_centered_clamped")
+    fileprivate static let method_popup_dialog_centered_clamped: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_dialog_centered_clamped")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3763385571)!
@@ -649,6 +711,7 @@ open class EditorInterface: Object {
     /// See also ``Window/setUnparentWhenInvisible(unparent:)``.
     /// 
     public final func popupDialogCenteredClamped(dialog: Window?, minsize: Vector2i = Vector2i (x: 0, y: 0), fallbackRatio: Double = 0.75) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: dialog?.handle) { pArg0 in
             withUnsafePointer(to: minsize) { pArg1 in
                 withUnsafePointer(to: fallbackRatio) { pArg2 in
@@ -668,8 +731,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_get_current_feature_profile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_feature_profile")
+    fileprivate static let method_get_current_feature_profile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_feature_profile")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -686,13 +749,14 @@ open class EditorInterface: Object {
     /// > Note: Feature profiles created via the user interface are loaded from the `feature_profiles` directory, as a file with the `.profile` extension. The editor configuration folder can be found by using ``EditorPaths/getConfigDir()``.
     /// 
     public final func getCurrentFeatureProfile() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorInterface.method_get_current_feature_profile, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_current_feature_profile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_current_feature_profile")
+    fileprivate static let method_set_current_feature_profile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_current_feature_profile")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -709,6 +773,7 @@ open class EditorInterface: Object {
     /// > Note: The feature profile that gets activated must be located in the `feature_profiles` directory, as a file with the `.profile` extension. If a profile could not be found, an error occurs. The editor configuration folder can be found by using ``EditorPaths/getConfigDir()``.
     /// 
     public final func setCurrentFeatureProfile(profileName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let profileName = GString(profileName)
         withUnsafePointer(to: profileName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -723,60 +788,29 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_popup_node_selector: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_node_selector")
+    fileprivate static let method_popup_node_selector: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_node_selector")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2271411043)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2444591477)!
             }
             
         }
         
     }()
     
-    /// Pops up an editor dialog for selecting a ``Node`` from the edited scene. The `callback` must take a single argument of type ``NodePath``. It is called on the selected ``NodePath`` or the empty path `^""` if the dialog is canceled. If `validTypes` is provided, the dialog will only show Nodes that match one of the listed Node types.
+    /// Pops up an editor dialog for selecting a ``Node`` from the edited scene. The `callback` must take a single argument of type ``NodePath``. It is called on the selected ``NodePath`` or the empty path `^""` if the dialog is canceled. If `validTypes` is provided, the dialog will only show Nodes that match one of the listed Node types. If `currentValue` is provided, the Node will be automatically selected in the tree, if it exists.
     /// 
-    /// **Example:**
+    /// **Example:** Display the node selection dialog as soon as this node is added to the tree for the first time:
     /// 
-    public final func popupNodeSelector(callback: Callable, validTypes: VariantCollection<StringName> = VariantCollection<StringName> ()) {
+    public final func popupNodeSelector(callback: Callable, validTypes: TypedArray<StringName> = TypedArray<StringName> (), currentValue: Node? = nil) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: callback.content) { pArg0 in
             withUnsafePointer(to: validTypes.array.content) { pArg1 in
-                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
-                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_node_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
-                    }
-                    
-                }
-                
-            }
-            
-        }
-        
-        
-    }
-    
-    fileprivate static var method_popup_property_selector: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_property_selector")
-        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
-            withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 261221679)!
-            }
-            
-        }
-        
-    }()
-    
-    /// Pops up an editor dialog for selecting properties from `object`. The `callback` must take a single argument of type ``NodePath``. It is called on the selected property path (see ``NodePath/getAsPropertyPath()``) or the empty path `^""` if the dialog is canceled. If `typeFilter` is provided, the dialog will only show properties that match one of the listed ``Variant.GType`` values.
-    /// 
-    /// **Example:**
-    /// 
-    public final func popupPropertySelector(object: Object?, callback: Callable, typeFilter: PackedInt32Array = PackedInt32Array()) {
-        withUnsafePointer(to: object?.handle) { pArg0 in
-            withUnsafePointer(to: callback.content) { pArg1 in
-                withUnsafePointer(to: typeFilter.content) { pArg2 in
+                withUnsafePointer(to: currentValue?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_property_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_node_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
                         }
                         
                     }
@@ -790,8 +824,164 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_get_file_system_dock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_system_dock")
+    fileprivate static let method_popup_property_selector: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_property_selector")
+        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2955609011)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Pops up an editor dialog for selecting properties from `object`. The `callback` must take a single argument of type ``NodePath``. It is called on the selected property path (see ``NodePath/getAsPropertyPath()``) or the empty path `^""` if the dialog is canceled. If `typeFilter` is provided, the dialog will only show properties that match one of the listed ``Variant.GType`` values. If `currentValue` is provided, the property will be selected automatically in the property list, if it exists.
+    /// 
+    public final func popupPropertySelector(object: Object?, callback: Callable, typeFilter: PackedInt32Array = PackedInt32Array(), currentValue: String = "") {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: object?.handle) { pArg0 in
+            withUnsafePointer(to: callback.content) { pArg1 in
+                withUnsafePointer(to: typeFilter.content) { pArg2 in
+                    let currentValue = GString(currentValue)
+                    withUnsafePointer(to: currentValue.content) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(EditorInterface.method_popup_property_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_popup_method_selector: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_method_selector")
+        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3585505226)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Pops up an editor dialog for selecting a method from `object`. The `callback` must take a single argument of type ``String`` which will contain the name of the selected method or be empty if the dialog is canceled. If `currentValue` is provided, the method will be selected automatically in the method list, if it exists.
+    public final func popupMethodSelector(object: Object?, callback: Callable, currentValue: String = "") {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: object?.handle) { pArg0 in
+            withUnsafePointer(to: callback.content) { pArg1 in
+                let currentValue = GString(currentValue)
+                withUnsafePointer(to: currentValue.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_method_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_popup_quick_open: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_quick_open")
+        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2271411043)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Pops up an editor dialog for quick selecting a resource file. The `callback` must take a single argument of type ``String`` which will contain the path of the selected resource or be empty if the dialog is canceled. If `baseTypes` is provided, the dialog will only show resources that match these types. Only types deriving from ``Resource`` are supported.
+    public final func popupQuickOpen(callback: Callable, baseTypes: TypedArray<StringName> = TypedArray<StringName> ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: callback.content) { pArg0 in
+            withUnsafePointer(to: baseTypes.array.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_quick_open, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_popup_create_dialog: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_create_dialog")
+        return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 495277124)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Pops up an editor dialog for creating an object.
+    /// 
+    /// The `callback` must take a single argument of type ``StringName`` which will contain the type name of the selected object or be empty if no item is selected.
+    /// 
+    /// The `baseType` specifies the base type of objects to display. For example, if you set this to "Resource", all types derived from ``Resource`` will display in the create dialog.
+    /// 
+    /// The `currentType` will be passed in the search box of the create dialog, and the specified type can be immediately selected when the dialog pops up. If the `currentType` is not derived from `baseType`, there will be no result of the type in the dialog.
+    /// 
+    /// The `dialogTitle` allows you to define a custom title for the dialog. This is useful if you want to accurately hint the usage of the dialog. If the `dialogTitle` is an empty string, the dialog will use "Create New 'Base Type'" as the default title.
+    /// 
+    /// The `typeBlocklist` contains a list of type names, and the types in the blocklist will be hidden from the create dialog.
+    /// 
+    /// > Note: Trying to list the base type in the `typeBlocklist` will hide all types derived from the base type from the create dialog.
+    /// 
+    public final func popupCreateDialog(callback: Callable, baseType: StringName = StringName (""), currentType: String = "", dialogTitle: String = "", typeBlocklist: TypedArray<StringName> = TypedArray<StringName> ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: callback.content) { pArg0 in
+            withUnsafePointer(to: baseType.content) { pArg1 in
+                let currentType = GString(currentType)
+                withUnsafePointer(to: currentType.content) { pArg2 in
+                    let dialogTitle = GString(dialogTitle)
+                    withUnsafePointer(to: dialogTitle.content) { pArg3 in
+                        withUnsafePointer(to: typeBlocklist.array.content) { pArg4 in
+                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
+                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
+                                    gi.object_method_bind_ptrcall(EditorInterface.method_popup_create_dialog, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_file_system_dock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_system_dock")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3751012327)!
@@ -806,13 +996,14 @@ open class EditorInterface: Object {
     /// > Warning: Removing and freeing this node will render a part of the editor useless and may cause a crash.
     /// 
     public final func getFileSystemDock() -> FileSystemDock? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_file_system_dock, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_select_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select_file")
+    fileprivate static let method_select_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select_file")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -824,6 +1015,7 @@ open class EditorInterface: Object {
     
     /// Selects the file, with the path provided by `file`, in the FileSystem dock.
     public final func selectFile(_ file: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let file = GString(file)
         withUnsafePointer(to: file.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -838,8 +1030,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_get_selected_paths: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected_paths")
+    fileprivate static let method_get_selected_paths: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected_paths")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -851,13 +1043,14 @@ open class EditorInterface: Object {
     
     /// Returns an array containing the paths of the currently selected files (and directories) in the ``FileSystemDock``.
     public final func getSelectedPaths() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(EditorInterface.method_get_selected_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_current_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_path")
+    fileprivate static let method_get_current_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_path")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -869,13 +1062,14 @@ open class EditorInterface: Object {
     
     /// Returns the current path being viewed in the ``FileSystemDock``.
     public final func getCurrentPath() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorInterface.method_get_current_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_current_directory: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_directory")
+    fileprivate static let method_get_current_directory: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_directory")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -887,13 +1081,14 @@ open class EditorInterface: Object {
     
     /// Returns the current directory being viewed in the ``FileSystemDock``. If a file is selected, its base directory will be returned using ``GString/getBaseDir()`` instead.
     public final func getCurrentDirectory() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorInterface.method_get_current_directory, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_inspector: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inspector")
+    fileprivate static let method_get_inspector: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inspector")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3517113938)!
@@ -908,13 +1103,14 @@ open class EditorInterface: Object {
     /// > Warning: Removing and freeing this node will render a part of the editor useless and may cause a crash.
     /// 
     public final func getInspector() -> EditorInspector? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_inspector, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_inspect_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("inspect_object")
+    fileprivate static let method_inspect_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("inspect_object")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 127962172)!
@@ -926,6 +1122,7 @@ open class EditorInterface: Object {
     
     /// Shows the given property on the given `object` in the editor's Inspector dock. If `inspectorOnly` is `true`, plugins will not attempt to edit `object`.
     public final func inspectObject(_ object: Object?, forProperty: String = "", inspectorOnly: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: object?.handle) { pArg0 in
             let forProperty = GString(forProperty)
             withUnsafePointer(to: forProperty.content) { pArg1 in
@@ -946,8 +1143,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_edit_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("edit_resource")
+    fileprivate static let method_edit_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("edit_resource")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 968641751)!
@@ -959,6 +1156,7 @@ open class EditorInterface: Object {
     
     /// Edits the given ``Resource``. If the resource is a ``Script`` you can also edit it with ``editScript(_:line:column:grabFocus:)`` to specify the line and column position.
     public final func editResource(_ resource: Resource?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -972,8 +1170,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_edit_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("edit_node")
+    fileprivate static let method_edit_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("edit_node")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -985,6 +1183,7 @@ open class EditorInterface: Object {
     
     /// Edits the given ``Node``. The node will be also selected if it's inside the scene tree.
     public final func editNode(_ node: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -998,8 +1197,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_edit_script: GDExtensionMethodBindPtr = {
-        let methodName = StringName("edit_script")
+    fileprivate static let method_edit_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("edit_script")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 219829402)!
@@ -1011,6 +1210,7 @@ open class EditorInterface: Object {
     
     /// Edits the given ``Script``. The line and column on which to open the script can also be specified. The script will be open with the user-configured editor for the script's language which may be an external editor.
     public final func editScript(_ script: Script?, line: Int32 = -1, column: Int32 = 0, grabFocus: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: script?.handle) { pArg0 in
             withUnsafePointer(to: line) { pArg1 in
                 withUnsafePointer(to: column) { pArg2 in
@@ -1033,24 +1233,28 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_open_scene_from_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open_scene_from_path")
+    fileprivate static let method_open_scene_from_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open_scene_from_path")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1168363258)!
             }
             
         }
         
     }()
     
-    /// Opens the scene at the given path.
-    public final func openSceneFromPath(sceneFilepath: String) {
+    /// Opens the scene at the given path. If `setInherited` is `true`, creates a new inherited scene.
+    public final func openSceneFromPath(sceneFilepath: String, setInherited: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let sceneFilepath = GString(sceneFilepath)
         withUnsafePointer(to: sceneFilepath.content) { pArg0 in
-            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
-                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_open_scene_from_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+            withUnsafePointer(to: setInherited) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorInterface.method_open_scene_from_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
                 }
                 
             }
@@ -1060,8 +1264,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_reload_scene_from_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reload_scene_from_path")
+    fileprivate static let method_reload_scene_from_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reload_scene_from_path")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1073,6 +1277,7 @@ open class EditorInterface: Object {
     
     /// Reloads the scene at the given path.
     public final func reloadSceneFromPath(sceneFilepath: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let sceneFilepath = GString(sceneFilepath)
         withUnsafePointer(to: sceneFilepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1087,8 +1292,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_get_open_scenes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_open_scenes")
+    fileprivate static let method_get_open_scenes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_open_scenes")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -1098,15 +1303,16 @@ open class EditorInterface: Object {
         
     }()
     
-    /// Returns an ``GArray`` with the file paths of the currently opened scenes.
+    /// Returns an ``VariantArray`` with the file paths of the currently opened scenes.
     public final func getOpenScenes() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(EditorInterface.method_get_open_scenes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_edited_scene_root: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edited_scene_root")
+    fileprivate static let method_get_edited_scene_root: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edited_scene_root")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3160264692)!
@@ -1118,13 +1324,14 @@ open class EditorInterface: Object {
     
     /// Returns the edited (current) scene's root ``Node``.
     public final func getEditedSceneRoot() -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorInterface.method_get_edited_scene_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_save_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_scene")
+    fileprivate static let method_save_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_scene")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -1136,13 +1343,14 @@ open class EditorInterface: Object {
     
     /// Saves the currently active scene. Returns either ``GodotError/ok`` or ``GodotError/errCantCreate``.
     public final func saveScene() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(EditorInterface.method_save_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_save_scene_as: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_scene_as")
+    fileprivate static let method_save_scene_as: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_scene_as")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3647332257)!
@@ -1154,6 +1362,7 @@ open class EditorInterface: Object {
     
     /// Saves the currently active scene as a file at `path`.
     public final func saveSceneAs(path: String, withPreview: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: withPreview) { pArg1 in
@@ -1171,8 +1380,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_save_all_scenes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("save_all_scenes")
+    fileprivate static let method_save_all_scenes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("save_all_scenes")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1184,12 +1393,13 @@ open class EditorInterface: Object {
     
     /// Saves all opened scenes in the editor.
     public final func saveAllScenes() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorInterface.method_save_all_scenes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_mark_scene_as_unsaved: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mark_scene_as_unsaved")
+    fileprivate static let method_mark_scene_as_unsaved: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mark_scene_as_unsaved")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1201,12 +1411,13 @@ open class EditorInterface: Object {
     
     /// Marks the current scene tab as unsaved.
     public final func markSceneAsUnsaved() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorInterface.method_mark_scene_as_unsaved, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_play_main_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play_main_scene")
+    fileprivate static let method_play_main_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play_main_scene")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1218,12 +1429,13 @@ open class EditorInterface: Object {
     
     /// Plays the main scene.
     public final func playMainScene() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorInterface.method_play_main_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_play_current_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play_current_scene")
+    fileprivate static let method_play_current_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play_current_scene")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1235,12 +1447,13 @@ open class EditorInterface: Object {
     
     /// Plays the currently active scene.
     public final func playCurrentScene() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorInterface.method_play_current_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_play_custom_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play_custom_scene")
+    fileprivate static let method_play_custom_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play_custom_scene")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1252,6 +1465,7 @@ open class EditorInterface: Object {
     
     /// Plays the scene specified by its filepath.
     public final func playCustomScene(sceneFilepath: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let sceneFilepath = GString(sceneFilepath)
         withUnsafePointer(to: sceneFilepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1266,8 +1480,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_stop_playing_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop_playing_scene")
+    fileprivate static let method_stop_playing_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop_playing_scene")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1279,12 +1493,13 @@ open class EditorInterface: Object {
     
     /// Stops the scene that is currently playing.
     public final func stopPlayingScene() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorInterface.method_stop_playing_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_playing_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_playing_scene")
+    fileprivate static let method_is_playing_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_playing_scene")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1296,13 +1511,14 @@ open class EditorInterface: Object {
     
     /// Returns `true` if a scene is currently being played, `false` otherwise. Paused scenes are considered as being played.
     public final func isPlayingScene() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorInterface.method_is_playing_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_playing_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_playing_scene")
+    fileprivate static let method_get_playing_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_playing_scene")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1314,13 +1530,14 @@ open class EditorInterface: Object {
     
     /// Returns the name of the scene that is being played. If no scene is currently being played, returns an empty string.
     public final func getPlayingScene() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorInterface.method_get_playing_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_movie_maker_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_movie_maker_enabled")
+    fileprivate static let method_set_movie_maker_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_movie_maker_enabled")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1332,6 +1549,7 @@ open class EditorInterface: Object {
     
     @inline(__always)
     fileprivate final func set_movie_maker_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1345,8 +1563,8 @@ open class EditorInterface: Object {
         
     }
     
-    fileprivate static var method_is_movie_maker_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_movie_maker_enabled")
+    fileprivate static let method_is_movie_maker_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_movie_maker_enabled")
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1358,6 +1576,7 @@ open class EditorInterface: Object {
     
     @inline(__always)
     fileprivate final func is_movie_maker_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(EditorInterface.method_is_movie_maker_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

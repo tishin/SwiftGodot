@@ -22,8 +22,11 @@ import Musl
 /// Abstract base class for input events affected by modifier keys like [kbd]Shift[/kbd] and [kbd]Alt[/kbd].
 /// 
 /// Stores information about mouse, keyboard, and touch gesture input events. This includes information about which modifier keys are pressed, such as [kbd]Shift[/kbd] or [kbd]Alt[/kbd]. See ``Node/_input(event:)``.
+/// 
+/// > Note: Modifier keys are considered modifiers only when used in combination with another key. As a result, their corresponding member variables, such as ``ctrlPressed``, will return `false` if the key is pressed on its own.
+/// 
 open class InputEventWithModifiers: InputEventFromWindow {
-    fileprivate static var className = StringName("InputEventWithModifiers")
+    private static var className = StringName("InputEventWithModifiers")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -89,8 +92,8 @@ open class InputEventWithModifiers: InputEventFromWindow {
     }
     
     /* Methods */
-    fileprivate static var method_set_command_or_control_autoremap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_command_or_control_autoremap")
+    fileprivate static let method_set_command_or_control_autoremap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_command_or_control_autoremap")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -102,6 +105,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_command_or_control_autoremap(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -115,8 +119,8 @@ open class InputEventWithModifiers: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_is_command_or_control_autoremap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_command_or_control_autoremap")
+    fileprivate static let method_is_command_or_control_autoremap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_command_or_control_autoremap")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -128,13 +132,14 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func is_command_or_control_autoremap() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_command_or_control_autoremap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_command_or_control_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_command_or_control_pressed")
+    fileprivate static let method_is_command_or_control_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_command_or_control_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -149,13 +154,14 @@ open class InputEventWithModifiers: InputEventFromWindow {
     /// On other platforms, returns `true` if [kbd]Ctrl[/kbd] is pressed.
     /// 
     public final func isCommandOrControlPressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_command_or_control_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_alt_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alt_pressed")
+    fileprivate static let method_set_alt_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alt_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -167,6 +173,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_alt_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -180,8 +187,8 @@ open class InputEventWithModifiers: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_is_alt_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_alt_pressed")
+    fileprivate static let method_is_alt_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_alt_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -193,13 +200,14 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func is_alt_pressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_alt_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shift_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shift_pressed")
+    fileprivate static let method_set_shift_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shift_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -211,6 +219,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_shift_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -224,8 +233,8 @@ open class InputEventWithModifiers: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_is_shift_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shift_pressed")
+    fileprivate static let method_is_shift_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shift_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -237,13 +246,14 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func is_shift_pressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_shift_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ctrl_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ctrl_pressed")
+    fileprivate static let method_set_ctrl_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ctrl_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -255,6 +265,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_ctrl_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -268,8 +279,8 @@ open class InputEventWithModifiers: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_is_ctrl_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ctrl_pressed")
+    fileprivate static let method_is_ctrl_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ctrl_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -281,13 +292,14 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func is_ctrl_pressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_ctrl_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_meta_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_meta_pressed")
+    fileprivate static let method_set_meta_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_meta_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -299,6 +311,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func set_meta_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -312,8 +325,8 @@ open class InputEventWithModifiers: InputEventFromWindow {
         
     }
     
-    fileprivate static var method_is_meta_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_meta_pressed")
+    fileprivate static let method_is_meta_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_meta_pressed")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -325,13 +338,14 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     @inline(__always)
     fileprivate final func is_meta_pressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_meta_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_modifiers_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modifiers_mask")
+    fileprivate static let method_get_modifiers_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modifiers_mask")
         return withUnsafePointer(to: &InputEventWithModifiers.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1258259499)!
@@ -343,6 +357,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     
     /// Returns the keycode combination of modifier keys.
     public final func getModifiersMask() -> KeyModifierMask {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: KeyModifierMask = KeyModifierMask ()
         gi.object_method_bind_ptrcall(InputEventWithModifiers.method_get_modifiers_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

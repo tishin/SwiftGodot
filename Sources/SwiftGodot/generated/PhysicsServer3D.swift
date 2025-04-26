@@ -39,14 +39,14 @@ import Musl
 /// 
 open class PhysicsServer3D: Object {
     /// The shared instance of this class
-    public static var shared: PhysicsServer3D = {
-        return withUnsafePointer (to: &PhysicsServer3D.godotClassName.content) { ptr in
-            lookupObject (nativeHandle: gi.global_get_singleton (ptr)!)!
+    public static var shared: PhysicsServer3D {
+        return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("PhysicsServer3D")
+    private static var className = StringName("PhysicsServer3D")
     override open class var godotClassName: StringName { className }
     public enum JointType: Int64, CaseIterable {
         /// The ``Joint3D`` is a ``PinJoint3D``.
@@ -424,8 +424,8 @@ open class PhysicsServer3D: Object {
     }
     
     /* Methods */
-    fileprivate static var method_world_boundary_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("world_boundary_shape_create")
+    fileprivate static let method_world_boundary_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("world_boundary_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -442,8 +442,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_separation_ray_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("separation_ray_shape_create")
+    fileprivate static let method_separation_ray_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("separation_ray_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -460,8 +460,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_sphere_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sphere_shape_create")
+    fileprivate static let method_sphere_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sphere_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -478,8 +478,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_box_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("box_shape_create")
+    fileprivate static let method_box_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("box_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -496,8 +496,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_capsule_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("capsule_shape_create")
+    fileprivate static let method_capsule_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("capsule_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -514,8 +514,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_cylinder_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cylinder_shape_create")
+    fileprivate static let method_cylinder_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cylinder_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -532,8 +532,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_convex_polygon_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("convex_polygon_shape_create")
+    fileprivate static let method_convex_polygon_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("convex_polygon_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -550,8 +550,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_concave_polygon_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("concave_polygon_shape_create")
+    fileprivate static let method_concave_polygon_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("concave_polygon_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -568,8 +568,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_heightmap_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("heightmap_shape_create")
+    fileprivate static let method_heightmap_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("heightmap_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -586,8 +586,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_custom_shape_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("custom_shape_create")
+    fileprivate static let method_custom_shape_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("custom_shape_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -604,8 +604,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_shape_set_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_set_data")
+    fileprivate static let method_shape_set_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_set_data")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175752987)!
@@ -633,8 +633,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_shape_set_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_set_margin")
+    fileprivate static let method_shape_set_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_set_margin")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -665,8 +665,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_shape_get_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_get_type")
+    fileprivate static let method_shape_get_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_get_type")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3418923367)!
@@ -692,8 +692,8 @@ open class PhysicsServer3D: Object {
         return PhysicsServer3D.ShapeType (rawValue: _result)!
     }
     
-    fileprivate static var method_shape_get_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_get_data")
+    fileprivate static let method_shape_get_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_get_data")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4171304767)!
@@ -719,8 +719,8 @@ open class PhysicsServer3D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_shape_get_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shape_get_margin")
+    fileprivate static let method_shape_get_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shape_get_margin")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -749,8 +749,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_space_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("space_create")
+    fileprivate static let method_space_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("space_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -767,8 +767,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_space_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("space_set_active")
+    fileprivate static let method_space_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("space_set_active")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -796,8 +796,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_space_is_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("space_is_active")
+    fileprivate static let method_space_is_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("space_is_active")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -823,8 +823,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_space_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("space_set_param")
+    fileprivate static let method_space_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("space_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2406017470)!
@@ -855,8 +855,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_space_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("space_get_param")
+    fileprivate static let method_space_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("space_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1523206731)!
@@ -885,8 +885,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_space_get_direct_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("space_get_direct_state")
+    fileprivate static let method_space_get_direct_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("space_get_direct_state")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2048616813)!
@@ -909,11 +909,11 @@ open class PhysicsServer3D: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_area_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_create")
+    fileprivate static let method_area_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -933,8 +933,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_set_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_space")
+    fileprivate static let method_area_set_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_space")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -962,8 +962,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_get_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_space")
+    fileprivate static let method_area_get_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_space")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -989,8 +989,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_add_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_add_shape")
+    fileprivate static let method_area_add_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_add_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3711419014)!
@@ -1024,8 +1024,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_shape")
+    fileprivate static let method_area_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2310537182)!
@@ -1056,8 +1056,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_shape_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_shape_transform")
+    fileprivate static let method_area_set_shape_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_shape_transform")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675327471)!
@@ -1088,8 +1088,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_shape_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_shape_disabled")
+    fileprivate static let method_area_set_shape_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_shape_disabled")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -1120,8 +1120,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_get_shape_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_shape_count")
+    fileprivate static let method_area_get_shape_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_shape_count")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1147,8 +1147,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_get_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_shape")
+    fileprivate static let method_area_get_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1066463050)!
@@ -1177,8 +1177,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_get_shape_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_shape_transform")
+    fileprivate static let method_area_get_shape_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_shape_transform")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1050775521)!
@@ -1207,8 +1207,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_remove_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_remove_shape")
+    fileprivate static let method_area_remove_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_remove_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1236,8 +1236,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_clear_shapes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_clear_shapes")
+    fileprivate static let method_area_clear_shapes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_clear_shapes")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -1262,8 +1262,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_collision_layer")
+    fileprivate static let method_area_set_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_collision_layer")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1291,8 +1291,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_get_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_collision_layer")
+    fileprivate static let method_area_get_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_collision_layer")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1318,8 +1318,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_collision_mask")
+    fileprivate static let method_area_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_collision_mask")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1347,8 +1347,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_collision_mask")
+    fileprivate static let method_area_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_collision_mask")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1374,8 +1374,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_param")
+    fileprivate static let method_area_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2980114638)!
@@ -1406,8 +1406,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_transform")
+    fileprivate static let method_area_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_transform")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3935195649)!
@@ -1435,8 +1435,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_param")
+    fileprivate static let method_area_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 890056067)!
@@ -1465,8 +1465,8 @@ open class PhysicsServer3D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_area_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_transform")
+    fileprivate static let method_area_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_transform")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1128465797)!
@@ -1492,8 +1492,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_attach_object_instance_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_attach_object_instance_id")
+    fileprivate static let method_area_attach_object_instance_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_attach_object_instance_id")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1521,8 +1521,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_get_object_instance_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_get_object_instance_id")
+    fileprivate static let method_area_get_object_instance_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_get_object_instance_id")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1548,8 +1548,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_area_set_monitor_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_monitor_callback")
+    fileprivate static let method_area_set_monitor_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_monitor_callback")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3379118538)!
@@ -1590,8 +1590,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_area_monitor_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_area_monitor_callback")
+    fileprivate static let method_area_set_area_monitor_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_area_monitor_callback")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3379118538)!
@@ -1632,8 +1632,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_monitorable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_monitorable")
+    fileprivate static let method_area_set_monitorable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_monitorable")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1661,8 +1661,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_area_set_ray_pickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("area_set_ray_pickable")
+    fileprivate static let method_area_set_ray_pickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("area_set_ray_pickable")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1690,8 +1690,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_create")
+    fileprivate static let method_body_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -1711,8 +1711,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_space")
+    fileprivate static let method_body_set_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_space")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -1740,8 +1740,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_space")
+    fileprivate static let method_body_get_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_space")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -1767,8 +1767,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_mode")
+    fileprivate static let method_body_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_mode")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 606803466)!
@@ -1796,8 +1796,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_mode")
+    fileprivate static let method_body_get_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_mode")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2488819728)!
@@ -1823,8 +1823,8 @@ open class PhysicsServer3D: Object {
         return PhysicsServer3D.BodyMode (rawValue: _result)!
     }
     
-    fileprivate static var method_body_set_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_collision_layer")
+    fileprivate static let method_body_set_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_collision_layer")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1852,8 +1852,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_collision_layer")
+    fileprivate static let method_body_get_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_collision_layer")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1879,8 +1879,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_collision_mask")
+    fileprivate static let method_body_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_collision_mask")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1908,8 +1908,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_collision_mask")
+    fileprivate static let method_body_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_collision_mask")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1935,8 +1935,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_collision_priority")
+    fileprivate static let method_body_set_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_collision_priority")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -1964,8 +1964,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_collision_priority")
+    fileprivate static let method_body_get_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_collision_priority")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -1991,8 +1991,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_add_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_add_shape")
+    fileprivate static let method_body_add_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_add_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3711419014)!
@@ -2026,8 +2026,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_shape")
+    fileprivate static let method_body_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2310537182)!
@@ -2058,8 +2058,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_shape_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_shape_transform")
+    fileprivate static let method_body_set_shape_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_shape_transform")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675327471)!
@@ -2090,8 +2090,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_shape_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_shape_disabled")
+    fileprivate static let method_body_set_shape_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_shape_disabled")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -2122,8 +2122,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_shape_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_shape_count")
+    fileprivate static let method_body_get_shape_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_shape_count")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -2149,8 +2149,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_get_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_shape")
+    fileprivate static let method_body_get_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1066463050)!
@@ -2179,8 +2179,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_get_shape_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_shape_transform")
+    fileprivate static let method_body_get_shape_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_shape_transform")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1050775521)!
@@ -2209,8 +2209,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_remove_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_remove_shape")
+    fileprivate static let method_body_remove_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_remove_shape")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -2238,8 +2238,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_clear_shapes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_clear_shapes")
+    fileprivate static let method_body_clear_shapes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_clear_shapes")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -2264,8 +2264,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_attach_object_instance_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_attach_object_instance_id")
+    fileprivate static let method_body_attach_object_instance_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_attach_object_instance_id")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -2293,8 +2293,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_object_instance_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_object_instance_id")
+    fileprivate static let method_body_get_object_instance_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_object_instance_id")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -2320,8 +2320,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_enable_continuous_collision_detection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_enable_continuous_collision_detection")
+    fileprivate static let method_body_set_enable_continuous_collision_detection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_enable_continuous_collision_detection")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -2352,8 +2352,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_is_continuous_collision_detection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_is_continuous_collision_detection_enabled")
+    fileprivate static let method_body_is_continuous_collision_detection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_is_continuous_collision_detection_enabled")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -2379,8 +2379,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_param")
+    fileprivate static let method_body_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 910941953)!
@@ -2411,8 +2411,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_param")
+    fileprivate static let method_body_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3385027841)!
@@ -2441,8 +2441,8 @@ open class PhysicsServer3D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_body_reset_mass_properties: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_reset_mass_properties")
+    fileprivate static let method_body_reset_mass_properties: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_reset_mass_properties")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -2467,8 +2467,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_state")
+    fileprivate static let method_body_set_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_state")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 599977762)!
@@ -2499,8 +2499,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_state")
+    fileprivate static let method_body_get_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_state")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1850449534)!
@@ -2529,8 +2529,8 @@ open class PhysicsServer3D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_body_apply_central_impulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_apply_central_impulse")
+    fileprivate static let method_body_apply_central_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_apply_central_impulse")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2563,8 +2563,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_apply_impulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_apply_impulse")
+    fileprivate static let method_body_apply_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_apply_impulse")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 390416203)!
@@ -2600,8 +2600,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_apply_torque_impulse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_apply_torque_impulse")
+    fileprivate static let method_body_apply_torque_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_apply_torque_impulse")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2632,8 +2632,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_apply_central_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_apply_central_force")
+    fileprivate static let method_body_apply_central_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_apply_central_force")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2664,8 +2664,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_apply_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_apply_force")
+    fileprivate static let method_body_apply_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_apply_force")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 390416203)!
@@ -2699,8 +2699,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_apply_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_apply_torque")
+    fileprivate static let method_body_apply_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_apply_torque")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2728,8 +2728,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_add_constant_central_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_add_constant_central_force")
+    fileprivate static let method_body_add_constant_central_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_add_constant_central_force")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2760,8 +2760,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_add_constant_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_add_constant_force")
+    fileprivate static let method_body_add_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_add_constant_force")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 390416203)!
@@ -2795,8 +2795,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_add_constant_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_add_constant_torque")
+    fileprivate static let method_body_add_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_add_constant_torque")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2824,8 +2824,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_constant_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_constant_force")
+    fileprivate static let method_body_set_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_constant_force")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2856,8 +2856,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_constant_force: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_constant_force")
+    fileprivate static let method_body_get_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_constant_force")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -2886,8 +2886,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_constant_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_constant_torque")
+    fileprivate static let method_body_set_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_constant_torque")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2918,8 +2918,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_constant_torque: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_constant_torque")
+    fileprivate static let method_body_get_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_constant_torque")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -2948,8 +2948,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_axis_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_axis_velocity")
+    fileprivate static let method_body_set_axis_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_axis_velocity")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2977,8 +2977,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_axis_lock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_axis_lock")
+    fileprivate static let method_body_set_axis_lock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_axis_lock")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2020836892)!
@@ -3009,8 +3009,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_is_axis_locked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_is_axis_locked")
+    fileprivate static let method_body_is_axis_locked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_is_axis_locked")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 587853580)!
@@ -3039,8 +3039,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_add_collision_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_add_collision_exception")
+    fileprivate static let method_body_add_collision_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_add_collision_exception")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3068,8 +3068,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_remove_collision_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_remove_collision_exception")
+    fileprivate static let method_body_remove_collision_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_remove_collision_exception")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3100,8 +3100,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_max_contacts_reported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_max_contacts_reported")
+    fileprivate static let method_body_set_max_contacts_reported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_max_contacts_reported")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3129,8 +3129,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_get_max_contacts_reported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_max_contacts_reported")
+    fileprivate static let method_body_get_max_contacts_reported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_max_contacts_reported")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3156,8 +3156,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_omit_force_integration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_omit_force_integration")
+    fileprivate static let method_body_set_omit_force_integration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_omit_force_integration")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -3188,8 +3188,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_is_omitting_force_integration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_is_omitting_force_integration")
+    fileprivate static let method_body_is_omitting_force_integration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_is_omitting_force_integration")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -3215,8 +3215,44 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_set_force_integration_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_force_integration_callback")
+    fileprivate static let method_body_set_state_sync_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_state_sync_callback")
+        return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3379118538)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the body's state synchronization callback function to `callable`. Use an empty ``Callable`` ([code skip-lint]Callable()`) to clear the callback.
+    /// 
+    /// The function `callable` will be called every physics frame, assuming that the body was active during the previous physics tick, and can be used to fetch the latest state from the physics server.
+    /// 
+    /// The function `callable` must take the following parameters:
+    /// 
+    /// 1. `state`: a ``PhysicsDirectBodyState3D``, used to retrieve the body's state.
+    /// 
+    public static func bodySetStateSyncCallback(body: RID, callable: Callable) {
+        withUnsafePointer(to: body.content) { pArg0 in
+            withUnsafePointer(to: callable.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_body_set_state_sync_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_body_set_force_integration_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_force_integration_callback")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3059434249)!
@@ -3258,8 +3294,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_set_ray_pickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_set_ray_pickable")
+    fileprivate static let method_body_set_ray_pickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_set_ray_pickable")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -3287,8 +3323,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_body_test_motion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_test_motion")
+    fileprivate static let method_body_test_motion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_test_motion")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1944921792)!
@@ -3320,8 +3356,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_body_get_direct_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("body_get_direct_state")
+    fileprivate static let method_body_get_direct_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("body_get_direct_state")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3029727957)!
@@ -3344,11 +3380,11 @@ open class PhysicsServer3D: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_soft_body_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_create")
+    fileprivate static let method_soft_body_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -3365,8 +3401,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_update_rendering_server: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_update_rendering_server")
+    fileprivate static let method_soft_body_update_rendering_server: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_update_rendering_server")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2218179753)!
@@ -3394,8 +3430,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_set_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_space")
+    fileprivate static let method_soft_body_set_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_space")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3423,8 +3459,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_space: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_space")
+    fileprivate static let method_soft_body_get_space: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_space")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -3450,8 +3486,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_mesh")
+    fileprivate static let method_soft_body_set_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_mesh")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3479,8 +3515,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_bounds: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_bounds")
+    fileprivate static let method_soft_body_get_bounds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_bounds")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 974181306)!
@@ -3506,8 +3542,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_collision_layer")
+    fileprivate static let method_soft_body_set_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_collision_layer")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3535,8 +3571,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_collision_layer")
+    fileprivate static let method_soft_body_get_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_collision_layer")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3562,8 +3598,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_collision_mask")
+    fileprivate static let method_soft_body_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_collision_mask")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3591,8 +3627,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_collision_mask")
+    fileprivate static let method_soft_body_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_collision_mask")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3618,8 +3654,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_add_collision_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_add_collision_exception")
+    fileprivate static let method_soft_body_add_collision_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_add_collision_exception")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3647,8 +3683,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_remove_collision_exception: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_remove_collision_exception")
+    fileprivate static let method_soft_body_remove_collision_exception: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_remove_collision_exception")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3676,8 +3712,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_set_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_state")
+    fileprivate static let method_soft_body_set_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_state")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 599977762)!
@@ -3711,8 +3747,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_state")
+    fileprivate static let method_soft_body_get_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_state")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1850449534)!
@@ -3744,8 +3780,8 @@ open class PhysicsServer3D: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_soft_body_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_transform")
+    fileprivate static let method_soft_body_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_transform")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3935195649)!
@@ -3773,8 +3809,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_set_ray_pickable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_ray_pickable")
+    fileprivate static let method_soft_body_set_ray_pickable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_ray_pickable")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -3802,8 +3838,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_set_simulation_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_simulation_precision")
+    fileprivate static let method_soft_body_set_simulation_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_simulation_precision")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3831,8 +3867,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_simulation_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_simulation_precision")
+    fileprivate static let method_soft_body_get_simulation_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_simulation_precision")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3858,8 +3894,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_total_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_total_mass")
+    fileprivate static let method_soft_body_set_total_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_total_mass")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -3887,8 +3923,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_total_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_total_mass")
+    fileprivate static let method_soft_body_get_total_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_total_mass")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -3914,8 +3950,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_linear_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_linear_stiffness")
+    fileprivate static let method_soft_body_set_linear_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_linear_stiffness")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -3943,8 +3979,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_linear_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_linear_stiffness")
+    fileprivate static let method_soft_body_get_linear_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_linear_stiffness")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -3970,8 +4006,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_pressure_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_pressure_coefficient")
+    fileprivate static let method_soft_body_set_pressure_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_pressure_coefficient")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -3999,8 +4035,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_pressure_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_pressure_coefficient")
+    fileprivate static let method_soft_body_get_pressure_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_pressure_coefficient")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -4026,8 +4062,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_damping_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_damping_coefficient")
+    fileprivate static let method_soft_body_set_damping_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_damping_coefficient")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -4055,8 +4091,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_damping_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_damping_coefficient")
+    fileprivate static let method_soft_body_get_damping_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_damping_coefficient")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -4082,8 +4118,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_set_drag_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_set_drag_coefficient")
+    fileprivate static let method_soft_body_set_drag_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_set_drag_coefficient")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -4114,8 +4150,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_drag_coefficient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_drag_coefficient")
+    fileprivate static let method_soft_body_get_drag_coefficient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_drag_coefficient")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -4141,8 +4177,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_move_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_move_point")
+    fileprivate static let method_soft_body_move_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_move_point")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 831953689)!
@@ -4173,8 +4209,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_get_point_global_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_get_point_global_position")
+    fileprivate static let method_soft_body_get_point_global_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_get_point_global_position")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3440143363)!
@@ -4203,8 +4239,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_soft_body_remove_all_pinned_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_remove_all_pinned_points")
+    fileprivate static let method_soft_body_remove_all_pinned_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_remove_all_pinned_points")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -4229,8 +4265,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_pin_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_pin_point")
+    fileprivate static let method_soft_body_pin_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_pin_point")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2658558584)!
@@ -4264,8 +4300,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_soft_body_is_point_pinned: GDExtensionMethodBindPtr = {
-        let methodName = StringName("soft_body_is_point_pinned")
+    fileprivate static let method_soft_body_is_point_pinned: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("soft_body_is_point_pinned")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3120086654)!
@@ -4294,8 +4330,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_create")
+    fileprivate static let method_joint_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_create")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -4312,8 +4348,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_clear")
+    fileprivate static let method_joint_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_clear")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -4338,8 +4374,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_joint_make_pin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_make_pin")
+    fileprivate static let method_joint_make_pin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_make_pin")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4280171926)!
@@ -4376,8 +4412,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_pin_joint_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pin_joint_set_param")
+    fileprivate static let method_pin_joint_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pin_joint_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 810685294)!
@@ -4408,8 +4444,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_pin_joint_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pin_joint_get_param")
+    fileprivate static let method_pin_joint_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pin_joint_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2817972347)!
@@ -4438,8 +4474,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_pin_joint_set_local_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pin_joint_set_local_a")
+    fileprivate static let method_pin_joint_set_local_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pin_joint_set_local_a")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -4467,8 +4503,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_pin_joint_get_local_a: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pin_joint_get_local_a")
+    fileprivate static let method_pin_joint_get_local_a: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pin_joint_get_local_a")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -4494,8 +4530,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_pin_joint_set_local_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pin_joint_set_local_b")
+    fileprivate static let method_pin_joint_set_local_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pin_joint_set_local_b")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -4523,8 +4559,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_pin_joint_get_local_b: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pin_joint_get_local_b")
+    fileprivate static let method_pin_joint_get_local_b: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pin_joint_get_local_b")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -4550,8 +4586,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_make_hinge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_make_hinge")
+    fileprivate static let method_joint_make_hinge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_make_hinge")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1684107643)!
@@ -4588,8 +4624,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_hinge_joint_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hinge_joint_set_param")
+    fileprivate static let method_hinge_joint_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hinge_joint_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3165502333)!
@@ -4620,8 +4656,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_hinge_joint_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hinge_joint_get_param")
+    fileprivate static let method_hinge_joint_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hinge_joint_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2129207581)!
@@ -4650,8 +4686,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_hinge_joint_set_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hinge_joint_set_flag")
+    fileprivate static let method_hinge_joint_set_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hinge_joint_set_flag")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1601626188)!
@@ -4682,8 +4718,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_hinge_joint_get_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hinge_joint_get_flag")
+    fileprivate static let method_hinge_joint_get_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hinge_joint_get_flag")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4165147865)!
@@ -4712,8 +4748,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_make_slider: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_make_slider")
+    fileprivate static let method_joint_make_slider: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_make_slider")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1684107643)!
@@ -4750,8 +4786,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_slider_joint_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("slider_joint_set_param")
+    fileprivate static let method_slider_joint_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("slider_joint_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2264833593)!
@@ -4782,8 +4818,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_slider_joint_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("slider_joint_get_param")
+    fileprivate static let method_slider_joint_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("slider_joint_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3498644957)!
@@ -4812,8 +4848,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_make_cone_twist: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_make_cone_twist")
+    fileprivate static let method_joint_make_cone_twist: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_make_cone_twist")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1684107643)!
@@ -4850,8 +4886,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_cone_twist_joint_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cone_twist_joint_set_param")
+    fileprivate static let method_cone_twist_joint_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cone_twist_joint_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 808587618)!
@@ -4882,8 +4918,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_cone_twist_joint_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cone_twist_joint_get_param")
+    fileprivate static let method_cone_twist_joint_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cone_twist_joint_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1134789658)!
@@ -4912,8 +4948,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_get_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_get_type")
+    fileprivate static let method_joint_get_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_get_type")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4290791900)!
@@ -4939,8 +4975,8 @@ open class PhysicsServer3D: Object {
         return PhysicsServer3D.JointType (rawValue: _result)!
     }
     
-    fileprivate static var method_joint_set_solver_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_set_solver_priority")
+    fileprivate static let method_joint_set_solver_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_set_solver_priority")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -4968,8 +5004,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_joint_get_solver_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_get_solver_priority")
+    fileprivate static let method_joint_get_solver_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_get_solver_priority")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -4995,8 +5031,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_disable_collisions_between_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_disable_collisions_between_bodies")
+    fileprivate static let method_joint_disable_collisions_between_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_disable_collisions_between_bodies")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -5024,8 +5060,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_joint_is_disabled_collisions_between_bodies: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_is_disabled_collisions_between_bodies")
+    fileprivate static let method_joint_is_disabled_collisions_between_bodies: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_is_disabled_collisions_between_bodies")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -5051,8 +5087,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_joint_make_generic_6dof: GDExtensionMethodBindPtr = {
-        let methodName = StringName("joint_make_generic_6dof")
+    fileprivate static let method_joint_make_generic_6dof: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("joint_make_generic_6dof")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1684107643)!
@@ -5089,8 +5125,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_generic_6dof_joint_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generic_6dof_joint_set_param")
+    fileprivate static let method_generic_6dof_joint_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generic_6dof_joint_set_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2600081391)!
@@ -5124,8 +5160,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_generic_6dof_joint_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generic_6dof_joint_get_param")
+    fileprivate static let method_generic_6dof_joint_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generic_6dof_joint_get_param")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 467122058)!
@@ -5157,8 +5193,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_generic_6dof_joint_set_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generic_6dof_joint_set_flag")
+    fileprivate static let method_generic_6dof_joint_set_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generic_6dof_joint_set_flag")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3570926903)!
@@ -5192,8 +5228,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_generic_6dof_joint_get_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generic_6dof_joint_get_flag")
+    fileprivate static let method_generic_6dof_joint_get_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generic_6dof_joint_get_flag")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4158090196)!
@@ -5225,8 +5261,8 @@ open class PhysicsServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_free_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("free_rid")
+    fileprivate static let method_free_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("free_rid")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -5251,8 +5287,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_active")
+    fileprivate static let method_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_active")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -5277,8 +5313,8 @@ open class PhysicsServer3D: Object {
         
     }
     
-    fileprivate static var method_get_process_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_info")
+    fileprivate static let method_get_process_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_info")
         return withUnsafePointer(to: &PhysicsServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1332958745)!

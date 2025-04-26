@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This node defines how particles are emitted. It allows to customize e.g. position and velocity. Available ports are different depending on which function this node is inside (start, process, collision) and whether custom data is enabled.
 open class VisualShaderNodeParticleOutput: VisualShaderNodeOutput {
-    fileprivate static var className = StringName("VisualShaderNodeParticleOutput")
+    private static var className = StringName("VisualShaderNodeParticleOutput")
     override open class var godotClassName: StringName { className }
 }
 

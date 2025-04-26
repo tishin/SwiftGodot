@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A node for displaying plain text in 3D space. By adjusting various properties of this node, you can configure things such as the text's appearance and whether it always faces the camera.
 open class Label3D: GeometryInstance3D {
-    fileprivate static var className = StringName("Label3D")
+    private static var className = StringName("Label3D")
     override open class var godotClassName: StringName { className }
     public enum DrawFlags: Int64, CaseIterable {
         /// If set, lights in the environment affect the label.
@@ -361,7 +361,7 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    /// Vertical space between lines in multiline ``Label3D``.
+    /// Additional vertical spacing between lines (in pixels), spacing is added to line descent. This value can be negative.
     final public var lineSpacing: Double {
         get {
             return get_line_spacing ()
@@ -385,7 +385,7 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    /// Line fill alignment rules. For more info see ``TextServer.JustificationFlag``.
+    /// Line fill alignment rules. See ``TextServer.JustificationFlag`` for more information.
     final public var justificationFlags: TextServer.JustificationFlag {
         get {
             return get_justification_flags ()
@@ -446,7 +446,7 @@ open class Label3D: GeometryInstance3D {
     }
     
     /// Set additional options for BiDi override.
-    final public var structuredTextBidiOverrideOptions: GArray {
+    final public var structuredTextBidiOverrideOptions: VariantArray {
         get {
             return get_structured_text_bidi_override_options ()
         }
@@ -458,8 +458,8 @@ open class Label3D: GeometryInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_horizontal_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_horizontal_alignment")
+    fileprivate static let method_set_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_horizontal_alignment")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2312603777)!
@@ -471,6 +471,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_horizontal_alignment(_ alignment: HorizontalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -484,8 +485,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_horizontal_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_horizontal_alignment")
+    fileprivate static let method_get_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_horizontal_alignment")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 341400642)!
@@ -497,13 +498,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_horizontal_alignment() -> HorizontalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_vertical_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertical_alignment")
+    fileprivate static let method_set_vertical_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical_alignment")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1796458609)!
@@ -515,6 +517,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_vertical_alignment(_ alignment: VerticalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -528,8 +531,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_vertical_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertical_alignment")
+    fileprivate static let method_get_vertical_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertical_alignment")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3274884059)!
@@ -541,13 +544,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_vertical_alignment() -> VerticalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VerticalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_modulate")
+    fileprivate static let method_set_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_modulate")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -559,6 +563,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_modulate(_ modulate: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: modulate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -572,8 +577,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modulate")
+    fileprivate static let method_get_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modulate")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -585,13 +590,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_modulate() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Label3D.method_get_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outline_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outline_modulate")
+    fileprivate static let method_set_outline_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outline_modulate")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -603,6 +609,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_outline_modulate(_ modulate: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: modulate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -616,8 +623,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_outline_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outline_modulate")
+    fileprivate static let method_get_outline_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outline_modulate")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -629,13 +636,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_outline_modulate() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Label3D.method_get_outline_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text")
+    fileprivate static let method_set_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -647,6 +655,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -661,8 +670,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text")
+    fileprivate static let method_get_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -674,13 +683,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Label3D.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_direction")
+    fileprivate static let method_set_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_direction")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1418190634)!
@@ -692,6 +702,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_text_direction(_ direction: TextServer.Direction) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -705,8 +716,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_direction")
+    fileprivate static let method_get_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_direction")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2516697328)!
@@ -718,13 +729,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_text_direction() -> TextServer.Direction {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.Direction (rawValue: _result)!
     }
     
-    fileprivate static var method_set_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_language")
+    fileprivate static let method_set_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_language")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -736,6 +748,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_language(_ language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -750,8 +763,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language")
+    fileprivate static let method_get_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -763,13 +776,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_language() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Label3D.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override")
+    fileprivate static let method_set_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 55961453)!
@@ -781,6 +795,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_structured_text_bidi_override(_ parser: TextServer.StructuredTextParser) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parser.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -794,8 +809,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override")
+    fileprivate static let method_get_structured_text_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3385126229)!
@@ -807,13 +822,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.StructuredTextParser (rawValue: _result)!
     }
     
-    fileprivate static var method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_structured_text_bidi_override_options")
+    fileprivate static let method_set_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_structured_text_bidi_override_options")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -824,7 +840,8 @@ open class Label3D: GeometryInstance3D {
     }()
     
     @inline(__always)
-    fileprivate final func set_structured_text_bidi_override_options(_ args: GArray) {
+    fileprivate final func set_structured_text_bidi_override_options(_ args: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: args.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -838,8 +855,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_structured_text_bidi_override_options")
+    fileprivate static let method_get_structured_text_bidi_override_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_structured_text_bidi_override_options")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -850,14 +867,15 @@ open class Label3D: GeometryInstance3D {
     }()
     
     @inline(__always)
-    fileprivate final func get_structured_text_bidi_override_options() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_structured_text_bidi_override_options() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(Label3D.method_get_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_uppercase: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uppercase")
+    fileprivate static let method_set_uppercase: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uppercase")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -869,6 +887,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_uppercase(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -882,8 +901,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_is_uppercase: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_uppercase")
+    fileprivate static let method_is_uppercase: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_uppercase")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -895,13 +914,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func is_uppercase() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Label3D.method_is_uppercase, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_render_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_render_priority")
+    fileprivate static let method_set_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_render_priority")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -913,6 +933,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_render_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -926,8 +947,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_render_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_priority")
+    fileprivate static let method_get_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_priority")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -939,13 +960,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_render_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Label3D.method_get_render_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outline_render_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outline_render_priority")
+    fileprivate static let method_set_outline_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outline_render_priority")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -957,6 +979,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_outline_render_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -970,8 +993,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_outline_render_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outline_render_priority")
+    fileprivate static let method_get_outline_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outline_render_priority")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -983,13 +1006,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_outline_render_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Label3D.method_get_outline_render_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font")
+    fileprivate static let method_set_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1262170328)!
@@ -1001,6 +1025,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_font(_ font: Font?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1014,8 +1039,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font")
+    fileprivate static let method_get_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229501585)!
@@ -1027,13 +1052,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_font() -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Label3D.method_get_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_size")
+    fileprivate static let method_set_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_size")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1045,6 +1071,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_font_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1058,8 +1085,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_size")
+    fileprivate static let method_get_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_size")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1071,13 +1098,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_font_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Label3D.method_get_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outline_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outline_size")
+    fileprivate static let method_set_outline_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outline_size")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1089,6 +1117,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_outline_size(_ outlineSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: outlineSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1102,8 +1131,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_outline_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outline_size")
+    fileprivate static let method_get_outline_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outline_size")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1115,13 +1144,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_outline_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Label3D.method_get_outline_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_line_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_spacing")
+    fileprivate static let method_set_line_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_spacing")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1133,6 +1163,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_line_spacing(_ lineSpacing: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lineSpacing) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1146,8 +1177,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_line_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_spacing")
+    fileprivate static let method_get_line_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_spacing")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1159,13 +1190,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_line_spacing() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Label3D.method_get_line_spacing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autowrap_mode")
+    fileprivate static let method_set_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autowrap_mode")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3289138044)!
@@ -1177,6 +1209,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_autowrap_mode(_ autowrapMode: TextServer.AutowrapMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1190,8 +1223,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autowrap_mode")
+    fileprivate static let method_get_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autowrap_mode")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1549071663)!
@@ -1203,13 +1236,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_justification_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_justification_flags")
+    fileprivate static let method_set_justification_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_justification_flags")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2877345813)!
@@ -1221,6 +1255,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_justification_flags(_ justificationFlags: TextServer.JustificationFlag) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: justificationFlags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1234,8 +1269,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_justification_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_justification_flags")
+    fileprivate static let method_get_justification_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_justification_flags")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1583363614)!
@@ -1247,13 +1282,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_justification_flags() -> TextServer.JustificationFlag {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.JustificationFlag = TextServer.JustificationFlag ()
         gi.object_method_bind_ptrcall(Label3D.method_get_justification_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1265,6 +1301,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_width(_ width: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1278,8 +1315,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_width")
+    fileprivate static let method_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_width")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1291,13 +1328,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_width() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Label3D.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pixel_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pixel_size")
+    fileprivate static let method_set_pixel_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pixel_size")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1309,6 +1347,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_pixel_size(_ pixelSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pixelSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1322,8 +1361,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_pixel_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pixel_size")
+    fileprivate static let method_get_pixel_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pixel_size")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1335,13 +1374,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_pixel_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Label3D.method_get_pixel_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1353,6 +1393,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1366,8 +1407,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1379,13 +1420,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Label3D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_draw_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draw_flag")
+    fileprivate static let method_set_draw_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_flag")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1285833066)!
@@ -1398,6 +1440,7 @@ open class Label3D: GeometryInstance3D {
     @inline(__always)
     /// If `true`, the specified flag will be enabled. See ``Label3D.DrawFlags`` for a list of flags.
     fileprivate final func set_draw_flag(_ flag: Label3D.DrawFlags, _ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1414,8 +1457,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_draw_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_draw_flag")
+    fileprivate static let method_get_draw_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_draw_flag")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 259226453)!
@@ -1428,6 +1471,7 @@ open class Label3D: GeometryInstance3D {
     @inline(__always)
     /// Returns the value of the specified flag.
     fileprivate final func get_draw_flag(_ flag: Label3D.DrawFlags) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1442,8 +1486,8 @@ open class Label3D: GeometryInstance3D {
         return _result
     }
     
-    fileprivate static var method_set_billboard_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_billboard_mode")
+    fileprivate static let method_set_billboard_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_billboard_mode")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4202036497)!
@@ -1455,6 +1499,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_billboard_mode(_ mode: BaseMaterial3D.BillboardMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1468,8 +1513,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_billboard_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_billboard_mode")
+    fileprivate static let method_get_billboard_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_billboard_mode")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1283840139)!
@@ -1481,13 +1526,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_billboard_mode() -> BaseMaterial3D.BillboardMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_billboard_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.BillboardMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_alpha_cut_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_cut_mode")
+    fileprivate static let method_set_alpha_cut_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_cut_mode")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2549142916)!
@@ -1499,6 +1545,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_alpha_cut_mode(_ mode: Label3D.AlphaCutMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1512,8 +1559,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_alpha_cut_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_cut_mode")
+    fileprivate static let method_get_alpha_cut_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_cut_mode")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 219468601)!
@@ -1525,13 +1572,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_alpha_cut_mode() -> Label3D.AlphaCutMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_alpha_cut_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Label3D.AlphaCutMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_scissor_threshold")
+    fileprivate static let method_set_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_scissor_threshold")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1543,6 +1591,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_alpha_scissor_threshold(_ threshold: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1556,8 +1605,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_scissor_threshold")
+    fileprivate static let method_get_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_scissor_threshold")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1569,13 +1618,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_alpha_scissor_threshold() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Label3D.method_get_alpha_scissor_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_alpha_hash_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_hash_scale")
+    fileprivate static let method_set_alpha_hash_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_hash_scale")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1587,6 +1637,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_alpha_hash_scale(_ threshold: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1600,8 +1651,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_alpha_hash_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_hash_scale")
+    fileprivate static let method_get_alpha_hash_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_hash_scale")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1613,13 +1664,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_alpha_hash_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Label3D.method_get_alpha_hash_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_alpha_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_antialiasing")
+    fileprivate static let method_set_alpha_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_antialiasing")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3212649852)!
@@ -1631,6 +1683,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_alpha_antialiasing(_ alphaAa: BaseMaterial3D.AlphaAntiAliasing) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alphaAa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1644,8 +1697,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_alpha_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_antialiasing")
+    fileprivate static let method_get_alpha_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_antialiasing")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2889939400)!
@@ -1657,13 +1710,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_alpha_antialiasing() -> BaseMaterial3D.AlphaAntiAliasing {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_alpha_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.AlphaAntiAliasing (rawValue: _result)!
     }
     
-    fileprivate static var method_set_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_antialiasing_edge")
+    fileprivate static let method_set_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_antialiasing_edge")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1675,6 +1729,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_alpha_antialiasing_edge(_ edge: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: edge) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1688,8 +1743,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_antialiasing_edge")
+    fileprivate static let method_get_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_antialiasing_edge")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1701,13 +1756,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_alpha_antialiasing_edge() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Label3D.method_get_alpha_antialiasing_edge, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_filter")
+    fileprivate static let method_set_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_filter")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 22904437)!
@@ -1719,6 +1775,7 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func set_texture_filter(_ mode: BaseMaterial3D.TextureFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1732,8 +1789,8 @@ open class Label3D: GeometryInstance3D {
         
     }
     
-    fileprivate static var method_get_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_filter")
+    fileprivate static let method_get_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_filter")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3289213076)!
@@ -1745,13 +1802,14 @@ open class Label3D: GeometryInstance3D {
     
     @inline(__always)
     fileprivate final func get_texture_filter() -> BaseMaterial3D.TextureFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Label3D.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.TextureFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_generate_triangle_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_triangle_mesh")
+    fileprivate static let method_generate_triangle_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_triangle_mesh")
         return withUnsafePointer(to: &Label3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3476533166)!
@@ -1763,9 +1821,10 @@ open class Label3D: GeometryInstance3D {
     
     /// Returns a ``TriangleMesh`` with the label's vertices following its current configuration (such as its ``pixelSize``).
     public final func generateTriangleMesh() -> TriangleMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Label3D.method_generate_triangle_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

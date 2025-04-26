@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This ``SkeletonModification2D`` rotates a bone to look a target. This is extremely helpful for moving character's head to look at the player, rotating a turret to look at a target, or any other case where you want to make a bone rotate towards something quickly and easily.
 open class SkeletonModification2DLookAt: SkeletonModification2D {
-    fileprivate static var className = StringName("SkeletonModification2DLookAt")
+    private static var className = StringName("SkeletonModification2DLookAt")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -65,8 +65,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone2d_node")
+    fileprivate static let method_set_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -78,6 +78,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_bone2d_node(_ bone2dNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bone2dNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -91,8 +92,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone2d_node")
+    fileprivate static let method_get_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -104,13 +105,14 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_bone2d_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_bone2d_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_index")
+    fileprivate static let method_set_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -122,6 +124,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_bone_index(_ boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -135,8 +138,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_index")
+    fileprivate static let method_get_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -148,13 +151,14 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_bone_index() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_bone_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_node")
+    fileprivate static let method_set_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_node")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -166,6 +170,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_target_node(_ targetNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -179,8 +184,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_node")
+    fileprivate static let method_get_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_node")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -192,13 +197,14 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_target_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_additional_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_additional_rotation")
+    fileprivate static let method_set_additional_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_additional_rotation")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -210,6 +216,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Sets the amount of additional rotation that is to be applied after executing the modification. This allows for offsetting the results by the inputted rotation amount.
     public final func setAdditionalRotation(_ rotation: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -223,8 +230,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_additional_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_additional_rotation")
+    fileprivate static let method_get_additional_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_additional_rotation")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -236,13 +243,14 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Returns the amount of additional rotation that is applied after the LookAt modification executes.
     public final func getAdditionalRotation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_additional_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_constraint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_constraint")
+    fileprivate static let method_set_enable_constraint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_constraint")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -254,6 +262,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Sets whether this modification will use constraints or not. When `true`, constraints will be applied when solving the LookAt modification.
     public final func setEnableConstraint(_ enableConstraint: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enableConstraint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -267,8 +276,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_enable_constraint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_constraint")
+    fileprivate static let method_get_enable_constraint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_constraint")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -280,13 +289,14 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Returns `true` if the LookAt modification is using constraints.
     public final func getEnableConstraint() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_enable_constraint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_constraint_angle_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constraint_angle_min")
+    fileprivate static let method_set_constraint_angle_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constraint_angle_min")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -298,6 +308,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Sets the constraint's minimum allowed angle.
     public final func setConstraintAngleMin(_ angleMin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: angleMin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -311,8 +322,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_constraint_angle_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constraint_angle_min")
+    fileprivate static let method_get_constraint_angle_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constraint_angle_min")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -324,13 +335,14 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Returns the constraint's minimum allowed angle.
     public final func getConstraintAngleMin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_constraint_angle_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constraint_angle_max")
+    fileprivate static let method_set_constraint_angle_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constraint_angle_max")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -342,6 +354,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Sets the constraint's maximum allowed angle.
     public final func setConstraintAngleMax(_ angleMax: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: angleMax) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -355,8 +368,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_constraint_angle_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constraint_angle_max")
+    fileprivate static let method_get_constraint_angle_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constraint_angle_max")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -368,13 +381,14 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Returns the constraint's maximum allowed angle.
     public final func getConstraintAngleMax() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_constraint_angle_invert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constraint_angle_invert")
+    fileprivate static let method_set_constraint_angle_invert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constraint_angle_invert")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -389,6 +403,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     /// An inverted joint constraint only constraints the ``Bone2D`` to the angles _outside of_ the inputted minimum and maximum angles. For this reason, it is referred to as an inverted joint constraint, as it constraints the joint to the outside of the inputted values.
     /// 
     public final func setConstraintAngleInvert(_ invert: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: invert) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -402,8 +417,8 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_constraint_angle_invert: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constraint_angle_invert")
+    fileprivate static let method_get_constraint_angle_invert: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constraint_angle_invert")
         return withUnsafePointer(to: &SkeletonModification2DLookAt.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -415,6 +430,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     
     /// Returns whether the constraints to this modification are inverted or not.
     public final func getConstraintAngleInvert() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_invert, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translates to `dot(a, b)` in the shader language.
 open class VisualShaderNodeDotProduct: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeDotProduct")
+    private static var className = StringName("VisualShaderNodeDotProduct")
     override open class var godotClassName: StringName { className }
 }
 

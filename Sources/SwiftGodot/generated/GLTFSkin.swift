@@ -20,7 +20,7 @@ import Musl
 
 
 open class GLTFSkin: Resource {
-    fileprivate static var className = StringName("GLTFSkin")
+    private static var className = StringName("GLTFSkin")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -47,7 +47,7 @@ open class GLTFSkin: Resource {
         
     }
     
-    final public var inverseBinds: VariantCollection<Transform3D> {
+    final public var inverseBinds: TypedArray<Transform3D> {
         get {
             return get_inverse_binds ()
         }
@@ -102,7 +102,7 @@ open class GLTFSkin: Resource {
         
     }
     
-    final public var jointIToBoneI: GDictionary {
+    final public var jointIToBoneI: VariantDictionary {
         get {
             return get_joint_i_to_bone_i ()
         }
@@ -113,7 +113,7 @@ open class GLTFSkin: Resource {
         
     }
     
-    final public var jointIToName: GDictionary {
+    final public var jointIToName: VariantDictionary {
         get {
             return get_joint_i_to_name ()
         }
@@ -136,8 +136,8 @@ open class GLTFSkin: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_skin_root: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skin_root")
+    fileprivate static let method_get_skin_root: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skin_root")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -149,13 +149,14 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func get_skin_root() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_skin_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_skin_root: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skin_root")
+    fileprivate static let method_set_skin_root: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skin_root")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -167,6 +168,7 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func set_skin_root(_ skinRoot: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skinRoot) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -180,8 +182,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_joints_original: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joints_original")
+    fileprivate static let method_get_joints_original: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joints_original")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -193,13 +195,14 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func get_joints_original() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_joints_original, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_joints_original: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joints_original")
+    fileprivate static let method_set_joints_original: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joints_original")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -211,6 +214,7 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func set_joints_original(_ jointsOriginal: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointsOriginal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -224,8 +228,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_inverse_binds: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inverse_binds")
+    fileprivate static let method_get_inverse_binds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inverse_binds")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -237,14 +241,15 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     /// 
-    fileprivate final func get_inverse_binds() -> VariantCollection<Transform3D> {
+    fileprivate final func get_inverse_binds() -> TypedArray<Transform3D> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_inverse_binds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<Transform3D>(content: _result)
+        return TypedArray<Transform3D>(takingOver: _result)
     }
     
-    fileprivate static var method_set_inverse_binds: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inverse_binds")
+    fileprivate static let method_set_inverse_binds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inverse_binds")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -256,7 +261,8 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     /// 
-    fileprivate final func set_inverse_binds(_ inverseBinds: VariantCollection<Transform3D>) {
+    fileprivate final func set_inverse_binds(_ inverseBinds: TypedArray<Transform3D>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: inverseBinds.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -270,8 +276,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_joints: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joints")
+    fileprivate static let method_get_joints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joints")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -283,13 +289,14 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func get_joints() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_joints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_joints: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joints")
+    fileprivate static let method_set_joints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joints")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -301,6 +308,7 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func set_joints(_ joints: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joints.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -314,8 +322,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_non_joints: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_non_joints")
+    fileprivate static let method_get_non_joints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_non_joints")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -327,13 +335,14 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func get_non_joints() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_non_joints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_non_joints: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_non_joints")
+    fileprivate static let method_set_non_joints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_non_joints")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -345,6 +354,7 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func set_non_joints(_ nonJoints: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: nonJoints.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -358,8 +368,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_roots: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_roots")
+    fileprivate static let method_get_roots: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_roots")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -371,13 +381,14 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func get_roots() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_roots, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_roots: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_roots")
+    fileprivate static let method_set_roots: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_roots")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -389,6 +400,7 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func set_roots(_ roots: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: roots.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -402,8 +414,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skeleton")
+    fileprivate static let method_get_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skeleton")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -415,13 +427,14 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func get_skeleton() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skeleton")
+    fileprivate static let method_set_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skeleton")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -433,6 +446,7 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func set_skeleton(_ skeleton: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skeleton) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -446,8 +460,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_joint_i_to_bone_i: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_i_to_bone_i")
+    fileprivate static let method_get_joint_i_to_bone_i: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_i_to_bone_i")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2382534195)!
@@ -459,14 +473,15 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     /// 
-    fileprivate final func get_joint_i_to_bone_i() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    fileprivate final func get_joint_i_to_bone_i() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_joint_i_to_bone_i, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_joint_i_to_bone_i: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_i_to_bone_i")
+    fileprivate static let method_set_joint_i_to_bone_i: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_i_to_bone_i")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155329257)!
@@ -478,7 +493,8 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     /// 
-    fileprivate final func set_joint_i_to_bone_i(_ jointIToBoneI: GDictionary) {
+    fileprivate final func set_joint_i_to_bone_i(_ jointIToBoneI: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIToBoneI.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -492,8 +508,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_joint_i_to_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_i_to_name")
+    fileprivate static let method_get_joint_i_to_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_i_to_name")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2382534195)!
@@ -505,14 +521,15 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     /// 
-    fileprivate final func get_joint_i_to_name() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    fileprivate final func get_joint_i_to_name() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_joint_i_to_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_joint_i_to_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_i_to_name")
+    fileprivate static let method_set_joint_i_to_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_i_to_name")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155329257)!
@@ -524,7 +541,8 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     /// 
-    fileprivate final func set_joint_i_to_name(_ jointIToName: GDictionary) {
+    fileprivate final func set_joint_i_to_name(_ jointIToName: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIToName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -538,8 +556,8 @@ open class GLTFSkin: Resource {
         
     }
     
-    fileprivate static var method_get_godot_skin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_godot_skin")
+    fileprivate static let method_get_godot_skin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_godot_skin")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1032037385)!
@@ -551,13 +569,14 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func get_godot_skin() -> Skin? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GLTFSkin.method_get_godot_skin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_godot_skin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_godot_skin")
+    fileprivate static let method_set_godot_skin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_godot_skin")
         return withUnsafePointer(to: &GLTFSkin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3971435618)!
@@ -569,6 +588,7 @@ open class GLTFSkin: Resource {
     
     @inline(__always)
     fileprivate final func set_godot_skin(_ godotSkin: Skin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: godotSkin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

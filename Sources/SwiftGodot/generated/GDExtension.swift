@@ -26,7 +26,7 @@ import Musl
 /// > Note: GDExtension itself is not a scripting language and has no relation to ``GDScript`` resources.
 /// 
 open class GDExtension: Resource {
-    fileprivate static var className = StringName("GDExtension")
+    private static var className = StringName("GDExtension")
     override open class var godotClassName: StringName { className }
     public enum InitializationLevel: Int64, CaseIterable {
         /// The library is initialized at the same time as the core features of the engine.
@@ -40,8 +40,8 @@ open class GDExtension: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_is_library_open: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_library_open")
+    fileprivate static let method_is_library_open: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_library_open")
         return withUnsafePointer(to: &GDExtension.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -53,13 +53,14 @@ open class GDExtension: Resource {
     
     /// Returns `true` if this extension's library has been opened.
     public final func isLibraryOpen() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GDExtension.method_is_library_open, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_minimum_library_initialization_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimum_library_initialization_level")
+    fileprivate static let method_get_minimum_library_initialization_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimum_library_initialization_level")
         return withUnsafePointer(to: &GDExtension.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 964858755)!
@@ -71,6 +72,7 @@ open class GDExtension: Resource {
     
     /// Returns the lowest level required for this extension to be properly initialized (see the ``GDExtension/InitializationLevel`` enum).
     public final func getMinimumLibraryInitializationLevel() -> GDExtension.InitializationLevel {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GDExtension.method_get_minimum_library_initialization_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GDExtension.InitializationLevel (rawValue: _result)!

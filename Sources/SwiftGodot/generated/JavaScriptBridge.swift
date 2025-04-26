@@ -32,18 +32,18 @@ import Musl
 /// - ``pwaUpdateAvailable``
 open class JavaScriptBridge: Object {
     /// The shared instance of this class
-    public static var shared: JavaScriptBridge = {
-        return withUnsafePointer (to: &JavaScriptBridge.godotClassName.content) { ptr in
-            JavaScriptBridge (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: JavaScriptBridge {
+        return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("JavaScriptBridge")
+    private static var className = StringName("JavaScriptBridge")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_eval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("eval")
+    fileprivate static let method_eval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("eval")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 218087648)!
@@ -76,8 +76,8 @@ open class JavaScriptBridge: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_get_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interface")
+    fileprivate static let method_get_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interface")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1355533281)!
@@ -87,7 +87,7 @@ open class JavaScriptBridge: Object {
         
     }()
     
-    /// Returns an interface to a JavaScript object that can be used by scripts. The `interface` must be a valid property of the JavaScript `window`. The callback must accept a single ``GArray`` argument, which will contain the JavaScript `arguments`. See ``JavaScriptObject`` for usage.
+    /// Returns an interface to a JavaScript object that can be used by scripts. The `interface` must be a valid property of the JavaScript `window`. The callback must accept a single ``VariantArray`` argument, which will contain the JavaScript `arguments`. See ``JavaScriptObject`` for usage.
     public static func getInterface(_ interface: String) -> JavaScriptObject? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         let interface = GString(interface)
@@ -101,11 +101,11 @@ open class JavaScriptBridge: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_callback")
+    fileprivate static let method_create_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_callback")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 422818440)!
@@ -116,6 +116,9 @@ open class JavaScriptBridge: Object {
     }()
     
     /// Creates a reference to a ``Callable`` that can be used as a callback by JavaScript. The reference must be kept until the callback happens, or it won't be called at all. See ``JavaScriptObject`` for usage.
+    /// 
+    /// > Note: The callback function must take exactly one ``VariantArray`` argument, which is going to be the JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">arguments object</a> converted to an array.
+    /// 
     public static func createCallback(callable: Callable) -> JavaScriptObject? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: callable.content) { pArg0 in
@@ -128,11 +131,65 @@ open class JavaScriptBridge: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_object")
+    fileprivate static let method_is_js_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_js_buffer")
+        return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 821968997)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the given `javascriptObject` is of type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">`ArrayBuffer`</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView">`DataView`</a>, or one of the many <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray">typed array objects</a>.
+    public static func isJsBuffer(javascriptObject: JavaScriptObject?) -> Bool {
+        var _result: Bool = false
+        withUnsafePointer(to: javascriptObject?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_is_js_buffer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_js_buffer_to_packed_byte_array: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("js_buffer_to_packed_byte_array")
+        return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 64409880)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a copy of `javascriptBuffer`'s contents as a ``PackedByteArray``. See also ``isJsBuffer(javascriptObject:)``.
+    public static func jsBufferToPackedByteArray(javascriptBuffer: JavaScriptObject?) -> PackedByteArray {
+        let _result: PackedByteArray = PackedByteArray ()
+        withUnsafePointer(to: javascriptBuffer?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_js_buffer_to_packed_byte_array, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_create_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_object")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3093893586)!
@@ -145,7 +202,7 @@ open class JavaScriptBridge: Object {
     /// Creates a new JavaScript object using the `new` constructor. The `object` must a valid property of the JavaScript `window`. See ``JavaScriptObject`` for usage.
     public static func createObject(_ object: String, _ arguments: Variant?...) -> Variant? {
         var _result: Variant.ContentType = Variant.zero
-        let object = Variant(object)
+        let object = object.toVariant()
         withUnsafePointer(to: object.content) { pArg0 in
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -187,8 +244,8 @@ open class JavaScriptBridge: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_download_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("download_buffer")
+    fileprivate static let method_download_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("download_buffer")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3352272093)!
@@ -228,8 +285,8 @@ open class JavaScriptBridge: Object {
         
     }
     
-    fileprivate static var method_pwa_needs_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pwa_needs_update")
+    fileprivate static let method_pwa_needs_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pwa_needs_update")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -249,8 +306,8 @@ open class JavaScriptBridge: Object {
         return _result
     }
     
-    fileprivate static var method_pwa_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pwa_update")
+    fileprivate static let method_pwa_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pwa_update")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -272,8 +329,8 @@ open class JavaScriptBridge: Object {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_force_fs_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_fs_sync")
+    fileprivate static let method_force_fs_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_fs_sync")
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!

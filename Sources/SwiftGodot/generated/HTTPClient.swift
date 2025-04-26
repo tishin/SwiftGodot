@@ -37,12 +37,12 @@ import Musl
 /// 
 /// > Note: When performing HTTP requests from a project exported to Web, keep in mind the remote server may not allow requests from foreign origins due to <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>. If you host the server in question, you should modify its backend to allow requests from foreign origins by adding the `Access-Control-Allow-Origin: *` HTTP header.
 /// 
-/// > Note: TLS support is currently limited to TLS 1.0, TLS 1.1, and TLS 1.2. Attempting to connect to a TLS 1.3-only server will return an error.
+/// > Note: TLS support is currently limited to TLSv1.2 and TLSv1.3. Attempting to connect to a server that only supports older (insecure) TLS versions will return an error.
 /// 
 /// > Warning: TLS certificate revocation and certificate pinning are currently not supported. Revoked certificates are accepted as long as they are otherwise valid. If this is a concern, you may want to use automatically managed certificates with a short validity period.
 /// 
 open class HTTPClient: RefCounted {
-    fileprivate static var className = StringName("HTTPClient")
+    private static var className = StringName("HTTPClient")
     override open class var godotClassName: StringName { className }
     public enum Method: Int64, CaseIterable {
         /// HTTP GET method. The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
@@ -97,7 +97,16 @@ open class HTTPClient: RefCounted {
         case switchingProtocols = 101 // RESPONSE_SWITCHING_PROTOCOLS
         /// HTTP status code `102 Processing` (WebDAV). Indicates that the server has received and is processing the request, but no response is available yet.
         case processing = 102 // RESPONSE_PROCESSING
-        /// HTTP status code `200 OK`. The request has succeeded. Default response for successful requests. Meaning varies depending on the request. GET: The resource has been fetched and is transmitted in the message body. HEAD: The entity headers are in the message body. POST: The resource describing the result of the action is transmitted in the message body. TRACE: The message body contains the request message as received by the server.
+        /// HTTP status code `200 OK`. The request has succeeded. Default response for successful requests. Meaning varies depending on the request:
+        /// 
+        /// - ``Method/get``: The resource has been fetched and is transmitted in the message body.
+        /// 
+        /// - ``Method/head``: The entity headers are in the message body.
+        /// 
+        /// - ``Method/post``: The resource describing the result of the action is transmitted in the message body.
+        /// 
+        /// - ``Method/trace``: The message body contains the request message as received by the server.
+        /// 
         case ok = 200 // RESPONSE_OK
         /// HTTP status code `201 Created`. The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a PUT request.
         case created = 201 // RESPONSE_CREATED
@@ -255,8 +264,8 @@ open class HTTPClient: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_connect_to_host: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_to_host")
+    fileprivate static let method_connect_to_host: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_to_host")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 504540374)!
@@ -271,6 +280,7 @@ open class HTTPClient: RefCounted {
     /// If no `port` is specified (or `-1` is used), it is automatically set to 80 for HTTP and 443 for HTTPS. You can pass the optional `tlsOptions` parameter to customize the trusted certification authorities, or the common name verification when using HTTPS. See ``TLSOptions/client(trustedChain:commonNameOverride:)`` and ``TLSOptions/clientUnsafe(trustedChain:)``.
     /// 
     public final func connectToHost(_ host: String, port: Int32 = -1, tlsOptions: TLSOptions? = nil) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
@@ -292,8 +302,8 @@ open class HTTPClient: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_connection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_connection")
+    fileprivate static let method_set_connection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_connection")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3281897016)!
@@ -305,6 +315,7 @@ open class HTTPClient: RefCounted {
     
     @inline(__always)
     fileprivate final func set_connection(_ connection: StreamPeer?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: connection?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -318,8 +329,8 @@ open class HTTPClient: RefCounted {
         
     }
     
-    fileprivate static var method_get_connection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connection")
+    fileprivate static let method_get_connection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2741655269)!
@@ -331,13 +342,14 @@ open class HTTPClient: RefCounted {
     
     @inline(__always)
     fileprivate final func get_connection() -> StreamPeer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(HTTPClient.method_get_connection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_request_raw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_raw")
+    fileprivate static let method_request_raw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_raw")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 540161961)!
@@ -349,13 +361,14 @@ open class HTTPClient: RefCounted {
     
     /// Sends a raw request to the connected host.
     /// 
-    /// The URL parameter is usually just the part after the host, so for `https://somehost.com/index.php`, it is `/index.php`. When sending requests to an HTTP proxy server, it should be an absolute URL. For ``HTTPClient/Method/options`` requests, `*` is also allowed. For ``HTTPClient/Method/connect`` requests, it should be the authority component (`host:port`).
+    /// The URL parameter is usually just the part after the host, so for `https://example.com/index.php`, it is `/index.php`. When sending requests to an HTTP proxy server, it should be an absolute URL. For ``HTTPClient/Method/options`` requests, `*` is also allowed. For ``HTTPClient/Method/connect`` requests, it should be the authority component (`host:port`).
     /// 
     /// Headers are HTTP request headers. For available HTTP methods, see ``HTTPClient/Method``.
     /// 
     /// Sends the body data raw, as a byte array and does not encode it in any way.
     /// 
     public final func requestRaw(method: HTTPClient.Method, url: String, headers: PackedStringArray, body: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: method.rawValue) { pArg0 in
             let url = GString(url)
@@ -380,8 +393,8 @@ open class HTTPClient: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_request: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request")
+    fileprivate static let method_request: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3778990155)!
@@ -393,7 +406,7 @@ open class HTTPClient: RefCounted {
     
     /// Sends a request to the connected host.
     /// 
-    /// The URL parameter is usually just the part after the host, so for `https://somehost.com/index.php`, it is `/index.php`. When sending requests to an HTTP proxy server, it should be an absolute URL. For ``HTTPClient/Method/options`` requests, `*` is also allowed. For ``HTTPClient/Method/connect`` requests, it should be the authority component (`host:port`).
+    /// The URL parameter is usually just the part after the host, so for `https://example.com/index.php`, it is `/index.php`. When sending requests to an HTTP proxy server, it should be an absolute URL. For ``HTTPClient/Method/options`` requests, `*` is also allowed. For ``HTTPClient/Method/connect`` requests, it should be the authority component (`host:port`).
     /// 
     /// Headers are HTTP request headers. For available HTTP methods, see ``HTTPClient/Method``.
     /// 
@@ -402,6 +415,7 @@ open class HTTPClient: RefCounted {
     /// > Note: The `body` parameter is ignored if `method` is ``HTTPClient/Method/get``. This is because GET methods can't contain request data. As a workaround, you can pass request data as a query string in the URL. See ``GString/uriEncode()`` for an example.
     /// 
     public final func request(method: HTTPClient.Method, url: String, headers: PackedStringArray, body: String = "") -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: method.rawValue) { pArg0 in
             let url = GString(url)
@@ -427,8 +441,8 @@ open class HTTPClient: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -440,12 +454,13 @@ open class HTTPClient: RefCounted {
     
     /// Closes the current connection, allowing reuse of this ``HTTPClient``.
     public final func close() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(HTTPClient.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_has_response: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_response")
+    fileprivate static let method_has_response: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_response")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -457,13 +472,14 @@ open class HTTPClient: RefCounted {
     
     /// If `true`, this ``HTTPClient`` has a response available.
     public final func hasResponse() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(HTTPClient.method_has_response, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_response_chunked: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_response_chunked")
+    fileprivate static let method_is_response_chunked: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_response_chunked")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -475,13 +491,14 @@ open class HTTPClient: RefCounted {
     
     /// If `true`, this ``HTTPClient`` has a response that is chunked.
     public final func isResponseChunked() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(HTTPClient.method_is_response_chunked, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_response_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_response_code")
+    fileprivate static let method_get_response_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_response_code")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -493,13 +510,14 @@ open class HTTPClient: RefCounted {
     
     /// Returns the response's HTTP status code.
     public final func getResponseCode() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HTTPClient.method_get_response_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_response_headers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_response_headers")
+    fileprivate static let method_get_response_headers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_response_headers")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -511,13 +529,14 @@ open class HTTPClient: RefCounted {
     
     /// Returns the response headers.
     public final func getResponseHeaders() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(HTTPClient.method_get_response_headers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_response_headers_as_dictionary: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_response_headers_as_dictionary")
+    fileprivate static let method_get_response_headers_as_dictionary: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_response_headers_as_dictionary")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2382534195)!
@@ -527,18 +546,17 @@ open class HTTPClient: RefCounted {
         
     }()
     
-    /// Returns all response headers as a Dictionary of structure `{ "key": "value1; value2" }` where the case-sensitivity of the keys and values is kept like the server delivers it. A value is a simple String, this string can have more than one value where "; " is used as separator.
+    /// Returns all response headers as a ``VariantDictionary``. Each entry is composed by the header name, and a ``String`` containing the values separated by `"; "`. The casing is kept the same as the headers were received.
     /// 
-    /// **Example:**
-    /// 
-    public final func getResponseHeadersAsDictionary() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getResponseHeadersAsDictionary() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(HTTPClient.method_get_response_headers_as_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_response_body_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_response_body_length")
+    fileprivate static let method_get_response_body_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_response_body_length")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -555,13 +573,14 @@ open class HTTPClient: RefCounted {
     /// > Note: This function always returns `-1` on the Web platform due to browsers limitations.
     /// 
     public final func getResponseBodyLength() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(HTTPClient.method_get_response_body_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_read_response_body_chunk: GDExtensionMethodBindPtr = {
-        let methodName = StringName("read_response_body_chunk")
+    fileprivate static let method_read_response_body_chunk: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("read_response_body_chunk")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2115431945)!
@@ -573,13 +592,14 @@ open class HTTPClient: RefCounted {
     
     /// Reads one chunk from the response.
     public final func readResponseBodyChunk() -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         gi.object_method_bind_ptrcall(HTTPClient.method_read_response_body_chunk, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_read_chunk_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_read_chunk_size")
+    fileprivate static let method_set_read_chunk_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_read_chunk_size")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -591,6 +611,7 @@ open class HTTPClient: RefCounted {
     
     @inline(__always)
     fileprivate final func set_read_chunk_size(_ bytes: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -604,8 +625,8 @@ open class HTTPClient: RefCounted {
         
     }
     
-    fileprivate static var method_get_read_chunk_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_read_chunk_size")
+    fileprivate static let method_get_read_chunk_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_read_chunk_size")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -617,13 +638,14 @@ open class HTTPClient: RefCounted {
     
     @inline(__always)
     fileprivate final func get_read_chunk_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HTTPClient.method_get_read_chunk_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_blocking_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blocking_mode")
+    fileprivate static let method_set_blocking_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blocking_mode")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -635,6 +657,7 @@ open class HTTPClient: RefCounted {
     
     @inline(__always)
     fileprivate final func set_blocking_mode(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -648,8 +671,8 @@ open class HTTPClient: RefCounted {
         
     }
     
-    fileprivate static var method_is_blocking_mode_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_blocking_mode_enabled")
+    fileprivate static let method_is_blocking_mode_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_blocking_mode_enabled")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -661,13 +684,14 @@ open class HTTPClient: RefCounted {
     
     @inline(__always)
     fileprivate final func is_blocking_mode_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(HTTPClient.method_is_blocking_mode_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_status")
+    fileprivate static let method_get_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_status")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1426656811)!
@@ -679,13 +703,14 @@ open class HTTPClient: RefCounted {
     
     /// Returns a ``HTTPClient/Status`` constant. Need to call ``poll()`` in order to get status updates.
     public final func getStatus() -> HTTPClient.Status {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(HTTPClient.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return HTTPClient.Status (rawValue: _result)!
     }
     
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -697,13 +722,14 @@ open class HTTPClient: RefCounted {
     
     /// This needs to be called in order to have any request processed. Check results with ``getStatus()``.
     public final func poll() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(HTTPClient.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_http_proxy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_http_proxy")
+    fileprivate static let method_set_http_proxy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_http_proxy")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2956805083)!
@@ -718,6 +744,7 @@ open class HTTPClient: RefCounted {
     /// The proxy server is unset if `host` is empty or `port` is -1.
     /// 
     public final func setHttpProxy(host: String, port: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
             withUnsafePointer(to: port) { pArg1 in
@@ -735,8 +762,8 @@ open class HTTPClient: RefCounted {
         
     }
     
-    fileprivate static var method_set_https_proxy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_https_proxy")
+    fileprivate static let method_set_https_proxy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_https_proxy")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2956805083)!
@@ -751,6 +778,7 @@ open class HTTPClient: RefCounted {
     /// The proxy server is unset if `host` is empty or `port` is -1.
     /// 
     public final func setHttpsProxy(host: String, port: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
             withUnsafePointer(to: port) { pArg1 in
@@ -768,8 +796,8 @@ open class HTTPClient: RefCounted {
         
     }
     
-    fileprivate static var method_query_string_from_dict: GDExtensionMethodBindPtr = {
-        let methodName = StringName("query_string_from_dict")
+    fileprivate static let method_query_string_from_dict: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("query_string_from_dict")
         return withUnsafePointer(to: &HTTPClient.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2538086567)!
@@ -783,7 +811,8 @@ open class HTTPClient: RefCounted {
     /// 
     /// Furthermore, if a key has a `null` value, only the key itself is added, without equal sign and value. If the value is an array, for each value in it a pair with the same key is added.
     /// 
-    public final func queryStringFromDict(fields: GDictionary) -> String {
+    public final func queryStringFromDict(fields: VariantDictionary) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: fields.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

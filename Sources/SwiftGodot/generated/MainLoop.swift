@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``MainLoop`` is the abstract base class for a Godot project's game loop. It is inherited by ``SceneTree``, which is the default game loop implementation used in Godot projects, though it is also possible to write and use one's own ``MainLoop`` subclass instead of the scene tree.
 /// 
-/// Upon the application start, a ``MainLoop`` implementation must be provided to the OS; otherwise, the application will exit. This happens automatically (and a ``SceneTree`` is created) unless a ``MainLoop`` ``Script`` is provided from the command line (with e.g. `godot -s my_loop.gd`) or the "Main Loop Type" project setting is overwritten.
+/// Upon the application start, a ``MainLoop`` implementation must be provided to the OS; otherwise, the application will exit. This happens automatically (and a ``SceneTree`` is created) unless a ``MainLoop`` ``Script`` is provided from the command line (with e.g. `godot -s my_loop.gd`) or the ``ProjectSettings/application/run/mainLoopType`` project setting is overwritten.
 /// 
 /// Here is an example script implementing a simple ``MainLoop``:
 /// 
@@ -33,7 +33,7 @@ import Musl
 /// 
 /// - ``onRequestPermissionsResult``
 open class MainLoop: Object {
-    fileprivate static var className = StringName("MainLoop")
+    private static var className = StringName("MainLoop")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Notification received from the OS when the application is exceeding its allocated memory.
@@ -83,35 +83,113 @@ open class MainLoop: Object {
     /// Notification received when text server is changed.
     public static let notificationTextServerChanged = 2018
     /* Methods */
+    fileprivate static let method__initialize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_initialize")
+        return withUnsafePointer(to: &MainLoop.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called once during initialization.
     @_documentation(visibility: public)
     open func _initialize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(MainLoop.method__initialize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__physics_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_physics_process")
+        return withUnsafePointer(to: &MainLoop.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 330693286)!
+            }
+            
+        }
+        
+    }()
     
     /// Called each physics frame with the time since the last physics frame as argument (`delta`, in seconds). Equivalent to ``Node/_physicsProcess(delta:)``.
     /// 
     /// If implemented, the method must return a boolean value. `true` ends the main loop, while `false` lets it proceed to the next frame.
     /// 
+    /// > Note: `delta` will be larger than expected if running at a framerate lower than ``Engine/physicsTicksPerSecond`` / ``Engine/maxPhysicsStepsPerFrame`` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both ``_process(delta:)`` and ``_physicsProcess(delta:)``. As a result, avoid using `delta` for time measurements in real-world seconds. Use the ``Time`` singleton's methods for this purpose instead, such as ``Time/getTicksUsec()``.
+    /// 
     @_documentation(visibility: public)
     open func _physicsProcess(delta: Double) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: delta) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(MainLoop.method__physics_process, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_process")
+        return withUnsafePointer(to: &MainLoop.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 330693286)!
+            }
+            
+        }
+        
+    }()
     
     /// Called each process (idle) frame with the time since the last process frame as argument (in seconds). Equivalent to ``Node/_process(delta:)``.
     /// 
     /// If implemented, the method must return a boolean value. `true` ends the main loop, while `false` lets it proceed to the next frame.
     /// 
+    /// > Note: `delta` will be larger than expected if running at a framerate lower than ``Engine/physicsTicksPerSecond`` / ``Engine/maxPhysicsStepsPerFrame`` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both ``_process(delta:)`` and ``_physicsProcess(delta:)``. As a result, avoid using `delta` for time measurements in real-world seconds. Use the ``Time`` singleton's methods for this purpose instead, such as ``Time/getTicksUsec()``.
+    /// 
     @_documentation(visibility: public)
     open func _process(delta: Double) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: delta) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(MainLoop.method__process, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__finalize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_finalize")
+        return withUnsafePointer(to: &MainLoop.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called before the program exits.
     @_documentation(visibility: public)
     open func _finalize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(MainLoop.method__finalize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_finalize":
@@ -150,20 +228,23 @@ open class MainLoop: Object {
 // Support methods for proxies
 func _MainLoop_proxy_finalize (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<MainLoop>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MainLoop else { return }
     swiftObject._finalize ()
 }
 
 func _MainLoop_proxy_initialize (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<MainLoop>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MainLoop else { return }
     swiftObject._initialize ()
 }
 
 func _MainLoop_proxy_physics_process (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<MainLoop>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MainLoop else { return }
     let ret = swiftObject._physicsProcess (delta: args [0]!.assumingMemoryBound (to: Double.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -171,7 +252,8 @@ func _MainLoop_proxy_physics_process (instance: UnsafeMutableRawPointer?, args: 
 func _MainLoop_proxy_process (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<MainLoop>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? MainLoop else { return }
     let ret = swiftObject._process (delta: args [0]!.assumingMemoryBound (to: Double.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }

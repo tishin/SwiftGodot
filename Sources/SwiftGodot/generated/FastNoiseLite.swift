@@ -26,7 +26,7 @@ import Musl
 /// Most generated noise values are in the range of `[-1, 1]`, but not always. Some of the cellular noise algorithms return results above `1`.
 /// 
 open class FastNoiseLite: Noise {
-    fileprivate static var className = StringName("FastNoiseLite")
+    private static var className = StringName("FastNoiseLite")
     override open class var godotClassName: StringName { className }
     public enum NoiseType: Int64, CaseIterable {
         /// A lattice of points are assigned random values then interpolated based on neighboring values.
@@ -40,9 +40,9 @@ open class FastNoiseLite: Noise {
         case perlin = 3 // TYPE_PERLIN
         /// Cellular includes both Worley noise and Voronoi diagrams which creates various regions of the same value.
         case cellular = 2 // TYPE_CELLULAR
-        /// As opposed to ``NoiseType/perlin``, gradients exist in a simplex lattice rather than a grid lattice, avoiding directional artifacts.
+        /// As opposed to ``NoiseType/perlin``, gradients exist in a simplex lattice rather than a grid lattice, avoiding directional artifacts. Internally uses FastNoiseLite's OpenSimplex2 noise type.
         case simplex = 0 // TYPE_SIMPLEX
-        /// Modified, higher quality version of ``NoiseType/simplex``, but slower.
+        /// Modified, higher quality version of ``NoiseType/simplex``, but slower. Internally uses FastNoiseLite's OpenSimplex2S noise type.
         case simplexSmooth = 1 // TYPE_SIMPLEX_SMOOTH
     }
     
@@ -64,7 +64,7 @@ open class FastNoiseLite: Noise {
         case euclideanSquared = 1 // DISTANCE_EUCLIDEAN_SQUARED
         /// Manhattan distance (taxicab metric) to the nearest point.
         case manhattan = 2 // DISTANCE_MANHATTAN
-        /// Blend of ``CellularDistanceFunction/euclidean`` and ``CellularDistanceFunction/manhattan`` to give curved cell boundaries
+        /// Blend of ``CellularDistanceFunction/euclidean`` and ``CellularDistanceFunction/manhattan`` to give curved cell boundaries.
         case hybrid = 3 // DISTANCE_HYBRID
     }
     
@@ -365,8 +365,8 @@ open class FastNoiseLite: Noise {
     }
     
     /* Methods */
-    fileprivate static var method_set_noise_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_noise_type")
+    fileprivate static let method_set_noise_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_noise_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2624461392)!
@@ -378,6 +378,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_noise_type(_ type: FastNoiseLite.NoiseType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -391,8 +392,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_noise_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_noise_type")
+    fileprivate static let method_get_noise_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_noise_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1458108610)!
@@ -404,13 +405,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_noise_type() -> FastNoiseLite.NoiseType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_noise_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FastNoiseLite.NoiseType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_seed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_seed")
+    fileprivate static let method_set_seed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_seed")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -422,6 +424,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_seed(_ seed: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: seed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -435,8 +438,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_seed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_seed")
+    fileprivate static let method_get_seed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_seed")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -448,13 +451,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_seed() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_frequency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frequency")
+    fileprivate static let method_set_frequency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frequency")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -466,6 +470,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_frequency(_ freq: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: freq) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -479,8 +484,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_frequency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frequency")
+    fileprivate static let method_get_frequency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frequency")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -492,13 +497,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_frequency() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -510,6 +516,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_offset(_ offset: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -523,8 +530,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -536,13 +543,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_offset() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fractal_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fractal_type")
+    fileprivate static let method_set_fractal_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fractal_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4132731174)!
@@ -554,6 +562,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_fractal_type(_ type: FastNoiseLite.FractalType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -567,8 +576,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_fractal_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fractal_type")
+    fileprivate static let method_get_fractal_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fractal_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1036889279)!
@@ -580,13 +589,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_fractal_type() -> FastNoiseLite.FractalType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FastNoiseLite.FractalType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_fractal_octaves: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fractal_octaves")
+    fileprivate static let method_set_fractal_octaves: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fractal_octaves")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -598,6 +608,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_fractal_octaves(_ octaveCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: octaveCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -611,8 +622,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_fractal_octaves: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fractal_octaves")
+    fileprivate static let method_get_fractal_octaves: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fractal_octaves")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -624,13 +635,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_fractal_octaves() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_octaves, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fractal_lacunarity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fractal_lacunarity")
+    fileprivate static let method_set_fractal_lacunarity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fractal_lacunarity")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -642,6 +654,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_fractal_lacunarity(_ lacunarity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lacunarity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -655,8 +668,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_fractal_lacunarity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fractal_lacunarity")
+    fileprivate static let method_get_fractal_lacunarity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fractal_lacunarity")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -668,13 +681,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_fractal_lacunarity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_lacunarity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fractal_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fractal_gain")
+    fileprivate static let method_set_fractal_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fractal_gain")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -686,6 +700,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_fractal_gain(_ gain: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -699,8 +714,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_fractal_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fractal_gain")
+    fileprivate static let method_get_fractal_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fractal_gain")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -712,13 +727,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_fractal_gain() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fractal_weighted_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fractal_weighted_strength")
+    fileprivate static let method_set_fractal_weighted_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fractal_weighted_strength")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -730,6 +746,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_fractal_weighted_strength(_ weightedStrength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: weightedStrength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -743,8 +760,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_fractal_weighted_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fractal_weighted_strength")
+    fileprivate static let method_get_fractal_weighted_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fractal_weighted_strength")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -756,13 +773,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_fractal_weighted_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_weighted_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fractal_ping_pong_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fractal_ping_pong_strength")
+    fileprivate static let method_set_fractal_ping_pong_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fractal_ping_pong_strength")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -774,6 +792,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_fractal_ping_pong_strength(_ pingPongStrength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pingPongStrength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -787,8 +806,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_fractal_ping_pong_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fractal_ping_pong_strength")
+    fileprivate static let method_get_fractal_ping_pong_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fractal_ping_pong_strength")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -800,13 +819,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_fractal_ping_pong_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_ping_pong_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cellular_distance_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cellular_distance_function")
+    fileprivate static let method_set_cellular_distance_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cellular_distance_function")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1006013267)!
@@ -818,6 +838,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_cellular_distance_function(_ `func`: FastNoiseLite.CellularDistanceFunction) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -831,8 +852,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_cellular_distance_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cellular_distance_function")
+    fileprivate static let method_get_cellular_distance_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cellular_distance_function")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2021274088)!
@@ -844,13 +865,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_cellular_distance_function() -> FastNoiseLite.CellularDistanceFunction {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_distance_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FastNoiseLite.CellularDistanceFunction (rawValue: _result)!
     }
     
-    fileprivate static var method_set_cellular_jitter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cellular_jitter")
+    fileprivate static let method_set_cellular_jitter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cellular_jitter")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -862,6 +884,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_cellular_jitter(_ jitter: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jitter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -875,8 +898,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_cellular_jitter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cellular_jitter")
+    fileprivate static let method_get_cellular_jitter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cellular_jitter")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -888,13 +911,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_cellular_jitter() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_jitter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cellular_return_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cellular_return_type")
+    fileprivate static let method_set_cellular_return_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cellular_return_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2654169698)!
@@ -906,6 +930,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_cellular_return_type(_ ret: FastNoiseLite.CellularReturnType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ret.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -919,8 +944,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_cellular_return_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cellular_return_type")
+    fileprivate static let method_get_cellular_return_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cellular_return_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3699796343)!
@@ -932,13 +957,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_cellular_return_type() -> FastNoiseLite.CellularReturnType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_return_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FastNoiseLite.CellularReturnType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_domain_warp_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_enabled")
+    fileprivate static let method_set_domain_warp_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_enabled")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -950,6 +976,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_enabled(_ domainWarpEnabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -963,8 +990,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_is_domain_warp_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_domain_warp_enabled")
+    fileprivate static let method_is_domain_warp_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_domain_warp_enabled")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -976,13 +1003,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func is_domain_warp_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FastNoiseLite.method_is_domain_warp_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_domain_warp_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_type")
+    fileprivate static let method_set_domain_warp_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3629692980)!
@@ -994,6 +1022,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_type(_ domainWarpType: FastNoiseLite.DomainWarpType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1007,8 +1036,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_domain_warp_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_domain_warp_type")
+    fileprivate static let method_get_domain_warp_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_warp_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2980162020)!
@@ -1020,13 +1049,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_domain_warp_type() -> FastNoiseLite.DomainWarpType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FastNoiseLite.DomainWarpType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_domain_warp_amplitude: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_amplitude")
+    fileprivate static let method_set_domain_warp_amplitude: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_amplitude")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1038,6 +1068,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_amplitude(_ domainWarpAmplitude: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpAmplitude) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1051,8 +1082,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_domain_warp_amplitude: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_domain_warp_amplitude")
+    fileprivate static let method_get_domain_warp_amplitude: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_warp_amplitude")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1064,13 +1095,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_domain_warp_amplitude() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_amplitude, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_domain_warp_frequency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_frequency")
+    fileprivate static let method_set_domain_warp_frequency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_frequency")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1082,6 +1114,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_frequency(_ domainWarpFrequency: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpFrequency) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1095,8 +1128,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_domain_warp_frequency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_domain_warp_frequency")
+    fileprivate static let method_get_domain_warp_frequency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_warp_frequency")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1108,13 +1141,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_domain_warp_frequency() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_domain_warp_fractal_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_fractal_type")
+    fileprivate static let method_set_domain_warp_fractal_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_fractal_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3999408287)!
@@ -1126,6 +1160,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_fractal_type(_ domainWarpFractalType: FastNoiseLite.DomainWarpFractalType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpFractalType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1139,8 +1174,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_domain_warp_fractal_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_domain_warp_fractal_type")
+    fileprivate static let method_get_domain_warp_fractal_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_warp_fractal_type")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 407716934)!
@@ -1152,13 +1187,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_domain_warp_fractal_type() -> FastNoiseLite.DomainWarpFractalType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FastNoiseLite.DomainWarpFractalType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_domain_warp_fractal_octaves: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_fractal_octaves")
+    fileprivate static let method_set_domain_warp_fractal_octaves: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_fractal_octaves")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1170,6 +1206,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_fractal_octaves(_ domainWarpOctaveCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpOctaveCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1183,8 +1220,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_domain_warp_fractal_octaves: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_domain_warp_fractal_octaves")
+    fileprivate static let method_get_domain_warp_fractal_octaves: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_warp_fractal_octaves")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1196,13 +1233,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_domain_warp_fractal_octaves() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_octaves, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_domain_warp_fractal_lacunarity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_fractal_lacunarity")
+    fileprivate static let method_set_domain_warp_fractal_lacunarity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_fractal_lacunarity")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1214,6 +1252,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_fractal_lacunarity(_ domainWarpLacunarity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpLacunarity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1227,8 +1266,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_domain_warp_fractal_lacunarity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_domain_warp_fractal_lacunarity")
+    fileprivate static let method_get_domain_warp_fractal_lacunarity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_warp_fractal_lacunarity")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1240,13 +1279,14 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_domain_warp_fractal_lacunarity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_lacunarity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_domain_warp_fractal_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_domain_warp_fractal_gain")
+    fileprivate static let method_set_domain_warp_fractal_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_domain_warp_fractal_gain")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1258,6 +1298,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func set_domain_warp_fractal_gain(_ domainWarpGain: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: domainWarpGain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1271,8 +1312,8 @@ open class FastNoiseLite: Noise {
         
     }
     
-    fileprivate static var method_get_domain_warp_fractal_gain: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_domain_warp_fractal_gain")
+    fileprivate static let method_get_domain_warp_fractal_gain: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_domain_warp_fractal_gain")
         return withUnsafePointer(to: &FastNoiseLite.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1284,6 +1325,7 @@ open class FastNoiseLite: Noise {
     
     @inline(__always)
     fileprivate final func get_domain_warp_fractal_gain() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

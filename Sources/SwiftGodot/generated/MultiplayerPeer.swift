@@ -34,7 +34,7 @@ import Musl
 /// - ``peerConnected``
 /// - ``peerDisconnected``
 open class MultiplayerPeer: PacketPeer {
-    fileprivate static var className = StringName("MultiplayerPeer")
+    private static var className = StringName("MultiplayerPeer")
     override open class var godotClassName: StringName { className }
     public enum ConnectionStatus: Int64, CaseIterable {
         /// The MultiplayerPeer is disconnected.
@@ -102,8 +102,8 @@ open class MultiplayerPeer: PacketPeer {
     }
     
     /* Methods */
-    fileprivate static var method_set_transfer_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transfer_channel")
+    fileprivate static let method_set_transfer_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transfer_channel")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -115,6 +115,7 @@ open class MultiplayerPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_transfer_channel(_ channel: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -128,8 +129,8 @@ open class MultiplayerPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_transfer_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transfer_channel")
+    fileprivate static let method_get_transfer_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transfer_channel")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -141,13 +142,14 @@ open class MultiplayerPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_transfer_channel() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_transfer_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transfer_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transfer_mode")
+    fileprivate static let method_set_transfer_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transfer_mode")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 950411049)!
@@ -159,6 +161,7 @@ open class MultiplayerPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_transfer_mode(_ mode: MultiplayerPeer.TransferMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -172,8 +175,8 @@ open class MultiplayerPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_transfer_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transfer_mode")
+    fileprivate static let method_get_transfer_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transfer_mode")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3369852622)!
@@ -185,13 +188,14 @@ open class MultiplayerPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_transfer_mode() -> MultiplayerPeer.TransferMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_transfer_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MultiplayerPeer.TransferMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_target_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_peer")
+    fileprivate static let method_set_target_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_peer")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -206,6 +210,7 @@ open class MultiplayerPeer: PacketPeer {
     /// The `id` can be one of: ``targetPeerBroadcast`` to send to all connected peers, ``targetPeerServer`` to send to the peer acting as server, a valid peer ID to send to that specific peer, a negative peer ID to send to all peers except that one. By default, the target peer is ``targetPeerBroadcast``.
     /// 
     public final func setTargetPeer(id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -219,8 +224,8 @@ open class MultiplayerPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_packet_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_peer")
+    fileprivate static let method_get_packet_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_peer")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -232,13 +237,14 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Returns the ID of the ``MultiplayerPeer`` who sent the next available packet. See ``PacketPeer/getAvailablePacketCount()``.
     public final func getPacketPeer() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_packet_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_channel")
+    fileprivate static let method_get_packet_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_channel")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -250,13 +256,14 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Returns the channel over which the next available packet was received. See ``PacketPeer/getAvailablePacketCount()``.
     public final func getPacketChannel() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_packet_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_mode")
+    fileprivate static let method_get_packet_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_mode")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3369852622)!
@@ -268,13 +275,14 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Returns the transfer mode the remote peer used to send the next available packet. See ``PacketPeer/getAvailablePacketCount()``.
     public final func getPacketMode() -> MultiplayerPeer.TransferMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MultiplayerPeer.TransferMode (rawValue: _result)!
     }
     
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -286,12 +294,13 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Waits up to 1 second to receive a new network event.
     public final func poll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -303,12 +312,13 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Immediately close the multiplayer peer returning to the state ``ConnectionStatus/disconnected``. Connected peers will be dropped without emitting [signal peer_disconnected].
     public final func close() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_disconnect_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_peer")
+    fileprivate static let method_disconnect_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_peer")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4023243586)!
@@ -320,6 +330,7 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Disconnects the given `peer` from this host. If `force` is `true` the [signal peer_disconnected] signal will not be emitted for this peer.
     public final func disconnectPeer(_ peer: Int32, force: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: peer) { pArg0 in
             withUnsafePointer(to: force) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -336,8 +347,8 @@ open class MultiplayerPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_connection_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connection_status")
+    fileprivate static let method_get_connection_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection_status")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2147374275)!
@@ -349,13 +360,14 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Returns the current state of the connection. See ``MultiplayerPeer/ConnectionStatus``.
     public final func getConnectionStatus() -> MultiplayerPeer.ConnectionStatus {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_connection_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MultiplayerPeer.ConnectionStatus (rawValue: _result)!
     }
     
-    fileprivate static var method_get_unique_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unique_id")
+    fileprivate static let method_get_unique_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unique_id")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -367,13 +379,14 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Returns the ID of this ``MultiplayerPeer``.
     public final func getUniqueId() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_generate_unique_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_unique_id")
+    fileprivate static let method_generate_unique_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_unique_id")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -385,13 +398,14 @@ open class MultiplayerPeer: PacketPeer {
     
     /// Returns a randomly generated integer that can be used as a network unique ID.
     public final func generateUniqueId() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_generate_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_refuse_new_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_refuse_new_connections")
+    fileprivate static let method_set_refuse_new_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_refuse_new_connections")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -403,6 +417,7 @@ open class MultiplayerPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_refuse_new_connections(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -416,8 +431,8 @@ open class MultiplayerPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_is_refusing_new_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_refusing_new_connections")
+    fileprivate static let method_is_refusing_new_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_refusing_new_connections")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -429,13 +444,14 @@ open class MultiplayerPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func is_refusing_new_connections() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_is_refusing_new_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_server_relay_supported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_server_relay_supported")
+    fileprivate static let method_is_server_relay_supported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_server_relay_supported")
         return withUnsafePointer(to: &MultiplayerPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -445,8 +461,9 @@ open class MultiplayerPeer: PacketPeer {
         
     }()
     
-    /// Returns true if the server can act as a relay in the current configuration (i.e. if the higher level ``MultiplayerAPI`` should notify connected clients of other peers, and implement a relay protocol to allow communication between them).
+    /// Returns `true` if the server can act as a relay in the current configuration. That is, if the higher level ``MultiplayerAPI`` should notify connected clients of other peers, and implement a relay protocol to allow communication between them.
     public final func isServerRelaySupported() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MultiplayerPeer.method_is_server_relay_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

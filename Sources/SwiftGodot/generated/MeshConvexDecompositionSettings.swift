@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Parameters to be used with a ``Mesh`` convex decomposition operation.
 open class MeshConvexDecompositionSettings: RefCounted {
-    fileprivate static var className = StringName("MeshConvexDecompositionSettings")
+    private static var className = StringName("MeshConvexDecompositionSettings")
     override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// Constant for voxel-based approximate convex decomposition.
@@ -192,8 +192,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_max_concavity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_concavity")
+    fileprivate static let method_set_max_concavity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_concavity")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -205,6 +205,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_max_concavity(_ maxConcavity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxConcavity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -218,8 +219,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_max_concavity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_concavity")
+    fileprivate static let method_get_max_concavity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_concavity")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -231,13 +232,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_max_concavity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_max_concavity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_symmetry_planes_clipping_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_symmetry_planes_clipping_bias")
+    fileprivate static let method_set_symmetry_planes_clipping_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_symmetry_planes_clipping_bias")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -249,6 +251,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_symmetry_planes_clipping_bias(_ symmetryPlanesClippingBias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: symmetryPlanesClippingBias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -262,8 +265,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_symmetry_planes_clipping_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_symmetry_planes_clipping_bias")
+    fileprivate static let method_get_symmetry_planes_clipping_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_symmetry_planes_clipping_bias")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -275,13 +278,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_symmetry_planes_clipping_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_symmetry_planes_clipping_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_revolution_axes_clipping_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_revolution_axes_clipping_bias")
+    fileprivate static let method_set_revolution_axes_clipping_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_revolution_axes_clipping_bias")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -293,6 +297,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_revolution_axes_clipping_bias(_ revolutionAxesClippingBias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: revolutionAxesClippingBias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -306,8 +311,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_revolution_axes_clipping_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_revolution_axes_clipping_bias")
+    fileprivate static let method_get_revolution_axes_clipping_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_revolution_axes_clipping_bias")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -319,13 +324,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_revolution_axes_clipping_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_revolution_axes_clipping_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_min_volume_per_convex_hull: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_volume_per_convex_hull")
+    fileprivate static let method_set_min_volume_per_convex_hull: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_volume_per_convex_hull")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -337,6 +343,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_min_volume_per_convex_hull(_ minVolumePerConvexHull: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minVolumePerConvexHull) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -350,8 +357,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_min_volume_per_convex_hull: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_volume_per_convex_hull")
+    fileprivate static let method_get_min_volume_per_convex_hull: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_volume_per_convex_hull")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -363,13 +370,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_min_volume_per_convex_hull() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_min_volume_per_convex_hull, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_resolution")
+    fileprivate static let method_set_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_resolution")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -381,6 +389,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_resolution(_ minVolumePerConvexHull: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minVolumePerConvexHull) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -394,8 +403,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_resolution")
+    fileprivate static let method_get_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_resolution")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -407,13 +416,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_resolution() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_resolution, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_num_vertices_per_convex_hull: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_num_vertices_per_convex_hull")
+    fileprivate static let method_set_max_num_vertices_per_convex_hull: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_num_vertices_per_convex_hull")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -425,6 +435,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_max_num_vertices_per_convex_hull(_ maxNumVerticesPerConvexHull: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxNumVerticesPerConvexHull) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -438,8 +449,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_max_num_vertices_per_convex_hull: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_num_vertices_per_convex_hull")
+    fileprivate static let method_get_max_num_vertices_per_convex_hull: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_num_vertices_per_convex_hull")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -451,13 +462,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_max_num_vertices_per_convex_hull() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_max_num_vertices_per_convex_hull, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_plane_downsampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_plane_downsampling")
+    fileprivate static let method_set_plane_downsampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_plane_downsampling")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -469,6 +481,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_plane_downsampling(_ planeDownsampling: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: planeDownsampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -482,8 +495,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_plane_downsampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_plane_downsampling")
+    fileprivate static let method_get_plane_downsampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_plane_downsampling")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -495,13 +508,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_plane_downsampling() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_plane_downsampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_convex_hull_downsampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_convex_hull_downsampling")
+    fileprivate static let method_set_convex_hull_downsampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_convex_hull_downsampling")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -513,6 +527,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_convex_hull_downsampling(_ convexHullDownsampling: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: convexHullDownsampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -526,8 +541,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_convex_hull_downsampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_convex_hull_downsampling")
+    fileprivate static let method_get_convex_hull_downsampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_convex_hull_downsampling")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -539,13 +554,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_convex_hull_downsampling() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_convex_hull_downsampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_normalize_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_normalize_mesh")
+    fileprivate static let method_set_normalize_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_normalize_mesh")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -557,6 +573,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_normalize_mesh(_ normalizeMesh: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normalizeMesh) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -570,8 +587,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_normalize_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_normalize_mesh")
+    fileprivate static let method_get_normalize_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_normalize_mesh")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -583,13 +600,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_normalize_mesh() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_normalize_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mode")
+    fileprivate static let method_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mode")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1668072869)!
@@ -601,6 +619,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_mode(_ mode: MeshConvexDecompositionSettings.Mode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -614,8 +633,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mode")
+    fileprivate static let method_get_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mode")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 23479454)!
@@ -627,13 +646,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_mode() -> MeshConvexDecompositionSettings.Mode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MeshConvexDecompositionSettings.Mode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_convex_hull_approximation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_convex_hull_approximation")
+    fileprivate static let method_set_convex_hull_approximation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_convex_hull_approximation")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -645,6 +665,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_convex_hull_approximation(_ convexHullApproximation: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: convexHullApproximation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -658,8 +679,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_convex_hull_approximation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_convex_hull_approximation")
+    fileprivate static let method_get_convex_hull_approximation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_convex_hull_approximation")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -671,13 +692,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_convex_hull_approximation() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_convex_hull_approximation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_convex_hulls: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_convex_hulls")
+    fileprivate static let method_set_max_convex_hulls: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_convex_hulls")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -689,6 +711,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_max_convex_hulls(_ maxConvexHulls: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxConvexHulls) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -702,8 +725,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_max_convex_hulls: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_convex_hulls")
+    fileprivate static let method_get_max_convex_hulls: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_convex_hulls")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -715,13 +738,14 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_max_convex_hulls() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_max_convex_hulls, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_project_hull_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_project_hull_vertices")
+    fileprivate static let method_set_project_hull_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_project_hull_vertices")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -733,6 +757,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func set_project_hull_vertices(_ projectHullVertices: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: projectHullVertices) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -746,8 +771,8 @@ open class MeshConvexDecompositionSettings: RefCounted {
         
     }
     
-    fileprivate static var method_get_project_hull_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_project_hull_vertices")
+    fileprivate static let method_get_project_hull_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_project_hull_vertices")
         return withUnsafePointer(to: &MeshConvexDecompositionSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -759,6 +784,7 @@ open class MeshConvexDecompositionSettings: RefCounted {
     
     @inline(__always)
     fileprivate final func get_project_hull_vertices() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MeshConvexDecompositionSettings.method_get_project_hull_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

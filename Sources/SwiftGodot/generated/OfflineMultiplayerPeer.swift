@@ -26,7 +26,7 @@ import Musl
 /// This means that the ``SceneTree`` will act as the multiplayer authority by default. Calls to ``MultiplayerAPI/isServer()`` will return `true`, and calls to ``MultiplayerAPI/getUniqueId()`` will return ``MultiplayerPeer/targetPeerServer``.
 /// 
 open class OfflineMultiplayerPeer: MultiplayerPeer {
-    fileprivate static var className = StringName("OfflineMultiplayerPeer")
+    private static var className = StringName("OfflineMultiplayerPeer")
     override open class var godotClassName: StringName { className }
 }
 

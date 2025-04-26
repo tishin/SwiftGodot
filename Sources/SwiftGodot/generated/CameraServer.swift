@@ -25,7 +25,7 @@ import Musl
 /// 
 /// It is notably used to provide AR modules with a video feed from the camera.
 /// 
-/// > Note: This class is currently only implemented on macOS and iOS. To get a ``CameraFeed`` on iOS, the camera plugin from <a href="https://github.com/godotengine/godot-ios-plugins">godot-ios-plugins</a> is required. On other platforms, no ``CameraFeed``s will be available.
+/// > Note: This class is currently only implemented on Linux, macOS, and iOS. On other platforms no ``CameraFeed``s will be available. To get a ``CameraFeed`` on iOS, the camera plugin from <a href="https://github.com/godotengine/godot-ios-plugins">godot-ios-plugins</a> is required.
 /// 
 /// 
 /// 
@@ -35,14 +35,14 @@ import Musl
 /// - ``cameraFeedRemoved``
 open class CameraServer: Object {
     /// The shared instance of this class
-    public static var shared: CameraServer = {
-        return withUnsafePointer (to: &CameraServer.godotClassName.content) { ptr in
-            CameraServer (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: CameraServer {
+        return withUnsafePointer(to: &CameraServer.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("CameraServer")
+    private static var className = StringName("CameraServer")
     override open class var godotClassName: StringName { className }
     public enum FeedImage: Int64, CaseIterable {
         /// The RGBA camera image.
@@ -56,8 +56,8 @@ open class CameraServer: Object {
     }
     
     /* Methods */
-    fileprivate static var method_get_feed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feed")
+    fileprivate static let method_get_feed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feed")
         return withUnsafePointer(to: &CameraServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 361927068)!
@@ -80,11 +80,11 @@ open class CameraServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_feed_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feed_count")
+    fileprivate static let method_get_feed_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feed_count")
         return withUnsafePointer(to: &CameraServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -101,8 +101,8 @@ open class CameraServer: Object {
         return _result
     }
     
-    fileprivate static var method_feeds: GDExtensionMethodBindPtr = {
-        let methodName = StringName("feeds")
+    fileprivate static let method_feeds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("feeds")
         return withUnsafePointer(to: &CameraServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -113,14 +113,14 @@ open class CameraServer: Object {
     }()
     
     /// Returns an array of ``CameraFeed``s.
-    public static func feeds() -> ObjectCollection<CameraFeed> {
+    public static func feeds() -> TypedArray<CameraFeed?> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_feeds, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return ObjectCollection<CameraFeed>(content: _result)
+        return TypedArray<CameraFeed?>(takingOver: _result)
     }
     
-    fileprivate static var method_add_feed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_feed")
+    fileprivate static let method_add_feed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_feed")
         return withUnsafePointer(to: &CameraServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3204782488)!
@@ -145,8 +145,8 @@ open class CameraServer: Object {
         
     }
     
-    fileprivate static var method_remove_feed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_feed")
+    fileprivate static let method_remove_feed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_feed")
         return withUnsafePointer(to: &CameraServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3204782488)!

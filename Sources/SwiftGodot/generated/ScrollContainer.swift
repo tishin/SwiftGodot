@@ -29,7 +29,7 @@ import Musl
 /// - ``scrollStarted``
 /// - ``scrollEnded``
 open class ScrollContainer: Container {
-    fileprivate static var className = StringName("ScrollContainer")
+    private static var className = StringName("ScrollContainer")
     override open class var godotClassName: StringName { className }
     public enum ScrollMode: Int64, CaseIterable {
         /// Scrolling disabled, scrollbar will be invisible.
@@ -40,6 +40,8 @@ open class ScrollContainer: Container {
         case showAlways = 2 // SCROLL_MODE_SHOW_ALWAYS
         /// Scrolling enabled, scrollbar will be hidden.
         case showNever = 3 // SCROLL_MODE_SHOW_NEVER
+        /// Combines ``ScrollMode/auto`` and ``ScrollMode/showAlways``. The scrollbar is only visible if necessary, but the content size is adjusted as if it was always visible. It's useful for ensuring that content size stays the same regardless if the scrollbar is visible.
+        case reserve = 4 // SCROLL_MODE_RESERVE
     }
     
     
@@ -53,6 +55,18 @@ open class ScrollContainer: Container {
         
         set {
             set_follow_focus (newValue)
+        }
+        
+    }
+    
+    /// If `true`, [theme_item focus] is drawn when the ScrollContainer or one of its descendant nodes is focused.
+    final public var drawFocusBorder: Bool {
+        get {
+            return get_draw_focus_border ()
+        }
+        
+        set {
+            set_draw_focus_border (newValue)
         }
         
     }
@@ -148,8 +162,8 @@ open class ScrollContainer: Container {
     }
     
     /* Methods */
-    fileprivate static var method_set_h_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_h_scroll")
+    fileprivate static let method_set_h_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_h_scroll")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -161,6 +175,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_h_scroll(_ value: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -174,8 +189,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_get_h_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_scroll")
+    fileprivate static let method_get_h_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_scroll")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -187,13 +202,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func get_h_scroll() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_h_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_v_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_v_scroll")
+    fileprivate static let method_set_v_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_v_scroll")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -205,6 +221,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_v_scroll(_ value: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -218,8 +235,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_get_v_scroll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_scroll")
+    fileprivate static let method_get_v_scroll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_scroll")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -231,13 +248,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func get_v_scroll() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_v_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_horizontal_custom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_horizontal_custom_step")
+    fileprivate static let method_set_horizontal_custom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_horizontal_custom_step")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -249,6 +267,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_horizontal_custom_step(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -262,8 +281,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_get_horizontal_custom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_horizontal_custom_step")
+    fileprivate static let method_get_horizontal_custom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_horizontal_custom_step")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -275,13 +294,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func get_horizontal_custom_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_horizontal_custom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vertical_custom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertical_custom_step")
+    fileprivate static let method_set_vertical_custom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical_custom_step")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -293,6 +313,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_vertical_custom_step(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -306,8 +327,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_get_vertical_custom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertical_custom_step")
+    fileprivate static let method_get_vertical_custom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertical_custom_step")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -319,13 +340,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func get_vertical_custom_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_vertical_custom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_horizontal_scroll_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_horizontal_scroll_mode")
+    fileprivate static let method_set_horizontal_scroll_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_horizontal_scroll_mode")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2750506364)!
@@ -337,6 +359,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_horizontal_scroll_mode(_ enable: ScrollContainer.ScrollMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -350,8 +373,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_get_horizontal_scroll_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_horizontal_scroll_mode")
+    fileprivate static let method_get_horizontal_scroll_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_horizontal_scroll_mode")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3987985145)!
@@ -363,13 +386,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func get_horizontal_scroll_mode() -> ScrollContainer.ScrollMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_horizontal_scroll_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ScrollContainer.ScrollMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_vertical_scroll_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertical_scroll_mode")
+    fileprivate static let method_set_vertical_scroll_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical_scroll_mode")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2750506364)!
@@ -381,6 +405,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_vertical_scroll_mode(_ enable: ScrollContainer.ScrollMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -394,8 +419,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_get_vertical_scroll_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertical_scroll_mode")
+    fileprivate static let method_get_vertical_scroll_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertical_scroll_mode")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3987985145)!
@@ -407,13 +432,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func get_vertical_scroll_mode() -> ScrollContainer.ScrollMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_vertical_scroll_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ScrollContainer.ScrollMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_deadzone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deadzone")
+    fileprivate static let method_set_deadzone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deadzone")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -425,6 +451,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_deadzone(_ deadzone: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: deadzone) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -438,8 +465,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_get_deadzone: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_deadzone")
+    fileprivate static let method_get_deadzone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_deadzone")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -451,13 +478,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func get_deadzone() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_deadzone, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_follow_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_follow_focus")
+    fileprivate static let method_set_follow_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_follow_focus")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -469,6 +497,7 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func set_follow_focus(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -482,8 +511,8 @@ open class ScrollContainer: Container {
         
     }
     
-    fileprivate static var method_is_following_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_following_focus")
+    fileprivate static let method_is_following_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_following_focus")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -495,13 +524,14 @@ open class ScrollContainer: Container {
     
     @inline(__always)
     fileprivate final func is_following_focus() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ScrollContainer.method_is_following_focus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_h_scroll_bar: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_h_scroll_bar")
+    fileprivate static let method_get_h_scroll_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_scroll_bar")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4004517983)!
@@ -516,13 +546,14 @@ open class ScrollContainer: Container {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to disable or hide a scrollbar, you can use ``horizontalScrollMode``.
     /// 
     public final func getHScrollBar() -> HScrollBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_h_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_scroll_bar")
+    fileprivate static let method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_scroll_bar")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2630340773)!
@@ -537,13 +568,14 @@ open class ScrollContainer: Container {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to disable or hide a scrollbar, you can use ``verticalScrollMode``.
     /// 
     public final func getVScrollBar() -> VScrollBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ScrollContainer.method_get_v_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_ensure_control_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ensure_control_visible")
+    fileprivate static let method_ensure_control_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ensure_control_visible")
         return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
@@ -558,6 +590,7 @@ open class ScrollContainer: Container {
     /// > Note: This will not work on a node that was just added during the same frame. If you want to scroll to a newly added child, you must wait until the next frame using [signal SceneTree.process_frame]:
     /// 
     public final func ensureControlVisible(control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -569,6 +602,52 @@ open class ScrollContainer: Container {
         }
         
         
+    }
+    
+    fileprivate static let method_set_draw_focus_border: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draw_focus_border")
+        return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_draw_focus_border(_ draw: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: draw) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_draw_focus_border, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_draw_focus_border: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_draw_focus_border")
+        return withUnsafePointer(to: &ScrollContainer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_draw_focus_border() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_draw_focus_border, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
     // Signals 

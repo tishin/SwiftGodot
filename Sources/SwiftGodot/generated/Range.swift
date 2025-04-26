@@ -29,7 +29,7 @@ import Musl
 /// - ``valueChanged``
 /// - ``changed``
 open class Range: Control {
-    fileprivate static var className = StringName("Range")
+    private static var className = StringName("Range")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -70,7 +70,7 @@ open class Range: Control {
         
     }
     
-    /// Page size. Used mainly for ``ScrollBar``. ScrollBar's length is its size multiplied by ``page`` over the difference between ``minValue`` and ``maxValue``.
+    /// Page size. Used mainly for ``ScrollBar``. A ``ScrollBar``'s grabber length is the ``ScrollBar``'s size multiplied by ``page`` over the difference between ``minValue`` and ``maxValue``.
     final public var page: Double {
         get {
             return get_page ()
@@ -155,13 +155,36 @@ open class Range: Control {
     }
     
     /* Methods */
+    fileprivate static let method__value_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_value_changed")
+        return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called when the ``Range``'s value is changed (following the same conditions as [signal value_changed]).
     @_documentation(visibility: public)
     open func _valueChanged(newValue: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: newValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Range.method__value_changed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_get_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_value")
+    fileprivate static let method_get_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_value")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -173,13 +196,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func get_value() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Range.method_get_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min")
+    fileprivate static let method_get_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -191,13 +215,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func get_min() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Range.method_get_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max")
+    fileprivate static let method_get_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -209,13 +234,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func get_max() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Range.method_get_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_step")
+    fileprivate static let method_get_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_step")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -227,13 +253,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func get_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Range.method_get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_page: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_page")
+    fileprivate static let method_get_page: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_page")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -245,13 +272,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func get_page() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Range.method_get_page, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_as_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_as_ratio")
+    fileprivate static let method_get_as_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_as_ratio")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -263,13 +291,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func get_as_ratio() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Range.method_get_as_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_value")
+    fileprivate static let method_set_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_value")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -281,6 +310,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_value(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -294,8 +324,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_set_value_no_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_value_no_signal")
+    fileprivate static let method_set_value_no_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_value_no_signal")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -307,6 +337,7 @@ open class Range: Control {
     
     /// Sets the ``Range``'s current value to the specified `value`, without emitting the [signal value_changed] signal.
     public final func setValueNoSignal(value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -320,8 +351,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_set_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min")
+    fileprivate static let method_set_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -333,6 +364,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_min(_ minimum: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minimum) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -346,8 +378,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_set_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max")
+    fileprivate static let method_set_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -359,6 +391,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_max(_ maximum: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maximum) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -372,8 +405,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_set_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_step")
+    fileprivate static let method_set_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_step")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -385,6 +418,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_step(_ step: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: step) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -398,8 +432,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_set_page: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_page")
+    fileprivate static let method_set_page: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_page")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -411,6 +445,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_page(_ pagesize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pagesize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -424,8 +459,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_set_as_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_as_ratio")
+    fileprivate static let method_set_as_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_as_ratio")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -437,6 +472,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_as_ratio(_ value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -450,8 +486,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_set_use_rounded_values: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_rounded_values")
+    fileprivate static let method_set_use_rounded_values: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_rounded_values")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -463,6 +499,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_use_rounded_values(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -476,8 +513,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_is_using_rounded_values: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_rounded_values")
+    fileprivate static let method_is_using_rounded_values: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_rounded_values")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -489,13 +526,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func is_using_rounded_values() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Range.method_is_using_rounded_values, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_exp_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exp_ratio")
+    fileprivate static let method_set_exp_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exp_ratio")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -507,6 +545,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_exp_ratio(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -520,8 +559,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_is_ratio_exp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ratio_exp")
+    fileprivate static let method_is_ratio_exp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ratio_exp")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -533,13 +572,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func is_ratio_exp() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Range.method_is_ratio_exp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_greater: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_greater")
+    fileprivate static let method_set_allow_greater: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_greater")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -551,6 +591,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_allow_greater(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -564,8 +605,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_is_greater_allowed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_greater_allowed")
+    fileprivate static let method_is_greater_allowed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_greater_allowed")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -577,13 +618,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func is_greater_allowed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Range.method_is_greater_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_lesser: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_lesser")
+    fileprivate static let method_set_allow_lesser: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_lesser")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -595,6 +637,7 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func set_allow_lesser(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -608,8 +651,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_is_lesser_allowed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_lesser_allowed")
+    fileprivate static let method_is_lesser_allowed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_lesser_allowed")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -621,13 +664,14 @@ open class Range: Control {
     
     @inline(__always)
     fileprivate final func is_lesser_allowed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Range.method_is_lesser_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_share: GDExtensionMethodBindPtr = {
-        let methodName = StringName("share")
+    fileprivate static let method_share: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("share")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -639,6 +683,7 @@ open class Range: Control {
     
     /// Binds two ``Range``s together along with any ranges previously grouped with either of them. When any of range's member variables change, it will share the new value with all other ranges in its group.
     public final func share(with: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: with?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -652,8 +697,8 @@ open class Range: Control {
         
     }
     
-    fileprivate static var method_unshare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unshare")
+    fileprivate static let method_unshare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unshare")
         return withUnsafePointer(to: &Range.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -665,11 +710,12 @@ open class Range: Control {
     
     /// Stops the ``Range`` from sharing its member variables with any other.
     public final func unshare() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Range.method_unshare, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_value_changed":
@@ -722,7 +768,8 @@ open class Range: Control {
 func _Range_proxy_value_changed (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Range>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Range else { return }
     swiftObject._valueChanged (newValue: args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 

@@ -28,7 +28,7 @@ import Musl
 /// This importer is only used if ``ProjectSettings/filesystem/import/fbx2gltf/enabled`` is set to `true`.
 /// 
 open class EditorSceneFormatImporterFBX2GLTF: EditorSceneFormatImporter {
-    fileprivate static var className = StringName("EditorSceneFormatImporterFBX2GLTF")
+    private static var className = StringName("EditorSceneFormatImporterFBX2GLTF")
     override open class var godotClassName: StringName { className }
 }
 

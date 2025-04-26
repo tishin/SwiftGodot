@@ -32,7 +32,7 @@ import Musl
 /// - Adjustments
 /// 
 open class Environment: Resource {
-    fileprivate static var className = StringName("Environment")
+    private static var className = StringName("Environment")
     override open class var godotClassName: StringName { className }
     public enum BGMode: Int64, CaseIterable {
         /// Clears the background using the clear color defined in ``ProjectSettings/rendering/environment/defaults/defaultClearColor``.
@@ -72,17 +72,25 @@ open class Environment: Resource {
     }
     
     public enum ToneMapper: Int64, CaseIterable {
-        /// Linear tonemapper operator. Reads the linear data and passes it on unmodified. This can cause bright lighting to look blown out, with noticeable clipping in the output colors.
+        /// Does not modify color data, resulting in a linear tonemapping curve which unnaturally clips bright values, causing bright lighting to look blown out. The simplest and fastest tonemapper.
         case linear = 0 // TONE_MAPPER_LINEAR
-        /// Reinhardt tonemapper operator. Performs a variation on rendered pixels' colors by this formula: `color = color / (1 + color)`. This avoids clipping bright highlights, but the resulting image can look a bit dull.
+        /// A simple tonemapping curve that rolls off bright values to prevent clipping. This results in an image that can appear dull and low contrast. Slower than ``ToneMapper/linear``.
+        /// 
+        /// > Note: When ``tonemapWhite`` is left at the default value of `1.0`, ``ToneMapper/reinhardt`` produces an identical image to ``ToneMapper/linear``.
+        /// 
         case reinhardt = 1 // TONE_MAPPER_REINHARDT
-        /// Filmic tonemapper operator. This avoids clipping bright highlights, with a resulting image that usually looks more vivid than ``ToneMapper/reinhardt``.
+        /// Uses a film-like tonemapping curve to prevent clipping of bright values and provide better contrast than ``ToneMapper/reinhardt``. Slightly slower than ``ToneMapper/reinhardt``.
         case filmic = 2 // TONE_MAPPER_FILMIC
-        /// Use the Academy Color Encoding System tonemapper. ACES is slightly more expensive than other options, but it handles bright lighting in a more realistic fashion by desaturating it as it becomes brighter. ACES typically has a more contrasted output compared to ``ToneMapper/reinhardt`` and ``ToneMapper/filmic``.
+        /// Uses a high-contrast film-like tonemapping curve and desaturates bright values for a more realistic appearance. Slightly slower than ``ToneMapper/filmic``.
         /// 
         /// > Note: This tonemapping operator is called "ACES Fitted" in Godot 3.x.
         /// 
         case aces = 3 // TONE_MAPPER_ACES
+        /// Uses a film-like tonemapping curve and desaturates bright values for a more realistic appearance. Better than other tonemappers at maintaining the hue of colors as they become brighter. The slowest tonemapping option.
+        /// 
+        /// > Note: ``tonemapWhite`` is fixed at a value of `16.29`, which makes ``ToneMapper/agx`` unsuitable for use with the Mobile rendering method.
+        /// 
+        case agx = 4 // TONE_MAPPER_AGX
     }
     
     public enum GlowBlendMode: Int64, CaseIterable {
@@ -300,7 +308,10 @@ open class Environment: Resource {
         
     }
     
-    /// The default exposure used for tonemapping. Higher values result in a brighter image. See also ``tonemapWhite``.
+    /// Adjusts the brightness of values before they are provided to the tonemapper. Higher ``tonemapExposure`` values result in a brighter image. See also ``tonemapWhite``.
+    /// 
+    /// > Note: Values provided to the tonemapper will also be multiplied by `2.0` and `1.8` for ``ToneMapper/filmic`` and ``ToneMapper/aces`` respectively to produce a similar apparent brightness as ``ToneMapper/linear``.
+    /// 
     final public var tonemapExposure: Double {
         get {
             return get_tonemap_exposure ()
@@ -312,7 +323,10 @@ open class Environment: Resource {
         
     }
     
-    /// The white reference value for tonemapping (also called "whitepoint"). Higher values can make highlights look less blown out, and will also slightly darken the whole scene as a result. Only effective if the ``tonemapMode`` isn't set to ``ToneMapper/linear``. See also ``tonemapExposure``.
+    /// The white reference value for tonemapping, which indicates where bright white is located in the scale of values provided to the tonemapper. For photorealistic lighting, recommended values are between `6.0` and `8.0`. Higher values result in less blown out highlights, but may make the scene appear lower contrast. See also ``tonemapExposure``.
+    /// 
+    /// > Note: ``tonemapWhite`` is ignored when using ``ToneMapper/linear`` or ``ToneMapper/agx``.
+    /// 
     final public var tonemapWhite: Double {
         get {
             return get_tonemap_white ()
@@ -860,7 +874,9 @@ open class Environment: Resource {
         
     }
     
-    /// How strong of an impact the ``glowMap`` should have on the overall glow effect. A strength of `0.0` means the glow map has no effect on the overall glow effect. A strength of `1.0` means the glow has a full effect on the overall glow effect (and can turn off glow entirely in specific areas of the screen if the glow map has black areas).
+    /// How strong of an influence the ``glowMap`` should have on the overall glow effect. A strength of `0.0` means the glow map has no influence, while a strength of `1.0` means the glow map has full influence.
+    /// 
+    /// > Note: If the glow map has black areas, a value of `1.0` can also turn off the glow effect entirely in specific areas of the screen.
     /// 
     /// > Note: ``glowMapStrength`` has no effect when using the Compatibility rendering method, due to this rendering method using a simpler glow implementation optimized for low-end devices.
     /// 
@@ -969,9 +985,11 @@ open class Environment: Resource {
         
     }
     
-    /// If set above `0.0` (exclusive), blends between the fog's color and the color of the background ``Sky``. This has a small performance cost when set above `0.0`. Must have ``backgroundMode`` set to ``BGMode/sky``.
+    /// If set above `0.0` (exclusive), blends between the fog's color and the color of the background ``Sky``, as read from the radiance cubemap. This has a small performance cost when set above `0.0`. Must have ``backgroundMode`` set to ``BGMode/sky``.
     /// 
     /// This is useful to simulate <a href="https://en.wikipedia.org/wiki/Aerial_perspective">aerial perspective</a> in large scenes with low density fog. However, it is not very useful for high-density fog, as the sky will shine through. When set to `1.0`, the fog color comes completely from the ``Sky``. If set to `0.0`, aerial perspective is disabled.
+    /// 
+    /// Notice that this does not sample the ``Sky`` directly, but rather the radiance cubemap. The cubemap is sampled at a mipmap level depending on the depth of the rendered pixel; the farther away, the higher the resolution of the sampled mipmap. This results in the actual color being a blurred version of the sky, with more blur closer to the camera. The highest mipmap resolution is used at a depth of ``Camera3D/far``.
     /// 
     final public var fogAerialPerspective: Double {
         get {
@@ -1295,8 +1313,8 @@ open class Environment: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_background: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_background")
+    fileprivate static let method_set_background: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_background")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4071623990)!
@@ -1308,6 +1326,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_background(_ mode: Environment.BGMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1321,8 +1340,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_background: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_background")
+    fileprivate static let method_get_background: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_background")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1843210413)!
@@ -1334,13 +1353,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_background() -> Environment.BGMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Environment.method_get_background, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Environment.BGMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_sky: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky")
+    fileprivate static let method_set_sky: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3336722921)!
@@ -1352,6 +1372,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sky(_ sky: Sky?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sky?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1365,8 +1386,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sky: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky")
+    fileprivate static let method_get_sky: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1177136966)!
@@ -1378,13 +1399,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sky() -> Sky? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Environment.method_get_sky, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_sky_custom_fov: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_custom_fov")
+    fileprivate static let method_set_sky_custom_fov: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_custom_fov")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1396,6 +1418,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sky_custom_fov(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1409,8 +1432,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sky_custom_fov: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_custom_fov")
+    fileprivate static let method_get_sky_custom_fov: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_custom_fov")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1422,13 +1445,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sky_custom_fov() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sky_custom_fov, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sky_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_rotation")
+    fileprivate static let method_set_sky_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_rotation")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -1440,6 +1464,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sky_rotation(_ eulerRadians: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: eulerRadians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1453,8 +1478,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sky_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_rotation")
+    fileprivate static let method_get_sky_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_rotation")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -1466,13 +1491,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sky_rotation() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(Environment.method_get_sky_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bg_color")
+    fileprivate static let method_set_bg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bg_color")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -1484,6 +1510,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_bg_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1497,8 +1524,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_bg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bg_color")
+    fileprivate static let method_get_bg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bg_color")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -1510,13 +1537,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_bg_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Environment.method_get_bg_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bg_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bg_energy_multiplier")
+    fileprivate static let method_set_bg_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bg_energy_multiplier")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1528,6 +1556,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_bg_energy_multiplier(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1541,8 +1570,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_bg_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bg_energy_multiplier")
+    fileprivate static let method_get_bg_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bg_energy_multiplier")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1554,13 +1583,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_bg_energy_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_bg_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bg_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bg_intensity")
+    fileprivate static let method_set_bg_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bg_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1572,6 +1602,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_bg_intensity(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1585,8 +1616,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_bg_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bg_intensity")
+    fileprivate static let method_get_bg_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bg_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1598,13 +1629,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_bg_intensity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_bg_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_canvas_max_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_canvas_max_layer")
+    fileprivate static let method_set_canvas_max_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_canvas_max_layer")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1616,6 +1648,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_canvas_max_layer(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1629,8 +1662,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_canvas_max_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_canvas_max_layer")
+    fileprivate static let method_get_canvas_max_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_canvas_max_layer")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1642,13 +1675,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_canvas_max_layer() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Environment.method_get_canvas_max_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_camera_feed_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_camera_feed_id")
+    fileprivate static let method_set_camera_feed_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_camera_feed_id")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1660,6 +1694,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_camera_feed_id(_ id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1673,8 +1708,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_camera_feed_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_feed_id")
+    fileprivate static let method_get_camera_feed_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_feed_id")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1686,13 +1721,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_camera_feed_id() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Environment.method_get_camera_feed_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ambient_light_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ambient_light_color")
+    fileprivate static let method_set_ambient_light_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ambient_light_color")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -1704,6 +1740,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ambient_light_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1717,8 +1754,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ambient_light_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ambient_light_color")
+    fileprivate static let method_get_ambient_light_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ambient_light_color")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -1730,13 +1767,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ambient_light_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ambient_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ambient_source")
+    fileprivate static let method_set_ambient_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ambient_source")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2607780160)!
@@ -1748,6 +1786,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ambient_source(_ source: Environment.AmbientSource) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1761,8 +1800,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ambient_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ambient_source")
+    fileprivate static let method_get_ambient_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ambient_source")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 67453933)!
@@ -1774,13 +1813,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ambient_source() -> Environment.AmbientSource {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Environment.method_get_ambient_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Environment.AmbientSource (rawValue: _result)!
     }
     
-    fileprivate static var method_set_ambient_light_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ambient_light_energy")
+    fileprivate static let method_set_ambient_light_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ambient_light_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1792,6 +1832,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ambient_light_energy(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1805,8 +1846,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ambient_light_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ambient_light_energy")
+    fileprivate static let method_get_ambient_light_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ambient_light_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1818,13 +1859,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ambient_light_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ambient_light_sky_contribution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ambient_light_sky_contribution")
+    fileprivate static let method_set_ambient_light_sky_contribution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ambient_light_sky_contribution")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1836,6 +1878,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ambient_light_sky_contribution(_ ratio: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1849,8 +1892,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ambient_light_sky_contribution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ambient_light_sky_contribution")
+    fileprivate static let method_get_ambient_light_sky_contribution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ambient_light_sky_contribution")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1862,13 +1905,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ambient_light_sky_contribution() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_sky_contribution, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_reflection_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_reflection_source")
+    fileprivate static let method_set_reflection_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_reflection_source")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 299673197)!
@@ -1880,6 +1924,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_reflection_source(_ source: Environment.ReflectionSource) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1893,8 +1938,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_reflection_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_reflection_source")
+    fileprivate static let method_get_reflection_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_reflection_source")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 777700713)!
@@ -1906,13 +1951,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_reflection_source() -> Environment.ReflectionSource {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Environment.method_get_reflection_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Environment.ReflectionSource (rawValue: _result)!
     }
     
-    fileprivate static var method_set_tonemapper: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tonemapper")
+    fileprivate static let method_set_tonemapper: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tonemapper")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509116664)!
@@ -1924,6 +1970,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_tonemapper(_ mode: Environment.ToneMapper) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1937,8 +1984,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_tonemapper: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tonemapper")
+    fileprivate static let method_get_tonemapper: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tonemapper")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2908408137)!
@@ -1950,13 +1997,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_tonemapper() -> Environment.ToneMapper {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Environment.method_get_tonemapper, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Environment.ToneMapper (rawValue: _result)!
     }
     
-    fileprivate static var method_set_tonemap_exposure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tonemap_exposure")
+    fileprivate static let method_set_tonemap_exposure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tonemap_exposure")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1968,6 +2016,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_tonemap_exposure(_ exposure: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: exposure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1981,8 +2030,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_tonemap_exposure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tonemap_exposure")
+    fileprivate static let method_get_tonemap_exposure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tonemap_exposure")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1994,13 +2043,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_tonemap_exposure() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_tonemap_exposure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tonemap_white: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tonemap_white")
+    fileprivate static let method_set_tonemap_white: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tonemap_white")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2012,6 +2062,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_tonemap_white(_ white: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: white) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2025,8 +2076,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_tonemap_white: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tonemap_white")
+    fileprivate static let method_get_tonemap_white: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tonemap_white")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2038,13 +2089,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_tonemap_white() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_tonemap_white, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssr_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssr_enabled")
+    fileprivate static let method_set_ssr_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssr_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2056,6 +2108,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssr_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2069,8 +2122,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_ssr_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ssr_enabled")
+    fileprivate static let method_is_ssr_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ssr_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2082,13 +2135,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_ssr_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_ssr_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssr_max_steps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssr_max_steps")
+    fileprivate static let method_set_ssr_max_steps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssr_max_steps")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2100,6 +2154,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssr_max_steps(_ maxSteps: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxSteps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2113,8 +2168,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssr_max_steps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssr_max_steps")
+    fileprivate static let method_get_ssr_max_steps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssr_max_steps")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2126,13 +2181,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssr_max_steps() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Environment.method_get_ssr_max_steps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssr_fade_in: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssr_fade_in")
+    fileprivate static let method_set_ssr_fade_in: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssr_fade_in")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2144,6 +2200,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssr_fade_in(_ fadeIn: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fadeIn) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2157,8 +2214,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssr_fade_in: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssr_fade_in")
+    fileprivate static let method_get_ssr_fade_in: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssr_fade_in")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2170,13 +2227,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssr_fade_in() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssr_fade_in, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssr_fade_out: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssr_fade_out")
+    fileprivate static let method_set_ssr_fade_out: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssr_fade_out")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2188,6 +2246,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssr_fade_out(_ fadeOut: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fadeOut) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2201,8 +2260,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssr_fade_out: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssr_fade_out")
+    fileprivate static let method_get_ssr_fade_out: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssr_fade_out")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2214,13 +2273,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssr_fade_out() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssr_fade_out, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssr_depth_tolerance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssr_depth_tolerance")
+    fileprivate static let method_set_ssr_depth_tolerance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssr_depth_tolerance")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2232,6 +2292,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssr_depth_tolerance(_ depthTolerance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depthTolerance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2245,8 +2306,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssr_depth_tolerance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssr_depth_tolerance")
+    fileprivate static let method_get_ssr_depth_tolerance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssr_depth_tolerance")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2258,13 +2319,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssr_depth_tolerance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssr_depth_tolerance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_enabled")
+    fileprivate static let method_set_ssao_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2276,6 +2338,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2289,8 +2352,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_ssao_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ssao_enabled")
+    fileprivate static let method_is_ssao_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ssao_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2302,13 +2365,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_ssao_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_ssao_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_radius")
+    fileprivate static let method_set_ssao_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_radius")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2320,6 +2384,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2333,8 +2398,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_radius")
+    fileprivate static let method_get_ssao_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_radius")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2346,13 +2411,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_intensity")
+    fileprivate static let method_set_ssao_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2364,6 +2430,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_intensity(_ intensity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2377,8 +2444,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_intensity")
+    fileprivate static let method_get_ssao_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2390,13 +2457,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_intensity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_power: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_power")
+    fileprivate static let method_set_ssao_power: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_power")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2408,6 +2476,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_power(_ power: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2421,8 +2490,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_power: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_power")
+    fileprivate static let method_get_ssao_power: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_power")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2434,13 +2503,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_power() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_power, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_detail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_detail")
+    fileprivate static let method_set_ssao_detail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_detail")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2452,6 +2522,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_detail(_ detail: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: detail) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2465,8 +2536,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_detail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_detail")
+    fileprivate static let method_get_ssao_detail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_detail")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2478,13 +2549,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_detail() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_detail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_horizon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_horizon")
+    fileprivate static let method_set_ssao_horizon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_horizon")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2496,6 +2568,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_horizon(_ horizon: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: horizon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2509,8 +2582,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_horizon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_horizon")
+    fileprivate static let method_get_ssao_horizon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_horizon")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2522,13 +2595,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_horizon() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_horizon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_sharpness")
+    fileprivate static let method_set_ssao_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_sharpness")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2540,6 +2614,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_sharpness(_ sharpness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2553,8 +2628,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_sharpness")
+    fileprivate static let method_get_ssao_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_sharpness")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2566,13 +2641,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_sharpness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_direct_light_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_direct_light_affect")
+    fileprivate static let method_set_ssao_direct_light_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_direct_light_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2584,6 +2660,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_direct_light_affect(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2597,8 +2674,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_direct_light_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_direct_light_affect")
+    fileprivate static let method_get_ssao_direct_light_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_direct_light_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2610,13 +2687,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_direct_light_affect() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_direct_light_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssao_ao_channel_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssao_ao_channel_affect")
+    fileprivate static let method_set_ssao_ao_channel_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssao_ao_channel_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2628,6 +2706,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssao_ao_channel_affect(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2641,8 +2720,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssao_ao_channel_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssao_ao_channel_affect")
+    fileprivate static let method_get_ssao_ao_channel_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssao_ao_channel_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2654,13 +2733,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssao_ao_channel_affect() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssao_ao_channel_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssil_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssil_enabled")
+    fileprivate static let method_set_ssil_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssil_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2672,6 +2752,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssil_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2685,8 +2766,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_ssil_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ssil_enabled")
+    fileprivate static let method_is_ssil_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ssil_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2698,13 +2779,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_ssil_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_ssil_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssil_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssil_radius")
+    fileprivate static let method_set_ssil_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssil_radius")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2716,6 +2798,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssil_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2729,8 +2812,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssil_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssil_radius")
+    fileprivate static let method_get_ssil_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssil_radius")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2742,13 +2825,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssil_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssil_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssil_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssil_intensity")
+    fileprivate static let method_set_ssil_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssil_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2760,6 +2844,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssil_intensity(_ intensity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2773,8 +2858,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssil_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssil_intensity")
+    fileprivate static let method_get_ssil_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssil_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2786,13 +2871,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssil_intensity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssil_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssil_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssil_sharpness")
+    fileprivate static let method_set_ssil_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssil_sharpness")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2804,6 +2890,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssil_sharpness(_ sharpness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2817,8 +2904,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssil_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssil_sharpness")
+    fileprivate static let method_get_ssil_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssil_sharpness")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2830,13 +2917,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssil_sharpness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssil_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ssil_normal_rejection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ssil_normal_rejection")
+    fileprivate static let method_set_ssil_normal_rejection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ssil_normal_rejection")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2848,6 +2936,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_ssil_normal_rejection(_ normalRejection: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normalRejection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2861,8 +2950,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_ssil_normal_rejection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ssil_normal_rejection")
+    fileprivate static let method_get_ssil_normal_rejection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ssil_normal_rejection")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2874,13 +2963,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_ssil_normal_rejection() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_ssil_normal_rejection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_enabled")
+    fileprivate static let method_set_sdfgi_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2892,6 +2982,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2905,8 +2996,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_sdfgi_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sdfgi_enabled")
+    fileprivate static let method_is_sdfgi_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sdfgi_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2918,13 +3009,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_sdfgi_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_cascades: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_cascades")
+    fileprivate static let method_set_sdfgi_cascades: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_cascades")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2936,6 +3028,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_cascades(_ amount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2949,8 +3042,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_cascades: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_cascades")
+    fileprivate static let method_get_sdfgi_cascades: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_cascades")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2962,13 +3055,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_cascades() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_cascades, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_min_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_min_cell_size")
+    fileprivate static let method_set_sdfgi_min_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_min_cell_size")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2980,6 +3074,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_min_cell_size(_ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2993,8 +3088,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_min_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_min_cell_size")
+    fileprivate static let method_get_sdfgi_min_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_min_cell_size")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3006,13 +3101,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_min_cell_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_min_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_max_distance")
+    fileprivate static let method_set_sdfgi_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_max_distance")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3024,6 +3120,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_max_distance(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3037,8 +3134,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_max_distance")
+    fileprivate static let method_get_sdfgi_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_max_distance")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3050,13 +3147,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_max_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_cascade0_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_cascade0_distance")
+    fileprivate static let method_set_sdfgi_cascade0_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_cascade0_distance")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3068,6 +3166,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_cascade0_distance(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3081,8 +3180,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_cascade0_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_cascade0_distance")
+    fileprivate static let method_get_sdfgi_cascade0_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_cascade0_distance")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3094,13 +3193,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_cascade0_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_cascade0_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_y_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_y_scale")
+    fileprivate static let method_set_sdfgi_y_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_y_scale")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3608608372)!
@@ -3112,6 +3212,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_y_scale(_ scale: Environment.SDFGIYScale) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3125,8 +3226,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_y_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_y_scale")
+    fileprivate static let method_get_sdfgi_y_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_y_scale")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2568002245)!
@@ -3138,13 +3239,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_y_scale() -> Environment.SDFGIYScale {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_y_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Environment.SDFGIYScale (rawValue: _result)!
     }
     
-    fileprivate static var method_set_sdfgi_use_occlusion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_use_occlusion")
+    fileprivate static let method_set_sdfgi_use_occlusion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_use_occlusion")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3156,6 +3258,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_use_occlusion(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3169,8 +3272,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_sdfgi_using_occlusion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sdfgi_using_occlusion")
+    fileprivate static let method_is_sdfgi_using_occlusion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sdfgi_using_occlusion")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3182,13 +3285,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_sdfgi_using_occlusion() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_using_occlusion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_bounce_feedback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_bounce_feedback")
+    fileprivate static let method_set_sdfgi_bounce_feedback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_bounce_feedback")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3200,6 +3304,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_bounce_feedback(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3213,8 +3318,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_bounce_feedback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_bounce_feedback")
+    fileprivate static let method_get_sdfgi_bounce_feedback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_bounce_feedback")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3226,13 +3331,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_bounce_feedback() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_bounce_feedback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_read_sky_light: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_read_sky_light")
+    fileprivate static let method_set_sdfgi_read_sky_light: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_read_sky_light")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3244,6 +3350,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_read_sky_light(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3257,8 +3364,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_sdfgi_reading_sky_light: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sdfgi_reading_sky_light")
+    fileprivate static let method_is_sdfgi_reading_sky_light: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sdfgi_reading_sky_light")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3270,13 +3377,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_sdfgi_reading_sky_light() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_reading_sky_light, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_energy")
+    fileprivate static let method_set_sdfgi_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3288,6 +3396,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_energy(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3301,8 +3410,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_energy")
+    fileprivate static let method_get_sdfgi_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3314,13 +3423,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_normal_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_normal_bias")
+    fileprivate static let method_set_sdfgi_normal_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_normal_bias")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3332,6 +3442,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_normal_bias(_ bias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3345,8 +3456,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_normal_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_normal_bias")
+    fileprivate static let method_get_sdfgi_normal_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_normal_bias")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3358,13 +3469,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_normal_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_normal_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sdfgi_probe_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sdfgi_probe_bias")
+    fileprivate static let method_set_sdfgi_probe_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sdfgi_probe_bias")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3376,6 +3488,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_sdfgi_probe_bias(_ bias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3389,8 +3502,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_sdfgi_probe_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sdfgi_probe_bias")
+    fileprivate static let method_get_sdfgi_probe_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sdfgi_probe_bias")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3402,13 +3515,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_sdfgi_probe_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_probe_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_enabled")
+    fileprivate static let method_set_glow_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3420,6 +3534,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3433,8 +3548,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_glow_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_glow_enabled")
+    fileprivate static let method_is_glow_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_glow_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3446,13 +3561,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_glow_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_glow_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_level")
+    fileprivate static let method_set_glow_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_level")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -3464,6 +3580,7 @@ open class Environment: Resource {
     
     /// Sets the intensity of the glow level `idx`. A value above `0.0` enables the level. Each level relies on the previous level. This means that enabling higher glow levels will slow down the glow effect rendering, even if previous levels aren't enabled.
     public final func setGlowLevel(idx: Int32, intensity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: intensity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3480,8 +3597,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_level: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_level")
+    fileprivate static let method_get_glow_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_level")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -3493,6 +3610,7 @@ open class Environment: Resource {
     
     /// Returns the intensity of the glow level `idx`.
     public final func getGlowLevel(idx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3507,8 +3625,8 @@ open class Environment: Resource {
         return _result
     }
     
-    fileprivate static var method_set_glow_normalized: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_normalized")
+    fileprivate static let method_set_glow_normalized: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_normalized")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3520,6 +3638,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_normalized(_ normalize: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normalize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3533,8 +3652,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_glow_normalized: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_glow_normalized")
+    fileprivate static let method_is_glow_normalized: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_glow_normalized")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3546,13 +3665,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_glow_normalized() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_glow_normalized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_intensity")
+    fileprivate static let method_set_glow_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3564,6 +3684,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_intensity(_ intensity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3577,8 +3698,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_intensity")
+    fileprivate static let method_get_glow_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_intensity")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3590,13 +3711,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_intensity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_strength")
+    fileprivate static let method_set_glow_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_strength")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3608,6 +3730,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3621,8 +3744,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_strength")
+    fileprivate static let method_get_glow_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_strength")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3634,13 +3757,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_mix")
+    fileprivate static let method_set_glow_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_mix")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3652,6 +3776,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_mix(_ mix: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mix) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3665,8 +3790,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_mix")
+    fileprivate static let method_get_glow_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_mix")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3678,13 +3803,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_mix() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_mix, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_bloom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_bloom")
+    fileprivate static let method_set_glow_bloom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_bloom")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3696,6 +3822,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_bloom(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3709,8 +3836,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_bloom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_bloom")
+    fileprivate static let method_get_glow_bloom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_bloom")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3722,13 +3849,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_bloom() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_bloom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_blend_mode")
+    fileprivate static let method_set_glow_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_blend_mode")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2561587761)!
@@ -3740,6 +3868,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_blend_mode(_ mode: Environment.GlowBlendMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3753,8 +3882,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_blend_mode")
+    fileprivate static let method_get_glow_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_blend_mode")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1529667332)!
@@ -3766,13 +3895,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_blend_mode() -> Environment.GlowBlendMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Environment.method_get_glow_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Environment.GlowBlendMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_glow_hdr_bleed_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_hdr_bleed_threshold")
+    fileprivate static let method_set_glow_hdr_bleed_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_hdr_bleed_threshold")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3784,6 +3914,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_hdr_bleed_threshold(_ threshold: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3797,8 +3928,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_hdr_bleed_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_hdr_bleed_threshold")
+    fileprivate static let method_get_glow_hdr_bleed_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_hdr_bleed_threshold")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3810,13 +3941,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_hdr_bleed_threshold() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_bleed_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_hdr_bleed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_hdr_bleed_scale")
+    fileprivate static let method_set_glow_hdr_bleed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_hdr_bleed_scale")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3828,6 +3960,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_hdr_bleed_scale(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3841,8 +3974,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_hdr_bleed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_hdr_bleed_scale")
+    fileprivate static let method_get_glow_hdr_bleed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_hdr_bleed_scale")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3854,13 +3987,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_hdr_bleed_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_bleed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_hdr_luminance_cap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_hdr_luminance_cap")
+    fileprivate static let method_set_glow_hdr_luminance_cap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_hdr_luminance_cap")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3872,6 +4006,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_hdr_luminance_cap(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3885,8 +4020,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_hdr_luminance_cap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_hdr_luminance_cap")
+    fileprivate static let method_get_glow_hdr_luminance_cap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_hdr_luminance_cap")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3898,13 +4033,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_hdr_luminance_cap() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_luminance_cap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_map_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_map_strength")
+    fileprivate static let method_set_glow_map_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_map_strength")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3916,6 +4052,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_map_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3929,8 +4066,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_map_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_map_strength")
+    fileprivate static let method_get_glow_map_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_map_strength")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3942,13 +4079,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_map_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_glow_map_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_glow_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glow_map")
+    fileprivate static let method_set_glow_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glow_map")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1790811099)!
@@ -3960,6 +4098,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_glow_map(_ mode: Texture?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3973,8 +4112,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_glow_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glow_map")
+    fileprivate static let method_get_glow_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glow_map")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4037048985)!
@@ -3986,13 +4125,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_glow_map() -> Texture? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Environment.method_get_glow_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_fog_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_enabled")
+    fileprivate static let method_set_fog_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4004,6 +4144,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4017,8 +4158,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_fog_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_fog_enabled")
+    fileprivate static let method_is_fog_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_fog_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4030,13 +4171,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_fog_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_fog_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_mode")
+    fileprivate static let method_set_fog_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_mode")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3059806579)!
@@ -4048,6 +4190,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_mode(_ mode: Environment.FogMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4061,8 +4204,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_mode")
+    fileprivate static let method_get_fog_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_mode")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2456062483)!
@@ -4074,13 +4217,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_mode() -> Environment.FogMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Environment.method_get_fog_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Environment.FogMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_fog_light_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_light_color")
+    fileprivate static let method_set_fog_light_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_light_color")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -4092,6 +4236,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_light_color(_ lightColor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lightColor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4105,8 +4250,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_light_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_light_color")
+    fileprivate static let method_get_fog_light_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_light_color")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -4118,13 +4263,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_light_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Environment.method_get_fog_light_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_light_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_light_energy")
+    fileprivate static let method_set_fog_light_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_light_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4136,6 +4282,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_light_energy(_ lightEnergy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lightEnergy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4149,8 +4296,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_light_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_light_energy")
+    fileprivate static let method_get_fog_light_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_light_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4162,13 +4309,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_light_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_light_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_sun_scatter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_sun_scatter")
+    fileprivate static let method_set_fog_sun_scatter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_sun_scatter")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4180,6 +4328,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_sun_scatter(_ sunScatter: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sunScatter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4193,8 +4342,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_sun_scatter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_sun_scatter")
+    fileprivate static let method_get_fog_sun_scatter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_sun_scatter")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4206,13 +4355,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_sun_scatter() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_sun_scatter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_density")
+    fileprivate static let method_set_fog_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_density")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4224,6 +4374,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_density(_ density: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: density) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4237,8 +4388,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_density")
+    fileprivate static let method_get_fog_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_density")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4250,13 +4401,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_density() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_height")
+    fileprivate static let method_set_fog_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_height")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4268,6 +4420,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_height(_ height: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4281,8 +4434,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_height")
+    fileprivate static let method_get_fog_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_height")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4294,13 +4447,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_height() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_height_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_height_density")
+    fileprivate static let method_set_fog_height_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_height_density")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4312,6 +4466,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_height_density(_ heightDensity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: heightDensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4325,8 +4480,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_height_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_height_density")
+    fileprivate static let method_get_fog_height_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_height_density")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4338,13 +4493,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_height_density() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_height_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_aerial_perspective: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_aerial_perspective")
+    fileprivate static let method_set_fog_aerial_perspective: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_aerial_perspective")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4356,6 +4512,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_aerial_perspective(_ aerialPerspective: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: aerialPerspective) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4369,8 +4526,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_aerial_perspective: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_aerial_perspective")
+    fileprivate static let method_get_fog_aerial_perspective: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_aerial_perspective")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4382,13 +4539,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_aerial_perspective() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_aerial_perspective, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_sky_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_sky_affect")
+    fileprivate static let method_set_fog_sky_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_sky_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4400,6 +4558,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_sky_affect(_ skyAffect: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skyAffect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4413,8 +4572,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_sky_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_sky_affect")
+    fileprivate static let method_get_fog_sky_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_sky_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4426,13 +4585,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_sky_affect() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_sky_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_depth_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_depth_curve")
+    fileprivate static let method_set_fog_depth_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_depth_curve")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4444,6 +4604,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_depth_curve(_ curve: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4457,8 +4618,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_depth_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_depth_curve")
+    fileprivate static let method_get_fog_depth_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_depth_curve")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4470,13 +4631,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_depth_curve() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_depth_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_depth_begin")
+    fileprivate static let method_set_fog_depth_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_depth_begin")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4488,6 +4650,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_depth_begin(_ begin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: begin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4501,8 +4664,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_depth_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_depth_begin")
+    fileprivate static let method_get_fog_depth_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_depth_begin")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4514,13 +4677,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_depth_begin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fog_depth_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fog_depth_end")
+    fileprivate static let method_set_fog_depth_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fog_depth_end")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4532,6 +4696,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_fog_depth_end(_ end: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: end) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4545,8 +4710,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_fog_depth_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fog_depth_end")
+    fileprivate static let method_get_fog_depth_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fog_depth_end")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4558,13 +4723,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_fog_depth_end() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_enabled")
+    fileprivate static let method_set_volumetric_fog_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4576,6 +4742,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4589,8 +4756,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_volumetric_fog_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_volumetric_fog_enabled")
+    fileprivate static let method_is_volumetric_fog_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_volumetric_fog_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4602,13 +4769,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_volumetric_fog_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_volumetric_fog_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_emission: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_emission")
+    fileprivate static let method_set_volumetric_fog_emission: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_emission")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -4620,6 +4788,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_emission(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4633,8 +4802,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_emission: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_emission")
+    fileprivate static let method_get_volumetric_fog_emission: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_emission")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -4646,13 +4815,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_emission() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_emission, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_albedo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_albedo")
+    fileprivate static let method_set_volumetric_fog_albedo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_albedo")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -4664,6 +4834,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_albedo(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4677,8 +4848,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_albedo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_albedo")
+    fileprivate static let method_get_volumetric_fog_albedo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_albedo")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -4690,13 +4861,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_albedo() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_albedo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_density")
+    fileprivate static let method_set_volumetric_fog_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_density")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4708,6 +4880,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_density(_ density: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: density) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4721,8 +4894,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_density")
+    fileprivate static let method_get_volumetric_fog_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_density")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4734,13 +4907,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_density() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_emission_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_emission_energy")
+    fileprivate static let method_set_volumetric_fog_emission_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_emission_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4752,6 +4926,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_emission_energy(_ begin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: begin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4765,8 +4940,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_emission_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_emission_energy")
+    fileprivate static let method_get_volumetric_fog_emission_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_emission_energy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4778,13 +4953,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_emission_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_emission_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_anisotropy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_anisotropy")
+    fileprivate static let method_set_volumetric_fog_anisotropy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_anisotropy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4796,6 +4972,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_anisotropy(_ anisotropy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anisotropy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4809,8 +4986,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_anisotropy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_anisotropy")
+    fileprivate static let method_get_volumetric_fog_anisotropy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_anisotropy")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4822,13 +4999,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_anisotropy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_anisotropy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_length")
+    fileprivate static let method_set_volumetric_fog_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_length")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4840,6 +5018,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_length(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4853,8 +5032,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_length")
+    fileprivate static let method_get_volumetric_fog_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_length")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4866,13 +5045,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_detail_spread: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_detail_spread")
+    fileprivate static let method_set_volumetric_fog_detail_spread: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_detail_spread")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4884,6 +5064,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_detail_spread(_ detailSpread: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: detailSpread) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4897,8 +5078,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_detail_spread: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_detail_spread")
+    fileprivate static let method_get_volumetric_fog_detail_spread: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_detail_spread")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4910,13 +5091,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_detail_spread() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_detail_spread, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_gi_inject: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_gi_inject")
+    fileprivate static let method_set_volumetric_fog_gi_inject: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_gi_inject")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4928,6 +5110,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_gi_inject(_ giInject: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: giInject) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4941,8 +5124,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_gi_inject: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_gi_inject")
+    fileprivate static let method_get_volumetric_fog_gi_inject: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_gi_inject")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4954,13 +5137,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_gi_inject() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_gi_inject, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_ambient_inject: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_ambient_inject")
+    fileprivate static let method_set_volumetric_fog_ambient_inject: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_ambient_inject")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4972,6 +5156,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_ambient_inject(_ enabled: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4985,8 +5170,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_ambient_inject: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_ambient_inject")
+    fileprivate static let method_get_volumetric_fog_ambient_inject: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_ambient_inject")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4998,13 +5183,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_ambient_inject() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_ambient_inject, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_sky_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_sky_affect")
+    fileprivate static let method_set_volumetric_fog_sky_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_sky_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -5016,6 +5202,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_sky_affect(_ skyAffect: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skyAffect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5029,8 +5216,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_sky_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_sky_affect")
+    fileprivate static let method_get_volumetric_fog_sky_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_sky_affect")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -5042,13 +5229,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_sky_affect() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_sky_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_temporal_reprojection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_temporal_reprojection_enabled")
+    fileprivate static let method_set_volumetric_fog_temporal_reprojection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_temporal_reprojection_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -5060,6 +5248,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_temporal_reprojection_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5073,8 +5262,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_volumetric_fog_temporal_reprojection_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_volumetric_fog_temporal_reprojection_enabled")
+    fileprivate static let method_is_volumetric_fog_temporal_reprojection_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_volumetric_fog_temporal_reprojection_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -5086,13 +5275,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_volumetric_fog_temporal_reprojection_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_volumetric_fog_temporal_reprojection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_volumetric_fog_temporal_reprojection_amount: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volumetric_fog_temporal_reprojection_amount")
+    fileprivate static let method_set_volumetric_fog_temporal_reprojection_amount: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volumetric_fog_temporal_reprojection_amount")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -5104,6 +5294,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_volumetric_fog_temporal_reprojection_amount(_ temporalReprojectionAmount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: temporalReprojectionAmount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5117,8 +5308,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_volumetric_fog_temporal_reprojection_amount: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volumetric_fog_temporal_reprojection_amount")
+    fileprivate static let method_get_volumetric_fog_temporal_reprojection_amount: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volumetric_fog_temporal_reprojection_amount")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -5130,13 +5321,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_volumetric_fog_temporal_reprojection_amount() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_temporal_reprojection_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_adjustment_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_adjustment_enabled")
+    fileprivate static let method_set_adjustment_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_adjustment_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -5148,6 +5340,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_adjustment_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5161,8 +5354,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_is_adjustment_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_adjustment_enabled")
+    fileprivate static let method_is_adjustment_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_adjustment_enabled")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -5174,13 +5367,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func is_adjustment_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Environment.method_is_adjustment_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_adjustment_brightness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_adjustment_brightness")
+    fileprivate static let method_set_adjustment_brightness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_adjustment_brightness")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -5192,6 +5386,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_adjustment_brightness(_ brightness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: brightness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5205,8 +5400,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_adjustment_brightness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_adjustment_brightness")
+    fileprivate static let method_get_adjustment_brightness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_adjustment_brightness")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -5218,13 +5413,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_adjustment_brightness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_adjustment_brightness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_adjustment_contrast: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_adjustment_contrast")
+    fileprivate static let method_set_adjustment_contrast: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_adjustment_contrast")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -5236,6 +5432,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_adjustment_contrast(_ contrast: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: contrast) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5249,8 +5446,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_adjustment_contrast: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_adjustment_contrast")
+    fileprivate static let method_get_adjustment_contrast: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_adjustment_contrast")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -5262,13 +5459,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_adjustment_contrast() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_adjustment_contrast, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_adjustment_saturation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_adjustment_saturation")
+    fileprivate static let method_set_adjustment_saturation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_adjustment_saturation")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -5280,6 +5478,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_adjustment_saturation(_ saturation: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: saturation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5293,8 +5492,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_adjustment_saturation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_adjustment_saturation")
+    fileprivate static let method_get_adjustment_saturation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_adjustment_saturation")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -5306,13 +5505,14 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_adjustment_saturation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Environment.method_get_adjustment_saturation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_adjustment_color_correction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_adjustment_color_correction")
+    fileprivate static let method_set_adjustment_color_correction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_adjustment_color_correction")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1790811099)!
@@ -5324,6 +5524,7 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func set_adjustment_color_correction(_ colorCorrection: Texture?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: colorCorrection?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -5337,8 +5538,8 @@ open class Environment: Resource {
         
     }
     
-    fileprivate static var method_get_adjustment_color_correction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_adjustment_color_correction")
+    fileprivate static let method_get_adjustment_color_correction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_adjustment_color_correction")
         return withUnsafePointer(to: &Environment.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4037048985)!
@@ -5350,9 +5551,10 @@ open class Environment: Resource {
     
     @inline(__always)
     fileprivate final func get_adjustment_color_correction() -> Texture? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Environment.method_get_adjustment_color_correction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

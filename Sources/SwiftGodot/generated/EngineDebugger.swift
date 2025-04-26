@@ -24,18 +24,18 @@ import Musl
 /// ``EngineDebugger`` handles the communication between the editor and the running game. It is active in the running game. Messages can be sent/received through it. It also manages the profilers.
 open class EngineDebugger: Object {
     /// The shared instance of this class
-    public static var shared: EngineDebugger = {
-        return withUnsafePointer (to: &EngineDebugger.godotClassName.content) { ptr in
-            EngineDebugger (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: EngineDebugger {
+        return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("EngineDebugger")
+    private static var className = StringName("EngineDebugger")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_is_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_active")
+    fileprivate static let method_is_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_active")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -52,8 +52,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_register_profiler: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_profiler")
+    fileprivate static let method_register_profiler: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_profiler")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3651669560)!
@@ -81,8 +81,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_unregister_profiler: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unregister_profiler")
+    fileprivate static let method_unregister_profiler: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unregister_profiler")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -107,8 +107,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_is_profiling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_profiling")
+    fileprivate static let method_is_profiling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_profiling")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2041966384)!
@@ -134,8 +134,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_has_profiler: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_profiler")
+    fileprivate static let method_has_profiler: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_profiler")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2041966384)!
@@ -161,8 +161,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_profiler_add_frame_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("profiler_add_frame_data")
+    fileprivate static let method_profiler_add_frame_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("profiler_add_frame_data")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1895267858)!
@@ -173,7 +173,7 @@ open class EngineDebugger: Object {
     }()
     
     /// Calls the `add` callable of the profiler with given `name` and `data`.
-    public static func profilerAddFrameData(name: StringName, data: GArray) {
+    public static func profilerAddFrameData(name: StringName, data: VariantArray) {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -190,8 +190,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_profiler_enable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("profiler_enable")
+    fileprivate static let method_profiler_enable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("profiler_enable")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3192561009)!
@@ -202,7 +202,7 @@ open class EngineDebugger: Object {
     }()
     
     /// Calls the `toggle` callable of the profiler with given `name` and `arguments`. Enables/Disables the same profiler depending on `enable` argument.
-    public static func profilerEnable(name: StringName, enable: Bool, arguments: GArray = GArray ()) {
+    public static func profilerEnable(name: StringName, enable: Bool, arguments: VariantArray = VariantArray ()) {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: arguments.content) { pArg2 in
@@ -222,8 +222,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_register_message_capture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_message_capture")
+    fileprivate static let method_register_message_capture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_message_capture")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1874754934)!
@@ -235,7 +235,9 @@ open class EngineDebugger: Object {
     
     /// Registers a message capture with given `name`. If `name` is "my_message" then messages starting with "my_message:" will be called with the given callable.
     /// 
-    /// Callable must accept a message string and a data array as argument. If the message and data are valid then callable must return `true` otherwise `false`.
+    /// The callable must accept a message string and a data array as argument. The callable should return `true` if the message is recognized.
+    /// 
+    /// > Note: The callable will receive the message with the prefix stripped, unlike ``EditorDebuggerPlugin/_capture(message:data:sessionId:)``. See the ``EditorDebuggerPlugin`` description for an example.
     /// 
     public static func registerMessageCapture(name: StringName, callable: Callable) {
         withUnsafePointer(to: name.content) { pArg0 in
@@ -254,8 +256,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_unregister_message_capture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unregister_message_capture")
+    fileprivate static let method_unregister_message_capture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unregister_message_capture")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -280,8 +282,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_has_capture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_capture")
+    fileprivate static let method_has_capture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_capture")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2041966384)!
@@ -307,8 +309,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_line_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("line_poll")
+    fileprivate static let method_line_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("line_poll")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -318,14 +320,14 @@ open class EngineDebugger: Object {
         
     }()
     
-    /// Forces a processing loop of debugger events. The purpose of this method is just processing events every now and then when the script might get too busy, so that bugs like infinite loops can be caught
+    /// Forces a processing loop of debugger events. The purpose of this method is just processing events every now and then when the script might get too busy, so that bugs like infinite loops can be caught.
     public static func linePoll() {
         gi.object_method_bind_ptrcall(method_line_poll, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
         
     }
     
-    fileprivate static var method_send_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("send_message")
+    fileprivate static let method_send_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("send_message")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1209351045)!
@@ -336,7 +338,7 @@ open class EngineDebugger: Object {
     }()
     
     /// Sends a message with given `message` and `data` array.
-    public static func sendMessage(_ message: String, data: GArray) {
+    public static func sendMessage(_ message: String, data: VariantArray) {
         let message = GString(message)
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: data.content) { pArg1 in
@@ -354,8 +356,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_debug: GDExtensionMethodBindPtr = {
-        let methodName = StringName("debug")
+    fileprivate static let method_debug: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("debug")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2751962654)!
@@ -383,8 +385,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_script_debug: GDExtensionMethodBindPtr = {
-        let methodName = StringName("script_debug")
+    fileprivate static let method_script_debug: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("script_debug")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2442343672)!
@@ -415,8 +417,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_set_lines_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lines_left")
+    fileprivate static let method_set_lines_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lines_left")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -441,8 +443,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_get_lines_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lines_left")
+    fileprivate static let method_get_lines_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lines_left")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -459,8 +461,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_set_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth")
+    fileprivate static let method_set_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -485,8 +487,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_get_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth")
+    fileprivate static let method_get_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -503,8 +505,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_is_breakpoint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_breakpoint")
+    fileprivate static let method_is_breakpoint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_breakpoint")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 921227809)!
@@ -533,8 +535,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_is_skipping_breakpoints: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_skipping_breakpoints")
+    fileprivate static let method_is_skipping_breakpoints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_skipping_breakpoints")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -551,8 +553,8 @@ open class EngineDebugger: Object {
         return _result
     }
     
-    fileprivate static var method_insert_breakpoint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("insert_breakpoint")
+    fileprivate static let method_insert_breakpoint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("insert_breakpoint")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -580,8 +582,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_remove_breakpoint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_breakpoint")
+    fileprivate static let method_remove_breakpoint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_breakpoint")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -609,8 +611,8 @@ open class EngineDebugger: Object {
         
     }
     
-    fileprivate static var method_clear_breakpoints: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_breakpoints")
+    fileprivate static let method_clear_breakpoints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_breakpoints")
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!

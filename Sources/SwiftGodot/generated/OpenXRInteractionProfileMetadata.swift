@@ -23,11 +23,11 @@ import Musl
 /// 
 /// This class allows OpenXR core and extensions to register metadata relating to supported interaction devices such as controllers, trackers, haptic devices, etc. It is primarily used by the action map editor and to sanitize any action map by removing extension-dependent entries when applicable.
 open class OpenXRInteractionProfileMetadata: Object {
-    fileprivate static var className = StringName("OpenXRInteractionProfileMetadata")
+    private static var className = StringName("OpenXRInteractionProfileMetadata")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_register_profile_rename: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_profile_rename")
+    fileprivate static let method_register_profile_rename: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_profile_rename")
         return withUnsafePointer(to: &OpenXRInteractionProfileMetadata.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3186203200)!
@@ -39,6 +39,7 @@ open class OpenXRInteractionProfileMetadata: Object {
     
     /// Allows for renaming old interaction profile paths to new paths to maintain backwards compatibility with older action maps.
     public final func registerProfileRename(oldName: String, newName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let oldName = GString(oldName)
         withUnsafePointer(to: oldName.content) { pArg0 in
             let newName = GString(newName)
@@ -57,8 +58,8 @@ open class OpenXRInteractionProfileMetadata: Object {
         
     }
     
-    fileprivate static var method_register_top_level_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_top_level_path")
+    fileprivate static let method_register_top_level_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_top_level_path")
         return withUnsafePointer(to: &OpenXRInteractionProfileMetadata.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 254767734)!
@@ -75,6 +76,7 @@ open class OpenXRInteractionProfileMetadata: Object {
     /// When a top level path ends up being bound by OpenXR, a ``XRPositionalTracker`` is instantiated to manage the state of the device.
     /// 
     public final func registerTopLevelPath(displayName: String, openxrPath: String, openxrExtensionName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let displayName = GString(displayName)
         withUnsafePointer(to: displayName.content) { pArg0 in
             let openxrPath = GString(openxrPath)
@@ -97,8 +99,8 @@ open class OpenXRInteractionProfileMetadata: Object {
         
     }
     
-    fileprivate static var method_register_interaction_profile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_interaction_profile")
+    fileprivate static let method_register_interaction_profile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_interaction_profile")
         return withUnsafePointer(to: &OpenXRInteractionProfileMetadata.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 254767734)!
@@ -113,6 +115,7 @@ open class OpenXRInteractionProfileMetadata: Object {
     /// `displayName` is the description shown to the user. `openxrPath` is the interaction profile path being registered. `openxrExtensionName` optionally restricts this profile to the given extension being enabled/available. If the extension is not available, the profile and all related entries used in an action map are filtered out.
     /// 
     public final func registerInteractionProfile(displayName: String, openxrPath: String, openxrExtensionName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let displayName = GString(displayName)
         withUnsafePointer(to: displayName.content) { pArg0 in
             let openxrPath = GString(openxrPath)
@@ -135,8 +138,8 @@ open class OpenXRInteractionProfileMetadata: Object {
         
     }
     
-    fileprivate static var method_register_io_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_io_path")
+    fileprivate static let method_register_io_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_io_path")
         return withUnsafePointer(to: &OpenXRInteractionProfileMetadata.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3443511926)!
@@ -148,6 +151,7 @@ open class OpenXRInteractionProfileMetadata: Object {
     
     /// Registers an input/output path for the given `interactionProfile`. The profile should previously have been registered using ``registerInteractionProfile(displayName:openxrPath:openxrExtensionName:)``. `displayName` is the description shown to the user. `toplevelPath` specifies the bind path this input/output can be bound to (e.g. `/user/hand/left` or `/user/hand/right`). `openxrPath` is the action input/output being registered (e.g. `/user/hand/left/input/aim/pose`). `openxrExtensionName` restricts this input/output to an enabled/available extension, this doesn't need to repeat the extension on the profile but relates to overlapping extension (e.g. `XR_EXT_palm_pose` that introduces `…/input/palm_ext/pose` input paths). `actionType` defines the type of input or output provided by OpenXR.
     public final func registerIoPath(interactionProfile: String, displayName: String, toplevelPath: String, openxrPath: String, openxrExtensionName: String, actionType: OpenXRAction.ActionType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let interactionProfile = GString(interactionProfile)
         withUnsafePointer(to: interactionProfile.content) { pArg0 in
             let displayName = GString(displayName)

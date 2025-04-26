@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Stores general information about mouse events.
 open class InputEventMouse: InputEventWithModifiers {
-    fileprivate static var className = StringName("InputEventMouse")
+    private static var className = StringName("InputEventMouse")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -71,8 +71,8 @@ open class InputEventMouse: InputEventWithModifiers {
     }
     
     /* Methods */
-    fileprivate static var method_set_button_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_button_mask")
+    fileprivate static let method_set_button_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_button_mask")
         return withUnsafePointer(to: &InputEventMouse.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3950145251)!
@@ -84,6 +84,7 @@ open class InputEventMouse: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_button_mask(_ buttonMask: MouseButtonMask) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: buttonMask.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -97,8 +98,8 @@ open class InputEventMouse: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_button_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_button_mask")
+    fileprivate static let method_get_button_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_button_mask")
         return withUnsafePointer(to: &InputEventMouse.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2512161324)!
@@ -110,13 +111,14 @@ open class InputEventMouse: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func get_button_mask() -> MouseButtonMask {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: MouseButtonMask = MouseButtonMask ()
         gi.object_method_bind_ptrcall(InputEventMouse.method_get_button_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position")
+    fileprivate static let method_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position")
         return withUnsafePointer(to: &InputEventMouse.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -128,6 +130,7 @@ open class InputEventMouse: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_position(_ position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -141,8 +144,8 @@ open class InputEventMouse: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &InputEventMouse.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -154,13 +157,14 @@ open class InputEventMouse: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func get_position() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventMouse.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_global_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_global_position")
+    fileprivate static let method_set_global_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_global_position")
         return withUnsafePointer(to: &InputEventMouse.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -172,6 +176,7 @@ open class InputEventMouse: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func set_global_position(_ globalPosition: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: globalPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -185,8 +190,8 @@ open class InputEventMouse: InputEventWithModifiers {
         
     }
     
-    fileprivate static var method_get_global_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_global_position")
+    fileprivate static let method_get_global_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_global_position")
         return withUnsafePointer(to: &InputEventMouse.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -198,6 +203,7 @@ open class InputEventMouse: InputEventWithModifiers {
     
     @inline(__always)
     fileprivate final func get_global_position() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(InputEventMouse.method_get_global_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

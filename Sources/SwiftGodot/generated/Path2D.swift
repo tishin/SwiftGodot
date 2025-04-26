@@ -26,7 +26,7 @@ import Musl
 /// > Note: The path is considered as relative to the moved nodes (children of ``PathFollow2D``). As such, the curve should usually start with a zero vector (`(0, 0)`).
 /// 
 open class Path2D: Node2D {
-    fileprivate static var className = StringName("Path2D")
+    private static var className = StringName("Path2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class Path2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve")
+    fileprivate static let method_set_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve")
         return withUnsafePointer(to: &Path2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659985499)!
@@ -57,6 +57,7 @@ open class Path2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_curve(_ curve: Curve2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class Path2D: Node2D {
         
     }
     
-    fileprivate static var method_get_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve")
+    fileprivate static let method_get_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve")
         return withUnsafePointer(to: &Path2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 660369445)!
@@ -83,9 +84,10 @@ open class Path2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_curve() -> Curve2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Path2D.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

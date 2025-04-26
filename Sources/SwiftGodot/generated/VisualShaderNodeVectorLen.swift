@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translated to `length(p0)` in the shader language.
 open class VisualShaderNodeVectorLen: VisualShaderNodeVectorBase {
-    fileprivate static var className = StringName("VisualShaderNodeVectorLen")
+    private static var className = StringName("VisualShaderNodeVectorLen")
     override open class var godotClassName: StringName { className }
 }
 

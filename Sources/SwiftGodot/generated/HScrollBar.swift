@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A horizontal scrollbar, typically used to navigate through content that extends beyond the visible width of a control. It is a ``Range``-based control and goes from left (min) to right (max).
 open class HScrollBar: ScrollBar {
-    fileprivate static var className = StringName("HScrollBar")
+    private static var className = StringName("HScrollBar")
     override open class var godotClassName: StringName { className }
 }
 

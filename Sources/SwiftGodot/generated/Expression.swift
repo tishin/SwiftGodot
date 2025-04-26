@@ -28,11 +28,11 @@ import Musl
 /// In the following example we use a ``LineEdit`` node to write our expression and show the result.
 /// 
 open class Expression: RefCounted {
-    fileprivate static var className = StringName("Expression")
+    private static var className = StringName("Expression")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_parse: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse")
+    fileprivate static let method_parse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse")
         return withUnsafePointer(to: &Expression.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3069722906)!
@@ -47,6 +47,7 @@ open class Expression: RefCounted {
     /// You can optionally specify names of variables that may appear in the expression with `inputNames`, so that you can bind them when it gets executed.
     /// 
     public final func parse(expression: String, inputNames: PackedStringArray = PackedStringArray()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let expression = GString(expression)
         withUnsafePointer(to: expression.content) { pArg0 in
@@ -65,8 +66,8 @@ open class Expression: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_execute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("execute")
+    fileprivate static let method_execute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("execute")
         return withUnsafePointer(to: &Expression.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3712471238)!
@@ -80,7 +81,8 @@ open class Expression: RefCounted {
     /// 
     /// If you defined input variables in ``parse(expression:inputNames:)``, you can specify their values in the inputs array, in the same order.
     /// 
-    public final func execute(inputs: GArray = GArray (), baseInstance: Object? = nil, showError: Bool = true, constCallsOnly: Bool = false) -> Variant? {
+    public final func execute(inputs: VariantArray = VariantArray (), baseInstance: Object? = nil, showError: Bool = true, constCallsOnly: Bool = false) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: inputs.content) { pArg0 in
             withUnsafePointer(to: baseInstance?.handle) { pArg1 in
@@ -104,8 +106,8 @@ open class Expression: RefCounted {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_has_execute_failed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_execute_failed")
+    fileprivate static let method_has_execute_failed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_execute_failed")
         return withUnsafePointer(to: &Expression.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -117,13 +119,14 @@ open class Expression: RefCounted {
     
     /// Returns `true` if ``execute(inputs:baseInstance:showError:constCallsOnly:)`` has failed.
     public final func hasExecuteFailed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Expression.method_has_execute_failed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_error_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_error_text")
+    fileprivate static let method_get_error_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_error_text")
         return withUnsafePointer(to: &Expression.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -135,6 +138,7 @@ open class Expression: RefCounted {
     
     /// Returns the error text if ``parse(expression:inputNames:)`` or ``execute(inputs:baseInstance:showError:constCallsOnly:)`` has failed.
     public final func getErrorText() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Expression.method_get_error_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

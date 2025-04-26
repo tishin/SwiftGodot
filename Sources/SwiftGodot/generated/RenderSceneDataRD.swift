@@ -26,7 +26,7 @@ import Musl
 /// > Note: This is an internal rendering server object, do not instantiate this from script.
 /// 
 open class RenderSceneDataRD: RenderSceneData {
-    fileprivate static var className = StringName("RenderSceneDataRD")
+    private static var className = StringName("RenderSceneDataRD")
     override open class var godotClassName: StringName { className }
 }
 

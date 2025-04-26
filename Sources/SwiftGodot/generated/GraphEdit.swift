@@ -27,6 +27,8 @@ import Musl
 /// 
 /// **Performance:** It is greatly advised to enable low-processor usage mode (see ``OS/lowProcessorUsageMode``) when using GraphEdits.
 /// 
+/// > Note: Keep in mind that ``Node/getChildren(includeInternal:)`` will also return the connection layer node named `_connection_layer` due to technical limitations. This behavior may change in future releases.
+/// 
 /// 
 /// 
 /// This object emits the following signals:
@@ -38,6 +40,7 @@ import Musl
 /// - ``connectionDragStarted``
 /// - ``connectionDragEnded``
 /// - ``copyNodesRequest``
+/// - ``cutNodesRequest``
 /// - ``pasteNodesRequest``
 /// - ``duplicateNodesRequest``
 /// - ``deleteNodesRequest``
@@ -50,7 +53,7 @@ import Musl
 /// - ``graphElementsLinkedToFrameRequest``
 /// - ``scrollOffsetChanged``
 open class GraphEdit: Control {
-    fileprivate static var className = StringName("GraphEdit")
+    private static var className = StringName("GraphEdit")
     override open class var godotClassName: StringName { className }
     public enum PanningScheme: Int64, CaseIterable {
         /// [kbd]Mouse Wheel[/kbd] will zoom, [kbd]Ctrl + Mouse Wheel[/kbd] will move the view.
@@ -185,6 +188,23 @@ open class GraphEdit: Control {
         
         set {
             set_connection_lines_antialiased (newValue)
+        }
+        
+    }
+    
+    /// The connections between ``GraphNode``s.
+    /// 
+    /// A connection is represented as a ``VariantDictionary`` in the form of:
+    /// 
+    /// Connections with `keep_alive` set to `false` may be deleted automatically if invalid during a redraw.
+    /// 
+    final public var connections: TypedArray<VariantDictionary> {
+        get {
+            return get_connection_list ()
+        }
+        
+        set {
+            set_connections (newValue)
         }
         
     }
@@ -346,6 +366,17 @@ open class GraphEdit: Control {
     }
     
     /* Methods */
+    fileprivate static let method__is_in_input_hotzone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_in_input_hotzone")
+        return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1779768129)!
+            }
+            
+        }
+        
+    }()
+    
     /// Returns whether the `mousePosition` is in the input hot zone.
     /// 
     /// By default, a hot zone is a ``Rect2`` positioned such that its center is at `inNode`.``GraphNode/getInputPortPosition(portIdx:)``(`inPort`) (For output's case, call ``GraphNode/getOutputPortPosition(portIdx:)`` instead). The hot zone's width is twice the Theme Property `port_grab_distance_horizontal`, and its height is twice the `port_grab_distance_vertical`.
@@ -354,8 +385,37 @@ open class GraphEdit: Control {
     /// 
     @_documentation(visibility: public)
     open func _isInInputHotzone(inNode: Object?, inPort: Int32, mousePosition: Vector2) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: inNode?.handle) { pArg0 in
+            withUnsafePointer(to: inPort) { pArg1 in
+                withUnsafePointer(to: mousePosition) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(GraphEdit.method__is_in_input_hotzone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__is_in_output_hotzone: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_in_output_hotzone")
+        return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1779768129)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns whether the `mousePosition` is in the output hot zone. For more information on hot zones, see ``_isInInputHotzone(inNode:inPort:mousePosition:)``.
     /// 
@@ -363,14 +423,69 @@ open class GraphEdit: Control {
     /// 
     @_documentation(visibility: public)
     open func _isInOutputHotzone(inNode: Object?, inPort: Int32, mousePosition: Vector2) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: inNode?.handle) { pArg0 in
+            withUnsafePointer(to: inPort) { pArg1 in
+                withUnsafePointer(to: mousePosition) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(GraphEdit.method__is_in_output_hotzone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_connection_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_connection_line")
+        return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3932192302)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method which can be overridden to customize how connections are drawn.
     @_documentation(visibility: public)
     open func _getConnectionLine(fromPosition: Vector2, toPosition: Vector2) -> PackedVector2Array {
-        return PackedVector2Array ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedVector2Array = PackedVector2Array ()
+        withUnsafePointer(to: fromPosition) { pArg0 in
+            withUnsafePointer(to: toPosition) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(GraphEdit.method__get_connection_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__is_node_hover_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_node_hover_valid")
+        return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4216241294)!
+            }
+            
+        }
+        
+    }()
     
     /// This virtual method can be used to insert additional error detection while the user is dragging a connection over a valid port.
     /// 
@@ -380,14 +495,35 @@ open class GraphEdit: Control {
     /// 
     @_documentation(visibility: public)
     open func _isNodeHoverValid(fromNode: StringName, fromPort: Int32, toNode: StringName, toPort: Int32) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: fromNode.content) { pArg0 in
+            withUnsafePointer(to: fromPort) { pArg1 in
+                withUnsafePointer(to: toNode.content) { pArg2 in
+                    withUnsafePointer(to: toPort) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(GraphEdit.method__is_node_hover_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
     
-    fileprivate static var method_connect_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_node")
+    fileprivate static let method_connect_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_node")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 195065850)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1376144231)!
             }
             
         }
@@ -395,15 +531,22 @@ open class GraphEdit: Control {
     }()
     
     /// Create a connection between the `fromPort` of the `fromNode` ``GraphNode`` and the `toPort` of the `toNode` ``GraphNode``. If the connection already exists, no connection is created.
-    public final func connectNode(fromNode: StringName, fromPort: Int32, toNode: StringName, toPort: Int32) -> GodotError {
+    /// 
+    /// Connections with `keepAlive` set to `false` may be deleted automatically if invalid during a redraw.
+    /// 
+    public final func connectNode(fromNode: StringName, fromPort: Int32, toNode: StringName, toPort: Int32, keepAlive: Bool = false) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fromNode.content) { pArg0 in
             withUnsafePointer(to: fromPort) { pArg1 in
                 withUnsafePointer(to: toNode.content) { pArg2 in
                     withUnsafePointer(to: toPort) { pArg3 in
-                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
-                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GraphEdit.method_connect_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        withUnsafePointer(to: keepAlive) { pArg4 in
+                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
+                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
+                                    gi.object_method_bind_ptrcall(GraphEdit.method_connect_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                }
+                                
                             }
                             
                         }
@@ -419,8 +562,8 @@ open class GraphEdit: Control {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_node_connected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_node_connected")
+    fileprivate static let method_is_node_connected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_node_connected")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4216241294)!
@@ -432,6 +575,7 @@ open class GraphEdit: Control {
     
     /// Returns `true` if the `fromPort` of the `fromNode` ``GraphNode`` is connected to the `toPort` of the `toNode` ``GraphNode``.
     public final func isNodeConnected(fromNode: StringName, fromPort: Int32, toNode: StringName, toPort: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fromNode.content) { pArg0 in
             withUnsafePointer(to: fromPort) { pArg1 in
@@ -455,8 +599,8 @@ open class GraphEdit: Control {
         return _result
     }
     
-    fileprivate static var method_disconnect_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_node")
+    fileprivate static let method_disconnect_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_node")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1933654315)!
@@ -468,6 +612,7 @@ open class GraphEdit: Control {
     
     /// Removes the connection between the `fromPort` of the `fromNode` ``GraphNode`` and the `toPort` of the `toNode` ``GraphNode``. If the connection does not exist, no connection is removed.
     public final func disconnectNode(fromNode: StringName, fromPort: Int32, toNode: StringName, toPort: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromNode.content) { pArg0 in
             withUnsafePointer(to: fromPort) { pArg1 in
                 withUnsafePointer(to: toNode.content) { pArg2 in
@@ -490,8 +635,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_set_connection_activity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_connection_activity")
+    fileprivate static let method_set_connection_activity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_connection_activity")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1141899943)!
@@ -503,6 +648,7 @@ open class GraphEdit: Control {
     
     /// Sets the coloration of the connection between `fromNode`'s `fromPort` and `toNode`'s `toPort` with the color provided in the [theme_item activity] theme property. The color is linearly interpolated between the connection color and the activity color using `amount` as weight.
     public final func setConnectionActivity(fromNode: StringName, fromPort: Int32, toNode: StringName, toPort: Int32, amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromNode.content) { pArg0 in
             withUnsafePointer(to: fromPort) { pArg1 in
                 withUnsafePointer(to: toNode.content) { pArg2 in
@@ -528,8 +674,35 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_connection_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connection_list")
+    fileprivate static let method_set_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_connections")
+        return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_connections(_ connections: TypedArray<VariantDictionary>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: connections.array.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_connection_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection_list")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -539,15 +712,47 @@ open class GraphEdit: Control {
         
     }()
     
-    /// Returns an ``GArray`` containing the list of connections. A connection consists in a structure of the form `{ from_port: 0, from_node: "GraphNode name 0", to_port: 1, to_node: "GraphNode name 1" }`.
-    public final func getConnectionList() -> VariantCollection<GDictionary> {
+    @inline(__always)
+    fileprivate final func get_connection_list() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_get_closest_connection_at_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_closest_connection_at_point")
+    fileprivate static let method_get_connection_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection_count")
+        return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 861718734)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the number of connections from `fromPort` of `fromNode`.
+    public final func getConnectionCount(fromNode: StringName, fromPort: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: fromNode.content) { pArg0 in
+            withUnsafePointer(to: fromPort) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_closest_connection_at_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_closest_connection_at_point")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 453879819)!
@@ -557,14 +762,15 @@ open class GraphEdit: Control {
         
     }()
     
-    /// Returns the closest connection to the given point in screen space. If no connection is found within `maxDistance` pixels, an empty ``GDictionary`` is returned.
+    /// Returns the closest connection to the given point in screen space. If no connection is found within `maxDistance` pixels, an empty ``VariantDictionary`` is returned.
     /// 
-    /// A connection consists in a structure of the form `{ from_port: 0, from_node: "GraphNode name 0", to_port: 1, to_node: "GraphNode name 1" }`.
+    /// A connection is represented as a ``VariantDictionary`` in the form of:
     /// 
     /// For example, getting a connection at a given mouse position can be achieved like this:
     /// 
-    public final func getClosestConnectionAtPoint(_ point: Vector2, maxDistance: Double = 4.0) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getClosestConnectionAtPoint(_ point: Vector2, maxDistance: Double = 4.0) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: maxDistance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -581,8 +787,8 @@ open class GraphEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_connections_intersecting_with_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connections_intersecting_with_rect")
+    fileprivate static let method_get_connections_intersecting_with_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connections_intersecting_with_rect")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2709748719)!
@@ -592,8 +798,12 @@ open class GraphEdit: Control {
         
     }()
     
-    /// Returns an ``GArray`` containing the list of connections that intersect with the given ``Rect2``. A connection consists in a structure of the form `{ from_port: 0, from_node: "GraphNode name 0", to_port: 1, to_node: "GraphNode name 1" }`.
-    public final func getConnectionsIntersectingWithRect(_ rect: Rect2) -> VariantCollection<GDictionary> {
+    /// Returns an ``VariantArray`` containing the list of connections that intersect with the given ``Rect2``.
+    /// 
+    /// A connection is represented as a ``VariantDictionary`` in the form of:
+    /// 
+    public final func getConnectionsIntersectingWithRect(_ rect: Rect2) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -605,11 +815,11 @@ open class GraphEdit: Control {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_clear_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_connections")
+    fileprivate static let method_clear_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_connections")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -621,12 +831,13 @@ open class GraphEdit: Control {
     
     /// Removes all connections between nodes.
     public final func clearConnections() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(GraphEdit.method_clear_connections, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_force_connection_drag_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_connection_drag_end")
+    fileprivate static let method_force_connection_drag_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_connection_drag_end")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -643,12 +854,13 @@ open class GraphEdit: Control {
     /// > Note: This method suppresses any other connection request signals apart from [signal connection_drag_ended].
     /// 
     public final func forceConnectionDragEnd() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(GraphEdit.method_force_connection_drag_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_scroll_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scroll_offset")
+    fileprivate static let method_get_scroll_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scroll_offset")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -660,13 +872,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_scroll_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(GraphEdit.method_get_scroll_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scroll_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scroll_offset")
+    fileprivate static let method_set_scroll_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scroll_offset")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -678,6 +891,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_scroll_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -691,8 +905,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_add_valid_right_disconnect_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_valid_right_disconnect_type")
+    fileprivate static let method_add_valid_right_disconnect_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_valid_right_disconnect_type")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -704,6 +918,7 @@ open class GraphEdit: Control {
     
     /// Allows to disconnect nodes when dragging from the right port of the ``GraphNode``'s slot if it has the specified type. See also ``removeValidRightDisconnectType(_:)``.
     public final func addValidRightDisconnectType(_ type: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -717,8 +932,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_remove_valid_right_disconnect_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_valid_right_disconnect_type")
+    fileprivate static let method_remove_valid_right_disconnect_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_valid_right_disconnect_type")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -730,6 +945,7 @@ open class GraphEdit: Control {
     
     /// Disallows to disconnect nodes when dragging from the right port of the ``GraphNode``'s slot if it has the specified type. Use this to disable disconnection previously allowed with ``addValidRightDisconnectType(_:)``.
     public final func removeValidRightDisconnectType(_ type: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -743,8 +959,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_add_valid_left_disconnect_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_valid_left_disconnect_type")
+    fileprivate static let method_add_valid_left_disconnect_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_valid_left_disconnect_type")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -756,6 +972,7 @@ open class GraphEdit: Control {
     
     /// Allows to disconnect nodes when dragging from the left port of the ``GraphNode``'s slot if it has the specified type. See also ``removeValidLeftDisconnectType(_:)``.
     public final func addValidLeftDisconnectType(_ type: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -769,8 +986,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_remove_valid_left_disconnect_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_valid_left_disconnect_type")
+    fileprivate static let method_remove_valid_left_disconnect_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_valid_left_disconnect_type")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -782,6 +999,7 @@ open class GraphEdit: Control {
     
     /// Disallows to disconnect nodes when dragging from the left port of the ``GraphNode``'s slot if it has the specified type. Use this to disable disconnection previously allowed with ``addValidLeftDisconnectType(_:)``.
     public final func removeValidLeftDisconnectType(_ type: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -795,8 +1013,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_add_valid_connection_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_valid_connection_type")
+    fileprivate static let method_add_valid_connection_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_valid_connection_type")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -811,6 +1029,7 @@ open class GraphEdit: Control {
     /// See also ``isValidConnectionType(fromType:toType:)`` and ``removeValidConnectionType(fromType:toType:)``.
     /// 
     public final func addValidConnectionType(fromType: Int32, toType: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromType) { pArg0 in
             withUnsafePointer(to: toType) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -827,8 +1046,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_remove_valid_connection_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_valid_connection_type")
+    fileprivate static let method_remove_valid_connection_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_valid_connection_type")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -843,6 +1062,7 @@ open class GraphEdit: Control {
     /// See also ``isValidConnectionType(fromType:toType:)``.
     /// 
     public final func removeValidConnectionType(fromType: Int32, toType: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromType) { pArg0 in
             withUnsafePointer(to: toType) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -859,8 +1079,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_valid_connection_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_valid_connection_type")
+    fileprivate static let method_is_valid_connection_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_valid_connection_type")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
@@ -875,6 +1095,7 @@ open class GraphEdit: Control {
     /// See also ``addValidConnectionType(fromType:toType:)`` and ``removeValidConnectionType(fromType:toType:)``.
     /// 
     public final func isValidConnectionType(fromType: Int32, toType: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fromType) { pArg0 in
             withUnsafePointer(to: toType) { pArg1 in
@@ -892,8 +1113,8 @@ open class GraphEdit: Control {
         return _result
     }
     
-    fileprivate static var method_get_connection_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connection_line")
+    fileprivate static let method_get_connection_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection_line")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3932192302)!
@@ -905,6 +1126,7 @@ open class GraphEdit: Control {
     
     /// Returns the points which would make up a connection between `fromNode` and `toNode`.
     public final func getConnectionLine(fromNode: Vector2, toNode: Vector2) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: fromNode) { pArg0 in
             withUnsafePointer(to: toNode) { pArg1 in
@@ -922,8 +1144,8 @@ open class GraphEdit: Control {
         return _result
     }
     
-    fileprivate static var method_attach_graph_element_to_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("attach_graph_element_to_frame")
+    fileprivate static let method_attach_graph_element_to_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("attach_graph_element_to_frame")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -935,6 +1157,7 @@ open class GraphEdit: Control {
     
     /// Attaches the `element` ``GraphElement`` to the `frame` ``GraphFrame``.
     public final func attachGraphElementToFrame(element: StringName, frame: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: element.content) { pArg0 in
             withUnsafePointer(to: frame.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -951,8 +1174,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_detach_graph_element_from_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("detach_graph_element_from_frame")
+    fileprivate static let method_detach_graph_element_from_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("detach_graph_element_from_frame")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -964,6 +1187,7 @@ open class GraphEdit: Control {
     
     /// Detaches the `element` ``GraphElement`` from the ``GraphFrame`` it is currently attached to.
     public final func detachGraphElementFromFrame(element: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: element.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -977,8 +1201,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_element_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_element_frame")
+    fileprivate static let method_get_element_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_element_frame")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 988084372)!
@@ -990,6 +1214,7 @@ open class GraphEdit: Control {
     
     /// Returns the ``GraphFrame`` that contains the ``GraphElement`` with the given name.
     public final func getElementFrame(element: StringName) -> GraphFrame? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: element.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1001,11 +1226,11 @@ open class GraphEdit: Control {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_attached_nodes_of_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_attached_nodes_of_frame")
+    fileprivate static let method_get_attached_nodes_of_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_attached_nodes_of_frame")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 689397652)!
@@ -1016,7 +1241,8 @@ open class GraphEdit: Control {
     }()
     
     /// Returns an array of node names that are attached to the ``GraphFrame`` with the given name.
-    public final func getAttachedNodesOfFrame(_ frame: StringName) -> VariantCollection<StringName> {
+    public final func getAttachedNodesOfFrame(_ frame: StringName) -> TypedArray<StringName> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: frame.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1028,11 +1254,11 @@ open class GraphEdit: Control {
             
         }
         
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
     }
     
-    fileprivate static var method_set_panning_scheme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_panning_scheme")
+    fileprivate static let method_set_panning_scheme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_panning_scheme")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 18893313)!
@@ -1044,6 +1270,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_panning_scheme(_ scheme: GraphEdit.PanningScheme) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scheme.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1057,8 +1284,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_panning_scheme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_panning_scheme")
+    fileprivate static let method_get_panning_scheme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_panning_scheme")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 549924446)!
@@ -1070,13 +1297,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_panning_scheme() -> GraphEdit.PanningScheme {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GraphEdit.method_get_panning_scheme, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GraphEdit.PanningScheme (rawValue: _result)!
     }
     
-    fileprivate static var method_set_zoom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_zoom")
+    fileprivate static let method_set_zoom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_zoom")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1088,6 +1316,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_zoom(_ zoom: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: zoom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1101,8 +1330,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_zoom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_zoom")
+    fileprivate static let method_get_zoom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_zoom")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1114,13 +1343,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_zoom() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_zoom_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_zoom_min")
+    fileprivate static let method_set_zoom_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_zoom_min")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1132,6 +1362,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_zoom_min(_ zoomMin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: zoomMin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1145,8 +1376,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_zoom_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_zoom_min")
+    fileprivate static let method_get_zoom_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_zoom_min")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1158,13 +1389,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_zoom_min() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_zoom_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_zoom_max")
+    fileprivate static let method_set_zoom_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_zoom_max")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1176,6 +1408,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_zoom_max(_ zoomMax: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: zoomMax) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1189,8 +1422,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_zoom_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_zoom_max")
+    fileprivate static let method_get_zoom_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_zoom_max")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1202,13 +1435,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_zoom_max() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_zoom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_zoom_step")
+    fileprivate static let method_set_zoom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_zoom_step")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1220,6 +1454,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_zoom_step(_ zoomStep: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: zoomStep) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1233,8 +1468,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_zoom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_zoom_step")
+    fileprivate static let method_get_zoom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_zoom_step")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1246,13 +1481,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_zoom_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_grid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_grid")
+    fileprivate static let method_set_show_grid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_grid")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1264,6 +1500,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_show_grid(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1277,8 +1514,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_showing_grid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_showing_grid")
+    fileprivate static let method_is_showing_grid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_showing_grid")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1290,13 +1527,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_showing_grid() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_grid, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_grid_pattern: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_grid_pattern")
+    fileprivate static let method_set_grid_pattern: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_grid_pattern")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1074098205)!
@@ -1308,6 +1546,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_grid_pattern(_ pattern: GraphEdit.GridPattern) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pattern.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1321,8 +1560,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_grid_pattern: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_grid_pattern")
+    fileprivate static let method_get_grid_pattern: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_grid_pattern")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286127528)!
@@ -1334,13 +1573,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_grid_pattern() -> GraphEdit.GridPattern {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(GraphEdit.method_get_grid_pattern, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GraphEdit.GridPattern (rawValue: _result)!
     }
     
-    fileprivate static var method_set_snapping_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_snapping_enabled")
+    fileprivate static let method_set_snapping_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_snapping_enabled")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1352,6 +1592,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_snapping_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1365,8 +1606,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_snapping_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_snapping_enabled")
+    fileprivate static let method_is_snapping_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_snapping_enabled")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1378,13 +1619,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_snapping_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_snapping_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_snapping_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_snapping_distance")
+    fileprivate static let method_set_snapping_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_snapping_distance")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1396,6 +1638,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_snapping_distance(_ pixels: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1409,8 +1652,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_snapping_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_snapping_distance")
+    fileprivate static let method_get_snapping_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_snapping_distance")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1422,13 +1665,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_snapping_distance() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_snapping_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_connection_lines_curvature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_connection_lines_curvature")
+    fileprivate static let method_set_connection_lines_curvature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_connection_lines_curvature")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1440,6 +1684,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_connection_lines_curvature(_ curvature: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curvature) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1453,8 +1698,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_connection_lines_curvature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connection_lines_curvature")
+    fileprivate static let method_get_connection_lines_curvature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection_lines_curvature")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1466,13 +1711,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_connection_lines_curvature() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_lines_curvature, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_connection_lines_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_connection_lines_thickness")
+    fileprivate static let method_set_connection_lines_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_connection_lines_thickness")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1484,6 +1730,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_connection_lines_thickness(_ pixels: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1497,8 +1744,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_connection_lines_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connection_lines_thickness")
+    fileprivate static let method_get_connection_lines_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection_lines_thickness")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1510,13 +1757,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_connection_lines_thickness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_lines_thickness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_connection_lines_antialiased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_connection_lines_antialiased")
+    fileprivate static let method_set_connection_lines_antialiased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_connection_lines_antialiased")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1528,6 +1776,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_connection_lines_antialiased(_ pixels: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1541,8 +1790,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_connection_lines_antialiased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_connection_lines_antialiased")
+    fileprivate static let method_is_connection_lines_antialiased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_connection_lines_antialiased")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1554,13 +1803,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_connection_lines_antialiased() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_connection_lines_antialiased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_minimap_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_minimap_size")
+    fileprivate static let method_set_minimap_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_minimap_size")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -1572,6 +1822,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_minimap_size(_ size: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1585,8 +1836,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_minimap_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimap_size")
+    fileprivate static let method_get_minimap_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimap_size")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1598,13 +1849,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_minimap_size() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(GraphEdit.method_get_minimap_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_minimap_opacity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_minimap_opacity")
+    fileprivate static let method_set_minimap_opacity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_minimap_opacity")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1616,6 +1868,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_minimap_opacity(_ opacity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: opacity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1629,8 +1882,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_get_minimap_opacity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_minimap_opacity")
+    fileprivate static let method_get_minimap_opacity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_minimap_opacity")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1642,13 +1895,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func get_minimap_opacity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GraphEdit.method_get_minimap_opacity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_minimap_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_minimap_enabled")
+    fileprivate static let method_set_minimap_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_minimap_enabled")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1660,6 +1914,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_minimap_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1673,8 +1928,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_minimap_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_minimap_enabled")
+    fileprivate static let method_is_minimap_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_minimap_enabled")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1686,13 +1941,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_minimap_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_minimap_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_menu")
+    fileprivate static let method_set_show_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_menu")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1704,6 +1960,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_show_menu(_ hidden: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1717,8 +1974,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_showing_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_showing_menu")
+    fileprivate static let method_is_showing_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_showing_menu")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1730,13 +1987,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_showing_menu() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_zoom_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_zoom_label")
+    fileprivate static let method_set_show_zoom_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_zoom_label")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1748,6 +2006,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_show_zoom_label(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1761,8 +2020,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_showing_zoom_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_showing_zoom_label")
+    fileprivate static let method_is_showing_zoom_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_showing_zoom_label")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1774,13 +2033,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_showing_zoom_label() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_zoom_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_grid_buttons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_grid_buttons")
+    fileprivate static let method_set_show_grid_buttons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_grid_buttons")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1792,6 +2052,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_show_grid_buttons(_ hidden: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1805,8 +2066,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_showing_grid_buttons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_showing_grid_buttons")
+    fileprivate static let method_is_showing_grid_buttons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_showing_grid_buttons")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1818,13 +2079,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_showing_grid_buttons() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_grid_buttons, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_zoom_buttons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_zoom_buttons")
+    fileprivate static let method_set_show_zoom_buttons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_zoom_buttons")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1836,6 +2098,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_show_zoom_buttons(_ hidden: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1849,8 +2112,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_showing_zoom_buttons: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_showing_zoom_buttons")
+    fileprivate static let method_is_showing_zoom_buttons: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_showing_zoom_buttons")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1862,13 +2125,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_showing_zoom_buttons() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_zoom_buttons, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_minimap_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_minimap_button")
+    fileprivate static let method_set_show_minimap_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_minimap_button")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1880,6 +2144,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_show_minimap_button(_ hidden: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1893,8 +2158,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_showing_minimap_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_showing_minimap_button")
+    fileprivate static let method_is_showing_minimap_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_showing_minimap_button")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1906,13 +2171,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_showing_minimap_button() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_minimap_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_show_arrange_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_show_arrange_button")
+    fileprivate static let method_set_show_arrange_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_show_arrange_button")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1924,6 +2190,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_show_arrange_button(_ hidden: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1937,8 +2204,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_showing_arrange_button: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_showing_arrange_button")
+    fileprivate static let method_is_showing_arrange_button: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_showing_arrange_button")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1950,13 +2217,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_showing_arrange_button() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_arrange_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_right_disconnects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_right_disconnects")
+    fileprivate static let method_set_right_disconnects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_right_disconnects")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1968,6 +2236,7 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func set_right_disconnects(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1981,8 +2250,8 @@ open class GraphEdit: Control {
         
     }
     
-    fileprivate static var method_is_right_disconnects_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_right_disconnects_enabled")
+    fileprivate static let method_is_right_disconnects_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_right_disconnects_enabled")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1994,13 +2263,14 @@ open class GraphEdit: Control {
     
     @inline(__always)
     fileprivate final func is_right_disconnects_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphEdit.method_is_right_disconnects_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_menu_hbox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_menu_hbox")
+    fileprivate static let method_get_menu_hbox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_menu_hbox")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3590609951)!
@@ -2015,13 +2285,14 @@ open class GraphEdit: Control {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``CanvasItem/visible`` property.
     /// 
     public final func getMenuHbox() -> HBoxContainer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GraphEdit.method_get_menu_hbox, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_arrange_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("arrange_nodes")
+    fileprivate static let method_arrange_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("arrange_nodes")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2033,12 +2304,13 @@ open class GraphEdit: Control {
     
     /// Rearranges selected nodes in a layout with minimum crossings between connections and uniform horizontal and vertical gap between nodes.
     public final func arrangeNodes() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(GraphEdit.method_arrange_nodes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selected")
+    fileprivate static let method_set_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selected")
         return withUnsafePointer(to: &GraphEdit.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -2050,6 +2322,7 @@ open class GraphEdit: Control {
     
     /// Sets the specified `node` as the one selected.
     public final func setSelected(node: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2063,7 +2336,7 @@ open class GraphEdit: Control {
         
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_connection_line":
@@ -2193,6 +2466,22 @@ open class GraphEdit: Control {
     /// ```
     public var copyNodesRequest: SimpleSignal { SimpleSignal (target: self, signalName: "copy_nodes_request") }
     
+    /// Emitted when this ``GraphEdit`` captures a `ui_cut` action ([kbd]Ctrl + X[/kbd] by default). In general, this signal indicates that the selected ``GraphElement``s should be cut.
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.cutNodesRequest.connect {
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var cutNodesRequest: SimpleSignal { SimpleSignal (target: self, signalName: "cut_nodes_request") }
+    
     /// Emitted when this ``GraphEdit`` captures a `ui_paste` action ([kbd]Ctrl + V[/kbd] by default). In general, this signal indicates that previously copied ``GraphElement``s should be pasted.
     ///
     /// To connect to this signal, reference this property and call the
@@ -2242,7 +2531,7 @@ open class GraphEdit: Control {
     ///    print ("caught signal")
     /// }
     /// ```
-    public var deleteNodesRequest: SignalWithArguments<VariantCollection<StringName>?> { SignalWithArguments<VariantCollection<StringName>?> (target: self, signalName: "delete_nodes_request") }
+    public var deleteNodesRequest: SignalWithArguments<TypedArray<StringName>> { SignalWithArguments<TypedArray<StringName>> (target: self, signalName: "delete_nodes_request") }
     
     /// Emitted when the given ``GraphElement`` node is selected.
     ///
@@ -2290,7 +2579,7 @@ open class GraphEdit: Control {
     ///    print ("caught signal")
     /// }
     /// ```
-    public var frameRectChanged: SignalWithArguments<GraphFrame?, Vector2> { SignalWithArguments<GraphFrame?, Vector2> (target: self, signalName: "frame_rect_changed") }
+    public var frameRectChanged: SignalWithArguments<GraphFrame?, Rect2> { SignalWithArguments<GraphFrame?, Rect2> (target: self, signalName: "frame_rect_changed") }
     
     /// Emitted when a popup is requested. Happens on right-clicking in the GraphEdit. `atPosition` is the position of the mouse pointer when the signal is sent.
     ///
@@ -2357,7 +2646,7 @@ open class GraphEdit: Control {
     ///    print ("caught signal")
     /// }
     /// ```
-    public var graphElementsLinkedToFrameRequest: SignalWithArguments<GArray?, StringName> { SignalWithArguments<GArray?, StringName> (target: self, signalName: "graph_elements_linked_to_frame_request") }
+    public var graphElementsLinkedToFrameRequest: SignalWithArguments<VariantArray, StringName> { SignalWithArguments<VariantArray, StringName> (target: self, signalName: "graph_elements_linked_to_frame_request") }
     
     /// Emitted when the scroll offset is changed by the user. It will not be emitted when changed in code.
     ///
@@ -2381,7 +2670,8 @@ open class GraphEdit: Control {
 func _GraphEdit_proxy_get_connection_line (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<GraphEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? GraphEdit else { return }
     let ret = swiftObject._getConnectionLine (fromPosition: args [0]!.assumingMemoryBound (to: Vector2.self).pointee, toPosition: args [1]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedVector2Array
     ret.content = PackedVector2Array.zero
@@ -2390,27 +2680,30 @@ func _GraphEdit_proxy_get_connection_line (instance: UnsafeMutableRawPointer?, a
 func _GraphEdit_proxy_is_in_input_hotzone (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<GraphEdit>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? GraphEdit else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._isInInputHotzone (inNode: lookupLiveObject (handleAddress: resolved_0) as? Object ?? Object (nativeHandle: resolved_0), inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
+    let ret = swiftObject._isInInputHotzone (inNode: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _GraphEdit_proxy_is_in_output_hotzone (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<GraphEdit>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? GraphEdit else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._isInOutputHotzone (inNode: lookupLiveObject (handleAddress: resolved_0) as? Object ?? Object (nativeHandle: resolved_0), inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
+    let ret = swiftObject._isInOutputHotzone (inNode: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _GraphEdit_proxy_is_node_hover_valid (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<GraphEdit>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? GraphEdit else { return }
     let ret = swiftObject._isNodeHoverValid (fromNode: StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), fromPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, toNode: StringName (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), toPort: args [3]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }

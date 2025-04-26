@@ -32,7 +32,7 @@ import Musl
 /// As TileData properties are stored directly in the TileSetAtlasSource resource, their properties might also be set using `TileSetAtlasSource.set("<coords_x>:<coords_y>/<alternative_id>/<tile_data_property>")`.
 /// 
 open class TileSetAtlasSource: TileSetSource {
-    fileprivate static var className = StringName("TileSetAtlasSource")
+    private static var className = StringName("TileSetAtlasSource")
     override open class var godotClassName: StringName { className }
     public enum TileAnimationMode: Int64, CaseIterable {
         /// Tile animations start at same time, looking identical.
@@ -92,7 +92,7 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    /// The base tile size in the texture (in pixel). This size must be bigger than the TileSet's `tile_size` value.
+    /// The base tile size in the texture (in pixel). This size must be bigger than or equal to the TileSet's `tile_size` value.
     final public var textureRegionSize: Vector2i {
         get {
             return get_texture_region_size ()
@@ -120,8 +120,8 @@ open class TileSetAtlasSource: TileSetSource {
     }
     
     /* Methods */
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -133,6 +133,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -146,8 +147,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -159,13 +160,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_margins: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_margins")
+    fileprivate static let method_set_margins: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_margins")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -177,6 +179,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func set_margins(_ margins: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margins) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -190,8 +193,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_margins: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_margins")
+    fileprivate static let method_get_margins: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_margins")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -203,13 +206,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func get_margins() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_margins, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_separation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_separation")
+    fileprivate static let method_set_separation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_separation")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -221,6 +225,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func set_separation(_ separation: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: separation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -234,8 +239,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_separation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_separation")
+    fileprivate static let method_get_separation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_separation")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -247,13 +252,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func get_separation() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_separation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texture_region_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_region_size")
+    fileprivate static let method_set_texture_region_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_region_size")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -265,6 +271,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func set_texture_region_size(_ textureRegionSize: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: textureRegionSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -278,8 +285,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_texture_region_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_region_size")
+    fileprivate static let method_get_texture_region_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_region_size")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -291,13 +298,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func get_texture_region_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_texture_region_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_texture_padding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_texture_padding")
+    fileprivate static let method_set_use_texture_padding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_texture_padding")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -309,6 +317,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func set_use_texture_padding(_ useTexturePadding: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useTexturePadding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -322,8 +331,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_use_texture_padding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_texture_padding")
+    fileprivate static let method_get_use_texture_padding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_texture_padding")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -335,13 +344,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     @inline(__always)
     fileprivate final func get_use_texture_padding() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_use_texture_padding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_create_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_tile")
+    fileprivate static let method_create_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_tile")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 190528769)!
@@ -353,6 +363,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Creates a new tile at coordinates `atlasCoords` with the given `size`.
     public final func createTile(atlasCoords: Vector2i, size: Vector2i = Vector2i (x: 1, y: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -369,8 +380,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_remove_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_tile")
+    fileprivate static let method_remove_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_tile")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -382,6 +393,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Remove a tile and its alternative at coordinates `atlasCoords`.
     public final func removeTile(atlasCoords: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -395,8 +407,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_move_tile_in_atlas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_tile_in_atlas")
+    fileprivate static let method_move_tile_in_atlas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_tile_in_atlas")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3870111920)!
@@ -413,6 +425,7 @@ open class TileSetAtlasSource: TileSetSource {
     /// To avoid an error, first check if a move is possible using ``hasRoomForTile(atlasCoords:size:animationColumns:animationSeparation:framesCount:ignoredTile:)``.
     /// 
     public final func moveTileInAtlas(atlasCoords: Vector2i, newAtlasCoords: Vector2i = Vector2i (x: -1, y: -1), newSize: Vector2i = Vector2i (x: -1, y: -1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: newAtlasCoords) { pArg1 in
                 withUnsafePointer(to: newSize) { pArg2 in
@@ -432,8 +445,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_tile_size_in_atlas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_size_in_atlas")
+    fileprivate static let method_get_tile_size_in_atlas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_size_in_atlas")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3050897911)!
@@ -445,6 +458,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the size of the tile (in the grid coordinates system) at coordinates `atlasCoords`.
     public final func getTileSizeInAtlas(atlasCoords: Vector2i) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -459,8 +473,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_has_room_for_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_room_for_tile")
+    fileprivate static let method_has_room_for_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_room_for_tile")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3018597268)!
@@ -472,6 +486,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns whether there is enough room in an atlas to create/modify a tile with the given properties. If `ignoredTile` is provided, act as is the given tile was not present in the atlas. This may be used when you want to modify a tile's properties.
     public final func hasRoomForTile(atlasCoords: Vector2i, size: Vector2i, animationColumns: Int32, animationSeparation: Vector2i, framesCount: Int32, ignoredTile: Vector2i = Vector2i (x: -1, y: -1)) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -501,8 +516,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_get_tiles_to_be_removed_on_change: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tiles_to_be_removed_on_change")
+    fileprivate static let method_get_tiles_to_be_removed_on_change: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tiles_to_be_removed_on_change")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1240378054)!
@@ -514,6 +529,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns an array of tiles coordinates ID that will be automatically removed when modifying one or several of those properties: `texture`, `margins`, `separation` or `textureRegionSize`. This can be used to undo changes that would have caused tiles data loss.
     public final func getTilesToBeRemovedOnChange(texture: Texture2D?, margins: Vector2i, separation: Vector2i, textureRegionSize: Vector2i) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: margins) { pArg1 in
@@ -537,8 +553,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_get_tile_at_coords: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_at_coords")
+    fileprivate static let method_get_tile_at_coords: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_at_coords")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3050897911)!
@@ -550,6 +566,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// If there is a tile covering the `atlasCoords` coordinates, returns the top-left coordinates of the tile (thus its coordinate ID). Returns `Vector2i(-1, -1)` otherwise.
     public final func getTileAtCoords(atlasCoords: Vector2i) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -564,8 +581,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_has_tiles_outside_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_tiles_outside_texture")
+    fileprivate static let method_has_tiles_outside_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_tiles_outside_texture")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -577,13 +594,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Checks if the source has any tiles that don't fit the texture area (either partially or completely).
     public final func hasTilesOutsideTexture() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_has_tiles_outside_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_clear_tiles_outside_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_tiles_outside_texture")
+    fileprivate static let method_clear_tiles_outside_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_tiles_outside_texture")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -595,12 +613,13 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Removes all tiles that don't fit the available texture area. This method iterates over all the source's tiles, so it's advised to use ``hasTilesOutsideTexture()`` beforehand.
     public final func clearTilesOutsideTexture() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_clear_tiles_outside_texture, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_tile_animation_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tile_animation_columns")
+    fileprivate static let method_set_tile_animation_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tile_animation_columns")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200960707)!
@@ -612,6 +631,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Sets the number of columns in the animation layout of the tile at coordinates `atlasCoords`. If set to 0, then the different frames of the animation are laid out as a single horizontal line in the atlas.
     public final func setTileAnimationColumns(atlasCoords: Vector2i, frameColumns: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: frameColumns) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -628,8 +648,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_tile_animation_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_animation_columns")
+    fileprivate static let method_get_tile_animation_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_animation_columns")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -641,6 +661,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns how many columns the tile at `atlasCoords` has in its animation layout.
     public final func getTileAnimationColumns(atlasCoords: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -655,8 +676,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_set_tile_animation_separation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tile_animation_separation")
+    fileprivate static let method_set_tile_animation_separation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tile_animation_separation")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1941061099)!
@@ -668,6 +689,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Sets the margin (in grid tiles) between each tile in the animation layout of the tile at coordinates `atlasCoords` has.
     public final func setTileAnimationSeparation(atlasCoords: Vector2i, separation: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: separation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -684,8 +706,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_tile_animation_separation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_animation_separation")
+    fileprivate static let method_get_tile_animation_separation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_animation_separation")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3050897911)!
@@ -697,6 +719,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the separation (as in the atlas grid) between each frame of an animated tile at coordinates `atlasCoords`.
     public final func getTileAnimationSeparation(atlasCoords: Vector2i) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -711,8 +734,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_set_tile_animation_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tile_animation_speed")
+    fileprivate static let method_set_tile_animation_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tile_animation_speed")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2262553149)!
@@ -724,6 +747,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Sets the animation speed of the tile at coordinates `atlasCoords` has.
     public final func setTileAnimationSpeed(atlasCoords: Vector2i, speed: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: speed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -740,8 +764,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_tile_animation_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_animation_speed")
+    fileprivate static let method_get_tile_animation_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_animation_speed")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 719993801)!
@@ -753,6 +777,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the animation speed of the tile at coordinates `atlasCoords`.
     public final func getTileAnimationSpeed(atlasCoords: Vector2i) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -767,8 +792,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_set_tile_animation_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tile_animation_mode")
+    fileprivate static let method_set_tile_animation_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tile_animation_mode")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3192753483)!
@@ -780,6 +805,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Sets the tile animation mode of the tile at `atlasCoords` to `mode`. See also ``getTileAnimationMode(atlasCoords:)``.
     public final func setTileAnimationMode(atlasCoords: Vector2i, mode: TileSetAtlasSource.TileAnimationMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -796,8 +822,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_tile_animation_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_animation_mode")
+    fileprivate static let method_get_tile_animation_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_animation_mode")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4025349959)!
@@ -809,6 +835,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the tile animation mode of the tile at `atlasCoords`. See also ``setTileAnimationMode(atlasCoords:mode:)``.
     public final func getTileAnimationMode(atlasCoords: Vector2i) -> TileSetAtlasSource.TileAnimationMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -823,8 +850,8 @@ open class TileSetAtlasSource: TileSetSource {
         return TileSetAtlasSource.TileAnimationMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_tile_animation_frames_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tile_animation_frames_count")
+    fileprivate static let method_set_tile_animation_frames_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tile_animation_frames_count")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200960707)!
@@ -836,6 +863,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Sets how many animation frames the tile at coordinates `atlasCoords` has.
     public final func setTileAnimationFramesCount(atlasCoords: Vector2i, framesCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: framesCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -852,8 +880,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_tile_animation_frames_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_animation_frames_count")
+    fileprivate static let method_get_tile_animation_frames_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_animation_frames_count")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -865,6 +893,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns how many animation frames has the tile at coordinates `atlasCoords`.
     public final func getTileAnimationFramesCount(atlasCoords: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -879,8 +908,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_set_tile_animation_frame_duration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tile_animation_frame_duration")
+    fileprivate static let method_set_tile_animation_frame_duration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tile_animation_frame_duration")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2843487787)!
@@ -892,6 +921,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Sets the animation frame `duration` of frame `frameIndex` for the tile at coordinates `atlasCoords`.
     public final func setTileAnimationFrameDuration(atlasCoords: Vector2i, frameIndex: Int32, duration: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: frameIndex) { pArg1 in
                 withUnsafePointer(to: duration) { pArg2 in
@@ -911,8 +941,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_tile_animation_frame_duration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_animation_frame_duration")
+    fileprivate static let method_get_tile_animation_frame_duration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_animation_frame_duration")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1802448425)!
@@ -924,6 +954,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the animation frame duration of frame `frameIndex` for the tile at coordinates `atlasCoords`.
     public final func getTileAnimationFrameDuration(atlasCoords: Vector2i, frameIndex: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: frameIndex) { pArg1 in
@@ -941,8 +972,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_get_tile_animation_total_duration: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_animation_total_duration")
+    fileprivate static let method_get_tile_animation_total_duration: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_animation_total_duration")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 719993801)!
@@ -954,6 +985,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the sum of the sum of the frame durations of the tile at coordinates `atlasCoords`. This value needs to be divided by the animation speed to get the actual animation loop duration.
     public final func getTileAnimationTotalDuration(atlasCoords: Vector2i) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -968,8 +1000,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_create_alternative_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_alternative_tile")
+    fileprivate static let method_create_alternative_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_alternative_tile")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2226298068)!
@@ -984,6 +1016,7 @@ open class TileSetAtlasSource: TileSetSource {
     /// Returns the new alternative identifier, or -1 if the alternative could not be created with a provided `alternativeIdOverride`.
     /// 
     public final func createAlternativeTile(atlasCoords: Vector2i, alternativeIdOverride: Int32 = -1) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: alternativeIdOverride) { pArg1 in
@@ -1001,8 +1034,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_remove_alternative_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_alternative_tile")
+    fileprivate static let method_remove_alternative_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_alternative_tile")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200960707)!
@@ -1017,6 +1050,7 @@ open class TileSetAtlasSource: TileSetSource {
     /// Calling this function with `alternativeTile` equals to 0 will fail, as the base tile alternative cannot be removed.
     /// 
     public final func removeAlternativeTile(atlasCoords: Vector2i, alternativeTile: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: alternativeTile) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1033,8 +1067,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_set_alternative_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alternative_tile_id")
+    fileprivate static let method_set_alternative_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alternative_tile_id")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1499785778)!
@@ -1049,6 +1083,7 @@ open class TileSetAtlasSource: TileSetSource {
     /// Calling this function with `newId` of 0 will fail, as the base tile alternative cannot be moved.
     /// 
     public final func setAlternativeTileId(atlasCoords: Vector2i, alternativeTile: Int32, newId: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: alternativeTile) { pArg1 in
                 withUnsafePointer(to: newId) { pArg2 in
@@ -1068,8 +1103,8 @@ open class TileSetAtlasSource: TileSetSource {
         
     }
     
-    fileprivate static var method_get_next_alternative_tile_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_next_alternative_tile_id")
+    fileprivate static let method_get_next_alternative_tile_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next_alternative_tile_id")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2485466453)!
@@ -1081,6 +1116,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the alternative ID a following call to ``createAlternativeTile(atlasCoords:alternativeIdOverride:)`` would return.
     public final func getNextAlternativeTileId(atlasCoords: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1095,8 +1131,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_get_tile_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_data")
+    fileprivate static let method_get_tile_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_data")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3534028207)!
@@ -1108,6 +1144,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the ``TileData`` object for the given atlas coordinates and alternative ID.
     public final func getTileData(atlasCoords: Vector2i, alternativeTile: Int32) -> TileData? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: alternativeTile) { pArg1 in
@@ -1122,11 +1159,11 @@ open class TileSetAtlasSource: TileSetSource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_atlas_grid_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_atlas_grid_size")
+    fileprivate static let method_get_atlas_grid_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_atlas_grid_size")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -1138,13 +1175,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns the atlas grid size, which depends on how many tiles can fit in the texture. It thus depends on the ``texture``'s size, the atlas ``margins``, and the tiles' ``textureRegionSize``.
     public final func getAtlasGridSize() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_atlas_grid_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_tile_texture_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tile_texture_region")
+    fileprivate static let method_get_tile_texture_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tile_texture_region")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 241857547)!
@@ -1156,6 +1194,7 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// Returns a tile's texture region in the atlas texture. For animated tiles, a `frame` argument might be provided for the different frames of the animation.
     public final func getTileTextureRegion(atlasCoords: Vector2i, frame: Int32 = 0) -> Rect2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: frame) { pArg1 in
@@ -1173,8 +1212,8 @@ open class TileSetAtlasSource: TileSetSource {
         return _result
     }
     
-    fileprivate static var method_get_runtime_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_runtime_texture")
+    fileprivate static let method_get_runtime_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_runtime_texture")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -1186,13 +1225,14 @@ open class TileSetAtlasSource: TileSetSource {
     
     /// If ``useTexturePadding`` is `false`, returns ``texture``. Otherwise, returns and internal ``ImageTexture`` created that includes the padding.
     public final func getRuntimeTexture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_runtime_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_runtime_tile_texture_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_runtime_tile_texture_region")
+    fileprivate static let method_get_runtime_tile_texture_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_runtime_tile_texture_region")
         return withUnsafePointer(to: &TileSetAtlasSource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 104874263)!
@@ -1207,6 +1247,7 @@ open class TileSetAtlasSource: TileSetSource {
     /// > Note: If ``useTexturePadding`` is `false`, returns the same as ``getTileTextureRegion(atlasCoords:frame:)``.
     /// 
     public final func getRuntimeTileTextureRegion(atlasCoords: Vector2i, frame: Int32) -> Rect2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: frame) { pArg1 in

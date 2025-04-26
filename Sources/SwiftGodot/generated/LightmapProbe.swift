@@ -28,7 +28,7 @@ import Musl
 /// > Note: ``LightmapProbe`` nodes that are placed after baking lightmaps are ignored by dynamic objects. You must bake lightmaps again after creating or modifying ``LightmapProbe``s for the probes to be effective.
 /// 
 open class LightmapProbe: Node3D {
-    fileprivate static var className = StringName("LightmapProbe")
+    private static var className = StringName("LightmapProbe")
     override open class var godotClassName: StringName { className }
 }
 

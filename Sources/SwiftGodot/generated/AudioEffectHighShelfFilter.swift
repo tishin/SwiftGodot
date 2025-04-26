@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Reduces all frequencies above the ``AudioEffectFilter/cutoffHz``.
 open class AudioEffectHighShelfFilter: AudioEffectFilter {
-    fileprivate static var className = StringName("AudioEffectHighShelfFilter")
+    private static var className = StringName("AudioEffectHighShelfFilter")
     override open class var godotClassName: StringName { className }
 }
 

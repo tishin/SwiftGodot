@@ -30,7 +30,7 @@ import Musl
 /// > Note: ``ProjectSettings/audio/driver/enableInput`` must be `true` for audio input to work. See also that setting's description for caveats related to permissions and operating system privacy settings.
 /// 
 open class AudioEffectRecord: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectRecord")
+    private static var className = StringName("AudioEffectRecord")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -48,8 +48,8 @@ open class AudioEffectRecord: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_recording_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_recording_active")
+    fileprivate static let method_set_recording_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_recording_active")
         return withUnsafePointer(to: &AudioEffectRecord.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -61,6 +61,7 @@ open class AudioEffectRecord: AudioEffect {
     
     /// If `true`, the sound will be recorded. Note that restarting the recording will remove the previously recorded sample.
     public final func setRecordingActive(record: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: record) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -74,8 +75,8 @@ open class AudioEffectRecord: AudioEffect {
         
     }
     
-    fileprivate static var method_is_recording_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_recording_active")
+    fileprivate static let method_is_recording_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_recording_active")
         return withUnsafePointer(to: &AudioEffectRecord.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -87,13 +88,14 @@ open class AudioEffectRecord: AudioEffect {
     
     /// Returns whether the recording is active or not.
     public final func isRecordingActive() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioEffectRecord.method_is_recording_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_format")
+    fileprivate static let method_set_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_format")
         return withUnsafePointer(to: &AudioEffectRecord.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 60648488)!
@@ -105,6 +107,7 @@ open class AudioEffectRecord: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_format(_ format: AudioStreamWAV.Format) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -118,8 +121,8 @@ open class AudioEffectRecord: AudioEffect {
         
     }
     
-    fileprivate static var method_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format")
+    fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format")
         return withUnsafePointer(to: &AudioEffectRecord.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3151724922)!
@@ -131,13 +134,14 @@ open class AudioEffectRecord: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_format() -> AudioStreamWAV.Format {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AudioEffectRecord.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AudioStreamWAV.Format (rawValue: _result)!
     }
     
-    fileprivate static var method_get_recording: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_recording")
+    fileprivate static let method_get_recording: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_recording")
         return withUnsafePointer(to: &AudioEffectRecord.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2964110865)!
@@ -149,9 +153,10 @@ open class AudioEffectRecord: AudioEffect {
     
     /// Returns the recorded sample.
     public final func getRecording() -> AudioStreamWAV? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AudioEffectRecord.method_get_recording, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

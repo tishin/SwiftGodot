@@ -31,10 +31,12 @@ import Musl
 /// 
 /// > Note: Lightmap baking on ``CSGShape3D``s and ``PrimitiveMesh``es is not supported, as these cannot store UV2 data required for baking.
 /// 
-/// > Note: If no custom lightmappers are installed, ``LightmapGI`` can only be baked from devices that support the Forward+ or Mobile rendering backends.
+/// > Note: If no custom lightmappers are installed, ``LightmapGI`` can only be baked from devices that support the Forward+ or Mobile renderers.
+/// 
+/// > Note: The ``LightmapGI`` node only bakes light data for child nodes of its parent. Nodes further up the hierarchy of the scene will not be baked.
 /// 
 open class LightmapGI: VisualInstance3D {
-    fileprivate static var className = StringName("LightmapGI")
+    private static var className = StringName("LightmapGI")
     override open class var godotClassName: StringName { className }
     public enum BakeQuality: Int64, CaseIterable {
         /// Low bake quality (fastest bake times). The quality of this preset can be adjusted by changing ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityRayCount`` and ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityProbeRayCount``.
@@ -81,6 +83,10 @@ open class LightmapGI: VisualInstance3D {
         case userAborted = 8 // BAKE_ERROR_USER_ABORTED
         /// Lightmap baking failed as the maximum texture size is too small to fit some of the meshes marked for baking.
         case textureSizeTooSmall = 9 // BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL
+        /// Lightmap baking failed as the lightmap is too small.
+        case lightmapTooSmall = 10 // BAKE_ERROR_LIGHTMAP_TOO_SMALL
+        /// Lightmap baking failed as the lightmap was unable to fit into an atlas.
+        case atlasTooSmall = 11 // BAKE_ERROR_ATLAS_TOO_SMALL
     }
     
     public enum EnvironmentMode: Int64, CaseIterable {
@@ -102,7 +108,9 @@ open class LightmapGI: VisualInstance3D {
     
     /// The quality preset to use when baking lightmaps. This affects bake times, but output file sizes remain mostly identical across quality levels.
     /// 
-    /// To further speed up bake times, decrease ``bounces``, disable ``useDenoiser`` and increase the lightmap texel size on 3D scenes in the Import doc.
+    /// To further speed up bake times, decrease ``bounces``, disable ``useDenoiser`` and/or decrease ``texelScale``.
+    /// 
+    /// To further increase quality, enable ``supersampling`` and/or increase ``texelScale``.
     /// 
     final public var quality: LightmapGI.BakeQuality {
         get {
@@ -111,6 +119,38 @@ open class LightmapGI: VisualInstance3D {
         
         set {
             set_bake_quality (newValue)
+        }
+        
+    }
+    
+    /// If `true`, lightmaps are baked with the texel scale multiplied with ``supersamplingFactor`` and downsampled before saving the lightmap (so the effective texel density is identical to having supersampling disabled).
+    /// 
+    /// Supersampling provides increased lightmap quality with less noise, smoother shadows and better shadowing of small-scale features in objects. However, it may result in significantly increased bake times and memory usage while baking lightmaps. Padding is automatically adjusted to avoid increasing light leaking.
+    /// 
+    final public var supersampling: Bool {
+        get {
+            return is_supersampling_enabled ()
+        }
+        
+        set {
+            set_supersampling_enabled (newValue)
+        }
+        
+    }
+    
+    /// The factor by which the texel density is multiplied for supersampling. For best results, use an integer value. While fractional values are allowed, they can result in increased light leaking and a blurry lightmap.
+    /// 
+    /// Higher values may result in better quality, but also increase bake times and memory usage while baking.
+    /// 
+    /// See ``supersampling`` for more information.
+    /// 
+    final public var supersamplingFactor: Double {
+        get {
+            return get_supersampling_factor ()
+        }
+        
+        set {
+            set_supersampling_factor (newValue)
         }
         
     }
@@ -153,6 +193,23 @@ open class LightmapGI: VisualInstance3D {
         
         set {
             set_directional (newValue)
+        }
+        
+    }
+    
+    /// The shadowmasking policy to use for directional shadows on static objects that are baked with this ``LightmapGI`` instance.
+    /// 
+    /// Shadowmasking allows ``DirectionalLight3D`` nodes to cast shadows even outside the range defined by their ``DirectionalLight3D/directionalShadowMaxDistance`` property. This is done by baking a texture that contains a shadowmap for the directional light, then using this texture according to the current shadowmask mode.
+    /// 
+    /// > Note: The shadowmask texture is only created if ``shadowmaskMode`` is not ``LightmapGIData/ShadowmaskMode/none``. To see a difference, you need to bake lightmaps again after switching from ``LightmapGIData/ShadowmaskMode/none`` to any other mode.
+    /// 
+    final public var shadowmaskMode: LightmapGIData.ShadowmaskMode {
+        get {
+            return get_shadowmask_mode ()
+        }
+        
+        set {
+            set_shadowmask_mode (newValue)
         }
         
     }
@@ -233,6 +290,9 @@ open class LightmapGI: VisualInstance3D {
     }
     
     /// Scales the lightmap texel density of all meshes for the current bake. This is a multiplier that builds upon the existing lightmap texel size defined in each imported 3D scene, along with the per-mesh density multiplier (which is designed to be used when the same mesh is used at different scales). Lower values will result in faster bake times.
+    /// 
+    /// For example, doubling ``texelScale`` doubles the lightmap texture resolution for all objects _on each axis_, so it will _quadruple_ the texel count.
+    /// 
     final public var texelScale: Double {
         get {
             return get_texel_scale ()
@@ -346,8 +406,8 @@ open class LightmapGI: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_light_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_light_data")
+    fileprivate static let method_set_light_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_light_data")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1790597277)!
@@ -359,6 +419,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_light_data(_ data: LightmapGIData?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -372,8 +433,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_light_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_light_data")
+    fileprivate static let method_get_light_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_light_data")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 290354153)!
@@ -385,13 +446,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_light_data() -> LightmapGIData? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(LightmapGI.method_get_light_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_bake_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_quality")
+    fileprivate static let method_set_bake_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_quality")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1192215803)!
@@ -403,6 +465,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_bake_quality(_ bakeQuality: LightmapGI.BakeQuality) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bakeQuality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -416,8 +479,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_bake_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_quality")
+    fileprivate static let method_get_bake_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_quality")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 688832735)!
@@ -429,13 +492,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_bake_quality() -> LightmapGI.BakeQuality {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(LightmapGI.method_get_bake_quality, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return LightmapGI.BakeQuality (rawValue: _result)!
     }
     
-    fileprivate static var method_set_bounces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bounces")
+    fileprivate static let method_set_bounces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bounces")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -447,6 +511,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_bounces(_ bounces: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bounces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -460,8 +525,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_bounces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bounces")
+    fileprivate static let method_get_bounces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bounces")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -473,13 +538,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_bounces() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_bounces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bounce_indirect_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bounce_indirect_energy")
+    fileprivate static let method_set_bounce_indirect_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bounce_indirect_energy")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -491,6 +557,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_bounce_indirect_energy(_ bounceIndirectEnergy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bounceIndirectEnergy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -504,8 +571,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_bounce_indirect_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bounce_indirect_energy")
+    fileprivate static let method_get_bounce_indirect_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bounce_indirect_energy")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -517,13 +584,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_bounce_indirect_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_bounce_indirect_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_generate_probes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_generate_probes")
+    fileprivate static let method_set_generate_probes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_generate_probes")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 549981046)!
@@ -535,6 +603,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_generate_probes(_ subdivision: LightmapGI.GenerateProbes) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: subdivision.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -548,8 +617,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_generate_probes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_generate_probes")
+    fileprivate static let method_get_generate_probes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_generate_probes")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3930596226)!
@@ -561,13 +630,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_generate_probes() -> LightmapGI.GenerateProbes {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(LightmapGI.method_get_generate_probes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return LightmapGI.GenerateProbes (rawValue: _result)!
     }
     
-    fileprivate static var method_set_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bias")
+    fileprivate static let method_set_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bias")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -579,6 +649,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_bias(_ bias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -592,8 +663,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bias")
+    fileprivate static let method_get_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bias")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -605,13 +676,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_environment_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment_mode")
+    fileprivate static let method_set_environment_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment_mode")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2282650285)!
@@ -623,6 +695,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_environment_mode(_ mode: LightmapGI.EnvironmentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -636,8 +709,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_environment_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment_mode")
+    fileprivate static let method_get_environment_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment_mode")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4128646479)!
@@ -649,13 +722,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_environment_mode() -> LightmapGI.EnvironmentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(LightmapGI.method_get_environment_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return LightmapGI.EnvironmentMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_environment_custom_sky: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment_custom_sky")
+    fileprivate static let method_set_environment_custom_sky: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment_custom_sky")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3336722921)!
@@ -667,6 +741,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_environment_custom_sky(_ sky: Sky?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sky?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -680,8 +755,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_environment_custom_sky: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment_custom_sky")
+    fileprivate static let method_get_environment_custom_sky: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment_custom_sky")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1177136966)!
@@ -693,13 +768,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_environment_custom_sky() -> Sky? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(LightmapGI.method_get_environment_custom_sky, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_environment_custom_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment_custom_color")
+    fileprivate static let method_set_environment_custom_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment_custom_color")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -711,6 +787,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_environment_custom_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -724,8 +801,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_environment_custom_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment_custom_color")
+    fileprivate static let method_get_environment_custom_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment_custom_color")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -737,13 +814,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_environment_custom_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(LightmapGI.method_get_environment_custom_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_environment_custom_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_environment_custom_energy")
+    fileprivate static let method_set_environment_custom_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_environment_custom_energy")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -755,6 +833,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_environment_custom_energy(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -768,8 +847,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_environment_custom_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment_custom_energy")
+    fileprivate static let method_get_environment_custom_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment_custom_energy")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -781,13 +860,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_environment_custom_energy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_environment_custom_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_texel_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texel_scale")
+    fileprivate static let method_set_texel_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texel_scale")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -799,6 +879,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_texel_scale(_ texelScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texelScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -812,8 +893,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_texel_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texel_scale")
+    fileprivate static let method_get_texel_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texel_scale")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -825,13 +906,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_texel_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_texel_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_texture_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_texture_size")
+    fileprivate static let method_set_max_texture_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_texture_size")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -843,6 +925,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_max_texture_size(_ maxTextureSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxTextureSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -856,8 +939,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_max_texture_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_texture_size")
+    fileprivate static let method_get_max_texture_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_texture_size")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -869,13 +952,106 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_max_texture_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_max_texture_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_denoiser: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_denoiser")
+    fileprivate static let method_set_supersampling_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_supersampling_enabled")
+        return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_supersampling_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(LightmapGI.method_set_supersampling_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_supersampling_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_supersampling_enabled")
+        return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_supersampling_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(LightmapGI.method_is_supersampling_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_supersampling_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_supersampling_factor")
+        return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_supersampling_factor(_ factor: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: factor) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(LightmapGI.method_set_supersampling_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_supersampling_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_supersampling_factor")
+        return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_supersampling_factor() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(LightmapGI.method_get_supersampling_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_use_denoiser: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_denoiser")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -887,6 +1063,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_use_denoiser(_ useDenoiser: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useDenoiser) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -900,8 +1077,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_using_denoiser: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_denoiser")
+    fileprivate static let method_is_using_denoiser: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_denoiser")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -913,13 +1090,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_using_denoiser() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(LightmapGI.method_is_using_denoiser, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_denoiser_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_denoiser_strength")
+    fileprivate static let method_set_denoiser_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_denoiser_strength")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -931,6 +1109,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_denoiser_strength(_ denoiserStrength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: denoiserStrength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -944,8 +1123,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_denoiser_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_denoiser_strength")
+    fileprivate static let method_get_denoiser_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_denoiser_strength")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -957,13 +1136,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_denoiser_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_denoiser_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_denoiser_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_denoiser_range")
+    fileprivate static let method_set_denoiser_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_denoiser_range")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -975,6 +1155,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_denoiser_range(_ denoiserRange: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: denoiserRange) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -988,8 +1169,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_denoiser_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_denoiser_range")
+    fileprivate static let method_get_denoiser_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_denoiser_range")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1001,13 +1182,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_denoiser_range() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(LightmapGI.method_get_denoiser_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_interior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_interior")
+    fileprivate static let method_set_interior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_interior")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1019,6 +1201,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_interior(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1032,8 +1215,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_interior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_interior")
+    fileprivate static let method_is_interior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_interior")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1045,13 +1228,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_interior() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(LightmapGI.method_is_interior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_directional: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_directional")
+    fileprivate static let method_set_directional: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_directional")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1063,6 +1247,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_directional(_ directional: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: directional) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1076,8 +1261,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_directional: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_directional")
+    fileprivate static let method_is_directional: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_directional")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1089,13 +1274,60 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_directional() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(LightmapGI.method_is_directional, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_texture_for_bounces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_texture_for_bounces")
+    fileprivate static let method_set_shadowmask_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadowmask_mode")
+        return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3451066572)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_shadowmask_mode(_ mode: LightmapGIData.ShadowmaskMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: mode.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(LightmapGI.method_set_shadowmask_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_shadowmask_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadowmask_mode")
+        return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 785478560)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_shadowmask_mode() -> LightmapGIData.ShadowmaskMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(LightmapGI.method_get_shadowmask_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return LightmapGIData.ShadowmaskMode (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_use_texture_for_bounces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_texture_for_bounces")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1107,6 +1339,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_use_texture_for_bounces(_ useTextureForBounces: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useTextureForBounces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1120,8 +1353,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_is_using_texture_for_bounces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_texture_for_bounces")
+    fileprivate static let method_is_using_texture_for_bounces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_texture_for_bounces")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1133,13 +1366,14 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func is_using_texture_for_bounces() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(LightmapGI.method_is_using_texture_for_bounces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_camera_attributes")
+    fileprivate static let method_set_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_camera_attributes")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2817810567)!
@@ -1151,6 +1385,7 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_camera_attributes(_ cameraAttributes: CameraAttributes?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cameraAttributes?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1164,8 +1399,8 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_attributes")
+    fileprivate static let method_get_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_attributes")
         return withUnsafePointer(to: &LightmapGI.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3921283215)!
@@ -1177,9 +1412,10 @@ open class LightmapGI: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_camera_attributes() -> CameraAttributes? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(LightmapGI.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

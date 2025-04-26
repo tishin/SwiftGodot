@@ -23,14 +23,14 @@ import Musl
 /// 
 /// ``Button`` is the standard themed button. It can contain text and an icon, and it will display them according to the current ``Theme``.
 /// 
-/// **Example of creating a button and assigning an action when pressed by code:**
+/// **Example:** Create a button and connect a method that will be called when the button is pressed:
 /// 
 /// See also ``BaseButton`` which contains common properties and methods associated with this node.
 /// 
-/// > Note: Buttons do not interpret touch input and therefore don't support multitouch, since mouse emulation can only press one button at a given time. Use ``TouchScreenButton`` for buttons that trigger gameplay movement or actions.
+/// > Note: Buttons do not detect touch input and therefore don't support multitouch, since mouse emulation can only press one button at a given time. Use ``TouchScreenButton`` for buttons that trigger gameplay movement or actions.
 /// 
 open class Button: BaseButton {
-    fileprivate static var className = StringName("Button")
+    private static var className = StringName("Button")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -110,7 +110,7 @@ open class Button: BaseButton {
         
     }
     
-    /// When this property is enabled, text that is too large to fit the button is clipped, when disabled the Button will always be wide enough to hold the text.
+    /// If `true`, text that is too large to fit the button is clipped horizontally. If `false`, the button will always be wide enough to hold the text. The text is not vertically clipped, and the button's height is not affected by this property.
     final public var clipText: Bool {
         get {
             return get_clip_text ()
@@ -183,8 +183,8 @@ open class Button: BaseButton {
     }
     
     /* Methods */
-    fileprivate static var method_set_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text")
+    fileprivate static let method_set_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -196,6 +196,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_text(_ text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -210,8 +211,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text")
+    fileprivate static let method_get_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -223,13 +224,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_text() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Button.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_text_overrun_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_overrun_behavior")
+    fileprivate static let method_set_text_overrun_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_overrun_behavior")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1008890932)!
@@ -241,6 +243,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_text_overrun_behavior(_ overrunBehavior: TextServer.OverrunBehavior) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: overrunBehavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -254,8 +257,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_text_overrun_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_overrun_behavior")
+    fileprivate static let method_get_text_overrun_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_overrun_behavior")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3779142101)!
@@ -267,13 +270,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Button.method_get_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.OverrunBehavior (rawValue: _result)!
     }
     
-    fileprivate static var method_set_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autowrap_mode")
+    fileprivate static let method_set_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autowrap_mode")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3289138044)!
@@ -285,6 +289,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_autowrap_mode(_ autowrapMode: TextServer.AutowrapMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -298,8 +303,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_autowrap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autowrap_mode")
+    fileprivate static let method_get_autowrap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autowrap_mode")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1549071663)!
@@ -311,13 +316,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Button.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_direction")
+    fileprivate static let method_set_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_direction")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 119160795)!
@@ -329,6 +335,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_text_direction(_ direction: Control.TextDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -342,8 +349,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_direction")
+    fileprivate static let method_get_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_direction")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 797257663)!
@@ -355,13 +362,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_text_direction() -> Control.TextDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Button.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_language")
+    fileprivate static let method_set_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_language")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -373,6 +381,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_language(_ language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -387,8 +396,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language")
+    fileprivate static let method_get_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -400,13 +409,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_language() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Button.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_button_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_button_icon")
+    fileprivate static let method_set_button_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_button_icon")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -418,6 +428,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_button_icon(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -431,8 +442,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_button_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_button_icon")
+    fileprivate static let method_get_button_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_button_icon")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -444,13 +455,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_button_icon() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Button.method_get_button_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_flat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flat")
+    fileprivate static let method_set_flat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flat")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -462,6 +474,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_flat(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -475,8 +488,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_is_flat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_flat")
+    fileprivate static let method_is_flat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_flat")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -488,13 +501,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func is_flat() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Button.method_is_flat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_clip_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_text")
+    fileprivate static let method_set_clip_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_text")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -506,6 +520,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_clip_text(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -519,8 +534,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_clip_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clip_text")
+    fileprivate static let method_get_clip_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clip_text")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -532,13 +547,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_clip_text() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Button.method_get_clip_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_text_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_alignment")
+    fileprivate static let method_set_text_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_alignment")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2312603777)!
@@ -550,6 +566,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_text_alignment(_ alignment: HorizontalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -563,8 +580,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_text_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_alignment")
+    fileprivate static let method_get_text_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_alignment")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 341400642)!
@@ -576,13 +593,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_text_alignment() -> HorizontalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Button.method_get_text_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_icon_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_icon_alignment")
+    fileprivate static let method_set_icon_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_icon_alignment")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2312603777)!
@@ -594,6 +612,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_icon_alignment(_ iconAlignment: HorizontalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: iconAlignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -607,8 +626,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_icon_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_icon_alignment")
+    fileprivate static let method_get_icon_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_icon_alignment")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 341400642)!
@@ -620,13 +639,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_icon_alignment() -> HorizontalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Button.method_get_icon_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_vertical_icon_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertical_icon_alignment")
+    fileprivate static let method_set_vertical_icon_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical_icon_alignment")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1796458609)!
@@ -638,6 +658,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_vertical_icon_alignment(_ verticalIconAlignment: VerticalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: verticalIconAlignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -651,8 +672,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_get_vertical_icon_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertical_icon_alignment")
+    fileprivate static let method_get_vertical_icon_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertical_icon_alignment")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3274884059)!
@@ -664,13 +685,14 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func get_vertical_icon_alignment() -> VerticalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Button.method_get_vertical_icon_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VerticalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_set_expand_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_expand_icon")
+    fileprivate static let method_set_expand_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_expand_icon")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -682,6 +704,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func set_expand_icon(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -695,8 +718,8 @@ open class Button: BaseButton {
         
     }
     
-    fileprivate static var method_is_expand_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_expand_icon")
+    fileprivate static let method_is_expand_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_expand_icon")
         return withUnsafePointer(to: &Button.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -708,6 +731,7 @@ open class Button: BaseButton {
     
     @inline(__always)
     fileprivate final func is_expand_icon() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Button.method_is_expand_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

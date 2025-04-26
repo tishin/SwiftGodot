@@ -29,8 +29,12 @@ import Musl
 /// 
 /// > Note: Instantiating scenes containing a high-resolution ``ViewportTexture`` may cause noticeable stutter.
 /// 
+/// > Note: When using a ``Viewport`` with ``Viewport/useHdr2d`` set to `true`, the returned texture will be an HDR image encoded in linear space. This may look darker than normal when displayed directly on screen. To convert to gamma space, you can do the following:
+/// 
+/// > Note: Some nodes such as ``Decal``, ``Light3D``, and ``PointLight2D`` do not support using ``ViewportTexture`` directly. To use texture data from a ``ViewportTexture`` in these nodes, you need to create an ``ImageTexture`` by calling ``Texture2D/getImage()`` on the ``ViewportTexture`` and passing the result to ``ImageTexture/createFromImage(_:)``. This conversion is a slow operation, so it should not be performed every frame.
+/// 
 open class ViewportTexture: Texture2D {
-    fileprivate static var className = StringName("ViewportTexture")
+    private static var className = StringName("ViewportTexture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -51,8 +55,8 @@ open class ViewportTexture: Texture2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_viewport_path_in_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_viewport_path_in_scene")
+    fileprivate static let method_set_viewport_path_in_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_viewport_path_in_scene")
         return withUnsafePointer(to: &ViewportTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -64,6 +68,7 @@ open class ViewportTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func set_viewport_path_in_scene(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -77,8 +82,8 @@ open class ViewportTexture: Texture2D {
         
     }
     
-    fileprivate static var method_get_viewport_path_in_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_viewport_path_in_scene")
+    fileprivate static let method_get_viewport_path_in_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_viewport_path_in_scene")
         return withUnsafePointer(to: &ViewportTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -90,6 +95,7 @@ open class ViewportTexture: Texture2D {
     
     @inline(__always)
     fileprivate final func get_viewport_path_in_scene() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(ViewportTexture.method_get_viewport_path_in_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

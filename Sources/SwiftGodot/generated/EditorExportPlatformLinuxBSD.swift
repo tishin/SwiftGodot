@@ -21,7 +21,7 @@ import Musl
 
 /// Exporter for Linux/BSD.
 open class EditorExportPlatformLinuxBSD: EditorExportPlatformPC {
-    fileprivate static var className = StringName("EditorExportPlatformLinuxBSD")
+    private static var className = StringName("EditorExportPlatformLinuxBSD")
     override open class var godotClassName: StringName { className }
 }
 

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Varying values are shader variables that can be passed between shader functions, e.g. from Vertex shader to Fragment shader.
 open class VisualShaderNodeVarying: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeVarying")
+    private static var className = StringName("VisualShaderNodeVarying")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -53,8 +53,8 @@ open class VisualShaderNodeVarying: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_varying_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_varying_name")
+    fileprivate static let method_set_varying_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_varying_name")
         return withUnsafePointer(to: &VisualShaderNodeVarying.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -66,6 +66,7 @@ open class VisualShaderNodeVarying: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_varying_name(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -80,8 +81,8 @@ open class VisualShaderNodeVarying: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_varying_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_varying_name")
+    fileprivate static let method_get_varying_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_varying_name")
         return withUnsafePointer(to: &VisualShaderNodeVarying.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -93,13 +94,14 @@ open class VisualShaderNodeVarying: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_varying_name() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_get_varying_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_varying_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_varying_type")
+    fileprivate static let method_set_varying_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_varying_type")
         return withUnsafePointer(to: &VisualShaderNodeVarying.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3565867981)!
@@ -111,6 +113,7 @@ open class VisualShaderNodeVarying: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_varying_type(_ type: VisualShader.VaryingType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -124,8 +127,8 @@ open class VisualShaderNodeVarying: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_varying_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_varying_type")
+    fileprivate static let method_get_varying_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_varying_type")
         return withUnsafePointer(to: &VisualShaderNodeVarying.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 523183580)!
@@ -137,6 +140,7 @@ open class VisualShaderNodeVarying: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_varying_type() -> VisualShader.VaryingType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_get_varying_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShader.VaryingType (rawValue: _result)!

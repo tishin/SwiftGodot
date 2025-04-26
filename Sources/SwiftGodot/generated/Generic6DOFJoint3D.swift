@@ -26,7 +26,7 @@ import Musl
 /// The first 3 DOF represent the linear motion of the physics bodies and the last 3 DOF represent the angular motion of the physics bodies. Each axis can be either locked, or limited.
 /// 
 open class Generic6DOFJoint3D: Joint3D {
-    fileprivate static var className = StringName("Generic6DOFJoint3D")
+    private static var className = StringName("Generic6DOFJoint3D")
     override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// The minimum difference between the pivot points' axes.
@@ -95,8 +95,8 @@ open class Generic6DOFJoint3D: Joint3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_param_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_param_x")
+    fileprivate static let method_set_param_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_param_x")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2018184242)!
@@ -108,6 +108,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func setParamX(param: Generic6DOFJoint3D.Param, value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -124,8 +125,8 @@ open class Generic6DOFJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_param_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_param_x")
+    fileprivate static let method_get_param_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_param_x")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2599835054)!
@@ -137,6 +138,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func getParamX(param: Generic6DOFJoint3D.Param) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -151,8 +153,8 @@ open class Generic6DOFJoint3D: Joint3D {
         return _result
     }
     
-    fileprivate static var method_set_param_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_param_y")
+    fileprivate static let method_set_param_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_param_y")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2018184242)!
@@ -164,6 +166,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func setParamY(param: Generic6DOFJoint3D.Param, value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -180,8 +183,8 @@ open class Generic6DOFJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_param_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_param_y")
+    fileprivate static let method_get_param_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_param_y")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2599835054)!
@@ -193,6 +196,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func getParamY(param: Generic6DOFJoint3D.Param) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -207,8 +211,8 @@ open class Generic6DOFJoint3D: Joint3D {
         return _result
     }
     
-    fileprivate static var method_set_param_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_param_z")
+    fileprivate static let method_set_param_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_param_z")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2018184242)!
@@ -220,6 +224,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func setParamZ(param: Generic6DOFJoint3D.Param, value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -236,8 +241,8 @@ open class Generic6DOFJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_param_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_param_z")
+    fileprivate static let method_get_param_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_param_z")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2599835054)!
@@ -249,6 +254,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func getParamZ(param: Generic6DOFJoint3D.Param) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -263,8 +269,8 @@ open class Generic6DOFJoint3D: Joint3D {
         return _result
     }
     
-    fileprivate static var method_set_flag_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flag_x")
+    fileprivate static let method_set_flag_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flag_x")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2451594564)!
@@ -276,6 +282,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func setFlagX(flag: Generic6DOFJoint3D.Flag, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -292,8 +299,8 @@ open class Generic6DOFJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_flag_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flag_x")
+    fileprivate static let method_get_flag_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flag_x")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2122427807)!
@@ -305,6 +312,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func getFlagX(flag: Generic6DOFJoint3D.Flag) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -319,8 +327,8 @@ open class Generic6DOFJoint3D: Joint3D {
         return _result
     }
     
-    fileprivate static var method_set_flag_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flag_y")
+    fileprivate static let method_set_flag_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flag_y")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2451594564)!
@@ -332,6 +340,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func setFlagY(flag: Generic6DOFJoint3D.Flag, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -348,8 +357,8 @@ open class Generic6DOFJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_flag_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flag_y")
+    fileprivate static let method_get_flag_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flag_y")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2122427807)!
@@ -361,6 +370,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func getFlagY(flag: Generic6DOFJoint3D.Flag) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -375,8 +385,8 @@ open class Generic6DOFJoint3D: Joint3D {
         return _result
     }
     
-    fileprivate static var method_set_flag_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flag_z")
+    fileprivate static let method_set_flag_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flag_z")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2451594564)!
@@ -388,6 +398,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func setFlagZ(flag: Generic6DOFJoint3D.Flag, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -404,8 +415,8 @@ open class Generic6DOFJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_flag_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flag_z")
+    fileprivate static let method_get_flag_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flag_z")
         return withUnsafePointer(to: &Generic6DOFJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2122427807)!
@@ -417,6 +428,7 @@ open class Generic6DOFJoint3D: Joint3D {
     
     /// 
     public final func getFlagZ(flag: Generic6DOFJoint3D.Flag) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

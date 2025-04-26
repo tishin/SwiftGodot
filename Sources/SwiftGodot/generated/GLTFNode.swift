@@ -19,14 +19,14 @@ import Musl
 #endif
 
 
-/// GLTF node class.
+/// glTF node class.
 /// 
-/// Represents a GLTF node. GLTF nodes may have names, transforms, children (other GLTF nodes), and more specialized properties (represented by their own classes).
+/// Represents a glTF node. glTF nodes may have names, transforms, children (other glTF nodes), and more specialized properties (represented by their own classes).
 /// 
-/// GLTF nodes generally exist inside of ``GLTFState`` which represents all data of a GLTF file. Most of GLTFNode's properties are indices of other data in the GLTF file. You can extend a GLTF node with additional properties by using ``getAdditionalData(extensionName:)`` and ``setAdditionalData(extensionName:additionalData:)``.
+/// glTF nodes generally exist inside of ``GLTFState`` which represents all data of a glTF file. Most of GLTFNode's properties are indices of other data in the glTF file. You can extend a glTF node with additional properties by using ``getAdditionalData(extensionName:)`` and ``setAdditionalData(extensionName:additionalData:)``.
 /// 
 open class GLTFNode: Resource {
-    fileprivate static var className = StringName("GLTFNode")
+    private static var className = StringName("GLTFNode")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -67,7 +67,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// The transform of the GLTF node relative to its parent. This property is usually unused since the position, rotation, and scale properties are preferred.
+    /// The transform of the glTF node relative to its parent. This property is usually unused since the position, rotation, and scale properties are preferred.
     final public var xform: Transform3D {
         get {
             return get_xform ()
@@ -79,7 +79,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// If this GLTF node is a mesh, the index of the ``GLTFMesh`` in the ``GLTFState`` that describes the mesh's properties. If -1, this node is not a mesh.
+    /// If this glTF node is a mesh, the index of the ``GLTFMesh`` in the ``GLTFState`` that describes the mesh's properties. If -1, this node is not a mesh.
     final public var mesh: Int32 {
         get {
             return get_mesh ()
@@ -91,7 +91,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// If this GLTF node is a camera, the index of the ``GLTFCamera`` in the ``GLTFState`` that describes the camera's properties. If -1, this node is not a camera.
+    /// If this glTF node is a camera, the index of the ``GLTFCamera`` in the ``GLTFState`` that describes the camera's properties. If -1, this node is not a camera.
     final public var camera: Int32 {
         get {
             return get_camera ()
@@ -103,7 +103,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// If this GLTF node has a skin, the index of the ``GLTFSkin`` in the ``GLTFState`` that describes the skin's properties. If -1, this node does not have a skin.
+    /// If this glTF node has a skin, the index of the ``GLTFSkin`` in the ``GLTFState`` that describes the skin's properties. If -1, this node does not have a skin.
     final public var skin: Int32 {
         get {
             return get_skin ()
@@ -115,7 +115,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// If this GLTF node has a skeleton, the index of the ``GLTFSkeleton`` in the ``GLTFState`` that describes the skeleton's properties. If -1, this node does not have a skeleton.
+    /// If this glTF node has a skeleton, the index of the ``GLTFSkeleton`` in the ``GLTFState`` that describes the skeleton's properties. If -1, this node does not have a skeleton.
     final public var skeleton: Int32 {
         get {
             return get_skeleton ()
@@ -127,7 +127,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// The position of the GLTF node relative to its parent.
+    /// The position of the glTF node relative to its parent.
     final public var position: Vector3 {
         get {
             return get_position ()
@@ -139,7 +139,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// The rotation of the GLTF node relative to its parent.
+    /// The rotation of the glTF node relative to its parent.
     final public var rotation: Quaternion {
         get {
             return get_rotation ()
@@ -151,7 +151,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// The scale of the GLTF node relative to its parent.
+    /// The scale of the glTF node relative to its parent.
     final public var scale: Vector3 {
         get {
             return get_scale ()
@@ -163,7 +163,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// The indices of the child nodes in the ``GLTFState``. If this GLTF node has no children, this will be an empty array.
+    /// The indices of the child nodes in the ``GLTFState``. If this glTF node has no children, this will be an empty array.
     final public var children: PackedInt32Array {
         get {
             return get_children ()
@@ -175,7 +175,7 @@ open class GLTFNode: Resource {
         
     }
     
-    /// If this GLTF node is a light, the index of the ``GLTFLight`` in the ``GLTFState`` that describes the light's properties. If -1, this node is not a light.
+    /// If this glTF node is a light, the index of the ``GLTFLight`` in the ``GLTFState`` that describes the light's properties. If -1, this node is not a light.
     final public var light: Int32 {
         get {
             return get_light ()
@@ -188,8 +188,8 @@ open class GLTFNode: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_original_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_original_name")
+    fileprivate static let method_get_original_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_original_name")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -201,13 +201,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_original_name() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(GLTFNode.method_get_original_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_original_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_original_name")
+    fileprivate static let method_set_original_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_original_name")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -219,6 +220,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_original_name(_ originalName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let originalName = GString(originalName)
         withUnsafePointer(to: originalName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -233,8 +235,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parent")
+    fileprivate static let method_get_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parent")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -246,13 +248,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_parent() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFNode.method_get_parent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_parent")
+    fileprivate static let method_set_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_parent")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -264,6 +267,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_parent(_ parent: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -277,8 +281,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_height")
+    fileprivate static let method_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_height")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -290,13 +294,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_height() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFNode.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_height")
+    fileprivate static let method_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_height")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -308,6 +313,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_height(_ height: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -321,8 +327,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_xform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_xform")
+    fileprivate static let method_get_xform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_xform")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4183770049)!
@@ -334,13 +340,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_xform() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(GLTFNode.method_get_xform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_xform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_xform")
+    fileprivate static let method_set_xform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_xform")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2952846383)!
@@ -352,6 +359,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_xform(_ xform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -365,8 +373,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh")
+    fileprivate static let method_get_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -378,13 +386,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_mesh() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFNode.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mesh")
+    fileprivate static let method_set_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mesh")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -396,6 +405,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_mesh(_ mesh: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mesh) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -409,8 +419,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_camera: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera")
+    fileprivate static let method_get_camera: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -422,13 +432,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_camera() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFNode.method_get_camera, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_camera: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_camera")
+    fileprivate static let method_set_camera: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_camera")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -440,6 +451,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_camera(_ camera: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: camera) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -453,8 +465,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_skin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skin")
+    fileprivate static let method_get_skin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skin")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -466,13 +478,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_skin() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFNode.method_get_skin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_skin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skin")
+    fileprivate static let method_set_skin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skin")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -484,6 +497,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_skin(_ skin: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -497,8 +511,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skeleton")
+    fileprivate static let method_get_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skeleton")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -510,13 +524,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_skeleton() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFNode.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skeleton")
+    fileprivate static let method_set_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skeleton")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -528,6 +543,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_skeleton(_ skeleton: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skeleton) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -541,8 +557,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3783033775)!
@@ -554,13 +570,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_position() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GLTFNode.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position")
+    fileprivate static let method_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -572,6 +589,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_position(_ position: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -585,8 +603,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rotation")
+    fileprivate static let method_get_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rotation")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2916281908)!
@@ -598,13 +616,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_rotation() -> Quaternion {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
         gi.object_method_bind_ptrcall(GLTFNode.method_get_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rotation")
+    fileprivate static let method_set_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rotation")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1727505552)!
@@ -616,6 +635,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_rotation(_ rotation: Quaternion) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -629,8 +649,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scale")
+    fileprivate static let method_get_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scale")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3783033775)!
@@ -642,13 +662,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_scale() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GLTFNode.method_get_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scale")
+    fileprivate static let method_set_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scale")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -660,6 +681,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_scale(_ scale: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -673,8 +695,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_children: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_children")
+    fileprivate static let method_get_children: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_children")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -686,13 +708,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_children() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(GLTFNode.method_get_children, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_children: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_children")
+    fileprivate static let method_set_children: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_children")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -704,6 +727,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_children(_ children: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: children.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -717,8 +741,35 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_light: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_light")
+    fileprivate static let method_append_child_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_child_index")
+        return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Appends the given child node index to the ``children`` array.
+    public final func appendChildIndex(_ childIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: childIndex) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(GLTFNode.method_append_child_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_light: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_light")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -730,13 +781,14 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func get_light() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFNode.method_get_light, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_light: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_light")
+    fileprivate static let method_set_light: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_light")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -748,6 +800,7 @@ open class GLTFNode: Resource {
     
     @inline(__always)
     fileprivate final func set_light(_ light: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: light) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -761,8 +814,8 @@ open class GLTFNode: Resource {
         
     }
     
-    fileprivate static var method_get_additional_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_additional_data")
+    fileprivate static let method_get_additional_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_additional_data")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2138907829)!
@@ -774,9 +827,10 @@ open class GLTFNode: Resource {
     
     /// Gets additional arbitrary data in this ``GLTFNode`` instance. This can be used to keep per-node state data in ``GLTFDocumentExtension`` classes, which is important because they are stateless.
     /// 
-    /// The argument should be the ``GLTFDocumentExtension`` name (does not have to match the extension name in the GLTF file), and the return value can be anything you set. If nothing was set, the return value is null.
+    /// The argument should be the ``GLTFDocumentExtension`` name (does not have to match the extension name in the glTF file), and the return value can be anything you set. If nothing was set, the return value is `null`.
     /// 
     public final func getAdditionalData(extensionName: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -791,8 +845,8 @@ open class GLTFNode: Resource {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_additional_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_additional_data")
+    fileprivate static let method_set_additional_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_additional_data")
         return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -804,9 +858,10 @@ open class GLTFNode: Resource {
     
     /// Sets additional arbitrary data in this ``GLTFNode`` instance. This can be used to keep per-node state data in ``GLTFDocumentExtension`` classes, which is important because they are stateless.
     /// 
-    /// The first argument should be the ``GLTFDocumentExtension`` name (does not have to match the extension name in the GLTF file), and the second argument can be anything you want.
+    /// The first argument should be the ``GLTFDocumentExtension`` name (does not have to match the extension name in the glTF file), and the second argument can be anything you want.
     /// 
     public final func setAdditionalData(extensionName: StringName, additionalData: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: additionalData.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -821,6 +876,40 @@ open class GLTFNode: Resource {
         }
         
         
+    }
+    
+    fileprivate static let method_get_scene_node_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_node_path")
+        return withUnsafePointer(to: &GLTFNode.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 573359477)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the ``NodePath`` that this GLTF node will have in the Godot scene tree after being imported. This is useful when importing glTF object model pointers with ``GLTFObjectModelProperty``, for handling extensions such as `KHR_animation_pointer` or `KHR_interactivity`.
+    /// 
+    /// If `handleSkeletons` is `true`, paths to skeleton bone glTF nodes will be resolved properly. For example, a path that would be `^"A/B/C/Bone1/Bone2/Bone3"` if `false` will become `^"A/B/C/Skeleton3D:Bone3"`.
+    /// 
+    public final func getSceneNodePath(gltfState: GLTFState?, handleSkeletons: Bool = true) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: NodePath = NodePath ()
+        withUnsafePointer(to: gltfState?.handle) { pArg0 in
+            withUnsafePointer(to: handleSkeletons) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(GLTFNode.method_get_scene_node_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
     
 }

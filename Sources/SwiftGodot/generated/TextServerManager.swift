@@ -33,18 +33,18 @@ import Musl
 /// - ``interfaceRemoved``
 open class TextServerManager: Object {
     /// The shared instance of this class
-    public static var shared: TextServerManager = {
-        return withUnsafePointer (to: &TextServerManager.godotClassName.content) { ptr in
-            TextServerManager (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: TextServerManager {
+        return withUnsafePointer(to: &TextServerManager.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("TextServerManager")
+    private static var className = StringName("TextServerManager")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_add_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_interface")
+    fileprivate static let method_add_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_interface")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1799689403)!
@@ -69,8 +69,8 @@ open class TextServerManager: Object {
         
     }
     
-    fileprivate static var method_get_interface_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interface_count")
+    fileprivate static let method_get_interface_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interface_count")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -87,8 +87,8 @@ open class TextServerManager: Object {
         return _result
     }
     
-    fileprivate static var method_remove_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_interface")
+    fileprivate static let method_remove_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_interface")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1799689403)!
@@ -113,8 +113,8 @@ open class TextServerManager: Object {
         
     }
     
-    fileprivate static var method_get_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interface")
+    fileprivate static let method_get_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interface")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1672475555)!
@@ -137,11 +137,11 @@ open class TextServerManager: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_interfaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interfaces")
+    fileprivate static let method_get_interfaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interfaces")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -152,14 +152,14 @@ open class TextServerManager: Object {
     }()
     
     /// Returns a list of available interfaces, with the index and name of each interface.
-    public static func getInterfaces() -> VariantCollection<GDictionary> {
+    public static func getInterfaces() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_interfaces, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_find_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_interface")
+    fileprivate static let method_find_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_interface")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240905781)!
@@ -183,11 +183,11 @@ open class TextServerManager: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_primary_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_primary_interface")
+    fileprivate static let method_set_primary_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_primary_interface")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1799689403)!
@@ -212,8 +212,8 @@ open class TextServerManager: Object {
         
     }
     
-    fileprivate static var method_get_primary_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_primary_interface")
+    fileprivate static let method_get_primary_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_primary_interface")
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 905850878)!
@@ -227,7 +227,7 @@ open class TextServerManager: Object {
     public static func getPrimaryInterface() -> TextServer? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_primary_interface, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

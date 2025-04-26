@@ -32,11 +32,11 @@ import Musl
 /// - ``editorScriptChanged``
 /// - ``scriptClose``
 open class ScriptEditor: PanelContainer {
-    fileprivate static var className = StringName("ScriptEditor")
+    private static var className = StringName("ScriptEditor")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_current_editor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_editor")
+    fileprivate static let method_get_current_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_editor")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1906266726)!
@@ -48,13 +48,14 @@ open class ScriptEditor: PanelContainer {
     
     /// Returns the ``ScriptEditorBase`` object that the user is currently editing.
     public final func getCurrentEditor() -> ScriptEditorBase? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ScriptEditor.method_get_current_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_open_script_editors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_open_script_editors")
+    fileprivate static let method_get_open_script_editors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_open_script_editors")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -65,14 +66,34 @@ open class ScriptEditor: PanelContainer {
     }()
     
     /// Returns an array with all ``ScriptEditorBase`` objects which are currently open in editor.
-    public final func getOpenScriptEditors() -> ObjectCollection<ScriptEditorBase> {
+    public final func getOpenScriptEditors() -> TypedArray<ScriptEditorBase?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(ScriptEditor.method_get_open_script_editors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<ScriptEditorBase>(content: _result)
+        return TypedArray<ScriptEditorBase?>(takingOver: _result)
     }
     
-    fileprivate static var method_register_syntax_highlighter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_syntax_highlighter")
+    fileprivate static let method_get_breakpoints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_breakpoints")
+        return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns array of breakpoints.
+    public final func getBreakpoints() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(ScriptEditor.method_get_breakpoints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
+    }
+    
+    fileprivate static let method_register_syntax_highlighter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_syntax_highlighter")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1092774468)!
@@ -87,6 +108,7 @@ open class ScriptEditor: PanelContainer {
     /// > Note: Does not apply to scripts that are already opened.
     /// 
     public final func registerSyntaxHighlighter(_ syntaxHighlighter: EditorSyntaxHighlighter?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: syntaxHighlighter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -100,8 +122,8 @@ open class ScriptEditor: PanelContainer {
         
     }
     
-    fileprivate static var method_unregister_syntax_highlighter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unregister_syntax_highlighter")
+    fileprivate static let method_unregister_syntax_highlighter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unregister_syntax_highlighter")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1092774468)!
@@ -116,6 +138,7 @@ open class ScriptEditor: PanelContainer {
     /// > Note: The ``EditorSyntaxHighlighter`` will still be applied to scripts that are already opened.
     /// 
     public final func unregisterSyntaxHighlighter(_ syntaxHighlighter: EditorSyntaxHighlighter?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: syntaxHighlighter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -129,8 +152,8 @@ open class ScriptEditor: PanelContainer {
         
     }
     
-    fileprivate static var method_goto_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("goto_line")
+    fileprivate static let method_goto_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("goto_line")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -142,6 +165,7 @@ open class ScriptEditor: PanelContainer {
     
     /// Goes to the specified line in the current script.
     public final func gotoLine(lineNumber: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lineNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -155,8 +179,8 @@ open class ScriptEditor: PanelContainer {
         
     }
     
-    fileprivate static var method_get_current_script: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_script")
+    fileprivate static let method_get_current_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_script")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2146468882)!
@@ -168,13 +192,14 @@ open class ScriptEditor: PanelContainer {
     
     /// Returns a ``Script`` that is currently active in editor.
     public final func getCurrentScript() -> Script? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ScriptEditor.method_get_current_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_open_scripts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_open_scripts")
+    fileprivate static let method_get_open_scripts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_open_scripts")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -185,14 +210,15 @@ open class ScriptEditor: PanelContainer {
     }()
     
     /// Returns an array with all ``Script`` objects which are currently open in editor.
-    public final func getOpenScripts() -> ObjectCollection<Script> {
+    public final func getOpenScripts() -> TypedArray<Script?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(ScriptEditor.method_get_open_scripts, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<Script>(content: _result)
+        return TypedArray<Script?>(takingOver: _result)
     }
     
-    fileprivate static var method_open_script_create_dialog: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open_script_create_dialog")
+    fileprivate static let method_open_script_create_dialog: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open_script_create_dialog")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3186203200)!
@@ -204,6 +230,7 @@ open class ScriptEditor: PanelContainer {
     
     /// Opens the script create dialog. The script will extend `baseName`. The file extension can be omitted from `basePath`. It will be added based on the selected scripting language.
     public final func openScriptCreateDialog(baseName: String, basePath: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let baseName = GString(baseName)
         withUnsafePointer(to: baseName.content) { pArg0 in
             let basePath = GString(basePath)
@@ -222,8 +249,8 @@ open class ScriptEditor: PanelContainer {
         
     }
     
-    fileprivate static var method_goto_help: GDExtensionMethodBindPtr = {
-        let methodName = StringName("goto_help")
+    fileprivate static let method_goto_help: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("goto_help")
         return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -237,14 +264,43 @@ open class ScriptEditor: PanelContainer {
     /// 
     /// The supported `topic` formats include `class_name:class`, `class_method:class:method`, `class_constant:class:constant`, `class_signal:class:signal`, `class_annotation:class:@annotation`, `class_property:class:property`, and `class_theme_item:class:item`, where `class` is the class name, `method` is the method name, `constant` is the constant name, `signal` is the signal name, `annotation` is the annotation name, `property` is the property name, and `item` is the theme item.
     /// 
-    /// **Examples:**
-    /// 
     public final func gotoHelp(topic: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let topic = GString(topic)
         withUnsafePointer(to: topic.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     gi.object_method_bind_ptrcall(ScriptEditor.method_goto_help, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_update_docs_from_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_docs_from_script")
+        return withUnsafePointer(to: &ScriptEditor.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3657522847)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Updates the documentation for the given `script` if the script's documentation is currently open.
+    /// 
+    /// > Note: This should be called whenever the script is changed to keep the open documentation state up to date.
+    /// 
+    public final func updateDocsFromScript(_ script: Script?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: script?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptEditor.method_update_docs_from_script, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
                 }
                 
             }

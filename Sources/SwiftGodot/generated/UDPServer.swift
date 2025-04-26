@@ -28,7 +28,7 @@ import Musl
 /// Below a small example of how it can be used:
 /// 
 open class UDPServer: RefCounted {
-    fileprivate static var className = StringName("UDPServer")
+    private static var className = StringName("UDPServer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class UDPServer: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_listen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("listen")
+    fileprivate static let method_listen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("listen")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3167955072)!
@@ -59,6 +59,7 @@ open class UDPServer: RefCounted {
     
     /// Starts the server by opening a UDP socket listening on the given `port`. You can optionally specify a `bindAddress` to only listen for packets sent to that address. See also ``PacketPeerUDP/bind(port:bindAddress:recvBufSize:)``.
     public final func listen(port: UInt16, bindAddress: String = "*") -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: port) { pArg0 in
             let bindAddress = GString(bindAddress)
@@ -77,8 +78,8 @@ open class UDPServer: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -90,13 +91,14 @@ open class UDPServer: RefCounted {
     
     /// Call this method at regular intervals (e.g. inside ``Node/_process(delta:)``) to process new packets. And packet from known address/port pair will be delivered to the appropriate ``PacketPeerUDP``, any packet received from an unknown address/port pair will be added as a pending connection (see ``isConnectionAvailable()``, ``takeConnection()``). The maximum number of pending connection is defined via ``maxPendingConnections``.
     public final func poll() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(UDPServer.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_connection_available: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_connection_available")
+    fileprivate static let method_is_connection_available: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_connection_available")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -108,13 +110,14 @@ open class UDPServer: RefCounted {
     
     /// Returns `true` if a packet with a new address/port combination was received on the socket.
     public final func isConnectionAvailable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(UDPServer.method_is_connection_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_local_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_local_port")
+    fileprivate static let method_get_local_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_local_port")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -126,13 +129,14 @@ open class UDPServer: RefCounted {
     
     /// Returns the local port this server is listening to.
     public final func getLocalPort() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(UDPServer.method_get_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_listening: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_listening")
+    fileprivate static let method_is_listening: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_listening")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -144,13 +148,14 @@ open class UDPServer: RefCounted {
     
     /// Returns `true` if the socket is open and listening on a port.
     public final func isListening() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(UDPServer.method_is_listening, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_take_connection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("take_connection")
+    fileprivate static let method_take_connection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("take_connection")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 808734560)!
@@ -162,13 +167,14 @@ open class UDPServer: RefCounted {
     
     /// Returns the first pending connection (connected to the appropriate address/port). Will return `null` if no new connection is available. See also ``isConnectionAvailable()``, ``PacketPeerUDP/connectToHost(_:port:)``.
     public final func takeConnection() -> PacketPeerUDP? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(UDPServer.method_take_connection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop")
+    fileprivate static let method_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -180,12 +186,13 @@ open class UDPServer: RefCounted {
     
     /// Stops the server, closing the UDP socket if open. Will close all connected ``PacketPeerUDP`` accepted via ``takeConnection()`` (remote peers will not be notified).
     public final func stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(UDPServer.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_max_pending_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_pending_connections")
+    fileprivate static let method_set_max_pending_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_pending_connections")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -197,6 +204,7 @@ open class UDPServer: RefCounted {
     
     @inline(__always)
     fileprivate final func set_max_pending_connections(_ maxPendingConnections: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxPendingConnections) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -210,8 +218,8 @@ open class UDPServer: RefCounted {
         
     }
     
-    fileprivate static var method_get_max_pending_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_pending_connections")
+    fileprivate static let method_get_max_pending_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_pending_connections")
         return withUnsafePointer(to: &UDPServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -223,6 +231,7 @@ open class UDPServer: RefCounted {
     
     @inline(__always)
     fileprivate final func get_max_pending_connections() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(UDPServer.method_get_max_pending_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

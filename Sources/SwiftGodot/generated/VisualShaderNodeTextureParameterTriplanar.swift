@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Performs a lookup operation on the texture provided as a uniform for the shader, with support for triplanar mapping.
 open class VisualShaderNodeTextureParameterTriplanar: VisualShaderNodeTextureParameter {
-    fileprivate static var className = StringName("VisualShaderNodeTextureParameterTriplanar")
+    private static var className = StringName("VisualShaderNodeTextureParameterTriplanar")
     override open class var godotClassName: StringName { className }
 }
 

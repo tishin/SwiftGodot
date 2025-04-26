@@ -33,14 +33,14 @@ import Musl
 /// 
 open class Time: Object {
     /// The shared instance of this class
-    public static var shared: Time = {
-        return withUnsafePointer (to: &Time.godotClassName.content) { ptr in
-            Time (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: Time {
+        return withUnsafePointer(to: &Time.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("Time")
+    private static var className = StringName("Time")
     override open class var godotClassName: StringName { className }
     public enum Month: Int64, CaseIterable {
         /// The month of January, represented numerically as `01`.
@@ -87,8 +87,8 @@ open class Time: Object {
     }
     
     /* Methods */
-    fileprivate static var method_get_datetime_dict_from_unix_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_datetime_dict_from_unix_time")
+    fileprivate static let method_get_datetime_dict_from_unix_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_datetime_dict_from_unix_time")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3485342025)!
@@ -102,8 +102,8 @@ open class Time: Object {
     /// 
     /// The returned Dictionary's values will be the same as the ``getDatetimeDictFromSystem(utc:)`` if the Unix timestamp is the current time, with the exception of Daylight Savings Time as it cannot be determined from the epoch.
     /// 
-    public static func getDatetimeDictFromUnixTime(unixTimeVal: Int) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getDatetimeDictFromUnixTime(unixTimeVal: Int) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -117,8 +117,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_date_dict_from_unix_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_date_dict_from_unix_time")
+    fileprivate static let method_get_date_dict_from_unix_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_date_dict_from_unix_time")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3485342025)!
@@ -129,8 +129,8 @@ open class Time: Object {
     }()
     
     /// Converts the given Unix timestamp to a dictionary of keys: `year`, `month`, `day`, and `weekday`.
-    public static func getDateDictFromUnixTime(unixTimeVal: Int) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getDateDictFromUnixTime(unixTimeVal: Int) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -144,8 +144,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_time_dict_from_unix_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_dict_from_unix_time")
+    fileprivate static let method_get_time_dict_from_unix_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_dict_from_unix_time")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3485342025)!
@@ -156,8 +156,8 @@ open class Time: Object {
     }()
     
     /// Converts the given time to a dictionary of keys: `hour`, `minute`, and `second`.
-    public static func getTimeDictFromUnixTime(unixTimeVal: Int) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getTimeDictFromUnixTime(unixTimeVal: Int) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -171,8 +171,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_datetime_string_from_unix_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_datetime_string_from_unix_time")
+    fileprivate static let method_get_datetime_string_from_unix_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_datetime_string_from_unix_time")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2311239925)!
@@ -204,8 +204,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_date_string_from_unix_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_date_string_from_unix_time")
+    fileprivate static let method_get_date_string_from_unix_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_date_string_from_unix_time")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -231,8 +231,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_time_string_from_unix_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_string_from_unix_time")
+    fileprivate static let method_get_time_string_from_unix_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_string_from_unix_time")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -258,8 +258,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_datetime_dict_from_datetime_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_datetime_dict_from_datetime_string")
+    fileprivate static let method_get_datetime_dict_from_datetime_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_datetime_dict_from_datetime_string")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3253569256)!
@@ -275,8 +275,8 @@ open class Time: Object {
     /// 
     /// > Note: Any decimal fraction in the time string will be ignored silently.
     /// 
-    public static func getDatetimeDictFromDatetimeString(datetime: String, weekday: Bool) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getDatetimeDictFromDatetimeString(datetime: String, weekday: Bool) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         let datetime = GString(datetime)
         withUnsafePointer(to: datetime.content) { pArg0 in
             withUnsafePointer(to: weekday) { pArg1 in
@@ -294,8 +294,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_datetime_string_from_datetime_dict: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_datetime_string_from_datetime_dict")
+    fileprivate static let method_get_datetime_string_from_datetime_dict: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_datetime_string_from_datetime_dict")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1898123706)!
@@ -313,7 +313,7 @@ open class Time: Object {
     /// 
     /// If `useSpace` is `true`, the date and time bits are separated by an empty space character instead of the letter T.
     /// 
-    public static func getDatetimeStringFromDatetimeDict(datetime: GDictionary, useSpace: Bool) -> String {
+    public static func getDatetimeStringFromDatetimeDict(datetime: VariantDictionary, useSpace: Bool) -> String {
         let _result = GString ()
         withUnsafePointer(to: datetime.content) { pArg0 in
             withUnsafePointer(to: useSpace) { pArg1 in
@@ -331,8 +331,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_unix_time_from_datetime_dict: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unix_time_from_datetime_dict")
+    fileprivate static let method_get_unix_time_from_datetime_dict: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unix_time_from_datetime_dict")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3021115443)!
@@ -352,7 +352,7 @@ open class Time: Object {
     /// 
     /// > Note: Unix timestamps are often in UTC. This method does not do any timezone conversion, so the timestamp will be in the same timezone as the given datetime dictionary.
     /// 
-    public static func getUnixTimeFromDatetimeDict(datetime: GDictionary) -> Int {
+    public static func getUnixTimeFromDatetimeDict(datetime: VariantDictionary) -> Int {
         var _result: Int = 0
         withUnsafePointer(to: datetime.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -367,8 +367,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_unix_time_from_datetime_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unix_time_from_datetime_string")
+    fileprivate static let method_get_unix_time_from_datetime_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unix_time_from_datetime_string")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1321353865)!
@@ -400,8 +400,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_offset_string_from_offset_minutes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset_string_from_offset_minutes")
+    fileprivate static let method_get_offset_string_from_offset_minutes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset_string_from_offset_minutes")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -427,8 +427,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_datetime_dict_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_datetime_dict_from_system")
+    fileprivate static let method_get_datetime_dict_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_datetime_dict_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 205769976)!
@@ -439,8 +439,8 @@ open class Time: Object {
     }()
     
     /// Returns the current date as a dictionary of keys: `year`, `month`, `day`, `weekday`, `hour`, `minute`, `second`, and `dst` (Daylight Savings Time).
-    public static func getDatetimeDictFromSystem(utc: Bool = false) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getDatetimeDictFromSystem(utc: Bool = false) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -454,8 +454,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_date_dict_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_date_dict_from_system")
+    fileprivate static let method_get_date_dict_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_date_dict_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 205769976)!
@@ -469,8 +469,8 @@ open class Time: Object {
     /// 
     /// The returned values are in the system's local time when `utc` is `false`, otherwise they are in UTC.
     /// 
-    public static func getDateDictFromSystem(utc: Bool = false) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getDateDictFromSystem(utc: Bool = false) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -484,8 +484,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_time_dict_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_dict_from_system")
+    fileprivate static let method_get_time_dict_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_dict_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 205769976)!
@@ -499,8 +499,8 @@ open class Time: Object {
     /// 
     /// The returned values are in the system's local time when `utc` is `false`, otherwise they are in UTC.
     /// 
-    public static func getTimeDictFromSystem(utc: Bool = false) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getTimeDictFromSystem(utc: Bool = false) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -514,8 +514,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_datetime_string_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_datetime_string_from_system")
+    fileprivate static let method_get_datetime_string_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_datetime_string_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1136425492)!
@@ -549,8 +549,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_date_string_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_date_string_from_system")
+    fileprivate static let method_get_date_string_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_date_string_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1162154673)!
@@ -579,8 +579,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_time_string_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_string_from_system")
+    fileprivate static let method_get_time_string_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_string_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1162154673)!
@@ -609,8 +609,8 @@ open class Time: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_time_zone_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_zone_from_system")
+    fileprivate static let method_get_time_zone_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_zone_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -626,14 +626,14 @@ open class Time: Object {
     /// 
     /// - `name` is the localized name of the time zone, according to the OS locale settings of the current user.
     /// 
-    public static func getTimeZoneFromSystem() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func getTimeZoneFromSystem() -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(method_get_time_zone_from_system, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_unix_time_from_system: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unix_time_from_system")
+    fileprivate static let method_get_unix_time_from_system: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unix_time_from_system")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -653,8 +653,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_ticks_msec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ticks_msec")
+    fileprivate static let method_get_ticks_msec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ticks_msec")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -674,8 +674,8 @@ open class Time: Object {
         return _result
     }
     
-    fileprivate static var method_get_ticks_usec: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ticks_usec")
+    fileprivate static let method_get_ticks_usec: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ticks_usec")
         return withUnsafePointer(to: &Time.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!

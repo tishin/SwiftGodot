@@ -31,11 +31,11 @@ import Musl
 /// 
 /// - ``selectionChanged``
 open class EditorSelection: Object {
-    fileprivate static var className = StringName("EditorSelection")
+    private static var className = StringName("EditorSelection")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &EditorSelection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -47,12 +47,13 @@ open class EditorSelection: Object {
     
     /// Clear the selection.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorSelection.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_add_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_node")
+    fileprivate static let method_add_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_node")
         return withUnsafePointer(to: &EditorSelection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -67,6 +68,7 @@ open class EditorSelection: Object {
     /// > Note: The newly selected node will not be automatically edited in the inspector. If you want to edit a node, use ``EditorInterface/editNode(_:)``.
     /// 
     public final func addNode(_ node: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -80,8 +82,8 @@ open class EditorSelection: Object {
         
     }
     
-    fileprivate static var method_remove_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_node")
+    fileprivate static let method_remove_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_node")
         return withUnsafePointer(to: &EditorSelection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -93,6 +95,7 @@ open class EditorSelection: Object {
     
     /// Removes a node from the selection.
     public final func removeNode(_ node: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -106,8 +109,8 @@ open class EditorSelection: Object {
         
     }
     
-    fileprivate static var method_get_selected_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected_nodes")
+    fileprivate static let method_get_selected_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected_nodes")
         return withUnsafePointer(to: &EditorSelection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -118,14 +121,15 @@ open class EditorSelection: Object {
     }()
     
     /// Returns the list of selected nodes.
-    public final func getSelectedNodes() -> ObjectCollection<Node> {
+    public final func getSelectedNodes() -> TypedArray<Node?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(EditorSelection.method_get_selected_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<Node>(content: _result)
+        return TypedArray<Node?>(takingOver: _result)
     }
     
-    fileprivate static var method_get_transformable_selected_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transformable_selected_nodes")
+    fileprivate static let method_get_transformable_selected_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transformable_selected_nodes")
         return withUnsafePointer(to: &EditorSelection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -136,10 +140,11 @@ open class EditorSelection: Object {
     }()
     
     /// Returns the list of selected nodes, optimized for transform operations (i.e. moving them, rotating, etc.). This list can be used to avoid situations where a node is selected and is also a child/grandchild.
-    public final func getTransformableSelectedNodes() -> ObjectCollection<Node> {
+    public final func getTransformableSelectedNodes() -> TypedArray<Node?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(EditorSelection.method_get_transformable_selected_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<Node>(content: _result)
+        return TypedArray<Node?>(takingOver: _result)
     }
     
     // Signals 

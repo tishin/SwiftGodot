@@ -32,7 +32,7 @@ import Musl
 /// - ``animationLooped``
 /// - ``animationFinished``
 open class AnimatedSprite2D: Node2D {
-    fileprivate static var className = StringName("AnimatedSprite2D")
+    private static var className = StringName("AnimatedSprite2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -164,8 +164,8 @@ open class AnimatedSprite2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_sprite_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sprite_frames")
+    fileprivate static let method_set_sprite_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sprite_frames")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 905781144)!
@@ -177,6 +177,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_sprite_frames(_ spriteFrames: SpriteFrames?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spriteFrames?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -190,8 +191,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_get_sprite_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sprite_frames")
+    fileprivate static let method_get_sprite_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sprite_frames")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3804851214)!
@@ -203,13 +204,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_sprite_frames() -> SpriteFrames? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_sprite_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_animation")
+    fileprivate static let method_set_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_animation")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -221,6 +223,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_animation(_ name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -234,8 +237,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_get_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation")
+    fileprivate static let method_get_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -247,13 +250,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_animation() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_animation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_autoplay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autoplay")
+    fileprivate static let method_set_autoplay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autoplay")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -265,6 +269,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_autoplay(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -279,8 +284,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_get_autoplay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_autoplay")
+    fileprivate static let method_get_autoplay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_autoplay")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -292,13 +297,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_autoplay() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_autoplay, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_playing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_playing")
+    fileprivate static let method_is_playing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_playing")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -310,16 +316,17 @@ open class AnimatedSprite2D: Node2D {
     
     /// Returns `true` if an animation is currently playing (even if ``speedScale`` and/or `custom_speed` are `0`).
     public final func isPlaying() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_play: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play")
+    fileprivate static let method_play: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2372066587)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3269405555)!
             }
             
         }
@@ -331,6 +338,7 @@ open class AnimatedSprite2D: Node2D {
     /// If this method is called with that same animation `name`, or with no `name` parameter, the assigned animation will resume playing if it was paused.
     /// 
     public final func play(name: StringName = StringName (""), customSpeed: Double = 1.0, fromEnd: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: customSpeed) { pArg1 in
                 withUnsafePointer(to: fromEnd) { pArg2 in
@@ -350,11 +358,11 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_play_backwards: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play_backwards")
+    fileprivate static let method_play_backwards: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play_backwards")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1421762485)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3323268493)!
             }
             
         }
@@ -366,6 +374,7 @@ open class AnimatedSprite2D: Node2D {
     /// This method is a shorthand for ``play(name:customSpeed:fromEnd:)`` with `custom_speed = -1.0` and `from_end = true`, so see its description for more information.
     /// 
     public final func playBackwards(name: StringName = StringName ("")) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -379,8 +388,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_pause: GDExtensionMethodBindPtr = {
-        let methodName = StringName("pause")
+    fileprivate static let method_pause: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("pause")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -395,12 +404,13 @@ open class AnimatedSprite2D: Node2D {
     /// See also ``stop()``.
     /// 
     public final func pause() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_pause, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop")
+    fileprivate static let method_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -412,12 +422,13 @@ open class AnimatedSprite2D: Node2D {
     
     /// Stops the currently playing animation. The animation position is reset to `0` and the `custom_speed` is reset to `1.0`. See also ``pause()``.
     public final func stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_centered: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_centered")
+    fileprivate static let method_set_centered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_centered")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -429,6 +440,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_centered(_ centered: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: centered) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -442,8 +454,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_is_centered: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_centered")
+    fileprivate static let method_is_centered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_centered")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -455,13 +467,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_centered() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_centered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_offset")
+    fileprivate static let method_set_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_offset")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -473,6 +486,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -486,8 +500,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_get_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_offset")
+    fileprivate static let method_get_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_offset")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -499,13 +513,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_flip_h: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flip_h")
+    fileprivate static let method_set_flip_h: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flip_h")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -517,6 +532,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_flip_h(_ flipH: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flipH) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -530,8 +546,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_is_flipped_h: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_flipped_h")
+    fileprivate static let method_is_flipped_h: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_flipped_h")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -543,13 +559,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_flipped_h() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_flipped_h, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_flip_v: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flip_v")
+    fileprivate static let method_set_flip_v: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flip_v")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -561,6 +578,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_flip_v(_ flipV: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flipV) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -574,8 +592,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_is_flipped_v: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_flipped_v")
+    fileprivate static let method_is_flipped_v: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_flipped_v")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -587,13 +605,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_flipped_v() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_flipped_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frame")
+    fileprivate static let method_set_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frame")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -605,6 +624,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_frame(_ frame: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -618,8 +638,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_get_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame")
+    fileprivate static let method_get_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -631,13 +651,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_frame() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_frame_progress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frame_progress")
+    fileprivate static let method_set_frame_progress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frame_progress")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -649,6 +670,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_frame_progress(_ progress: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: progress) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -662,8 +684,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_get_frame_progress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_progress")
+    fileprivate static let method_get_frame_progress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_progress")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -675,13 +697,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_frame_progress() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_frame_progress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_frame_and_progress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frame_and_progress")
+    fileprivate static let method_set_frame_and_progress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frame_and_progress")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -691,13 +714,12 @@ open class AnimatedSprite2D: Node2D {
         
     }()
     
-    /// The setter of ``frame`` resets the ``frameProgress`` to `0.0` implicitly, but this method avoids that.
+    /// Sets ``frame`` the ``frameProgress`` to the given values. Unlike setting ``frame``, this method does not reset the ``frameProgress`` to `0.0` implicitly.
     /// 
-    /// This is useful when you want to carry over the current ``frameProgress`` to another ``frame``.
-    /// 
-    /// **Example:**
+    /// **Example:** Change the animation while keeping the same ``frame`` and ``frameProgress``:
     /// 
     public final func setFrameAndProgress(frame: Int32, progress: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: progress) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -714,8 +736,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_set_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_speed_scale")
+    fileprivate static let method_set_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_speed_scale")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -727,6 +749,7 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_speed_scale(_ speedScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: speedScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -740,8 +763,8 @@ open class AnimatedSprite2D: Node2D {
         
     }
     
-    fileprivate static var method_get_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_speed_scale")
+    fileprivate static let method_get_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_speed_scale")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -753,13 +776,14 @@ open class AnimatedSprite2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_speed_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_speed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_playing_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_playing_speed")
+    fileprivate static let method_get_playing_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_playing_speed")
         return withUnsafePointer(to: &AnimatedSprite2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -774,6 +798,7 @@ open class AnimatedSprite2D: Node2D {
     /// Returns a negative value if the current animation is playing backwards.
     /// 
     public final func getPlayingSpeed() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_playing_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

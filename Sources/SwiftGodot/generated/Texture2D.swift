@@ -30,32 +30,111 @@ import Musl
 /// > Note: The maximum texture size is 16384×16384 pixels due to graphics hardware limitations. Larger textures may fail to import.
 /// 
 open class Texture2D: Texture {
-    fileprivate static var className = StringName("Texture2D")
+    private static var className = StringName("Texture2D")
     override open class var godotClassName: StringName { className }
     /* Methods */
+    fileprivate static let method__get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_width")
+        return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called when the ``Texture2D``'s width is queried.
     @_documentation(visibility: public)
     open func _getWidth() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(Texture2D.method__get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_height")
+        return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the ``Texture2D``'s height is queried.
     @_documentation(visibility: public)
     open func _getHeight() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(Texture2D.method__get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__is_pixel_opaque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_pixel_opaque")
+        return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when a pixel's opaque state in the ``Texture2D`` is queried at the specified `(x, y)` position.
     @_documentation(visibility: public)
     open func _isPixelOpaque(x: Int32, y: Int32) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: x) { pArg0 in
+            withUnsafePointer(to: y) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Texture2D.method__is_pixel_opaque, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__has_alpha: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_has_alpha")
+        return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the presence of an alpha channel in the ``Texture2D`` is queried.
     @_documentation(visibility: public)
     open func _hasAlpha() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(Texture2D.method__has_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_draw")
+        return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1384643611)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the entire ``Texture2D`` is requested to be drawn over a ``CanvasItem``, with the top-left offset specified in `pos`. `modulate` specifies a multiplier for the colors being drawn, while `transpose` specifies whether drawing should be performed in column-major order instead of row-major order (resulting in 90-degree clockwise rotation).
     /// 
@@ -63,7 +142,39 @@ open class Texture2D: Texture {
     /// 
     @_documentation(visibility: public)
     open func _draw(toCanvasItem: RID, pos: Vector2, modulate: Color, transpose: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: toCanvasItem.content) { pArg0 in
+            withUnsafePointer(to: pos) { pArg1 in
+                withUnsafePointer(to: modulate) { pArg2 in
+                    withUnsafePointer(to: transpose) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(Texture2D.method__draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__draw_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_draw_rect")
+        return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3819628907)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the ``Texture2D`` is requested to be drawn onto ``CanvasItem``'s specified `rect`. `modulate` specifies a multiplier for the colors being drawn, while `transpose` specifies whether drawing should be performed in column-major order instead of row-major order (resulting in 90-degree clockwise rotation).
     /// 
@@ -71,7 +182,42 @@ open class Texture2D: Texture {
     /// 
     @_documentation(visibility: public)
     open func _drawRect(toCanvasItem: RID, rect: Rect2, tile: Bool, modulate: Color, transpose: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: toCanvasItem.content) { pArg0 in
+            withUnsafePointer(to: rect) { pArg1 in
+                withUnsafePointer(to: tile) { pArg2 in
+                    withUnsafePointer(to: modulate) { pArg3 in
+                        withUnsafePointer(to: transpose) { pArg4 in
+                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
+                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
+                                    gi.object_method_bind_ptrcall(Texture2D.method__draw_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__draw_rect_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_draw_rect_region")
+        return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4094143664)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when a part of the ``Texture2D`` specified by `srcRect`'s coordinates is requested to be drawn onto ``CanvasItem``'s specified `rect`. `modulate` specifies a multiplier for the colors being drawn, while `transpose` specifies whether drawing should be performed in column-major order instead of row-major order (resulting in 90-degree clockwise rotation).
     /// 
@@ -79,10 +225,37 @@ open class Texture2D: Texture {
     /// 
     @_documentation(visibility: public)
     open func _drawRectRegion(toCanvasItem: RID, rect: Rect2, srcRect: Rect2, modulate: Color, transpose: Bool, clipUv: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: toCanvasItem.content) { pArg0 in
+            withUnsafePointer(to: rect) { pArg1 in
+                withUnsafePointer(to: srcRect) { pArg2 in
+                    withUnsafePointer(to: modulate) { pArg3 in
+                        withUnsafePointer(to: transpose) { pArg4 in
+                            withUnsafePointer(to: clipUv) { pArg5 in
+                                withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
+                                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
+                                        gi.object_method_bind_ptrcall(Texture2D.method__draw_rect_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_width")
+    fileprivate static let method_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_width")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -94,13 +267,14 @@ open class Texture2D: Texture {
     
     /// Returns the texture width in pixels.
     public final func getWidth() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Texture2D.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_height")
+    fileprivate static let method_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_height")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -112,13 +286,14 @@ open class Texture2D: Texture {
     
     /// Returns the texture height in pixels.
     public final func getHeight() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Texture2D.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -130,13 +305,14 @@ open class Texture2D: Texture {
     
     /// Returns the texture size in pixels.
     public final func getSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Texture2D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_alpha: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_alpha")
+    fileprivate static let method_has_alpha: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_alpha")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -148,13 +324,14 @@ open class Texture2D: Texture {
     
     /// Returns `true` if this ``Texture2D`` has an alpha channel.
     public final func hasAlpha() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Texture2D.method_has_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw")
+    fileprivate static let method_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2729649137)!
@@ -166,6 +343,7 @@ open class Texture2D: Texture {
     
     /// Draws the texture using a ``CanvasItem`` with the ``RenderingServer`` API at the specified `position`.
     public final func draw(canvasItem: RID, position: Vector2, modulate: Color = Color (r: 1, g: 1, b: 1, a: 1), transpose: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canvasItem.content) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: modulate) { pArg2 in
@@ -188,8 +366,8 @@ open class Texture2D: Texture {
         
     }
     
-    fileprivate static var method_draw_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_rect")
+    fileprivate static let method_draw_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_rect")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3499451691)!
@@ -201,6 +379,7 @@ open class Texture2D: Texture {
     
     /// Draws the texture using a ``CanvasItem`` with the ``RenderingServer`` API.
     public final func drawRect(canvasItem: RID, rect: Rect2, tile: Bool, modulate: Color = Color (r: 1, g: 1, b: 1, a: 1), transpose: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canvasItem.content) { pArg0 in
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: tile) { pArg2 in
@@ -226,8 +405,8 @@ open class Texture2D: Texture {
         
     }
     
-    fileprivate static var method_draw_rect_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_rect_region")
+    fileprivate static let method_draw_rect_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_rect_region")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2963678660)!
@@ -239,6 +418,7 @@ open class Texture2D: Texture {
     
     /// Draws a part of the texture using a ``CanvasItem`` with the ``RenderingServer`` API.
     public final func drawRectRegion(canvasItem: RID, rect: Rect2, srcRect: Rect2, modulate: Color = Color (r: 1, g: 1, b: 1, a: 1), transpose: Bool = false, clipUv: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canvasItem.content) { pArg0 in
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: srcRect) { pArg2 in
@@ -267,8 +447,8 @@ open class Texture2D: Texture {
         
     }
     
-    fileprivate static var method_get_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_image")
+    fileprivate static let method_get_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_image")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4190603485)!
@@ -282,16 +462,17 @@ open class Texture2D: Texture {
     /// 
     /// > Note: This will return `null` if this ``Texture2D`` is invalid.
     /// 
-    /// > Note: This will fetch the texture data from the GPU, which might cause performance problems when overused.
+    /// > Note: This will fetch the texture data from the GPU, which might cause performance problems when overused. Avoid calling ``getImage()`` every frame, especially on large textures.
     /// 
     public final func getImage() -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Texture2D.method_get_image, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_placeholder")
+    fileprivate static let method_create_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_placeholder")
         return withUnsafePointer(to: &Texture2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 121922552)!
@@ -303,12 +484,13 @@ open class Texture2D: Texture {
     
     /// Creates a placeholder version of this resource (``PlaceholderTexture2D``).
     public final func createPlaceholder() -> Resource? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Texture2D.method_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_draw":
@@ -337,41 +519,47 @@ open class Texture2D: Texture {
 func _Texture2D_proxy_draw (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Texture2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Texture2D else { return }
     swiftObject._draw (toCanvasItem: RID (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), pos: args [1]!.assumingMemoryBound (to: Vector2.self).pointee, modulate: args [2]!.assumingMemoryBound (to: Color.self).pointee, transpose: args [3]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _Texture2D_proxy_draw_rect (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Texture2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Texture2D else { return }
     swiftObject._drawRect (toCanvasItem: RID (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), rect: args [1]!.assumingMemoryBound (to: Rect2.self).pointee, tile: args [2]!.assumingMemoryBound (to: Bool.self).pointee, modulate: args [3]!.assumingMemoryBound (to: Color.self).pointee, transpose: args [4]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _Texture2D_proxy_draw_rect_region (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Texture2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Texture2D else { return }
     swiftObject._drawRectRegion (toCanvasItem: RID (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), rect: args [1]!.assumingMemoryBound (to: Rect2.self).pointee, srcRect: args [2]!.assumingMemoryBound (to: Rect2.self).pointee, modulate: args [3]!.assumingMemoryBound (to: Color.self).pointee, transpose: args [4]!.assumingMemoryBound (to: Bool.self).pointee, clipUv: args [5]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _Texture2D_proxy_get_height (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Texture2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Texture2D else { return }
     let ret = swiftObject._getHeight ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _Texture2D_proxy_get_width (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Texture2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Texture2D else { return }
     let ret = swiftObject._getWidth ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _Texture2D_proxy_has_alpha (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Texture2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Texture2D else { return }
     let ret = swiftObject._hasAlpha ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -379,7 +567,8 @@ func _Texture2D_proxy_has_alpha (instance: UnsafeMutableRawPointer?, args: Unsaf
 func _Texture2D_proxy_is_pixel_opaque (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Texture2D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Texture2D else { return }
     let ret = swiftObject._isPixelOpaque (x: args [0]!.assumingMemoryBound (to: Int32.self).pointee, y: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }

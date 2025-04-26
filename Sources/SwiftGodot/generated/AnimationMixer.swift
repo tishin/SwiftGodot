@@ -37,7 +37,7 @@ import Musl
 /// - ``mixerApplied``
 /// - ``mixerUpdated``
 open class AnimationMixer: Node {
-    fileprivate static var className = StringName("AnimationMixer")
+    private static var className = StringName("AnimationMixer")
     override open class var godotClassName: StringName { className }
     public enum AnimationCallbackModeProcess: Int64, CaseIterable {
         /// Process animation during physics frames (see ``Node/notificationInternalPhysicsProcess``). This is especially useful when animating physics bodies.
@@ -62,7 +62,31 @@ open class AnimationMixer: Node {
         case recessive = 1 // ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE
         /// Always treat the ``Animation/UpdateMode/discrete`` track value as ``Animation/UpdateMode/continuous`` with ``Animation/InterpolationType/nearest``. This is the default behavior for ``AnimationTree``.
         /// 
-        /// If a value track has non-numeric type key values, it is internally converted to use ``AnimationCallbackModeDiscrete/recessive`` with ``Animation/UpdateMode/discrete``.
+        /// If a value track has un-interpolatable type key values, it is internally converted to use ``AnimationCallbackModeDiscrete/recessive`` with ``Animation/UpdateMode/discrete``.
+        /// 
+        /// Un-interpolatable type list:
+        /// 
+        /// - ``@GlobalScope.TYPE_NIL``
+        /// 
+        /// - ``@GlobalScope.TYPE_NODE_PATH``
+        /// 
+        /// - ``@GlobalScope.TYPE_RID``
+        /// 
+        /// - ``@GlobalScope.TYPE_OBJECT``
+        /// 
+        /// - ``@GlobalScope.TYPE_CALLABLE``
+        /// 
+        /// - ``@GlobalScope.TYPE_SIGNAL``
+        /// 
+        /// - ``@GlobalScope.TYPE_DICTIONARY``
+        /// 
+        /// - ``@GlobalScope.TYPE_PACKED_BYTE_ARRAY``
+        /// 
+        /// ``@GlobalScope.TYPE_BOOL`` and ``@GlobalScope.TYPE_INT`` are treated as ``@GlobalScope.TYPE_FLOAT`` during blending and rounded when the result is retrieved.
+        /// 
+        /// It is same for arrays and vectors with them such as ``@GlobalScope.TYPE_PACKED_INT32_ARRAY`` or ``@GlobalScope.TYPE_VECTOR2I``, they are treated as ``@GlobalScope.TYPE_PACKED_FLOAT32_ARRAY`` or ``@GlobalScope.TYPE_VECTOR2``. Also note that for arrays, the size is also interpolated.
+        /// 
+        /// ``@GlobalScope.TYPE_STRING`` and ``@GlobalScope.TYPE_STRING_NAME`` are interpolated between character codes and lengths, but note that there is a difference in algorithm between interpolation between keys and interpolation by blending.
         /// 
         case forceContinuous = 2 // ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS
     }
@@ -132,9 +156,9 @@ open class AnimationMixer: Node {
         
     }
     
-    /// The path to the Animation track used for root motion. Paths must be valid scene-tree paths to a node, and must be specified starting from the parent node of the node that will reproduce the animation. To specify a track that controls properties or bones, append its name after the path, separated by `":"`. For example, `"character/skeleton:ankle"` or `"character/mesh:transform/local"`.
+    /// The path to the Animation track used for root motion. Paths must be valid scene-tree paths to a node, and must be specified starting from the parent node of the node that will reproduce the animation. The ``rootMotionTrack`` uses the same format as ``Animation/trackSetPath(trackIdx:path:)``, but note that a bone must be specified.
     /// 
-    /// If the track has type ``Animation/TrackType/position3d``, ``Animation/TrackType/rotation3d`` or ``Animation/TrackType/scale3d`` the transformation will be canceled visually, and the animation will appear to stay in place. See also ``getRootMotionPosition()``, ``getRootMotionRotation()``, ``getRootMotionScale()`` and ``RootMotionView``.
+    /// If the track has type ``Animation/TrackType/position3d``, ``Animation/TrackType/rotation3d``, or ``Animation/TrackType/scale3d`` the transformation will be canceled visually, and the animation will appear to stay in place. See also ``getRootMotionPosition()``, ``getRootMotionRotation()``, ``getRootMotionScale()``, and ``RootMotionView``.
     /// 
     final public var rootMotionTrack: NodePath {
         get {
@@ -143,6 +167,18 @@ open class AnimationMixer: Node {
         
         set {
             set_root_motion_track (newValue)
+        }
+        
+    }
+    
+    /// If `true`, ``getRootMotionPosition()`` value is extracted as a local translation value before blending. In other words, it is treated like the translation is done after the rotation.
+    final public var rootMotionLocal: Bool {
+        get {
+            return is_root_motion_local ()
+        }
+        
+        set {
+            set_root_motion_local (newValue)
         }
         
     }
@@ -204,14 +240,49 @@ open class AnimationMixer: Node {
     }
     
     /* Methods */
+    fileprivate static let method__post_process_key_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_post_process_key_value")
+        return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2716908335)!
+            }
+            
+        }
+        
+    }()
+    
     /// A virtual function for processing after getting a key during playback.
     @_documentation(visibility: public)
     open func _postProcessKeyValue(animation: Animation?, track: Int32, value: Variant?, objectId: UInt, objectSubIdx: Int32) -> Variant? {
-        return nil
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: animation?.handle) { pArg0 in
+            withUnsafePointer(to: track) { pArg1 in
+                withUnsafePointer(to: value.content) { pArg2 in
+                    withUnsafePointer(to: objectId) { pArg3 in
+                        withUnsafePointer(to: objectSubIdx) { pArg4 in
+                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
+                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
+                                    gi.object_method_bind_ptrcall(AnimationMixer.method__post_process_key_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_add_animation_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_animation_library")
+    fileprivate static let method_add_animation_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_animation_library")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 618909818)!
@@ -222,7 +293,11 @@ open class AnimationMixer: Node {
     }()
     
     /// Adds `library` to the animation player, under the key `name`.
+    /// 
+    /// AnimationMixer has a global library by default with an empty string as key. For adding an animation to the global library:
+    /// 
     public final func addAnimationLibrary(name: StringName, library: AnimationLibrary?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: library?.handle) { pArg1 in
@@ -240,8 +315,8 @@ open class AnimationMixer: Node {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_remove_animation_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_animation_library")
+    fileprivate static let method_remove_animation_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_animation_library")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -253,6 +328,7 @@ open class AnimationMixer: Node {
     
     /// Removes the ``AnimationLibrary`` associated with the key `name`.
     public final func removeAnimationLibrary(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -266,8 +342,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_rename_animation_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_animation_library")
+    fileprivate static let method_rename_animation_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_animation_library")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -279,6 +355,7 @@ open class AnimationMixer: Node {
     
     /// Moves the ``AnimationLibrary`` associated with the key `name` to the key `newname`.
     public final func renameAnimationLibrary(name: StringName, newname: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: newname.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -295,8 +372,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_has_animation_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_animation_library")
+    fileprivate static let method_has_animation_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_animation_library")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -308,6 +385,7 @@ open class AnimationMixer: Node {
     
     /// Returns `true` if the ``AnimationMixer`` stores an ``AnimationLibrary`` with key `name`.
     public final func hasAnimationLibrary(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -322,8 +400,8 @@ open class AnimationMixer: Node {
         return _result
     }
     
-    fileprivate static var method_get_animation_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_library")
+    fileprivate static let method_get_animation_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_library")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 147342321)!
@@ -338,6 +416,7 @@ open class AnimationMixer: Node {
     /// To get the ``AnimationMixer``'s global animation library, use `get_animation_library("")`.
     /// 
     public final func getAnimationLibrary(name: StringName) -> AnimationLibrary? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -349,11 +428,11 @@ open class AnimationMixer: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_animation_library_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_library_list")
+    fileprivate static let method_get_animation_library_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_library_list")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -364,14 +443,15 @@ open class AnimationMixer: Node {
     }()
     
     /// Returns the list of stored library keys.
-    public final func getAnimationLibraryList() -> VariantCollection<StringName> {
+    public final func getAnimationLibraryList() -> TypedArray<StringName> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_animation_library_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
     }
     
-    fileprivate static var method_has_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_animation")
+    fileprivate static let method_has_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_animation")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -383,6 +463,7 @@ open class AnimationMixer: Node {
     
     /// Returns `true` if the ``AnimationMixer`` stores an ``Animation`` with key `name`.
     public final func hasAnimation(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -397,8 +478,8 @@ open class AnimationMixer: Node {
         return _result
     }
     
-    fileprivate static var method_get_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation")
+    fileprivate static let method_get_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2933122410)!
@@ -410,6 +491,7 @@ open class AnimationMixer: Node {
     
     /// Returns the ``Animation`` with the key `name`. If the animation does not exist, `null` is returned and an error is logged.
     public final func getAnimation(name: StringName) -> Animation? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -421,11 +503,11 @@ open class AnimationMixer: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_animation_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_list")
+    fileprivate static let method_get_animation_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_list")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -437,13 +519,14 @@ open class AnimationMixer: Node {
     
     /// Returns the list of stored animation keys.
     public final func getAnimationList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_animation_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_active")
+    fileprivate static let method_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_active")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -455,6 +538,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_active(_ active: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -468,8 +552,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_is_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_active")
+    fileprivate static let method_is_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_active")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -481,13 +565,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func is_active() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationMixer.method_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_deterministic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deterministic")
+    fileprivate static let method_set_deterministic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deterministic")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -499,6 +584,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_deterministic(_ deterministic: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: deterministic) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -512,8 +598,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_is_deterministic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_deterministic")
+    fileprivate static let method_is_deterministic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_deterministic")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -525,13 +611,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func is_deterministic() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationMixer.method_is_deterministic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_root_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_root_node")
+    fileprivate static let method_set_root_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_node")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -543,6 +630,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_root_node(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -556,8 +644,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_get_root_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_node")
+    fileprivate static let method_get_root_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_node")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -569,13 +657,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func get_root_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_callback_mode_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_callback_mode_process")
+    fileprivate static let method_set_callback_mode_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_callback_mode_process")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2153733086)!
@@ -587,6 +676,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_callback_mode_process(_ mode: AnimationMixer.AnimationCallbackModeProcess) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -600,8 +690,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_get_callback_mode_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_callback_mode_process")
+    fileprivate static let method_get_callback_mode_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_callback_mode_process")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1394468472)!
@@ -613,13 +703,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func get_callback_mode_process() -> AnimationMixer.AnimationCallbackModeProcess {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_callback_mode_process, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationMixer.AnimationCallbackModeProcess (rawValue: _result)!
     }
     
-    fileprivate static var method_set_callback_mode_method: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_callback_mode_method")
+    fileprivate static let method_set_callback_mode_method: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_callback_mode_method")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 742218271)!
@@ -631,6 +722,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_callback_mode_method(_ mode: AnimationMixer.AnimationCallbackModeMethod) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -644,8 +736,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_get_callback_mode_method: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_callback_mode_method")
+    fileprivate static let method_get_callback_mode_method: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_callback_mode_method")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 489449656)!
@@ -657,13 +749,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func get_callback_mode_method() -> AnimationMixer.AnimationCallbackModeMethod {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_callback_mode_method, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationMixer.AnimationCallbackModeMethod (rawValue: _result)!
     }
     
-    fileprivate static var method_set_callback_mode_discrete: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_callback_mode_discrete")
+    fileprivate static let method_set_callback_mode_discrete: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_callback_mode_discrete")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1998944670)!
@@ -675,6 +768,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_callback_mode_discrete(_ mode: AnimationMixer.AnimationCallbackModeDiscrete) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -688,8 +782,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_get_callback_mode_discrete: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_callback_mode_discrete")
+    fileprivate static let method_get_callback_mode_discrete: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_callback_mode_discrete")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3493168860)!
@@ -701,13 +795,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func get_callback_mode_discrete() -> AnimationMixer.AnimationCallbackModeDiscrete {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_callback_mode_discrete, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AnimationMixer.AnimationCallbackModeDiscrete (rawValue: _result)!
     }
     
-    fileprivate static var method_set_audio_max_polyphony: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_audio_max_polyphony")
+    fileprivate static let method_set_audio_max_polyphony: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_audio_max_polyphony")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -719,6 +814,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_audio_max_polyphony(_ maxPolyphony: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxPolyphony) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -732,8 +828,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_get_audio_max_polyphony: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_audio_max_polyphony")
+    fileprivate static let method_get_audio_max_polyphony: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_audio_max_polyphony")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -745,13 +841,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func get_audio_max_polyphony() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_audio_max_polyphony, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_root_motion_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_root_motion_track")
+    fileprivate static let method_set_root_motion_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_motion_track")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -763,6 +860,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_root_motion_track(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -776,8 +874,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_get_root_motion_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_motion_track")
+    fileprivate static let method_get_root_motion_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_motion_track")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -789,13 +887,60 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func get_root_motion_track() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_motion_track, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_root_motion_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_motion_position")
+    fileprivate static let method_set_root_motion_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_motion_local")
+        return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_root_motion_local(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enabled) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(AnimationMixer.method_set_root_motion_local, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_is_root_motion_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_root_motion_local")
+        return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func is_root_motion_local() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(AnimationMixer.method_is_root_motion_local, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_root_motion_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_motion_position")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -813,16 +958,21 @@ open class AnimationMixer: Node {
     /// 
     /// The most basic example is applying position to ``CharacterBody3D``:
     /// 
-    /// By using this in combination with ``getRootMotionPositionAccumulator()``, you can apply the root motion position more correctly to account for the rotation of the node.
+    /// By using this in combination with ``getRootMotionRotationAccumulator()``, you can apply the root motion position more correctly to account for the rotation of the node.
+    /// 
+    /// If ``rootMotionLocal`` is `true`, return the pre-multiplied translation value with the inverted rotation.
+    /// 
+    /// In this case, the code can be written as follows:
     /// 
     public final func getRootMotionPosition() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_motion_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_root_motion_rotation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_motion_rotation")
+    fileprivate static let method_get_root_motion_rotation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_motion_rotation")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1222331677)!
@@ -841,13 +991,14 @@ open class AnimationMixer: Node {
     /// The most basic example is applying rotation to ``CharacterBody3D``:
     /// 
     public final func getRootMotionRotation() -> Quaternion {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_motion_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_root_motion_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_motion_scale")
+    fileprivate static let method_get_root_motion_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_motion_scale")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -866,13 +1017,14 @@ open class AnimationMixer: Node {
     /// The most basic example is applying scale to ``CharacterBody3D``:
     /// 
     public final func getRootMotionScale() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_motion_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_root_motion_position_accumulator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_motion_position_accumulator")
+    fileprivate static let method_get_root_motion_position_accumulator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_motion_position_accumulator")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -891,13 +1043,14 @@ open class AnimationMixer: Node {
     /// However, if the animation loops, an unintended discrete change may occur, so this is only useful for some simple use cases.
     /// 
     public final func getRootMotionPositionAccumulator() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_motion_position_accumulator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_root_motion_rotation_accumulator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_motion_rotation_accumulator")
+    fileprivate static let method_get_root_motion_rotation_accumulator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_motion_rotation_accumulator")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1222331677)!
@@ -918,13 +1071,14 @@ open class AnimationMixer: Node {
     /// However, if the animation loops, an unintended discrete change may occur, so this is only useful for some simple use cases.
     /// 
     public final func getRootMotionRotationAccumulator() -> Quaternion {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_motion_rotation_accumulator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_root_motion_scale_accumulator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_motion_scale_accumulator")
+    fileprivate static let method_get_root_motion_scale_accumulator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_motion_scale_accumulator")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -941,13 +1095,14 @@ open class AnimationMixer: Node {
     /// However, if the animation loops, an unintended discrete change may occur, so this is only useful for some simple use cases.
     /// 
     public final func getRootMotionScaleAccumulator() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(AnimationMixer.method_get_root_motion_scale_accumulator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_clear_caches: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_caches")
+    fileprivate static let method_clear_caches: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_caches")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -959,12 +1114,13 @@ open class AnimationMixer: Node {
     
     /// ``AnimationMixer`` caches animated nodes. It may not notice if a node disappears; ``clearCaches()`` forces it to update the cache again.
     public final func clearCaches() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AnimationMixer.method_clear_caches, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("advance")
+    fileprivate static let method_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("advance")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -976,6 +1132,7 @@ open class AnimationMixer: Node {
     
     /// Manually advance the animations by the specified time (in seconds).
     public final func advance(delta: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -989,8 +1146,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_capture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("capture")
+    fileprivate static let method_capture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("capture")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1333632127)!
@@ -1007,6 +1164,7 @@ open class AnimationMixer: Node {
     /// You can specify `transType` as the curve for the interpolation. For better results, it may be appropriate to specify ``Tween/TransitionType/linear`` for cases where the first key of the track begins with a non-zero value or where the key value does not change, and ``Tween/TransitionType/quad`` for cases where the key value changes linearly.
     /// 
     public final func capture(name: StringName, duration: Double, transType: Tween.TransitionType = .linear, easeType: Tween.EaseType = .`in`) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: duration) { pArg1 in
                 withUnsafePointer(to: transType.rawValue) { pArg2 in
@@ -1029,8 +1187,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_set_reset_on_save_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_reset_on_save_enabled")
+    fileprivate static let method_set_reset_on_save_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_reset_on_save_enabled")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1042,6 +1200,7 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func set_reset_on_save_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1055,8 +1214,8 @@ open class AnimationMixer: Node {
         
     }
     
-    fileprivate static var method_is_reset_on_save_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_reset_on_save_enabled")
+    fileprivate static let method_is_reset_on_save_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_reset_on_save_enabled")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1068,13 +1227,14 @@ open class AnimationMixer: Node {
     
     @inline(__always)
     fileprivate final func is_reset_on_save_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationMixer.method_is_reset_on_save_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_find_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_animation")
+    fileprivate static let method_find_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_animation")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1559484580)!
@@ -1086,6 +1246,7 @@ open class AnimationMixer: Node {
     
     /// Returns the key of `animation` or an empty ``StringName`` if not found.
     public final func findAnimation(_ animation: Animation?) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: animation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1100,8 +1261,8 @@ open class AnimationMixer: Node {
         return _result
     }
     
-    fileprivate static var method_find_animation_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_animation_library")
+    fileprivate static let method_find_animation_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_animation_library")
         return withUnsafePointer(to: &AnimationMixer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1559484580)!
@@ -1113,6 +1274,7 @@ open class AnimationMixer: Node {
     
     /// Returns the key for the ``AnimationLibrary`` that contains `animation` or an empty ``StringName`` if not found.
     public final func findAnimationLibrary(animation: Animation?) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: animation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1127,7 +1289,7 @@ open class AnimationMixer: Node {
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_post_process_key_value":
@@ -1260,10 +1422,11 @@ open class AnimationMixer: Node {
 func _AnimationMixer_proxy_post_process_key_value (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<AnimationMixer>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? AnimationMixer else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._postProcessKeyValue (animation: lookupLiveObject (handleAddress: resolved_0) as? Animation ?? lookupObject (nativeHandle: resolved_0)!, track: args [1]!.assumingMemoryBound (to: Int32.self).pointee, value: args [2]!.assumingMemoryBound (to: Variant.self).pointee, objectId: args [3]!.assumingMemoryBound (to: UInt.self).pointee, objectSubIdx: args [4]!.assumingMemoryBound (to: Int32.self).pointee)
+    let ret = swiftObject._postProcessKeyValue (animation: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Animation, track: args [1]!.assumingMemoryBound (to: Int32.self).pointee, value: args [2]!.assumingMemoryBound (to: Variant.self).pointee, objectId: args [3]!.assumingMemoryBound (to: UInt.self).pointee, objectSubIdx: args [4]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes(of: ret.content, as: Variant.ContentType.self)
     ret?.content = Variant.zero
 }

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A variant of ``BoxContainer`` that can only arrange its child controls vertically. Child controls are rearranged automatically when their minimum size changes.
 open class VBoxContainer: BoxContainer {
-    fileprivate static var className = StringName("VBoxContainer")
+    private static var className = StringName("VBoxContainer")
     override open class var godotClassName: StringName { className }
 }
 

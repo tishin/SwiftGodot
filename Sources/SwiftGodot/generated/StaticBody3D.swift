@@ -28,7 +28,7 @@ import Musl
 /// ``StaticBody3D`` is useful for completely static objects like floors and walls, as well as moving surfaces like conveyor belts and circular revolving platforms (by using ``constantLinearVelocity`` and ``constantAngularVelocity``).
 /// 
 open class StaticBody3D: PhysicsBody3D {
-    fileprivate static var className = StringName("StaticBody3D")
+    private static var className = StringName("StaticBody3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -73,8 +73,8 @@ open class StaticBody3D: PhysicsBody3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_constant_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constant_linear_velocity")
+    fileprivate static let method_set_constant_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constant_linear_velocity")
         return withUnsafePointer(to: &StaticBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -86,6 +86,7 @@ open class StaticBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_constant_linear_velocity(_ vel: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -99,8 +100,8 @@ open class StaticBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_set_constant_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_constant_angular_velocity")
+    fileprivate static let method_set_constant_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_constant_angular_velocity")
         return withUnsafePointer(to: &StaticBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -112,6 +113,7 @@ open class StaticBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_constant_angular_velocity(_ vel: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -125,8 +127,8 @@ open class StaticBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_constant_linear_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant_linear_velocity")
+    fileprivate static let method_get_constant_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant_linear_velocity")
         return withUnsafePointer(to: &StaticBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -138,13 +140,14 @@ open class StaticBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_constant_linear_velocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(StaticBody3D.method_get_constant_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_constant_angular_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_constant_angular_velocity")
+    fileprivate static let method_get_constant_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_constant_angular_velocity")
         return withUnsafePointer(to: &StaticBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -156,13 +159,14 @@ open class StaticBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_constant_angular_velocity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(StaticBody3D.method_get_constant_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_physics_material_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_material_override")
+    fileprivate static let method_set_physics_material_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_material_override")
         return withUnsafePointer(to: &StaticBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1784508650)!
@@ -174,6 +178,7 @@ open class StaticBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func set_physics_material_override(_ physicsMaterialOverride: PhysicsMaterial?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: physicsMaterialOverride?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -187,8 +192,8 @@ open class StaticBody3D: PhysicsBody3D {
         
     }
     
-    fileprivate static var method_get_physics_material_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_material_override")
+    fileprivate static let method_get_physics_material_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_material_override")
         return withUnsafePointer(to: &StaticBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2521850424)!
@@ -200,9 +205,10 @@ open class StaticBody3D: PhysicsBody3D {
     
     @inline(__always)
     fileprivate final func get_physics_material_override() -> PhysicsMaterial? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(StaticBody3D.method_get_physics_material_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -26,11 +26,11 @@ import Musl
 /// The ``InstancePlaceholder`` does not have a transform. This causes any child nodes to be positioned relatively to the ``Viewport`` from point (0,0), rather than their parent as displayed in the editor. Replacing the placeholder with a scene with a transform will transform children relatively to their parent again.
 /// 
 open class InstancePlaceholder: Node {
-    fileprivate static var className = StringName("InstancePlaceholder")
+    private static var className = StringName("InstancePlaceholder")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_stored_values: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stored_values")
+    fileprivate static let method_get_stored_values: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stored_values")
         return withUnsafePointer(to: &InstancePlaceholder.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2230153369)!
@@ -42,10 +42,11 @@ open class InstancePlaceholder: Node {
     
     /// Returns the list of properties that will be applied to the node when ``createInstance(replace:customScene:)`` is called.
     /// 
-    /// If `withOrder` is `true`, a key named `.order` (note the leading period) is added to the dictionary. This `.order` key is an ``GArray`` of ``String`` property names specifying the order in which properties will be applied (with index 0 being the first).
+    /// If `withOrder` is `true`, a key named `.order` (note the leading period) is added to the dictionary. This `.order` key is an ``VariantArray`` of ``String`` property names specifying the order in which properties will be applied (with index 0 being the first).
     /// 
-    public final func getStoredValues(withOrder: Bool = false) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getStoredValues(withOrder: Bool = false) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: withOrder) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -59,8 +60,8 @@ open class InstancePlaceholder: Node {
         return _result
     }
     
-    fileprivate static var method_create_instance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_instance")
+    fileprivate static let method_create_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_instance")
         return withUnsafePointer(to: &InstancePlaceholder.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3794612210)!
@@ -75,6 +76,7 @@ open class InstancePlaceholder: Node {
     /// > Note: ``createInstance(replace:customScene:)`` is not thread-safe. Use ``Object/callDeferred(method:)`` if calling from a thread.
     /// 
     public final func createInstance(replace: Bool = false, customScene: PackedScene? = nil) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: replace) { pArg0 in
             withUnsafePointer(to: customScene?.handle) { pArg1 in
@@ -89,11 +91,11 @@ open class InstancePlaceholder: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_instance_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_path")
+    fileprivate static let method_get_instance_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_path")
         return withUnsafePointer(to: &InstancePlaceholder.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -105,6 +107,7 @@ open class InstancePlaceholder: Node {
     
     /// Gets the path to the ``PackedScene`` resource file that is loaded by default when calling ``createInstance(replace:customScene:)``. Not thread-safe. Use ``Object/callDeferred(method:)`` if calling from a thread.
     public final func getInstancePath() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(InstancePlaceholder.method_get_instance_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

@@ -26,7 +26,7 @@ import Musl
 /// See ``OccluderInstance3D``'s documentation for instructions on setting up occlusion culling.
 /// 
 open class PolygonOccluder3D: Occluder3D {
-    fileprivate static var className = StringName("PolygonOccluder3D")
+    private static var className = StringName("PolygonOccluder3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -47,8 +47,8 @@ open class PolygonOccluder3D: Occluder3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_polygon")
+    fileprivate static let method_set_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_polygon")
         return withUnsafePointer(to: &PolygonOccluder3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -60,6 +60,7 @@ open class PolygonOccluder3D: Occluder3D {
     
     @inline(__always)
     fileprivate final func set_polygon(_ polygon: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -73,8 +74,8 @@ open class PolygonOccluder3D: Occluder3D {
         
     }
     
-    fileprivate static var method_get_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon")
+    fileprivate static let method_get_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon")
         return withUnsafePointer(to: &PolygonOccluder3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -86,6 +87,7 @@ open class PolygonOccluder3D: Occluder3D {
     
     @inline(__always)
     fileprivate final func get_polygon() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(PolygonOccluder3D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

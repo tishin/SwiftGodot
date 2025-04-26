@@ -29,11 +29,11 @@ import Musl
 /// 
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
-/// **Example of contacting a REST API and printing one of its returned fields:**
+/// **Example:** Contact a REST API and print one of its returned fields:
 /// 
-/// **Example of loading and displaying an image using HTTPRequest:**
+/// **Example:** Load an image using ``HTTPRequest`` and display it:
 /// 
-/// **Gzipped response bodies**: HTTPRequest will automatically handle decompression of response bodies. A `Accept-Encoding` header will be automatically added to each of your requests, unless one is already specified. Any response with a `Content-Encoding: gzip` header will automatically be decompressed and delivered to you as uncompressed bytes.
+/// > Note: ``HTTPRequest`` nodes will automatically handle decompression of response bodies. A `Accept-Encoding` header will be automatically added to each of your requests, unless one is already specified. Any response with a `Content-Encoding: gzip` header will automatically be decompressed and delivered to you as uncompressed bytes.
 /// 
 /// 
 /// 
@@ -41,12 +41,12 @@ import Musl
 /// 
 /// - ``requestCompleted``
 open class HTTPRequest: Node {
-    fileprivate static var className = StringName("HTTPRequest")
+    private static var className = StringName("HTTPRequest")
     override open class var godotClassName: StringName { className }
     public enum Result: Int64, CaseIterable {
         /// Request successful.
         case success = 0 // RESULT_SUCCESS
-        /// 
+        /// Request failed due to a mismatch between the expected and actual chunked body size during transfer. Possible causes include network errors, server misconfiguration, or issues with chunked encoding.
         case chunkedBodySizeMismatch = 1 // RESULT_CHUNKED_BODY_SIZE_MISMATCH
         /// Request failed while connecting.
         case cantConnect = 2 // RESULT_CANT_CONNECT
@@ -60,7 +60,7 @@ open class HTTPRequest: Node {
         case noResponse = 6 // RESULT_NO_RESPONSE
         /// Request exceeded its maximum size limit, see ``bodySizeLimit``.
         case bodySizeLimitExceeded = 7 // RESULT_BODY_SIZE_LIMIT_EXCEEDED
-        /// 
+        /// Request failed due to an error while decompressing the response body. Possible causes include unsupported or incorrect compression format, corrupted data, or incomplete transfer.
         case bodyDecompressFailed = 8 // RESULT_BODY_DECOMPRESS_FAILED
         /// Request failed (currently unused).
         case requestFailed = 9 // RESULT_REQUEST_FAILED
@@ -172,8 +172,8 @@ open class HTTPRequest: Node {
     }
     
     /* Methods */
-    fileprivate static var method_request: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request")
+    fileprivate static let method_request: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3215244323)!
@@ -192,6 +192,7 @@ open class HTTPRequest: Node {
     /// > Note: It's recommended to use transport encryption (TLS) and to avoid sending sensitive information (such as login credentials) in HTTP GET URL parameters. Consider using HTTP POST requests or HTTP headers for such information instead.
     /// 
     public final func request(url: String, customHeaders: PackedStringArray = PackedStringArray(), method: HTTPClient.Method = .get, requestData: String = "") -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let url = GString(url)
         withUnsafePointer(to: url.content) { pArg0 in
@@ -217,8 +218,8 @@ open class HTTPRequest: Node {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_request_raw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_raw")
+    fileprivate static let method_request_raw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_raw")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2714829993)!
@@ -233,6 +234,7 @@ open class HTTPRequest: Node {
     /// Returns ``GodotError/ok`` if request is successfully created. (Does not imply that the server has responded), ``GodotError/errUnconfigured`` if not in the tree, ``GodotError/errBusy`` if still processing previous request, ``GodotError/errInvalidParameter`` if given string is not a valid URL format, or ``GodotError/errCantConnect`` if not using thread and the ``HTTPClient`` cannot connect to host.
     /// 
     public final func requestRaw(url: String, customHeaders: PackedStringArray = PackedStringArray(), method: HTTPClient.Method = .get, requestDataRaw: PackedByteArray = PackedByteArray()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let url = GString(url)
         withUnsafePointer(to: url.content) { pArg0 in
@@ -257,8 +259,8 @@ open class HTTPRequest: Node {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_cancel_request: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cancel_request")
+    fileprivate static let method_cancel_request: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cancel_request")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -270,12 +272,13 @@ open class HTTPRequest: Node {
     
     /// Cancels the current request.
     public final func cancelRequest() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(HTTPRequest.method_cancel_request, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_tls_options: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tls_options")
+    fileprivate static let method_set_tls_options: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tls_options")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2210231844)!
@@ -287,6 +290,7 @@ open class HTTPRequest: Node {
     
     /// Sets the ``TLSOptions`` to be used when connecting to an HTTPS server. See ``TLSOptions/client(trustedChain:commonNameOverride:)``.
     public final func setTlsOptions(clientOptions: TLSOptions?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clientOptions?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -300,8 +304,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_get_http_client_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_http_client_status")
+    fileprivate static let method_get_http_client_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_http_client_status")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1426656811)!
@@ -313,13 +317,14 @@ open class HTTPRequest: Node {
     
     /// Returns the current status of the underlying ``HTTPClient``. See ``HTTPClient.Status``.
     public final func getHttpClientStatus() -> HTTPClient.Status {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_http_client_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return HTTPClient.Status (rawValue: _result)!
     }
     
-    fileprivate static var method_set_use_threads: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_threads")
+    fileprivate static let method_set_use_threads: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_threads")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -331,6 +336,7 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func set_use_threads(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -344,8 +350,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_is_using_threads: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_threads")
+    fileprivate static let method_is_using_threads: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_threads")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -357,13 +363,14 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func is_using_threads() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(HTTPRequest.method_is_using_threads, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_accept_gzip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_accept_gzip")
+    fileprivate static let method_set_accept_gzip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_accept_gzip")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -375,6 +382,7 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func set_accept_gzip(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -388,8 +396,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_is_accepting_gzip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_accepting_gzip")
+    fileprivate static let method_is_accepting_gzip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_accepting_gzip")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -401,13 +409,14 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func is_accepting_gzip() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(HTTPRequest.method_is_accepting_gzip, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_body_size_limit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_body_size_limit")
+    fileprivate static let method_set_body_size_limit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_body_size_limit")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -419,6 +428,7 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func set_body_size_limit(_ bytes: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -432,8 +442,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_get_body_size_limit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_body_size_limit")
+    fileprivate static let method_get_body_size_limit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_body_size_limit")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -445,13 +455,14 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func get_body_size_limit() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_body_size_limit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_redirects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_redirects")
+    fileprivate static let method_set_max_redirects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_redirects")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -463,6 +474,7 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func set_max_redirects(_ amount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -476,8 +488,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_get_max_redirects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_redirects")
+    fileprivate static let method_get_max_redirects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_redirects")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -489,13 +501,14 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func get_max_redirects() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_max_redirects, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_download_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_download_file")
+    fileprivate static let method_set_download_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_download_file")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -507,6 +520,7 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func set_download_file(_ path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -521,8 +535,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_get_download_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_download_file")
+    fileprivate static let method_get_download_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_download_file")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -534,13 +548,14 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func get_download_file() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_download_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_downloaded_bytes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_downloaded_bytes")
+    fileprivate static let method_get_downloaded_bytes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_downloaded_bytes")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -552,13 +567,14 @@ open class HTTPRequest: Node {
     
     /// Returns the number of bytes this HTTPRequest downloaded.
     public final func getDownloadedBytes() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_downloaded_bytes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_body_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_body_size")
+    fileprivate static let method_get_body_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_body_size")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -573,13 +589,14 @@ open class HTTPRequest: Node {
     /// > Note: Some Web servers may not send a body length. In this case, the value returned will be `-1`. If using chunked transfer encoding, the body length will also be `-1`.
     /// 
     public final func getBodySize() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_body_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_timeout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_timeout")
+    fileprivate static let method_set_timeout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_timeout")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -591,6 +608,7 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func set_timeout(_ timeout: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -604,8 +622,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_get_timeout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_timeout")
+    fileprivate static let method_get_timeout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_timeout")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -617,13 +635,14 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func get_timeout() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_timeout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_download_chunk_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_download_chunk_size")
+    fileprivate static let method_set_download_chunk_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_download_chunk_size")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -635,6 +654,7 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func set_download_chunk_size(_ chunkSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: chunkSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -648,8 +668,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_get_download_chunk_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_download_chunk_size")
+    fileprivate static let method_get_download_chunk_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_download_chunk_size")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -661,13 +681,14 @@ open class HTTPRequest: Node {
     
     @inline(__always)
     fileprivate final func get_download_chunk_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(HTTPRequest.method_get_download_chunk_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_http_proxy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_http_proxy")
+    fileprivate static let method_set_http_proxy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_http_proxy")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2956805083)!
@@ -682,6 +703,7 @@ open class HTTPRequest: Node {
     /// The proxy server is unset if `host` is empty or `port` is -1.
     /// 
     public final func setHttpProxy(host: String, port: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
             withUnsafePointer(to: port) { pArg1 in
@@ -699,8 +721,8 @@ open class HTTPRequest: Node {
         
     }
     
-    fileprivate static var method_set_https_proxy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_https_proxy")
+    fileprivate static let method_set_https_proxy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_https_proxy")
         return withUnsafePointer(to: &HTTPRequest.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2956805083)!
@@ -715,6 +737,7 @@ open class HTTPRequest: Node {
     /// The proxy server is unset if `host` is empty or `port` is -1.
     /// 
     public final func setHttpsProxy(host: String, port: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
             withUnsafePointer(to: port) { pArg1 in

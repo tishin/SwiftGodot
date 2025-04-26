@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Uses three operands to compute `(a * b + c)` expression.
 open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeMultiplyAdd")
+    private static var className = StringName("VisualShaderNodeMultiplyAdd")
     override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar type.
@@ -54,8 +54,8 @@ open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_op_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_op_type")
+    fileprivate static let method_set_op_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_op_type")
         return withUnsafePointer(to: &VisualShaderNodeMultiplyAdd.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1409862380)!
@@ -67,6 +67,7 @@ open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_op_type(_ type: VisualShaderNodeMultiplyAdd.OpType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -80,8 +81,8 @@ open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_op_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_op_type")
+    fileprivate static let method_get_op_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_op_type")
         return withUnsafePointer(to: &VisualShaderNodeMultiplyAdd.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2823201991)!
@@ -93,6 +94,7 @@ open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_op_type() -> VisualShaderNodeMultiplyAdd.OpType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeMultiplyAdd.method_get_op_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeMultiplyAdd.OpType (rawValue: _result)!

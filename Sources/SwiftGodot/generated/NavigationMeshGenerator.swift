@@ -33,18 +33,18 @@ import Musl
 /// 
 open class NavigationMeshGenerator: Object {
     /// The shared instance of this class
-    public static var shared: NavigationMeshGenerator = {
-        return withUnsafePointer (to: &NavigationMeshGenerator.godotClassName.content) { ptr in
-            NavigationMeshGenerator (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: NavigationMeshGenerator {
+        return withUnsafePointer(to: &NavigationMeshGenerator.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("NavigationMeshGenerator")
+    private static var className = StringName("NavigationMeshGenerator")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_bake: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bake")
+    fileprivate static let method_bake: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake")
         return withUnsafePointer(to: &NavigationMeshGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1401173477)!
@@ -72,8 +72,8 @@ open class NavigationMeshGenerator: Object {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &NavigationMeshGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2923361153)!
@@ -98,11 +98,11 @@ open class NavigationMeshGenerator: Object {
         
     }
     
-    fileprivate static var method_parse_source_geometry_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse_source_geometry_data")
+    fileprivate static let method_parse_source_geometry_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse_source_geometry_data")
         return withUnsafePointer(to: &NavigationMeshGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 685862123)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3172802542)!
             }
             
         }
@@ -138,11 +138,11 @@ open class NavigationMeshGenerator: Object {
         
     }
     
-    fileprivate static var method_bake_from_source_geometry_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bake_from_source_geometry_data")
+    fileprivate static let method_bake_from_source_geometry_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake_from_source_geometry_data")
         return withUnsafePointer(to: &NavigationMeshGenerator.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2469318639)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286748856)!
             }
             
         }

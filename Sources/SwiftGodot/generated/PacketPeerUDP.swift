@@ -21,16 +21,20 @@ import Musl
 
 /// UDP packet peer.
 /// 
-/// UDP packet peer. Can be used to send raw UDP packets as well as ``Variant``s.
+/// UDP packet peer. Can be used to send and receive raw UDP packets as well as ``Variant``s.
+/// 
+/// **Example:** Send a packet:
+/// 
+/// **Example:** Listen for packets:
 /// 
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class PacketPeerUDP: PacketPeer {
-    fileprivate static var className = StringName("PacketPeerUDP")
+    private static var className = StringName("PacketPeerUDP")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_bind: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bind")
+    fileprivate static let method_bind: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bind")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051239242)!
@@ -49,6 +53,7 @@ open class PacketPeerUDP: PacketPeer {
     /// If `bindAddress` is set to any valid address (e.g. `"192.168.1.101"`, `"::1"`, etc.), the peer will only be bound to the interface with that address (or fail if no interface with the given address exists).
     /// 
     public final func bind(port: Int32, bindAddress: String = "*", recvBufSize: Int32 = 65536) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: port) { pArg0 in
             let bindAddress = GString(bindAddress)
@@ -70,8 +75,8 @@ open class PacketPeerUDP: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -83,12 +88,13 @@ open class PacketPeerUDP: PacketPeer {
     
     /// Closes the ``PacketPeerUDP``'s underlying UDP socket.
     public final func close() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(PacketPeerUDP.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_wait: GDExtensionMethodBindPtr = {
-        let methodName = StringName("wait")
+    fileprivate static let method_wait: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("wait")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -103,13 +109,14 @@ open class PacketPeerUDP: PacketPeer {
     /// > Note: ``wait()`` can't be interrupted once it has been called. This can be worked around by allowing the other party to send a specific "death pill" packet like this:
     /// 
     public final func wait() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(PacketPeerUDP.method_wait, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_bound: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_bound")
+    fileprivate static let method_is_bound: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_bound")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -121,13 +128,14 @@ open class PacketPeerUDP: PacketPeer {
     
     /// Returns whether this ``PacketPeerUDP`` is bound to an address and can receive packets.
     public final func isBound() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PacketPeerUDP.method_is_bound, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_connect_to_host: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_to_host")
+    fileprivate static let method_connect_to_host: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_to_host")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 993915709)!
@@ -142,6 +150,7 @@ open class PacketPeerUDP: PacketPeer {
     /// > Note: Connecting to the remote peer does not help to protect from malicious attacks like IP spoofing, etc. Think about using an encryption technique like TLS or DTLS if you feel like your application is transferring sensitive information.
     /// 
     public final func connectToHost(_ host: String, port: Int32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
@@ -160,8 +169,8 @@ open class PacketPeerUDP: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_is_socket_connected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_socket_connected")
+    fileprivate static let method_is_socket_connected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_socket_connected")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -173,13 +182,14 @@ open class PacketPeerUDP: PacketPeer {
     
     /// Returns `true` if the UDP socket is open and has been connected to a remote address. See ``connectToHost(_:port:)``.
     public final func isSocketConnected() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(PacketPeerUDP.method_is_socket_connected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_packet_ip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_ip")
+    fileprivate static let method_get_packet_ip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_ip")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -191,13 +201,14 @@ open class PacketPeerUDP: PacketPeer {
     
     /// Returns the IP of the remote peer that sent the last packet(that was received with ``PacketPeer/getPacket()`` or ``PacketPeer/getVar(allowObjects:)``).
     public final func getPacketIp() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_packet_ip, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_packet_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_packet_port")
+    fileprivate static let method_get_packet_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_packet_port")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -209,13 +220,14 @@ open class PacketPeerUDP: PacketPeer {
     
     /// Returns the port of the remote peer that sent the last packet(that was received with ``PacketPeer/getPacket()`` or ``PacketPeer/getVar(allowObjects:)``).
     public final func getPacketPort() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_packet_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_local_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_local_port")
+    fileprivate static let method_get_local_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_local_port")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -227,13 +239,14 @@ open class PacketPeerUDP: PacketPeer {
     
     /// Returns the local port to which this peer is bound.
     public final func getLocalPort() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_dest_address: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_dest_address")
+    fileprivate static let method_set_dest_address: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_dest_address")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 993915709)!
@@ -248,6 +261,7 @@ open class PacketPeerUDP: PacketPeer {
     /// > Note: ``setBroadcastEnabled(_:)`` must be enabled before sending packets to a broadcast address (e.g. `255.255.255.255`).
     /// 
     public final func setDestAddress(host: String, port: Int32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let host = GString(host)
         withUnsafePointer(to: host.content) { pArg0 in
@@ -266,8 +280,8 @@ open class PacketPeerUDP: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_broadcast_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_broadcast_enabled")
+    fileprivate static let method_set_broadcast_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_broadcast_enabled")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -282,6 +296,7 @@ open class PacketPeerUDP: PacketPeer {
     /// > Note: Some Android devices might require the `CHANGE_WIFI_MULTICAST_STATE` permission and this option to be enabled to receive broadcast packets too.
     /// 
     public final func setBroadcastEnabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -295,8 +310,8 @@ open class PacketPeerUDP: PacketPeer {
         
     }
     
-    fileprivate static var method_join_multicast_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("join_multicast_group")
+    fileprivate static let method_join_multicast_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("join_multicast_group")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 852856452)!
@@ -313,6 +328,7 @@ open class PacketPeerUDP: PacketPeer {
     /// > Note: Some Android devices might require the `CHANGE_WIFI_MULTICAST_STATE` permission for multicast to work.
     /// 
     public final func joinMulticastGroup(multicastAddress: String, interfaceName: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let multicastAddress = GString(multicastAddress)
         withUnsafePointer(to: multicastAddress.content) { pArg0 in
@@ -332,8 +348,8 @@ open class PacketPeerUDP: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_leave_multicast_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("leave_multicast_group")
+    fileprivate static let method_leave_multicast_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("leave_multicast_group")
         return withUnsafePointer(to: &PacketPeerUDP.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 852856452)!
@@ -345,6 +361,7 @@ open class PacketPeerUDP: PacketPeer {
     
     /// Removes the interface identified by `interfaceName` from the multicast group specified by `multicastAddress`.
     public final func leaveMulticastGroup(multicastAddress: String, interfaceName: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let multicastAddress = GString(multicastAddress)
         withUnsafePointer(to: multicastAddress.content) { pArg0 in

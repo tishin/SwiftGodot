@@ -28,7 +28,7 @@ import Musl
 /// ``ProceduralSkyMaterial`` uses a lightweight shader to draw the sky and is therefore suited for real-time updates. This makes it a great option for a sky that is simple and computationally cheap, but unrealistic. If you need a more realistic procedural option, use ``PhysicalSkyMaterial``.
 /// 
 open class ProceduralSkyMaterial: Material {
-    fileprivate static var className = StringName("ProceduralSkyMaterial")
+    private static var className = StringName("ProceduralSkyMaterial")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -202,8 +202,8 @@ open class ProceduralSkyMaterial: Material {
     }
     
     /* Methods */
-    fileprivate static var method_set_sky_top_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_top_color")
+    fileprivate static let method_set_sky_top_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_top_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -215,6 +215,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sky_top_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -228,8 +229,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sky_top_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_top_color")
+    fileprivate static let method_get_sky_top_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_top_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -241,13 +242,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sky_top_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_top_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sky_horizon_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_horizon_color")
+    fileprivate static let method_set_sky_horizon_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_horizon_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -259,6 +261,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sky_horizon_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -272,8 +275,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sky_horizon_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_horizon_color")
+    fileprivate static let method_get_sky_horizon_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_horizon_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -285,13 +288,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sky_horizon_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_horizon_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sky_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_curve")
+    fileprivate static let method_set_sky_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_curve")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -303,6 +307,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sky_curve(_ curve: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -316,8 +321,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sky_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_curve")
+    fileprivate static let method_get_sky_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_curve")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -329,13 +334,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sky_curve() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sky_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_energy_multiplier")
+    fileprivate static let method_set_sky_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_energy_multiplier")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -347,6 +353,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sky_energy_multiplier(_ multiplier: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -360,8 +367,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sky_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_energy_multiplier")
+    fileprivate static let method_get_sky_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_energy_multiplier")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -373,13 +380,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sky_energy_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sky_cover: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_cover")
+    fileprivate static let method_set_sky_cover: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_cover")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -391,6 +399,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sky_cover(_ skyCover: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skyCover?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -404,8 +413,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sky_cover: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_cover")
+    fileprivate static let method_get_sky_cover: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_cover")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -417,13 +426,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sky_cover() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_cover, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_sky_cover_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sky_cover_modulate")
+    fileprivate static let method_set_sky_cover_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sky_cover_modulate")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -435,6 +445,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sky_cover_modulate(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -448,8 +459,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sky_cover_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sky_cover_modulate")
+    fileprivate static let method_get_sky_cover_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sky_cover_modulate")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -461,13 +472,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sky_cover_modulate() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_cover_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ground_bottom_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ground_bottom_color")
+    fileprivate static let method_set_ground_bottom_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ground_bottom_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -479,6 +491,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_ground_bottom_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -492,8 +505,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_ground_bottom_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ground_bottom_color")
+    fileprivate static let method_get_ground_bottom_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ground_bottom_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -505,13 +518,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_ground_bottom_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_bottom_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ground_horizon_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ground_horizon_color")
+    fileprivate static let method_set_ground_horizon_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ground_horizon_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -523,6 +537,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_ground_horizon_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -536,8 +551,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_ground_horizon_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ground_horizon_color")
+    fileprivate static let method_get_ground_horizon_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ground_horizon_color")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -549,13 +564,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_ground_horizon_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_horizon_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ground_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ground_curve")
+    fileprivate static let method_set_ground_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ground_curve")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -567,6 +583,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_ground_curve(_ curve: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -580,8 +597,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_ground_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ground_curve")
+    fileprivate static let method_get_ground_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ground_curve")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -593,13 +610,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_ground_curve() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ground_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ground_energy_multiplier")
+    fileprivate static let method_set_ground_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ground_energy_multiplier")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -611,6 +629,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_ground_energy_multiplier(_ energy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -624,8 +643,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_ground_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ground_energy_multiplier")
+    fileprivate static let method_get_ground_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ground_energy_multiplier")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -637,13 +656,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_ground_energy_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sun_angle_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sun_angle_max")
+    fileprivate static let method_set_sun_angle_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sun_angle_max")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -655,6 +675,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sun_angle_max(_ degrees: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -668,8 +689,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sun_angle_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sun_angle_max")
+    fileprivate static let method_get_sun_angle_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sun_angle_max")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -681,13 +702,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sun_angle_max() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sun_angle_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sun_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sun_curve")
+    fileprivate static let method_set_sun_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sun_curve")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -699,6 +721,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_sun_curve(_ curve: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -712,8 +735,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_sun_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sun_curve")
+    fileprivate static let method_get_sun_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sun_curve")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -725,13 +748,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_sun_curve() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sun_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_debanding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_debanding")
+    fileprivate static let method_set_use_debanding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_debanding")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -743,6 +767,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_use_debanding(_ useDebanding: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useDebanding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -756,8 +781,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_use_debanding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_debanding")
+    fileprivate static let method_get_use_debanding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_debanding")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -769,13 +794,14 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_use_debanding() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_use_debanding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_energy_multiplier")
+    fileprivate static let method_set_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_energy_multiplier")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -787,6 +813,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_energy_multiplier(_ multiplier: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -800,8 +827,8 @@ open class ProceduralSkyMaterial: Material {
         
     }
     
-    fileprivate static var method_get_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_energy_multiplier")
+    fileprivate static let method_get_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_energy_multiplier")
         return withUnsafePointer(to: &ProceduralSkyMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -813,6 +840,7 @@ open class ProceduralSkyMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_energy_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

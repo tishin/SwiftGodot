@@ -26,7 +26,7 @@ import Musl
 /// > Note: Unlike the other ``InputEvent`` subclasses which map to unique physical events, this virtual one is not emitted by the engine. This class is useful to emit actions manually with ``Input/parseInputEvent(_:)``, which are then received in ``Node/_input(event:)``. To check if a physical event matches an action from the Input Map, use ``InputEvent/isAction(_:exactMatch:)`` and ``InputEvent/isActionPressed(action:allowEcho:exactMatch:)``.
 /// 
 open class InputEventAction: InputEvent {
-    fileprivate static var className = StringName("InputEventAction")
+    private static var className = StringName("InputEventAction")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -80,8 +80,8 @@ open class InputEventAction: InputEvent {
     }
     
     /* Methods */
-    fileprivate static var method_set_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_action")
+    fileprivate static let method_set_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_action")
         return withUnsafePointer(to: &InputEventAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -93,6 +93,7 @@ open class InputEventAction: InputEvent {
     
     @inline(__always)
     fileprivate final func set_action(_ action: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -106,8 +107,8 @@ open class InputEventAction: InputEvent {
         
     }
     
-    fileprivate static var method_get_action: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action")
+    fileprivate static let method_get_action: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action")
         return withUnsafePointer(to: &InputEventAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -119,13 +120,14 @@ open class InputEventAction: InputEvent {
     
     @inline(__always)
     fileprivate final func get_action() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(InputEventAction.method_get_action, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressed")
+    fileprivate static let method_set_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressed")
         return withUnsafePointer(to: &InputEventAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -137,6 +139,7 @@ open class InputEventAction: InputEvent {
     
     @inline(__always)
     fileprivate final func set_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -150,8 +153,8 @@ open class InputEventAction: InputEvent {
         
     }
     
-    fileprivate static var method_set_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_strength")
+    fileprivate static let method_set_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_strength")
         return withUnsafePointer(to: &InputEventAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -163,6 +166,7 @@ open class InputEventAction: InputEvent {
     
     @inline(__always)
     fileprivate final func set_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -176,8 +180,8 @@ open class InputEventAction: InputEvent {
         
     }
     
-    fileprivate static var method_get_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_strength")
+    fileprivate static let method_get_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_strength")
         return withUnsafePointer(to: &InputEventAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -189,13 +193,14 @@ open class InputEventAction: InputEvent {
     
     @inline(__always)
     fileprivate final func get_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(InputEventAction.method_get_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_event_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_event_index")
+    fileprivate static let method_set_event_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_event_index")
         return withUnsafePointer(to: &InputEventAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -207,6 +212,7 @@ open class InputEventAction: InputEvent {
     
     @inline(__always)
     fileprivate final func set_event_index(_ index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -220,8 +226,8 @@ open class InputEventAction: InputEvent {
         
     }
     
-    fileprivate static var method_get_event_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_event_index")
+    fileprivate static let method_get_event_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_event_index")
         return withUnsafePointer(to: &InputEventAction.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -233,6 +239,7 @@ open class InputEventAction: InputEvent {
     
     @inline(__always)
     fileprivate final func get_event_index() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(InputEventAction.method_get_event_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

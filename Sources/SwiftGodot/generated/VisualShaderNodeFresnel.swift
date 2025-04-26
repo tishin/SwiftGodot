@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Returns falloff based on the dot product of surface normal and view direction of camera (pass associated inputs to it).
 open class VisualShaderNodeFresnel: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeFresnel")
+    private static var className = StringName("VisualShaderNodeFresnel")
     override open class var godotClassName: StringName { className }
 }
 

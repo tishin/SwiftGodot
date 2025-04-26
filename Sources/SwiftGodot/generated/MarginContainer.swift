@@ -26,7 +26,7 @@ import Musl
 /// > Note: The margin sizes are theme overrides, not normal properties. This is an example of how to change them in code:
 /// 
 open class MarginContainer: Container {
-    fileprivate static var className = StringName("MarginContainer")
+    private static var className = StringName("MarginContainer")
     override open class var godotClassName: StringName { className }
 }
 

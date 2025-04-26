@@ -19,16 +19,16 @@ import Musl
 #endif
 
 
-/// Allows reading the content of a zip file.
+/// Allows reading the content of a ZIP file.
 /// 
-/// This class implements a reader that can extract the content of individual files inside a zip archive.
+/// This class implements a reader that can extract the content of individual files inside a ZIP archive. See also ``ZIPPacker``.
 /// 
 open class ZIPReader: RefCounted {
-    fileprivate static var className = StringName("ZIPReader")
+    private static var className = StringName("ZIPReader")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_open: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open")
+    fileprivate static let method_open: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open")
         return withUnsafePointer(to: &ZIPReader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -40,6 +40,7 @@ open class ZIPReader: RefCounted {
     
     /// Opens the zip archive at the given `path` and reads its file index.
     public final func open(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -55,8 +56,8 @@ open class ZIPReader: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &ZIPReader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -68,13 +69,14 @@ open class ZIPReader: RefCounted {
     
     /// Closes the underlying resources used by this instance.
     public final func close() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ZIPReader.method_close, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_files: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_files")
+    fileprivate static let method_get_files: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_files")
         return withUnsafePointer(to: &ZIPReader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -89,13 +91,14 @@ open class ZIPReader: RefCounted {
     /// Must be called after ``open(path:)``.
     /// 
     public final func getFiles() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(ZIPReader.method_get_files, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_read_file: GDExtensionMethodBindPtr = {
-        let methodName = StringName("read_file")
+    fileprivate static let method_read_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("read_file")
         return withUnsafePointer(to: &ZIPReader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 740857591)!
@@ -110,6 +113,7 @@ open class ZIPReader: RefCounted {
     /// Must be called after ``open(path:)``.
     /// 
     public final func readFile(path: String, caseSensitive: Bool = true) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -128,8 +132,8 @@ open class ZIPReader: RefCounted {
         return _result
     }
     
-    fileprivate static var method_file_exists: GDExtensionMethodBindPtr = {
-        let methodName = StringName("file_exists")
+    fileprivate static let method_file_exists: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("file_exists")
         return withUnsafePointer(to: &ZIPReader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 35364943)!
@@ -144,6 +148,7 @@ open class ZIPReader: RefCounted {
     /// Must be called after ``open(path:)``.
     /// 
     public final func fileExists(path: String, caseSensitive: Bool = true) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in

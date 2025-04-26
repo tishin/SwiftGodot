@@ -25,16 +25,30 @@ import Musl
 /// 
 /// This resource is typically used as a uniform in custom shaders. Few core Godot methods make use of ``Cubemap`` resources.
 /// 
-/// To create such a texture file yourself, reimport your image files using the Godot Editor import presets.
+/// To create such a texture file yourself, reimport your image files using the Godot Editor import presets. To create a Cubemap from code, use ``ImageTextureLayered/createFromImages(_:)`` on an instance of the Cubemap class.
 /// 
-/// > Note: Godot doesn't support using cubemaps in a ``PanoramaSkyMaterial``. You can use <a href="https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html">this tool</a> to convert a cubemap to an equirectangular sky map.
+/// The expected image order is X+, X-, Y+, Y-, Z+, Z- (in Godot's coordinate system, so Y+ is "up" and Z- is "forward"). You can use one of the following templates as a base:
+/// 
+/// - <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/tutorials/assets_pipeline/img/cubemap_template_2x3.webp">2×3 cubemap template (default layout option)</a>
+/// 
+/// - <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/tutorials/assets_pipeline/img/cubemap_template_3x2.webp">3×2 cubemap template</a>
+/// 
+/// - <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/tutorials/assets_pipeline/img/cubemap_template_1x6.webp">1×6 cubemap template</a>
+/// 
+/// - <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/tutorials/assets_pipeline/img/cubemap_template_6x1.webp">6×1 cubemap template</a>
+/// 
+/// > Note: Godot doesn't support using cubemaps in a ``PanoramaSkyMaterial``. To use a cubemap as a skybox, convert the default ``PanoramaSkyMaterial`` to a ``ShaderMaterial`` using the **Convert to ShaderMaterial** resource dropdown option, then replace its code with the following:
+/// 
+/// After replacing the shader code and saving, specify the imported Cubemap resource in the Shader Parameters section of the ShaderMaterial in the inspector.
+/// 
+/// Alternatively, you can use <a href="https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html">this tool</a> to convert a cubemap to an equirectangular sky map and use ``PanoramaSkyMaterial`` as usual.
 /// 
 open class Cubemap: ImageTextureLayered {
-    fileprivate static var className = StringName("Cubemap")
+    private static var className = StringName("Cubemap")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_create_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_placeholder")
+    fileprivate static let method_create_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_placeholder")
         return withUnsafePointer(to: &Cubemap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 121922552)!
@@ -46,9 +60,10 @@ open class Cubemap: ImageTextureLayered {
     
     /// Creates a placeholder version of this resource (``PlaceholderCubemap``).
     public final func createPlaceholder() -> Resource? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Cubemap.method_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

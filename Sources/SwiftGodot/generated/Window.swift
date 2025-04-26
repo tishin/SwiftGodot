@@ -42,8 +42,9 @@ import Musl
 /// - ``themeChanged``
 /// - ``dpiChanged``
 /// - ``titlebarChanged``
+/// - ``titleChanged``
 open class Window: Viewport {
-    fileprivate static var className = StringName("Window")
+    private static var className = StringName("Window")
     override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// Windowed mode, i.e. ``Window`` doesn't occupy the whole screen (unless set to the size of the screen).
@@ -56,6 +57,8 @@ open class Window: Viewport {
         /// 
         /// Full screen window covers the entire display area of a screen and has no decorations. The display's video mode is not changed.
         /// 
+        /// **On Android:** This enables immersive mode.
+        /// 
         /// **On Windows:** Multi-window full-screen mode has a 1px border of the ``ProjectSettings/rendering/environment/defaults/defaultClearColor`` color.
         /// 
         /// **On macOS:** A new desktop is used to display the running project.
@@ -66,6 +69,8 @@ open class Window: Viewport {
         /// A single window full screen mode. This mode has less overhead, but only one window can be open on a given screen at a time (opening a child window or application switching will trigger a full screen transition).
         /// 
         /// Full screen window covers the entire display area of a screen and has no border or decorations. The display's video mode is not changed.
+        /// 
+        /// **On Android:** This enables immersive mode.
         /// 
         /// **On Windows:** Depending on video driver, full screen transition might cause screens to go black for a moment.
         /// 
@@ -109,8 +114,22 @@ open class Window: Viewport {
         /// > Note: This flag has no effect in embedded windows.
         /// 
         case mousePassthrough = 7 // FLAG_MOUSE_PASSTHROUGH
+        /// Window style is overridden, forcing sharp corners.
+        /// 
+        /// > Note: This flag has no effect in embedded windows.
+        /// 
+        /// > Note: This flag is implemented only on Windows (11).
+        /// 
+        case sharpCorners = 8 // FLAG_SHARP_CORNERS
+        /// Windows is excluded from screenshots taken by ``DisplayServer/screenGetImage(screen:)``, ``DisplayServer/screenGetImageRect(_:)``, and ``DisplayServer/screenGetPixel(position:)``.
+        /// 
+        /// > Note: This flag is implemented on macOS and Windows.
+        /// 
+        /// > Note: Setting this flag will **NOT** prevent other apps from capturing an image, it should not be used as a security measure.
+        /// 
+        case excludeFromCapture = 9 // FLAG_EXCLUDE_FROM_CAPTURE
         /// Max value of the ``Window/Flags``.
-        case max = 8 // FLAG_MAX
+        case max = 10 // FLAG_MAX
     }
     
     public enum ContentScaleMode: Int64, CaseIterable {
@@ -146,11 +165,17 @@ open class Window: Viewport {
         /// Automatic layout direction, determined from the parent window layout direction.
         case inherited = 0 // LAYOUT_DIRECTION_INHERITED
         /// Automatic layout direction, determined from the current locale.
-        case locale = 1 // LAYOUT_DIRECTION_LOCALE
+        case applicationLocale = 1 // LAYOUT_DIRECTION_APPLICATION_LOCALE
         /// Left-to-right layout direction.
         case ltr = 2 // LAYOUT_DIRECTION_LTR
         /// Right-to-left layout direction.
         case rtl = 3 // LAYOUT_DIRECTION_RTL
+        /// Automatic layout direction, determined from the system locale.
+        case systemLocale = 4 // LAYOUT_DIRECTION_SYSTEM_LOCALE
+        /// Represents the size of the ``Window/LayoutDirection`` enum.
+        case max = 5 // LAYOUT_DIRECTION_MAX
+        /// 
+        // case locale = 1 // LAYOUT_DIRECTION_LOCALE
     }
     
     public enum WindowInitialPosition: Int64, CaseIterable {
@@ -468,6 +493,35 @@ open class Window: Viewport {
         
     }
     
+    /// If `true`, the ``Window`` will override the OS window style to display sharp corners.
+    /// 
+    /// > Note: This property is implemented only on Windows (11).
+    /// 
+    /// > Note: This property only works with native windows.
+    /// 
+    final public var sharpCorners: Bool {
+        get {
+            return get_flag (Window.Flags (rawValue: 8)!)
+        }
+        
+        set {
+            set_flag (Window.Flags (rawValue: 8)!, newValue)
+        }
+        
+    }
+    
+    /// Windows is excluded from screenshots taken by ``DisplayServer/screenGetImage(screen:)``, ``DisplayServer/screenGetImageRect(_:)``, and ``DisplayServer/screenGetPixel(position:)``.
+    final public var excludeFromCapture: Bool {
+        get {
+            return get_flag (Window.Flags (rawValue: 9)!)
+        }
+        
+        set {
+            set_flag (Window.Flags (rawValue: 9)!, newValue)
+        }
+        
+    }
+    
     /// If `true`, native window will be used regardless of parent viewport and project settings.
     final public var forceNative: Bool {
         get {
@@ -570,7 +624,7 @@ open class Window: Viewport {
         
     }
     
-    /// Specifies the base scale of ``Window``'s content when its ``size`` is equal to ``contentScaleSize``.
+    /// Specifies the base scale of ``Window``'s content when its ``size`` is equal to ``contentScaleSize``. See also ``Viewport/getStretchTransform()``.
     final public var contentScaleFactor: Double {
         get {
             return get_content_scale_factor ()
@@ -622,14 +676,28 @@ open class Window: Viewport {
     }
     
     /* Methods */
+    fileprivate static let method__get_contents_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contents_minimum_size")
+        return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
+            }
+            
+        }
+        
+    }()
+    
     /// Virtual method to be implemented by the user. Overrides the value returned by ``getContentsMinimumSize()``.
     @_documentation(visibility: public)
     open func _getContentsMinimumSize() -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        gi.object_method_bind_ptrcall(Window.method__get_contents_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
-    fileprivate static var method_set_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_title")
+    fileprivate static let method_set_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_title")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -641,6 +709,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_title(_ title: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let title = GString(title)
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -655,8 +724,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_title")
+    fileprivate static let method_get_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_title")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -668,13 +737,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_title() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Window.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_window_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_window_id")
+    fileprivate static let method_get_window_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_window_id")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -686,13 +756,14 @@ open class Window: Viewport {
     
     /// Returns the ID of the window.
     public final func getWindowId() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Window.method_get_window_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_initial_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_initial_position")
+    fileprivate static let method_set_initial_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_initial_position")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4084468099)!
@@ -704,6 +775,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_initial_position(_ initialPosition: Window.WindowInitialPosition) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: initialPosition.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -717,8 +789,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_initial_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_initial_position")
+    fileprivate static let method_get_initial_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_initial_position")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4294066647)!
@@ -730,13 +802,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_initial_position() -> Window.WindowInitialPosition {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Window.method_get_initial_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Window.WindowInitialPosition (rawValue: _result)!
     }
     
-    fileprivate static var method_set_current_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_current_screen")
+    fileprivate static let method_set_current_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_current_screen")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -748,6 +821,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_current_screen(_ index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -761,8 +835,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_current_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_screen")
+    fileprivate static let method_get_current_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_screen")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -774,13 +848,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_current_screen() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Window.method_get_current_screen, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position")
+    fileprivate static let method_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -792,6 +867,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_position(_ position: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -805,8 +881,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -818,13 +894,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_position() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Window.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_move_to_center: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_to_center")
+    fileprivate static let method_move_to_center: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_to_center")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -836,12 +913,13 @@ open class Window: Viewport {
     
     /// Centers a native window on the current screen and an embedded window on its embedder ``Viewport``.
     public final func moveToCenter() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_move_to_center, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -853,6 +931,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -866,8 +945,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -879,13 +958,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Window.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_reset_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reset_size")
+    fileprivate static let method_reset_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -897,12 +977,13 @@ open class Window: Viewport {
     
     /// Resets the size to the minimum size, which is the max of ``minSize`` and (if ``wrapControls`` is enabled) ``getContentsMinimumSize()``. This is equivalent to calling `set_size(Vector2i())` (or any size below the minimum).
     public final func resetSize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_reset_size, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_position_with_decorations: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position_with_decorations")
+    fileprivate static let method_get_position_with_decorations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position_with_decorations")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -917,13 +998,14 @@ open class Window: Viewport {
     /// > Note: If ``visible`` is `false`, this method returns the same value as ``position``.
     /// 
     public final func getPositionWithDecorations() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Window.method_get_position_with_decorations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_size_with_decorations: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size_with_decorations")
+    fileprivate static let method_get_size_with_decorations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size_with_decorations")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -938,13 +1020,14 @@ open class Window: Viewport {
     /// > Note: If ``visible`` is `false`, this method returns the same value as ``size``.
     /// 
     public final func getSizeWithDecorations() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Window.method_get_size_with_decorations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_size")
+    fileprivate static let method_set_max_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -956,6 +1039,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_max_size(_ maxSize: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -969,8 +1053,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_max_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_size")
+    fileprivate static let method_get_max_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -982,13 +1066,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_max_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Window.method_get_max_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_size")
+    fileprivate static let method_set_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -1000,6 +1085,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_min_size(_ minSize: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1013,8 +1099,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_min_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_size")
+    fileprivate static let method_get_min_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -1026,13 +1112,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_min_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Window.method_get_min_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mode")
+    fileprivate static let method_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mode")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3095236531)!
@@ -1044,6 +1131,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_mode(_ mode: Window.Mode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1057,8 +1145,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mode")
+    fileprivate static let method_get_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mode")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2566346114)!
@@ -1070,13 +1158,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_mode() -> Window.Mode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Window.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Window.Mode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flag")
+    fileprivate static let method_set_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flag")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3426449779)!
@@ -1089,6 +1178,7 @@ open class Window: Viewport {
     @inline(__always)
     /// Sets a specified window flag.
     fileprivate final func set_flag(_ flag: Window.Flags, _ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1105,8 +1195,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flag")
+    fileprivate static let method_get_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flag")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3062752289)!
@@ -1119,6 +1209,7 @@ open class Window: Viewport {
     @inline(__always)
     /// Returns `true` if the `flag` is set.
     fileprivate final func get_flag(_ flag: Window.Flags) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1133,8 +1224,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_is_maximize_allowed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_maximize_allowed")
+    fileprivate static let method_is_maximize_allowed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_maximize_allowed")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1146,13 +1237,14 @@ open class Window: Viewport {
     
     /// Returns `true` if the window can be maximized (the maximize button is enabled).
     public final func isMaximizeAllowed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_maximize_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_request_attention: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_attention")
+    fileprivate static let method_request_attention: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_attention")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1164,12 +1256,13 @@ open class Window: Viewport {
     
     /// Tells the OS that the ``Window`` needs an attention. This makes the window stand out in some way depending on the system, e.g. it might blink on the task bar.
     public final func requestAttention() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_request_attention, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_move_to_foreground: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_to_foreground")
+    fileprivate static let method_move_to_foreground: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_to_foreground")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1181,12 +1274,13 @@ open class Window: Viewport {
     
     /// Causes the window to grab focus, allowing it to receive user input.
     public final func moveToForeground() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_move_to_foreground, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visible")
+    fileprivate static let method_set_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visible")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1198,6 +1292,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_visible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1211,8 +1306,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_visible")
+    fileprivate static let method_is_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_visible")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1224,13 +1319,60 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func is_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_hide: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hide")
+    fileprivate static let method_set_native_surface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_native_surface")
+        return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2894024005)!
+            }
+            
+        }
+        
+    }()
+    
+    /// 
+    public final func setNativeSurface(_ nativeSurface: RenderingNativeSurface?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: nativeSurface?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Window.method_set_native_surface, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_native_surface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_native_surface")
+        return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1517110549)!
+            }
+            
+        }
+        
+    }()
+    
+    /// 
+    public final func getNativeSurface() -> RenderingNativeSurface? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(Window.method_get_native_surface, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_hide: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hide")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1242,12 +1384,13 @@ open class Window: Viewport {
     
     /// Hides the window. This is not the same as minimized state. Hidden window can't be interacted with and needs to be made visible with ``show()``.
     public final func hide() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_hide, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_show: GDExtensionMethodBindPtr = {
-        let methodName = StringName("show")
+    fileprivate static let method_show: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("show")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1259,12 +1402,13 @@ open class Window: Viewport {
     
     /// Makes the ``Window`` appear. This enables interactions with the ``Window`` and doesn't change any of its property other than visibility (unlike e.g. ``popup(rect:)``).
     public final func show() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_show, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_transient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transient")
+    fileprivate static let method_set_transient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transient")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1276,6 +1420,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_transient(_ transient: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: transient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1289,8 +1434,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_transient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_transient")
+    fileprivate static let method_is_transient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_transient")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1302,13 +1447,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func is_transient() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_transient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transient_to_focused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transient_to_focused")
+    fileprivate static let method_set_transient_to_focused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transient_to_focused")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1320,6 +1466,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_transient_to_focused(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1333,8 +1480,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_transient_to_focused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_transient_to_focused")
+    fileprivate static let method_is_transient_to_focused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_transient_to_focused")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1346,13 +1493,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func is_transient_to_focused() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_transient_to_focused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_exclusive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_exclusive")
+    fileprivate static let method_set_exclusive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_exclusive")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1364,6 +1512,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_exclusive(_ exclusive: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: exclusive) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1377,8 +1526,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_exclusive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_exclusive")
+    fileprivate static let method_is_exclusive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_exclusive")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1390,13 +1539,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func is_exclusive() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_exclusive, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_unparent_when_invisible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_unparent_when_invisible")
+    fileprivate static let method_set_unparent_when_invisible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_unparent_when_invisible")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1411,6 +1561,7 @@ open class Window: Viewport {
     /// > Note: Make sure to keep a reference to the node, otherwise it will be orphaned. You also need to manually call ``Node/queueFree()`` to free the window if it's not parented.
     /// 
     public final func setUnparentWhenInvisible(unparent: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: unparent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1424,8 +1575,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_can_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("can_draw")
+    fileprivate static let method_can_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("can_draw")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1437,13 +1588,14 @@ open class Window: Viewport {
     
     /// Returns whether the window is being drawn to the screen.
     public final func canDraw() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_can_draw, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_focus")
+    fileprivate static let method_has_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_focus")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1455,13 +1607,14 @@ open class Window: Viewport {
     
     /// Returns `true` if the window is focused.
     public final func hasFocus() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_has_focus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_grab_focus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("grab_focus")
+    fileprivate static let method_grab_focus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("grab_focus")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1473,12 +1626,58 @@ open class Window: Viewport {
     
     /// Causes the window to grab focus, allowing it to receive user input.
     public final func grabFocus() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_grab_focus, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_ime_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ime_active")
+    fileprivate static let method_start_drag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start_drag")
+        return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Starts an interactive drag operation on the window, using the current mouse position. Call this method when handling a mouse button being pressed to simulate a pressed event on the window's title bar. Using this method allows the window to participate in space switching, tiling, and other system features.
+    public final func startDrag() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Window.method_start_drag, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_start_resize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("start_resize")
+        return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 122288853)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Starts an interactive resize operation on the window, using the current mouse position. Call this method when handling a mouse button being pressed to simulate a pressed event on the window's edge.
+    public final func startResize(edge: DisplayServer.WindowResizeEdge) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: edge.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Window.method_start_resize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_set_ime_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ime_active")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1490,6 +1689,7 @@ open class Window: Viewport {
     
     /// If `active` is `true`, enables system's native IME (Input Method Editor).
     public final func setImeActive(_ active: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1503,8 +1703,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_set_ime_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ime_position")
+    fileprivate static let method_set_ime_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ime_position")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -1516,6 +1716,7 @@ open class Window: Viewport {
     
     /// Moves IME to the given position.
     public final func setImePosition(_ position: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1529,8 +1730,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_embedded: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_embedded")
+    fileprivate static let method_is_embedded: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_embedded")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1542,13 +1743,14 @@ open class Window: Viewport {
     
     /// Returns `true` if the window is currently embedded in another window.
     public final func isEmbedded() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_embedded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_contents_minimum_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_contents_minimum_size")
+    fileprivate static let method_get_contents_minimum_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_contents_minimum_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -1563,13 +1765,14 @@ open class Window: Viewport {
     /// The value returned by this method can be overridden with ``_getContentsMinimumSize()``.
     /// 
     public final func getContentsMinimumSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(Window.method_get_contents_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_force_native: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_force_native")
+    fileprivate static let method_set_force_native: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_force_native")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1581,6 +1784,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_force_native(_ forceNative: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: forceNative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1594,8 +1798,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_force_native: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_force_native")
+    fileprivate static let method_get_force_native: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_force_native")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1607,13 +1811,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_force_native() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_get_force_native, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_content_scale_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_content_scale_size")
+    fileprivate static let method_set_content_scale_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_content_scale_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -1625,6 +1830,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_content_scale_size(_ size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1638,8 +1844,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_content_scale_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_content_scale_size")
+    fileprivate static let method_get_content_scale_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_content_scale_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -1651,13 +1857,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_content_scale_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(Window.method_get_content_scale_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_content_scale_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_content_scale_mode")
+    fileprivate static let method_set_content_scale_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_content_scale_mode")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2937716473)!
@@ -1669,6 +1876,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_content_scale_mode(_ mode: Window.ContentScaleMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1682,8 +1890,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_content_scale_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_content_scale_mode")
+    fileprivate static let method_get_content_scale_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_content_scale_mode")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 161585230)!
@@ -1695,13 +1903,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_content_scale_mode() -> Window.ContentScaleMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Window.method_get_content_scale_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Window.ContentScaleMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_content_scale_aspect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_content_scale_aspect")
+    fileprivate static let method_set_content_scale_aspect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_content_scale_aspect")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2370399418)!
@@ -1713,6 +1922,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_content_scale_aspect(_ aspect: Window.ContentScaleAspect) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: aspect.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1726,8 +1936,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_content_scale_aspect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_content_scale_aspect")
+    fileprivate static let method_get_content_scale_aspect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_content_scale_aspect")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4158790715)!
@@ -1739,13 +1949,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_content_scale_aspect() -> Window.ContentScaleAspect {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Window.method_get_content_scale_aspect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Window.ContentScaleAspect (rawValue: _result)!
     }
     
-    fileprivate static var method_set_content_scale_stretch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_content_scale_stretch")
+    fileprivate static let method_set_content_scale_stretch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_content_scale_stretch")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 349355940)!
@@ -1757,6 +1968,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_content_scale_stretch(_ stretch: Window.ContentScaleStretch) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stretch.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1770,8 +1982,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_content_scale_stretch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_content_scale_stretch")
+    fileprivate static let method_get_content_scale_stretch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_content_scale_stretch")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 536857316)!
@@ -1783,13 +1995,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_content_scale_stretch() -> Window.ContentScaleStretch {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Window.method_get_content_scale_stretch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Window.ContentScaleStretch (rawValue: _result)!
     }
     
-    fileprivate static var method_set_keep_title_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_keep_title_visible")
+    fileprivate static let method_set_keep_title_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_title_visible")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1801,6 +2014,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_keep_title_visible(_ titleVisible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: titleVisible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1814,8 +2028,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_keep_title_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_keep_title_visible")
+    fileprivate static let method_get_keep_title_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keep_title_visible")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1827,13 +2041,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_keep_title_visible() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_get_keep_title_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_content_scale_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_content_scale_factor")
+    fileprivate static let method_set_content_scale_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_content_scale_factor")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1845,6 +2060,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_content_scale_factor(_ factor: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: factor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1858,8 +2074,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_content_scale_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_content_scale_factor")
+    fileprivate static let method_get_content_scale_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_content_scale_factor")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1871,13 +2087,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_content_scale_factor() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Window.method_get_content_scale_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_font_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_font_oversampling")
+    fileprivate static let method_set_use_font_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_font_oversampling")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1889,6 +2106,7 @@ open class Window: Viewport {
     
     /// Enables font oversampling. This makes fonts look better when they are scaled up.
     public final func setUseFontOversampling(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1902,8 +2120,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_using_font_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_font_oversampling")
+    fileprivate static let method_is_using_font_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_font_oversampling")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1915,13 +2133,14 @@ open class Window: Viewport {
     
     /// Returns `true` if font oversampling is enabled. See ``setUseFontOversampling(enable:)``.
     public final func isUsingFontOversampling() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_using_font_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mouse_passthrough_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mouse_passthrough_polygon")
+    fileprivate static let method_set_mouse_passthrough_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mouse_passthrough_polygon")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -1933,6 +2152,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_mouse_passthrough_polygon(_ polygon: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1946,8 +2166,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_mouse_passthrough_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mouse_passthrough_polygon")
+    fileprivate static let method_get_mouse_passthrough_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mouse_passthrough_polygon")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -1959,13 +2179,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_mouse_passthrough_polygon() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(Window.method_get_mouse_passthrough_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_wrap_controls: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_wrap_controls")
+    fileprivate static let method_set_wrap_controls: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_wrap_controls")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1977,6 +2198,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_wrap_controls(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1990,8 +2212,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_wrapping_controls: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_wrapping_controls")
+    fileprivate static let method_is_wrapping_controls: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_wrapping_controls")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2003,13 +2225,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func is_wrapping_controls() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_wrapping_controls, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_child_controls_changed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("child_controls_changed")
+    fileprivate static let method_child_controls_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("child_controls_changed")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2021,12 +2244,13 @@ open class Window: Viewport {
     
     /// Requests an update of the ``Window`` size to fit underlying ``Control`` nodes.
     public final func childControlsChanged() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_child_controls_changed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_theme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_theme")
+    fileprivate static let method_set_theme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_theme")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2326690814)!
@@ -2038,6 +2262,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_theme(_ theme: Theme?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: theme?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2051,8 +2276,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_theme: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme")
+    fileprivate static let method_get_theme: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3846893731)!
@@ -2064,13 +2289,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_theme() -> Theme? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Window.method_get_theme, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_theme_type_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_theme_type_variation")
+    fileprivate static let method_set_theme_type_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_theme_type_variation")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2082,6 +2308,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_theme_type_variation(_ themeType: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2095,8 +2322,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_theme_type_variation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_type_variation")
+    fileprivate static let method_get_theme_type_variation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_type_variation")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -2108,13 +2335,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func get_theme_type_variation() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(Window.method_get_theme_type_variation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_begin_bulk_theme_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("begin_bulk_theme_override")
+    fileprivate static let method_begin_bulk_theme_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("begin_bulk_theme_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2126,12 +2354,13 @@ open class Window: Viewport {
     
     /// Prevents `*_theme_*_override` methods from emitting ``notificationThemeChanged`` until ``endBulkThemeOverride()`` is called.
     public final func beginBulkThemeOverride() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_begin_bulk_theme_override, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_end_bulk_theme_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("end_bulk_theme_override")
+    fileprivate static let method_end_bulk_theme_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("end_bulk_theme_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2143,12 +2372,13 @@ open class Window: Viewport {
     
     /// Ends a bulk theme override update. See ``beginBulkThemeOverride()``.
     public final func endBulkThemeOverride() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Window.method_end_bulk_theme_override, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_add_theme_icon_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_icon_override")
+    fileprivate static let method_add_theme_icon_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_icon_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1373065600)!
@@ -2163,6 +2393,7 @@ open class Window: Viewport {
     /// See also ``getThemeIcon(name:themeType:)``.
     /// 
     public final func addThemeIconOverride(name: StringName, texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2179,8 +2410,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_add_theme_stylebox_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_stylebox_override")
+    fileprivate static let method_add_theme_stylebox_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_stylebox_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4188838905)!
@@ -2195,6 +2426,7 @@ open class Window: Viewport {
     /// See also ``getThemeStylebox(name:themeType:)`` and ``Control/addThemeStyleboxOverride(name:stylebox:)`` for more details.
     /// 
     public final func addThemeStyleboxOverride(name: StringName, stylebox: StyleBox?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: stylebox?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2211,8 +2443,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_add_theme_font_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_font_override")
+    fileprivate static let method_add_theme_font_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_font_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3518018674)!
@@ -2227,6 +2459,7 @@ open class Window: Viewport {
     /// See also ``getThemeFont(name:themeType:)``.
     /// 
     public final func addThemeFontOverride(name: StringName, font: Font?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: font?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2243,8 +2476,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_add_theme_font_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_font_size_override")
+    fileprivate static let method_add_theme_font_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_font_size_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2415702435)!
@@ -2259,6 +2492,7 @@ open class Window: Viewport {
     /// See also ``getThemeFontSize(name:themeType:)``.
     /// 
     public final func addThemeFontSizeOverride(name: StringName, fontSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: fontSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2275,8 +2509,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_add_theme_color_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_color_override")
+    fileprivate static let method_add_theme_color_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_color_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4260178595)!
@@ -2291,6 +2525,7 @@ open class Window: Viewport {
     /// See also ``getThemeColor(name:themeType:)`` and ``Control/addThemeColorOverride(name:color:)`` for more details.
     /// 
     public final func addThemeColorOverride(name: StringName, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2307,8 +2542,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_add_theme_constant_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_theme_constant_override")
+    fileprivate static let method_add_theme_constant_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_theme_constant_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2415702435)!
@@ -2323,6 +2558,7 @@ open class Window: Viewport {
     /// See also ``getThemeConstant(name:themeType:)``.
     /// 
     public final func addThemeConstantOverride(name: StringName, constant: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: constant) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2339,8 +2575,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_remove_theme_icon_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_icon_override")
+    fileprivate static let method_remove_theme_icon_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_icon_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2352,6 +2588,7 @@ open class Window: Viewport {
     
     /// Removes a local override for a theme icon with the specified `name` previously added by ``addThemeIconOverride(name:texture:)`` or via the Inspector dock.
     public final func removeThemeIconOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2365,8 +2602,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_remove_theme_stylebox_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_stylebox_override")
+    fileprivate static let method_remove_theme_stylebox_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_stylebox_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2378,6 +2615,7 @@ open class Window: Viewport {
     
     /// Removes a local override for a theme ``StyleBox`` with the specified `name` previously added by ``addThemeStyleboxOverride(name:stylebox:)`` or via the Inspector dock.
     public final func removeThemeStyleboxOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2391,8 +2629,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_remove_theme_font_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_font_override")
+    fileprivate static let method_remove_theme_font_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_font_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2404,6 +2642,7 @@ open class Window: Viewport {
     
     /// Removes a local override for a theme ``Font`` with the specified `name` previously added by ``addThemeFontOverride(name:font:)`` or via the Inspector dock.
     public final func removeThemeFontOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2417,8 +2656,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_remove_theme_font_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_font_size_override")
+    fileprivate static let method_remove_theme_font_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_font_size_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2430,6 +2669,7 @@ open class Window: Viewport {
     
     /// Removes a local override for a theme font size with the specified `name` previously added by ``addThemeFontSizeOverride(name:fontSize:)`` or via the Inspector dock.
     public final func removeThemeFontSizeOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2443,8 +2683,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_remove_theme_color_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_color_override")
+    fileprivate static let method_remove_theme_color_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_color_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2456,6 +2696,7 @@ open class Window: Viewport {
     
     /// Removes a local override for a theme ``Color`` with the specified `name` previously added by ``addThemeColorOverride(name:color:)`` or via the Inspector dock.
     public final func removeThemeColorOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2469,8 +2710,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_remove_theme_constant_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_theme_constant_override")
+    fileprivate static let method_remove_theme_constant_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_theme_constant_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -2482,6 +2723,7 @@ open class Window: Viewport {
     
     /// Removes a local override for a theme constant with the specified `name` previously added by ``addThemeConstantOverride(name:constant:)`` or via the Inspector dock.
     public final func removeThemeConstantOverride(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2495,11 +2737,11 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_theme_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_icon")
+    fileprivate static let method_get_theme_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_icon")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2336455395)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3163973443)!
             }
             
         }
@@ -2511,6 +2753,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeIcon(name: StringName, themeType: StringName = StringName ("")) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2525,14 +2768,14 @@ open class Window: Viewport {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_stylebox")
+    fileprivate static let method_get_theme_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_stylebox")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2759935355)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 604739069)!
             }
             
         }
@@ -2544,6 +2787,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeStylebox(name: StringName, themeType: StringName = StringName ("")) -> StyleBox? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2558,14 +2802,14 @@ open class Window: Viewport {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_font")
+    fileprivate static let method_get_theme_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_font")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 387378635)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2826986490)!
             }
             
         }
@@ -2577,6 +2821,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeFont(name: StringName, themeType: StringName = StringName ("")) -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2591,14 +2836,14 @@ open class Window: Viewport {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_font_size")
+    fileprivate static let method_get_theme_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_font_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 229578101)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1327056374)!
             }
             
         }
@@ -2610,6 +2855,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeFontSize(name: StringName, themeType: StringName = StringName ("")) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2627,11 +2873,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_get_theme_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_color")
+    fileprivate static let method_get_theme_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_color")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2377051548)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2798751242)!
             }
             
         }
@@ -2643,6 +2889,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for more details.
     /// 
     public final func getThemeColor(name: StringName, themeType: StringName = StringName ("")) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2660,11 +2907,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_get_theme_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_constant")
+    fileprivate static let method_get_theme_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_constant")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 229578101)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1327056374)!
             }
             
         }
@@ -2676,6 +2923,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for more details.
     /// 
     public final func getThemeConstant(name: StringName, themeType: StringName = StringName ("")) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2693,8 +2941,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_icon_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_icon_override")
+    fileprivate static let method_has_theme_icon_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_icon_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2709,6 +2957,7 @@ open class Window: Viewport {
     /// See ``addThemeIconOverride(name:texture:)``.
     /// 
     public final func hasThemeIconOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2723,8 +2972,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_stylebox_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_stylebox_override")
+    fileprivate static let method_has_theme_stylebox_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_stylebox_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2739,6 +2988,7 @@ open class Window: Viewport {
     /// See ``addThemeStyleboxOverride(name:stylebox:)``.
     /// 
     public final func hasThemeStyleboxOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2753,8 +3003,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_font_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font_override")
+    fileprivate static let method_has_theme_font_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2769,6 +3019,7 @@ open class Window: Viewport {
     /// See ``addThemeFontOverride(name:font:)``.
     /// 
     public final func hasThemeFontOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2783,8 +3034,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_font_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font_size_override")
+    fileprivate static let method_has_theme_font_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font_size_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2799,6 +3050,7 @@ open class Window: Viewport {
     /// See ``addThemeFontSizeOverride(name:fontSize:)``.
     /// 
     public final func hasThemeFontSizeOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2813,8 +3065,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_color_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_color_override")
+    fileprivate static let method_has_theme_color_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_color_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2829,6 +3081,7 @@ open class Window: Viewport {
     /// See ``addThemeColorOverride(name:color:)``.
     /// 
     public final func hasThemeColorOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2843,8 +3096,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_constant_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_constant_override")
+    fileprivate static let method_has_theme_constant_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_constant_override")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -2859,6 +3112,7 @@ open class Window: Viewport {
     /// See ``addThemeConstantOverride(name:constant:)``.
     /// 
     public final func hasThemeConstantOverride(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2873,11 +3127,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_icon")
+    fileprivate static let method_has_theme_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_icon")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2889,6 +3143,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeIcon(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2906,11 +3161,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_stylebox")
+    fileprivate static let method_has_theme_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_stylebox")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2922,6 +3177,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeStylebox(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2939,11 +3195,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font")
+    fileprivate static let method_has_theme_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2955,6 +3211,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeFont(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -2972,11 +3229,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_font_size")
+    fileprivate static let method_has_theme_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_font_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -2988,6 +3245,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeFontSize(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -3005,11 +3263,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_color")
+    fileprivate static let method_has_theme_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_color")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -3021,6 +3279,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeColor(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -3038,11 +3297,11 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_has_theme_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_theme_constant")
+    fileprivate static let method_has_theme_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_theme_constant")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187511791)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 866386512)!
             }
             
         }
@@ -3054,6 +3313,7 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func hasThemeConstant(name: StringName, themeType: StringName = StringName ("")) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
@@ -3071,8 +3331,8 @@ open class Window: Viewport {
         return _result
     }
     
-    fileprivate static var method_get_theme_default_base_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_default_base_scale")
+    fileprivate static let method_get_theme_default_base_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_default_base_scale")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3087,13 +3347,14 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeDefaultBaseScale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Window.method_get_theme_default_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_theme_default_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_default_font")
+    fileprivate static let method_get_theme_default_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_default_font")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229501585)!
@@ -3108,13 +3369,14 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeDefaultFont() -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Window.method_get_theme_default_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_theme_default_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_theme_default_font_size")
+    fileprivate static let method_get_theme_default_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_theme_default_font_size")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3129,13 +3391,14 @@ open class Window: Viewport {
     /// See ``Control/getThemeColor(name:themeType:)`` for details.
     /// 
     public final func getThemeDefaultFontSize() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Window.method_get_theme_default_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_layout_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layout_direction")
+    fileprivate static let method_set_layout_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layout_direction")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3094704184)!
@@ -3147,6 +3410,7 @@ open class Window: Viewport {
     
     /// Sets layout direction and text writing direction. Right-to-left layouts are necessary for certain languages (e.g. Arabic and Hebrew).
     public final func setLayoutDirection(_ direction: Window.LayoutDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3160,8 +3424,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_get_layout_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layout_direction")
+    fileprivate static let method_get_layout_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layout_direction")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3909617982)!
@@ -3173,13 +3437,14 @@ open class Window: Viewport {
     
     /// Returns layout direction and text writing direction.
     public final func getLayoutDirection() -> Window.LayoutDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Window.method_get_layout_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Window.LayoutDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_is_layout_rtl: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_layout_rtl")
+    fileprivate static let method_is_layout_rtl: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_layout_rtl")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3191,13 +3456,14 @@ open class Window: Viewport {
     
     /// Returns `true` if layout is right-to-left.
     public final func isLayoutRtl() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_layout_rtl, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_auto_translate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auto_translate")
+    fileprivate static let method_set_auto_translate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_translate")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3209,6 +3475,7 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func set_auto_translate(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3222,8 +3489,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_is_auto_translating: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_auto_translating")
+    fileprivate static let method_is_auto_translating: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_auto_translating")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3235,13 +3502,14 @@ open class Window: Viewport {
     
     @inline(__always)
     fileprivate final func is_auto_translating() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Window.method_is_auto_translating, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_popup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup")
+    fileprivate static let method_popup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1680304321)!
@@ -3252,7 +3520,15 @@ open class Window: Viewport {
     }()
     
     /// Shows the ``Window`` and makes it transient (see ``transient``). If `rect` is provided, it will be set as the ``Window``'s size. Fails if called on the main window.
+    /// 
+    /// If ``ProjectSettings/display/window/subwindows/embedSubwindows`` is `true` (single-window mode), `rect`'s coordinates are global and relative to the main window's top-left corner (excluding window decorations). If `rect`'s position coordinates are negative, the window will be located outside the main window and may not be visible as a result.
+    /// 
+    /// If ``ProjectSettings/display/window/subwindows/embedSubwindows`` is `false` (multi-window mode), `rect`'s coordinates are global and relative to the top-left corner of the leftmost screen. If `rect`'s position coordinates are negative, the window will be placed at the top-left corner of the screen.
+    /// 
+    /// > Note: `rect` must be in global coordinates if specified.
+    /// 
     public final func popup(rect: Rect2i = Rect2i (x: 0, y: 0, width: 0, height: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3266,8 +3542,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_on_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_on_parent")
+    fileprivate static let method_popup_on_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_on_parent")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1763793166)!
@@ -3279,6 +3555,7 @@ open class Window: Viewport {
     
     /// Popups the ``Window`` with a position shifted by parent ``Window``'s position. If the ``Window`` is embedded, has the same effect as ``popup(rect:)``.
     public final func popupOnParent(parentRect: Rect2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parentRect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3292,8 +3569,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_centered: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_centered")
+    fileprivate static let method_popup_centered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_centered")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3447975422)!
@@ -3308,6 +3585,7 @@ open class Window: Viewport {
     /// > Note: Calling it with the default value of `minsize` is equivalent to calling it with ``size``.
     /// 
     public final func popupCentered(minsize: Vector2i = Vector2i (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minsize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3321,8 +3599,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_centered_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_centered_ratio")
+    fileprivate static let method_popup_centered_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_centered_ratio")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1014814997)!
@@ -3337,6 +3615,7 @@ open class Window: Viewport {
     /// If ``Window`` is a native window, popups the ``Window`` centered inside the screen of its parent ``Window`` and sets its size as a `ratio` of the screen size.
     /// 
     public final func popupCenteredRatio(_ ratio: Double = 0.8) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3350,8 +3629,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_centered_clamped: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_centered_clamped")
+    fileprivate static let method_popup_centered_clamped: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_centered_clamped")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2613752477)!
@@ -3366,6 +3645,7 @@ open class Window: Viewport {
     /// > Note: Calling it with the default value of `minsize` is equivalent to calling it with ``size``.
     /// 
     public final func popupCenteredClamped(minsize: Vector2i = Vector2i (x: 0, y: 0), fallbackRatio: Double = 0.75) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: minsize) { pArg0 in
             withUnsafePointer(to: fallbackRatio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3382,8 +3662,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_exclusive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_exclusive")
+    fileprivate static let method_popup_exclusive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_exclusive")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2134721627)!
@@ -3398,6 +3678,7 @@ open class Window: Viewport {
     /// See also ``setUnparentWhenInvisible(unparent:)`` and ``Node/getLastExclusiveWindow()``.
     /// 
     public final func popupExclusive(fromNode: Node?, rect: Rect2i = Rect2i (x: 0, y: 0, width: 0, height: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromNode?.handle) { pArg0 in
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3414,8 +3695,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_exclusive_on_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_exclusive_on_parent")
+    fileprivate static let method_popup_exclusive_on_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_exclusive_on_parent")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2344671043)!
@@ -3430,6 +3711,7 @@ open class Window: Viewport {
     /// See also ``setUnparentWhenInvisible(unparent:)`` and ``Node/getLastExclusiveWindow()``.
     /// 
     public final func popupExclusiveOnParent(fromNode: Node?, parentRect: Rect2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromNode?.handle) { pArg0 in
             withUnsafePointer(to: parentRect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3446,8 +3728,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_exclusive_centered: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_exclusive_centered")
+    fileprivate static let method_popup_exclusive_centered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_exclusive_centered")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3357594017)!
@@ -3462,6 +3744,7 @@ open class Window: Viewport {
     /// See also ``setUnparentWhenInvisible(unparent:)`` and ``Node/getLastExclusiveWindow()``.
     /// 
     public final func popupExclusiveCentered(fromNode: Node?, minsize: Vector2i = Vector2i (x: 0, y: 0)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromNode?.handle) { pArg0 in
             withUnsafePointer(to: minsize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3478,8 +3761,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_exclusive_centered_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_exclusive_centered_ratio")
+    fileprivate static let method_popup_exclusive_centered_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_exclusive_centered_ratio")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2284776287)!
@@ -3494,6 +3777,7 @@ open class Window: Viewport {
     /// See also ``setUnparentWhenInvisible(unparent:)`` and ``Node/getLastExclusiveWindow()``.
     /// 
     public final func popupExclusiveCenteredRatio(fromNode: Node?, ratio: Double = 0.8) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromNode?.handle) { pArg0 in
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3510,8 +3794,8 @@ open class Window: Viewport {
         
     }
     
-    fileprivate static var method_popup_exclusive_centered_clamped: GDExtensionMethodBindPtr = {
-        let methodName = StringName("popup_exclusive_centered_clamped")
+    fileprivate static let method_popup_exclusive_centered_clamped: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("popup_exclusive_centered_clamped")
         return withUnsafePointer(to: &Window.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2612708785)!
@@ -3526,6 +3810,7 @@ open class Window: Viewport {
     /// See also ``setUnparentWhenInvisible(unparent:)`` and ``Node/getLastExclusiveWindow()``.
     /// 
     public final func popupExclusiveCenteredClamped(fromNode: Node?, minsize: Vector2i = Vector2i (x: 0, y: 0), fallbackRatio: Double = 0.75) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromNode?.handle) { pArg0 in
             withUnsafePointer(to: minsize) { pArg1 in
                 withUnsafePointer(to: fallbackRatio) { pArg2 in
@@ -3545,7 +3830,7 @@ open class Window: Viewport {
         
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_contents_minimum_size":
@@ -3575,9 +3860,7 @@ open class Window: Viewport {
     
     /// Emitted when files are dragged from the OS file manager and dropped in the game window. The argument is a list of file paths.
     /// 
-    /// Note that this method only works with native windows, i.e. the main window and ``Window``-derived nodes when ``Viewport/guiEmbedSubwindows`` is disabled in the main viewport.
-    /// 
-    /// Example usage:
+    /// > Note: This signal only works with native windows, i.e. the main window and ``Window``-derived nodes when ``Viewport/guiEmbedSubwindows`` is disabled in the main viewport.
     /// 
     ///
     /// To connect to this signal, reference this property and call the
@@ -3776,12 +4059,29 @@ open class Window: Viewport {
     /// ```
     public var titlebarChanged: SimpleSignal { SimpleSignal (target: self, signalName: "titlebar_changed") }
     
+    /// Emitted when window title bar text is changed.
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.titleChanged.connect {
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var titleChanged: SimpleSignal { SimpleSignal (target: self, signalName: "title_changed") }
+    
 }
 
 // Support methods for proxies
 func _Window_proxy_get_contents_minimum_size (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Window>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Window else { return }
     let ret = swiftObject._getContentsMinimumSize ()
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }

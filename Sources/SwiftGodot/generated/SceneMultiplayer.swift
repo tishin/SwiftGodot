@@ -39,7 +39,7 @@ import Musl
 /// - ``peerAuthenticationFailed``
 /// - ``peerPacket``
 open class SceneMultiplayer: MultiplayerAPI {
-    fileprivate static var className = StringName("SceneMultiplayer")
+    private static var className = StringName("SceneMultiplayer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -59,7 +59,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    /// The callback to execute when when receiving authentication data sent via ``sendAuth(id:data:)``. If the ``Callable`` is empty (default), peers will be automatically accepted as soon as they connect.
+    /// The callback to execute when receiving authentication data sent via ``sendAuth(id:data:)``. If the ``Callable`` is empty (default), peers will be automatically accepted as soon as they connect.
     final public var authCallback: Callable {
         get {
             return get_auth_callback ()
@@ -71,7 +71,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    /// If set to a value greater than `0.0`, the maximum amount of time peers can stay in the authenticating state, after which the authentication will automatically fail. See the [signal peer_authenticating] and [signal peer_authentication_failed] signals.
+    /// If set to a value greater than `0.0`, the maximum duration in seconds peers can stay in the authenticating state, after which the authentication will automatically fail. See the [signal peer_authenticating] and [signal peer_authentication_failed] signals.
     final public var authTimeout: Double {
         get {
             return get_auth_timeout ()
@@ -152,8 +152,8 @@ open class SceneMultiplayer: MultiplayerAPI {
     }
     
     /* Methods */
-    fileprivate static var method_set_root_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_root_path")
+    fileprivate static let method_set_root_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_path")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -165,6 +165,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_root_path(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -178,8 +179,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_get_root_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_path")
+    fileprivate static let method_get_root_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_path")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -191,13 +192,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func get_root_path() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_root_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -209,12 +211,13 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     /// Clears the current SceneMultiplayer network state (you shouldn't call this unless you know what you are doing).
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_disconnect_peer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_peer")
+    fileprivate static let method_disconnect_peer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_peer")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -226,6 +229,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     /// Disconnects the peer identified by `id`, removing it from the list of connected peers, and closing the underlying connection with it.
     public final func disconnectPeer(id: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -239,8 +243,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_get_authenticating_peers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_authenticating_peers")
+    fileprivate static let method_get_authenticating_peers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_authenticating_peers")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -252,13 +256,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     /// Returns the IDs of the peers currently trying to authenticate with this ``MultiplayerAPI``.
     public final func getAuthenticatingPeers() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_authenticating_peers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_send_auth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("send_auth")
+    fileprivate static let method_send_auth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("send_auth")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 506032537)!
@@ -270,6 +275,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     /// Sends the specified `data` to the remote peer identified by `id` as part of an authentication message. This can be used to authenticate peers, and control when [signal MultiplayerAPI.peer_connected] is emitted (and the remote peer accepted as one of the connected peers).
     public final func sendAuth(id: Int32, data: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: data.content) { pArg1 in
@@ -287,8 +293,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_complete_auth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("complete_auth")
+    fileprivate static let method_complete_auth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("complete_auth")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844576869)!
@@ -303,6 +309,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     /// If a peer disconnects before completing authentication, either due to a network issue, the ``authTimeout`` expiring, or manually calling ``disconnectPeer(id:)``, the [signal peer_authentication_failed] signal will be emitted instead of [signal MultiplayerAPI.peer_disconnected].
     /// 
     public final func completeAuth(id: Int32) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -317,8 +324,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_auth_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auth_callback")
+    fileprivate static let method_set_auth_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auth_callback")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -330,6 +337,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_auth_callback(_ callback: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: callback.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -343,8 +351,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_get_auth_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_auth_callback")
+    fileprivate static let method_get_auth_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_auth_callback")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1307783378)!
@@ -356,13 +364,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func get_auth_callback() -> Callable {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: Callable = Callable ()
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_auth_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_auth_timeout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auth_timeout")
+    fileprivate static let method_set_auth_timeout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auth_timeout")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -374,6 +383,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_auth_timeout(_ timeout: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -387,8 +397,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_get_auth_timeout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_auth_timeout")
+    fileprivate static let method_get_auth_timeout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_auth_timeout")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -400,13 +410,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func get_auth_timeout() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_auth_timeout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_refuse_new_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_refuse_new_connections")
+    fileprivate static let method_set_refuse_new_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_refuse_new_connections")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -418,6 +429,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_refuse_new_connections(_ refuse: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: refuse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -431,8 +443,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_is_refusing_new_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_refusing_new_connections")
+    fileprivate static let method_is_refusing_new_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_refusing_new_connections")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -444,13 +456,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func is_refusing_new_connections() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_refusing_new_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_object_decoding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_object_decoding")
+    fileprivate static let method_set_allow_object_decoding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_object_decoding")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -462,6 +475,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_allow_object_decoding(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -475,8 +489,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_is_object_decoding_allowed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_object_decoding_allowed")
+    fileprivate static let method_is_object_decoding_allowed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_object_decoding_allowed")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -488,13 +502,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func is_object_decoding_allowed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_object_decoding_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_server_relay_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_server_relay_enabled")
+    fileprivate static let method_set_server_relay_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_server_relay_enabled")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -506,6 +521,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_server_relay_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -519,8 +535,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_is_server_relay_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_server_relay_enabled")
+    fileprivate static let method_is_server_relay_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_server_relay_enabled")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -532,13 +548,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func is_server_relay_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_server_relay_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_send_bytes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("send_bytes")
+    fileprivate static let method_send_bytes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("send_bytes")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1307428718)!
@@ -550,6 +567,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     /// Sends the given raw `bytes` to a specific peer identified by `id` (see ``MultiplayerPeer/setTargetPeer(id:)``). Default ID is `0`, i.e. broadcast to all peers.
     public final func sendBytes(_ bytes: PackedByteArray, id: Int32 = 0, mode: MultiplayerPeer.TransferMode = .reliable, channel: Int32 = 0) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: bytes.content) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
@@ -573,8 +591,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_max_sync_packet_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_sync_packet_size")
+    fileprivate static let method_get_max_sync_packet_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_sync_packet_size")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -586,13 +604,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func get_max_sync_packet_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_max_sync_packet_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_sync_packet_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_sync_packet_size")
+    fileprivate static let method_set_max_sync_packet_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_sync_packet_size")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -604,6 +623,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_max_sync_packet_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -617,8 +637,8 @@ open class SceneMultiplayer: MultiplayerAPI {
         
     }
     
-    fileprivate static var method_get_max_delta_packet_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_delta_packet_size")
+    fileprivate static let method_get_max_delta_packet_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_delta_packet_size")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -630,13 +650,14 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func get_max_delta_packet_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_max_delta_packet_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_delta_packet_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_delta_packet_size")
+    fileprivate static let method_set_max_delta_packet_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_delta_packet_size")
         return withUnsafePointer(to: &SceneMultiplayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -648,6 +669,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     
     @inline(__always)
     fileprivate final func set_max_delta_packet_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

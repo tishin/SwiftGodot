@@ -41,7 +41,7 @@ import Musl
 /// - ``iceCandidateCreated``
 /// - ``dataChannelReceived``
 open class WebRTCPeerConnection: RefCounted {
-    fileprivate static var className = StringName("WebRTCPeerConnection")
+    private static var className = StringName("WebRTCPeerConnection")
     override open class var godotClassName: StringName { className }
     public enum ConnectionState: Int64, CaseIterable {
         /// The connection is new, data channels and an offer can be created in this state.
@@ -83,8 +83,8 @@ open class WebRTCPeerConnection: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_default_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_extension")
+    fileprivate static let method_set_default_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_extension")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -109,8 +109,8 @@ open class WebRTCPeerConnection: RefCounted {
         
     }
     
-    fileprivate static var method_initialize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("initialize")
+    fileprivate static let method_initialize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("initialize")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2625064318)!
@@ -124,7 +124,8 @@ open class WebRTCPeerConnection: RefCounted {
     /// 
     /// Valid `configuration` options are:
     /// 
-    public final func initialize(configuration: GDictionary = GDictionary ()) -> GodotError {
+    public final func initialize(configuration: VariantDictionary = VariantDictionary ()) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: configuration.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -139,8 +140,8 @@ open class WebRTCPeerConnection: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_create_data_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_data_channel")
+    fileprivate static let method_create_data_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_data_channel")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1288557393)!
@@ -158,7 +159,8 @@ open class WebRTCPeerConnection: RefCounted {
     /// 
     /// > Note: You must keep a reference to channels created this way, or it will be closed.
     /// 
-    public final func createDataChannel(label: String, options: GDictionary = GDictionary ()) -> WebRTCDataChannel? {
+    public final func createDataChannel(label: String, options: VariantDictionary = VariantDictionary ()) -> WebRTCDataChannel? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
@@ -174,11 +176,11 @@ open class WebRTCPeerConnection: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_offer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_offer")
+    fileprivate static let method_create_offer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_offer")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -193,13 +195,14 @@ open class WebRTCPeerConnection: RefCounted {
     /// If this functions returns ``GodotError/ok``, [signal session_description_created] will be called when the session is ready to be sent.
     /// 
     public final func createOffer() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_create_offer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_local_description: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_local_description")
+    fileprivate static let method_set_local_description: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_local_description")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 852856452)!
@@ -214,6 +217,7 @@ open class WebRTCPeerConnection: RefCounted {
     /// After calling this function the peer will start emitting [signal ice_candidate_created] (unless an ``GodotError`` different from ``GodotError/ok`` is returned).
     /// 
     public final func setLocalDescription(type: String, sdp: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let type = GString(type)
         withUnsafePointer(to: type.content) { pArg0 in
@@ -233,8 +237,8 @@ open class WebRTCPeerConnection: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_remote_description: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_remote_description")
+    fileprivate static let method_set_remote_description: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_remote_description")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 852856452)!
@@ -251,6 +255,7 @@ open class WebRTCPeerConnection: RefCounted {
     /// If `type` is `"answer"` the peer will start emitting [signal ice_candidate_created].
     /// 
     public final func setRemoteDescription(type: String, sdp: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let type = GString(type)
         withUnsafePointer(to: type.content) { pArg0 in
@@ -270,8 +275,8 @@ open class WebRTCPeerConnection: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_add_ice_candidate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_ice_candidate")
+    fileprivate static let method_add_ice_candidate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_ice_candidate")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3958950400)!
@@ -283,6 +288,7 @@ open class WebRTCPeerConnection: RefCounted {
     
     /// Add an ice candidate generated by a remote peer (and received over the signaling server). See [signal ice_candidate_created].
     public final func addIceCandidate(media: String, index: Int32, name: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let media = GString(media)
         withUnsafePointer(to: media.content) { pArg0 in
@@ -305,8 +311,8 @@ open class WebRTCPeerConnection: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -318,13 +324,14 @@ open class WebRTCPeerConnection: RefCounted {
     
     /// Call this method frequently (e.g. in ``Node/_process(delta:)`` or ``Node/_physicsProcess(delta:)``) to properly receive signals.
     public final func poll() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -339,12 +346,13 @@ open class WebRTCPeerConnection: RefCounted {
     /// > Note: You cannot reuse this object for a new connection unless you call ``initialize(configuration:)``.
     /// 
     public final func close() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_connection_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connection_state")
+    fileprivate static let method_get_connection_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connection_state")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2275710506)!
@@ -356,13 +364,14 @@ open class WebRTCPeerConnection: RefCounted {
     
     /// Returns the connection state. See ``WebRTCPeerConnection/ConnectionState``.
     public final func getConnectionState() -> WebRTCPeerConnection.ConnectionState {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_connection_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return WebRTCPeerConnection.ConnectionState (rawValue: _result)!
     }
     
-    fileprivate static var method_get_gathering_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gathering_state")
+    fileprivate static let method_get_gathering_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gathering_state")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4262591401)!
@@ -374,13 +383,14 @@ open class WebRTCPeerConnection: RefCounted {
     
     /// Returns the ICE ``WebRTCPeerConnection/GatheringState`` of the connection. This lets you detect, for example, when collection of ICE candidates has finished.
     public final func getGatheringState() -> WebRTCPeerConnection.GatheringState {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_gathering_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return WebRTCPeerConnection.GatheringState (rawValue: _result)!
     }
     
-    fileprivate static var method_get_signaling_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_signaling_state")
+    fileprivate static let method_get_signaling_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_signaling_state")
         return withUnsafePointer(to: &WebRTCPeerConnection.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3342956226)!
@@ -392,6 +402,7 @@ open class WebRTCPeerConnection: RefCounted {
     
     /// Returns the signaling state on the local end of the connection while connecting or reconnecting to another peer.
     public final func getSignalingState() -> WebRTCPeerConnection.SignalingState {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_signaling_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return WebRTCPeerConnection.SignalingState (rawValue: _result)!

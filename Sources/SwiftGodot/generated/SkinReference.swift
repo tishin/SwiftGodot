@@ -32,11 +32,11 @@ import Musl
 /// On the other hand, a ``Skeleton3D`` with multiple ``MeshInstance3D`` nodes which each have different ``MeshInstance3D/skin`` objects may have multiple SkinReference instances (and hence, multiple skeleton ``RID``s).
 /// 
 open class SkinReference: RefCounted {
-    fileprivate static var className = StringName("SkinReference")
+    private static var className = StringName("SkinReference")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skeleton")
+    fileprivate static let method_get_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skeleton")
         return withUnsafePointer(to: &SkinReference.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -48,13 +48,14 @@ open class SkinReference: RefCounted {
     
     /// Returns the ``RID`` owned by this SkinReference, as returned by ``RenderingServer/skeletonCreate()``.
     public final func getSkeleton() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(SkinReference.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_skin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skin")
+    fileprivate static let method_get_skin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skin")
         return withUnsafePointer(to: &SkinReference.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2074563878)!
@@ -69,9 +70,10 @@ open class SkinReference: RefCounted {
     /// Note that a single ``Skin`` may have more than one ``SkinReference`` in the case that it is shared by meshes across multiple ``Skeleton3D`` nodes.
     /// 
     public final func getSkin() -> Skin? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(SkinReference.method_get_skin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

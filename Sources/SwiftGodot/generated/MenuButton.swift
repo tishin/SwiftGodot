@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``aboutToPopup``
 open class MenuButton: Button {
-    fileprivate static var className = StringName("MenuButton")
+    private static var className = StringName("MenuButton")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -61,8 +61,8 @@ open class MenuButton: Button {
     }
     
     /* Methods */
-    fileprivate static var method_get_popup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_popup")
+    fileprivate static let method_get_popup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_popup")
         return withUnsafePointer(to: &MenuButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 229722558)!
@@ -77,13 +77,14 @@ open class MenuButton: Button {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``Window/visible`` property.
     /// 
     public final func getPopup() -> PopupMenu? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(MenuButton.method_get_popup, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_show_popup: GDExtensionMethodBindPtr = {
-        let methodName = StringName("show_popup")
+    fileprivate static let method_show_popup: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("show_popup")
         return withUnsafePointer(to: &MenuButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -95,12 +96,13 @@ open class MenuButton: Button {
     
     /// Adjusts popup position and sizing for the ``MenuButton``, then shows the ``PopupMenu``. Prefer this over using `get_popup().popup()`.
     public final func showPopup() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(MenuButton.method_show_popup, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_switch_on_hover: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_switch_on_hover")
+    fileprivate static let method_set_switch_on_hover: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_switch_on_hover")
         return withUnsafePointer(to: &MenuButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -112,6 +114,7 @@ open class MenuButton: Button {
     
     @inline(__always)
     fileprivate final func set_switch_on_hover(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -125,8 +128,8 @@ open class MenuButton: Button {
         
     }
     
-    fileprivate static var method_is_switch_on_hover: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_switch_on_hover")
+    fileprivate static let method_is_switch_on_hover: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_switch_on_hover")
         return withUnsafePointer(to: &MenuButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -138,13 +141,14 @@ open class MenuButton: Button {
     
     @inline(__always)
     fileprivate final func is_switch_on_hover() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MenuButton.method_is_switch_on_hover, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_disable_shortcuts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_shortcuts")
+    fileprivate static let method_set_disable_shortcuts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_shortcuts")
         return withUnsafePointer(to: &MenuButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -156,6 +160,7 @@ open class MenuButton: Button {
     
     /// If `true`, shortcuts are disabled and cannot be used to trigger the button.
     public final func setDisableShortcuts(disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -169,8 +174,8 @@ open class MenuButton: Button {
         
     }
     
-    fileprivate static var method_set_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_count")
+    fileprivate static let method_set_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_count")
         return withUnsafePointer(to: &MenuButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -182,6 +187,7 @@ open class MenuButton: Button {
     
     @inline(__always)
     fileprivate final func set_item_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -195,8 +201,8 @@ open class MenuButton: Button {
         
     }
     
-    fileprivate static var method_get_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_count")
+    fileprivate static let method_get_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_count")
         return withUnsafePointer(to: &MenuButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -208,6 +214,7 @@ open class MenuButton: Button {
     
     @inline(__always)
     fileprivate final func get_item_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MenuButton.method_get_item_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

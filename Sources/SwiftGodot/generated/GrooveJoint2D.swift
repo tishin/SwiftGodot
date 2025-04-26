@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A physics joint that restricts the movement of two 2D physics bodies to a fixed axis. For example, a ``StaticBody2D`` representing a piston base can be attached to a ``RigidBody2D`` representing the piston head, moving up and down.
 open class GrooveJoint2D: Joint2D {
-    fileprivate static var className = StringName("GrooveJoint2D")
+    private static var className = StringName("GrooveJoint2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -53,8 +53,8 @@ open class GrooveJoint2D: Joint2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_length")
+    fileprivate static let method_set_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_length")
         return withUnsafePointer(to: &GrooveJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -66,6 +66,7 @@ open class GrooveJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func set_length(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -79,8 +80,8 @@ open class GrooveJoint2D: Joint2D {
         
     }
     
-    fileprivate static var method_get_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_length")
+    fileprivate static let method_get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_length")
         return withUnsafePointer(to: &GrooveJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -92,13 +93,14 @@ open class GrooveJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func get_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GrooveJoint2D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_initial_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_initial_offset")
+    fileprivate static let method_set_initial_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_initial_offset")
         return withUnsafePointer(to: &GrooveJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -110,6 +112,7 @@ open class GrooveJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func set_initial_offset(_ offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -123,8 +126,8 @@ open class GrooveJoint2D: Joint2D {
         
     }
     
-    fileprivate static var method_get_initial_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_initial_offset")
+    fileprivate static let method_get_initial_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_initial_offset")
         return withUnsafePointer(to: &GrooveJoint2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -136,6 +139,7 @@ open class GrooveJoint2D: Joint2D {
     
     @inline(__always)
     fileprivate final func get_initial_offset() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GrooveJoint2D.method_get_initial_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -28,7 +28,7 @@ import Musl
 /// > Note: ``ResourceImporterScene`` is _not_ used for ``PackedScene``s, such as `.tscn` and `.scn` files.
 /// 
 open class ResourceImporterScene: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterScene")
+    private static var className = StringName("ResourceImporterScene")
     override open class var godotClassName: StringName { className }
 }
 

@@ -28,7 +28,7 @@ import Musl
 /// 
 /// - ``scrolling``
 open class ScrollBar: Range {
-    fileprivate static var className = StringName("ScrollBar")
+    private static var className = StringName("ScrollBar")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class ScrollBar: Range {
     }
     
     /* Methods */
-    fileprivate static var method_set_custom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_step")
+    fileprivate static let method_set_custom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_step")
         return withUnsafePointer(to: &ScrollBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -59,6 +59,7 @@ open class ScrollBar: Range {
     
     @inline(__always)
     fileprivate final func set_custom_step(_ step: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: step) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -72,8 +73,8 @@ open class ScrollBar: Range {
         
     }
     
-    fileprivate static var method_get_custom_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_step")
+    fileprivate static let method_get_custom_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_step")
         return withUnsafePointer(to: &ScrollBar.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -85,6 +86,7 @@ open class ScrollBar: Range {
     
     @inline(__always)
     fileprivate final func get_custom_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ScrollBar.method_get_custom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

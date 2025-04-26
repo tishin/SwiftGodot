@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The base class for the desktop platform exporters. These include Windows and Linux/BSD, but not macOS. See the classes inheriting this one for more details.
 open class EditorExportPlatformPC: EditorExportPlatform {
-    fileprivate static var className = StringName("EditorExportPlatformPC")
+    private static var className = StringName("EditorExportPlatformPC")
     override open class var godotClassName: StringName { className }
 }
 

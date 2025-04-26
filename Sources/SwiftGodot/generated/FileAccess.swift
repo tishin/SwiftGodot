@@ -21,7 +21,7 @@ import Musl
 
 /// Provides methods for file reading and writing operations.
 /// 
-/// This class can be used to permanently store data in the user device's file system and to read from it. This is useful for store game save data or player configuration files.
+/// This class can be used to permanently store data in the user device's file system and to read from it. This is useful for storing game save data or player configuration files.
 /// 
 /// Here's a sample on how to write and read from a file:
 /// 
@@ -29,12 +29,12 @@ import Musl
 /// 
 /// ``FileAccess`` will close when it's freed, which happens when it goes out of scope or when it gets assigned with `null`. ``close()`` can be used to close it before then explicitly. In C# the reference must be disposed manually, which can be done with the `using` statement or by calling the `Dispose` method directly.
 /// 
-/// > Note: To access project resources once exported, it is recommended to use ``ResourceLoader`` instead of ``FileAccess``, as some files are converted to engine-specific formats and their original source files might not be present in the exported PCK package.
+/// > Note: To access project resources once exported, it is recommended to use ``ResourceLoader`` instead of ``FileAccess``, as some files are converted to engine-specific formats and their original source files might not be present in the exported PCK package. If using ``FileAccess``, make sure the file is included in the export by changing its import mode to **Keep File (exported as is)** in the Import dock, or, for files where this option is not available, change the non-resource export filter in the Export dialog to include the file's extension (e.g. `*.txt`).
 /// 
 /// > Note: Files are automatically closed only if the process exits "normally" (such as by clicking the window manager's close button or pressing **Alt + F4**). If you stop the project execution by pressing **F8** while the project is running, the file won't be closed as the game process will be killed. You can work around this by calling ``flush()`` at regular intervals.
 /// 
 open class FileAccess: RefCounted {
-    fileprivate static var className = StringName("FileAccess")
+    private static var className = StringName("FileAccess")
     override open class var godotClassName: StringName { className }
     public enum ModeFlags: Int64, CaseIterable {
         /// Opens the file for read operations. The cursor is positioned at the beginning of the file.
@@ -138,8 +138,8 @@ open class FileAccess: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_open: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open")
+    fileprivate static let method_open: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1247358404)!
@@ -169,14 +169,14 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_open_encrypted: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open_encrypted")
+    fileprivate static let method_open_encrypted: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open_encrypted")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1482131466)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 788003459)!
             }
             
         }
@@ -189,15 +189,18 @@ open class FileAccess: RefCounted {
     /// 
     /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
-    public static func openEncrypted(path: String, modeFlags: FileAccess.ModeFlags, key: PackedByteArray) -> FileAccess? {
+    public static func openEncrypted(path: String, modeFlags: FileAccess.ModeFlags, key: PackedByteArray, iv: PackedByteArray = PackedByteArray()) -> FileAccess? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: modeFlags.rawValue) { pArg1 in
                 withUnsafePointer(to: key.content) { pArg2 in
-                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
-                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_open_encrypted, nil, pArgs, &_result)
+                    withUnsafePointer(to: iv.content) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(method_open_encrypted, nil, pArgs, &_result)
+                            }
+                            
                         }
                         
                     }
@@ -208,11 +211,11 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_open_encrypted_with_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open_encrypted_with_pass")
+    fileprivate static let method_open_encrypted_with_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open_encrypted_with_pass")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 790283377)!
@@ -246,11 +249,11 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_open_compressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("open_compressed")
+    fileprivate static let method_open_compressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("open_compressed")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3686439335)!
@@ -285,11 +288,11 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_open_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_open_error")
+    fileprivate static let method_get_open_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_open_error")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -306,8 +309,55 @@ open class FileAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_file_as_bytes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_as_bytes")
+    fileprivate static let method_create_temp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_temp")
+        return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3075606245)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Creates a temporary file. This file will be freed when the returned ``FileAccess`` is freed.
+    /// 
+    /// If `prefix` is not empty, it will be prefixed to the file name, separated by a `-`.
+    /// 
+    /// If `extension` is not empty, it will be appended to the temporary file name.
+    /// 
+    /// If `keep` is `true`, the file is not deleted when the returned ``FileAccess`` is freed.
+    /// 
+    /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
+    /// 
+    public static func createTemp(modeFlags: Int32, prefix: String = "", `extension`: String = "", keep: Bool = false) -> FileAccess? {
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: modeFlags) { pArg0 in
+            let prefix = GString(prefix)
+            withUnsafePointer(to: prefix.content) { pArg1 in
+                let `extension` = GString(`extension`)
+                withUnsafePointer(to: `extension`.content) { pArg2 in
+                    withUnsafePointer(to: keep) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(method_create_temp, nil, pArgs, &_result)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_get_file_as_bytes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_as_bytes")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659035735)!
@@ -337,8 +387,8 @@ open class FileAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_file_as_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_file_as_string")
+    fileprivate static let method_get_file_as_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_file_as_string")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1703090593)!
@@ -368,8 +418,8 @@ open class FileAccess: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_resize: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resize")
+    fileprivate static let method_resize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resize")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844576869)!
@@ -381,6 +431,7 @@ open class FileAccess: RefCounted {
     
     /// Resizes the file to a specified length. The file must be open in a mode that permits writing. If the file is extended, NUL characters are appended. If the file is truncated, all data from the end file to the original length of the file is lost.
     public final func resize(length: Int) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -395,8 +446,8 @@ open class FileAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_flush: GDExtensionMethodBindPtr = {
-        let methodName = StringName("flush")
+    fileprivate static let method_flush: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("flush")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -411,12 +462,13 @@ open class FileAccess: RefCounted {
     /// > Note: Only call ``flush()`` when you actually need it. Otherwise, it will decrease performance due to constant disk writes.
     /// 
     public final func flush() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(FileAccess.method_flush, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path")
+    fileprivate static let method_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -428,13 +480,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the path as a ``String`` for the current open file.
     public final func getPath() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(FileAccess.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_path_absolute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_absolute")
+    fileprivate static let method_get_path_absolute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_absolute")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -446,13 +499,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the absolute path as a ``String`` for the current open file.
     public final func getPathAbsolute() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(FileAccess.method_get_path_absolute, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_open: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_open")
+    fileprivate static let method_is_open: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_open")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -464,13 +518,14 @@ open class FileAccess: RefCounted {
     
     /// Returns `true` if the file is currently opened.
     public final func isOpen() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FileAccess.method_is_open, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_seek: GDExtensionMethodBindPtr = {
-        let methodName = StringName("seek")
+    fileprivate static let method_seek: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("seek")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -482,6 +537,7 @@ open class FileAccess: RefCounted {
     
     /// Changes the file reading/writing cursor to the specified position (in bytes from the beginning of the file).
     public final func seek(position: UInt) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -495,8 +551,8 @@ open class FileAccess: RefCounted {
         
     }
     
-    fileprivate static var method_seek_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("seek_end")
+    fileprivate static let method_seek_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("seek_end")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -511,6 +567,7 @@ open class FileAccess: RefCounted {
     /// > Note: This is an offset, so you should use negative numbers or the cursor will be at the end of the file.
     /// 
     public final func seekEnd(position: Int = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -524,8 +581,8 @@ open class FileAccess: RefCounted {
         
     }
     
-    fileprivate static var method_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position")
+    fileprivate static let method_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -537,13 +594,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the file cursor's position.
     public final func getPosition() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(FileAccess.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_length")
+    fileprivate static let method_get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_length")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -553,15 +611,16 @@ open class FileAccess: RefCounted {
         
     }()
     
-    /// Returns the size of the file in bytes.
+    /// Returns the size of the file in bytes. For a pipe, returns the number of bytes available for reading from the pipe.
     public final func getLength() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(FileAccess.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_eof_reached: GDExtensionMethodBindPtr = {
-        let methodName = StringName("eof_reached")
+    fileprivate static let method_eof_reached: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("eof_reached")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -576,13 +635,14 @@ open class FileAccess: RefCounted {
     /// > Note: `eof_reached() == false` cannot be used to check whether there is more data available. To loop while there is more data available, use:
     /// 
     public final func eofReached() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FileAccess.method_eof_reached, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_8: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_8")
+    fileprivate static let method_get_8: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_8")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -594,13 +654,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the next 8 bits from the file as an integer. See ``store8(value:)`` for details on what values can be stored and retrieved this way.
     public final func get8() -> UInt8 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt8 = 0
         gi.object_method_bind_ptrcall(FileAccess.method_get_8, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_16: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_16")
+    fileprivate static let method_get_16: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_16")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -612,13 +673,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the next 16 bits from the file as an integer. See ``store16(value:)`` for details on what values can be stored and retrieved this way.
     public final func get16() -> UInt16 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt16 = 0
         gi.object_method_bind_ptrcall(FileAccess.method_get_16, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_32: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_32")
+    fileprivate static let method_get_32: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_32")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -630,13 +692,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the next 32 bits from the file as an integer. See ``store32(value:)`` for details on what values can be stored and retrieved this way.
     public final func get32() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(FileAccess.method_get_32, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_64")
+    fileprivate static let method_get_64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_64")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -648,13 +711,33 @@ open class FileAccess: RefCounted {
     
     /// Returns the next 64 bits from the file as an integer. See ``store64(value:)`` for details on what values can be stored and retrieved this way.
     public final func get64() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(FileAccess.method_get_64, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_float: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_float")
+    fileprivate static let method_get_half: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_half")
+        return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the next 16 bits from the file as a half-precision floating-point number.
+    public final func getHalf() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(FileAccess.method_get_half, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_float: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_float")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -666,13 +749,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the next 32 bits from the file as a floating-point number.
     public final func getFloat() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FileAccess.method_get_float, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_double: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_double")
+    fileprivate static let method_get_double: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_double")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -684,13 +768,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the next 64 bits from the file as a floating-point number.
     public final func getDouble() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FileAccess.method_get_double, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_real: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_real")
+    fileprivate static let method_get_real: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_real")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -702,13 +787,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the next bits from the file as a floating-point number.
     public final func getReal() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FileAccess.method_get_real, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer")
+    fileprivate static let method_get_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4131300905)!
@@ -720,6 +806,7 @@ open class FileAccess: RefCounted {
     
     /// Returns next `length` bytes of the file as a ``PackedByteArray``.
     public final func getBuffer(length: Int) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -734,8 +821,8 @@ open class FileAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line")
+    fileprivate static let method_get_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -750,13 +837,14 @@ open class FileAccess: RefCounted {
     /// Text is interpreted as being UTF-8 encoded.
     /// 
     public final func getLine() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(FileAccess.method_get_line, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_csv_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_csv_line")
+    fileprivate static let method_get_csv_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_csv_line")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2358116058)!
@@ -775,6 +863,7 @@ open class FileAccess: RefCounted {
     /// Note how the second line can omit the enclosing quotes as it does not include the delimiter. However it _could_ very well use quotes, it was only written without for demonstration purposes. The third line must use `""` for each quotation mark that needs to be interpreted as such instead of the end of a text value.
     /// 
     public final func getCsvLine(delim: String = ",") -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         let delim = GString(delim)
         withUnsafePointer(to: delim.content) { pArg0 in
@@ -790,8 +879,8 @@ open class FileAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_as_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_as_text")
+    fileprivate static let method_get_as_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_as_text")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1162154673)!
@@ -806,6 +895,7 @@ open class FileAccess: RefCounted {
     /// If `skipCr` is `true`, carriage return characters (`\r`, CR) will be ignored when parsing the UTF-8, so that only line feed characters (`\n`, LF) represent a new line (Unix convention).
     /// 
     public final func getAsText(skipCr: Bool = false) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: skipCr) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -820,8 +910,8 @@ open class FileAccess: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_get_md5: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_md5")
+    fileprivate static let method_get_md5: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_md5")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1703090593)!
@@ -848,8 +938,8 @@ open class FileAccess: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_get_sha256: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sha256")
+    fileprivate static let method_get_sha256: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sha256")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1703090593)!
@@ -876,8 +966,8 @@ open class FileAccess: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_is_big_endian: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_big_endian")
+    fileprivate static let method_is_big_endian: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_big_endian")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -889,13 +979,14 @@ open class FileAccess: RefCounted {
     
     @inline(__always)
     fileprivate final func is_big_endian() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FileAccess.method_is_big_endian, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_big_endian: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_big_endian")
+    fileprivate static let method_set_big_endian: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_big_endian")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -907,6 +998,7 @@ open class FileAccess: RefCounted {
     
     @inline(__always)
     fileprivate final func set_big_endian(_ bigEndian: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bigEndian) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -920,8 +1012,8 @@ open class FileAccess: RefCounted {
         
     }
     
-    fileprivate static var method_get_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_error")
+    fileprivate static let method_get_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_error")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3185525595)!
@@ -933,13 +1025,14 @@ open class FileAccess: RefCounted {
     
     /// Returns the last error that happened when trying to perform operations. Compare with the `ERR_FILE_*` constants from ``GodotError``.
     public final func getError() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FileAccess.method_get_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_var: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_var")
+    fileprivate static let method_get_var: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_var")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 189129690)!
@@ -956,6 +1049,7 @@ open class FileAccess: RefCounted {
     /// > Warning: Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.
     /// 
     public final func getVar(allowObjects: Bool = false) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: allowObjects) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -970,11 +1064,11 @@ open class FileAccess: RefCounted {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_store_8: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_8")
+    fileprivate static let method_store_8: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_8")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
             }
             
         }
@@ -985,27 +1079,31 @@ open class FileAccess: RefCounted {
     /// 
     /// > Note: The `value` should lie in the interval `[0, 255]`. Any other value will overflow and wrap around.
     /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
     /// To store a signed integer, use ``store64(value:)``, or convert it manually (see ``store16(value:)`` for an example).
     /// 
-    public final func store8(value: UInt8) {
+    public final func store8(value: UInt8) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_8, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_8, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_16: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_16")
+    fileprivate static let method_store_16: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_16")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
             }
             
         }
@@ -1016,27 +1114,31 @@ open class FileAccess: RefCounted {
     /// 
     /// > Note: The `value` should lie in the interval `[0, 2^16 - 1]`. Any other value will overflow and wrap around.
     /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
     /// To store a signed integer, use ``store64(value:)`` or store a signed integer from the interval `[-2^15, 2^15 - 1]` (i.e. keeping one bit for the signedness) and compute its sign manually when reading. For example:
     /// 
-    public final func store16(value: UInt16) {
+    public final func store16(value: UInt16) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_16, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_16, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_32: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_32")
+    fileprivate static let method_store_32: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_32")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
             }
             
         }
@@ -1047,27 +1149,31 @@ open class FileAccess: RefCounted {
     /// 
     /// > Note: The `value` should lie in the interval `[0, 2^32 - 1]`. Any other value will overflow and wrap around.
     /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
     /// To store a signed integer, use ``store64(value:)``, or convert it manually (see ``store16(value:)`` for an example).
     /// 
-    public final func store32(value: UInt32) {
+    public final func store32(value: UInt32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_32, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_32, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_64")
+    fileprivate static let method_store_64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_64")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3067735520)!
             }
             
         }
@@ -1078,25 +1184,57 @@ open class FileAccess: RefCounted {
     /// 
     /// > Note: The `value` must lie in the interval `[-2^63, 2^63 - 1]` (i.e. be a valid integer value).
     /// 
-    public final func store64(value: UInt) {
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func store64(value: UInt) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_64, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_64, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_float: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_float")
+    fileprivate static let method_store_half: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_half")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 330693286)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Stores a half-precision floating-point number as 16 bits in the file.
+    public final func storeHalf(value: Double) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: value) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_half, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_store_float: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_float")
+        return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 330693286)!
             }
             
         }
@@ -1104,25 +1242,30 @@ open class FileAccess: RefCounted {
     }()
     
     /// Stores a floating-point number as 32 bits in the file.
-    public final func storeFloat(value: Double) {
+    /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeFloat(value: Double) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_float, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_float, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_double: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_double")
+    fileprivate static let method_store_double: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_double")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 330693286)!
             }
             
         }
@@ -1130,25 +1273,30 @@ open class FileAccess: RefCounted {
     }()
     
     /// Stores a floating-point number as 64 bits in the file.
-    public final func storeDouble(value: Double) {
+    /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeDouble(value: Double) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_double, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_double, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_real: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_real")
+    fileprivate static let method_store_real: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_real")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 330693286)!
             }
             
         }
@@ -1156,25 +1304,30 @@ open class FileAccess: RefCounted {
     }()
     
     /// Stores a floating-point number in the file.
-    public final func storeReal(value: Double) {
+    /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeReal(value: Double) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_real, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_real, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_buffer")
+    fileprivate static let method_store_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_buffer")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2971499966)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 114037665)!
             }
             
         }
@@ -1182,52 +1335,62 @@ open class FileAccess: RefCounted {
     }()
     
     /// Stores the given array of bytes in the file.
-    public final func storeBuffer(_ buffer: PackedByteArray) {
+    /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeBuffer(_ buffer: PackedByteArray) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_line")
+    fileprivate static let method_store_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_line")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
             }
             
         }
         
     }()
     
-    /// Appends `line` to the file followed by a line return character (`\n`), encoding the text as UTF-8.
-    public final func storeLine(_ line: String) {
+    /// Stores `line` in the file followed by a newline character (`\n`), encoding the text as UTF-8.
+    /// 
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeLine(_ line: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         let line = GString(line)
         withUnsafePointer(to: line.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_csv_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_csv_line")
+    fileprivate static let method_store_csv_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_csv_line")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2173791505)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1611473434)!
             }
             
         }
@@ -1238,13 +1401,17 @@ open class FileAccess: RefCounted {
     /// 
     /// Text will be encoded as UTF-8.
     /// 
-    public final func storeCsvLine(values: PackedStringArray, delim: String = ",") {
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeCsvLine(values: PackedStringArray, delim: String = ",") -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: values.content) { pArg0 in
             let delim = GString(delim)
             withUnsafePointer(to: delim.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileAccess.method_store_csv_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FileAccess.method_store_csv_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                     }
                     
                 }
@@ -1253,44 +1420,48 @@ open class FileAccess: RefCounted {
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_string")
+    fileprivate static let method_store_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_string")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
             }
             
         }
         
     }()
     
-    /// Appends `string` to the file without a line return, encoding the text as UTF-8.
+    /// Stores `string` in the file without a newline character (`\n`), encoding the text as UTF-8.
     /// 
     /// > Note: This method is intended to be used to write text files. The string is stored as a UTF-8 encoded buffer without string length or terminating zero, which means that it can't be loaded back easily. If you want to store a retrievable string in a binary file, consider using ``storePascalString(_:)`` instead. For retrieving strings from a text file, you can use `get_buffer(length).get_string_from_utf8()` (if you know the length) or ``getAsText(skipCr:)``.
     /// 
-    public final func storeString(_ string: String) {
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeString(_ string: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_var: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_var")
+    fileprivate static let method_store_var: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_var")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 738511890)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 117357437)!
             }
             
         }
@@ -1303,12 +1474,16 @@ open class FileAccess: RefCounted {
     /// 
     /// > Note: Not all properties are included. Only properties that are configured with the ``PropertyUsageFlags/propertyUsageStorage`` flag set will be serialized. You can add a new usage flag to a property by overriding the ``Object/_getPropertyList()`` method in your class. You can also check how property usage is configured by calling ``Object/_getPropertyList()``. See ``PropertyUsageFlags`` for the possible usage flags.
     /// 
-    public final func storeVar(value: Variant?, fullObjects: Bool = false) {
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storeVar(value: Variant?, fullObjects: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: fullObjects) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileAccess.method_store_var, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FileAccess.method_store_var, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                     }
                     
                 }
@@ -1317,14 +1492,14 @@ open class FileAccess: RefCounted {
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_store_pascal_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("store_pascal_string")
+    fileprivate static let method_store_pascal_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("store_pascal_string")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
             }
             
         }
@@ -1335,23 +1510,27 @@ open class FileAccess: RefCounted {
     /// 
     /// Text will be encoded as UTF-8.
     /// 
-    public final func storePascalString(_ string: String) {
+    /// > Note: If an error occurs, the resulting value of the file position indicator is indeterminate.
+    /// 
+    public final func storePascalString(_ string: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
         let string = GString(string)
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_pascal_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_pascal_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
                 }
                 
             }
             
         }
         
-        
+        return _result
     }
     
-    fileprivate static var method_get_pascal_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pascal_string")
+    fileprivate static let method_get_pascal_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pascal_string")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -1366,13 +1545,14 @@ open class FileAccess: RefCounted {
     /// Text is interpreted as being UTF-8 encoded.
     /// 
     public final func getPascalString() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(FileAccess.method_get_pascal_string, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1387,12 +1567,13 @@ open class FileAccess: RefCounted {
     /// > Note: ``FileAccess`` will automatically close when it's freed, which happens when it goes out of scope or when it gets assigned with `null`. In C# the reference must be disposed after we are done using it, this can be done with the `using` statement or calling the `Dispose` method directly.
     /// 
     public final func close() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(FileAccess.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_file_exists: GDExtensionMethodBindPtr = {
-        let methodName = StringName("file_exists")
+    fileprivate static let method_file_exists: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("file_exists")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -1424,8 +1605,8 @@ open class FileAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_modified_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_modified_time")
+    fileprivate static let method_get_modified_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_modified_time")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1597066294)!
@@ -1452,8 +1633,8 @@ open class FileAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_unix_permissions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_unix_permissions")
+    fileprivate static let method_get_unix_permissions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_unix_permissions")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 524341837)!
@@ -1483,8 +1664,8 @@ open class FileAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_unix_permissions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_unix_permissions")
+    fileprivate static let method_set_unix_permissions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_unix_permissions")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 846038644)!
@@ -1517,8 +1698,8 @@ open class FileAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_hidden_attribute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hidden_attribute")
+    fileprivate static let method_get_hidden_attribute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hidden_attribute")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!
@@ -1548,8 +1729,8 @@ open class FileAccess: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_hidden_attribute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hidden_attribute")
+    fileprivate static let method_set_hidden_attribute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hidden_attribute")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2892558115)!
@@ -1582,8 +1763,8 @@ open class FileAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_read_only_attribute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_read_only_attribute")
+    fileprivate static let method_set_read_only_attribute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_read_only_attribute")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2892558115)!
@@ -1616,8 +1797,8 @@ open class FileAccess: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_read_only_attribute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_read_only_attribute")
+    fileprivate static let method_get_read_only_attribute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_read_only_attribute")
         return withUnsafePointer(to: &FileAccess.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2323990056)!

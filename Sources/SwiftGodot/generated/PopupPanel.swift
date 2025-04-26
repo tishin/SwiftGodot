@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A popup with a configurable panel background. Any child controls added to this node will be stretched to fit the panel's size (similar to how ``PanelContainer`` works). If you are making windows, see ``Window``.
 open class PopupPanel: Popup {
-    fileprivate static var className = StringName("PopupPanel")
+    private static var className = StringName("PopupPanel")
     override open class var godotClassName: StringName { className }
 }
 

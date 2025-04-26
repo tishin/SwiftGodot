@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translated to `uniform vec4` in the shader language.
 open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
-    fileprivate static var className = StringName("VisualShaderNodeColorParameter")
+    private static var className = StringName("VisualShaderNodeColorParameter")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -53,8 +53,8 @@ open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
     }
     
     /* Methods */
-    fileprivate static var method_set_default_value_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_value_enabled")
+    fileprivate static let method_set_default_value_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_value_enabled")
         return withUnsafePointer(to: &VisualShaderNodeColorParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -66,6 +66,7 @@ open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_default_value_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -79,8 +80,8 @@ open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_is_default_value_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_default_value_enabled")
+    fileprivate static let method_is_default_value_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_default_value_enabled")
         return withUnsafePointer(to: &VisualShaderNodeColorParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -92,13 +93,14 @@ open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func is_default_value_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisualShaderNodeColorParameter.method_is_default_value_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_value")
+    fileprivate static let method_set_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_value")
         return withUnsafePointer(to: &VisualShaderNodeColorParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -110,6 +112,7 @@ open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_default_value(_ value: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -123,8 +126,8 @@ open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_value")
+    fileprivate static let method_get_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_value")
         return withUnsafePointer(to: &VisualShaderNodeColorParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -136,6 +139,7 @@ open class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_default_value() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(VisualShaderNodeColorParameter.method_get_default_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -35,7 +35,7 @@ import Musl
 /// 
 /// - ``slotUpdated``
 open class GraphNode: GraphElement {
-    fileprivate static var className = StringName("GraphNode")
+    private static var className = StringName("GraphNode")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -65,13 +65,45 @@ open class GraphNode: GraphElement {
     }
     
     /* Methods */
+    fileprivate static let method__draw_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_draw_port")
+        return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 93366828)!
+            }
+            
+        }
+        
+    }()
+    
     /// 
     @_documentation(visibility: public)
     open func _drawPort(slotIndex: Int32, position: Vector2i, left: Bool, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: slotIndex) { pArg0 in
+            withUnsafePointer(to: position) { pArg1 in
+                withUnsafePointer(to: left) { pArg2 in
+                    withUnsafePointer(to: color) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(GraphNode.method__draw_port, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_set_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_title")
+    fileprivate static let method_set_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_title")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -83,6 +115,7 @@ open class GraphNode: GraphElement {
     
     @inline(__always)
     fileprivate final func set_title(_ title: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let title = GString(title)
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -97,8 +130,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_get_title: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_title")
+    fileprivate static let method_get_title: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_title")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -110,13 +143,14 @@ open class GraphNode: GraphElement {
     
     @inline(__always)
     fileprivate final func get_title() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(GraphNode.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_titlebar_hbox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_titlebar_hbox")
+    fileprivate static let method_get_titlebar_hbox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_titlebar_hbox")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3590609951)!
@@ -128,13 +162,14 @@ open class GraphNode: GraphElement {
     
     /// Returns the ``HBoxContainer`` used for the title bar, only containing a ``Label`` for displaying the title by default. This can be used to add custom controls to the title bar such as option or close buttons.
     public final func getTitlebarHbox() -> HBoxContainer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GraphNode.method_get_titlebar_hbox, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_slot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot")
+    fileprivate static let method_set_slot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2873310869)!
@@ -159,6 +194,7 @@ open class GraphNode: GraphElement {
     /// > Note: This method only sets properties of the slot. To create the slot itself, add a ``Control``-derived child to the GraphNode.
     /// 
     public final func setSlot(slotIndex: Int32, enableLeftPort: Bool, typeLeft: Int32, colorLeft: Color, enableRightPort: Bool, typeRight: Int32, colorRight: Color, customIconLeft: Texture2D? = nil, customIconRight: Texture2D? = nil, drawStylebox: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: enableLeftPort) { pArg1 in
                 withUnsafePointer(to: typeLeft) { pArg2 in
@@ -199,8 +235,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_clear_slot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_slot")
+    fileprivate static let method_clear_slot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_slot")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -212,6 +248,7 @@ open class GraphNode: GraphElement {
     
     /// Disables the slot with the given `slotIndex`. This will remove the corresponding input and output port from the GraphNode.
     public final func clearSlot(slotIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -225,8 +262,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_clear_all_slots: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_all_slots")
+    fileprivate static let method_clear_all_slots: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_all_slots")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -238,12 +275,13 @@ open class GraphNode: GraphElement {
     
     /// Disables all slots of the GraphNode. This will remove all input/output ports from the GraphNode.
     public final func clearAllSlots() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(GraphNode.method_clear_all_slots, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_slot_enabled_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_slot_enabled_left")
+    fileprivate static let method_is_slot_enabled_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_slot_enabled_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -255,6 +293,7 @@ open class GraphNode: GraphElement {
     
     /// Returns `true` if left (input) side of the slot with the given `slotIndex` is enabled.
     public final func isSlotEnabledLeft(slotIndex: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -269,8 +308,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_set_slot_enabled_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_enabled_left")
+    fileprivate static let method_set_slot_enabled_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_enabled_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -282,6 +321,7 @@ open class GraphNode: GraphElement {
     
     /// Toggles the left (input) side of the slot with the given `slotIndex`. If `enable` is `true`, a port will appear on the left side and the slot will be able to be connected from this side.
     public final func setSlotEnabledLeft(slotIndex: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -298,8 +338,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_set_slot_type_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_type_left")
+    fileprivate static let method_set_slot_type_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_type_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -311,6 +351,7 @@ open class GraphNode: GraphElement {
     
     /// Sets the left (input) type of the slot with the given `slotIndex` to `type`. If the value is negative, all connections will be disallowed to be created via user inputs.
     public final func setSlotTypeLeft(slotIndex: Int32, type: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: type) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -327,8 +368,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_get_slot_type_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slot_type_left")
+    fileprivate static let method_get_slot_type_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slot_type_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -340,6 +381,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the left (input) type of the slot with the given `slotIndex`.
     public final func getSlotTypeLeft(slotIndex: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -354,8 +396,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_set_slot_color_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_color_left")
+    fileprivate static let method_set_slot_color_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_color_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -367,6 +409,7 @@ open class GraphNode: GraphElement {
     
     /// Sets the ``Color`` of the left (input) side of the slot with the given `slotIndex` to `color`.
     public final func setSlotColorLeft(slotIndex: Int32, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -383,8 +426,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_get_slot_color_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slot_color_left")
+    fileprivate static let method_get_slot_color_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slot_color_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -396,6 +439,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the left (input) ``Color`` of the slot with the given `slotIndex`.
     public final func getSlotColorLeft(slotIndex: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -410,8 +454,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_set_slot_custom_icon_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_custom_icon_left")
+    fileprivate static let method_set_slot_custom_icon_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_custom_icon_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -423,6 +467,7 @@ open class GraphNode: GraphElement {
     
     /// Sets the custom ``Texture2D`` of the left (input) side of the slot with the given `slotIndex` to `customIcon`.
     public final func setSlotCustomIconLeft(slotIndex: Int32, customIcon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: customIcon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -439,8 +484,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_get_slot_custom_icon_left: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slot_custom_icon_left")
+    fileprivate static let method_get_slot_custom_icon_left: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slot_custom_icon_left")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -452,6 +497,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the left (input) custom ``Texture2D`` of the slot with the given `slotIndex`.
     public final func getSlotCustomIconLeft(slotIndex: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -463,11 +509,11 @@ open class GraphNode: GraphElement {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_slot_enabled_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_slot_enabled_right")
+    fileprivate static let method_is_slot_enabled_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_slot_enabled_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -479,6 +525,7 @@ open class GraphNode: GraphElement {
     
     /// Returns `true` if right (output) side of the slot with the given `slotIndex` is enabled.
     public final func isSlotEnabledRight(slotIndex: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -493,8 +540,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_set_slot_enabled_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_enabled_right")
+    fileprivate static let method_set_slot_enabled_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_enabled_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -506,6 +553,7 @@ open class GraphNode: GraphElement {
     
     /// Toggles the right (output) side of the slot with the given `slotIndex`. If `enable` is `true`, a port will appear on the right side and the slot will be able to be connected from this side.
     public final func setSlotEnabledRight(slotIndex: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -522,8 +570,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_set_slot_type_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_type_right")
+    fileprivate static let method_set_slot_type_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_type_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -535,6 +583,7 @@ open class GraphNode: GraphElement {
     
     /// Sets the right (output) type of the slot with the given `slotIndex` to `type`. If the value is negative, all connections will be disallowed to be created via user inputs.
     public final func setSlotTypeRight(slotIndex: Int32, type: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: type) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -551,8 +600,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_get_slot_type_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slot_type_right")
+    fileprivate static let method_get_slot_type_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slot_type_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -564,6 +613,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the right (output) type of the slot with the given `slotIndex`.
     public final func getSlotTypeRight(slotIndex: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -578,8 +628,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_set_slot_color_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_color_right")
+    fileprivate static let method_set_slot_color_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_color_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -591,6 +641,7 @@ open class GraphNode: GraphElement {
     
     /// Sets the ``Color`` of the right (output) side of the slot with the given `slotIndex` to `color`.
     public final func setSlotColorRight(slotIndex: Int32, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -607,8 +658,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_get_slot_color_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slot_color_right")
+    fileprivate static let method_get_slot_color_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slot_color_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -620,6 +671,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the right (output) ``Color`` of the slot with the given `slotIndex`.
     public final func getSlotColorRight(slotIndex: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -634,8 +686,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_set_slot_custom_icon_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_custom_icon_right")
+    fileprivate static let method_set_slot_custom_icon_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_custom_icon_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -647,6 +699,7 @@ open class GraphNode: GraphElement {
     
     /// Sets the custom ``Texture2D`` of the right (output) side of the slot with the given `slotIndex` to `customIcon`.
     public final func setSlotCustomIconRight(slotIndex: Int32, customIcon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: customIcon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -663,8 +716,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_get_slot_custom_icon_right: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_slot_custom_icon_right")
+    fileprivate static let method_get_slot_custom_icon_right: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_slot_custom_icon_right")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -676,6 +729,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the right (output) custom ``Texture2D`` of the slot with the given `slotIndex`.
     public final func getSlotCustomIconRight(slotIndex: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -687,11 +741,11 @@ open class GraphNode: GraphElement {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_slot_draw_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_slot_draw_stylebox")
+    fileprivate static let method_is_slot_draw_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_slot_draw_stylebox")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -701,8 +755,9 @@ open class GraphNode: GraphElement {
         
     }()
     
-    /// Returns true if the background ``StyleBox`` of the slot with the given `slotIndex` is drawn.
+    /// Returns `true` if the background ``StyleBox`` of the slot with the given `slotIndex` is drawn.
     public final func isSlotDrawStylebox(slotIndex: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -717,8 +772,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_set_slot_draw_stylebox: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_slot_draw_stylebox")
+    fileprivate static let method_set_slot_draw_stylebox: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_slot_draw_stylebox")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -730,6 +785,7 @@ open class GraphNode: GraphElement {
     
     /// Toggles the background ``StyleBox`` of the slot with the given `slotIndex`.
     public final func setSlotDrawStylebox(slotIndex: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -746,8 +802,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_set_ignore_invalid_connection_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ignore_invalid_connection_type")
+    fileprivate static let method_set_ignore_invalid_connection_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ignore_invalid_connection_type")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -759,6 +815,7 @@ open class GraphNode: GraphElement {
     
     @inline(__always)
     fileprivate final func set_ignore_invalid_connection_type(_ ignore: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -772,8 +829,8 @@ open class GraphNode: GraphElement {
         
     }
     
-    fileprivate static var method_is_ignoring_valid_connection_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ignoring_valid_connection_type")
+    fileprivate static let method_is_ignoring_valid_connection_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ignoring_valid_connection_type")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -785,13 +842,14 @@ open class GraphNode: GraphElement {
     
     @inline(__always)
     fileprivate final func is_ignoring_valid_connection_type() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphNode.method_is_ignoring_valid_connection_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_input_port_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_port_count")
+    fileprivate static let method_get_input_port_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_port_count")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -803,13 +861,14 @@ open class GraphNode: GraphElement {
     
     /// Returns the number of slots with an enabled input port.
     public final func getInputPortCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_input_port_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_port_position")
+    fileprivate static let method_get_input_port_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_port_position")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3114997196)!
@@ -821,6 +880,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the position of the input port with the given `portIdx`.
     public final func getInputPortPosition(portIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -835,8 +895,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_get_input_port_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_port_type")
+    fileprivate static let method_get_input_port_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_port_type")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -848,6 +908,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the type of the input port with the given `portIdx`.
     public final func getInputPortType(portIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -862,8 +923,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_get_input_port_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_port_color")
+    fileprivate static let method_get_input_port_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_port_color")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2624840992)!
@@ -875,6 +936,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the ``Color`` of the input port with the given `portIdx`.
     public final func getInputPortColor(portIdx: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -889,8 +951,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_get_input_port_slot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_port_slot")
+    fileprivate static let method_get_input_port_slot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_port_slot")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -902,6 +964,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the corresponding slot index of the input port with the given `portIdx`.
     public final func getInputPortSlot(portIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -916,8 +979,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_get_output_port_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_port_count")
+    fileprivate static let method_get_output_port_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_port_count")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -929,13 +992,14 @@ open class GraphNode: GraphElement {
     
     /// Returns the number of slots with an enabled output port.
     public final func getOutputPortCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_output_port_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_port_position")
+    fileprivate static let method_get_output_port_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_port_position")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3114997196)!
@@ -947,6 +1011,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the position of the output port with the given `portIdx`.
     public final func getOutputPortPosition(portIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -961,8 +1026,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_get_output_port_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_port_type")
+    fileprivate static let method_get_output_port_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_port_type")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -974,6 +1039,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the type of the output port with the given `portIdx`.
     public final func getOutputPortType(portIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -988,8 +1054,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_get_output_port_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_port_color")
+    fileprivate static let method_get_output_port_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_port_color")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2624840992)!
@@ -1001,6 +1067,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the ``Color`` of the output port with the given `portIdx`.
     public final func getOutputPortColor(portIdx: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1015,8 +1082,8 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    fileprivate static var method_get_output_port_slot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_port_slot")
+    fileprivate static let method_get_output_port_slot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_port_slot")
         return withUnsafePointer(to: &GraphNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -1028,6 +1095,7 @@ open class GraphNode: GraphElement {
     
     /// Returns the corresponding slot index of the output port with the given `portIdx`.
     public final func getOutputPortSlot(portIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1042,7 +1110,7 @@ open class GraphNode: GraphElement {
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_draw_port":
@@ -1076,7 +1144,8 @@ open class GraphNode: GraphElement {
 func _GraphNode_proxy_draw_port (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<GraphNode>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? GraphNode else { return }
     swiftObject._drawPort (slotIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee, position: args [1]!.assumingMemoryBound (to: Vector2i.self).pointee, left: args [2]!.assumingMemoryBound (to: Bool.self).pointee, color: args [3]!.assumingMemoryBound (to: Color.self).pointee)
 }
 

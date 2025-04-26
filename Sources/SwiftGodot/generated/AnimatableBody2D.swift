@@ -26,7 +26,7 @@ import Musl
 /// When ``AnimatableBody2D`` is moved, its linear and angular velocity are estimated and used to affect other physics bodies in its path. This makes it useful for moving platforms, doors, and other moving objects.
 /// 
 open class AnimatableBody2D: StaticBody2D {
-    fileprivate static var className = StringName("AnimatableBody2D")
+    private static var className = StringName("AnimatableBody2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class AnimatableBody2D: StaticBody2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_sync_to_physics: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sync_to_physics")
+    fileprivate static let method_set_sync_to_physics: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sync_to_physics")
         return withUnsafePointer(to: &AnimatableBody2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -57,6 +57,7 @@ open class AnimatableBody2D: StaticBody2D {
     
     @inline(__always)
     fileprivate final func set_sync_to_physics(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class AnimatableBody2D: StaticBody2D {
         
     }
     
-    fileprivate static var method_is_sync_to_physics_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sync_to_physics_enabled")
+    fileprivate static let method_is_sync_to_physics_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sync_to_physics_enabled")
         return withUnsafePointer(to: &AnimatableBody2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -83,6 +84,7 @@ open class AnimatableBody2D: StaticBody2D {
     
     @inline(__always)
     fileprivate final func is_sync_to_physics_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimatableBody2D.method_is_sync_to_physics_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

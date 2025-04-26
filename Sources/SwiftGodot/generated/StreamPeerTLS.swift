@@ -26,7 +26,7 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class StreamPeerTLS: StreamPeer {
-    fileprivate static var className = StringName("StreamPeerTLS")
+    private static var className = StringName("StreamPeerTLS")
     override open class var godotClassName: StringName { className }
     public enum Status: Int64, CaseIterable {
         /// A status representing a ``StreamPeerTLS`` that is disconnected.
@@ -42,8 +42,8 @@ open class StreamPeerTLS: StreamPeer {
     }
     
     /* Methods */
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &StreamPeerTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -55,12 +55,13 @@ open class StreamPeerTLS: StreamPeer {
     
     /// Poll the connection to check for incoming bytes. Call this right before ``StreamPeer/getAvailableBytes()`` for it to work properly.
     public final func poll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(StreamPeerTLS.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_accept_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("accept_stream")
+    fileprivate static let method_accept_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("accept_stream")
         return withUnsafePointer(to: &StreamPeerTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4292689651)!
@@ -72,6 +73,7 @@ open class StreamPeerTLS: StreamPeer {
     
     /// Accepts a peer connection as a server using the given `serverOptions`. See ``TLSOptions/server(key:certificate:)``.
     public final func acceptStream(_ stream: StreamPeer?, serverOptions: TLSOptions?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: serverOptions?.handle) { pArg1 in
@@ -89,8 +91,8 @@ open class StreamPeerTLS: StreamPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_connect_to_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_to_stream")
+    fileprivate static let method_connect_to_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_to_stream")
         return withUnsafePointer(to: &StreamPeerTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 57169517)!
@@ -102,6 +104,7 @@ open class StreamPeerTLS: StreamPeer {
     
     /// Connects to a peer using an underlying ``StreamPeer`` `stream` and verifying the remote certificate is correctly signed for the given `commonName`. You can pass the optional `clientOptions` parameter to customize the trusted certification authorities, or disable the common name verification. See ``TLSOptions/client(trustedChain:commonNameOverride:)`` and ``TLSOptions/clientUnsafe(trustedChain:)``.
     public final func connectToStream(_ stream: StreamPeer?, commonName: String, clientOptions: TLSOptions? = nil) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: stream?.handle) { pArg0 in
             let commonName = GString(commonName)
@@ -123,8 +126,8 @@ open class StreamPeerTLS: StreamPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_get_status: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_status")
+    fileprivate static let method_get_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_status")
         return withUnsafePointer(to: &StreamPeerTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1128380576)!
@@ -136,13 +139,14 @@ open class StreamPeerTLS: StreamPeer {
     
     /// Returns the status of the connection. See ``StreamPeerTLS/Status`` for values.
     public final func getStatus() -> StreamPeerTLS.Status {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(StreamPeerTLS.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return StreamPeerTLS.Status (rawValue: _result)!
     }
     
-    fileprivate static var method_get_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream")
+    fileprivate static let method_get_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream")
         return withUnsafePointer(to: &StreamPeerTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2741655269)!
@@ -154,13 +158,14 @@ open class StreamPeerTLS: StreamPeer {
     
     /// Returns the underlying ``StreamPeer`` connection, used in ``acceptStream(_:serverOptions:)`` or ``connectToStream(_:commonName:clientOptions:)``.
     public final func getStream() -> StreamPeer? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(StreamPeerTLS.method_get_stream, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_disconnect_from_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("disconnect_from_stream")
+    fileprivate static let method_disconnect_from_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("disconnect_from_stream")
         return withUnsafePointer(to: &StreamPeerTLS.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -172,6 +177,7 @@ open class StreamPeerTLS: StreamPeer {
     
     /// Disconnects from host.
     public final func disconnectFromStream() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(StreamPeerTLS.method_disconnect_from_stream, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

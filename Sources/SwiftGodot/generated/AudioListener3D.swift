@@ -23,11 +23,11 @@ import Musl
 /// 
 /// Once added to the scene tree and enabled using ``makeCurrent()``, this node will override the location sounds are heard from. This can be used to listen from a location different from the ``Camera3D``.
 open class AudioListener3D: Node3D {
-    fileprivate static var className = StringName("AudioListener3D")
+    private static var className = StringName("AudioListener3D")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_make_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_current")
+    fileprivate static let method_make_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_current")
         return withUnsafePointer(to: &AudioListener3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -39,12 +39,13 @@ open class AudioListener3D: Node3D {
     
     /// Enables the listener. This will override the current camera's listener.
     public final func makeCurrent() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AudioListener3D.method_make_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_current")
+    fileprivate static let method_clear_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_current")
         return withUnsafePointer(to: &AudioListener3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -56,12 +57,13 @@ open class AudioListener3D: Node3D {
     
     /// Disables the listener to use the current camera's listener instead.
     public final func clearCurrent() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AudioListener3D.method_clear_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_current: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_current")
+    fileprivate static let method_is_current: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_current")
         return withUnsafePointer(to: &AudioListener3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -76,13 +78,14 @@ open class AudioListener3D: Node3D {
     /// > Note: There may be more than one AudioListener3D marked as "current" in the scene tree, but only the one that was made current last will be used.
     /// 
     public final func isCurrent() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioListener3D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_listener_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_listener_transform")
+    fileprivate static let method_get_listener_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_listener_transform")
         return withUnsafePointer(to: &AudioListener3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229777777)!
@@ -94,6 +97,7 @@ open class AudioListener3D: Node3D {
     
     /// Returns the listener's global orthonormalized ``Transform3D``.
     public final func getListenerTransform() -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         gi.object_method_bind_ptrcall(AudioListener3D.method_get_listener_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

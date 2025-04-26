@@ -26,7 +26,7 @@ import Musl
 /// Godot contains a built-in GPU-based lightmapper ``LightmapperRD`` that uses compute shaders, but custom lightmappers can be implemented by C++ modules.
 /// 
 open class Lightmapper: RefCounted {
-    fileprivate static var className = StringName("Lightmapper")
+    private static var className = StringName("Lightmapper")
     override open class var godotClassName: StringName { className }
 }
 

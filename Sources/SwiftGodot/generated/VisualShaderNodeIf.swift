@@ -30,7 +30,7 @@ import Musl
 /// - Ports **4**, **5**, and **6** are the possible outputs, returned if `a == b`, `a > b`, or `a < b` respectively.
 /// 
 open class VisualShaderNodeIf: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeIf")
+    private static var className = StringName("VisualShaderNodeIf")
     override open class var godotClassName: StringName { className }
 }
 

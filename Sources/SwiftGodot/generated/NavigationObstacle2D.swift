@@ -28,7 +28,7 @@ import Musl
 /// With ``avoidanceEnabled`` the obstacle can constrain the avoidance velocities of avoidance using agents. If the obstacle's vertices are wound in clockwise order, avoidance agents will be pushed in by the obstacle, otherwise, avoidance agents will be pushed out. Obstacles using vertices and avoidance can warp to a new position but should not be moved every single frame as each change requires a rebuild of the avoidance map.
 /// 
 open class NavigationObstacle2D: Node2D {
-    fileprivate static var className = StringName("NavigationObstacle2D")
+    private static var className = StringName("NavigationObstacle2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -123,8 +123,8 @@ open class NavigationObstacle2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_get_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rid")
+    fileprivate static let method_get_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rid")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -136,13 +136,14 @@ open class NavigationObstacle2D: Node2D {
     
     /// Returns the ``RID`` of this obstacle on the ``NavigationServer2D``.
     public final func getRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_avoidance_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_avoidance_enabled")
+    fileprivate static let method_set_avoidance_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_avoidance_enabled")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -154,6 +155,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_avoidance_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -167,8 +169,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_avoidance_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_avoidance_enabled")
+    fileprivate static let method_get_avoidance_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_avoidance_enabled")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -180,13 +182,14 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_avoidance_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_map")
+    fileprivate static let method_set_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_map")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -198,6 +201,7 @@ open class NavigationObstacle2D: Node2D {
     
     /// Sets the ``RID`` of the navigation map this NavigationObstacle node should use and also updates the `obstacle` on the NavigationServer.
     public final func setNavigationMap(_ navigationMap: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: navigationMap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -211,8 +215,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_map")
+    fileprivate static let method_get_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_map")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -224,13 +228,14 @@ open class NavigationObstacle2D: Node2D {
     
     /// Returns the ``RID`` of the navigation map for this NavigationObstacle node. This function returns always the map set on the NavigationObstacle node and not the map of the abstract obstacle on the NavigationServer. If the obstacle map is changed directly with the NavigationServer API the NavigationObstacle node will not be aware of the map change. Use ``setNavigationMap(_:)`` to change the navigation map for the NavigationObstacle and also update the obstacle on the NavigationServer.
     public final func getNavigationMap() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_radius")
+    fileprivate static let method_set_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_radius")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -242,6 +247,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -255,8 +261,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_radius")
+    fileprivate static let method_get_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_radius")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -268,13 +274,14 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_velocity")
+    fileprivate static let method_set_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_velocity")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -286,6 +293,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_velocity(_ velocity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -299,8 +307,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_velocity")
+    fileprivate static let method_get_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_velocity")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -312,13 +320,14 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_velocity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertices")
+    fileprivate static let method_set_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertices")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -330,6 +339,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_vertices(_ vertices: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -343,8 +353,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_vertices")
+    fileprivate static let method_get_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_vertices")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -356,13 +366,14 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_vertices() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_avoidance_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_avoidance_layers")
+    fileprivate static let method_set_avoidance_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_avoidance_layers")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -374,6 +385,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_avoidance_layers(_ layers: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -387,8 +399,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_avoidance_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_avoidance_layers")
+    fileprivate static let method_get_avoidance_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_avoidance_layers")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -400,13 +412,14 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_avoidance_layers() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_avoidance_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_avoidance_layer_value")
+    fileprivate static let method_set_avoidance_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_avoidance_layer_value")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -418,6 +431,7 @@ open class NavigationObstacle2D: Node2D {
     
     /// Based on `value`, enables or disables the specified layer in the ``avoidanceLayers`` bitmask, given a `layerNumber` between 1 and 32.
     public final func setAvoidanceLayerValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -434,8 +448,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_avoidance_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_avoidance_layer_value")
+    fileprivate static let method_get_avoidance_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_avoidance_layer_value")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -447,6 +461,7 @@ open class NavigationObstacle2D: Node2D {
     
     /// Returns whether or not the specified layer of the ``avoidanceLayers`` bitmask is enabled, given a `layerNumber` between 1 and 32.
     public final func getAvoidanceLayerValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -461,8 +476,8 @@ open class NavigationObstacle2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_affect_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_affect_navigation_mesh")
+    fileprivate static let method_set_affect_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_affect_navigation_mesh")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -474,6 +489,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_affect_navigation_mesh(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -487,8 +503,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_affect_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_affect_navigation_mesh")
+    fileprivate static let method_get_affect_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_affect_navigation_mesh")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -500,13 +516,14 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_affect_navigation_mesh() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_affect_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_carve_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_carve_navigation_mesh")
+    fileprivate static let method_set_carve_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_carve_navigation_mesh")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -518,6 +535,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_carve_navigation_mesh(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -531,8 +549,8 @@ open class NavigationObstacle2D: Node2D {
         
     }
     
-    fileprivate static var method_get_carve_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_carve_navigation_mesh")
+    fileprivate static let method_get_carve_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_carve_navigation_mesh")
         return withUnsafePointer(to: &NavigationObstacle2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -544,6 +562,7 @@ open class NavigationObstacle2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_carve_navigation_mesh() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_carve_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -21,7 +21,7 @@ import Musl
 
 /// The FBXState handles the state data imported from FBX files.
 open class FBXState: GLTFState {
-    fileprivate static var className = StringName("FBXState")
+    private static var className = StringName("FBXState")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -39,8 +39,8 @@ open class FBXState: GLTFState {
     }
     
     /* Methods */
-    fileprivate static var method_get_allow_geometry_helper_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_geometry_helper_nodes")
+    fileprivate static let method_get_allow_geometry_helper_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_geometry_helper_nodes")
         return withUnsafePointer(to: &FBXState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -52,13 +52,14 @@ open class FBXState: GLTFState {
     
     @inline(__always)
     fileprivate final func get_allow_geometry_helper_nodes() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FBXState.method_get_allow_geometry_helper_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_geometry_helper_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_geometry_helper_nodes")
+    fileprivate static let method_set_allow_geometry_helper_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_geometry_helper_nodes")
         return withUnsafePointer(to: &FBXState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -70,6 +71,7 @@ open class FBXState: GLTFState {
     
     @inline(__always)
     fileprivate final func set_allow_geometry_helper_nodes(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

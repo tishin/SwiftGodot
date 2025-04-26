@@ -26,7 +26,7 @@ import Musl
 /// > Note: On Wear OS devices, rotary input is mapped to ``MouseButton/wheelUp`` and ``MouseButton/wheelDown``. This can be changed to ``MouseButton/wheelLeft`` and ``MouseButton/wheelRight`` with the ``ProjectSettings/inputDevices/pointing/android/rotaryInputScrollAxis`` setting.
 /// 
 open class InputEventMouseButton: InputEventMouse {
-    fileprivate static var className = StringName("InputEventMouseButton")
+    private static var className = StringName("InputEventMouseButton")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -92,8 +92,8 @@ open class InputEventMouseButton: InputEventMouse {
     }
     
     /* Methods */
-    fileprivate static var method_set_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_factor")
+    fileprivate static let method_set_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_factor")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -105,6 +105,7 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_factor(_ factor: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: factor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -118,8 +119,8 @@ open class InputEventMouseButton: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_factor")
+    fileprivate static let method_get_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_factor")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -131,13 +132,14 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_factor() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(InputEventMouseButton.method_get_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_button_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_button_index")
+    fileprivate static let method_set_button_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_button_index")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3624991109)!
@@ -149,6 +151,7 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_button_index(_ buttonIndex: MouseButton) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: buttonIndex.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -162,8 +165,8 @@ open class InputEventMouseButton: InputEventMouse {
         
     }
     
-    fileprivate static var method_get_button_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_button_index")
+    fileprivate static let method_get_button_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_button_index")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1132662608)!
@@ -175,13 +178,14 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func get_button_index() -> MouseButton {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventMouseButton.method_get_button_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MouseButton (rawValue: _result)!
     }
     
-    fileprivate static var method_set_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressed")
+    fileprivate static let method_set_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressed")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -193,6 +197,7 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -206,8 +211,8 @@ open class InputEventMouseButton: InputEventMouse {
         
     }
     
-    fileprivate static var method_set_canceled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_canceled")
+    fileprivate static let method_set_canceled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_canceled")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -219,6 +224,7 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_canceled(_ canceled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canceled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -232,8 +238,8 @@ open class InputEventMouseButton: InputEventMouse {
         
     }
     
-    fileprivate static var method_set_double_click: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_double_click")
+    fileprivate static let method_set_double_click: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_double_click")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -245,6 +251,7 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func set_double_click(_ doubleClick: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: doubleClick) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -258,8 +265,8 @@ open class InputEventMouseButton: InputEventMouse {
         
     }
     
-    fileprivate static var method_is_double_click: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_double_click")
+    fileprivate static let method_is_double_click: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_double_click")
         return withUnsafePointer(to: &InputEventMouseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -271,6 +278,7 @@ open class InputEventMouseButton: InputEventMouse {
     
     @inline(__always)
     fileprivate final func is_double_click() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(InputEventMouseButton.method_is_double_click, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

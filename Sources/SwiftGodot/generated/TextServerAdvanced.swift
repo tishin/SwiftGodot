@@ -23,7 +23,7 @@ import Musl
 /// 
 /// An implementation of ``TextServer`` that uses HarfBuzz, ICU and SIL Graphite to support BiDi, complex text layouts and contextual OpenType features. This is Godot's default primary ``TextServer`` interface.
 open class TextServerAdvanced: TextServerExtension {
-    fileprivate static var className = StringName("TextServerAdvanced")
+    private static var className = StringName("TextServerAdvanced")
     override open class var godotClassName: StringName { className }
 }
 

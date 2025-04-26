@@ -30,7 +30,7 @@ import Musl
 /// By default the skeleton hand bones are repositioned to match the size of the tracked hand. To preserve the modeled bone sizes change ``boneUpdate`` to apply rotation only.
 /// 
 open class OpenXRHand: Node3D {
-    fileprivate static var className = StringName("OpenXRHand")
+    private static var className = StringName("OpenXRHand")
     override open class var godotClassName: StringName { className }
     public enum Hands: Int64, CaseIterable {
         /// Tracking the player's left hand.
@@ -132,8 +132,8 @@ open class OpenXRHand: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_hand: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand")
+    fileprivate static let method_set_hand: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1849328560)!
@@ -145,6 +145,7 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func set_hand(_ hand: OpenXRHand.Hands) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -158,8 +159,8 @@ open class OpenXRHand: Node3D {
         
     }
     
-    fileprivate static var method_get_hand: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand")
+    fileprivate static let method_get_hand: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2850644561)!
@@ -171,13 +172,14 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func get_hand() -> OpenXRHand.Hands {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(OpenXRHand.method_get_hand, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return OpenXRHand.Hands (rawValue: _result)!
     }
     
-    fileprivate static var method_set_hand_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hand_skeleton")
+    fileprivate static let method_set_hand_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hand_skeleton")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -189,6 +191,7 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func set_hand_skeleton(_ handSkeleton: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: handSkeleton.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -202,8 +205,8 @@ open class OpenXRHand: Node3D {
         
     }
     
-    fileprivate static var method_get_hand_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hand_skeleton")
+    fileprivate static let method_get_hand_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hand_skeleton")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -215,13 +218,14 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func get_hand_skeleton() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(OpenXRHand.method_get_hand_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_motion_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_motion_range")
+    fileprivate static let method_set_motion_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_motion_range")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3326516003)!
@@ -233,6 +237,7 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func set_motion_range(_ motionRange: OpenXRHand.MotionRange) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: motionRange.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -246,8 +251,8 @@ open class OpenXRHand: Node3D {
         
     }
     
-    fileprivate static var method_get_motion_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_motion_range")
+    fileprivate static let method_get_motion_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_motion_range")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2191822314)!
@@ -259,13 +264,14 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func get_motion_range() -> OpenXRHand.MotionRange {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(OpenXRHand.method_get_motion_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return OpenXRHand.MotionRange (rawValue: _result)!
     }
     
-    fileprivate static var method_set_skeleton_rig: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skeleton_rig")
+    fileprivate static let method_set_skeleton_rig: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skeleton_rig")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1528072213)!
@@ -277,6 +283,7 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func set_skeleton_rig(_ skeletonRig: OpenXRHand.SkeletonRig) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: skeletonRig.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -290,8 +297,8 @@ open class OpenXRHand: Node3D {
         
     }
     
-    fileprivate static var method_get_skeleton_rig: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skeleton_rig")
+    fileprivate static let method_get_skeleton_rig: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skeleton_rig")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 968409338)!
@@ -303,13 +310,14 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func get_skeleton_rig() -> OpenXRHand.SkeletonRig {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(OpenXRHand.method_get_skeleton_rig, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return OpenXRHand.SkeletonRig (rawValue: _result)!
     }
     
-    fileprivate static var method_set_bone_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_update")
+    fileprivate static let method_set_bone_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_update")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3144625444)!
@@ -321,6 +329,7 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func set_bone_update(_ boneUpdate: OpenXRHand.BoneUpdate) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneUpdate.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -334,8 +343,8 @@ open class OpenXRHand: Node3D {
         
     }
     
-    fileprivate static var method_get_bone_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_update")
+    fileprivate static let method_get_bone_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_update")
         return withUnsafePointer(to: &OpenXRHand.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1310695248)!
@@ -347,6 +356,7 @@ open class OpenXRHand: Node3D {
     
     @inline(__always)
     fileprivate final func get_bone_update() -> OpenXRHand.BoneUpdate {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(OpenXRHand.method_get_bone_update, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return OpenXRHand.BoneUpdate (rawValue: _result)!

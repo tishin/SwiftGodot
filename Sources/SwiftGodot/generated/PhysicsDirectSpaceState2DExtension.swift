@@ -26,11 +26,11 @@ import Musl
 /// Intended for use with GDExtension to create custom implementations of ``PhysicsDirectSpaceState2D``.
 /// 
 open class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
-    fileprivate static var className = StringName("PhysicsDirectSpaceState2DExtension")
+    private static var className = StringName("PhysicsDirectSpaceState2DExtension")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_is_body_excluded_from_query: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_body_excluded_from_query")
+    fileprivate static let method_is_body_excluded_from_query: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_body_excluded_from_query")
         return withUnsafePointer(to: &PhysicsDirectSpaceState2DExtension.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -42,6 +42,7 @@ open class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
     
     /// 
     public final func isBodyExcludedFromQuery(body: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

@@ -49,7 +49,7 @@ import Musl
 /// See also ``AudioEffectEQ``, ``AudioEffectEQ6``, ``AudioEffectEQ21``.
 /// 
 open class AudioEffectEQ10: AudioEffectEQ {
-    fileprivate static var className = StringName("AudioEffectEQ10")
+    private static var className = StringName("AudioEffectEQ10")
     override open class var godotClassName: StringName { className }
 }
 

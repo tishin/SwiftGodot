@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Abstraction over ``TextServer`` for handling a single line of text.
 open class TextLine: RefCounted {
-    fileprivate static var className = StringName("TextLine")
+    private static var className = StringName("TextLine")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -137,8 +137,8 @@ open class TextLine: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -150,12 +150,13 @@ open class TextLine: RefCounted {
     
     /// Clears text line (removes text and inline objects).
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TextLine.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_direction")
+    fileprivate static let method_set_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_direction")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1418190634)!
@@ -167,6 +168,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_direction(_ direction: TextServer.Direction) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -180,8 +182,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_direction")
+    fileprivate static let method_get_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_direction")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2516697328)!
@@ -193,13 +195,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_direction() -> TextServer.Direction {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextLine.method_get_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.Direction (rawValue: _result)!
     }
     
-    fileprivate static var method_set_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_orientation")
+    fileprivate static let method_set_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_orientation")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 42823726)!
@@ -211,6 +214,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_orientation(_ orientation: TextServer.Orientation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: orientation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -224,8 +228,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_orientation")
+    fileprivate static let method_get_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_orientation")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 175768116)!
@@ -237,13 +241,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_orientation() -> TextServer.Orientation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextLine.method_get_orientation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.Orientation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_preserve_invalid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_preserve_invalid")
+    fileprivate static let method_set_preserve_invalid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_preserve_invalid")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -255,6 +260,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_preserve_invalid(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -268,8 +274,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_preserve_invalid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_preserve_invalid")
+    fileprivate static let method_get_preserve_invalid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_preserve_invalid")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -281,13 +287,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_preserve_invalid() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextLine.method_get_preserve_invalid, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_preserve_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_preserve_control")
+    fileprivate static let method_set_preserve_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_preserve_control")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -299,6 +306,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_preserve_control(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -312,8 +320,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_preserve_control: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_preserve_control")
+    fileprivate static let method_get_preserve_control: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_preserve_control")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -325,13 +333,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_preserve_control() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TextLine.method_get_preserve_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bidi_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bidi_override")
+    fileprivate static let method_set_bidi_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bidi_override")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -345,7 +354,8 @@ open class TextLine: RefCounted {
     /// 
     /// Override ranges should cover full source text without overlaps. BiDi algorithm will be used on each range separately.
     /// 
-    public final func setBidiOverride(_ override: GArray) {
+    public final func setBidiOverride(_ override: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: override.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -359,8 +369,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_add_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_string")
+    fileprivate static let method_add_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_string")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 621426851)!
@@ -372,6 +382,7 @@ open class TextLine: RefCounted {
     
     /// Adds text span and font to draw it.
     public final func addString(text: String, font: Font?, fontSize: Int32, language: String = "", meta: Variant?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
@@ -400,8 +411,8 @@ open class TextLine: RefCounted {
         return _result
     }
     
-    fileprivate static var method_add_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_object")
+    fileprivate static let method_add_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_object")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1316529304)!
@@ -413,6 +424,7 @@ open class TextLine: RefCounted {
     
     /// Adds inline object to the text buffer, `key` must be unique. In the text, object is represented as `length` object replacement characters.
     public final func addObject(key: Variant?, size: Vector2, inlineAlign: InlineAlignment = .center, length: Int32 = 1, baseline: Double = 0.0) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: key.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -439,8 +451,8 @@ open class TextLine: RefCounted {
         return _result
     }
     
-    fileprivate static var method_resize_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resize_object")
+    fileprivate static let method_resize_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resize_object")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2095776372)!
@@ -452,6 +464,7 @@ open class TextLine: RefCounted {
     
     /// Sets new size and alignment of embedded object.
     public final func resizeObject(key: Variant?, size: Vector2, inlineAlign: InlineAlignment = .center, baseline: Double = 0.0) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: key.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -475,8 +488,8 @@ open class TextLine: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -488,6 +501,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_width(_ width: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -501,8 +515,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_width")
+    fileprivate static let method_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_width")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -514,13 +528,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_width() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextLine.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_horizontal_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_horizontal_alignment")
+    fileprivate static let method_set_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_horizontal_alignment")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2312603777)!
@@ -532,6 +547,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_horizontal_alignment(_ alignment: HorizontalAlignment) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -545,8 +561,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_horizontal_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_horizontal_alignment")
+    fileprivate static let method_get_horizontal_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_horizontal_alignment")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 341400642)!
@@ -558,13 +574,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_horizontal_alignment() -> HorizontalAlignment {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextLine.method_get_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
-    fileprivate static var method_tab_align: GDExtensionMethodBindPtr = {
-        let methodName = StringName("tab_align")
+    fileprivate static let method_tab_align: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("tab_align")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2899603908)!
@@ -576,6 +593,7 @@ open class TextLine: RefCounted {
     
     /// Aligns text to the given tab-stops.
     public final func tabAlign(tabStops: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tabStops.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -589,8 +607,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_set_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flags")
+    fileprivate static let method_set_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flags")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2877345813)!
@@ -602,6 +620,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_flags(_ flags: TextServer.JustificationFlag) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -615,8 +634,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flags")
+    fileprivate static let method_get_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flags")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1583363614)!
@@ -628,13 +647,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_flags() -> TextServer.JustificationFlag {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.JustificationFlag = TextServer.JustificationFlag ()
         gi.object_method_bind_ptrcall(TextLine.method_get_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_text_overrun_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_overrun_behavior")
+    fileprivate static let method_set_text_overrun_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_overrun_behavior")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1008890932)!
@@ -646,6 +666,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_text_overrun_behavior(_ overrunBehavior: TextServer.OverrunBehavior) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: overrunBehavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -659,8 +680,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_text_overrun_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_overrun_behavior")
+    fileprivate static let method_get_text_overrun_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_overrun_behavior")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3779142101)!
@@ -672,13 +693,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TextLine.method_get_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.OverrunBehavior (rawValue: _result)!
     }
     
-    fileprivate static var method_set_ellipsis_char: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ellipsis_char")
+    fileprivate static let method_set_ellipsis_char: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ellipsis_char")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -690,6 +712,7 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func set_ellipsis_char(_ char: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let char = GString(char)
         withUnsafePointer(to: char.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -704,8 +727,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_get_ellipsis_char: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ellipsis_char")
+    fileprivate static let method_get_ellipsis_char: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ellipsis_char")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -717,13 +740,14 @@ open class TextLine: RefCounted {
     
     @inline(__always)
     fileprivate final func get_ellipsis_char() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(TextLine.method_get_ellipsis_char, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_objects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_objects")
+    fileprivate static let method_get_objects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_objects")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -734,14 +758,15 @@ open class TextLine: RefCounted {
     }()
     
     /// Returns array of inline objects.
-    public final func getObjects() -> GArray {
-        let _result: GArray = GArray ()
+    public final func getObjects() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(TextLine.method_get_objects, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_object_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_object_rect")
+    fileprivate static let method_get_object_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_object_rect")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1742700391)!
@@ -753,6 +778,7 @@ open class TextLine: RefCounted {
     
     /// Returns bounding rectangle of the inline object.
     public final func getObjectRect(key: Variant?) -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         withUnsafePointer(to: key.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -767,8 +793,8 @@ open class TextLine: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -780,13 +806,14 @@ open class TextLine: RefCounted {
     
     /// Returns size of the bounding box of the text.
     public final func getSize() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(TextLine.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rid")
+    fileprivate static let method_get_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rid")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -798,13 +825,14 @@ open class TextLine: RefCounted {
     
     /// Returns TextServer buffer RID.
     public final func getRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(TextLine.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_line_ascent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_ascent")
+    fileprivate static let method_get_line_ascent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_ascent")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -816,13 +844,14 @@ open class TextLine: RefCounted {
     
     /// Returns the text ascent (number of pixels above the baseline for horizontal layout or to the left of baseline for vertical).
     public final func getLineAscent() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextLine.method_get_line_ascent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_line_descent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_descent")
+    fileprivate static let method_get_line_descent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_descent")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -834,13 +863,14 @@ open class TextLine: RefCounted {
     
     /// Returns the text descent (number of pixels below the baseline for horizontal layout or to the right of baseline for vertical).
     public final func getLineDescent() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextLine.method_get_line_descent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_line_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_width")
+    fileprivate static let method_get_line_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_width")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -852,13 +882,14 @@ open class TextLine: RefCounted {
     
     /// Returns width (for horizontal layout) or height (for vertical) of the text.
     public final func getLineWidth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextLine.method_get_line_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_line_underline_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_underline_position")
+    fileprivate static let method_get_line_underline_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_underline_position")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -870,13 +901,14 @@ open class TextLine: RefCounted {
     
     /// Returns pixel offset of the underline below the baseline.
     public final func getLineUnderlinePosition() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextLine.method_get_line_underline_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_line_underline_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_underline_thickness")
+    fileprivate static let method_get_line_underline_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_underline_thickness")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -888,13 +920,14 @@ open class TextLine: RefCounted {
     
     /// Returns thickness of the underline.
     public final func getLineUnderlineThickness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TextLine.method_get_line_underline_thickness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw")
+    fileprivate static let method_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 856975658)!
@@ -906,6 +939,7 @@ open class TextLine: RefCounted {
     
     /// Draw text into a canvas item at a given position, with `color`. `pos` specifies the top left corner of the bounding box.
     public final func draw(canvas: RID, pos: Vector2, color: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canvas.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: color) { pArg2 in
@@ -925,8 +959,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_draw_outline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw_outline")
+    fileprivate static let method_draw_outline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw_outline")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1343401456)!
@@ -938,6 +972,7 @@ open class TextLine: RefCounted {
     
     /// Draw text into a canvas item at a given position, with `color`. `pos` specifies the top left corner of the bounding box.
     public final func drawOutline(canvas: RID, pos: Vector2, outlineSize: Int32 = 1, color: Color = Color (r: 1, g: 1, b: 1, a: 1)) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canvas.content) { pArg0 in
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: outlineSize) { pArg2 in
@@ -960,8 +995,8 @@ open class TextLine: RefCounted {
         
     }
     
-    fileprivate static var method_hit_test: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hit_test")
+    fileprivate static let method_hit_test: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hit_test")
         return withUnsafePointer(to: &TextLine.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2401831903)!
@@ -973,6 +1008,7 @@ open class TextLine: RefCounted {
     
     /// Returns caret character offset at the specified pixel offset at the baseline. This function always returns a valid position.
     public final func hitTest(coords: Double) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

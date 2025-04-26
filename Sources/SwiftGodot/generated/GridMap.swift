@@ -38,7 +38,7 @@ import Musl
 /// - ``cellSizeChanged``
 /// - ``changed``
 open class GridMap: Node3D {
-    fileprivate static var className = StringName("GridMap")
+    private static var className = StringName("GridMap")
     override open class var godotClassName: StringName { className }
     /* Constants */
     /// Invalid cell item that can be used in ``setCellItem(position:item:orientation:)`` to clear cells (or represent an empty cell in ``getCellItem(position:)``).
@@ -200,8 +200,8 @@ open class GridMap: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer")
+    fileprivate static let method_set_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -213,6 +213,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_collision_layer(_ layer: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -226,8 +227,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_collision_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer")
+    fileprivate static let method_get_collision_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -239,13 +240,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_collision_layer() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(GridMap.method_get_collision_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -257,6 +259,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -270,8 +273,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -283,13 +286,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(GridMap.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask_value")
+    fileprivate static let method_set_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask_value")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -301,6 +305,7 @@ open class GridMap: Node3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionMask``, given a `layerNumber` between 1 and 32.
     public final func setCollisionMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -317,8 +322,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_collision_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask_value")
+    fileprivate static let method_get_collision_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask_value")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -330,6 +335,7 @@ open class GridMap: Node3D {
     
     /// Returns whether or not the specified layer of the ``collisionMask`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -344,8 +350,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_layer_value")
+    fileprivate static let method_set_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_layer_value")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -357,6 +363,7 @@ open class GridMap: Node3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``collisionLayer``, given a `layerNumber` between 1 and 32.
     public final func setCollisionLayerValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -373,8 +380,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_collision_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_layer_value")
+    fileprivate static let method_get_collision_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_layer_value")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -386,6 +393,7 @@ open class GridMap: Node3D {
     
     /// Returns whether or not the specified layer of the ``collisionLayer`` is enabled, given a `layerNumber` between 1 and 32.
     public final func getCollisionLayerValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -400,8 +408,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_priority")
+    fileprivate static let method_set_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_priority")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -413,6 +421,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_collision_priority(_ priority: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -426,8 +435,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_collision_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_priority")
+    fileprivate static let method_get_collision_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_priority")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -439,13 +448,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_collision_priority() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GridMap.method_get_collision_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_physics_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_material")
+    fileprivate static let method_set_physics_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_material")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1784508650)!
@@ -457,6 +467,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_physics_material(_ material: PhysicsMaterial?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -470,8 +481,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_physics_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_material")
+    fileprivate static let method_get_physics_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_material")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2521850424)!
@@ -483,13 +494,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_physics_material() -> PhysicsMaterial? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GridMap.method_get_physics_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_bake_navigation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bake_navigation")
+    fileprivate static let method_set_bake_navigation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bake_navigation")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -501,6 +513,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_bake_navigation(_ bakeNavigation: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bakeNavigation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -514,8 +527,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_is_baking_navigation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_baking_navigation")
+    fileprivate static let method_is_baking_navigation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_baking_navigation")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -527,13 +540,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func is_baking_navigation() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GridMap.method_is_baking_navigation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_map")
+    fileprivate static let method_set_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_map")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -545,6 +559,7 @@ open class GridMap: Node3D {
     
     /// Sets the ``RID`` of the navigation map this GridMap node should use for its cell baked navigation meshes.
     public final func setNavigationMap(_ navigationMap: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: navigationMap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -558,8 +573,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_map")
+    fileprivate static let method_get_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_map")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -574,13 +589,14 @@ open class GridMap: Node3D {
     /// This function returns always the map set on the GridMap node and not the map on the NavigationServer. If the map is changed directly with the NavigationServer API the GridMap node will not be aware of the map change.
     /// 
     public final func getNavigationMap() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(GridMap.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_mesh_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mesh_library")
+    fileprivate static let method_set_mesh_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mesh_library")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1488083439)!
@@ -592,6 +608,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_mesh_library(_ meshLibrary: MeshLibrary?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: meshLibrary?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -605,8 +622,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_mesh_library: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh_library")
+    fileprivate static let method_get_mesh_library: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh_library")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3350993772)!
@@ -618,13 +635,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_mesh_library() -> MeshLibrary? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(GridMap.method_get_mesh_library, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_size")
+    fileprivate static let method_set_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_size")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -636,6 +654,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_cell_size(_ size: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -649,8 +668,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_size")
+    fileprivate static let method_get_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_size")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -662,13 +681,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_cell_size() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(GridMap.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cell_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_scale")
+    fileprivate static let method_set_cell_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_scale")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -680,6 +700,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_cell_scale(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -693,8 +714,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_cell_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_scale")
+    fileprivate static let method_get_cell_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_scale")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -706,13 +727,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_cell_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GridMap.method_get_cell_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_octant_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_octant_size")
+    fileprivate static let method_set_octant_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_octant_size")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -724,6 +746,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_octant_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -737,8 +760,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_octant_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_octant_size")
+    fileprivate static let method_get_octant_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_octant_size")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -750,13 +773,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_octant_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GridMap.method_get_octant_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cell_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell_item")
+    fileprivate static let method_set_cell_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell_item")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3449088946)!
@@ -773,6 +797,7 @@ open class GridMap: Node3D {
     /// Optionally, the item's orientation can be passed. For valid orientation values, see ``getOrthogonalIndexFromBasis(_:)``.
     /// 
     public final func setCellItem(position: Vector3i, item: Int32, orientation: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: item) { pArg1 in
                 withUnsafePointer(to: orientation) { pArg2 in
@@ -792,8 +817,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_cell_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_item")
+    fileprivate static let method_get_cell_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_item")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3724960147)!
@@ -805,6 +830,7 @@ open class GridMap: Node3D {
     
     /// The ``MeshLibrary`` item index located at the given grid coordinates. If the cell is empty, ``invalidCellItem`` will be returned.
     public final func getCellItem(position: Vector3i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -819,8 +845,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_cell_item_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_item_orientation")
+    fileprivate static let method_get_cell_item_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_item_orientation")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3724960147)!
@@ -832,6 +858,7 @@ open class GridMap: Node3D {
     
     /// The orientation of the cell at the given grid coordinates. `-1` is returned if the cell is empty.
     public final func getCellItemOrientation(position: Vector3i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -846,8 +873,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_cell_item_basis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_item_basis")
+    fileprivate static let method_get_cell_item_basis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_item_basis")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3493604918)!
@@ -859,6 +886,7 @@ open class GridMap: Node3D {
     
     /// Returns the basis that gives the specified cell its orientation.
     public final func getCellItemBasis(position: Vector3i) -> Basis {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -873,8 +901,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_basis_with_orthogonal_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_basis_with_orthogonal_index")
+    fileprivate static let method_get_basis_with_orthogonal_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_basis_with_orthogonal_index")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2816196998)!
@@ -886,6 +914,7 @@ open class GridMap: Node3D {
     
     /// Returns one of 24 possible rotations that lie along the vectors (x,y,z) with each component being either -1, 0, or 1. For further details, refer to the Godot source code.
     public final func getBasisWithOrthogonalIndex(_ index: Int32) -> Basis {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -900,8 +929,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_get_orthogonal_index_from_basis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_orthogonal_index_from_basis")
+    fileprivate static let method_get_orthogonal_index_from_basis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_orthogonal_index_from_basis")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4210359952)!
@@ -913,6 +942,7 @@ open class GridMap: Node3D {
     
     /// This function considers a discretization of rotations into 24 points on unit sphere, lying along the vectors (x,y,z) with each component being either -1, 0, or 1, and returns the index (in the range from 0 to 23) of the point best representing the orientation of the object. For further details, refer to the Godot source code.
     public final func getOrthogonalIndexFromBasis(_ basis: Basis) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: basis) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -927,8 +957,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_local_to_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("local_to_map")
+    fileprivate static let method_local_to_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("local_to_map")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1257687843)!
@@ -940,6 +970,7 @@ open class GridMap: Node3D {
     
     /// Returns the map coordinates of the cell containing the given `localPosition`. If `localPosition` is in global coordinates, consider using ``Node3D/toLocal(globalPoint:)`` before passing it to this method. See also ``mapToLocal(mapPosition:)``.
     public final func localToMap(localPosition: Vector3) -> Vector3i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3i = Vector3i ()
         withUnsafePointer(to: localPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -954,8 +985,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_map_to_local: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_to_local")
+    fileprivate static let method_map_to_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_to_local")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1088329196)!
@@ -967,6 +998,7 @@ open class GridMap: Node3D {
     
     /// Returns the position of a grid cell in the GridMap's local coordinate space. To convert the returned value into global coordinates, use ``Node3D/toGlobal(localPoint:)``. See also ``localToMap(localPosition:)``.
     public final func mapToLocal(mapPosition: Vector3i) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: mapPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -981,8 +1013,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_resource_changed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("resource_changed")
+    fileprivate static let method_resource_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("resource_changed")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 968641751)!
@@ -994,6 +1026,7 @@ open class GridMap: Node3D {
     
     /// This method does nothing.
     public final func resourceChanged(resource: Resource?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1007,8 +1040,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_set_center_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_center_x")
+    fileprivate static let method_set_center_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_center_x")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1020,6 +1053,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_center_x(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1033,8 +1067,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_center_x: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_center_x")
+    fileprivate static let method_get_center_x: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_center_x")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1046,13 +1080,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_center_x() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GridMap.method_get_center_x, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_center_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_center_y")
+    fileprivate static let method_set_center_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_center_y")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1064,6 +1099,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_center_y(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1077,8 +1113,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_center_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_center_y")
+    fileprivate static let method_get_center_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_center_y")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1090,13 +1126,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_center_y() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GridMap.method_get_center_y, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_center_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_center_z")
+    fileprivate static let method_set_center_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_center_z")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1108,6 +1145,7 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func set_center_z(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1121,8 +1159,8 @@ open class GridMap: Node3D {
         
     }
     
-    fileprivate static var method_get_center_z: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_center_z")
+    fileprivate static let method_get_center_z: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_center_z")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1134,13 +1172,14 @@ open class GridMap: Node3D {
     
     @inline(__always)
     fileprivate final func get_center_z() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GridMap.method_get_center_z, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1152,12 +1191,13 @@ open class GridMap: Node3D {
     
     /// Clear all cells.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(GridMap.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_used_cells: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_used_cells")
+    fileprivate static let method_get_used_cells: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_used_cells")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -1168,14 +1208,15 @@ open class GridMap: Node3D {
     }()
     
     /// Returns an array of ``Vector3`` with the non-empty cell coordinates in the grid map.
-    public final func getUsedCells() -> VariantCollection<Vector3i> {
+    public final func getUsedCells() -> TypedArray<Vector3i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(GridMap.method_get_used_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<Vector3i>(content: _result)
+        return TypedArray<Vector3i>(takingOver: _result)
     }
     
-    fileprivate static var method_get_used_cells_by_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_used_cells_by_item")
+    fileprivate static let method_get_used_cells_by_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_used_cells_by_item")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
@@ -1186,7 +1227,8 @@ open class GridMap: Node3D {
     }()
     
     /// Returns an array of all cells with the given item index specified in `item`.
-    public final func getUsedCellsByItem(_ item: Int32) -> VariantCollection<Vector3i> {
+    public final func getUsedCellsByItem(_ item: Int32) -> TypedArray<Vector3i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: item) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1198,11 +1240,11 @@ open class GridMap: Node3D {
             
         }
         
-        return VariantCollection<Vector3i>(content: _result)
+        return TypedArray<Vector3i>(takingOver: _result)
     }
     
-    fileprivate static var method_get_meshes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_meshes")
+    fileprivate static let method_get_meshes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_meshes")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -1213,14 +1255,15 @@ open class GridMap: Node3D {
     }()
     
     /// Returns an array of ``Transform3D`` and ``Mesh`` references corresponding to the non-empty cells in the grid. The transforms are specified in local space.
-    public final func getMeshes() -> GArray {
-        let _result: GArray = GArray ()
+    public final func getMeshes() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(GridMap.method_get_meshes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_bake_meshes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_meshes")
+    fileprivate static let method_get_bake_meshes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_meshes")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -1231,14 +1274,15 @@ open class GridMap: Node3D {
     }()
     
     /// Returns an array of ``ArrayMesh``es and ``Transform3D`` references of all bake meshes that exist within the current GridMap.
-    public final func getBakeMeshes() -> GArray {
-        let _result: GArray = GArray ()
+    public final func getBakeMeshes() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(GridMap.method_get_bake_meshes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_bake_mesh_instance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bake_mesh_instance")
+    fileprivate static let method_get_bake_mesh_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bake_mesh_instance")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 937000113)!
@@ -1250,6 +1294,7 @@ open class GridMap: Node3D {
     
     /// Returns ``RID`` of a baked mesh with the given `idx`.
     public final func getBakeMeshInstance(idx: Int32) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1264,8 +1309,8 @@ open class GridMap: Node3D {
         return _result
     }
     
-    fileprivate static var method_clear_baked_meshes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_baked_meshes")
+    fileprivate static let method_clear_baked_meshes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_baked_meshes")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1277,12 +1322,13 @@ open class GridMap: Node3D {
     
     /// Clears all baked meshes. See ``makeBakedMeshes(genLightmapUv:lightmapUvTexelSize:)``.
     public final func clearBakedMeshes() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(GridMap.method_clear_baked_meshes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_make_baked_meshes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_baked_meshes")
+    fileprivate static let method_make_baked_meshes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_baked_meshes")
         return withUnsafePointer(to: &GridMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3609286057)!
@@ -1294,6 +1340,7 @@ open class GridMap: Node3D {
     
     /// Bakes lightmap data for all meshes in the assigned ``MeshLibrary``.
     public final func makeBakedMeshes(genLightmapUv: Bool = false, lightmapUvTexelSize: Double = 0.1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: genLightmapUv) { pArg0 in
             withUnsafePointer(to: lightmapUvTexelSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in

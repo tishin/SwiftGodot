@@ -26,7 +26,7 @@ import Musl
 /// 
 /// Plays input signal back after a period of time. The delayed signal may be played back multiple times to create the sound of a repeating, decaying echo. Delay effects range from a subtle echo effect to a pronounced blending of previous sounds with new sounds.
 open class AudioEffectDelay: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectDelay")
+    private static var className = StringName("AudioEffectDelay")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -188,8 +188,8 @@ open class AudioEffectDelay: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_dry: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_dry")
+    fileprivate static let method_set_dry: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_dry")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -201,6 +201,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_dry(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -214,8 +215,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_dry: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_dry")
+    fileprivate static let method_get_dry: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_dry")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -227,13 +228,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_dry() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_dry, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap1_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap1_active")
+    fileprivate static let method_set_tap1_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap1_active")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -245,6 +247,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap1_active(_ amount: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -258,8 +261,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_is_tap1_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_tap1_active")
+    fileprivate static let method_is_tap1_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_tap1_active")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -271,13 +274,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func is_tap1_active() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_is_tap1_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap1_delay_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap1_delay_ms")
+    fileprivate static let method_set_tap1_delay_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap1_delay_ms")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -289,6 +293,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap1_delay_ms(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -302,8 +307,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_tap1_delay_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tap1_delay_ms")
+    fileprivate static let method_get_tap1_delay_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tap1_delay_ms")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -315,13 +320,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_tap1_delay_ms() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_tap1_delay_ms, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap1_level_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap1_level_db")
+    fileprivate static let method_set_tap1_level_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap1_level_db")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -333,6 +339,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap1_level_db(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -346,8 +353,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_tap1_level_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tap1_level_db")
+    fileprivate static let method_get_tap1_level_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tap1_level_db")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -359,13 +366,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_tap1_level_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_tap1_level_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap1_pan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap1_pan")
+    fileprivate static let method_set_tap1_pan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap1_pan")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -377,6 +385,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap1_pan(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -390,8 +399,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_tap1_pan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tap1_pan")
+    fileprivate static let method_get_tap1_pan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tap1_pan")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -403,13 +412,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_tap1_pan() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_tap1_pan, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap2_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap2_active")
+    fileprivate static let method_set_tap2_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap2_active")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -421,6 +431,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap2_active(_ amount: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -434,8 +445,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_is_tap2_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_tap2_active")
+    fileprivate static let method_is_tap2_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_tap2_active")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -447,13 +458,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func is_tap2_active() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_is_tap2_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap2_delay_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap2_delay_ms")
+    fileprivate static let method_set_tap2_delay_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap2_delay_ms")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -465,6 +477,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap2_delay_ms(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -478,8 +491,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_tap2_delay_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tap2_delay_ms")
+    fileprivate static let method_get_tap2_delay_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tap2_delay_ms")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -491,13 +504,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_tap2_delay_ms() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_tap2_delay_ms, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap2_level_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap2_level_db")
+    fileprivate static let method_set_tap2_level_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap2_level_db")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -509,6 +523,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap2_level_db(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -522,8 +537,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_tap2_level_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tap2_level_db")
+    fileprivate static let method_get_tap2_level_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tap2_level_db")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -535,13 +550,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_tap2_level_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_tap2_level_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_tap2_pan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tap2_pan")
+    fileprivate static let method_set_tap2_pan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tap2_pan")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -553,6 +569,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_tap2_pan(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -566,8 +583,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_tap2_pan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tap2_pan")
+    fileprivate static let method_get_tap2_pan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tap2_pan")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -579,13 +596,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_tap2_pan() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_tap2_pan, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_feedback_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_feedback_active")
+    fileprivate static let method_set_feedback_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_feedback_active")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -597,6 +615,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_feedback_active(_ amount: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -610,8 +629,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_is_feedback_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_feedback_active")
+    fileprivate static let method_is_feedback_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_feedback_active")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -623,13 +642,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func is_feedback_active() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_is_feedback_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_feedback_delay_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_feedback_delay_ms")
+    fileprivate static let method_set_feedback_delay_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_feedback_delay_ms")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -641,6 +661,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_feedback_delay_ms(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -654,8 +675,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_feedback_delay_ms: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feedback_delay_ms")
+    fileprivate static let method_get_feedback_delay_ms: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feedback_delay_ms")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -667,13 +688,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_feedback_delay_ms() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_feedback_delay_ms, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_feedback_level_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_feedback_level_db")
+    fileprivate static let method_set_feedback_level_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_feedback_level_db")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -685,6 +707,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_feedback_level_db(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -698,8 +721,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_feedback_level_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feedback_level_db")
+    fileprivate static let method_get_feedback_level_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feedback_level_db")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -711,13 +734,14 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_feedback_level_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_feedback_level_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_feedback_lowpass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_feedback_lowpass")
+    fileprivate static let method_set_feedback_lowpass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_feedback_lowpass")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -729,6 +753,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_feedback_lowpass(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -742,8 +767,8 @@ open class AudioEffectDelay: AudioEffect {
         
     }
     
-    fileprivate static var method_get_feedback_lowpass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feedback_lowpass")
+    fileprivate static let method_get_feedback_lowpass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feedback_lowpass")
         return withUnsafePointer(to: &AudioEffectDelay.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -755,6 +780,7 @@ open class AudioEffectDelay: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_feedback_lowpass() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectDelay.method_get_feedback_lowpass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

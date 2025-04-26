@@ -20,7 +20,7 @@ import Musl
 
 
 open class WebRTCDataChannel: PacketPeer {
-    fileprivate static var className = StringName("WebRTCDataChannel")
+    private static var className = StringName("WebRTCDataChannel")
     override open class var godotClassName: StringName { className }
     public enum WriteMode: Int64, CaseIterable {
         /// Tells the channel to send data over this channel as text. An external peer (non-Godot) would receive this as a string.
@@ -56,8 +56,8 @@ open class WebRTCDataChannel: PacketPeer {
     }
     
     /* Methods */
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166280745)!
@@ -69,13 +69,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Reserved, but not used for now.
     public final func poll() -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -87,12 +88,13 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Closes this data channel, notifying the other peer.
     public final func close() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_was_string_packet: GDExtensionMethodBindPtr = {
-        let methodName = StringName("was_string_packet")
+    fileprivate static let method_was_string_packet: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("was_string_packet")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -104,13 +106,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Returns `true` if the last received packet was transferred as text. See ``writeMode``.
     public final func wasStringPacket() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_was_string_packet, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_write_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_write_mode")
+    fileprivate static let method_set_write_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_write_mode")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1999768052)!
@@ -122,6 +125,7 @@ open class WebRTCDataChannel: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_write_mode(_ writeMode: WebRTCDataChannel.WriteMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: writeMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -135,8 +139,8 @@ open class WebRTCDataChannel: PacketPeer {
         
     }
     
-    fileprivate static var method_get_write_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_write_mode")
+    fileprivate static let method_get_write_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_write_mode")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2848495172)!
@@ -148,13 +152,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_write_mode() -> WebRTCDataChannel.WriteMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_write_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return WebRTCDataChannel.WriteMode (rawValue: _result)!
     }
     
-    fileprivate static var method_get_ready_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ready_state")
+    fileprivate static let method_get_ready_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ready_state")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3501143017)!
@@ -166,13 +171,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Returns the current state of this channel, see ``WebRTCDataChannel/ChannelState``.
     public final func getReadyState() -> WebRTCDataChannel.ChannelState {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_ready_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return WebRTCDataChannel.ChannelState (rawValue: _result)!
     }
     
-    fileprivate static var method_get_label: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_label")
+    fileprivate static let method_get_label: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_label")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -184,13 +190,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Returns the label assigned to this channel during creation.
     public final func getLabel() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_ordered: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ordered")
+    fileprivate static let method_is_ordered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ordered")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -202,13 +209,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Returns `true` if this channel was created with ordering enabled (default).
     public final func isOrdered() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_is_ordered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_id")
+    fileprivate static let method_get_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_id")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -223,13 +231,14 @@ open class WebRTCDataChannel: PacketPeer {
     /// If the channel is not negotiated out-of-band the ID will only be available after the connection is established (will return `65535` until then).
     /// 
     public final func getId() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_max_packet_life_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_packet_life_time")
+    fileprivate static let method_get_max_packet_life_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_packet_life_time")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -244,13 +253,14 @@ open class WebRTCDataChannel: PacketPeer {
     /// Will be `65535` if not specified.
     /// 
     public final func getMaxPacketLifeTime() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_max_packet_life_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_max_retransmits: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_retransmits")
+    fileprivate static let method_get_max_retransmits: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_retransmits")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -265,13 +275,14 @@ open class WebRTCDataChannel: PacketPeer {
     /// Will be `65535` if not specified.
     /// 
     public final func getMaxRetransmits() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_max_retransmits, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_protocol: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_protocol")
+    fileprivate static let method_get_protocol: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_protocol")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -283,13 +294,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Returns the sub-protocol assigned to this channel during creation. An empty string if not specified.
     public final func getProtocol() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_protocol, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_is_negotiated: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_negotiated")
+    fileprivate static let method_is_negotiated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_negotiated")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -301,13 +313,14 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Returns `true` if this channel was created with out-of-band configuration.
     public final func isNegotiated() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_is_negotiated, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_buffered_amount: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffered_amount")
+    fileprivate static let method_get_buffered_amount: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffered_amount")
         return withUnsafePointer(to: &WebRTCDataChannel.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -319,6 +332,7 @@ open class WebRTCDataChannel: PacketPeer {
     
     /// Returns the number of bytes currently queued to be sent over this channel.
     public final func getBufferedAmount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_buffered_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

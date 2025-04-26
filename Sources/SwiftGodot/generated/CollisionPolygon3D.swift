@@ -26,7 +26,7 @@ import Musl
 /// > Warning: A non-uniformly scaled ``CollisionShape3D`` will likely not behave as expected. Make sure to keep its scale the same on all axes and adjust its shape resource instead.
 /// 
 open class CollisionPolygon3D: Node3D {
-    fileprivate static var className = StringName("CollisionPolygon3D")
+    private static var className = StringName("CollisionPolygon3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -79,9 +79,36 @@ open class CollisionPolygon3D: Node3D {
         
     }
     
+    /// The collision shape color that is displayed in the editor, or in the running project if **Debug > Visible Collision Shapes** is checked at the top of the editor.
+    /// 
+    /// > Note: The default value is ``ProjectSettings/debug/shapes/collision/shapeColor``. The `Color(0, 0, 0, 0)` value documented here is a placeholder, and not the actual default debug color.
+    /// 
+    final public var debugColor: Color {
+        get {
+            return get_debug_color ()
+        }
+        
+        set {
+            set_debug_color (newValue)
+        }
+        
+    }
+    
+    /// If `true`, when the shape is displayed, it will show a solid fill color in addition to its wireframe.
+    final public var debugFill: Bool {
+        get {
+            return get_enable_debug_fill ()
+        }
+        
+        set {
+            set_enable_debug_fill (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_set_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth")
+    fileprivate static let method_set_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -93,6 +120,7 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_depth(_ depth: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -106,8 +134,8 @@ open class CollisionPolygon3D: Node3D {
         
     }
     
-    fileprivate static var method_get_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth")
+    fileprivate static let method_get_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -119,13 +147,14 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_depth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_polygon")
+    fileprivate static let method_set_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_polygon")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -137,6 +166,7 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_polygon(_ polygon: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -150,8 +180,8 @@ open class CollisionPolygon3D: Node3D {
         
     }
     
-    fileprivate static var method_get_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon")
+    fileprivate static let method_get_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -163,13 +193,14 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_polygon() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disabled")
+    fileprivate static let method_set_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disabled")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -181,6 +212,7 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_disabled(_ disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -194,8 +226,8 @@ open class CollisionPolygon3D: Node3D {
         
     }
     
-    fileprivate static var method_is_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_disabled")
+    fileprivate static let method_is_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_disabled")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -207,13 +239,106 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func is_disabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CollisionPolygon3D.method_is_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_margin")
+    fileprivate static let method_set_debug_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_debug_color")
+        return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_debug_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: color) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_debug_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_debug_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_debug_color")
+        return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_debug_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Color = Color ()
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_debug_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_enable_debug_fill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_debug_fill")
+        return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_enable_debug_fill(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_enable_debug_fill, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_enable_debug_fill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_debug_fill")
+        return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_enable_debug_fill() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_enable_debug_fill, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_margin")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -225,6 +350,7 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_margin(_ margin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -238,8 +364,8 @@ open class CollisionPolygon3D: Node3D {
         
     }
     
-    fileprivate static var method_get_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_margin")
+    fileprivate static let method_get_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_margin")
         return withUnsafePointer(to: &CollisionPolygon3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -251,6 +377,7 @@ open class CollisionPolygon3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

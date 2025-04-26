@@ -20,7 +20,7 @@ import Musl
 
 
 open class AudioStreamPlaybackOggVorbis: AudioStreamPlaybackResampled {
-    fileprivate static var className = StringName("AudioStreamPlaybackOggVorbis")
+    private static var className = StringName("AudioStreamPlaybackOggVorbis")
     override open class var godotClassName: StringName { className }
 }
 

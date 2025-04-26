@@ -26,7 +26,7 @@ import Musl
 /// See also ``RDShaderSource``. ``RDShaderFile`` is only meant to be used with the ``RenderingDevice`` API. It should not be confused with Godot's own ``Shader`` resource, which is what Godot's various nodes use for high-level shader programming.
 /// 
 open class RDShaderFile: Resource {
-    fileprivate static var className = StringName("RDShaderFile")
+    private static var className = StringName("RDShaderFile")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,11 +44,11 @@ open class RDShaderFile: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_bytecode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bytecode")
+    fileprivate static let method_set_bytecode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bytecode")
         return withUnsafePointer(to: &RDShaderFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1558064255)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1526857008)!
             }
             
         }
@@ -57,6 +57,7 @@ open class RDShaderFile: Resource {
     
     /// Sets the SPIR-V `bytecode` that will be compiled for the specified `version`.
     public final func setBytecode(_ bytecode: RDShaderSPIRV?, version: StringName = StringName ("")) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bytecode?.handle) { pArg0 in
             withUnsafePointer(to: version.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -73,11 +74,11 @@ open class RDShaderFile: Resource {
         
     }
     
-    fileprivate static var method_get_spirv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_spirv")
+    fileprivate static let method_get_spirv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_spirv")
         return withUnsafePointer(to: &RDShaderFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3340165340)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2689310080)!
             }
             
         }
@@ -86,6 +87,7 @@ open class RDShaderFile: Resource {
     
     /// Returns the SPIR-V intermediate representation for the specified shader `version`.
     public final func getSpirv(version: StringName = StringName ("")) -> RDShaderSPIRV? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: version.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -97,11 +99,11 @@ open class RDShaderFile: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_version_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_version_list")
+    fileprivate static let method_get_version_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_version_list")
         return withUnsafePointer(to: &RDShaderFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -112,14 +114,15 @@ open class RDShaderFile: Resource {
     }()
     
     /// Returns the list of compiled versions for this shader.
-    public final func getVersionList() -> VariantCollection<StringName> {
+    public final func getVersionList() -> TypedArray<StringName> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(RDShaderFile.method_get_version_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
     }
     
-    fileprivate static var method_set_base_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_base_error")
+    fileprivate static let method_set_base_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_base_error")
         return withUnsafePointer(to: &RDShaderFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -131,6 +134,7 @@ open class RDShaderFile: Resource {
     
     @inline(__always)
     fileprivate final func set_base_error(_ error: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let error = GString(error)
         withUnsafePointer(to: error.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -145,8 +149,8 @@ open class RDShaderFile: Resource {
         
     }
     
-    fileprivate static var method_get_base_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_base_error")
+    fileprivate static let method_get_base_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_base_error")
         return withUnsafePointer(to: &RDShaderFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -158,6 +162,7 @@ open class RDShaderFile: Resource {
     
     @inline(__always)
     fileprivate final func get_base_error() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RDShaderFile.method_get_base_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description

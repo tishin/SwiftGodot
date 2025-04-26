@@ -26,7 +26,7 @@ import Musl
 /// See also ``BaseButton`` which contains common properties and methods associated with this node.
 /// 
 open class CheckButton: Button {
-    fileprivate static var className = StringName("CheckButton")
+    private static var className = StringName("CheckButton")
     override open class var godotClassName: StringName { className }
 }
 

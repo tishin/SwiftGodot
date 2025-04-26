@@ -40,7 +40,7 @@ import Musl
 /// See ``CubemapArray`` for a general description of cubemap arrays.
 /// 
 open class CompressedCubemapArray: CompressedTextureLayered {
-    fileprivate static var className = StringName("CompressedCubemapArray")
+    private static var className = StringName("CompressedCubemapArray")
     override open class var godotClassName: StringName { className }
 }
 

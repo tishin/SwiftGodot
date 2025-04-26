@@ -23,12 +23,12 @@ import Musl
 /// 
 /// ``LabelSettings`` is a resource that provides common settings to customize the text in a ``Label``. It will take priority over the properties defined in ``Control/theme``. The resource can be shared between multiple labels and changed on the fly, so it's convenient and flexible way to setup text style.
 open class LabelSettings: Resource {
-    fileprivate static var className = StringName("LabelSettings")
+    private static var className = StringName("LabelSettings")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
-    /// Vertical space between lines when the text is multiline.
+    /// Additional vertical spacing between lines (in pixels), spacing is added to line descent. This value can be negative.
     final public var lineSpacing: Double {
         get {
             return get_line_spacing ()
@@ -36,6 +36,18 @@ open class LabelSettings: Resource {
         
         set {
             set_line_spacing (newValue)
+        }
+        
+    }
+    
+    /// Vertical space between paragraphs. Added on top of ``lineSpacing``.
+    final public var paragraphSpacing: Double {
+        get {
+            return get_paragraph_spacing ()
+        }
+        
+        set {
+            set_paragraph_spacing (newValue)
         }
         
     }
@@ -137,8 +149,8 @@ open class LabelSettings: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_line_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_spacing")
+    fileprivate static let method_set_line_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_spacing")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -150,6 +162,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_line_spacing(_ spacing: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: spacing) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -163,8 +176,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_line_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_spacing")
+    fileprivate static let method_get_line_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_spacing")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -176,13 +189,60 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_line_spacing() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(LabelSettings.method_get_line_spacing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font")
+    fileprivate static let method_set_paragraph_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_paragraph_spacing")
+        return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_paragraph_spacing(_ spacing: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: spacing) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_paragraph_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_paragraph_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_paragraph_spacing")
+        return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_paragraph_spacing() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_paragraph_spacing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1262170328)!
@@ -194,6 +254,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_font(_ font: Font?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -207,8 +268,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font")
+    fileprivate static let method_get_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3229501585)!
@@ -220,13 +281,14 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_font() -> Font? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(LabelSettings.method_get_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_size")
+    fileprivate static let method_set_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_size")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -238,6 +300,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_font_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -251,8 +314,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_font_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_size")
+    fileprivate static let method_get_font_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_size")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -264,13 +327,14 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_font_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(LabelSettings.method_get_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_font_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_color")
+    fileprivate static let method_set_font_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_color")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -282,6 +346,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_font_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -295,8 +360,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_font_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_color")
+    fileprivate static let method_get_font_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_color")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -308,13 +373,14 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_font_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(LabelSettings.method_get_font_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outline_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outline_size")
+    fileprivate static let method_set_outline_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outline_size")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -326,6 +392,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_outline_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -339,8 +406,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_outline_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outline_size")
+    fileprivate static let method_get_outline_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outline_size")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -352,13 +419,14 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_outline_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(LabelSettings.method_get_outline_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outline_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outline_color")
+    fileprivate static let method_set_outline_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outline_color")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -370,6 +438,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_outline_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -383,8 +452,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_outline_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outline_color")
+    fileprivate static let method_get_outline_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outline_color")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -396,13 +465,14 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_outline_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(LabelSettings.method_get_outline_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_size")
+    fileprivate static let method_set_shadow_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_size")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -414,6 +484,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_shadow_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -427,8 +498,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_shadow_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_size")
+    fileprivate static let method_get_shadow_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_size")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -440,13 +511,14 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_shadow_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_color")
+    fileprivate static let method_set_shadow_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_color")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -458,6 +530,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_shadow_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -471,8 +544,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_shadow_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_color")
+    fileprivate static let method_get_shadow_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_color")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -484,13 +557,14 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_shadow_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shadow_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_offset")
+    fileprivate static let method_set_shadow_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_offset")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -502,6 +576,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func set_shadow_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -515,8 +590,8 @@ open class LabelSettings: Resource {
         
     }
     
-    fileprivate static var method_get_shadow_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_offset")
+    fileprivate static let method_get_shadow_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_offset")
         return withUnsafePointer(to: &LabelSettings.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -528,6 +603,7 @@ open class LabelSettings: Resource {
     
     @inline(__always)
     fileprivate final func get_shadow_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -20,7 +20,7 @@ import Musl
 
 
 open class ScriptLanguage: Object {
-    fileprivate static var className = StringName("ScriptLanguage")
+    private static var className = StringName("ScriptLanguage")
     override open class var godotClassName: StringName { className }
     public enum ScriptNameCasing: Int64, CaseIterable {
         /// 

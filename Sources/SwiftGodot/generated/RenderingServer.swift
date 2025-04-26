@@ -47,15 +47,24 @@ import Musl
 /// - ``framePostDraw``
 open class RenderingServer: Object {
     /// The shared instance of this class
-    public static var shared: RenderingServer = {
-        return withUnsafePointer (to: &RenderingServer.godotClassName.content) { ptr in
-            RenderingServer (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: RenderingServer {
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("RenderingServer")
+    private static var className = StringName("RenderingServer")
     override open class var godotClassName: StringName { className }
+    public enum TextureType: Int64, CaseIterable {
+        /// 2D texture.
+        case textureType2d = 0 // TEXTURE_TYPE_2D
+        /// Layered texture.
+        case layered = 1 // TEXTURE_TYPE_LAYERED
+        /// 3D texture.
+        case textureType3d = 2 // TEXTURE_TYPE_3D
+    }
+    
     public enum TextureLayeredType: Int64, CaseIterable {
         /// Array of 2-dimensional textures (see ``Texture2DArray``).
         case textureLayered2dArray = 0 // TEXTURE_LAYERED_2D_ARRAY
@@ -179,27 +188,27 @@ open class RenderingServer: Object {
         public static let formatWeights = ArrayFormat (rawValue: 2048)
         /// Flag used to mark an index array.
         public static let formatIndex = ArrayFormat (rawValue: 4096)
-        /// 
+        /// Mask of mesh channels permitted in blend shapes.
         public static let formatBlendShapeMask = ArrayFormat (rawValue: 7)
-        /// 
+        /// Shift of first custom channel.
         public static let formatCustomBase = ArrayFormat (rawValue: 13)
-        /// 
+        /// Number of format bits per custom channel. See ``RenderingServer/ArrayCustomFormat``.
         public static let formatCustomBits = ArrayFormat (rawValue: 3)
-        /// 
+        /// Amount to shift ``RenderingServer/ArrayCustomFormat`` for custom channel index 0.
         public static let formatCustom0Shift = ArrayFormat (rawValue: 13)
-        /// 
+        /// Amount to shift ``RenderingServer/ArrayCustomFormat`` for custom channel index 1.
         public static let formatCustom1Shift = ArrayFormat (rawValue: 16)
-        /// 
+        /// Amount to shift ``RenderingServer/ArrayCustomFormat`` for custom channel index 2.
         public static let formatCustom2Shift = ArrayFormat (rawValue: 19)
-        /// 
+        /// Amount to shift ``RenderingServer/ArrayCustomFormat`` for custom channel index 3.
         public static let formatCustom3Shift = ArrayFormat (rawValue: 22)
-        /// 
+        /// Mask of custom format bits per custom channel. Must be shifted by one of the SHIFT constants. See ``RenderingServer/ArrayCustomFormat``.
         public static let formatCustomMask = ArrayFormat (rawValue: 7)
-        /// 
+        /// Shift of first compress flag. Compress flags should be passed to ``ArrayMesh/addSurfaceFromArrays(primitive:arrays:blendShapes:lods:flags:)`` and ``SurfaceTool/commit(existing:flags:)``.
         public static let compressFlagsBase = ArrayFormat (rawValue: 25)
         /// Flag used to mark that the array contains 2D vertices.
         public static let flagUse2dVertices = ArrayFormat (rawValue: 33554432)
-        /// 
+        /// Flag indices that the mesh data will use `GL_DYNAMIC_DRAW` on GLES. Unused on Vulkan.
         public static let flagUseDynamicUpdate = ArrayFormat (rawValue: 67108864)
         /// Flag used to mark that the array uses 8 bone weights instead of 4.
         public static let flagUse8BoneWeights = ArrayFormat (rawValue: 134217728)
@@ -285,6 +294,13 @@ open class RenderingServer: Object {
         case multimeshTransform2d = 0 // MULTIMESH_TRANSFORM_2D
         /// Use ``Transform3D`` to store MultiMesh transform.
         case multimeshTransform3d = 1 // MULTIMESH_TRANSFORM_3D
+    }
+    
+    public enum MultimeshPhysicsInterpolationQuality: Int64, CaseIterable {
+        /// MultiMesh physics interpolation favors speed over quality.
+        case fast = 0 // MULTIMESH_INTERP_QUALITY_FAST
+        /// MultiMesh physics interpolation favors quality over speed.
+        case high = 1 // MULTIMESH_INTERP_QUALITY_HIGH
     }
     
     public enum LightProjectorFilter: Int64, CaseIterable {
@@ -548,8 +564,18 @@ open class RenderingServer: Object {
         case fsr = 1 // VIEWPORT_SCALING_3D_MODE_FSR
         /// Use AMD FidelityFX Super Resolution 2.2 upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using FSR2. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` will use FSR2 at native resolution as a TAA solution.
         case fsr2 = 2 // VIEWPORT_SCALING_3D_MODE_FSR2
+        /// Use MetalFX spatial upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using MetalFX. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` disables scaling.
+        /// 
+        /// > Note: Only supported when the Metal rendering driver is in use, which limits this scaling mode to macOS and iOS.
+        /// 
+        case metalfxSpatial = 3 // VIEWPORT_SCALING_3D_MODE_METALFX_SPATIAL
+        /// Use MetalFX temporal upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using MetalFX. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` will use MetalFX at native resolution as a TAA solution.
+        /// 
+        /// > Note: Only supported when the Metal rendering driver is in use, which limits this scaling mode to macOS and iOS.
+        /// 
+        case metalfxTemporal = 4 // VIEWPORT_SCALING_3D_MODE_METALFX_TEMPORAL
         /// Represents the size of the ``RenderingServer/ViewportScaling3DMode`` enum.
-        case max = 3 // VIEWPORT_SCALING_3D_MODE_MAX
+        case max = 5 // VIEWPORT_SCALING_3D_MODE_MAX
     }
     
     public enum ViewportUpdateMode: Int64, CaseIterable {
@@ -622,6 +648,21 @@ open class RenderingServer: Object {
         case max = 4 // VIEWPORT_MSAA_MAX
     }
     
+    public enum ViewportAnisotropicFiltering: Int64, CaseIterable {
+        /// Anisotropic filtering is disabled.
+        case disabled = 0 // VIEWPORT_ANISOTROPY_DISABLED
+        /// Use 2× anisotropic filtering.
+        case viewportAnisotropy2x = 1 // VIEWPORT_ANISOTROPY_2X
+        /// Use 4× anisotropic filtering. This is the default value.
+        case viewportAnisotropy4x = 2 // VIEWPORT_ANISOTROPY_4X
+        /// Use 8× anisotropic filtering.
+        case viewportAnisotropy8x = 3 // VIEWPORT_ANISOTROPY_8X
+        /// Use 16× anisotropic filtering.
+        case viewportAnisotropy16x = 4 // VIEWPORT_ANISOTROPY_16X
+        /// Represents the size of the ``RenderingServer/ViewportAnisotropicFiltering`` enum.
+        case max = 5 // VIEWPORT_ANISOTROPY_MAX
+    }
+    
     public enum ViewportScreenSpaceAA: Int64, CaseIterable {
         /// Do not perform any antialiasing in the full screen post-process.
         case disabled = 0 // VIEWPORT_SCREEN_SPACE_AA_DISABLED
@@ -675,6 +716,9 @@ open class RenderingServer: Object {
         /// 
         case overdraw = 3 // VIEWPORT_DEBUG_DRAW_OVERDRAW
         /// Debug draw draws objects in wireframe.
+        /// 
+        /// > Note: ``setDebugGenerateWireframes(generate:)`` must be called before loading any meshes for wireframes to be visible when using the Compatibility renderer.
+        /// 
         case wireframe = 4 // VIEWPORT_DEBUG_DRAW_WIREFRAME
         /// Normal buffer is drawn instead of regular scene so you can see the per-pixel normals that will be used by post-processing effects.
         case normalBuffer = 5 // VIEWPORT_DEBUG_DRAW_NORMAL_BUFFER
@@ -785,7 +829,7 @@ open class RenderingServer: Object {
         case postSky = 2 // COMPOSITOR_EFFECT_CALLBACK_TYPE_POST_SKY
         /// The callback is called before our transparent rendering pass, but after our sky is rendered and we've created our back buffers.
         case preTransparent = 3 // COMPOSITOR_EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT
-        /// The callback is called after our transparent rendering pass, but before any build in post effects and output to our render target.
+        /// The callback is called after our transparent rendering pass, but before any built-in post-processing effects and output to our render target.
         case postTransparent = 4 // COMPOSITOR_EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
         /// 
         case any = -1 // COMPOSITOR_EFFECT_CALLBACK_TYPE_ANY
@@ -849,17 +893,25 @@ open class RenderingServer: Object {
     }
     
     public enum EnvironmentToneMapper: Int64, CaseIterable {
-        /// Output color as they came in. This can cause bright lighting to look blown out, with noticeable clipping in the output colors.
+        /// Does not modify color data, resulting in a linear tonemapping curve which unnaturally clips bright values, causing bright lighting to look blown out. The simplest and fastest tonemapper.
         case linear = 0 // ENV_TONE_MAPPER_LINEAR
-        /// Use the Reinhard tonemapper. Performs a variation on rendered pixels' colors by this formula: `color = color / (1 + color)`. This avoids clipping bright highlights, but the resulting image can look a bit dull.
+        /// A simple tonemapping curve that rolls off bright values to prevent clipping. This results in an image that can appear dull and low contrast. Slower than ``EnvironmentToneMapper/linear``.
+        /// 
+        /// > Note: When ``Environment/tonemapWhite`` is left at the default value of `1.0`, ``EnvironmentToneMapper/reinhard`` produces an identical image to ``EnvironmentToneMapper/linear``.
+        /// 
         case reinhard = 1 // ENV_TONE_MAPPER_REINHARD
-        /// Use the filmic tonemapper. This avoids clipping bright highlights, with a resulting image that usually looks more vivid than ``EnvironmentToneMapper/reinhard``.
+        /// Uses a film-like tonemapping curve to prevent clipping of bright values and provide better contrast than ``EnvironmentToneMapper/reinhard``. Slightly slower than ``EnvironmentToneMapper/reinhard``.
         case filmic = 2 // ENV_TONE_MAPPER_FILMIC
-        /// Use the Academy Color Encoding System tonemapper. ACES is slightly more expensive than other options, but it handles bright lighting in a more realistic fashion by desaturating it as it becomes brighter. ACES typically has a more contrasted output compared to ``EnvironmentToneMapper/reinhard`` and ``EnvironmentToneMapper/filmic``.
+        /// Uses a high-contrast film-like tonemapping curve and desaturates bright values for a more realistic appearance. Slightly slower than ``EnvironmentToneMapper/filmic``.
         /// 
         /// > Note: This tonemapping operator is called "ACES Fitted" in Godot 3.x.
         /// 
         case aces = 3 // ENV_TONE_MAPPER_ACES
+        /// Uses a film-like tonemapping curve and desaturates bright values for a more realistic appearance. Better than other tonemappers at maintaining the hue of colors as they become brighter. The slowest tonemapping option.
+        /// 
+        /// > Note: ``Environment/tonemapWhite`` is fixed at a value of `16.29`, which makes ``EnvironmentToneMapper/agx`` unsuitable for use with the Mobile rendering method.
+        /// 
+        case agx = 4 // ENV_TONE_MAPPER_AGX
     }
     
     public enum EnvironmentSSRRoughnessQuality: Int64, CaseIterable {
@@ -1233,8 +1285,10 @@ open class RenderingServer: Object {
         case sampler3d = 26 // GLOBAL_VAR_TYPE_SAMPLER3D
         /// Cubemap sampler global shader parameter (`global uniform samplerCube ...`). Exposed as a ``Cubemap`` in the editor UI.
         case samplercube = 27 // GLOBAL_VAR_TYPE_SAMPLERCUBE
+        /// External sampler global shader parameter (`global uniform samplerExternalOES ...`). Exposed as a ``ExternalTexture`` in the editor UI.
+        case samplerext = 28 // GLOBAL_VAR_TYPE_SAMPLEREXT
         /// Represents the size of the ``RenderingServer/GlobalShaderParameterType`` enum.
-        case max = 28 // GLOBAL_VAR_TYPE_MAX
+        case max = 29 // GLOBAL_VAR_TYPE_MAX
     }
     
     public enum RenderingInfo: Int64, CaseIterable {
@@ -1248,8 +1302,33 @@ open class RenderingServer: Object {
         case textureMemUsed = 3 // RENDERING_INFO_TEXTURE_MEM_USED
         /// Buffer memory used (in bytes). This includes vertex data, uniform buffers, and many miscellaneous buffer types used internally.
         case bufferMemUsed = 4 // RENDERING_INFO_BUFFER_MEM_USED
-        /// Video memory used (in bytes). When using the Forward+ or mobile rendering backends, this is always greater than the sum of ``RenderingInfo/textureMemUsed`` and ``RenderingInfo/bufferMemUsed``, since there is miscellaneous data not accounted for by those two metrics. When using the GL Compatibility backend, this is equal to the sum of ``RenderingInfo/textureMemUsed`` and ``RenderingInfo/bufferMemUsed``.
+        /// Video memory used (in bytes). When using the Forward+ or Mobile renderers, this is always greater than the sum of ``RenderingInfo/textureMemUsed`` and ``RenderingInfo/bufferMemUsed``, since there is miscellaneous data not accounted for by those two metrics. When using the Compatibility renderer, this is equal to the sum of ``RenderingInfo/textureMemUsed`` and ``RenderingInfo/bufferMemUsed``.
         case videoMemUsed = 5 // RENDERING_INFO_VIDEO_MEM_USED
+        /// Number of pipeline compilations that were triggered by the 2D canvas renderer.
+        case pipelineCompilationsCanvas = 6 // RENDERING_INFO_PIPELINE_COMPILATIONS_CANVAS
+        /// Number of pipeline compilations that were triggered by loading meshes. These compilations will show up as longer loading times the first time a user runs the game and the pipeline is required.
+        case pipelineCompilationsMesh = 7 // RENDERING_INFO_PIPELINE_COMPILATIONS_MESH
+        /// Number of pipeline compilations that were triggered by building the surface cache before rendering the scene. These compilations will show up as a stutter when loading an scene the first time a user runs the game and the pipeline is required.
+        case pipelineCompilationsSurface = 8 // RENDERING_INFO_PIPELINE_COMPILATIONS_SURFACE
+        /// Number of pipeline compilations that were triggered while drawing the scene. These compilations will show up as stutters during gameplay the first time a user runs the game and the pipeline is required.
+        case pipelineCompilationsDraw = 9 // RENDERING_INFO_PIPELINE_COMPILATIONS_DRAW
+        /// Number of pipeline compilations that were triggered to optimize the current scene. These compilations are done in the background and should not cause any stutters whatsoever.
+        case pipelineCompilationsSpecialization = 10 // RENDERING_INFO_PIPELINE_COMPILATIONS_SPECIALIZATION
+    }
+    
+    public enum PipelineSource: Int64, CaseIterable {
+        /// Pipeline compilation that was triggered by the 2D canvas renderer.
+        case canvas = 0 // PIPELINE_SOURCE_CANVAS
+        /// Pipeline compilation that was triggered by loading a mesh.
+        case mesh = 1 // PIPELINE_SOURCE_MESH
+        /// Pipeline compilation that was triggered by building the surface cache before rendering the scene.
+        case surface = 2 // PIPELINE_SOURCE_SURFACE
+        /// Pipeline compilation that was triggered while drawing the scene.
+        case draw = 3 // PIPELINE_SOURCE_DRAW
+        /// Pipeline compilation that was triggered to optimize the current scene.
+        case specialization = 4 // PIPELINE_SOURCE_SPECIALIZATION
+        /// Represents the size of the ``RenderingServer/PipelineSource`` enum.
+        case max = 5 // PIPELINE_SOURCE_MAX
     }
     
     public enum Features: Int64, CaseIterable {
@@ -1308,8 +1387,8 @@ open class RenderingServer: Object {
     }
     
     /* Methods */
-    fileprivate static var method_texture_2d_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_2d_create")
+    fileprivate static let method_texture_2d_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_2d_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2010018390)!
@@ -1342,8 +1421,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_2d_layered_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_2d_layered_create")
+    fileprivate static let method_texture_2d_layered_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_2d_layered_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 913689023)!
@@ -1359,7 +1438,7 @@ open class RenderingServer: Object {
     /// 
     /// > Note: The equivalent resource is ``TextureLayered``.
     /// 
-    public static func texture2dLayeredCreate(layers: ObjectCollection<Image>, layeredType: RenderingServer.TextureLayeredType) -> RID {
+    public static func texture2dLayeredCreate(layers: TypedArray<Image?>, layeredType: RenderingServer.TextureLayeredType) -> RID {
         let _result: RID = RID ()
         withUnsafePointer(to: layers.array.content) { pArg0 in
             withUnsafePointer(to: layeredType.rawValue) { pArg1 in
@@ -1377,8 +1456,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_3d_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_3d_create")
+    fileprivate static let method_texture_3d_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_3d_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4036838706)!
@@ -1389,7 +1468,7 @@ open class RenderingServer: Object {
     }()
     
     /// > Note: The equivalent resource is ``Texture3D``.
-    public static func texture3dCreate(format: Image.Format, width: Int32, height: Int32, depth: Int32, mipmaps: Bool, data: ObjectCollection<Image>) -> RID {
+    public static func texture3dCreate(format: Image.Format, width: Int32, height: Int32, depth: Int32, mipmaps: Bool, data: TypedArray<Image?>) -> RID {
         let _result: RID = RID ()
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: width) { pArg1 in
@@ -1419,8 +1498,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_proxy_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_proxy_create")
+    fileprivate static let method_texture_proxy_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_proxy_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 41030802)!
@@ -1446,8 +1525,59 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_2d_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_2d_update")
+    fileprivate static let method_texture_create_from_native_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_create_from_native_handle")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1682977582)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Creates a texture based on a native handle that was created outside of Godot's renderer.
+    /// 
+    /// > Note: If using only the rendering device renderer, it's recommend to use ``RenderingDevice/textureCreateFromExtension(type:format:samples:usageFlags:image:width:height:depth:layers:)`` together with ``RenderingServer/textureRdCreate(rdTexture:layerType:)``, rather than this method. It will give you much more control over the texture's format and usage.
+    /// 
+    public static func textureCreateFromNativeHandle(type: RenderingServer.TextureType, format: Image.Format, nativeHandle: UInt, width: Int32, height: Int32, depth: Int32, layers: Int32 = 1, layeredType: RenderingServer.TextureLayeredType = .textureLayered2dArray) -> RID {
+        let _result: RID = RID ()
+        withUnsafePointer(to: type.rawValue) { pArg0 in
+            withUnsafePointer(to: format.rawValue) { pArg1 in
+                withUnsafePointer(to: nativeHandle) { pArg2 in
+                    withUnsafePointer(to: width) { pArg3 in
+                        withUnsafePointer(to: height) { pArg4 in
+                            withUnsafePointer(to: depth) { pArg5 in
+                                withUnsafePointer(to: layers) { pArg6 in
+                                    withUnsafePointer(to: layeredType.rawValue) { pArg7 in
+                                        withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
+                                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
+                                                gi.object_method_bind_ptrcall(method_texture_create_from_native_handle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_texture_2d_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_2d_update")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 999539803)!
@@ -1481,8 +1611,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_texture_3d_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_3d_update")
+    fileprivate static let method_texture_3d_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_3d_update")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 684822712)!
@@ -1496,7 +1626,7 @@ open class RenderingServer: Object {
     /// 
     /// > Note: The `texture` must have the same width, height, depth and format as the current texture data. Otherwise, an error will be printed and the original texture won't be modified. If you need to use different width, height, depth or format, use ``textureReplace(texture:byTexture:)`` instead.
     /// 
-    public static func texture3dUpdate(texture: RID, data: ObjectCollection<Image>) {
+    public static func texture3dUpdate(texture: RID, data: TypedArray<Image?>) {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: data.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1513,8 +1643,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_texture_proxy_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_proxy_update")
+    fileprivate static let method_texture_proxy_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_proxy_update")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -1542,8 +1672,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_texture_2d_placeholder_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_2d_placeholder_create")
+    fileprivate static let method_texture_2d_placeholder_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_2d_placeholder_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -1553,7 +1683,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// Creates a placeholder for a 2-dimensional layered texture and adds it to the RenderingServer. It can be accessed with the RID that is returned. This RID will be used in all `texture_2d_layered_*` RenderingServer functions, although it does nothing when used. See also ``texture2dLayeredPlaceholderCreate(layeredType:)``
+    /// Creates a placeholder for a 2-dimensional layered texture and adds it to the RenderingServer. It can be accessed with the RID that is returned. This RID will be used in all `texture_2d_layered_*` RenderingServer functions, although it does nothing when used. See also ``texture2dLayeredPlaceholderCreate(layeredType:)``.
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingServer's ``freeRid(_:)`` method.
     /// 
@@ -1565,8 +1695,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_2d_layered_placeholder_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_2d_layered_placeholder_create")
+    fileprivate static let method_texture_2d_layered_placeholder_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_2d_layered_placeholder_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1394585590)!
@@ -1595,8 +1725,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_3d_placeholder_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_3d_placeholder_create")
+    fileprivate static let method_texture_3d_placeholder_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_3d_placeholder_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -1618,8 +1748,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_2d_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_2d_get")
+    fileprivate static let method_texture_2d_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_2d_get")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4206205781)!
@@ -1631,7 +1761,7 @@ open class RenderingServer: Object {
     
     /// Returns an ``Image`` instance from the given `texture` ``RID``.
     /// 
-    /// Example of getting the test texture from ``getTestTexture()`` and applying it to a ``Sprite2D`` node:
+    /// **Example:** Get the test texture from ``getTestTexture()`` and apply it to a ``Sprite2D`` node:
     /// 
     public static func texture2dGet(texture: RID) -> Image? {
         var _result = UnsafeRawPointer (bitPattern: 0)
@@ -1645,11 +1775,11 @@ open class RenderingServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_texture_2d_layer_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_2d_layer_get")
+    fileprivate static let method_texture_2d_layer_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_2d_layer_get")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2705440895)!
@@ -1675,11 +1805,11 @@ open class RenderingServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_texture_3d_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_3d_get")
+    fileprivate static let method_texture_3d_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_3d_get")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -1690,7 +1820,7 @@ open class RenderingServer: Object {
     }()
     
     /// Returns 3D texture data as an array of ``Image``s for the specified texture ``RID``.
-    public static func texture3dGet(texture: RID) -> ObjectCollection<Image> {
+    public static func texture3dGet(texture: RID) -> TypedArray<Image?> {
         var _result: Int64 = 0
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1702,11 +1832,11 @@ open class RenderingServer: Object {
             
         }
         
-        return ObjectCollection<Image>(content: _result)
+        return TypedArray<Image?>(takingOver: _result)
     }
     
-    fileprivate static var method_texture_replace: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_replace")
+    fileprivate static let method_texture_replace: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_replace")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -1734,8 +1864,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_texture_set_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_set_size_override")
+    fileprivate static let method_texture_set_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_set_size_override")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -1766,8 +1896,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_texture_set_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_set_path")
+    fileprivate static let method_texture_set_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_set_path")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -1796,8 +1926,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_texture_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_get_path")
+    fileprivate static let method_texture_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_path")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642473191)!
@@ -1823,8 +1953,8 @@ open class RenderingServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_texture_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_get_format")
+    fileprivate static let method_texture_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_format")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1932918979)!
@@ -1850,8 +1980,8 @@ open class RenderingServer: Object {
         return Image.Format (rawValue: _result)!
     }
     
-    fileprivate static var method_texture_set_force_redraw_if_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_set_force_redraw_if_visible")
+    fileprivate static let method_texture_set_force_redraw_if_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_set_force_redraw_if_visible")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1879,8 +2009,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_texture_rd_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_rd_create")
+    fileprivate static let method_texture_rd_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_rd_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1434128712)!
@@ -1909,8 +2039,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_get_rd_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_get_rd_texture")
+    fileprivate static let method_texture_get_rd_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_rd_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2790148051)!
@@ -1939,8 +2069,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_texture_get_native_handle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("texture_get_native_handle")
+    fileprivate static let method_texture_get_native_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("texture_get_native_handle")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1834114100)!
@@ -1972,8 +2102,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_shader_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_create")
+    fileprivate static let method_shader_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -1995,8 +2125,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_shader_set_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_set_code")
+    fileprivate static let method_shader_set_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_set_code")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -2025,8 +2155,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_shader_set_path_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_set_path_hint")
+    fileprivate static let method_shader_set_path_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_set_path_hint")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2726140452)!
@@ -2055,8 +2185,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_shader_get_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_get_code")
+    fileprivate static let method_shader_get_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_get_code")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 642473191)!
@@ -2082,8 +2212,8 @@ open class RenderingServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_shader_parameter_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shader_parameter_list")
+    fileprivate static let method_get_shader_parameter_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shader_parameter_list")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -2094,7 +2224,7 @@ open class RenderingServer: Object {
     }()
     
     /// Returns the parameters of a shader.
-    public static func getShaderParameterList(shader: RID) -> VariantCollection<GDictionary> {
+    public static func getShaderParameterList(shader: RID) -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2106,11 +2236,11 @@ open class RenderingServer: Object {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_shader_get_parameter_default: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_get_parameter_default")
+    fileprivate static let method_shader_get_parameter_default: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_get_parameter_default")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2621281810)!
@@ -2139,8 +2269,8 @@ open class RenderingServer: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_shader_set_default_texture_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_set_default_texture_parameter")
+    fileprivate static let method_shader_set_default_texture_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_set_default_texture_parameter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4094001817)!
@@ -2177,8 +2307,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_shader_get_default_texture_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("shader_get_default_texture_parameter")
+    fileprivate static let method_shader_get_default_texture_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("shader_get_default_texture_parameter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1464608890)!
@@ -2213,8 +2343,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_material_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("material_create")
+    fileprivate static let method_material_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("material_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -2236,8 +2366,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_material_set_shader: GDExtensionMethodBindPtr = {
-        let methodName = StringName("material_set_shader")
+    fileprivate static let method_material_set_shader: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("material_set_shader")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -2265,8 +2395,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_material_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("material_set_param")
+    fileprivate static let method_material_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("material_set_param")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3477296213)!
@@ -2297,8 +2427,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_material_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("material_get_param")
+    fileprivate static let method_material_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("material_get_param")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2621281810)!
@@ -2327,8 +2457,8 @@ open class RenderingServer: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_material_set_render_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("material_set_render_priority")
+    fileprivate static let method_material_set_render_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("material_set_render_priority")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -2356,8 +2486,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_material_set_next_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("material_set_next_pass")
+    fileprivate static let method_material_set_next_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("material_set_next_pass")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -2385,8 +2515,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_create_from_surfaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_create_from_surfaces")
+    fileprivate static let method_mesh_create_from_surfaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_create_from_surfaces")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4291747531)!
@@ -2397,7 +2527,7 @@ open class RenderingServer: Object {
     }()
     
     /// 
-    public static func meshCreateFromSurfaces(_ surfaces: VariantCollection<GDictionary>, blendShapeCount: Int32 = 0) -> RID {
+    public static func meshCreateFromSurfaces(_ surfaces: TypedArray<VariantDictionary>, blendShapeCount: Int32 = 0) -> RID {
         let _result: RID = RID ()
         withUnsafePointer(to: surfaces.array.content) { pArg0 in
             withUnsafePointer(to: blendShapeCount) { pArg1 in
@@ -2415,8 +2545,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_create")
+    fileprivate static let method_mesh_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -2440,8 +2570,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_surface_get_format_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_format_offset")
+    fileprivate static let method_mesh_surface_get_format_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_format_offset")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981368685)!
@@ -2473,8 +2603,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_surface_get_format_vertex_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_format_vertex_stride")
+    fileprivate static let method_mesh_surface_get_format_vertex_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_format_vertex_stride")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3188363337)!
@@ -2503,8 +2633,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_surface_get_format_normal_tangent_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_format_normal_tangent_stride")
+    fileprivate static let method_mesh_surface_get_format_normal_tangent_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_format_normal_tangent_stride")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3188363337)!
@@ -2533,8 +2663,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_surface_get_format_attribute_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_format_attribute_stride")
+    fileprivate static let method_mesh_surface_get_format_attribute_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_format_attribute_stride")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3188363337)!
@@ -2563,8 +2693,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_surface_get_format_skin_stride: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_format_skin_stride")
+    fileprivate static let method_mesh_surface_get_format_skin_stride: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_format_skin_stride")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3188363337)!
@@ -2593,8 +2723,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_add_surface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_add_surface")
+    fileprivate static let method_mesh_add_surface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_add_surface")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1217542888)!
@@ -2605,7 +2735,7 @@ open class RenderingServer: Object {
     }()
     
     /// 
-    public static func meshAddSurface(mesh: RID, surface: GDictionary) {
+    public static func meshAddSurface(mesh: RID, surface: VariantDictionary) {
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: surface.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2622,8 +2752,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_add_surface_from_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_add_surface_from_arrays")
+    fileprivate static let method_mesh_add_surface_from_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_add_surface_from_arrays")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2342446560)!
@@ -2634,7 +2764,7 @@ open class RenderingServer: Object {
     }()
     
     /// 
-    public static func meshAddSurfaceFromArrays(mesh: RID, primitive: RenderingServer.PrimitiveType, arrays: GArray, blendShapes: GArray = GArray (), lods: GDictionary = GDictionary (), compressFormat: RenderingServer.ArrayFormat = []) {
+    public static func meshAddSurfaceFromArrays(mesh: RID, primitive: RenderingServer.PrimitiveType, arrays: VariantArray, blendShapes: VariantArray = VariantArray (), lods: VariantDictionary = VariantDictionary (), compressFormat: RenderingServer.ArrayFormat = []) {
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: primitive.rawValue) { pArg1 in
                 withUnsafePointer(to: arrays.content) { pArg2 in
@@ -2663,8 +2793,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_get_blend_shape_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_get_blend_shape_count")
+    fileprivate static let method_mesh_get_blend_shape_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_get_blend_shape_count")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -2690,8 +2820,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_set_blend_shape_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_set_blend_shape_mode")
+    fileprivate static let method_mesh_set_blend_shape_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_set_blend_shape_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1294662092)!
@@ -2719,8 +2849,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_get_blend_shape_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_get_blend_shape_mode")
+    fileprivate static let method_mesh_get_blend_shape_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_get_blend_shape_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4282291819)!
@@ -2746,8 +2876,8 @@ open class RenderingServer: Object {
         return RenderingServer.BlendShapeMode (rawValue: _result)!
     }
     
-    fileprivate static var method_mesh_surface_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_set_material")
+    fileprivate static let method_mesh_surface_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_set_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2310537182)!
@@ -2778,8 +2908,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_surface_get_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_material")
+    fileprivate static let method_mesh_surface_get_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1066463050)!
@@ -2808,8 +2938,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_get_surface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_get_surface")
+    fileprivate static let method_mesh_get_surface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_get_surface")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 186674697)!
@@ -2820,8 +2950,8 @@ open class RenderingServer: Object {
     }()
     
     /// 
-    public static func meshGetSurface(mesh: RID, surface: Int32) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public static func meshGetSurface(mesh: RID, surface: Int32) -> VariantDictionary {
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2838,8 +2968,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_surface_get_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_arrays")
+    fileprivate static let method_mesh_surface_get_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_arrays")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1778388067)!
@@ -2850,8 +2980,8 @@ open class RenderingServer: Object {
     }()
     
     /// Returns a mesh's surface's buffer arrays.
-    public static func meshSurfaceGetArrays(mesh: RID, surface: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public static func meshSurfaceGetArrays(mesh: RID, surface: Int32) -> VariantArray {
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2868,8 +2998,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_surface_get_blend_shape_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_get_blend_shape_arrays")
+    fileprivate static let method_mesh_surface_get_blend_shape_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_get_blend_shape_arrays")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1778388067)!
@@ -2880,7 +3010,7 @@ open class RenderingServer: Object {
     }()
     
     /// Returns a mesh's surface's arrays for blend shapes.
-    public static func meshSurfaceGetBlendShapeArrays(mesh: RID, surface: Int32) -> VariantCollection<GArray> {
+    public static func meshSurfaceGetBlendShapeArrays(mesh: RID, surface: Int32) -> TypedArray<VariantArray> {
         var _result: Int64 = 0
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: surface) { pArg1 in
@@ -2895,11 +3025,11 @@ open class RenderingServer: Object {
             
         }
         
-        return VariantCollection<GArray>(content: _result)
+        return TypedArray<VariantArray>(takingOver: _result)
     }
     
-    fileprivate static var method_mesh_get_surface_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_get_surface_count")
+    fileprivate static let method_mesh_get_surface_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_get_surface_count")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -2925,8 +3055,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_set_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_set_custom_aabb")
+    fileprivate static let method_mesh_set_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_set_custom_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3696536120)!
@@ -2954,8 +3084,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_get_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_get_custom_aabb")
+    fileprivate static let method_mesh_get_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_get_custom_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 974181306)!
@@ -2981,8 +3111,37 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_mesh_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_clear")
+    fileprivate static let method_mesh_surface_remove: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_remove")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Removes the surface at the given index from the Mesh, shifting surfaces with higher index down by one.
+    public static func meshSurfaceRemove(mesh: RID, surface: Int32) {
+        withUnsafePointer(to: mesh.content) { pArg0 in
+            withUnsafePointer(to: surface) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_mesh_surface_remove, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_mesh_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_clear")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -3007,8 +3166,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_surface_update_vertex_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_update_vertex_region")
+    fileprivate static let method_mesh_surface_update_vertex_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_update_vertex_region")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2900195149)!
@@ -3042,8 +3201,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_surface_update_attribute_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_update_attribute_region")
+    fileprivate static let method_mesh_surface_update_attribute_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_update_attribute_region")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2900195149)!
@@ -3077,8 +3236,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_surface_update_skin_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_surface_update_skin_region")
+    fileprivate static let method_mesh_surface_update_skin_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_surface_update_skin_region")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2900195149)!
@@ -3112,8 +3271,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_mesh_set_shadow_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mesh_set_shadow_mesh")
+    fileprivate static let method_mesh_set_shadow_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mesh_set_shadow_mesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3141,8 +3300,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_create")
+    fileprivate static let method_multimesh_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -3166,11 +3325,11 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_allocate_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_allocate_data")
+    fileprivate static let method_multimesh_allocate_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_allocate_data")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 283685892)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 557240154)!
             }
             
         }
@@ -3178,15 +3337,18 @@ open class RenderingServer: Object {
     }()
     
     /// 
-    public static func multimeshAllocateData(multimesh: RID, instances: Int32, transformFormat: RenderingServer.MultimeshTransformFormat, colorFormat: Bool = false, customDataFormat: Bool = false) {
+    public static func multimeshAllocateData(multimesh: RID, instances: Int32, transformFormat: RenderingServer.MultimeshTransformFormat, colorFormat: Bool = false, customDataFormat: Bool = false, useIndirect: Bool = false) {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: instances) { pArg1 in
                 withUnsafePointer(to: transformFormat.rawValue) { pArg2 in
                     withUnsafePointer(to: colorFormat) { pArg3 in
                         withUnsafePointer(to: customDataFormat) { pArg4 in
-                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
-                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_multimesh_allocate_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            withUnsafePointer(to: useIndirect) { pArg5 in
+                                withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
+                                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
+                                        gi.object_method_bind_ptrcall(method_multimesh_allocate_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    }
+                                    
                                 }
                                 
                             }
@@ -3204,8 +3366,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_get_instance_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_get_instance_count")
+    fileprivate static let method_multimesh_get_instance_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_instance_count")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3231,8 +3393,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_set_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_set_mesh")
+    fileprivate static let method_multimesh_set_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_set_mesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3260,8 +3422,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_instance_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_set_transform")
+    fileprivate static let method_multimesh_instance_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675327471)!
@@ -3292,8 +3454,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_instance_set_transform_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_set_transform_2d")
+    fileprivate static let method_multimesh_instance_set_transform_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_set_transform_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 736082694)!
@@ -3324,8 +3486,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_instance_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_set_color")
+    fileprivate static let method_multimesh_instance_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_set_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 176975443)!
@@ -3356,8 +3518,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_instance_set_custom_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_set_custom_data")
+    fileprivate static let method_multimesh_instance_set_custom_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_set_custom_data")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 176975443)!
@@ -3388,8 +3550,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_get_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_get_mesh")
+    fileprivate static let method_multimesh_get_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_mesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -3415,8 +3577,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_get_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_get_aabb")
+    fileprivate static let method_multimesh_get_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 974181306)!
@@ -3442,8 +3604,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_set_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_set_custom_aabb")
+    fileprivate static let method_multimesh_set_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_set_custom_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3696536120)!
@@ -3471,8 +3633,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_get_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_get_custom_aabb")
+    fileprivate static let method_multimesh_get_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_custom_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 974181306)!
@@ -3498,8 +3660,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_instance_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_get_transform")
+    fileprivate static let method_multimesh_instance_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_get_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1050775521)!
@@ -3528,8 +3690,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_instance_get_transform_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_get_transform_2d")
+    fileprivate static let method_multimesh_instance_get_transform_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_get_transform_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1324854622)!
@@ -3558,8 +3720,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_instance_get_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_get_color")
+    fileprivate static let method_multimesh_instance_get_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_get_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2946315076)!
@@ -3588,8 +3750,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_instance_get_custom_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_instance_get_custom_data")
+    fileprivate static let method_multimesh_instance_get_custom_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_get_custom_data")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2946315076)!
@@ -3618,8 +3780,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_set_visible_instances: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_set_visible_instances")
+    fileprivate static let method_multimesh_set_visible_instances: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_set_visible_instances")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3647,8 +3809,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_get_visible_instances: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_get_visible_instances")
+    fileprivate static let method_multimesh_get_visible_instances: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_visible_instances")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3674,8 +3836,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_multimesh_set_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_set_buffer")
+    fileprivate static let method_multimesh_set_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_set_buffer")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2960552364)!
@@ -3688,6 +3850,12 @@ open class RenderingServer: Object {
     /// Set the entire data to use for drawing the `multimesh` at once to `buffer` (such as instance transforms and colors). `buffer`'s size must match the number of instances multiplied by the per-instance data size (which depends on the enabled MultiMesh fields). Otherwise, an error message is printed and nothing is rendered. See also ``multimeshGetBuffer(multimesh:)``.
     /// 
     /// The per-instance data size and expected data order is:
+    /// 
+    /// Instance transforms are in row-major order. Specifically:
+    /// 
+    /// - For ``Transform2D`` the float-order is: `(x.x, y.x, padding_float, origin.x, x.y, y.y, padding_float, origin.y)`.
+    /// 
+    /// - For ``Transform3D`` the float-order is: `(basis.x.x, basis.y.x, basis.z.x, origin.x, basis.x.y, basis.y.y, basis.z.y, origin.y, basis.x.z, basis.y.z, basis.z.z, origin.z)`.
     /// 
     public static func multimeshSetBuffer(multimesh: RID, buffer: PackedFloat32Array) {
         withUnsafePointer(to: multimesh.content) { pArg0 in
@@ -3706,8 +3874,67 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_multimesh_get_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("multimesh_get_buffer")
+    fileprivate static let method_multimesh_get_command_buffer_rd_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_command_buffer_rd_rid")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the ``RenderingDevice`` ``RID`` handle of the ``MultiMesh`` command buffer. This ``RID`` is only valid if `use_indirect` is set to `true` when allocating data through ``multimeshAllocateData(multimesh:instances:transformFormat:colorFormat:customDataFormat:useIndirect:)``. It can be used to directly modify the instance count via buffer.
+    /// 
+    /// The data structure is dependent on both how many surfaces the mesh contains and whether it is indexed or not, the buffer has 5 integers in it, with the last unused if the mesh is not indexed.
+    /// 
+    /// Each of the values in the buffer correspond to these options:
+    /// 
+    public static func multimeshGetCommandBufferRdRid(multimesh: RID) -> RID {
+        let _result: RID = RID ()
+        withUnsafePointer(to: multimesh.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_multimesh_get_command_buffer_rd_rid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_multimesh_get_buffer_rd_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_buffer_rd_rid")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the ``RenderingDevice`` ``RID`` handle of the ``MultiMesh``, which can be used as any other buffer on the Rendering Device.
+    public static func multimeshGetBufferRdRid(multimesh: RID) -> RID {
+        let _result: RID = RID ()
+        withUnsafePointer(to: multimesh.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_multimesh_get_buffer_rd_rid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_multimesh_get_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_get_buffer")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3964669176)!
@@ -3736,8 +3963,136 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_skeleton_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_create")
+    fileprivate static let method_multimesh_set_buffer_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_set_buffer_interpolated")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 659844711)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Alternative version of ``multimeshSetBuffer(multimesh:buffer:)`` for use with physics interpolation.
+    /// 
+    /// Takes both an array of current data and an array of data for the previous physics tick.
+    /// 
+    public static func multimeshSetBufferInterpolated(multimesh: RID, buffer: PackedFloat32Array, bufferPrevious: PackedFloat32Array) {
+        withUnsafePointer(to: multimesh.content) { pArg0 in
+            withUnsafePointer(to: buffer.content) { pArg1 in
+                withUnsafePointer(to: bufferPrevious.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(method_multimesh_set_buffer_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_multimesh_set_physics_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_set_physics_interpolated")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Turns on and off physics interpolation for this MultiMesh resource.
+    public static func multimeshSetPhysicsInterpolated(multimesh: RID, interpolated: Bool) {
+        withUnsafePointer(to: multimesh.content) { pArg0 in
+            withUnsafePointer(to: interpolated) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_multimesh_set_physics_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_multimesh_set_physics_interpolation_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_set_physics_interpolation_quality")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3934808223)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the physics interpolation quality for the ``MultiMesh``.
+    /// 
+    /// A value of ``MultimeshPhysicsInterpolationQuality/fast`` gives fast but low quality interpolation, a value of ``MultimeshPhysicsInterpolationQuality/high`` gives slower but higher quality interpolation.
+    /// 
+    public static func multimeshSetPhysicsInterpolationQuality(multimesh: RID, quality: RenderingServer.MultimeshPhysicsInterpolationQuality) {
+        withUnsafePointer(to: multimesh.content) { pArg0 in
+            withUnsafePointer(to: quality.rawValue) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_multimesh_set_physics_interpolation_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_multimesh_instance_reset_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("multimesh_instance_reset_physics_interpolation")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Prevents physics interpolation for the specified instance during the current physics tick.
+    /// 
+    /// This is useful when moving an instance to a new location, to give an instantaneous change rather than interpolation from the previous location.
+    /// 
+    public static func multimeshInstanceResetPhysicsInterpolation(multimesh: RID, index: Int32) {
+        withUnsafePointer(to: multimesh.content) { pArg0 in
+            withUnsafePointer(to: index) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_multimesh_instance_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_skeleton_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -3757,8 +4112,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_skeleton_allocate_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_allocate_data")
+    fileprivate static let method_skeleton_allocate_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_allocate_data")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1904426712)!
@@ -3789,8 +4144,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_skeleton_get_bone_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_get_bone_count")
+    fileprivate static let method_skeleton_get_bone_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_get_bone_count")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3816,8 +4171,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_skeleton_bone_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_bone_set_transform")
+    fileprivate static let method_skeleton_bone_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_bone_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675327471)!
@@ -3848,8 +4203,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_skeleton_bone_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_bone_get_transform")
+    fileprivate static let method_skeleton_bone_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_bone_get_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1050775521)!
@@ -3878,8 +4233,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_skeleton_bone_set_transform_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_bone_set_transform_2d")
+    fileprivate static let method_skeleton_bone_set_transform_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_bone_set_transform_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 736082694)!
@@ -3910,8 +4265,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_skeleton_bone_get_transform_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_bone_get_transform_2d")
+    fileprivate static let method_skeleton_bone_get_transform_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_bone_get_transform_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1324854622)!
@@ -3940,8 +4295,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_skeleton_set_base_transform_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("skeleton_set_base_transform_2d")
+    fileprivate static let method_skeleton_set_base_transform_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("skeleton_set_base_transform_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -3969,8 +4324,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_directional_light_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("directional_light_create")
+    fileprivate static let method_directional_light_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("directional_light_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -3994,8 +4349,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_omni_light_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("omni_light_create")
+    fileprivate static let method_omni_light_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("omni_light_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -4019,8 +4374,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_spot_light_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("spot_light_create")
+    fileprivate static let method_spot_light_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("spot_light_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -4042,8 +4397,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_light_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_color")
+    fileprivate static let method_light_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -4071,8 +4426,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_param")
+    fileprivate static let method_light_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_param")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501936875)!
@@ -4103,8 +4458,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_shadow: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_shadow")
+    fileprivate static let method_light_set_shadow: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_shadow")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4132,8 +4487,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_projector: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_projector")
+    fileprivate static let method_light_set_projector: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_projector")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -4161,8 +4516,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_negative: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_negative")
+    fileprivate static let method_light_set_negative: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_negative")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4190,8 +4545,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_cull_mask")
+    fileprivate static let method_light_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -4219,8 +4574,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_distance_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_distance_fade")
+    fileprivate static let method_light_set_distance_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_distance_fade")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1622292572)!
@@ -4257,8 +4612,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_reverse_cull_face_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_reverse_cull_face_mode")
+    fileprivate static let method_light_set_reverse_cull_face_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_reverse_cull_face_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4286,8 +4641,37 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_bake_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_bake_mode")
+    fileprivate static let method_light_set_shadow_caster_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_shadow_caster_mask")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the shadow caster mask for this 3D light. Shadows will only be cast using objects in the selected layers. Equivalent to ``Light3D/shadowCasterMask``.
+    public static func lightSetShadowCasterMask(light: RID, mask: UInt32) {
+        withUnsafePointer(to: light.content) { pArg0 in
+            withUnsafePointer(to: mask) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_light_set_shadow_caster_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_light_set_bake_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_bake_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1048525260)!
@@ -4315,8 +4699,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_set_max_sdfgi_cascade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_set_max_sdfgi_cascade")
+    fileprivate static let method_light_set_max_sdfgi_cascade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_set_max_sdfgi_cascade")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -4344,8 +4728,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_omni_set_shadow_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_omni_set_shadow_mode")
+    fileprivate static let method_light_omni_set_shadow_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_omni_set_shadow_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2552677200)!
@@ -4373,8 +4757,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_directional_set_shadow_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_directional_set_shadow_mode")
+    fileprivate static let method_light_directional_set_shadow_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_directional_set_shadow_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 380462970)!
@@ -4402,8 +4786,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_directional_set_blend_splits: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_directional_set_blend_splits")
+    fileprivate static let method_light_directional_set_blend_splits: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_directional_set_blend_splits")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4431,8 +4815,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_directional_set_sky_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_directional_set_sky_mode")
+    fileprivate static let method_light_directional_set_sky_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_directional_set_sky_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2559740754)!
@@ -4460,8 +4844,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_light_projectors_set_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("light_projectors_set_filter")
+    fileprivate static let method_light_projectors_set_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("light_projectors_set_filter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 43944325)!
@@ -4486,8 +4870,34 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_positional_soft_shadow_filter_set_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("positional_soft_shadow_filter_set_quality")
+    fileprivate static let method_lightmaps_set_bicubic_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmaps_set_bicubic_filter")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Toggles whether a bicubic filter should be used when lightmaps are sampled. This smoothens their appearance at a performance cost.
+    public static func lightmapsSetBicubicFilter(enable: Bool) {
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_lightmaps_set_bicubic_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_positional_soft_shadow_filter_set_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("positional_soft_shadow_filter_set_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3613045266)!
@@ -4512,8 +4922,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_directional_soft_shadow_filter_set_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("directional_soft_shadow_filter_set_quality")
+    fileprivate static let method_directional_soft_shadow_filter_set_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("directional_soft_shadow_filter_set_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3613045266)!
@@ -4538,8 +4948,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_directional_shadow_atlas_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("directional_shadow_atlas_set_size")
+    fileprivate static let method_directional_shadow_atlas_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("directional_shadow_atlas_set_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -4567,8 +4977,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_create")
+    fileprivate static let method_reflection_probe_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -4592,8 +5002,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_reflection_probe_set_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_update_mode")
+    fileprivate static let method_reflection_probe_set_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_update_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3853670147)!
@@ -4621,8 +5031,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_intensity")
+    fileprivate static let method_reflection_probe_set_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_intensity")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -4650,8 +5060,37 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_ambient_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_ambient_mode")
+    fileprivate static let method_reflection_probe_set_blend_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_blend_distance")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the distance in meters over which a probe blends into the scene.
+    public static func reflectionProbeSetBlendDistance(probe: RID, blendDistance: Double) {
+        withUnsafePointer(to: probe.content) { pArg0 in
+            withUnsafePointer(to: blendDistance) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_blend_distance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_reflection_probe_set_ambient_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_ambient_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 184163074)!
@@ -4679,8 +5118,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_ambient_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_ambient_color")
+    fileprivate static let method_reflection_probe_set_ambient_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_ambient_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -4708,8 +5147,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_ambient_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_ambient_energy")
+    fileprivate static let method_reflection_probe_set_ambient_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_ambient_energy")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -4737,8 +5176,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_max_distance")
+    fileprivate static let method_reflection_probe_set_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_max_distance")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -4766,8 +5205,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_size")
+    fileprivate static let method_reflection_probe_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -4795,8 +5234,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_origin_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_origin_offset")
+    fileprivate static let method_reflection_probe_set_origin_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_origin_offset")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -4824,8 +5263,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_as_interior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_as_interior")
+    fileprivate static let method_reflection_probe_set_as_interior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_as_interior")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4853,8 +5292,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_enable_box_projection: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_enable_box_projection")
+    fileprivate static let method_reflection_probe_set_enable_box_projection: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_enable_box_projection")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4882,8 +5321,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_enable_shadows: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_enable_shadows")
+    fileprivate static let method_reflection_probe_set_enable_shadows: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_enable_shadows")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -4911,8 +5350,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_cull_mask")
+    fileprivate static let method_reflection_probe_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -4940,8 +5379,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_reflection_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_reflection_mask")
+    fileprivate static let method_reflection_probe_set_reflection_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_reflection_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -4969,8 +5408,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_resolution")
+    fileprivate static let method_reflection_probe_set_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_resolution")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -4998,8 +5437,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_reflection_probe_set_mesh_lod_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reflection_probe_set_mesh_lod_threshold")
+    fileprivate static let method_reflection_probe_set_mesh_lod_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reflection_probe_set_mesh_lod_threshold")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5027,8 +5466,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_create")
+    fileprivate static let method_decal_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -5052,8 +5491,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_decal_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_size")
+    fileprivate static let method_decal_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -5081,8 +5520,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_texture")
+    fileprivate static let method_decal_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3953344054)!
@@ -5113,8 +5552,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_emission_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_emission_energy")
+    fileprivate static let method_decal_set_emission_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_emission_energy")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5142,8 +5581,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_albedo_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_albedo_mix")
+    fileprivate static let method_decal_set_albedo_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_albedo_mix")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5171,8 +5610,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_modulate")
+    fileprivate static let method_decal_set_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_modulate")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -5200,8 +5639,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_cull_mask")
+    fileprivate static let method_decal_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -5229,8 +5668,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_distance_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_distance_fade")
+    fileprivate static let method_decal_set_distance_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_distance_fade")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2972769666)!
@@ -5264,8 +5703,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_fade")
+    fileprivate static let method_decal_set_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_fade")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2513314492)!
@@ -5296,8 +5735,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decal_set_normal_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decal_set_normal_fade")
+    fileprivate static let method_decal_set_normal_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decal_set_normal_fade")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5325,8 +5764,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_decals_set_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decals_set_filter")
+    fileprivate static let method_decals_set_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decals_set_filter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3519875702)!
@@ -5351,8 +5790,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_gi_set_use_half_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("gi_set_use_half_resolution")
+    fileprivate static let method_gi_set_use_half_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("gi_set_use_half_resolution")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -5377,8 +5816,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_create")
+    fileprivate static let method_voxel_gi_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -5400,8 +5839,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_voxel_gi_allocate_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_allocate_data")
+    fileprivate static let method_voxel_gi_allocate_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_allocate_data")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4108223027)!
@@ -5447,8 +5886,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_get_octree_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_get_octree_size")
+    fileprivate static let method_voxel_gi_get_octree_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_get_octree_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2607699645)!
@@ -5474,8 +5913,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_voxel_gi_get_octree_cells: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_get_octree_cells")
+    fileprivate static let method_voxel_gi_get_octree_cells: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_get_octree_cells")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3348040486)!
@@ -5501,8 +5940,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_voxel_gi_get_data_cells: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_get_data_cells")
+    fileprivate static let method_voxel_gi_get_data_cells: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_get_data_cells")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3348040486)!
@@ -5528,8 +5967,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_voxel_gi_get_distance_field: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_get_distance_field")
+    fileprivate static let method_voxel_gi_get_distance_field: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_get_distance_field")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3348040486)!
@@ -5555,8 +5994,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_voxel_gi_get_level_counts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_get_level_counts")
+    fileprivate static let method_voxel_gi_get_level_counts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_get_level_counts")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 788230395)!
@@ -5582,8 +6021,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_voxel_gi_get_to_cell_xform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_get_to_cell_xform")
+    fileprivate static let method_voxel_gi_get_to_cell_xform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_get_to_cell_xform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1128465797)!
@@ -5609,8 +6048,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_voxel_gi_set_dynamic_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_dynamic_range")
+    fileprivate static let method_voxel_gi_set_dynamic_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_dynamic_range")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5638,8 +6077,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_propagation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_propagation")
+    fileprivate static let method_voxel_gi_set_propagation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_propagation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5667,8 +6106,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_energy")
+    fileprivate static let method_voxel_gi_set_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_energy")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5696,8 +6135,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_baked_exposure_normalization: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_baked_exposure_normalization")
+    fileprivate static let method_voxel_gi_set_baked_exposure_normalization: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_baked_exposure_normalization")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5725,8 +6164,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_bias")
+    fileprivate static let method_voxel_gi_set_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_bias")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5754,8 +6193,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_normal_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_normal_bias")
+    fileprivate static let method_voxel_gi_set_normal_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_normal_bias")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -5783,8 +6222,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_interior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_interior")
+    fileprivate static let method_voxel_gi_set_interior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_interior")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -5812,8 +6251,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_use_two_bounces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_use_two_bounces")
+    fileprivate static let method_voxel_gi_set_use_two_bounces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_use_two_bounces")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -5841,8 +6280,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_voxel_gi_set_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("voxel_gi_set_quality")
+    fileprivate static let method_voxel_gi_set_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("voxel_gi_set_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1538689978)!
@@ -5867,8 +6306,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_lightmap_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_create")
+    fileprivate static let method_lightmap_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -5890,8 +6329,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_lightmap_set_textures: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_set_textures")
+    fileprivate static let method_lightmap_set_textures: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_set_textures")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2646464759)!
@@ -5922,8 +6361,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_lightmap_set_probe_bounds: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_set_probe_bounds")
+    fileprivate static let method_lightmap_set_probe_bounds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_set_probe_bounds")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3696536120)!
@@ -5951,8 +6390,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_lightmap_set_probe_interior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_set_probe_interior")
+    fileprivate static let method_lightmap_set_probe_interior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_set_probe_interior")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -5980,8 +6419,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_lightmap_set_probe_capture_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_set_probe_capture_data")
+    fileprivate static let method_lightmap_set_probe_capture_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_set_probe_capture_data")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3217845880)!
@@ -6018,8 +6457,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_lightmap_get_probe_capture_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_get_probe_capture_points")
+    fileprivate static let method_lightmap_get_probe_capture_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_get_probe_capture_points")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 808965560)!
@@ -6045,8 +6484,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_lightmap_get_probe_capture_sh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_get_probe_capture_sh")
+    fileprivate static let method_lightmap_get_probe_capture_sh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_get_probe_capture_sh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1569415609)!
@@ -6072,8 +6511,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_lightmap_get_probe_capture_tetrahedra: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_get_probe_capture_tetrahedra")
+    fileprivate static let method_lightmap_get_probe_capture_tetrahedra: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_get_probe_capture_tetrahedra")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 788230395)!
@@ -6099,8 +6538,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_lightmap_get_probe_capture_bsp_tree: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_get_probe_capture_bsp_tree")
+    fileprivate static let method_lightmap_get_probe_capture_bsp_tree: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_get_probe_capture_bsp_tree")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 788230395)!
@@ -6126,8 +6565,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_lightmap_set_baked_exposure_normalization: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_set_baked_exposure_normalization")
+    fileprivate static let method_lightmap_set_baked_exposure_normalization: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_set_baked_exposure_normalization")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6155,8 +6594,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_lightmap_set_probe_capture_update_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lightmap_set_probe_capture_update_speed")
+    fileprivate static let method_lightmap_set_probe_capture_update_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lightmap_set_probe_capture_update_speed")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -6181,8 +6620,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_create")
+    fileprivate static let method_particles_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -6208,8 +6647,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_particles_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_mode")
+    fileprivate static let method_particles_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3492270028)!
@@ -6237,8 +6676,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_emitting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_emitting")
+    fileprivate static let method_particles_set_emitting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_emitting")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -6248,7 +6687,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// If `true`, particles will emit over time. Setting to false does not reset the particles, but only stops their emission. Equivalent to ``GPUParticles3D/emitting``.
+    /// If `true`, particles will emit over time. Setting to `false` does not reset the particles, but only stops their emission. Equivalent to ``GPUParticles3D/emitting``.
     public static func particlesSetEmitting(particles: RID, emitting: Bool) {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: emitting) { pArg1 in
@@ -6266,8 +6705,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_get_emitting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_get_emitting")
+    fileprivate static let method_particles_get_emitting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_get_emitting")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -6293,8 +6732,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_particles_set_amount: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_amount")
+    fileprivate static let method_particles_set_amount: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_amount")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -6322,8 +6761,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_amount_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_amount_ratio")
+    fileprivate static let method_particles_set_amount_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_amount_ratio")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6351,8 +6790,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_lifetime: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_lifetime")
+    fileprivate static let method_particles_set_lifetime: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_lifetime")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6380,8 +6819,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_one_shot: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_one_shot")
+    fileprivate static let method_particles_set_one_shot: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_one_shot")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -6409,8 +6848,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_pre_process_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_pre_process_time")
+    fileprivate static let method_particles_set_pre_process_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_pre_process_time")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6438,8 +6877,37 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_explosiveness_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_explosiveness_ratio")
+    fileprivate static let method_particles_request_process_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_request_process_time")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Requests particles to process for extra process time during a single frame.
+    public static func particlesRequestProcessTime(particles: RID, time: Double) {
+        withUnsafePointer(to: particles.content) { pArg0 in
+            withUnsafePointer(to: time) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_particles_request_process_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_particles_set_explosiveness_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_explosiveness_ratio")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6467,8 +6935,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_randomness_ratio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_randomness_ratio")
+    fileprivate static let method_particles_set_randomness_ratio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_randomness_ratio")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6496,8 +6964,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_interp_to_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_interp_to_end")
+    fileprivate static let method_particles_set_interp_to_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_interp_to_end")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6525,8 +6993,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_emitter_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_emitter_velocity")
+    fileprivate static let method_particles_set_emitter_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_emitter_velocity")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -6554,8 +7022,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_custom_aabb")
+    fileprivate static let method_particles_set_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_custom_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3696536120)!
@@ -6583,8 +7051,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_speed_scale")
+    fileprivate static let method_particles_set_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_speed_scale")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6612,8 +7080,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_use_local_coordinates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_use_local_coordinates")
+    fileprivate static let method_particles_set_use_local_coordinates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_use_local_coordinates")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -6641,8 +7109,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_process_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_process_material")
+    fileprivate static let method_particles_set_process_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_process_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -6673,8 +7141,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_fixed_fps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_fixed_fps")
+    fileprivate static let method_particles_set_fixed_fps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_fixed_fps")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -6702,8 +7170,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_interpolate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_interpolate")
+    fileprivate static let method_particles_set_interpolate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_interpolate")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -6731,8 +7199,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_fractional_delta: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_fractional_delta")
+    fileprivate static let method_particles_set_fractional_delta: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_fractional_delta")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -6760,8 +7228,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_collision_base_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_collision_base_size")
+    fileprivate static let method_particles_set_collision_base_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_collision_base_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -6789,8 +7257,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_transform_align: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_transform_align")
+    fileprivate static let method_particles_set_transform_align: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_transform_align")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3264971368)!
@@ -6818,8 +7286,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_trails: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_trails")
+    fileprivate static let method_particles_set_trails: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_trails")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2010054925)!
@@ -6850,8 +7318,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_trail_bind_poses: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_trail_bind_poses")
+    fileprivate static let method_particles_set_trail_bind_poses: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_trail_bind_poses")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 684822712)!
@@ -6862,7 +7330,7 @@ open class RenderingServer: Object {
     }()
     
     /// 
-    public static func particlesSetTrailBindPoses(particles: RID, bindPoses: VariantCollection<Transform3D>) {
+    public static func particlesSetTrailBindPoses(particles: RID, bindPoses: TypedArray<Transform3D>) {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: bindPoses.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -6879,8 +7347,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_is_inactive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_is_inactive")
+    fileprivate static let method_particles_is_inactive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_is_inactive")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -6906,8 +7374,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_particles_request_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_request_process")
+    fileprivate static let method_particles_request_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_request_process")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -6932,8 +7400,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_restart: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_restart")
+    fileprivate static let method_particles_restart: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_restart")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -6943,7 +7411,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// Reset the particles on the next update. Equivalent to ``GPUParticles3D/restart()``.
+    /// Reset the particles on the next update. Equivalent to ``GPUParticles3D/restart(keepSeed:)``.
     public static func particlesRestart(particles: RID) {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -6958,8 +7426,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_subemitter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_subemitter")
+    fileprivate static let method_particles_set_subemitter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_subemitter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -6987,8 +7455,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_emit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_emit")
+    fileprivate static let method_particles_emit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_emit")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4043136117)!
@@ -7028,8 +7496,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_draw_order: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_draw_order")
+    fileprivate static let method_particles_set_draw_order: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_draw_order")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 935028487)!
@@ -7057,8 +7525,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_draw_passes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_draw_passes")
+    fileprivate static let method_particles_set_draw_passes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_draw_passes")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -7086,8 +7554,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_set_draw_pass_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_draw_pass_mesh")
+    fileprivate static let method_particles_set_draw_pass_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_draw_pass_mesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2310537182)!
@@ -7118,8 +7586,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_get_current_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_get_current_aabb")
+    fileprivate static let method_particles_get_current_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_get_current_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3952830260)!
@@ -7145,8 +7613,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_particles_set_emission_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_set_emission_transform")
+    fileprivate static let method_particles_set_emission_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_set_emission_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3935195649)!
@@ -7174,8 +7642,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_create")
+    fileprivate static let method_particles_collision_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -7195,8 +7663,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_particles_collision_set_collision_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_collision_type")
+    fileprivate static let method_particles_collision_set_collision_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_collision_type")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1497044930)!
@@ -7224,8 +7692,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_cull_mask")
+    fileprivate static let method_particles_collision_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -7253,8 +7721,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_sphere_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_sphere_radius")
+    fileprivate static let method_particles_collision_set_sphere_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_sphere_radius")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -7282,8 +7750,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_box_extents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_box_extents")
+    fileprivate static let method_particles_collision_set_box_extents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_box_extents")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -7311,8 +7779,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_attractor_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_attractor_strength")
+    fileprivate static let method_particles_collision_set_attractor_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_attractor_strength")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -7340,8 +7808,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_attractor_directionality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_attractor_directionality")
+    fileprivate static let method_particles_collision_set_attractor_directionality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_attractor_directionality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -7369,8 +7837,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_attractor_attenuation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_attractor_attenuation")
+    fileprivate static let method_particles_collision_set_attractor_attenuation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_attractor_attenuation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -7398,8 +7866,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_field_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_field_texture")
+    fileprivate static let method_particles_collision_set_field_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_field_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -7427,8 +7895,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_height_field_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_height_field_update")
+    fileprivate static let method_particles_collision_height_field_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_height_field_update")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -7453,8 +7921,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_particles_collision_set_height_field_resolution: GDExtensionMethodBindPtr = {
-        let methodName = StringName("particles_collision_set_height_field_resolution")
+    fileprivate static let method_particles_collision_set_height_field_resolution: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_height_field_resolution")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 962977297)!
@@ -7482,8 +7950,37 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_fog_volume_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fog_volume_create")
+    fileprivate static let method_particles_collision_set_height_field_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("particles_collision_set_height_field_mask")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the heightfield `mask` for the 3D GPU particles heightfield collision specified by the `particlesCollision` RID. Equivalent to ``GPUParticlesCollisionHeightField3D/heightfieldMask``.
+    public static func particlesCollisionSetHeightFieldMask(particlesCollision: RID, mask: UInt32) {
+        withUnsafePointer(to: particlesCollision.content) { pArg0 in
+            withUnsafePointer(to: mask) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_height_field_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_fog_volume_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fog_volume_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -7505,8 +8002,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_fog_volume_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fog_volume_set_shape")
+    fileprivate static let method_fog_volume_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fog_volume_set_shape")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3818703106)!
@@ -7534,8 +8031,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_fog_volume_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fog_volume_set_size")
+    fileprivate static let method_fog_volume_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fog_volume_set_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -7563,8 +8060,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_fog_volume_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fog_volume_set_material")
+    fileprivate static let method_fog_volume_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fog_volume_set_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -7592,8 +8089,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_visibility_notifier_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("visibility_notifier_create")
+    fileprivate static let method_visibility_notifier_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("visibility_notifier_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -7607,7 +8104,7 @@ open class RenderingServer: Object {
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingServer's ``freeRid(_:)`` method.
     /// 
-    /// To place in a scene, attach this mesh to an instance using ``instanceSetBase(instance:base:)`` using the returned RID.
+    /// To place in a scene, attach this notifier to an instance using ``instanceSetBase(instance:base:)`` using the returned RID.
     /// 
     /// > Note: The equivalent node is ``VisibleOnScreenNotifier3D``.
     /// 
@@ -7617,8 +8114,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_visibility_notifier_set_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("visibility_notifier_set_aabb")
+    fileprivate static let method_visibility_notifier_set_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("visibility_notifier_set_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3696536120)!
@@ -7646,8 +8143,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_visibility_notifier_set_callbacks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("visibility_notifier_set_callbacks")
+    fileprivate static let method_visibility_notifier_set_callbacks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("visibility_notifier_set_callbacks")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2689735388)!
@@ -7678,8 +8175,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_occluder_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("occluder_create")
+    fileprivate static let method_occluder_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("occluder_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -7701,8 +8198,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_occluder_set_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("occluder_set_mesh")
+    fileprivate static let method_occluder_set_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("occluder_set_mesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3854404263)!
@@ -7733,8 +8230,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_create")
+    fileprivate static let method_camera_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -7756,8 +8253,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_camera_set_perspective: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_perspective")
+    fileprivate static let method_camera_set_perspective: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_perspective")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 157498339)!
@@ -7791,8 +8288,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_orthogonal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_orthogonal")
+    fileprivate static let method_camera_set_orthogonal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_orthogonal")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 157498339)!
@@ -7826,8 +8323,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_frustum: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_frustum")
+    fileprivate static let method_camera_set_frustum: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_frustum")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1889878953)!
@@ -7864,8 +8361,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_transform")
+    fileprivate static let method_camera_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3935195649)!
@@ -7893,8 +8390,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_cull_mask")
+    fileprivate static let method_camera_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -7922,8 +8419,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_environment")
+    fileprivate static let method_camera_set_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_environment")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -7951,8 +8448,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_camera_attributes")
+    fileprivate static let method_camera_set_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_camera_attributes")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -7980,8 +8477,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_compositor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_compositor")
+    fileprivate static let method_camera_set_compositor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_compositor")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -8009,8 +8506,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_set_use_vertical_aspect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_set_use_vertical_aspect")
+    fileprivate static let method_camera_set_use_vertical_aspect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_set_use_vertical_aspect")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8038,8 +8535,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_create")
+    fileprivate static let method_viewport_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -8061,8 +8558,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_viewport_set_use_xr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_use_xr")
+    fileprivate static let method_viewport_set_use_xr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_use_xr")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8090,8 +8587,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_size")
+    fileprivate static let method_viewport_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -8122,8 +8619,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_active")
+    fileprivate static let method_viewport_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_active")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8151,8 +8648,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_parent_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_parent_viewport")
+    fileprivate static let method_viewport_set_parent_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_parent_viewport")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -8180,8 +8677,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_attach_to_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_attach_to_screen")
+    fileprivate static let method_viewport_attach_to_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_attach_to_screen")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1062245816)!
@@ -8194,8 +8691,6 @@ open class RenderingServer: Object {
     /// Copies the viewport to a region of the screen specified by `rect`. If ``viewportSetRenderDirectToScreen(viewport:enabled:)`` is `true`, then the viewport does not use a framebuffer and the contents of the viewport are rendered directly to screen. However, note that the root viewport is drawn last, therefore it will draw over the screen. Accordingly, you must set the root viewport to an area that does not cover the area that you have attached this viewport to.
     /// 
     /// For example, you can set the root viewport to not render at all with the following code:
-    /// 
-    /// FIXME: The method seems to be non-existent.
     /// 
     /// Using this can result in significant optimization, especially on lower-end devices. However, it comes at the cost of having to manage your viewports manually. For further optimization, see ``viewportSetRenderDirectToScreen(viewport:enabled:)``.
     /// 
@@ -8219,8 +8714,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_render_direct_to_screen: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_render_direct_to_screen")
+    fileprivate static let method_viewport_set_render_direct_to_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_render_direct_to_screen")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8248,8 +8743,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_canvas_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_canvas_cull_mask")
+    fileprivate static let method_viewport_set_canvas_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_canvas_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -8277,8 +8772,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_scaling_3d_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_scaling_3d_mode")
+    fileprivate static let method_viewport_set_scaling_3d_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_scaling_3d_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2386524376)!
@@ -8306,8 +8801,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_scaling_3d_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_scaling_3d_scale")
+    fileprivate static let method_viewport_set_scaling_3d_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_scaling_3d_scale")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -8338,8 +8833,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_fsr_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_fsr_sharpness")
+    fileprivate static let method_viewport_set_fsr_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_fsr_sharpness")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -8367,8 +8862,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_texture_mipmap_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_texture_mipmap_bias")
+    fileprivate static let method_viewport_set_texture_mipmap_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_texture_mipmap_bias")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -8399,8 +8894,44 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_update_mode")
+    fileprivate static let method_viewport_set_anisotropic_filtering_level: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_anisotropic_filtering_level")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3953214029)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the maximum number of samples to take when using anisotropic filtering on textures (as a power of two). A higher sample count will result in sharper textures at oblique angles, but is more expensive to compute. A value of `0` forcibly disables anisotropic filtering, even on materials where it is enabled.
+    /// 
+    /// The anisotropic filtering level also affects decals and light projectors if they are configured to use anisotropic filtering. See ``ProjectSettings/rendering/textures/decals/filter`` and ``ProjectSettings/rendering/textures/lightProjectors/filter``.
+    /// 
+    /// > Note: In 3D, for this setting to have an effect, set ``BaseMaterial3D/textureFilter`` to ``BaseMaterial3D/TextureFilter/linearWithMipmapsAnisotropic`` or ``BaseMaterial3D/TextureFilter/nearestWithMipmapsAnisotropic`` on materials.
+    /// 
+    /// > Note: In 2D, for this setting to have an effect, set ``CanvasItem/textureFilter`` to ``CanvasItem/TextureFilter/linearWithMipmapsAnisotropic`` or ``CanvasItem/TextureFilter/nearestWithMipmapsAnisotropic`` on the ``CanvasItem`` node displaying the texture (or in ``CanvasTexture``). However, anisotropic filtering is rarely useful in 2D, so only enable it for textures in 2D if it makes a meaningful visual difference.
+    /// 
+    public static func viewportSetAnisotropicFilteringLevel(viewport: RID, anisotropicFilteringLevel: RenderingServer.ViewportAnisotropicFiltering) {
+        withUnsafePointer(to: viewport.content) { pArg0 in
+            withUnsafePointer(to: anisotropicFilteringLevel.rawValue) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_viewport_set_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_viewport_set_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_update_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3161116010)!
@@ -8428,8 +8959,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_get_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_get_update_mode")
+    fileprivate static let method_viewport_get_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_get_update_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3803901472)!
@@ -8458,8 +8989,8 @@ open class RenderingServer: Object {
         return RenderingServer.ViewportUpdateMode (rawValue: _result)!
     }
     
-    fileprivate static var method_viewport_set_clear_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_clear_mode")
+    fileprivate static let method_viewport_set_clear_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_clear_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3628367896)!
@@ -8487,8 +9018,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_get_render_target: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_get_render_target")
+    fileprivate static let method_viewport_get_render_target: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_get_render_target")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -8514,8 +9045,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_viewport_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_get_texture")
+    fileprivate static let method_viewport_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_get_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -8541,8 +9072,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_viewport_set_disable_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_disable_3d")
+    fileprivate static let method_viewport_set_disable_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_disable_3d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8570,8 +9101,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_disable_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_disable_2d")
+    fileprivate static let method_viewport_set_disable_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_disable_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8599,8 +9130,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_environment_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_environment_mode")
+    fileprivate static let method_viewport_set_environment_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_environment_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2196892182)!
@@ -8628,8 +9159,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_attach_camera: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_attach_camera")
+    fileprivate static let method_viewport_attach_camera: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_attach_camera")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -8657,8 +9188,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_scenario: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_scenario")
+    fileprivate static let method_viewport_set_scenario: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_scenario")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -8686,8 +9217,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_attach_canvas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_attach_canvas")
+    fileprivate static let method_viewport_attach_canvas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_attach_canvas")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -8715,8 +9246,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_remove_canvas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_remove_canvas")
+    fileprivate static let method_viewport_remove_canvas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_remove_canvas")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -8744,8 +9275,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_snap_2d_transforms_to_pixel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_snap_2d_transforms_to_pixel")
+    fileprivate static let method_viewport_set_snap_2d_transforms_to_pixel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_snap_2d_transforms_to_pixel")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8773,8 +9304,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_snap_2d_vertices_to_pixel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_snap_2d_vertices_to_pixel")
+    fileprivate static let method_viewport_set_snap_2d_vertices_to_pixel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_snap_2d_vertices_to_pixel")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8802,8 +9333,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_default_canvas_item_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_default_canvas_item_texture_filter")
+    fileprivate static let method_viewport_set_default_canvas_item_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_default_canvas_item_texture_filter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1155129294)!
@@ -8831,8 +9362,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_default_canvas_item_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_default_canvas_item_texture_repeat")
+    fileprivate static let method_viewport_set_default_canvas_item_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_default_canvas_item_texture_repeat")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1652956681)!
@@ -8860,8 +9391,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_canvas_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_canvas_transform")
+    fileprivate static let method_viewport_set_canvas_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_canvas_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3608606053)!
@@ -8892,8 +9423,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_canvas_stacking: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_canvas_stacking")
+    fileprivate static let method_viewport_set_canvas_stacking: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_canvas_stacking")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3713930247)!
@@ -8930,8 +9461,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_transparent_background: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_transparent_background")
+    fileprivate static let method_viewport_set_transparent_background: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_transparent_background")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -8959,8 +9490,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_global_canvas_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_global_canvas_transform")
+    fileprivate static let method_viewport_set_global_canvas_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_global_canvas_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -8988,8 +9519,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_sdf_oversize_and_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_sdf_oversize_and_scale")
+    fileprivate static let method_viewport_set_sdf_oversize_and_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_sdf_oversize_and_scale")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1329198632)!
@@ -9020,8 +9551,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_positional_shadow_atlas_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_positional_shadow_atlas_size")
+    fileprivate static let method_viewport_set_positional_shadow_atlas_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_positional_shadow_atlas_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1904426712)!
@@ -9055,8 +9586,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_positional_shadow_atlas_quadrant_subdivision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_positional_shadow_atlas_quadrant_subdivision")
+    fileprivate static let method_viewport_set_positional_shadow_atlas_quadrant_subdivision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_positional_shadow_atlas_quadrant_subdivision")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -9087,8 +9618,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_msaa_3d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_msaa_3d")
+    fileprivate static let method_viewport_set_msaa_3d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_msaa_3d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3764433340)!
@@ -9098,7 +9629,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// Sets the multisample anti-aliasing mode for 3D on the specified `viewport` RID. See ``RenderingServer/ViewportMSAA`` for options.
+    /// Sets the multisample antialiasing mode for 3D on the specified `viewport` RID. See ``RenderingServer/ViewportMSAA`` for options. Equivalent to ``ProjectSettings/rendering/antiAliasing/quality/msaa3d`` or ``Viewport/msaa3d``.
     public static func viewportSetMsaa3d(viewport: RID, msaa: RenderingServer.ViewportMSAA) {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: msaa.rawValue) { pArg1 in
@@ -9116,8 +9647,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_msaa_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_msaa_2d")
+    fileprivate static let method_viewport_set_msaa_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_msaa_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3764433340)!
@@ -9127,7 +9658,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// Sets the multisample anti-aliasing mode for 2D/Canvas on the specified `viewport` RID. See ``RenderingServer/ViewportMSAA`` for options.
+    /// Sets the multisample antialiasing mode for 2D/Canvas on the specified `viewport` RID. See ``RenderingServer/ViewportMSAA`` for options. Equivalent to ``ProjectSettings/rendering/antiAliasing/quality/msaa2d`` or ``Viewport/msaa2d``.
     public static func viewportSetMsaa2d(viewport: RID, msaa: RenderingServer.ViewportMSAA) {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: msaa.rawValue) { pArg1 in
@@ -9145,8 +9676,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_use_hdr_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_use_hdr_2d")
+    fileprivate static let method_viewport_set_use_hdr_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_use_hdr_2d")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -9158,7 +9689,7 @@ open class RenderingServer: Object {
     
     /// If `true`, 2D rendering will use a high dynamic range (HDR) format framebuffer matching the bit depth of the 3D framebuffer. When using the Forward+ renderer this will be an `RGBA16` framebuffer, while when using the Mobile renderer it will be an `RGB10_A2` framebuffer. Additionally, 2D rendering will take place in linear color space and will be converted to sRGB space immediately before blitting to the screen (if the Viewport is attached to the screen). Practically speaking, this means that the end result of the Viewport will not be clamped into the `0-1` range and can be used in 3D rendering without color space adjustments. This allows 2D rendering to take advantage of effects requiring high dynamic range (e.g. 2D glow) as well as substantially improves the appearance of effects requiring highly detailed gradients. This setting has the same effect as ``Viewport/useHdr2d``.
     /// 
-    /// > Note: This setting will have no effect when using the GL Compatibility renderer as the GL Compatibility renderer always renders in low dynamic range for performance reasons.
+    /// > Note: This setting will have no effect when using the Compatibility renderer, which always renders in low dynamic range for performance reasons.
     /// 
     public static func viewportSetUseHdr2d(viewport: RID, enabled: Bool) {
         withUnsafePointer(to: viewport.content) { pArg0 in
@@ -9177,8 +9708,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_screen_space_aa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_screen_space_aa")
+    fileprivate static let method_viewport_set_screen_space_aa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_screen_space_aa")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1447279591)!
@@ -9188,7 +9719,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// Sets the viewport's screen-space antialiasing mode.
+    /// Sets the viewport's screen-space antialiasing mode. Equivalent to ``ProjectSettings/rendering/antiAliasing/quality/screenSpaceAa`` or ``Viewport/screenSpaceAa``.
     public static func viewportSetScreenSpaceAa(viewport: RID, mode: RenderingServer.ViewportScreenSpaceAA) {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
@@ -9206,8 +9737,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_use_taa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_use_taa")
+    fileprivate static let method_viewport_set_use_taa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_use_taa")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -9217,7 +9748,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// If `true`, use Temporal Anti-Aliasing. Equivalent to ``ProjectSettings/rendering/antiAliasing/quality/useTaa``.
+    /// If `true`, use temporal antialiasing. Equivalent to ``ProjectSettings/rendering/antiAliasing/quality/useTaa`` or ``Viewport/useTaa``.
     public static func viewportSetUseTaa(viewport: RID, enable: Bool) {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
@@ -9235,8 +9766,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_use_debanding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_use_debanding")
+    fileprivate static let method_viewport_set_use_debanding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_use_debanding")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -9246,7 +9777,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// If `true`, enables debanding on the specified viewport. Equivalent to ``ProjectSettings/rendering/antiAliasing/quality/useDebanding``.
+    /// If `true`, enables debanding on the specified viewport. Equivalent to ``ProjectSettings/rendering/antiAliasing/quality/useDebanding`` or ``Viewport/useDebanding``.
     public static func viewportSetUseDebanding(viewport: RID, enable: Bool) {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
@@ -9264,8 +9795,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_use_occlusion_culling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_use_occlusion_culling")
+    fileprivate static let method_viewport_set_use_occlusion_culling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_use_occlusion_culling")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -9293,8 +9824,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_occlusion_rays_per_thread: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_occlusion_rays_per_thread")
+    fileprivate static let method_viewport_set_occlusion_rays_per_thread: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_occlusion_rays_per_thread")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -9319,8 +9850,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_occlusion_culling_build_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_occlusion_culling_build_quality")
+    fileprivate static let method_viewport_set_occlusion_culling_build_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_occlusion_culling_build_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2069725696)!
@@ -9345,8 +9876,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_get_render_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_get_render_info")
+    fileprivate static let method_viewport_get_render_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_get_render_info")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2041262392)!
@@ -9383,8 +9914,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_viewport_set_debug_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_debug_draw")
+    fileprivate static let method_viewport_set_debug_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_debug_draw")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2089420930)!
@@ -9412,8 +9943,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_measure_render_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_measure_render_time")
+    fileprivate static let method_viewport_set_measure_render_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_measure_render_time")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -9441,8 +9972,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_get_measured_render_time_cpu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_get_measured_render_time_cpu")
+    fileprivate static let method_viewport_get_measured_render_time_cpu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_get_measured_render_time_cpu")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -9471,8 +10002,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_viewport_get_measured_render_time_gpu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_get_measured_render_time_gpu")
+    fileprivate static let method_viewport_get_measured_render_time_gpu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_get_measured_render_time_gpu")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -9482,7 +10013,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// Returns the GPU time taken to render the last frame in milliseconds. To get a complete readout of GPU time spent to render the scene, sum the render times of all viewports that are drawn every frame. Unlike ``Engine/getFramesPerSecond()``, this method accurately reflects GPU utilization even if framerate is capped via V-Sync or ``Engine/maxFps``. See also ``viewportGetMeasuredRenderTimeGpu(viewport:)``.
+    /// Returns the GPU time taken to render the last frame in milliseconds. To get a complete readout of GPU time spent to render the scene, sum the render times of all viewports that are drawn every frame. Unlike ``Engine/getFramesPerSecond()``, this method accurately reflects GPU utilization even if framerate is capped via V-Sync or ``Engine/maxFps``. See also ``viewportGetMeasuredRenderTimeCpu(viewport:)``.
     /// 
     /// > Note: Requires measurements to be enabled on the specified `viewport` using ``viewportSetMeasureRenderTime(viewport:enable:)``. Otherwise, this method returns `0.0`.
     /// 
@@ -9503,8 +10034,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_viewport_set_vrs_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_vrs_mode")
+    fileprivate static let method_viewport_set_vrs_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_vrs_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 398809874)!
@@ -9532,8 +10063,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_vrs_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_vrs_update_mode")
+    fileprivate static let method_viewport_set_vrs_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_vrs_update_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2696154815)!
@@ -9564,8 +10095,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_viewport_set_vrs_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("viewport_set_vrs_texture")
+    fileprivate static let method_viewport_set_vrs_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("viewport_set_vrs_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -9593,8 +10124,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_sky_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sky_create")
+    fileprivate static let method_sky_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sky_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -9614,8 +10145,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_sky_set_radiance_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sky_set_radiance_size")
+    fileprivate static let method_sky_set_radiance_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sky_set_radiance_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -9643,8 +10174,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_sky_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sky_set_mode")
+    fileprivate static let method_sky_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sky_set_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3279019937)!
@@ -9672,8 +10203,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_sky_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sky_set_material")
+    fileprivate static let method_sky_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sky_set_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -9701,8 +10232,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_sky_bake_panorama: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sky_bake_panorama")
+    fileprivate static let method_sky_bake_panorama: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sky_bake_panorama")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3875285818)!
@@ -9739,11 +10270,11 @@ open class RenderingServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_compositor_effect_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compositor_effect_create")
+    fileprivate static let method_compositor_effect_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compositor_effect_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -9763,8 +10294,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_compositor_effect_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compositor_effect_set_enabled")
+    fileprivate static let method_compositor_effect_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compositor_effect_set_enabled")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -9792,8 +10323,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_compositor_effect_set_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compositor_effect_set_callback")
+    fileprivate static let method_compositor_effect_set_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compositor_effect_set_callback")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 487412485)!
@@ -9824,8 +10355,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_compositor_effect_set_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compositor_effect_set_flag")
+    fileprivate static let method_compositor_effect_set_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compositor_effect_set_flag")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3659527075)!
@@ -9856,8 +10387,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_compositor_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compositor_create")
+    fileprivate static let method_compositor_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compositor_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -9877,8 +10408,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_compositor_set_compositor_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compositor_set_compositor_effects")
+    fileprivate static let method_compositor_set_compositor_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compositor_set_compositor_effects")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 684822712)!
@@ -9889,7 +10420,7 @@ open class RenderingServer: Object {
     }()
     
     /// Sets the compositor effects for the specified compositor RID. `effects` should be an array containing RIDs created with ``compositorEffectCreate()``.
-    public static func compositorSetCompositorEffects(compositor: RID, effects: VariantCollection<RID>) {
+    public static func compositorSetCompositorEffects(compositor: RID, effects: TypedArray<RID>) {
         withUnsafePointer(to: compositor.content) { pArg0 in
             withUnsafePointer(to: effects.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -9906,8 +10437,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_create")
+    fileprivate static let method_environment_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -9929,8 +10460,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_environment_set_background: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_background")
+    fileprivate static let method_environment_set_background: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_background")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937328877)!
@@ -9958,8 +10489,37 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_sky: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_sky")
+    fileprivate static let method_environment_set_camera_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_camera_id")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the camera ID to be used as environment background.
+    public static func environmentSetCameraId(env: RID, id: Int32) {
+        withUnsafePointer(to: env.content) { pArg0 in
+            withUnsafePointer(to: id) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_environment_set_camera_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_environment_set_sky: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_sky")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -9987,8 +10547,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_sky_custom_fov: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_sky_custom_fov")
+    fileprivate static let method_environment_set_sky_custom_fov: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_sky_custom_fov")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -10016,8 +10576,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_sky_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_sky_orientation")
+    fileprivate static let method_environment_set_sky_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_sky_orientation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1735850857)!
@@ -10045,8 +10605,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_bg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_bg_color")
+    fileprivate static let method_environment_set_bg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_bg_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -10074,8 +10634,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_bg_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_bg_energy")
+    fileprivate static let method_environment_set_bg_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_bg_energy")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2513314492)!
@@ -10106,8 +10666,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_canvas_max_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_canvas_max_layer")
+    fileprivate static let method_environment_set_canvas_max_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_canvas_max_layer")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -10135,8 +10695,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_ambient_light: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_ambient_light")
+    fileprivate static let method_environment_set_ambient_light: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_ambient_light")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1214961493)!
@@ -10147,12 +10707,12 @@ open class RenderingServer: Object {
     }()
     
     /// Sets the values to be used for ambient light rendering. See ``Environment`` for more details.
-    public static func environmentSetAmbientLight(env: RID, color: Color, ambient: RenderingServer.EnvironmentAmbientSource = .bg, energy: Double = 1.0, skyContibution: Double = 0.0, reflectionSource: RenderingServer.EnvironmentReflectionSource = .bg) {
+    public static func environmentSetAmbientLight(env: RID, color: Color, ambient: RenderingServer.EnvironmentAmbientSource = .bg, energy: Double = 1.0, skyContribution: Double = 0.0, reflectionSource: RenderingServer.EnvironmentReflectionSource = .bg) {
         withUnsafePointer(to: env.content) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: ambient.rawValue) { pArg2 in
                     withUnsafePointer(to: energy) { pArg3 in
-                        withUnsafePointer(to: skyContibution) { pArg4 in
+                        withUnsafePointer(to: skyContribution) { pArg4 in
                             withUnsafePointer(to: reflectionSource.rawValue) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
@@ -10176,8 +10736,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_glow: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_glow")
+    fileprivate static let method_environment_set_glow: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_glow")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2421724940)!
@@ -10238,8 +10798,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_tonemap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_tonemap")
+    fileprivate static let method_environment_set_tonemap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_tonemap")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2914312638)!
@@ -10273,8 +10833,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_adjustment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_adjustment")
+    fileprivate static let method_environment_set_adjustment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_adjustment")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 876799838)!
@@ -10317,8 +10877,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_ssr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_ssr")
+    fileprivate static let method_environment_set_ssr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_ssr")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3607294374)!
@@ -10358,8 +10918,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_ssao: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_ssao")
+    fileprivate static let method_environment_set_ssao: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_ssao")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3994732740)!
@@ -10411,8 +10971,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_fog: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_fog")
+    fileprivate static let method_environment_set_fog: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_fog")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 105051629)!
@@ -10467,8 +11027,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_sdfgi: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_sdfgi")
+    fileprivate static let method_environment_set_sdfgi: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_sdfgi")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3519144388)!
@@ -10523,8 +11083,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_volumetric_fog: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_volumetric_fog")
+    fileprivate static let method_environment_set_volumetric_fog: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_volumetric_fog")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1553633833)!
@@ -10588,8 +11148,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_glow_set_use_bicubic_upscale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_glow_set_use_bicubic_upscale")
+    fileprivate static let method_environment_glow_set_use_bicubic_upscale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_glow_set_use_bicubic_upscale")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -10614,8 +11174,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_ssr_roughness_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_ssr_roughness_quality")
+    fileprivate static let method_environment_set_ssr_roughness_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_ssr_roughness_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1190026788)!
@@ -10640,8 +11200,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_ssao_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_ssao_quality")
+    fileprivate static let method_environment_set_ssao_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_ssao_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 189753569)!
@@ -10681,8 +11241,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_ssil_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_ssil_quality")
+    fileprivate static let method_environment_set_ssil_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_ssil_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1713836683)!
@@ -10722,8 +11282,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_sdfgi_ray_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_sdfgi_ray_count")
+    fileprivate static let method_environment_set_sdfgi_ray_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_sdfgi_ray_count")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 340137951)!
@@ -10748,8 +11308,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_sdfgi_frames_to_converge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_sdfgi_frames_to_converge")
+    fileprivate static let method_environment_set_sdfgi_frames_to_converge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_sdfgi_frames_to_converge")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2182444374)!
@@ -10774,8 +11334,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_sdfgi_frames_to_update_light: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_sdfgi_frames_to_update_light")
+    fileprivate static let method_environment_set_sdfgi_frames_to_update_light: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_sdfgi_frames_to_update_light")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1251144068)!
@@ -10800,8 +11360,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_volumetric_fog_volume_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_volumetric_fog_volume_size")
+    fileprivate static let method_environment_set_volumetric_fog_volume_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_volumetric_fog_volume_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -10829,8 +11389,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_set_volumetric_fog_filter_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_set_volumetric_fog_filter_active")
+    fileprivate static let method_environment_set_volumetric_fog_filter_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_set_volumetric_fog_filter_active")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -10855,8 +11415,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_environment_bake_panorama: GDExtensionMethodBindPtr = {
-        let methodName = StringName("environment_bake_panorama")
+    fileprivate static let method_environment_bake_panorama: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("environment_bake_panorama")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2452908646)!
@@ -10890,11 +11450,11 @@ open class RenderingServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_screen_space_roughness_limiter_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("screen_space_roughness_limiter_set_active")
+    fileprivate static let method_screen_space_roughness_limiter_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("screen_space_roughness_limiter_set_active")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 916716790)!
@@ -10925,8 +11485,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_sub_surface_scattering_set_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sub_surface_scattering_set_quality")
+    fileprivate static let method_sub_surface_scattering_set_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sub_surface_scattering_set_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 64571803)!
@@ -10951,8 +11511,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_sub_surface_scattering_set_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sub_surface_scattering_set_scale")
+    fileprivate static let method_sub_surface_scattering_set_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sub_surface_scattering_set_scale")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1017552074)!
@@ -10980,8 +11540,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_attributes_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_attributes_create")
+    fileprivate static let method_camera_attributes_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_attributes_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -11003,8 +11563,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_camera_attributes_set_dof_blur_quality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_attributes_set_dof_blur_quality")
+    fileprivate static let method_camera_attributes_set_dof_blur_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_attributes_set_dof_blur_quality")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2220136795)!
@@ -11032,8 +11592,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_attributes_set_dof_blur_bokeh_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_attributes_set_dof_blur_bokeh_shape")
+    fileprivate static let method_camera_attributes_set_dof_blur_bokeh_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_attributes_set_dof_blur_bokeh_shape")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1205058394)!
@@ -11058,8 +11618,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_attributes_set_dof_blur: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_attributes_set_dof_blur")
+    fileprivate static let method_camera_attributes_set_dof_blur: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_attributes_set_dof_blur")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 316272616)!
@@ -11105,8 +11665,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_attributes_set_exposure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_attributes_set_exposure")
+    fileprivate static let method_camera_attributes_set_exposure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_attributes_set_exposure")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2513314492)!
@@ -11142,8 +11702,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_camera_attributes_set_auto_exposure: GDExtensionMethodBindPtr = {
-        let methodName = StringName("camera_attributes_set_auto_exposure")
+    fileprivate static let method_camera_attributes_set_auto_exposure: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("camera_attributes_set_auto_exposure")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4266986332)!
@@ -11183,8 +11743,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_scenario_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scenario_create")
+    fileprivate static let method_scenario_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scenario_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -11206,8 +11766,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_scenario_set_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scenario_set_environment")
+    fileprivate static let method_scenario_set_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scenario_set_environment")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11235,8 +11795,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_scenario_set_fallback_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scenario_set_fallback_environment")
+    fileprivate static let method_scenario_set_fallback_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scenario_set_fallback_environment")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11264,8 +11824,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_scenario_set_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scenario_set_camera_attributes")
+    fileprivate static let method_scenario_set_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scenario_set_camera_attributes")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11293,8 +11853,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_scenario_set_compositor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scenario_set_compositor")
+    fileprivate static let method_scenario_set_compositor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scenario_set_compositor")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11322,8 +11882,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_create2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_create2")
+    fileprivate static let method_instance_create2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_create2")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 746547085)!
@@ -11355,8 +11915,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_instance_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_create")
+    fileprivate static let method_instance_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -11380,8 +11940,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_instance_set_base: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_base")
+    fileprivate static let method_instance_set_base: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_base")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11409,8 +11969,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_scenario: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_scenario")
+    fileprivate static let method_instance_set_scenario: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_scenario")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11438,8 +11998,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_layer_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_layer_mask")
+    fileprivate static let method_instance_set_layer_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_layer_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -11467,8 +12027,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_pivot_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_pivot_data")
+    fileprivate static let method_instance_set_pivot_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_pivot_data")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1280615259)!
@@ -11499,8 +12059,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_transform")
+    fileprivate static let method_instance_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3935195649)!
@@ -11528,8 +12088,66 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_attach_object_instance_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_attach_object_instance_id")
+    fileprivate static let method_instance_set_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_interpolated")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Turns on and off physics interpolation for the instance.
+    public static func instanceSetInterpolated(instance: RID, interpolated: Bool) {
+        withUnsafePointer(to: instance.content) { pArg0 in
+            withUnsafePointer(to: interpolated) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_instance_set_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_instance_reset_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_reset_physics_interpolation")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Prevents physics interpolation for the current physics tick.
+    /// 
+    /// This is useful when moving an instance to a new location, to give an instantaneous change rather than interpolation from the previous location.
+    /// 
+    public static func instanceResetPhysicsInterpolation(instance: RID) {
+        withUnsafePointer(to: instance.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_instance_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_instance_attach_object_instance_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_attach_object_instance_id")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -11557,8 +12175,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_blend_shape_weight: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_blend_shape_weight")
+    fileprivate static let method_instance_set_blend_shape_weight: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_blend_shape_weight")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1892459533)!
@@ -11589,8 +12207,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_surface_override_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_surface_override_material")
+    fileprivate static let method_instance_set_surface_override_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_surface_override_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2310537182)!
@@ -11621,8 +12239,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_visible")
+    fileprivate static let method_instance_set_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_visible")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -11650,8 +12268,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_transparency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_transparency")
+    fileprivate static let method_instance_geometry_set_transparency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_transparency")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -11686,8 +12304,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_custom_aabb")
+    fileprivate static let method_instance_set_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_custom_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3696536120)!
@@ -11715,8 +12333,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_attach_skeleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_attach_skeleton")
+    fileprivate static let method_instance_attach_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_attach_skeleton")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11744,8 +12362,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_extra_visibility_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_extra_visibility_margin")
+    fileprivate static let method_instance_set_extra_visibility_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_extra_visibility_margin")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -11773,8 +12391,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_visibility_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_visibility_parent")
+    fileprivate static let method_instance_set_visibility_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_visibility_parent")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11802,8 +12420,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_set_ignore_culling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_set_ignore_culling")
+    fileprivate static let method_instance_set_ignore_culling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_set_ignore_culling")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -11831,8 +12449,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_flag")
+    fileprivate static let method_instance_geometry_set_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_flag")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1014989537)!
@@ -11863,8 +12481,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_cast_shadows_setting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_cast_shadows_setting")
+    fileprivate static let method_instance_geometry_set_cast_shadows_setting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_cast_shadows_setting")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3768836020)!
@@ -11892,8 +12510,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_material_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_material_override")
+    fileprivate static let method_instance_geometry_set_material_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_material_override")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11921,8 +12539,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_material_overlay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_material_overlay")
+    fileprivate static let method_instance_geometry_set_material_overlay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_material_overlay")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -11950,8 +12568,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_visibility_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_visibility_range")
+    fileprivate static let method_instance_geometry_set_visibility_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_visibility_range")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4263925858)!
@@ -11991,8 +12609,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_lightmap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_lightmap")
+    fileprivate static let method_instance_geometry_set_lightmap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_lightmap")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 536974962)!
@@ -12026,8 +12644,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_lod_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_lod_bias")
+    fileprivate static let method_instance_geometry_set_lod_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_lod_bias")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -12055,8 +12673,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_set_shader_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_set_shader_parameter")
+    fileprivate static let method_instance_geometry_set_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_set_shader_parameter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3477296213)!
@@ -12087,8 +12705,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_instance_geometry_get_shader_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_get_shader_parameter")
+    fileprivate static let method_instance_geometry_get_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_get_shader_parameter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2621281810)!
@@ -12120,8 +12738,8 @@ open class RenderingServer: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_instance_geometry_get_shader_parameter_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_get_shader_parameter_default_value")
+    fileprivate static let method_instance_geometry_get_shader_parameter_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_get_shader_parameter_default_value")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2621281810)!
@@ -12150,8 +12768,8 @@ open class RenderingServer: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_instance_geometry_get_shader_parameter_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instance_geometry_get_shader_parameter_list")
+    fileprivate static let method_instance_geometry_get_shader_parameter_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instance_geometry_get_shader_parameter_list")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -12162,7 +12780,7 @@ open class RenderingServer: Object {
     }()
     
     /// Returns a dictionary of per-instance shader uniform names of the per-instance shader uniform from the specified 3D geometry instance. The returned dictionary is in PropertyInfo format, with the keys `name`, `class_name`, `type`, `hint`, `hint_string` and `usage`. Equivalent to ``GeometryInstance3D/getInstanceShaderParameter(name:)``.
-    public static func instanceGeometryGetShaderParameterList(instance: RID) -> VariantCollection<GDictionary> {
+    public static func instanceGeometryGetShaderParameterList(instance: RID) -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
         withUnsafePointer(to: instance.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -12174,11 +12792,11 @@ open class RenderingServer: Object {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_instances_cull_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instances_cull_aabb")
+    fileprivate static let method_instances_cull_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instances_cull_aabb")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2570105777)!
@@ -12210,8 +12828,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_instances_cull_ray: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instances_cull_ray")
+    fileprivate static let method_instances_cull_ray: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instances_cull_ray")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2208759584)!
@@ -12246,8 +12864,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_instances_cull_convex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("instances_cull_convex")
+    fileprivate static let method_instances_cull_convex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("instances_cull_convex")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2488539944)!
@@ -12261,7 +12879,7 @@ open class RenderingServer: Object {
     /// 
     /// > Warning: This function is primarily intended for editor usage. For in-game use cases, prefer physics collision.
     /// 
-    public static func instancesCullConvex(_ convex: VariantCollection<Plane>, scenario: RID = RID()) -> PackedInt64Array {
+    public static func instancesCullConvex(_ convex: TypedArray<Plane>, scenario: RID = RID()) -> PackedInt64Array {
         let _result: PackedInt64Array = PackedInt64Array ()
         withUnsafePointer(to: convex.array.content) { pArg0 in
             withUnsafePointer(to: scenario.content) { pArg1 in
@@ -12279,8 +12897,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_bake_render_uv2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bake_render_uv2")
+    fileprivate static let method_bake_render_uv2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake_render_uv2")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1904608558)!
@@ -12291,7 +12909,7 @@ open class RenderingServer: Object {
     }()
     
     /// Bakes the material data of the Mesh passed in the `base` parameter with optional `materialOverrides` to a set of ``Image``s of size `imageSize`. Returns an array of ``Image``s containing material properties as specified in ``RenderingServer/BakeChannels``.
-    public static func bakeRenderUv2(base: RID, materialOverrides: VariantCollection<RID>, imageSize: Vector2i) -> ObjectCollection<Image> {
+    public static func bakeRenderUv2(base: RID, materialOverrides: TypedArray<RID>, imageSize: Vector2i) -> TypedArray<Image?> {
         var _result: Int64 = 0
         withUnsafePointer(to: base.content) { pArg0 in
             withUnsafePointer(to: materialOverrides.array.content) { pArg1 in
@@ -12309,11 +12927,11 @@ open class RenderingServer: Object {
             
         }
         
-        return ObjectCollection<Image>(content: _result)
+        return TypedArray<Image?>(takingOver: _result)
     }
     
-    fileprivate static var method_canvas_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_create")
+    fileprivate static let method_canvas_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -12335,8 +12953,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_canvas_set_item_mirroring: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_set_item_mirroring")
+    fileprivate static let method_canvas_set_item_mirroring: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_set_item_mirroring")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2343975398)!
@@ -12346,7 +12964,10 @@ open class RenderingServer: Object {
         
     }()
     
-    /// A copy of the canvas item will be drawn with a local offset of the mirroring ``Vector2``.
+    /// A copy of the canvas item will be drawn with a local offset of the `mirroring`.
+    /// 
+    /// > Note: This is equivalent to calling ``canvasSetItemRepeat(item:repeatSize:repeatTimes:)`` like `canvas_set_item_repeat(item, mirroring, 1)`, with an additional check ensuring `canvas` is a parent of `item`.
+    /// 
     public static func canvasSetItemMirroring(canvas: RID, item: RID, mirroring: Vector2) {
         withUnsafePointer(to: canvas.content) { pArg0 in
             withUnsafePointer(to: item.content) { pArg1 in
@@ -12367,8 +12988,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_set_item_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_set_item_repeat")
+    fileprivate static let method_canvas_set_item_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_set_item_repeat")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1739512717)!
@@ -12399,8 +13020,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_set_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_set_modulate")
+    fileprivate static let method_canvas_set_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_set_modulate")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -12428,8 +13049,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_set_disable_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_set_disable_scale")
+    fileprivate static let method_canvas_set_disable_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_set_disable_scale")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -12454,8 +13075,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_texture_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_texture_create")
+    fileprivate static let method_canvas_texture_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_texture_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -12477,8 +13098,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_canvas_texture_set_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_texture_set_channel")
+    fileprivate static let method_canvas_texture_set_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_texture_set_channel")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3822119138)!
@@ -12509,8 +13130,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_texture_set_shading_parameters: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_texture_set_shading_parameters")
+    fileprivate static let method_canvas_texture_set_shading_parameters: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_texture_set_shading_parameters")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2124967469)!
@@ -12541,8 +13162,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_texture_set_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_texture_set_texture_filter")
+    fileprivate static let method_canvas_texture_set_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_texture_set_texture_filter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1155129294)!
@@ -12570,8 +13191,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_texture_set_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_texture_set_texture_repeat")
+    fileprivate static let method_canvas_texture_set_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_texture_set_texture_repeat")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1652956681)!
@@ -12599,8 +13220,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_create")
+    fileprivate static let method_canvas_item_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -12622,8 +13243,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_canvas_item_set_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_parent")
+    fileprivate static let method_canvas_item_set_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_parent")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -12651,8 +13272,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_default_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_default_texture_filter")
+    fileprivate static let method_canvas_item_set_default_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_default_texture_filter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1155129294)!
@@ -12680,8 +13301,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_default_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_default_texture_repeat")
+    fileprivate static let method_canvas_item_set_default_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_default_texture_repeat")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1652956681)!
@@ -12709,8 +13330,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_visible")
+    fileprivate static let method_canvas_item_set_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_visible")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -12738,8 +13359,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_light_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_light_mask")
+    fileprivate static let method_canvas_item_set_light_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_light_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -12767,8 +13388,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_visibility_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_visibility_layer")
+    fileprivate static let method_canvas_item_set_visibility_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_visibility_layer")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -12796,8 +13417,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_transform")
+    fileprivate static let method_canvas_item_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -12825,8 +13446,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_clip")
+    fileprivate static let method_canvas_item_set_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_clip")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -12857,8 +13478,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_distance_field_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_distance_field_mode")
+    fileprivate static let method_canvas_item_set_distance_field_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_distance_field_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -12886,8 +13507,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_custom_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_custom_rect")
+    fileprivate static let method_canvas_item_set_custom_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_custom_rect")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1333997032)!
@@ -12918,8 +13539,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_modulate")
+    fileprivate static let method_canvas_item_set_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_modulate")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -12947,8 +13568,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_self_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_self_modulate")
+    fileprivate static let method_canvas_item_set_self_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_self_modulate")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -12976,8 +13597,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_draw_behind_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_draw_behind_parent")
+    fileprivate static let method_canvas_item_set_draw_behind_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_draw_behind_parent")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -13005,8 +13626,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_interpolated: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_interpolated")
+    fileprivate static let method_canvas_item_set_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_interpolated")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -13034,8 +13655,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_reset_physics_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_reset_physics_interpolation")
+    fileprivate static let method_canvas_item_reset_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_reset_physics_interpolation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -13063,8 +13684,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_transform_physics_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_transform_physics_interpolation")
+    fileprivate static let method_canvas_item_transform_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_transform_physics_interpolation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -13095,8 +13716,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_line: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_line")
+    fileprivate static let method_canvas_item_add_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_line")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1819681853)!
@@ -13136,8 +13757,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_polyline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_polyline")
+    fileprivate static let method_canvas_item_add_polyline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_polyline")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3098767073)!
@@ -13174,8 +13795,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_multiline: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_multiline")
+    fileprivate static let method_canvas_item_add_multiline: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_multiline")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3098767073)!
@@ -13212,8 +13833,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_rect")
+    fileprivate static let method_canvas_item_add_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_rect")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3523446176)!
@@ -13247,8 +13868,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_circle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_circle")
+    fileprivate static let method_canvas_item_add_circle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_circle")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 333077949)!
@@ -13285,8 +13906,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_texture_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_texture_rect")
+    fileprivate static let method_canvas_item_add_texture_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_texture_rect")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 324864032)!
@@ -13326,8 +13947,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_msdf_texture_rect_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_msdf_texture_rect_region")
+    fileprivate static let method_canvas_item_add_msdf_texture_rect_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_msdf_texture_rect_region")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 97408773)!
@@ -13373,8 +13994,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_lcd_texture_rect_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_lcd_texture_rect_region")
+    fileprivate static let method_canvas_item_add_lcd_texture_rect_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_lcd_texture_rect_region")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 359793297)!
@@ -13411,8 +14032,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_texture_rect_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_texture_rect_region")
+    fileprivate static let method_canvas_item_add_texture_rect_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_texture_rect_region")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 485157892)!
@@ -13455,8 +14076,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_nine_patch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_nine_patch")
+    fileprivate static let method_canvas_item_add_nine_patch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_nine_patch")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 389957886)!
@@ -13508,8 +14129,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_primitive: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_primitive")
+    fileprivate static let method_canvas_item_add_primitive: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_primitive")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3731601077)!
@@ -13546,8 +14167,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_polygon")
+    fileprivate static let method_canvas_item_add_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_polygon")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3580000528)!
@@ -13558,6 +14179,9 @@ open class RenderingServer: Object {
     }()
     
     /// Draws a 2D polygon on the ``CanvasItem`` pointed to by the `item` ``RID``. If you need more flexibility (such as being able to use bones), use ``canvasItemAddTriangleArray(item:indices:points:colors:uvs:bones:weights:texture:count:)`` instead. See also ``CanvasItem/drawPolygon(points:colors:uvs:texture:)``.
+    /// 
+    /// > Note: If you frequently redraw the same polygon with a large number of vertices, consider pre-calculating the triangulation with ``Geometry2D/triangulatePolygon(_:)`` and using ``CanvasItem/drawMesh(_:texture:transform:modulate:)``, ``CanvasItem/drawMultimesh(_:texture:)``, or ``canvasItemAddTriangleArray(item:indices:points:colors:uvs:bones:weights:texture:count:)``.
+    /// 
     public static func canvasItemAddPolygon(item: RID, points: PackedVector2Array, colors: PackedColorArray, uvs: PackedVector2Array = PackedVector2Array(), texture: RID = RID()) {
         withUnsafePointer(to: item.content) { pArg0 in
             withUnsafePointer(to: points.content) { pArg1 in
@@ -13584,8 +14208,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_triangle_array: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_triangle_array")
+    fileprivate static let method_canvas_item_add_triangle_array: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_triangle_array")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 660261329)!
@@ -13637,8 +14261,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_mesh")
+    fileprivate static let method_canvas_item_add_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_mesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 316450961)!
@@ -13675,8 +14299,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_multimesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_multimesh")
+    fileprivate static let method_canvas_item_add_multimesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_multimesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2131855138)!
@@ -13707,8 +14331,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_particles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_particles")
+    fileprivate static let method_canvas_item_add_particles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_particles")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2575754278)!
@@ -13739,8 +14363,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_set_transform")
+    fileprivate static let method_canvas_item_add_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -13768,8 +14392,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_clip_ignore: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_clip_ignore")
+    fileprivate static let method_canvas_item_add_clip_ignore: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_clip_ignore")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -13779,7 +14403,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// If `ignore` is `true`, ignore clipping on items drawn with this canvas item until this is called again with `ignore` set to false.
+    /// If `ignore` is `true`, ignore clipping on items drawn with this canvas item until this is called again with `ignore` set to `false`.
     public static func canvasItemAddClipIgnore(item: RID, ignore: Bool) {
         withUnsafePointer(to: item.content) { pArg0 in
             withUnsafePointer(to: ignore) { pArg1 in
@@ -13797,8 +14421,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_add_animation_slice: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_add_animation_slice")
+    fileprivate static let method_canvas_item_add_animation_slice: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_add_animation_slice")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2646834499)!
@@ -13835,8 +14459,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_sort_children_by_y: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_sort_children_by_y")
+    fileprivate static let method_canvas_item_set_sort_children_by_y: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_sort_children_by_y")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -13864,8 +14488,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_z_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_z_index")
+    fileprivate static let method_canvas_item_set_z_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_z_index")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -13893,8 +14517,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_z_as_relative_to_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_z_as_relative_to_parent")
+    fileprivate static let method_canvas_item_set_z_as_relative_to_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_z_as_relative_to_parent")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -13922,8 +14546,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_copy_to_backbuffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_copy_to_backbuffer")
+    fileprivate static let method_canvas_item_set_copy_to_backbuffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_copy_to_backbuffer")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2429202503)!
@@ -13954,8 +14578,37 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_clear")
+    fileprivate static let method_canvas_item_attach_skeleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_attach_skeleton")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Attaches a skeleton to the ``CanvasItem``. Removes the previous skeleton.
+    public static func canvasItemAttachSkeleton(item: RID, skeleton: RID) {
+        withUnsafePointer(to: item.content) { pArg0 in
+            withUnsafePointer(to: skeleton.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_canvas_item_attach_skeleton, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_canvas_item_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_clear")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -13980,8 +14633,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_draw_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_draw_index")
+    fileprivate static let method_canvas_item_set_draw_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_draw_index")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -14009,8 +14662,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_material")
+    fileprivate static let method_canvas_item_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -14038,8 +14691,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_use_parent_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_use_parent_material")
+    fileprivate static let method_canvas_item_set_use_parent_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_use_parent_material")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -14067,8 +14720,130 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_visibility_notifier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_visibility_notifier")
+    fileprivate static let method_canvas_item_set_instance_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_instance_shader_parameter")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3477296213)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the per-instance shader uniform on the specified canvas item instance. Equivalent to ``CanvasItem/setInstanceShaderParameter(name:value:)``.
+    public static func canvasItemSetInstanceShaderParameter(instance: RID, parameter: StringName, value: Variant?) {
+        withUnsafePointer(to: instance.content) { pArg0 in
+            withUnsafePointer(to: parameter.content) { pArg1 in
+                withUnsafePointer(to: value.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(method_canvas_item_set_instance_shader_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_canvas_item_get_instance_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_get_instance_shader_parameter")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2621281810)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the value of the per-instance shader uniform from the specified canvas item instance. Equivalent to ``CanvasItem/getInstanceShaderParameter(name:)``.
+    public static func canvasItemGetInstanceShaderParameter(instance: RID, parameter: StringName) -> Variant? {
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: instance.content) { pArg0 in
+            withUnsafePointer(to: parameter.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
+    }
+    
+    fileprivate static let method_canvas_item_get_instance_shader_parameter_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_get_instance_shader_parameter_default_value")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2621281810)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the default value of the per-instance shader uniform from the specified canvas item instance. Equivalent to ``CanvasItem/getInstanceShaderParameter(name:)``.
+    public static func canvasItemGetInstanceShaderParameterDefaultValue(instance: RID, parameter: StringName) -> Variant? {
+        var _result: Variant.ContentType = Variant.zero
+        withUnsafePointer(to: instance.content) { pArg0 in
+            withUnsafePointer(to: parameter.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter_default_value, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return Variant(takingOver: _result)
+    }
+    
+    fileprivate static let method_canvas_item_get_instance_shader_parameter_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_get_instance_shader_parameter_list")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a dictionary of per-instance shader uniform names of the per-instance shader uniform from the specified canvas item instance.
+    /// 
+    /// The returned dictionary is in PropertyInfo format, with the keys `name`, `class_name`, `type`, `hint`, `hint_string`, and `usage`.
+    /// 
+    public static func canvasItemGetInstanceShaderParameterList(instance: RID) -> TypedArray<VariantDictionary> {
+        var _result: Int64 = 0
+        withUnsafePointer(to: instance.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return TypedArray<VariantDictionary>(takingOver: _result)
+    }
+    
+    fileprivate static let method_canvas_item_set_visibility_notifier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_visibility_notifier")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3568945579)!
@@ -14108,8 +14883,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_item_set_canvas_group_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_item_set_canvas_group_mode")
+    fileprivate static let method_canvas_item_set_canvas_group_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_item_set_canvas_group_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3973586316)!
@@ -14152,8 +14927,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_debug_canvas_item_get_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("debug_canvas_item_get_rect")
+    fileprivate static let method_debug_canvas_item_get_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("debug_canvas_item_get_rect")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 624227424)!
@@ -14182,8 +14957,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_canvas_light_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_create")
+    fileprivate static let method_canvas_light_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -14205,8 +14980,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_canvas_light_attach_to_canvas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_attach_to_canvas")
+    fileprivate static let method_canvas_light_attach_to_canvas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_attach_to_canvas")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -14234,8 +15009,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_enabled")
+    fileprivate static let method_canvas_light_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_enabled")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -14263,8 +15038,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_texture_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_texture_scale")
+    fileprivate static let method_canvas_light_set_texture_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_texture_scale")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -14292,8 +15067,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_transform")
+    fileprivate static let method_canvas_light_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -14321,8 +15096,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_texture")
+    fileprivate static let method_canvas_light_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -14350,8 +15125,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_texture_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_texture_offset")
+    fileprivate static let method_canvas_light_set_texture_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_texture_offset")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3201125042)!
@@ -14379,8 +15154,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_color")
+    fileprivate static let method_canvas_light_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -14408,8 +15183,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_height")
+    fileprivate static let method_canvas_light_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_height")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -14437,8 +15212,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_energy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_energy")
+    fileprivate static let method_canvas_light_set_energy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_energy")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -14466,8 +15241,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_z_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_z_range")
+    fileprivate static let method_canvas_light_set_z_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_z_range")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -14498,8 +15273,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_layer_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_layer_range")
+    fileprivate static let method_canvas_light_set_layer_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_layer_range")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4288446313)!
@@ -14530,8 +15305,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_item_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_item_cull_mask")
+    fileprivate static let method_canvas_light_set_item_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_item_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -14559,8 +15334,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_item_shadow_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_item_shadow_cull_mask")
+    fileprivate static let method_canvas_light_set_item_shadow_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_item_shadow_cull_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -14588,8 +15363,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_mode")
+    fileprivate static let method_canvas_light_set_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2957564891)!
@@ -14617,8 +15392,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_shadow_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_shadow_enabled")
+    fileprivate static let method_canvas_light_set_shadow_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_shadow_enabled")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -14646,8 +15421,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_shadow_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_shadow_filter")
+    fileprivate static let method_canvas_light_set_shadow_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_shadow_filter")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 393119659)!
@@ -14675,8 +15450,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_shadow_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_shadow_color")
+    fileprivate static let method_canvas_light_set_shadow_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_shadow_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -14704,8 +15479,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_shadow_smooth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_shadow_smooth")
+    fileprivate static let method_canvas_light_set_shadow_smooth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_shadow_smooth")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -14733,8 +15508,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_blend_mode")
+    fileprivate static let method_canvas_light_set_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_blend_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 804895945)!
@@ -14762,8 +15537,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_set_interpolated: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_set_interpolated")
+    fileprivate static let method_canvas_light_set_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_set_interpolated")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -14791,8 +15566,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_reset_physics_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_reset_physics_interpolation")
+    fileprivate static let method_canvas_light_reset_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_reset_physics_interpolation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -14820,8 +15595,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_transform_physics_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_transform_physics_interpolation")
+    fileprivate static let method_canvas_light_transform_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_transform_physics_interpolation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -14833,7 +15608,7 @@ open class RenderingServer: Object {
     
     /// Transforms both the current and previous stored transform for a canvas light.
     /// 
-    /// This allows transforming a light without creating a "glitch" in the interpolation, which is is particularly useful for large worlds utilizing a shifting origin.
+    /// This allows transforming a light without creating a "glitch" in the interpolation, which is particularly useful for large worlds utilizing a shifting origin.
     /// 
     public static func canvasLightTransformPhysicsInterpolation(light: RID, transform: Transform2D) {
         withUnsafePointer(to: light.content) { pArg0 in
@@ -14852,8 +15627,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_create")
+    fileprivate static let method_canvas_light_occluder_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -14875,8 +15650,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_canvas_light_occluder_attach_to_canvas: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_attach_to_canvas")
+    fileprivate static let method_canvas_light_occluder_attach_to_canvas: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_attach_to_canvas")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -14904,8 +15679,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_set_enabled")
+    fileprivate static let method_canvas_light_occluder_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_set_enabled")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -14933,8 +15708,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_set_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_set_polygon")
+    fileprivate static let method_canvas_light_occluder_set_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_set_polygon")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -14962,8 +15737,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_set_as_sdf_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_set_as_sdf_collision")
+    fileprivate static let method_canvas_light_occluder_set_as_sdf_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_set_as_sdf_collision")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -14991,8 +15766,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_set_transform")
+    fileprivate static let method_canvas_light_occluder_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_set_transform")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -15020,8 +15795,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_set_light_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_set_light_mask")
+    fileprivate static let method_canvas_light_occluder_set_light_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_set_light_mask")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -15049,8 +15824,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_set_interpolated: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_set_interpolated")
+    fileprivate static let method_canvas_light_occluder_set_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_set_interpolated")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -15078,8 +15853,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_reset_physics_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_reset_physics_interpolation")
+    fileprivate static let method_canvas_light_occluder_reset_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_reset_physics_interpolation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -15107,8 +15882,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_light_occluder_transform_physics_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_light_occluder_transform_physics_interpolation")
+    fileprivate static let method_canvas_light_occluder_transform_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_light_occluder_transform_physics_interpolation")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1246044741)!
@@ -15139,8 +15914,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_occluder_polygon_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_occluder_polygon_create")
+    fileprivate static let method_canvas_occluder_polygon_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_occluder_polygon_create")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -15162,8 +15937,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_canvas_occluder_polygon_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_occluder_polygon_set_shape")
+    fileprivate static let method_canvas_occluder_polygon_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_occluder_polygon_set_shape")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2103882027)!
@@ -15194,8 +15969,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_occluder_polygon_set_cull_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_occluder_polygon_set_cull_mode")
+    fileprivate static let method_canvas_occluder_polygon_set_cull_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_occluder_polygon_set_cull_mode")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1839404663)!
@@ -15223,8 +15998,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_canvas_set_shadow_texture_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("canvas_set_shadow_texture_size")
+    fileprivate static let method_canvas_set_shadow_texture_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("canvas_set_shadow_texture_size")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -15249,8 +16024,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_global_shader_parameter_add: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_shader_parameter_add")
+    fileprivate static let method_global_shader_parameter_add: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_shader_parameter_add")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 463390080)!
@@ -15284,8 +16059,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_global_shader_parameter_remove: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_shader_parameter_remove")
+    fileprivate static let method_global_shader_parameter_remove: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_shader_parameter_remove")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -15310,8 +16085,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_global_shader_parameter_get_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_shader_parameter_get_list")
+    fileprivate static let method_global_shader_parameter_get_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_shader_parameter_get_list")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -15325,14 +16100,14 @@ open class RenderingServer: Object {
     /// 
     /// > Note: ``globalShaderParameterGet(name:)`` has a large performance penalty as the rendering thread needs to synchronize with the calling thread, which is slow. Do not use this method during gameplay to avoid stuttering. If you need to read values in a script after setting them, consider creating an autoload where you store the values you need to query at the same time you're setting them as global parameters.
     /// 
-    public static func globalShaderParameterGetList() -> VariantCollection<StringName> {
+    public static func globalShaderParameterGetList() -> TypedArray<StringName> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_global_shader_parameter_get_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
     }
     
-    fileprivate static var method_global_shader_parameter_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_shader_parameter_set")
+    fileprivate static let method_global_shader_parameter_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_shader_parameter_set")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -15360,8 +16135,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_global_shader_parameter_set_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_shader_parameter_set_override")
+    fileprivate static let method_global_shader_parameter_set_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_shader_parameter_set_override")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -15389,8 +16164,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_global_shader_parameter_get: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_shader_parameter_get")
+    fileprivate static let method_global_shader_parameter_get: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_shader_parameter_get")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2760726917)!
@@ -15419,8 +16194,8 @@ open class RenderingServer: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_global_shader_parameter_get_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("global_shader_parameter_get_type")
+    fileprivate static let method_global_shader_parameter_get_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("global_shader_parameter_get_type")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1601414142)!
@@ -15449,8 +16224,8 @@ open class RenderingServer: Object {
         return RenderingServer.GlobalShaderParameterType (rawValue: _result)!
     }
     
-    fileprivate static var method_free_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("free_rid")
+    fileprivate static let method_free_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("free_rid")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -15475,8 +16250,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_request_frame_drawn_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_frame_drawn_callback")
+    fileprivate static let method_request_frame_drawn_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_frame_drawn_callback")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -15501,8 +16276,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_has_changed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_changed")
+    fileprivate static let method_has_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_changed")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -15519,8 +16294,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_rendering_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rendering_info")
+    fileprivate static let method_get_rendering_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rendering_info")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3763192241)!
@@ -15551,8 +16326,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_video_adapter_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_video_adapter_name")
+    fileprivate static let method_get_video_adapter_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_video_adapter_name")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -15574,8 +16349,8 @@ open class RenderingServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_video_adapter_vendor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_video_adapter_vendor")
+    fileprivate static let method_get_video_adapter_vendor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_video_adapter_vendor")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -15595,8 +16370,8 @@ open class RenderingServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_video_adapter_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_video_adapter_type")
+    fileprivate static let method_get_video_adapter_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_video_adapter_type")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3099547011)!
@@ -15608,7 +16383,7 @@ open class RenderingServer: Object {
     
     /// Returns the type of the video adapter. Since dedicated graphics cards from a given generation will _usually_ be significantly faster than integrated graphics made in the same generation, the device type can be used as a basis for automatic graphics settings adjustment. However, this is not always true, so make sure to provide users with a way to manually override graphics settings.
     /// 
-    /// > Note: When using the OpenGL backend or when running in headless mode, this function always returns ``RenderingDevice/DeviceType/other``.
+    /// > Note: When using the OpenGL rendering driver or when running in headless mode, this function always returns ``RenderingDevice/DeviceType/other``.
     /// 
     public static func getVideoAdapterType() -> RenderingDevice.DeviceType {
         var _result: Int64 = 0 // to avoid packed enums on the stack
@@ -15616,8 +16391,8 @@ open class RenderingServer: Object {
         return RenderingDevice.DeviceType (rawValue: _result)!
     }
     
-    fileprivate static var method_get_video_adapter_api_version: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_video_adapter_api_version")
+    fileprivate static let method_get_video_adapter_api_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_video_adapter_api_version")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -15637,8 +16412,50 @@ open class RenderingServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_make_sphere_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_sphere_mesh")
+    fileprivate static let method_get_current_rendering_driver_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_rendering_driver_name")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the name of the current rendering driver. This can be `vulkan`, `d3d12`, `metal`, `opengl3`, `opengl3_es`, or `opengl3_angle`. See also ``getCurrentRenderingMethod()``.
+    /// 
+    /// The rendering driver is determined by ``ProjectSettings/rendering/renderingDevice/driver``, the `--rendering-driver` command line argument that overrides this project setting, or an automatic fallback that is applied depending on the hardware.
+    /// 
+    public static func getCurrentRenderingDriverName() -> String {
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(method_get_current_rendering_driver_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        return _result.description
+    }
+    
+    fileprivate static let method_get_current_rendering_method: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_rendering_method")
+        return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the name of the current rendering method. This can be `forward_plus`, `mobile`, or `gl_compatibility`. See also ``getCurrentRenderingDriverName()``.
+    /// 
+    /// The rendering method is determined by ``ProjectSettings/rendering/renderer/renderingMethod``, the `--rendering-method` command line argument that overrides this project setting, or an automatic fallback that is applied depending on the hardware.
+    /// 
+    public static func getCurrentRenderingMethod() -> String {
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(method_get_current_rendering_method, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        return _result.description
+    }
+    
+    fileprivate static let method_make_sphere_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_sphere_mesh")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2251015897)!
@@ -15670,8 +16487,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_test_cube: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_test_cube")
+    fileprivate static let method_get_test_cube: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_test_cube")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -15688,8 +16505,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_test_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_test_texture")
+    fileprivate static let method_get_test_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_test_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -15701,7 +16518,7 @@ open class RenderingServer: Object {
     
     /// Returns the RID of a 256×256 texture with a testing pattern on it (in ``Image/Format/rgb8`` format). This texture will be created and returned on the first call to ``getTestTexture()``, then it will be cached for subsequent calls. See also ``getWhiteTexture()``.
     /// 
-    /// Example of getting the test texture and applying it to a ``Sprite2D`` node:
+    /// **Example:** Get the test texture and apply it to a ``Sprite2D`` node:
     /// 
     public static func getTestTexture() -> RID {
         let _result: RID = RID ()
@@ -15709,8 +16526,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_white_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_white_texture")
+    fileprivate static let method_get_white_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_white_texture")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -15722,7 +16539,7 @@ open class RenderingServer: Object {
     
     /// Returns the ID of a 4×4 white texture (in ``Image/Format/rgb8`` format). This texture will be created and returned on the first call to ``getWhiteTexture()``, then it will be cached for subsequent calls. See also ``getTestTexture()``.
     /// 
-    /// Example of getting the white texture and applying it to a ``Sprite2D`` node:
+    /// **Example:** Get the white texture and apply it to a ``Sprite2D`` node:
     /// 
     public static func getWhiteTexture() -> RID {
         let _result: RID = RID ()
@@ -15730,11 +16547,11 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_boot_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_boot_image")
+    fileprivate static let method_set_boot_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_boot_image")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3759744527)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4241564265)!
             }
             
         }
@@ -15742,14 +16559,17 @@ open class RenderingServer: Object {
     }()
     
     /// Sets a boot image. The color defines the background color. If `scale` is `true`, the image will be scaled to fit the screen size. If `useFilter` is `true`, the image will be scaled with linear interpolation. If `useFilter` is `false`, the image will be scaled with nearest-neighbor interpolation.
-    public static func setBootImage(_ image: Image?, color: Color, scale: Bool, useFilter: Bool = true) {
+    public static func setBootImage(_ image: Image?, color: Color, scale: Bool, screen: Int32, useFilter: Bool = true) {
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: scale) { pArg2 in
-                    withUnsafePointer(to: useFilter) { pArg3 in
-                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
-                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_set_boot_image, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    withUnsafePointer(to: screen) { pArg3 in
+                        withUnsafePointer(to: useFilter) { pArg4 in
+                            withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
+                                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
+                                    gi.object_method_bind_ptrcall(method_set_boot_image, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                }
+                                
                             }
                             
                         }
@@ -15765,8 +16585,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_get_default_clear_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_clear_color")
+    fileprivate static let method_get_default_clear_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_clear_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200896285)!
@@ -15783,8 +16603,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_default_clear_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_clear_color")
+    fileprivate static let method_set_default_clear_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_clear_color")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -15809,8 +16629,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_has_os_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_os_feature")
+    fileprivate static let method_has_os_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_os_feature")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -15837,8 +16657,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_debug_generate_wireframes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_debug_generate_wireframes")
+    fileprivate static let method_set_debug_generate_wireframes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_debug_generate_wireframes")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -15848,7 +16668,10 @@ open class RenderingServer: Object {
         
     }()
     
-    /// This method is currently unimplemented and does nothing if called with `generate` set to `true`.
+    /// If `generate` is `true`, generates debug wireframes for all meshes that are loaded when using the Compatibility renderer. By default, the engine does not generate debug wireframes at runtime, since they slow down loading of assets and take up VRAM.
+    /// 
+    /// > Note: You must call this method before loading any meshes when using the Compatibility renderer, otherwise wireframes will not be used.
+    /// 
     public static func setDebugGenerateWireframes(generate: Bool) {
         withUnsafePointer(to: generate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -15863,8 +16686,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_is_render_loop_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_render_loop_enabled")
+    fileprivate static let method_is_render_loop_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_render_loop_enabled")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -15881,8 +16704,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_render_loop_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_render_loop_enabled")
+    fileprivate static let method_set_render_loop_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_render_loop_enabled")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -15907,8 +16730,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_get_frame_setup_time_cpu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame_setup_time_cpu")
+    fileprivate static let method_get_frame_setup_time_cpu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame_setup_time_cpu")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -15925,8 +16748,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_force_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_sync")
+    fileprivate static let method_force_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_sync")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -15942,8 +16765,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_force_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_draw")
+    fileprivate static let method_force_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_draw")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1076185472)!
@@ -15971,8 +16794,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_get_rendering_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rendering_device")
+    fileprivate static let method_get_rendering_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rendering_device")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1405107940)!
@@ -15984,16 +16807,16 @@ open class RenderingServer: Object {
     
     /// Returns the global RenderingDevice.
     /// 
-    /// > Note: When using the OpenGL backend or when running in headless mode, this function always returns `null`.
+    /// > Note: When using the OpenGL rendering driver or when running in headless mode, this function always returns `null`.
     /// 
     public static func getRenderingDevice() -> RenderingDevice {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_rendering_device, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { fatalError ("Unexpected nil return from a method that should never return nil") } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { fatalError ("Unexpected nil return from a method that should never return nil") } ; return lookupObject (nativeHandle: _result, ownsRef: true)!
     }
     
-    fileprivate static var method_create_local_rendering_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_local_rendering_device")
+    fileprivate static let method_create_local_rendering_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_local_rendering_device")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1405107940)!
@@ -16005,16 +16828,16 @@ open class RenderingServer: Object {
     
     /// Creates a RenderingDevice that can be used to do draw and compute operations on a separate thread. Cannot draw to the screen nor share data with the global RenderingDevice.
     /// 
-    /// > Note: When using the OpenGL backend or when running in headless mode, this function always returns `null`.
+    /// > Note: When using the OpenGL rendering driver or when running in headless mode, this function always returns `null`.
     /// 
     public static func createLocalRenderingDevice() -> RenderingDevice? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_create_local_rendering_device, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_is_on_render_thread: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_on_render_thread")
+    fileprivate static let method_is_on_render_thread: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_on_render_thread")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -16031,8 +16854,8 @@ open class RenderingServer: Object {
         return _result
     }
     
-    fileprivate static var method_call_on_render_thread: GDExtensionMethodBindPtr = {
-        let methodName = StringName("call_on_render_thread")
+    fileprivate static let method_call_on_render_thread: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("call_on_render_thread")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -16057,8 +16880,8 @@ open class RenderingServer: Object {
         
     }
     
-    fileprivate static var method_has_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_feature")
+    fileprivate static let method_has_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_feature")
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 598462696)!

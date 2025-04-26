@@ -26,7 +26,7 @@ import Musl
 /// > Warning: With a non-uniform scale, this node will likely not behave as expected. It is advised to keep its scale the same on all axes and adjust its collision shape(s) instead.
 /// 
 open class PhysicsBody3D: CollisionObject3D {
-    fileprivate static var className = StringName("PhysicsBody3D")
+    private static var className = StringName("PhysicsBody3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -104,8 +104,8 @@ open class PhysicsBody3D: CollisionObject3D {
     }
     
     /* Methods */
-    fileprivate static var method_move_and_collide: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_and_collide")
+    fileprivate static let method_move_and_collide: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_and_collide")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3208792678)!
@@ -128,6 +128,7 @@ open class PhysicsBody3D: CollisionObject3D {
     /// `maxCollisions` allows to retrieve more than one collision result.
     /// 
     public final func moveAndCollide(motion: Vector3, testOnly: Bool = false, safeMargin: Double = 0.001, recoveryAsCollision: Bool = false, maxCollisions: Int32 = 1) -> KinematicCollision3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: motion) { pArg0 in
             withUnsafePointer(to: testOnly) { pArg1 in
@@ -151,11 +152,11 @@ open class PhysicsBody3D: CollisionObject3D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_test_move: GDExtensionMethodBindPtr = {
-        let methodName = StringName("test_move")
+    fileprivate static let method_test_move: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("test_move")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2481691619)!
@@ -178,6 +179,7 @@ open class PhysicsBody3D: CollisionObject3D {
     /// `maxCollisions` allows to retrieve more than one collision result.
     /// 
     public final func testMove(from: Transform3D, motion: Vector3, collision: KinematicCollision3D? = nil, safeMargin: Double = 0.001, recoveryAsCollision: Bool = false, maxCollisions: Int32 = 1) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: motion) { pArg1 in
@@ -207,8 +209,8 @@ open class PhysicsBody3D: CollisionObject3D {
         return _result
     }
     
-    fileprivate static var method_get_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity")
+    fileprivate static let method_get_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -220,13 +222,14 @@ open class PhysicsBody3D: CollisionObject3D {
     
     /// Returns the gravity vector computed from all sources that can affect the body, including all gravity overrides from ``Area3D`` nodes and the global world gravity.
     public final func getGravity() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(PhysicsBody3D.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_axis_lock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_axis_lock")
+    fileprivate static let method_set_axis_lock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_axis_lock")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1787895195)!
@@ -239,6 +242,7 @@ open class PhysicsBody3D: CollisionObject3D {
     @inline(__always)
     /// Locks or unlocks the specified linear or rotational `axis` depending on the value of `lock`.
     fileprivate final func set_axis_lock(_ axis: PhysicsServer3D.BodyAxis, _ lock: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: axis.rawValue) { pArg0 in
             withUnsafePointer(to: lock) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -255,8 +259,8 @@ open class PhysicsBody3D: CollisionObject3D {
         
     }
     
-    fileprivate static var method_get_axis_lock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_axis_lock")
+    fileprivate static let method_get_axis_lock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_axis_lock")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2264617709)!
@@ -269,6 +273,7 @@ open class PhysicsBody3D: CollisionObject3D {
     @inline(__always)
     /// Returns `true` if the specified linear or rotational `axis` is locked.
     fileprivate final func get_axis_lock(_ axis: PhysicsServer3D.BodyAxis) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: axis.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -283,8 +288,8 @@ open class PhysicsBody3D: CollisionObject3D {
         return _result
     }
     
-    fileprivate static var method_get_collision_exceptions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_exceptions")
+    fileprivate static let method_get_collision_exceptions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_exceptions")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -295,14 +300,15 @@ open class PhysicsBody3D: CollisionObject3D {
     }()
     
     /// Returns an array of nodes that were added as collision exceptions for this body.
-    public final func getCollisionExceptions() -> ObjectCollection<PhysicsBody3D> {
+    public final func getCollisionExceptions() -> TypedArray<PhysicsBody3D?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(PhysicsBody3D.method_get_collision_exceptions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<PhysicsBody3D>(content: _result)
+        return TypedArray<PhysicsBody3D?>(takingOver: _result)
     }
     
-    fileprivate static var method_add_collision_exception_with: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_collision_exception_with")
+    fileprivate static let method_add_collision_exception_with: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_collision_exception_with")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -314,6 +320,7 @@ open class PhysicsBody3D: CollisionObject3D {
     
     /// Adds a body to the list of bodies that this body can't collide with.
     public final func addCollisionExceptionWith(body: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -327,8 +334,8 @@ open class PhysicsBody3D: CollisionObject3D {
         
     }
     
-    fileprivate static var method_remove_collision_exception_with: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_collision_exception_with")
+    fileprivate static let method_remove_collision_exception_with: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_collision_exception_with")
         return withUnsafePointer(to: &PhysicsBody3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -340,6 +347,7 @@ open class PhysicsBody3D: CollisionObject3D {
     
     /// Removes a body from the list of bodies that this body can't collide with.
     public final func removeCollisionExceptionWith(body: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

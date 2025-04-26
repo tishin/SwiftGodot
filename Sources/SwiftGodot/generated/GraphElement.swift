@@ -35,7 +35,7 @@ import Musl
 /// - ``dragged``
 /// - ``positionOffsetChanged``
 open class GraphElement: Container {
-    fileprivate static var className = StringName("GraphElement")
+    private static var className = StringName("GraphElement")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -104,8 +104,8 @@ open class GraphElement: Container {
     }
     
     /* Methods */
-    fileprivate static var method_set_resizable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_resizable")
+    fileprivate static let method_set_resizable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_resizable")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -117,6 +117,7 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func set_resizable(_ resizable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: resizable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -130,8 +131,8 @@ open class GraphElement: Container {
         
     }
     
-    fileprivate static var method_is_resizable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_resizable")
+    fileprivate static let method_is_resizable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_resizable")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -143,13 +144,14 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func is_resizable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphElement.method_is_resizable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_draggable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_draggable")
+    fileprivate static let method_set_draggable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_draggable")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -161,6 +163,7 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func set_draggable(_ draggable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: draggable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -174,8 +177,8 @@ open class GraphElement: Container {
         
     }
     
-    fileprivate static var method_is_draggable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_draggable")
+    fileprivate static let method_is_draggable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_draggable")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -187,13 +190,14 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func is_draggable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphElement.method_is_draggable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_selectable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selectable")
+    fileprivate static let method_set_selectable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selectable")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -205,6 +209,7 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func set_selectable(_ selectable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: selectable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -218,8 +223,8 @@ open class GraphElement: Container {
         
     }
     
-    fileprivate static var method_is_selectable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_selectable")
+    fileprivate static let method_is_selectable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_selectable")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -231,13 +236,14 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func is_selectable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphElement.method_is_selectable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_selected")
+    fileprivate static let method_set_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_selected")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -249,6 +255,7 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func set_selected(_ selected: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: selected) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -262,8 +269,8 @@ open class GraphElement: Container {
         
     }
     
-    fileprivate static var method_is_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_selected")
+    fileprivate static let method_is_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_selected")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -275,13 +282,14 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func is_selected() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(GraphElement.method_is_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_position_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_position_offset")
+    fileprivate static let method_set_position_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_position_offset")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -293,6 +301,7 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func set_position_offset(_ offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -306,8 +315,8 @@ open class GraphElement: Container {
         
     }
     
-    fileprivate static var method_get_position_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_position_offset")
+    fileprivate static let method_get_position_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_position_offset")
         return withUnsafePointer(to: &GraphElement.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -319,6 +328,7 @@ open class GraphElement: Container {
     
     @inline(__always)
     fileprivate final func get_position_offset() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(GraphElement.method_get_position_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

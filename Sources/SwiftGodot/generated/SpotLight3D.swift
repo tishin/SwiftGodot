@@ -28,7 +28,7 @@ import Musl
 /// > Note: When using the Mobile or Compatibility rendering methods, spot lights will only correctly affect meshes whose visibility AABB intersects with the light's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, ``GeometryInstance3D/extraCullMargin`` must be increased on the mesh. Otherwise, the light may not be visible on the mesh.
 /// 
 open class SpotLight3D: Light3D {
-    fileprivate static var className = StringName("SpotLight3D")
+    private static var className = StringName("SpotLight3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */

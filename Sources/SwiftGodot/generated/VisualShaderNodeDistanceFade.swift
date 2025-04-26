@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The distance fade effect fades out each pixel based on its distance to another object.
 open class VisualShaderNodeDistanceFade: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeDistanceFade")
+    private static var className = StringName("VisualShaderNodeDistanceFade")
     override open class var godotClassName: StringName { className }
 }
 

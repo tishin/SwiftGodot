@@ -26,7 +26,7 @@ import Musl
 /// > Note: ``GridContainer`` only works with child nodes inheriting from ``Control``. It won't rearrange child nodes inheriting from ``Node2D``.
 /// 
 open class GridContainer: Container {
-    fileprivate static var className = StringName("GridContainer")
+    private static var className = StringName("GridContainer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class GridContainer: Container {
     }
     
     /* Methods */
-    fileprivate static var method_set_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_columns")
+    fileprivate static let method_set_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_columns")
         return withUnsafePointer(to: &GridContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -57,6 +57,7 @@ open class GridContainer: Container {
     
     @inline(__always)
     fileprivate final func set_columns(_ columns: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: columns) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class GridContainer: Container {
         
     }
     
-    fileprivate static var method_get_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_columns")
+    fileprivate static let method_get_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_columns")
         return withUnsafePointer(to: &GridContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -83,6 +84,7 @@ open class GridContainer: Container {
     
     @inline(__always)
     fileprivate final func get_columns() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GridContainer.method_get_columns, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

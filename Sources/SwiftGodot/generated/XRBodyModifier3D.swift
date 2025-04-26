@@ -28,7 +28,7 @@ import Musl
 /// The body tracking position-data is scaled by ``Skeleton3D/motionScale`` when applied to the skeleton, which can be used to adjust the tracked body to match the scale of the body model.
 /// 
 open class XRBodyModifier3D: SkeletonModifier3D {
-    fileprivate static var className = StringName("XRBodyModifier3D")
+    private static var className = StringName("XRBodyModifier3D")
     override open class var godotClassName: StringName { className }
     public struct BodyUpdate: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
@@ -103,8 +103,8 @@ open class XRBodyModifier3D: SkeletonModifier3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_body_tracker: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_body_tracker")
+    fileprivate static let method_set_body_tracker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_body_tracker")
         return withUnsafePointer(to: &XRBodyModifier3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -116,6 +116,7 @@ open class XRBodyModifier3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_body_tracker(_ trackerName: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -129,8 +130,8 @@ open class XRBodyModifier3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_body_tracker: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_body_tracker")
+    fileprivate static let method_get_body_tracker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_body_tracker")
         return withUnsafePointer(to: &XRBodyModifier3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -142,13 +143,14 @@ open class XRBodyModifier3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_body_tracker() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(XRBodyModifier3D.method_get_body_tracker, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_body_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_body_update")
+    fileprivate static let method_set_body_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_body_update")
         return withUnsafePointer(to: &XRBodyModifier3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2211199417)!
@@ -160,6 +162,7 @@ open class XRBodyModifier3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_body_update(_ bodyUpdate: XRBodyModifier3D.BodyUpdate) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bodyUpdate.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -173,8 +176,8 @@ open class XRBodyModifier3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_body_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_body_update")
+    fileprivate static let method_get_body_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_body_update")
         return withUnsafePointer(to: &XRBodyModifier3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2642335328)!
@@ -186,13 +189,14 @@ open class XRBodyModifier3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_body_update() -> XRBodyModifier3D.BodyUpdate {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: XRBodyModifier3D.BodyUpdate = XRBodyModifier3D.BodyUpdate ()
         gi.object_method_bind_ptrcall(XRBodyModifier3D.method_get_body_update, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bone_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bone_update")
+    fileprivate static let method_set_bone_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bone_update")
         return withUnsafePointer(to: &XRBodyModifier3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3356796943)!
@@ -204,6 +208,7 @@ open class XRBodyModifier3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func set_bone_update(_ boneUpdate: XRBodyModifier3D.BoneUpdate) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boneUpdate.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -217,8 +222,8 @@ open class XRBodyModifier3D: SkeletonModifier3D {
         
     }
     
-    fileprivate static var method_get_bone_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bone_update")
+    fileprivate static let method_get_bone_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bone_update")
         return withUnsafePointer(to: &XRBodyModifier3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1309305964)!
@@ -230,6 +235,7 @@ open class XRBodyModifier3D: SkeletonModifier3D {
     
     @inline(__always)
     fileprivate final func get_bone_update() -> XRBodyModifier3D.BoneUpdate {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(XRBodyModifier3D.method_get_bone_update, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return XRBodyModifier3D.BoneUpdate (rawValue: _result)!

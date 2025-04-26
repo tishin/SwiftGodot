@@ -26,7 +26,7 @@ import Musl
 /// This object is used by ``RenderingDevice``.
 /// 
 open class RDShaderSPIRV: Resource {
-    fileprivate static var className = StringName("RDShaderSPIRV")
+    private static var className = StringName("RDShaderSPIRV")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -152,8 +152,8 @@ open class RDShaderSPIRV: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_stage_bytecode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stage_bytecode")
+    fileprivate static let method_set_stage_bytecode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stage_bytecode")
         return withUnsafePointer(to: &RDShaderSPIRV.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3514097977)!
@@ -166,6 +166,7 @@ open class RDShaderSPIRV: Resource {
     @inline(__always)
     /// Sets the SPIR-V `bytecode` for the given shader `stage`. Equivalent to setting one of ``bytecodeCompute``, ``bytecodeFragment``, ``bytecodeTesselationControl``, ``bytecodeTesselationEvaluation``, ``bytecodeVertex``.
     fileprivate final func set_stage_bytecode(_ stage: RenderingDevice.ShaderStage, _ bytecode: PackedByteArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             withUnsafePointer(to: bytecode.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -182,8 +183,8 @@ open class RDShaderSPIRV: Resource {
         
     }
     
-    fileprivate static var method_get_stage_bytecode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stage_bytecode")
+    fileprivate static let method_get_stage_bytecode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stage_bytecode")
         return withUnsafePointer(to: &RDShaderSPIRV.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3816765404)!
@@ -196,6 +197,7 @@ open class RDShaderSPIRV: Resource {
     @inline(__always)
     /// Equivalent to getting one of ``bytecodeCompute``, ``bytecodeFragment``, ``bytecodeTesselationControl``, ``bytecodeTesselationEvaluation``, ``bytecodeVertex``.
     fileprivate final func get_stage_bytecode(_ stage: RenderingDevice.ShaderStage) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -210,8 +212,8 @@ open class RDShaderSPIRV: Resource {
         return _result
     }
     
-    fileprivate static var method_set_stage_compile_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stage_compile_error")
+    fileprivate static let method_set_stage_compile_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stage_compile_error")
         return withUnsafePointer(to: &RDShaderSPIRV.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 620821314)!
@@ -224,6 +226,7 @@ open class RDShaderSPIRV: Resource {
     @inline(__always)
     /// Sets the compilation error message for the given shader `stage` to `compileError`. Equivalent to setting one of ``compileErrorCompute``, ``compileErrorFragment``, ``compileErrorTesselationControl``, ``compileErrorTesselationEvaluation``, ``compileErrorVertex``.
     fileprivate final func set_stage_compile_error(_ stage: RenderingDevice.ShaderStage, _ compileError: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             let compileError = GString(compileError)
             withUnsafePointer(to: compileError.content) { pArg1 in
@@ -241,8 +244,8 @@ open class RDShaderSPIRV: Resource {
         
     }
     
-    fileprivate static var method_get_stage_compile_error: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stage_compile_error")
+    fileprivate static let method_get_stage_compile_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stage_compile_error")
         return withUnsafePointer(to: &RDShaderSPIRV.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3354920045)!
@@ -255,6 +258,7 @@ open class RDShaderSPIRV: Resource {
     @inline(__always)
     /// Returns the compilation error message for the given shader `stage`. Equivalent to getting one of ``compileErrorCompute``, ``compileErrorFragment``, ``compileErrorTesselationControl``, ``compileErrorTesselationEvaluation``, ``compileErrorVertex``.
     fileprivate final func get_stage_compile_error(_ stage: RenderingDevice.ShaderStage) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

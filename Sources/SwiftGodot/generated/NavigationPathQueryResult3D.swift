@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This class stores the result of a 3D navigation path query from the ``NavigationServer3D``.
 open class NavigationPathQueryResult3D: RefCounted {
-    fileprivate static var className = StringName("NavigationPathQueryResult3D")
+    private static var className = StringName("NavigationPathQueryResult3D")
     override open class var godotClassName: StringName { className }
     public enum PathSegmentType: Int64, CaseIterable {
         /// This segment of the path goes through a region.
@@ -60,7 +60,7 @@ open class NavigationPathQueryResult3D: RefCounted {
     }
     
     /// The ``RID``s of the regions and links that each point of the path goes through.
-    final public var pathRids: VariantCollection<RID> {
+    final public var pathRids: TypedArray<RID> {
         get {
             return get_path_rids ()
         }
@@ -84,8 +84,8 @@ open class NavigationPathQueryResult3D: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path")
+    fileprivate static let method_set_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 334873810)!
@@ -97,6 +97,7 @@ open class NavigationPathQueryResult3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_path(_ path: PackedVector3Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -110,8 +111,8 @@ open class NavigationPathQueryResult3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path")
+    fileprivate static let method_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 497664490)!
@@ -123,13 +124,14 @@ open class NavigationPathQueryResult3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_path() -> PackedVector3Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
         gi.object_method_bind_ptrcall(NavigationPathQueryResult3D.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_path_types: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_types")
+    fileprivate static let method_set_path_types: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_types")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -141,6 +143,7 @@ open class NavigationPathQueryResult3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_path_types(_ pathTypes: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pathTypes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -154,8 +157,8 @@ open class NavigationPathQueryResult3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_path_types: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_types")
+    fileprivate static let method_get_path_types: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_types")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -167,13 +170,14 @@ open class NavigationPathQueryResult3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_path_types() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(NavigationPathQueryResult3D.method_get_path_types, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_path_rids: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_rids")
+    fileprivate static let method_set_path_rids: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_rids")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -184,7 +188,8 @@ open class NavigationPathQueryResult3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func set_path_rids(_ pathRids: VariantCollection<RID>) {
+    fileprivate final func set_path_rids(_ pathRids: TypedArray<RID>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pathRids.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -198,8 +203,8 @@ open class NavigationPathQueryResult3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_path_rids: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_rids")
+    fileprivate static let method_get_path_rids: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_rids")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -210,14 +215,15 @@ open class NavigationPathQueryResult3D: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func get_path_rids() -> VariantCollection<RID> {
+    fileprivate final func get_path_rids() -> TypedArray<RID> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(NavigationPathQueryResult3D.method_get_path_rids, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_set_path_owner_ids: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path_owner_ids")
+    fileprivate static let method_set_path_owner_ids: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_owner_ids")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3709968205)!
@@ -229,6 +235,7 @@ open class NavigationPathQueryResult3D: RefCounted {
     
     @inline(__always)
     fileprivate final func set_path_owner_ids(_ pathOwnerIds: PackedInt64Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pathOwnerIds.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -242,8 +249,8 @@ open class NavigationPathQueryResult3D: RefCounted {
         
     }
     
-    fileprivate static var method_get_path_owner_ids: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_owner_ids")
+    fileprivate static let method_get_path_owner_ids: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_owner_ids")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 235988956)!
@@ -255,13 +262,14 @@ open class NavigationPathQueryResult3D: RefCounted {
     
     @inline(__always)
     fileprivate final func get_path_owner_ids() -> PackedInt64Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
         gi.object_method_bind_ptrcall(NavigationPathQueryResult3D.method_get_path_owner_ids, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_reset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reset")
+    fileprivate static let method_reset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset")
         return withUnsafePointer(to: &NavigationPathQueryResult3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -273,6 +281,7 @@ open class NavigationPathQueryResult3D: RefCounted {
     
     /// Reset the result object to its initial state. This is useful to reuse the object across multiple queries.
     public final func reset() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(NavigationPathQueryResult3D.method_reset, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

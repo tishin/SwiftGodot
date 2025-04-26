@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Visual shader graphs consist of various nodes. Each node in the graph is a separate object and they are represented as a rectangular boxes with title and a set of properties. Each node also has connection ports that allow to connect it to another nodes and control the flow of the shader.
 open class VisualShaderNode: Resource {
-    fileprivate static var className = StringName("VisualShaderNode")
+    private static var className = StringName("VisualShaderNode")
     override open class var godotClassName: StringName { className }
     public enum PortType: Int64, CaseIterable {
         /// Floating-point scalar. Translated to [code skip-lint]float` type in shader code.
@@ -63,7 +63,7 @@ open class VisualShaderNode: Resource {
         
     }
     
-    final public var defaultInputValues: GArray {
+    final public var defaultInputValues: VariantArray {
         get {
             return get_default_input_values ()
         }
@@ -87,8 +87,8 @@ open class VisualShaderNode: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_default_input_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_input_port")
+    fileprivate static let method_get_default_input_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_input_port")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1894493699)!
@@ -100,6 +100,7 @@ open class VisualShaderNode: Resource {
     
     /// Returns the input port which should be connected by default when this node is created as a result of dragging a connection from an existing node to the empty space on the graph.
     public final func getDefaultInputPort(type: VisualShaderNode.PortType) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -114,8 +115,8 @@ open class VisualShaderNode: Resource {
         return _result
     }
     
-    fileprivate static var method_set_output_port_for_preview: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_output_port_for_preview")
+    fileprivate static let method_set_output_port_for_preview: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_output_port_for_preview")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -127,6 +128,7 @@ open class VisualShaderNode: Resource {
     
     @inline(__always)
     fileprivate final func set_output_port_for_preview(_ port: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -140,8 +142,8 @@ open class VisualShaderNode: Resource {
         
     }
     
-    fileprivate static var method_get_output_port_for_preview: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_port_for_preview")
+    fileprivate static let method_get_output_port_for_preview: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_port_for_preview")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -153,13 +155,14 @@ open class VisualShaderNode: Resource {
     
     @inline(__always)
     fileprivate final func get_output_port_for_preview() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(VisualShaderNode.method_get_output_port_for_preview, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_input_port_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_port_default_value")
+    fileprivate static let method_set_input_port_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_port_default_value")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 150923387)!
@@ -171,6 +174,7 @@ open class VisualShaderNode: Resource {
     
     /// Sets the default `value` for the selected input `port`.
     public final func setInputPortDefaultValue(port: Int32, value: Variant?, prevValue: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: prevValue.content) { pArg2 in
@@ -190,8 +194,8 @@ open class VisualShaderNode: Resource {
         
     }
     
-    fileprivate static var method_get_input_port_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_port_default_value")
+    fileprivate static let method_get_input_port_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_port_default_value")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
@@ -203,6 +207,7 @@ open class VisualShaderNode: Resource {
     
     /// Returns the default value of the input `port`.
     public final func getInputPortDefaultValue(port: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -217,8 +222,8 @@ open class VisualShaderNode: Resource {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_remove_input_port_default_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_input_port_default_value")
+    fileprivate static let method_remove_input_port_default_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_input_port_default_value")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -230,6 +235,7 @@ open class VisualShaderNode: Resource {
     
     /// Removes the default value of the input `port`.
     public final func removeInputPortDefaultValue(port: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -243,8 +249,8 @@ open class VisualShaderNode: Resource {
         
     }
     
-    fileprivate static var method_clear_default_input_values: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_default_input_values")
+    fileprivate static let method_clear_default_input_values: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_default_input_values")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -256,12 +262,13 @@ open class VisualShaderNode: Resource {
     
     /// Clears the default input ports value.
     public final func clearDefaultInputValues() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(VisualShaderNode.method_clear_default_input_values, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_default_input_values: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_input_values")
+    fileprivate static let method_set_default_input_values: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_input_values")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -272,8 +279,9 @@ open class VisualShaderNode: Resource {
     }()
     
     @inline(__always)
-    /// Sets the default input ports values using an ``GArray`` of the form `[index0, value0, index1, value1, ...]`. For example: `[0, Vector3(0, 0, 0), 1, Vector3(0, 0, 0)]`.
-    fileprivate final func set_default_input_values(_ values: GArray) {
+    /// Sets the default input ports values using an ``VariantArray`` of the form `[index0, value0, index1, value1, ...]`. For example: `[0, Vector3(0, 0, 0), 1, Vector3(0, 0, 0)]`.
+    fileprivate final func set_default_input_values(_ values: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: values.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -287,8 +295,8 @@ open class VisualShaderNode: Resource {
         
     }
     
-    fileprivate static var method_get_default_input_values: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_input_values")
+    fileprivate static let method_get_default_input_values: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_input_values")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -299,15 +307,16 @@ open class VisualShaderNode: Resource {
     }()
     
     @inline(__always)
-    /// Returns an ``GArray`` containing default values for all of the input ports of the node in the form `[index0, value0, index1, value1, ...]`.
-    fileprivate final func get_default_input_values() -> GArray {
-        let _result: GArray = GArray ()
+    /// Returns an ``VariantArray`` containing default values for all of the input ports of the node in the form `[index0, value0, index1, value1, ...]`.
+    fileprivate final func get_default_input_values() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(VisualShaderNode.method_get_default_input_values, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_frame")
+    fileprivate static let method_set_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_frame")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -319,6 +328,7 @@ open class VisualShaderNode: Resource {
     
     @inline(__always)
     fileprivate final func set_frame(_ frame: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -332,8 +342,8 @@ open class VisualShaderNode: Resource {
         
     }
     
-    fileprivate static var method_get_frame: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_frame")
+    fileprivate static let method_get_frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_frame")
         return withUnsafePointer(to: &VisualShaderNode.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -345,6 +355,7 @@ open class VisualShaderNode: Resource {
     
     @inline(__always)
     fileprivate final func get_frame() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(VisualShaderNode.method_get_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

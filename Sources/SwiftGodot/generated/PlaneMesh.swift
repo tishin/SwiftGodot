@@ -26,7 +26,7 @@ import Musl
 /// > Note: When using a large textured ``PlaneMesh`` (e.g. as a floor), you may stumble upon UV jittering issues depending on the camera angle. To solve this, increase ``subdivideDepth`` and ``subdivideWidth`` until you no longer notice UV jittering.
 /// 
 open class PlaneMesh: PrimitiveMesh {
-    fileprivate static var className = StringName("PlaneMesh")
+    private static var className = StringName("PlaneMesh")
     override open class var godotClassName: StringName { className }
     public enum Orientation: Int64, CaseIterable {
         /// ``PlaneMesh`` will face the positive X-axis.
@@ -101,8 +101,8 @@ open class PlaneMesh: PrimitiveMesh {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -114,6 +114,7 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -127,8 +128,8 @@ open class PlaneMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -140,13 +141,14 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(PlaneMesh.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_subdivide_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_subdivide_width")
+    fileprivate static let method_set_subdivide_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_subdivide_width")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -158,6 +160,7 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_subdivide_width(_ subdivide: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: subdivide) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -171,8 +174,8 @@ open class PlaneMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_subdivide_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subdivide_width")
+    fileprivate static let method_get_subdivide_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subdivide_width")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -184,13 +187,14 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_subdivide_width() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PlaneMesh.method_get_subdivide_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_subdivide_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_subdivide_depth")
+    fileprivate static let method_set_subdivide_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_subdivide_depth")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -202,6 +206,7 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_subdivide_depth(_ subdivide: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: subdivide) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -215,8 +220,8 @@ open class PlaneMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_subdivide_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subdivide_depth")
+    fileprivate static let method_get_subdivide_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subdivide_depth")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -228,13 +233,14 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_subdivide_depth() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(PlaneMesh.method_get_subdivide_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_center_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_center_offset")
+    fileprivate static let method_set_center_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_center_offset")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -246,6 +252,7 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_center_offset(_ offset: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -259,8 +266,8 @@ open class PlaneMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_center_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_center_offset")
+    fileprivate static let method_get_center_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_center_offset")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -272,13 +279,14 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_center_offset() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(PlaneMesh.method_get_center_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_orientation")
+    fileprivate static let method_set_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_orientation")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2751399687)!
@@ -290,6 +298,7 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_orientation(_ orientation: PlaneMesh.Orientation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: orientation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -303,8 +312,8 @@ open class PlaneMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_orientation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_orientation")
+    fileprivate static let method_get_orientation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_orientation")
         return withUnsafePointer(to: &PlaneMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227599250)!
@@ -316,6 +325,7 @@ open class PlaneMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_orientation() -> PlaneMesh.Orientation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(PlaneMesh.method_get_orientation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return PlaneMesh.Orientation (rawValue: _result)!

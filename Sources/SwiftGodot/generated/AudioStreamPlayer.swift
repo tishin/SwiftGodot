@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The ``AudioStreamPlayer`` node plays an audio stream non-positionally. It is ideal for user interfaces, menus, or background music.
 /// 
-/// To use this node, ``stream`` needs to be set to a valid ``AudioStream`` resource. Playing more than one sound at the time is also supported, see ``maxPolyphony``.
+/// To use this node, ``stream`` needs to be set to a valid ``AudioStream`` resource. Playing more than one sound at the same time is also supported, see ``maxPolyphony``.
 /// 
 /// If you need to play audio at a specific position, use ``AudioStreamPlayer2D`` or ``AudioStreamPlayer3D`` instead.
 /// 
@@ -33,7 +33,7 @@ import Musl
 /// 
 /// - ``finished``
 open class AudioStreamPlayer: Node {
-    fileprivate static var className = StringName("AudioStreamPlayer")
+    private static var className = StringName("AudioStreamPlayer")
     override open class var godotClassName: StringName { className }
     public enum MixTarget: Int64, CaseIterable {
         /// The audio will be played only on the first channel. This is the default.
@@ -59,9 +59,9 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    /// Volume of sound, in decibel. This is an offset of the ``stream``'s volume.
+    /// Volume of sound, in decibels. This is an offset of the ``stream``'s volume.
     /// 
-    /// > Note: To convert between decibel and linear energy (like most volume sliders do), use ``@GlobalScope.db_to_linear`` and ``@GlobalScope.linear_to_db``.
+    /// > Note: To convert between decibel and linear energy (like most volume sliders do), use ``volumeLinear``, or ``@GlobalScope.db_to_linear`` and ``@GlobalScope.linear_to_db``.
     /// 
     final public var volumeDb: Double {
         get {
@@ -74,6 +74,21 @@ open class AudioStreamPlayer: Node {
         
     }
     
+    /// Volume of sound, as a linear value.
+    /// 
+    /// > Note: This member modifies ``volumeDb`` for convenience. The returned value is equivalent to the result of ``@GlobalScope.db_to_linear`` on ``volumeDb``. Setting this member is equivalent to setting ``volumeDb`` to the result of ``@GlobalScope.linear_to_db`` on a value.
+    /// 
+    final public var volumeLinear: Double {
+        get {
+            return get_volume_linear ()
+        }
+        
+        set {
+            set_volume_linear (newValue)
+        }
+        
+    }
+    
     /// The audio's pitch and tempo, as a multiplier of the ``stream``'s sample rate. A value of `2.0` doubles the audio's pitch, while a value of `0.5` halves the pitch.
     final public var pitchScale: Double {
         get {
@@ -82,6 +97,18 @@ open class AudioStreamPlayer: Node {
         
         set {
             set_pitch_scale (newValue)
+        }
+        
+    }
+    
+    /// If `true`, this node is playing sounds. Setting this property has the same effect as ``play(fromPosition:)`` and ``stop()``.
+    final public var playing: Bool {
+        get {
+            return is_playing ()
+        }
+        
+        set {
+            set_playing (newValue)
         }
         
     }
@@ -165,8 +192,8 @@ open class AudioStreamPlayer: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stream")
+    fileprivate static let method_set_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stream")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2210767741)!
@@ -178,6 +205,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_stream(_ stream: AudioStream?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -191,8 +219,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream")
+    fileprivate static let method_get_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 160907539)!
@@ -204,13 +232,14 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_stream() -> AudioStream? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_volume_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_volume_db")
+    fileprivate static let method_set_volume_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volume_db")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -222,6 +251,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_volume_db(_ volumeDb: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: volumeDb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -235,8 +265,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_volume_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_volume_db")
+    fileprivate static let method_get_volume_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volume_db")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -248,13 +278,60 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_volume_db() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_volume_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pitch_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pitch_scale")
+    fileprivate static let method_set_volume_linear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_volume_linear")
+        return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_volume_linear(_ volumeLinear: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: volumeLinear) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_volume_linear, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_volume_linear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_volume_linear")
+        return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_volume_linear() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_volume_linear, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_pitch_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pitch_scale")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -266,6 +343,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_pitch_scale(_ pitchScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pitchScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -279,8 +357,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_pitch_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pitch_scale")
+    fileprivate static let method_get_pitch_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pitch_scale")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -292,13 +370,14 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_pitch_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_pitch_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_play: GDExtensionMethodBindPtr = {
-        let methodName = StringName("play")
+    fileprivate static let method_play: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("play")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1958160172)!
@@ -310,6 +389,7 @@ open class AudioStreamPlayer: Node {
     
     /// Plays a sound from the beginning, or the given `fromPosition` in seconds.
     public final func play(fromPosition: Double = 0.0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -323,8 +403,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_seek: GDExtensionMethodBindPtr = {
-        let methodName = StringName("seek")
+    fileprivate static let method_seek: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("seek")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -336,6 +416,7 @@ open class AudioStreamPlayer: Node {
     
     /// Restarts all sounds to be played from the given `toPosition`, in seconds. Does nothing if no sounds are playing.
     public final func seek(toPosition: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: toPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -349,8 +430,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_stop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("stop")
+    fileprivate static let method_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("stop")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -362,12 +443,13 @@ open class AudioStreamPlayer: Node {
     
     /// Stops all sounds from this node.
     public final func stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_playing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_playing")
+    fileprivate static let method_is_playing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_playing")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -377,14 +459,16 @@ open class AudioStreamPlayer: Node {
         
     }()
     
-    public final func isPlaying() -> Bool {
+    @inline(__always)
+    fileprivate final func is_playing() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_playback_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_playback_position")
+    fileprivate static let method_get_playback_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_playback_position")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -398,14 +482,17 @@ open class AudioStreamPlayer: Node {
     /// 
     /// > Note: The position is not always accurate, as the ``AudioServer`` does not mix audio every processed frame. To get more accurate results, add ``AudioServer/getTimeSinceLastMix()`` to the returned position.
     /// 
+    /// > Note: This method always returns `0.0` if the ``stream`` is an ``AudioStreamInteractive``, since it can have multiple clips playing at once.
+    /// 
     public final func getPlaybackPosition() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_playback_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus")
+    fileprivate static let method_set_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -417,6 +504,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_bus(_ bus: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bus.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -430,8 +518,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus")
+    fileprivate static let method_get_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -443,13 +531,14 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_bus() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_bus, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_autoplay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_autoplay")
+    fileprivate static let method_set_autoplay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_autoplay")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -461,6 +550,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_autoplay(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -474,8 +564,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_is_autoplay_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_autoplay_enabled")
+    fileprivate static let method_is_autoplay_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_autoplay_enabled")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -487,13 +577,14 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func is_autoplay_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_is_autoplay_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mix_target: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mix_target")
+    fileprivate static let method_set_mix_target: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mix_target")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2300306138)!
@@ -505,6 +596,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_mix_target(_ mixTarget: AudioStreamPlayer.MixTarget) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mixTarget.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -518,8 +610,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_mix_target: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mix_target")
+    fileprivate static let method_get_mix_target: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mix_target")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 172807476)!
@@ -531,13 +623,41 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_mix_target() -> AudioStreamPlayer.MixTarget {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_mix_target, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AudioStreamPlayer.MixTarget (rawValue: _result)!
     }
     
-    fileprivate static var method_set_stream_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stream_paused")
+    fileprivate static let method_set_playing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_playing")
+        return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_playing(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_playing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_set_stream_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stream_paused")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -549,6 +669,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_stream_paused(_ pause: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pause) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -562,8 +683,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_stream_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream_paused")
+    fileprivate static let method_get_stream_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream_paused")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -575,13 +696,14 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_stream_paused() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_polyphony: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_polyphony")
+    fileprivate static let method_set_max_polyphony: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_polyphony")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -593,6 +715,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_max_polyphony(_ maxPolyphony: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: maxPolyphony) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -606,8 +729,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_max_polyphony: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_polyphony")
+    fileprivate static let method_get_max_polyphony: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_polyphony")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -619,13 +742,14 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_max_polyphony() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_max_polyphony, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_has_stream_playback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_stream_playback")
+    fileprivate static let method_has_stream_playback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_stream_playback")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -637,13 +761,14 @@ open class AudioStreamPlayer: Node {
     
     /// Returns `true` if any sound is active, even if ``streamPaused`` is set to `true`. See also ``playing`` and ``getStreamPlayback()``.
     public final func hasStreamPlayback() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_has_stream_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_stream_playback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stream_playback")
+    fileprivate static let method_get_stream_playback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stream_playback")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 210135309)!
@@ -655,13 +780,14 @@ open class AudioStreamPlayer: Node {
     
     /// Returns the latest ``AudioStreamPlayback`` of this node, usually the most recently created by ``play(fromPosition:)``. If no sounds are playing, this method fails and returns an empty playback.
     public final func getStreamPlayback() -> AudioStreamPlayback? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_playback_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_playback_type")
+    fileprivate static let method_set_playback_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_playback_type")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 725473817)!
@@ -673,6 +799,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func set_playback_type(_ playbackType: AudioServer.PlaybackType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: playbackType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -686,8 +813,8 @@ open class AudioStreamPlayer: Node {
         
     }
     
-    fileprivate static var method_get_playback_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_playback_type")
+    fileprivate static let method_get_playback_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_playback_type")
         return withUnsafePointer(to: &AudioStreamPlayer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4011264623)!
@@ -699,6 +826,7 @@ open class AudioStreamPlayer: Node {
     
     @inline(__always)
     fileprivate final func get_playback_type() -> AudioServer.PlaybackType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_playback_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return AudioServer.PlaybackType (rawValue: _result)!

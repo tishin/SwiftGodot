@@ -26,7 +26,7 @@ import Musl
 /// > Note: ``ProjectSettings/audio/driver/enableInput`` must be `true` for audio input to work. See also that setting's description for caveats related to permissions and operating system privacy settings.
 /// 
 open class AudioStreamMicrophone: AudioStream {
-    fileprivate static var className = StringName("AudioStreamMicrophone")
+    private static var className = StringName("AudioStreamMicrophone")
     override open class var godotClassName: StringName { className }
 }
 

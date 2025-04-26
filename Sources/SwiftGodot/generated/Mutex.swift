@@ -34,11 +34,11 @@ import Musl
 /// - When a ``Thread``'s reference count reaches zero and it is therefore destroyed, it must not have any mutex locked.
 /// 
 open class Mutex: RefCounted {
-    fileprivate static var className = StringName("Mutex")
+    private static var className = StringName("Mutex")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_lock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lock")
+    fileprivate static let method_lock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lock")
         return withUnsafePointer(to: &Mutex.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -53,12 +53,13 @@ open class Mutex: RefCounted {
     /// > Note: This function returns without blocking if the thread already has ownership of the mutex.
     /// 
     public final func lock() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Mutex.method_lock, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_try_lock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("try_lock")
+    fileprivate static let method_try_lock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("try_lock")
         return withUnsafePointer(to: &Mutex.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -73,13 +74,14 @@ open class Mutex: RefCounted {
     /// > Note: This function returns `true` if the thread already has ownership of the mutex.
     /// 
     public final func tryLock() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Mutex.method_try_lock, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_unlock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unlock")
+    fileprivate static let method_unlock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unlock")
         return withUnsafePointer(to: &Mutex.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -96,6 +98,7 @@ open class Mutex: RefCounted {
     /// > Warning: Calling ``unlock()`` more times that ``lock()`` on a given thread, thus ending up trying to unlock a non-locked mutex, is wrong and may causes crashes or deadlocks.
     /// 
     public final func unlock() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Mutex.method_unlock, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

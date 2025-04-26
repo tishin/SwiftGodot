@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Resizable nodes have a handle that allows the user to adjust their size as needed.
 open class VisualShaderNodeResizableBase: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeResizableBase")
+    private static var className = StringName("VisualShaderNodeResizableBase")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class VisualShaderNodeResizableBase: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size")
+    fileprivate static let method_set_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size")
         return withUnsafePointer(to: &VisualShaderNodeResizableBase.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -54,6 +54,7 @@ open class VisualShaderNodeResizableBase: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_size(_ size: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class VisualShaderNodeResizableBase: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size")
+    fileprivate static let method_get_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size")
         return withUnsafePointer(to: &VisualShaderNodeResizableBase.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -80,6 +81,7 @@ open class VisualShaderNodeResizableBase: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_size() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(VisualShaderNodeResizableBase.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

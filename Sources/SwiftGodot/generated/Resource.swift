@@ -36,7 +36,7 @@ import Musl
 /// - ``changed``
 /// - ``setupLocalToSceneRequested``
 open class Resource: RefCounted {
-    fileprivate static var className = StringName("Resource")
+    private static var className = StringName("Resource")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -106,16 +106,98 @@ open class Resource: RefCounted {
     }
     
     /* Methods */
+    fileprivate static let method__setup_local_to_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_setup_local_to_scene")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
     /// Override this method to customize the newly duplicated resource created from ``PackedScene/instantiate(editState:)``, if the original's ``resourceLocalToScene`` is set to `true`.
     /// 
-    /// **Example:** Set a random `damage` value to every local resource from an instantiated scene.
+    /// **Example:** Set a random `damage` value to every local resource from an instantiated scene:
     /// 
     @_documentation(visibility: public)
     open func _setupLocalToScene() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Resource.method__setup_local_to_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
     
-    fileprivate static var method_set_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_path")
+    fileprivate static let method__get_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_rid")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Override this method to return a custom ``RID`` when ``getRid()`` is called.
+    @_documentation(visibility: public)
+    open func _getRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: RID = RID ()
+        gi.object_method_bind_ptrcall(Resource.method__get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
+    }
+    
+    fileprivate static let method__reset_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_reset_state")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// For resources that use a variable number of properties, either via ``Object/_validateProperty()`` or ``Object/_getPropertyList()``, this method should be implemented to correctly clear the resource's state.
+    @_documentation(visibility: public)
+    open func _resetState() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Resource.method__reset_state, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method__set_path_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_path_cache")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3089850668)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the resource's path to `path` without involving the resource cache.
+    @_documentation(visibility: public)
+    open func _setPathCache(path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Resource.method__set_path_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_set_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -127,6 +209,7 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func set_path(_ path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -141,8 +224,8 @@ open class Resource: RefCounted {
         
     }
     
-    fileprivate static var method_take_over_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("take_over_path")
+    fileprivate static let method_take_over_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("take_over_path")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -154,6 +237,7 @@ open class Resource: RefCounted {
     
     /// Sets the ``resourcePath`` to `path`, potentially overriding an existing cache entry for this path. Further attempts to load an overridden resource by path will instead return this resource.
     public final func takeOverPath(_ path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -168,8 +252,8 @@ open class Resource: RefCounted {
         
     }
     
-    fileprivate static var method_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path")
+    fileprivate static let method_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -181,13 +265,42 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func get_path() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Resource.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_name")
+    fileprivate static let method_set_path_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_path_cache")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the resource's path to `path` without involving the resource cache.
+    public final func setPathCache(path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Resource.method_set_path_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_set_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_name")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -199,6 +312,7 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func set_name(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -213,8 +327,8 @@ open class Resource: RefCounted {
         
     }
     
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -226,13 +340,14 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func get_name() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Resource.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rid")
+    fileprivate static let method_get_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rid")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -244,13 +359,14 @@ open class Resource: RefCounted {
     
     /// Returns the ``RID`` of this resource (or an empty RID). Many resources (such as ``Texture2D``, ``Mesh``, and so on) are high-level abstractions of resources stored in a specialized server (``DisplayServer``, ``RenderingServer``, etc.), so this function will return the original ``RID``.
     public final func getRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(Resource.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_local_to_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_local_to_scene")
+    fileprivate static let method_set_local_to_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_local_to_scene")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -262,6 +378,7 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func set_local_to_scene(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -275,8 +392,8 @@ open class Resource: RefCounted {
         
     }
     
-    fileprivate static var method_is_local_to_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_local_to_scene")
+    fileprivate static let method_is_local_to_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_local_to_scene")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -288,13 +405,14 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func is_local_to_scene() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Resource.method_is_local_to_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_local_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_local_scene")
+    fileprivate static let method_get_local_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_local_scene")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3160264692)!
@@ -306,13 +424,14 @@ open class Resource: RefCounted {
     
     /// If ``resourceLocalToScene`` is set to `true` and the resource has been loaded from a ``PackedScene`` instantiation, returns the root ``Node`` of the scene where this resource is used. Otherwise, returns `null`.
     public final func getLocalScene() -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Resource.method_get_local_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_setup_local_to_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("setup_local_to_scene")
+    fileprivate static let method_setup_local_to_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("setup_local_to_scene")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -324,12 +443,117 @@ open class Resource: RefCounted {
     
     /// Calls ``_setupLocalToScene()``. If ``resourceLocalToScene`` is set to `true`, this method is automatically called from ``PackedScene/instantiate(editState:)`` by the newly duplicated resource within the scene instance.
     public final func setupLocalToScene() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Resource.method_setup_local_to_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_generate_scene_unique_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_scene_unique_id")
+    fileprivate static let method_reset_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset_state")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// For resources that use a variable number of properties, either via ``Object/_validateProperty()`` or ``Object/_getPropertyList()``, override ``_resetState()`` to correctly clear the resource's state.
+    public final func resetState() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Resource.method_reset_state, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_set_id_for_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_id_for_path")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3186203200)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the unique identifier to `id` for the resource with the given `path` in the resource cache. If the unique identifier is empty, the cache entry using `path` is removed if it exists.
+    /// 
+    /// > Note: This method is only implemented when running in an editor context.
+    /// 
+    public final func setIdForPath(_ path: String, id: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            let id = GString(id)
+            withUnsafePointer(to: id.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Resource.method_set_id_for_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_id_for_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_id_for_path")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the unique identifier for the resource with the given `path` from the resource cache. If the resource is not loaded and cached, an empty string is returned.
+    /// 
+    /// > Note: This method is only implemented when running in an editor context. At runtime, it returns an empty string.
+    /// 
+    public final func getIdForPath(_ path: String) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Resource.method_get_id_for_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
+    }
+    
+    fileprivate static let method_is_built_in: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_built_in")
+        return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the resource is built-in (from the engine) or `false` if it is user-defined.
+    public final func isBuiltIn() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(Resource.method_is_built_in, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_generate_scene_unique_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_scene_unique_id")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -346,8 +570,8 @@ open class Resource: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_set_scene_unique_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scene_unique_id")
+    fileprivate static let method_set_scene_unique_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scene_unique_id")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -359,6 +583,7 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func set_scene_unique_id(_ id: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let id = GString(id)
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -373,8 +598,8 @@ open class Resource: RefCounted {
         
     }
     
-    fileprivate static var method_get_scene_unique_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scene_unique_id")
+    fileprivate static let method_get_scene_unique_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_unique_id")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -386,13 +611,14 @@ open class Resource: RefCounted {
     
     @inline(__always)
     fileprivate final func get_scene_unique_id() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Resource.method_get_scene_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_emit_changed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("emit_changed")
+    fileprivate static let method_emit_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("emit_changed")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -407,12 +633,13 @@ open class Resource: RefCounted {
     /// > Note: For custom resources, it's recommended to call this method whenever a meaningful change occurs, such as a modified property. This ensures that custom ``Object``s depending on the resource are properly updated.
     /// 
     public final func emitChanged() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Resource.method_emit_changed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_duplicate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("duplicate")
+    fileprivate static let method_duplicate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("duplicate")
         return withUnsafePointer(to: &Resource.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 482882304)!
@@ -424,13 +651,20 @@ open class Resource: RefCounted {
     
     /// Duplicates this resource, returning a new resource with its `export`ed or ``PropertyUsageFlags/propertyUsageStorage`` properties copied from the original.
     /// 
-    /// If `subresources` is `false`, a shallow copy is returned; nested resources within subresources are not duplicated and are shared from the original resource. If `subresources` is `true`, a deep copy is returned; nested subresources will be duplicated and are not shared.
+    /// If `subresources` is `false`, a shallow copy is returned; nested resources within subresources are not duplicated and are shared with the original resource (with one exception; see below). If `subresources` is `true`, a deep copy is returned; nested subresources will be duplicated and are not shared (with two exceptions; see below).
     /// 
-    /// Subresource properties with the ``PropertyUsageFlags/propertyUsageAlwaysDuplicate`` flag are always duplicated even with `subresources` set to `false`, and properties with the ``PropertyUsageFlags/propertyUsageNeverDuplicate`` flag are never duplicated even with `subresources` set to `true`.
+    /// `subresources` is usually respected, with the following exceptions:
+    /// 
+    /// - Subresource properties with the ``PropertyUsageFlags/propertyUsageAlwaysDuplicate`` flag are always duplicated.
+    /// 
+    /// - Subresource properties with the ``PropertyUsageFlags/propertyUsageNeverDuplicate`` flag are never duplicated.
+    /// 
+    /// - Subresources inside ``VariantArray`` and ``VariantDictionary`` properties are never duplicated.
     /// 
     /// > Note: For custom resources, this method will fail if ``Object/_init()`` has been defined with required parameters.
     /// 
     public final func duplicate(subresources: Bool = false) -> Resource? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: subresources) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -442,12 +676,18 @@ open class Resource: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
+            case "_get_rid":
+                return _Resource_proxy_get_rid
+            case "_reset_state":
+                return _Resource_proxy_reset_state
+            case "_set_path_cache":
+                return _Resource_proxy_set_path_cache
             case "_setup_local_to_scene":
                 return _Resource_proxy_setup_local_to_scene
             default:
@@ -495,9 +735,34 @@ open class Resource: RefCounted {
 }
 
 // Support methods for proxies
+func _Resource_proxy_get_rid (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
+    guard let instance else { return }
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Resource else { return }
+    let ret = swiftObject._getRid ()
+    retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // RID
+    ret.content = RID.zero
+}
+
+func _Resource_proxy_reset_state (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
+    guard let instance else { return }
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Resource else { return }
+    swiftObject._resetState ()
+}
+
+func _Resource_proxy_set_path_cache (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
+    guard let instance else { return }
+    guard let args else { return }
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Resource else { return }
+    swiftObject._setPathCache (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
+}
+
 func _Resource_proxy_setup_local_to_scene (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Resource>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Resource else { return }
     swiftObject._setupLocalToScene ()
 }
 

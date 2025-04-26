@@ -32,7 +32,7 @@ import Musl
 /// > Note: This class is implemented on iOS, Linux, macOS and Windows, on other platforms it will fallback to default theme font.
 /// 
 open class SystemFont: Font {
-    fileprivate static var className = StringName("SystemFont")
+    private static var className = StringName("SystemFont")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -169,6 +169,18 @@ open class SystemFont: Font {
         
     }
     
+    /// If set to `true`, when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled.
+    final public var keepRoundingRemainders: Bool {
+        get {
+            return get_keep_rounding_remainders ()
+        }
+        
+        set {
+            set_keep_rounding_remainders (newValue)
+        }
+        
+    }
+    
     /// If set to `true`, glyphs of all sizes are rendered using single multichannel signed distance field generated from the dynamic font vector data.
     final public var multichannelSignedDistanceField: Bool {
         get {
@@ -218,8 +230,8 @@ open class SystemFont: Font {
     }
     
     /* Methods */
-    fileprivate static var method_set_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_antialiasing")
+    fileprivate static let method_set_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_antialiasing")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1669900)!
@@ -231,6 +243,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_antialiasing(_ antialiasing: TextServer.FontAntialiasing) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: antialiasing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -244,8 +257,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_antialiasing")
+    fileprivate static let method_get_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_antialiasing")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4262718649)!
@@ -257,13 +270,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_antialiasing() -> TextServer.FontAntialiasing {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(SystemFont.method_get_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.FontAntialiasing (rawValue: _result)!
     }
     
-    fileprivate static var method_set_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_embedded_bitmaps")
+    fileprivate static let method_set_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_embedded_bitmaps")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -275,6 +289,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_disable_embedded_bitmaps(_ disableEmbeddedBitmaps: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: disableEmbeddedBitmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -288,8 +303,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_disable_embedded_bitmaps")
+    fileprivate static let method_get_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_disable_embedded_bitmaps")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -301,13 +316,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_disable_embedded_bitmaps() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SystemFont.method_get_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_generate_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_generate_mipmaps")
+    fileprivate static let method_set_generate_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_generate_mipmaps")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -319,6 +335,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_generate_mipmaps(_ generateMipmaps: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: generateMipmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -332,8 +349,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_generate_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_generate_mipmaps")
+    fileprivate static let method_get_generate_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_generate_mipmaps")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -345,13 +362,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_generate_mipmaps() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SystemFont.method_get_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_system_fallback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_system_fallback")
+    fileprivate static let method_set_allow_system_fallback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_system_fallback")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -363,6 +381,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_allow_system_fallback(_ allowSystemFallback: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allowSystemFallback) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -376,8 +395,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_is_allow_system_fallback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_allow_system_fallback")
+    fileprivate static let method_is_allow_system_fallback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_allow_system_fallback")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -389,13 +408,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func is_allow_system_fallback() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SystemFont.method_is_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_force_autohinter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_force_autohinter")
+    fileprivate static let method_set_force_autohinter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_force_autohinter")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -407,6 +427,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_force_autohinter(_ forceAutohinter: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: forceAutohinter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -420,8 +441,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_is_force_autohinter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_force_autohinter")
+    fileprivate static let method_is_force_autohinter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_force_autohinter")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -433,13 +454,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func is_force_autohinter() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SystemFont.method_is_force_autohinter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hinting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hinting")
+    fileprivate static let method_set_hinting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hinting")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1827459492)!
@@ -451,6 +473,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_hinting(_ hinting: TextServer.Hinting) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hinting.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -464,8 +487,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_hinting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hinting")
+    fileprivate static let method_get_hinting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hinting")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3683214614)!
@@ -477,13 +500,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_hinting() -> TextServer.Hinting {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(SystemFont.method_get_hinting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.Hinting (rawValue: _result)!
     }
     
-    fileprivate static var method_set_subpixel_positioning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_subpixel_positioning")
+    fileprivate static let method_set_subpixel_positioning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_subpixel_positioning")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4225742182)!
@@ -495,6 +519,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_subpixel_positioning(_ subpixelPositioning: TextServer.SubpixelPositioning) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: subpixelPositioning.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -508,8 +533,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_subpixel_positioning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subpixel_positioning")
+    fileprivate static let method_get_subpixel_positioning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subpixel_positioning")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1069238588)!
@@ -521,13 +546,60 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_subpixel_positioning() -> TextServer.SubpixelPositioning {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(SystemFont.method_get_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.SubpixelPositioning (rawValue: _result)!
     }
     
-    fileprivate static var method_set_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_multichannel_signed_distance_field")
+    fileprivate static let method_set_keep_rounding_remainders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_rounding_remainders")
+        return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_keep_rounding_remainders(_ keepRoundingRemainders: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: keepRoundingRemainders) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_keep_rounding_remainders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keep_rounding_remainders")
+        return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_keep_rounding_remainders() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(SystemFont.method_get_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_multichannel_signed_distance_field")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -539,6 +611,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_multichannel_signed_distance_field(_ msdf: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msdf) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -552,8 +625,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_is_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_multichannel_signed_distance_field")
+    fileprivate static let method_is_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_multichannel_signed_distance_field")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -565,13 +638,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func is_multichannel_signed_distance_field() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SystemFont.method_is_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msdf_pixel_range")
+    fileprivate static let method_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msdf_pixel_range")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -583,6 +657,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_msdf_pixel_range(_ msdfPixelRange: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msdfPixelRange) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -596,8 +671,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msdf_pixel_range")
+    fileprivate static let method_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msdf_pixel_range")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -609,13 +684,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_msdf_pixel_range() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SystemFont.method_get_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_msdf_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msdf_size")
+    fileprivate static let method_set_msdf_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msdf_size")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -627,6 +703,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_msdf_size(_ msdfSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msdfSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -640,8 +717,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_msdf_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msdf_size")
+    fileprivate static let method_get_msdf_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msdf_size")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -653,13 +730,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_msdf_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SystemFont.method_get_msdf_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_oversampling")
+    fileprivate static let method_set_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_oversampling")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -671,6 +749,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_oversampling(_ oversampling: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oversampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -684,8 +763,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_oversampling")
+    fileprivate static let method_get_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_oversampling")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -697,13 +776,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_oversampling() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SystemFont.method_get_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_font_names: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_names")
+    fileprivate static let method_get_font_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_names")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -715,13 +795,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_font_names() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(SystemFont.method_get_font_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_font_names: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_names")
+    fileprivate static let method_set_font_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_names")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4015028928)!
@@ -733,6 +814,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_font_names(_ names: PackedStringArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: names.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -746,8 +828,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_get_font_italic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_font_italic")
+    fileprivate static let method_get_font_italic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_font_italic")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -759,13 +841,14 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func get_font_italic() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SystemFont.method_get_font_italic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_font_italic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_italic")
+    fileprivate static let method_set_font_italic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_italic")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -777,6 +860,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_font_italic(_ italic: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: italic) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -790,8 +874,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_set_font_weight: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_weight")
+    fileprivate static let method_set_font_weight: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_weight")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -803,6 +887,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_font_weight(_ weight: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: weight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -816,8 +901,8 @@ open class SystemFont: Font {
         
     }
     
-    fileprivate static var method_set_font_stretch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_stretch")
+    fileprivate static let method_set_font_stretch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_stretch")
         return withUnsafePointer(to: &SystemFont.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -829,6 +914,7 @@ open class SystemFont: Font {
     
     @inline(__always)
     fileprivate final func set_font_stretch(_ stretch: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stretch) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

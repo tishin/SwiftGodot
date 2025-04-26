@@ -28,7 +28,7 @@ import Musl
 /// > Note: The Jiggle modifier has `jiggle_joints`, which are the data objects that hold the data for each joint in the Jiggle chain. This is different from than ``Bone2D`` nodes! Jiggle joints hold the data needed for each ``Bone2D`` in the bone chain used by the Jiggle modification.
 /// 
 open class SkeletonModification2DJiggle: SkeletonModification2D {
-    fileprivate static var className = StringName("SkeletonModification2DJiggle")
+    private static var className = StringName("SkeletonModification2DJiggle")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -118,8 +118,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_target_node")
+    fileprivate static let method_set_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_target_node")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -131,6 +131,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_target_node(_ targetNodepath: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -144,8 +145,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_target_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_target_node")
+    fileprivate static let method_get_target_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_target_node")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -157,13 +158,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_target_node() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_jiggle_data_chain_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_data_chain_length")
+    fileprivate static let method_set_jiggle_data_chain_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_data_chain_length")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -175,6 +177,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_jiggle_data_chain_length(_ length: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -188,8 +191,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_data_chain_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_data_chain_length")
+    fileprivate static let method_get_jiggle_data_chain_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_data_chain_length")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -201,13 +204,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_jiggle_data_chain_length() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_data_chain_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_stiffness")
+    fileprivate static let method_set_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_stiffness")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -219,6 +223,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_stiffness(_ stiffness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stiffness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -232,8 +237,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_stiffness")
+    fileprivate static let method_get_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_stiffness")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -245,13 +250,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_stiffness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mass")
+    fileprivate static let method_set_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mass")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -263,6 +269,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_mass(_ mass: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -276,8 +283,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mass")
+    fileprivate static let method_get_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mass")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -289,13 +296,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_mass() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_damping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_damping")
+    fileprivate static let method_set_damping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_damping")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -307,6 +315,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_damping(_ damping: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: damping) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -320,8 +329,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_damping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_damping")
+    fileprivate static let method_get_damping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_damping")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -333,13 +342,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_damping() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_damping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_gravity")
+    fileprivate static let method_set_use_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -351,6 +361,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_use_gravity(_ useGravity: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useGravity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -364,8 +375,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_use_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_gravity")
+    fileprivate static let method_get_use_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -377,13 +388,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_use_gravity() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_use_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gravity")
+    fileprivate static let method_set_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -395,6 +407,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func set_gravity(_ gravity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: gravity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -408,8 +421,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gravity")
+    fileprivate static let method_get_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
@@ -421,13 +434,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     @inline(__always)
     fileprivate final func get_gravity() -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_colliders: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_colliders")
+    fileprivate static let method_set_use_colliders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_colliders")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -439,6 +453,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// If `true`, the Jiggle modifier will take colliders into account, keeping them from entering into these collision objects.
     public final func setUseColliders(_ useColliders: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: useColliders) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -452,8 +467,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_use_colliders: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_colliders")
+    fileprivate static let method_get_use_colliders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_colliders")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -465,13 +480,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns whether the jiggle modifier is taking physics colliders into account when solving.
     public final func getUseColliders() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_use_colliders, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -483,6 +499,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets the collision mask that the Jiggle modifier will use when reacting to colliders, if the Jiggle modifier is set to take colliders into account.
     public final func setCollisionMask(_ collisionMask: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: collisionMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -496,8 +513,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -509,13 +526,14 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns the collision mask used by the Jiggle modifier when collisions are enabled.
     public final func getCollisionMask() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_bone2d_node")
+    fileprivate static let method_set_jiggle_joint_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761262315)!
@@ -527,6 +545,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets the ``Bone2D`` node assigned to the Jiggle joint at `jointIdx`.
     public final func setJiggleJointBone2dNode(jointIdx: Int32, bone2dNode: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: bone2dNode.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -543,8 +562,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_bone2d_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_bone2d_node")
+    fileprivate static let method_get_jiggle_joint_bone2d_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_bone2d_node")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 408788394)!
@@ -556,6 +575,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns the ``Bone2D`` node assigned to the Jiggle joint at `jointIdx`.
     public final func getJiggleJointBone2dNode(jointIdx: Int32) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -570,8 +590,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_bone_index")
+    fileprivate static let method_set_jiggle_joint_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -583,6 +603,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets the bone index, `boneIdx`, of the Jiggle joint at `jointIdx`. When possible, this will also update the `bone2d_node` of the Jiggle joint based on data provided by the linked skeleton.
     public final func setJiggleJointBoneIndex(jointIdx: Int32, boneIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: boneIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -599,8 +620,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_bone_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_bone_index")
+    fileprivate static let method_get_jiggle_joint_bone_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_bone_index")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -612,6 +633,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns the index of the ``Bone2D`` node assigned to the Jiggle joint at `jointIdx`.
     public final func getJiggleJointBoneIndex(jointIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -626,8 +648,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_override")
+    fileprivate static let method_set_jiggle_joint_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_override")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -639,6 +661,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets whether the Jiggle joint at `jointIdx` should override the default Jiggle joint settings. Setting this to `true` will make the joint use its own settings rather than the default ones attached to the modification.
     public final func setJiggleJointOverride(jointIdx: Int32, override: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: override) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -655,8 +678,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_override")
+    fileprivate static let method_get_jiggle_joint_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_override")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -668,6 +691,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns a boolean that indicates whether the joint at `jointIdx` is overriding the default Jiggle joint data defined in the modification.
     public final func getJiggleJointOverride(jointIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -682,8 +706,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_stiffness")
+    fileprivate static let method_set_jiggle_joint_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_stiffness")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -695,6 +719,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets the of stiffness of the Jiggle joint at `jointIdx`.
     public final func setJiggleJointStiffness(jointIdx: Int32, stiffness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: stiffness) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -711,8 +736,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_stiffness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_stiffness")
+    fileprivate static let method_get_jiggle_joint_stiffness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_stiffness")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -724,6 +749,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns the stiffness of the Jiggle joint at `jointIdx`.
     public final func getJiggleJointStiffness(jointIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -738,8 +764,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_mass")
+    fileprivate static let method_set_jiggle_joint_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_mass")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -751,6 +777,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets the of mass of the Jiggle joint at `jointIdx`.
     public final func setJiggleJointMass(jointIdx: Int32, mass: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: mass) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -767,8 +794,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_mass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_mass")
+    fileprivate static let method_get_jiggle_joint_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_mass")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -780,6 +807,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns the amount of mass of the jiggle joint at `jointIdx`.
     public final func getJiggleJointMass(jointIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -794,8 +822,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_damping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_damping")
+    fileprivate static let method_set_jiggle_joint_damping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_damping")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -807,6 +835,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets the amount of damping of the Jiggle joint at `jointIdx`.
     public final func setJiggleJointDamping(jointIdx: Int32, damping: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: damping) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -823,8 +852,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_damping: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_damping")
+    fileprivate static let method_get_jiggle_joint_damping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_damping")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -836,6 +865,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns the amount of damping of the Jiggle joint at `jointIdx`.
     public final func getJiggleJointDamping(jointIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -850,8 +880,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_use_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_use_gravity")
+    fileprivate static let method_set_jiggle_joint_use_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_use_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -863,6 +893,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets whether the Jiggle joint at `jointIdx` should use gravity.
     public final func setJiggleJointUseGravity(jointIdx: Int32, useGravity: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: useGravity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -879,8 +910,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_use_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_use_gravity")
+    fileprivate static let method_get_jiggle_joint_use_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_use_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -892,6 +923,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns a boolean that indicates whether the joint at `jointIdx` is using gravity or not.
     public final func getJiggleJointUseGravity(jointIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -906,8 +938,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         return _result
     }
     
-    fileprivate static var method_set_jiggle_joint_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_jiggle_joint_gravity")
+    fileprivate static let method_set_jiggle_joint_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_jiggle_joint_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -919,6 +951,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Sets the gravity vector of the Jiggle joint at `jointIdx`.
     public final func setJiggleJointGravity(jointIdx: Int32, gravity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: gravity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -935,8 +968,8 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         
     }
     
-    fileprivate static var method_get_jiggle_joint_gravity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_jiggle_joint_gravity")
+    fileprivate static let method_get_jiggle_joint_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_jiggle_joint_gravity")
         return withUnsafePointer(to: &SkeletonModification2DJiggle.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -948,6 +981,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     
     /// Returns a ``Vector2`` representing the amount of gravity the Jiggle joint at `jointIdx` is influenced by.
     public final func getJiggleJointGravity(jointIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

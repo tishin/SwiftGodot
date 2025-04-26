@@ -31,7 +31,7 @@ import Musl
 /// 
 /// - ``textureChanged``
 open class MultiMeshInstance2D: Node2D {
-    fileprivate static var className = StringName("MultiMeshInstance2D")
+    private static var className = StringName("MultiMeshInstance2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -61,8 +61,8 @@ open class MultiMeshInstance2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_multimesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_multimesh")
+    fileprivate static let method_set_multimesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_multimesh")
         return withUnsafePointer(to: &MultiMeshInstance2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2246127404)!
@@ -74,6 +74,7 @@ open class MultiMeshInstance2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_multimesh(_ multimesh: MultiMesh?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: multimesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -87,8 +88,8 @@ open class MultiMeshInstance2D: Node2D {
         
     }
     
-    fileprivate static var method_get_multimesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_multimesh")
+    fileprivate static let method_get_multimesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_multimesh")
         return withUnsafePointer(to: &MultiMeshInstance2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1385450523)!
@@ -100,13 +101,14 @@ open class MultiMeshInstance2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_multimesh() -> MultiMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(MultiMeshInstance2D.method_get_multimesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &MultiMeshInstance2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -118,6 +120,7 @@ open class MultiMeshInstance2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -131,8 +134,8 @@ open class MultiMeshInstance2D: Node2D {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &MultiMeshInstance2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -144,9 +147,10 @@ open class MultiMeshInstance2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(MultiMeshInstance2D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

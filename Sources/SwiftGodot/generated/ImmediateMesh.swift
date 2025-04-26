@@ -28,11 +28,11 @@ import Musl
 /// > Note: Generating complex geometries with ``ImmediateMesh`` is highly inefficient. Instead, it is designed to generate simple geometry that changes often.
 /// 
 open class ImmediateMesh: Mesh {
-    fileprivate static var className = StringName("ImmediateMesh")
+    private static var className = StringName("ImmediateMesh")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_surface_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_begin")
+    fileprivate static let method_surface_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_begin")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2794442543)!
@@ -44,6 +44,7 @@ open class ImmediateMesh: Mesh {
     
     /// Begin a new surface.
     public final func surfaceBegin(primitive: Mesh.PrimitiveType, material: Material? = nil) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: primitive.rawValue) { pArg0 in
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -60,8 +61,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_set_color")
+    fileprivate static let method_surface_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_set_color")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -73,6 +74,7 @@ open class ImmediateMesh: Mesh {
     
     /// Set the color attribute that will be pushed with the next vertex.
     public final func surfaceSetColor(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -86,8 +88,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_set_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_set_normal")
+    fileprivate static let method_surface_set_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_set_normal")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -99,6 +101,7 @@ open class ImmediateMesh: Mesh {
     
     /// Set the normal attribute that will be pushed with the next vertex.
     public final func surfaceSetNormal(_ normal: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -112,8 +115,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_set_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_set_tangent")
+    fileprivate static let method_surface_set_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_set_tangent")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3505987427)!
@@ -125,6 +128,7 @@ open class ImmediateMesh: Mesh {
     
     /// Set the tangent attribute that will be pushed with the next vertex.
     public final func surfaceSetTangent(_ tangent: Plane) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tangent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -138,8 +142,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_set_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_set_uv")
+    fileprivate static let method_surface_set_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_set_uv")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -151,6 +155,7 @@ open class ImmediateMesh: Mesh {
     
     /// Set the UV attribute that will be pushed with the next vertex.
     public final func surfaceSetUv(_ uv: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: uv) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -164,8 +169,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_set_uv2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_set_uv2")
+    fileprivate static let method_surface_set_uv2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_set_uv2")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -177,6 +182,7 @@ open class ImmediateMesh: Mesh {
     
     /// Set the UV2 attribute that will be pushed with the next vertex.
     public final func surfaceSetUv2(_ uv2: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: uv2) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -190,8 +196,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_add_vertex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_add_vertex")
+    fileprivate static let method_surface_add_vertex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_add_vertex")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -203,6 +209,7 @@ open class ImmediateMesh: Mesh {
     
     /// Add a 3D vertex using the current attributes previously set.
     public final func surfaceAddVertex(_ vertex: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -216,8 +223,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_add_vertex_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_add_vertex_2d")
+    fileprivate static let method_surface_add_vertex_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_add_vertex_2d")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -229,6 +236,7 @@ open class ImmediateMesh: Mesh {
     
     /// Add a 2D vertex using the current attributes previously set.
     public final func surfaceAddVertex2d(vertex: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -242,8 +250,8 @@ open class ImmediateMesh: Mesh {
         
     }
     
-    fileprivate static var method_surface_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("surface_end")
+    fileprivate static let method_surface_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("surface_end")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -255,12 +263,13 @@ open class ImmediateMesh: Mesh {
     
     /// End and commit current surface. Note that surface being created will not be visible until this function is called.
     public final func surfaceEnd() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear_surfaces: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_surfaces")
+    fileprivate static let method_clear_surfaces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_surfaces")
         return withUnsafePointer(to: &ImmediateMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -272,6 +281,7 @@ open class ImmediateMesh: Mesh {
     
     /// Clear all surfaces.
     public final func clearSurfaces() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ImmediateMesh.method_clear_surfaces, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

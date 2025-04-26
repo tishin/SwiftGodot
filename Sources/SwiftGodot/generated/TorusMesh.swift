@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Class representing a torus ``PrimitiveMesh``.
 open class TorusMesh: PrimitiveMesh {
-    fileprivate static var className = StringName("TorusMesh")
+    private static var className = StringName("TorusMesh")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -77,8 +77,8 @@ open class TorusMesh: PrimitiveMesh {
     }
     
     /* Methods */
-    fileprivate static var method_set_inner_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inner_radius")
+    fileprivate static let method_set_inner_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inner_radius")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -90,6 +90,7 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_inner_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -103,8 +104,8 @@ open class TorusMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_inner_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inner_radius")
+    fileprivate static let method_get_inner_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inner_radius")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -116,13 +117,14 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_inner_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TorusMesh.method_get_inner_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outer_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outer_radius")
+    fileprivate static let method_set_outer_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outer_radius")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -134,6 +136,7 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_outer_radius(_ radius: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -147,8 +150,8 @@ open class TorusMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_outer_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outer_radius")
+    fileprivate static let method_get_outer_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outer_radius")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -160,13 +163,14 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_outer_radius() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(TorusMesh.method_get_outer_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rings")
+    fileprivate static let method_set_rings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rings")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -178,6 +182,7 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_rings(_ rings: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -191,8 +196,8 @@ open class TorusMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_rings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rings")
+    fileprivate static let method_get_rings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rings")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -204,13 +209,14 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_rings() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TorusMesh.method_get_rings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_ring_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ring_segments")
+    fileprivate static let method_set_ring_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ring_segments")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -222,6 +228,7 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func set_ring_segments(_ rings: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -235,8 +242,8 @@ open class TorusMesh: PrimitiveMesh {
         
     }
     
-    fileprivate static var method_get_ring_segments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ring_segments")
+    fileprivate static let method_get_ring_segments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ring_segments")
         return withUnsafePointer(to: &TorusMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -248,6 +255,7 @@ open class TorusMesh: PrimitiveMesh {
     
     @inline(__always)
     fileprivate final func get_ring_segments() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TorusMesh.method_get_ring_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

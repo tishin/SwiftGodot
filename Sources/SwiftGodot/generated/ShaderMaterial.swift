@@ -28,7 +28,7 @@ import Musl
 /// > Note: For performance reasons, the [signal Resource.changed] signal is only emitted when the ``Resource/resourceName`` changes. Only in editor, it is also emitted for ``shader`` changes.
 /// 
 open class ShaderMaterial: Material {
-    fileprivate static var className = StringName("ShaderMaterial")
+    private static var className = StringName("ShaderMaterial")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -46,8 +46,8 @@ open class ShaderMaterial: Material {
     }
     
     /* Methods */
-    fileprivate static var method_set_shader: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shader")
+    fileprivate static let method_set_shader: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shader")
         return withUnsafePointer(to: &ShaderMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3341921675)!
@@ -59,6 +59,7 @@ open class ShaderMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_shader(_ shader: Shader?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shader?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -72,8 +73,8 @@ open class ShaderMaterial: Material {
         
     }
     
-    fileprivate static var method_get_shader: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shader")
+    fileprivate static let method_get_shader: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shader")
         return withUnsafePointer(to: &ShaderMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2078273437)!
@@ -85,13 +86,14 @@ open class ShaderMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_shader() -> Shader? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ShaderMaterial.method_get_shader, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_shader_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shader_parameter")
+    fileprivate static let method_set_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shader_parameter")
         return withUnsafePointer(to: &ShaderMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -108,6 +110,7 @@ open class ShaderMaterial: Material {
     /// > Note: Changes to the shader uniform will be effective on all instances using this ``ShaderMaterial``. To prevent this, use per-instance uniforms with ``GeometryInstance3D/setInstanceShaderParameter(name:value:)`` or duplicate the ``ShaderMaterial`` resource using ``Resource/duplicate(subresources:)``. Per-instance uniforms allow for better shader reuse and are therefore faster, so they should be preferred over duplicating the ``ShaderMaterial`` when possible.
     /// 
     public final func setShaderParameter(param: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: param.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -124,8 +127,8 @@ open class ShaderMaterial: Material {
         
     }
     
-    fileprivate static var method_get_shader_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shader_parameter")
+    fileprivate static let method_get_shader_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shader_parameter")
         return withUnsafePointer(to: &ShaderMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2760726917)!
@@ -137,6 +140,7 @@ open class ShaderMaterial: Material {
     
     /// Returns the current value set for this material of a uniform in the shader.
     public final func getShaderParameter(param: StringName) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: param.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

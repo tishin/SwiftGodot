@@ -26,7 +26,7 @@ import Musl
 /// Use ``XRBodyModifier3D`` to animate a body mesh using body tracking data.
 /// 
 open class XRBodyTracker: XRPositionalTracker {
-    fileprivate static var className = StringName("XRBodyTracker")
+    private static var className = StringName("XRBodyTracker")
     override open class var godotClassName: StringName { className }
     public struct BodyFlags: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
@@ -264,8 +264,8 @@ open class XRBodyTracker: XRPositionalTracker {
     }
     
     /* Methods */
-    fileprivate static var method_set_has_tracking_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_has_tracking_data")
+    fileprivate static let method_set_has_tracking_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_has_tracking_data")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -277,6 +277,7 @@ open class XRBodyTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func set_has_tracking_data(_ hasData: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hasData) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -290,8 +291,8 @@ open class XRBodyTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_has_tracking_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_has_tracking_data")
+    fileprivate static let method_get_has_tracking_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_has_tracking_data")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -303,13 +304,14 @@ open class XRBodyTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func get_has_tracking_data() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(XRBodyTracker.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_body_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_body_flags")
+    fileprivate static let method_set_body_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_body_flags")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2103235750)!
@@ -321,6 +323,7 @@ open class XRBodyTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func set_body_flags(_ flags: XRBodyTracker.BodyFlags) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -334,8 +337,8 @@ open class XRBodyTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_body_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_body_flags")
+    fileprivate static let method_get_body_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_body_flags")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3543166366)!
@@ -347,13 +350,14 @@ open class XRBodyTracker: XRPositionalTracker {
     
     @inline(__always)
     fileprivate final func get_body_flags() -> XRBodyTracker.BodyFlags {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: XRBodyTracker.BodyFlags = XRBodyTracker.BodyFlags ()
         gi.object_method_bind_ptrcall(XRBodyTracker.method_get_body_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_joint_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_flags")
+    fileprivate static let method_set_joint_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_flags")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 592144999)!
@@ -365,6 +369,7 @@ open class XRBodyTracker: XRPositionalTracker {
     
     /// Sets flags about the validity of the tracking data for the given body joint.
     public final func setJointFlags(joint: XRBodyTracker.Joint, flags: XRBodyTracker.JointFlags) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: flags.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -381,8 +386,8 @@ open class XRBodyTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_joint_flags: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_flags")
+    fileprivate static let method_get_joint_flags: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_flags")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1030162609)!
@@ -394,6 +399,7 @@ open class XRBodyTracker: XRPositionalTracker {
     
     /// Returns flags about the validity of the tracking data for the given body joint (see ``XRBodyTracker.JointFlags``).
     public final func getJointFlags(joint: XRBodyTracker.Joint) -> XRBodyTracker.JointFlags {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: XRBodyTracker.JointFlags = XRBodyTracker.JointFlags ()
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -408,8 +414,8 @@ open class XRBodyTracker: XRPositionalTracker {
         return _result
     }
     
-    fileprivate static var method_set_joint_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_transform")
+    fileprivate static let method_set_joint_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_transform")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2635424328)!
@@ -421,6 +427,7 @@ open class XRBodyTracker: XRPositionalTracker {
     
     /// Sets the transform for the given body joint.
     public final func setJointTransform(joint: XRBodyTracker.Joint, transform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -437,8 +444,8 @@ open class XRBodyTracker: XRPositionalTracker {
         
     }
     
-    fileprivate static var method_get_joint_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_transform")
+    fileprivate static let method_get_joint_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_transform")
         return withUnsafePointer(to: &XRBodyTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3474811534)!
@@ -450,6 +457,7 @@ open class XRBodyTracker: XRPositionalTracker {
     
     /// Returns the transform for the given body joint.
     public final func getJointTransform(joint: XRBodyTracker.Joint) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

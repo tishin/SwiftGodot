@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``Panel`` is a GUI control that displays a ``StyleBox``. See also ``PanelContainer``.
 open class Panel: Control {
-    fileprivate static var className = StringName("Panel")
+    private static var className = StringName("Panel")
     override open class var godotClassName: StringName { className }
 }
 

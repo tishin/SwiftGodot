@@ -28,7 +28,7 @@ import Musl
 /// - When this subclass is missing due to using a different engine version or build (e.g. modules disabled).
 /// 
 open class PlaceholderMaterial: Material {
-    fileprivate static var className = StringName("PlaceholderMaterial")
+    private static var className = StringName("PlaceholderMaterial")
     override open class var godotClassName: StringName { className }
 }
 

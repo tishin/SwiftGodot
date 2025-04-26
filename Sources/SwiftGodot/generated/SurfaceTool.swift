@@ -34,7 +34,7 @@ import Musl
 /// > Note: Godot uses clockwise <a href="https://learnopengl.com/Advanced-OpenGL/Face-culling">winding order</a> for front faces of triangle primitive modes.
 /// 
 open class SurfaceTool: RefCounted {
-    fileprivate static var className = StringName("SurfaceTool")
+    private static var className = StringName("SurfaceTool")
     override open class var godotClassName: StringName { className }
     public enum CustomFormat: Int64, CaseIterable {
         /// Limits range of data passed to ``setCustom(channelIndex:customColor:)`` to unsigned normalized 0 to 1 stored in 8 bits per channel. See ``Mesh/ArrayCustomFormat/rgba8Unorm``.
@@ -65,8 +65,8 @@ open class SurfaceTool: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_skin_weight_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_skin_weight_count")
+    fileprivate static let method_set_skin_weight_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_skin_weight_count")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 618679515)!
@@ -78,11 +78,12 @@ open class SurfaceTool: RefCounted {
     
     /// Set to ``SkinWeightCount/skin8Weights`` to indicate that up to 8 bone influences per vertex may be used.
     /// 
-    /// By default, only 4 bone influences are used (``SkinWeightCount/skin4Weights``)
+    /// By default, only 4 bone influences are used (``SkinWeightCount/skin4Weights``).
     /// 
     /// > Note: This function takes an enum, not the exact number of weights.
     /// 
     public final func setSkinWeightCount(_ count: SurfaceTool.SkinWeightCount) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -96,8 +97,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_skin_weight_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_skin_weight_count")
+    fileprivate static let method_get_skin_weight_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_skin_weight_count")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1072401130)!
@@ -114,13 +115,14 @@ open class SurfaceTool: RefCounted {
     /// > Note: This function returns an enum, not the exact number of weights.
     /// 
     public final func getSkinWeightCount() -> SurfaceTool.SkinWeightCount {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(SurfaceTool.method_get_skin_weight_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return SurfaceTool.SkinWeightCount (rawValue: _result)!
     }
     
-    fileprivate static var method_set_custom_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_format")
+    fileprivate static let method_set_custom_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_format")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4087759856)!
@@ -135,6 +137,7 @@ open class SurfaceTool: RefCounted {
     /// Must be invoked after ``begin(primitive:)`` and should be set before ``commit(existing:flags:)`` or ``commitToArrays()``.
     /// 
     public final func setCustomFormat(channelIndex: Int32, format: SurfaceTool.CustomFormat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channelIndex) { pArg0 in
             withUnsafePointer(to: format.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -151,8 +154,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_custom_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_format")
+    fileprivate static let method_get_custom_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_format")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 839863283)!
@@ -164,6 +167,7 @@ open class SurfaceTool: RefCounted {
     
     /// Returns the format for custom `channelIndex` (currently up to 4). Returns ``CustomFormat/max`` if this custom channel is unused.
     public final func getCustomFormat(channelIndex: Int32) -> SurfaceTool.CustomFormat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: channelIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -178,8 +182,8 @@ open class SurfaceTool: RefCounted {
         return SurfaceTool.CustomFormat (rawValue: _result)!
     }
     
-    fileprivate static var method_begin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("begin")
+    fileprivate static let method_begin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("begin")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2230304113)!
@@ -191,6 +195,7 @@ open class SurfaceTool: RefCounted {
     
     /// Called before adding any vertices. Takes the primitive type as an argument (e.g. ``Mesh/PrimitiveType/triangles``).
     public final func begin(primitive: Mesh.PrimitiveType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: primitive.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -204,8 +209,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_add_vertex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_vertex")
+    fileprivate static let method_add_vertex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_vertex")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -217,6 +222,7 @@ open class SurfaceTool: RefCounted {
     
     /// Specifies the position of current vertex. Should be called after specifying other vertex properties (e.g. Color, UV).
     public final func addVertex(_ vertex: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -230,8 +236,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color")
+    fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -246,6 +252,7 @@ open class SurfaceTool: RefCounted {
     /// > Note: The material must have ``BaseMaterial3D/vertexColorUseAsAlbedo`` enabled for the vertex color to be visible.
     /// 
     public final func setColor(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -259,8 +266,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_normal")
+    fileprivate static let method_set_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_normal")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -272,6 +279,7 @@ open class SurfaceTool: RefCounted {
     
     /// Specifies a normal to use for the _next_ vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all.
     public final func setNormal(_ normal: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -285,8 +293,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tangent")
+    fileprivate static let method_set_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tangent")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3505987427)!
@@ -298,6 +306,7 @@ open class SurfaceTool: RefCounted {
     
     /// Specifies a tangent to use for the _next_ vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all.
     public final func setTangent(_ tangent: Plane) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tangent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -311,8 +320,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv")
+    fileprivate static let method_set_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -324,6 +333,7 @@ open class SurfaceTool: RefCounted {
     
     /// Specifies a set of UV coordinates to use for the _next_ vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all.
     public final func setUv(_ uv: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: uv) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -337,8 +347,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_uv2: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv2")
+    fileprivate static let method_set_uv2: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv2")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
@@ -350,6 +360,7 @@ open class SurfaceTool: RefCounted {
     
     /// Specifies an optional second set of UV coordinates to use for the _next_ vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all.
     public final func setUv2(_ uv2: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: uv2) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -363,8 +374,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_bones: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bones")
+    fileprivate static let method_set_bones: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bones")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3614634198)!
@@ -376,6 +387,7 @@ open class SurfaceTool: RefCounted {
     
     /// Specifies an array of bones to use for the _next_ vertex. `bones` must contain 4 integers.
     public final func setBones(_ bones: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bones.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -389,8 +401,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_weights: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_weights")
+    fileprivate static let method_set_weights: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_weights")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2899603908)!
@@ -402,6 +414,7 @@ open class SurfaceTool: RefCounted {
     
     /// Specifies weight values to use for the _next_ vertex. `weights` must contain 4 values. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all.
     public final func setWeights(_ weights: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: weights.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -415,8 +428,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_custom: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom")
+    fileprivate static let method_set_custom: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -431,6 +444,7 @@ open class SurfaceTool: RefCounted {
     /// ``setCustomFormat(channelIndex:format:)`` must be called first for this `channelIndex`. Formats which are not RGBA will ignore other color channels.
     /// 
     public final func setCustom(channelIndex: Int32, customColor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channelIndex) { pArg0 in
             withUnsafePointer(to: customColor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -447,8 +461,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_set_smooth_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_smooth_group")
+    fileprivate static let method_set_smooth_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_smooth_group")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -463,6 +477,7 @@ open class SurfaceTool: RefCounted {
     /// > Note: This function actually takes a `uint32_t`, so C# users should use `uint32.MaxValue` instead of `-1` to produce a mesh with flat normals.
     /// 
     public final func setSmoothGroup(index: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -476,8 +491,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_add_triangle_fan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_triangle_fan")
+    fileprivate static let method_add_triangle_fan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_triangle_fan")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2235017613)!
@@ -491,7 +506,8 @@ open class SurfaceTool: RefCounted {
     /// 
     /// Requires the primitive type be set to ``Mesh/PrimitiveType/triangles``.
     /// 
-    public final func addTriangleFan(vertices: PackedVector3Array, uvs: PackedVector2Array = PackedVector2Array(), colors: PackedColorArray = PackedColorArray(), uv2s: PackedVector2Array = PackedVector2Array(), normals: PackedVector3Array = PackedVector3Array(), tangents: VariantCollection<Plane> = VariantCollection<Plane> ()) {
+    public final func addTriangleFan(vertices: PackedVector3Array, uvs: PackedVector2Array = PackedVector2Array(), colors: PackedColorArray = PackedColorArray(), uv2s: PackedVector2Array = PackedVector2Array(), normals: PackedVector3Array = PackedVector3Array(), tangents: TypedArray<Plane> = TypedArray<Plane> ()) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: uvs.content) { pArg1 in
                 withUnsafePointer(to: colors.content) { pArg2 in
@@ -520,8 +536,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_add_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_index")
+    fileprivate static let method_add_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_index")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -533,6 +549,7 @@ open class SurfaceTool: RefCounted {
     
     /// Adds a vertex to index array if you are using indexed vertices. Does not need to be called before adding vertices.
     public final func addIndex(_ index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -546,8 +563,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("index")
+    fileprivate static let method_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("index")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -559,12 +576,13 @@ open class SurfaceTool: RefCounted {
     
     /// Shrinks the vertex array by creating an index array. This can improve performance by avoiding vertex reuse.
     public final func index() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SurfaceTool.method_index, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_deindex: GDExtensionMethodBindPtr = {
-        let methodName = StringName("deindex")
+    fileprivate static let method_deindex: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("deindex")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -576,12 +594,13 @@ open class SurfaceTool: RefCounted {
     
     /// Removes the index array by expanding the vertex array.
     public final func deindex() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SurfaceTool.method_deindex, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_generate_normals: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_normals")
+    fileprivate static let method_generate_normals: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_normals")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 107499316)!
@@ -593,11 +612,12 @@ open class SurfaceTool: RefCounted {
     
     /// Generates normals from vertices so you do not have to do it manually. If `flip` is `true`, the resulting normals will be inverted. ``generateNormals(flip:)`` should be called _after_ generating geometry and _before_ committing the mesh using ``commit(existing:flags:)`` or ``commitToArrays()``. For correct display of normal-mapped surfaces, you will also have to generate tangents using ``generateTangents()``.
     /// 
-    /// > Note: ``generateNormals(flip:)`` only works if the primitive type to be set to ``Mesh/PrimitiveType/triangles``.
+    /// > Note: ``generateNormals(flip:)`` only works if the primitive type is set to ``Mesh/PrimitiveType/triangles``.
     /// 
     /// > Note: ``generateNormals(flip:)`` takes smooth groups into account. To generate smooth normals, set the smooth group to a value greater than or equal to `0` using ``setSmoothGroup(index:)`` or leave the smooth group at the default of `0`. To generate flat normals, set the smooth group to `-1` using ``setSmoothGroup(index:)`` prior to adding vertices.
     /// 
     public final func generateNormals(flip: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -611,8 +631,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_generate_tangents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_tangents")
+    fileprivate static let method_generate_tangents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_tangents")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -622,14 +642,15 @@ open class SurfaceTool: RefCounted {
         
     }()
     
-    /// Generates a tangent vector for each vertex. Requires that each vertex have UVs and normals set already (see ``generateNormals(flip:)``).
+    /// Generates a tangent vector for each vertex. Requires that each vertex already has UVs and normals set (see ``generateNormals(flip:)``).
     public final func generateTangents() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SurfaceTool.method_generate_tangents, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_optimize_indices_for_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("optimize_indices_for_cache")
+    fileprivate static let method_optimize_indices_for_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("optimize_indices_for_cache")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -641,12 +662,13 @@ open class SurfaceTool: RefCounted {
     
     /// Optimizes triangle sorting for performance. Requires that ``getPrimitiveType()`` is ``Mesh/PrimitiveType/triangles``.
     public final func optimizeIndicesForCache() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SurfaceTool.method_optimize_indices_for_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_aabb")
+    fileprivate static let method_get_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_aabb")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -658,13 +680,14 @@ open class SurfaceTool: RefCounted {
     
     /// Returns the axis-aligned bounding box of the vertex positions.
     public final func getAabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(SurfaceTool.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_generate_lod: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_lod")
+    fileprivate static let method_generate_lod: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_lod")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1938056459)!
@@ -676,6 +699,7 @@ open class SurfaceTool: RefCounted {
     
     /// Generates an LOD for a given `ndThreshold` in linear units (square root of quadric error metric), using at most `targetIndexCount` indices.
     public final func generateLod(ndThreshold: Double, targetIndexCount: Int32 = 3) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: ndThreshold) { pArg0 in
             withUnsafePointer(to: targetIndexCount) { pArg1 in
@@ -693,8 +717,8 @@ open class SurfaceTool: RefCounted {
         return _result
     }
     
-    fileprivate static var method_set_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_material")
+    fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_material")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2757459619)!
@@ -706,6 +730,7 @@ open class SurfaceTool: RefCounted {
     
     /// Sets ``Material`` to be used by the ``Mesh`` you are constructing.
     public final func setMaterial(_ material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -719,8 +744,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_get_primitive_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_primitive_type")
+    fileprivate static let method_get_primitive_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_primitive_type")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 768822145)!
@@ -732,13 +757,14 @@ open class SurfaceTool: RefCounted {
     
     /// Returns the type of mesh geometry, such as ``Mesh/PrimitiveType/triangles``.
     public final func getPrimitiveType() -> Mesh.PrimitiveType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(SurfaceTool.method_get_primitive_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Mesh.PrimitiveType (rawValue: _result)!
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -750,12 +776,13 @@ open class SurfaceTool: RefCounted {
     
     /// Clear all information passed into the surface tool so far.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SurfaceTool.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_create_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from")
+    fileprivate static let method_create_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1767024570)!
@@ -767,6 +794,7 @@ open class SurfaceTool: RefCounted {
     
     /// Creates a vertex array from an existing ``Mesh``.
     public final func createFrom(existing: Mesh?, surface: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: existing?.handle) { pArg0 in
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -783,8 +811,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_create_from_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_arrays")
+    fileprivate static let method_create_from_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_arrays")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1894639680)!
@@ -795,7 +823,8 @@ open class SurfaceTool: RefCounted {
     }()
     
     /// Creates this SurfaceTool from existing vertex arrays such as returned by ``commitToArrays()``, ``Mesh/surfaceGetArrays(surfIdx:)``, ``Mesh/surfaceGetBlendShapeArrays(surfIdx:)``, ``ImporterMesh/getSurfaceArrays(surfaceIdx:)``, and ``ImporterMesh/getSurfaceBlendShapeArrays(surfaceIdx:blendShapeIdx:)``. `primitiveType` controls the type of mesh data, defaulting to ``Mesh/PrimitiveType/triangles``.
-    public final func createFromArrays(_ arrays: GArray, primitiveType: Mesh.PrimitiveType = .triangles) {
+    public final func createFromArrays(_ arrays: VariantArray, primitiveType: Mesh.PrimitiveType = .triangles) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: arrays.content) { pArg0 in
             withUnsafePointer(to: primitiveType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -812,8 +841,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_create_from_blend_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_blend_shape")
+    fileprivate static let method_create_from_blend_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_blend_shape")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1306185582)!
@@ -825,6 +854,7 @@ open class SurfaceTool: RefCounted {
     
     /// Creates a vertex array from the specified blend shape of an existing ``Mesh``. This can be used to extract a specific pose from a blend shape.
     public final func createFromBlendShape(existing: Mesh?, surface: Int32, blendShape: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: existing?.handle) { pArg0 in
             withUnsafePointer(to: surface) { pArg1 in
                 let blendShape = GString(blendShape)
@@ -845,8 +875,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_append_from: GDExtensionMethodBindPtr = {
-        let methodName = StringName("append_from")
+    fileprivate static let method_append_from: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("append_from")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2217967155)!
@@ -858,6 +888,7 @@ open class SurfaceTool: RefCounted {
     
     /// Append vertices from a given ``Mesh`` surface onto the current vertex array with specified ``Transform3D``.
     public final func appendFrom(existing: Mesh?, surface: Int32, transform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: existing?.handle) { pArg0 in
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: transform) { pArg2 in
@@ -877,8 +908,8 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    fileprivate static var method_commit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("commit")
+    fileprivate static let method_commit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("commit")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4107864055)!
@@ -890,9 +921,10 @@ open class SurfaceTool: RefCounted {
     
     /// Returns a constructed ``ArrayMesh`` from current information passed in. If an existing ``ArrayMesh`` is passed in as an argument, will add an extra surface to the existing ``ArrayMesh``.
     /// 
-    /// **FIXME:** Document possible values for `flags`, it changed in 4.0. Likely some combinations of ``Mesh.ArrayFormat``.
+    /// The `flags` argument can be the bitwise OR of ``Mesh/ArrayFormat/flagUseDynamicUpdate``, ``Mesh/ArrayFormat/flagUse8BoneWeights``, or ``Mesh/ArrayFormat/flagUsesEmptyVertexArray``.
     /// 
     public final func commit(existing: ArrayMesh? = nil, flags: UInt = 0) -> ArrayMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: existing?.handle) { pArg0 in
             withUnsafePointer(to: flags) { pArg1 in
@@ -907,11 +939,11 @@ open class SurfaceTool: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_commit_to_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("commit_to_arrays")
+    fileprivate static let method_commit_to_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("commit_to_arrays")
         return withUnsafePointer(to: &SurfaceTool.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
@@ -922,8 +954,9 @@ open class SurfaceTool: RefCounted {
     }()
     
     /// Commits the data to the same format used by ``ArrayMesh/addSurfaceFromArrays(primitive:arrays:blendShapes:lods:flags:)``, ``ImporterMesh/addSurface(primitive:arrays:blendShapes:lods:material:name:flags:)``, and ``createFromArrays(_:primitiveType:)``. This way you can further process the mesh data using the ``ArrayMesh`` or ``ImporterMesh`` APIs.
-    public final func commitToArrays() -> GArray {
-        let _result: GArray = GArray ()
+    public final func commitToArrays() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(SurfaceTool.method_commit_to_arrays, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }

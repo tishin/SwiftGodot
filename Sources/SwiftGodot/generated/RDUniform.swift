@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDUniform: RefCounted {
-    fileprivate static var className = StringName("RDUniform")
+    private static var className = StringName("RDUniform")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -53,8 +53,8 @@ open class RDUniform: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_uniform_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uniform_type")
+    fileprivate static let method_set_uniform_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uniform_type")
         return withUnsafePointer(to: &RDUniform.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1664894931)!
@@ -66,6 +66,7 @@ open class RDUniform: RefCounted {
     
     @inline(__always)
     fileprivate final func set_uniform_type(_ pMember: RenderingDevice.UniformType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -79,8 +80,8 @@ open class RDUniform: RefCounted {
         
     }
     
-    fileprivate static var method_get_uniform_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uniform_type")
+    fileprivate static let method_get_uniform_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uniform_type")
         return withUnsafePointer(to: &RDUniform.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 475470040)!
@@ -92,13 +93,14 @@ open class RDUniform: RefCounted {
     
     @inline(__always)
     fileprivate final func get_uniform_type() -> RenderingDevice.UniformType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDUniform.method_get_uniform_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.UniformType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_binding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_binding")
+    fileprivate static let method_set_binding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_binding")
         return withUnsafePointer(to: &RDUniform.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -110,6 +112,7 @@ open class RDUniform: RefCounted {
     
     @inline(__always)
     fileprivate final func set_binding(_ pMember: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -123,8 +126,8 @@ open class RDUniform: RefCounted {
         
     }
     
-    fileprivate static var method_get_binding: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_binding")
+    fileprivate static let method_get_binding: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_binding")
         return withUnsafePointer(to: &RDUniform.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -136,13 +139,14 @@ open class RDUniform: RefCounted {
     
     @inline(__always)
     fileprivate final func get_binding() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RDUniform.method_get_binding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_id")
+    fileprivate static let method_add_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_id")
         return withUnsafePointer(to: &RDUniform.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -154,6 +158,7 @@ open class RDUniform: RefCounted {
     
     /// Binds the given id to the uniform. The data associated with the id is then used when the uniform is passed to a shader.
     public final func addId(_ id: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -167,8 +172,8 @@ open class RDUniform: RefCounted {
         
     }
     
-    fileprivate static var method_clear_ids: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_ids")
+    fileprivate static let method_clear_ids: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_ids")
         return withUnsafePointer(to: &RDUniform.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -180,12 +185,13 @@ open class RDUniform: RefCounted {
     
     /// Unbinds all ids currently bound to the uniform.
     public final func clearIds() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RDUniform.method_clear_ids, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_ids: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ids")
+    fileprivate static let method_get_ids: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ids")
         return withUnsafePointer(to: &RDUniform.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -196,10 +202,11 @@ open class RDUniform: RefCounted {
     }()
     
     /// Returns an array of all ids currently bound to the uniform.
-    public final func getIds() -> VariantCollection<RID> {
+    public final func getIds() -> TypedArray<RID> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(RDUniform.method_get_ids, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
 }

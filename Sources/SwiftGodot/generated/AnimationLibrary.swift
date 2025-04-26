@@ -31,11 +31,11 @@ import Musl
 /// - ``animationRenamed``
 /// - ``animationChanged``
 open class AnimationLibrary: Resource {
-    fileprivate static var className = StringName("AnimationLibrary")
+    private static var className = StringName("AnimationLibrary")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_add_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_animation")
+    fileprivate static let method_add_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_animation")
         return withUnsafePointer(to: &AnimationLibrary.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1811855551)!
@@ -47,6 +47,7 @@ open class AnimationLibrary: Resource {
     
     /// Adds the `animation` to the library, accessible by the key `name`.
     public final func addAnimation(name: StringName, animation: Animation?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: animation?.handle) { pArg1 in
@@ -64,8 +65,8 @@ open class AnimationLibrary: Resource {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_remove_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_animation")
+    fileprivate static let method_remove_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_animation")
         return withUnsafePointer(to: &AnimationLibrary.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -77,6 +78,7 @@ open class AnimationLibrary: Resource {
     
     /// Removes the ``Animation`` with the key `name`.
     public final func removeAnimation(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -90,8 +92,8 @@ open class AnimationLibrary: Resource {
         
     }
     
-    fileprivate static var method_rename_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rename_animation")
+    fileprivate static let method_rename_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rename_animation")
         return withUnsafePointer(to: &AnimationLibrary.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3740211285)!
@@ -103,6 +105,7 @@ open class AnimationLibrary: Resource {
     
     /// Changes the key of the ``Animation`` associated with the key `name` to `newname`.
     public final func renameAnimation(name: StringName, newname: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: newname.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -119,8 +122,8 @@ open class AnimationLibrary: Resource {
         
     }
     
-    fileprivate static var method_has_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_animation")
+    fileprivate static let method_has_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_animation")
         return withUnsafePointer(to: &AnimationLibrary.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -132,6 +135,7 @@ open class AnimationLibrary: Resource {
     
     /// Returns `true` if the library stores an ``Animation`` with `name` as the key.
     public final func hasAnimation(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -146,8 +150,8 @@ open class AnimationLibrary: Resource {
         return _result
     }
     
-    fileprivate static var method_get_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation")
+    fileprivate static let method_get_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation")
         return withUnsafePointer(to: &AnimationLibrary.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2933122410)!
@@ -159,6 +163,7 @@ open class AnimationLibrary: Resource {
     
     /// Returns the ``Animation`` with the key `name`. If the animation does not exist, `null` is returned and an error is logged.
     public final func getAnimation(name: StringName) -> Animation? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -170,11 +175,11 @@ open class AnimationLibrary: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_animation_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_animation_list")
+    fileprivate static let method_get_animation_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_list")
         return withUnsafePointer(to: &AnimationLibrary.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -185,10 +190,30 @@ open class AnimationLibrary: Resource {
     }()
     
     /// Returns the keys for the ``Animation``s stored in the library.
-    public final func getAnimationList() -> VariantCollection<StringName> {
+    public final func getAnimationList() -> TypedArray<StringName> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
+    }
+    
+    fileprivate static let method_get_animation_list_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_animation_list_size")
+        return withUnsafePointer(to: &AnimationLibrary.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the key count for the ``Animation``s stored in the library.
+    public final func getAnimationListSize() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation_list_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
     // Signals 

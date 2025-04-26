@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Determines how much of an audio signal is sent to the left and right buses.
 open class AudioEffectPanner: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectPanner")
+    private static var className = StringName("AudioEffectPanner")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class AudioEffectPanner: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_pan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pan")
+    fileprivate static let method_set_pan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pan")
         return withUnsafePointer(to: &AudioEffectPanner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -54,6 +54,7 @@ open class AudioEffectPanner: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_pan(_ cpanume: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cpanume) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class AudioEffectPanner: AudioEffect {
         
     }
     
-    fileprivate static var method_get_pan: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pan")
+    fileprivate static let method_get_pan: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pan")
         return withUnsafePointer(to: &AudioEffectPanner.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -80,6 +81,7 @@ open class AudioEffectPanner: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_pan() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectPanner.method_get_pan, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

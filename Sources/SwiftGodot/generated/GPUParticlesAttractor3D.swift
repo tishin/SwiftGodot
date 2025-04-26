@@ -30,7 +30,7 @@ import Musl
 /// > Note: Particle attractors only affect ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesAttractor3D: VisualInstance3D {
-    fileprivate static var className = StringName("GPUParticlesAttractor3D")
+    private static var className = StringName("GPUParticlesAttractor3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -92,8 +92,8 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mask")
+    fileprivate static let method_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mask")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -105,6 +105,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_cull_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -118,8 +119,8 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mask")
+    fileprivate static let method_get_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mask")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -131,13 +132,14 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_cull_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_strength")
+    fileprivate static let method_set_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_strength")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -149,6 +151,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -162,8 +165,8 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_strength")
+    fileprivate static let method_get_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_strength")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -175,13 +178,14 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_attenuation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_attenuation")
+    fileprivate static let method_set_attenuation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_attenuation")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -193,6 +197,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_attenuation(_ attenuation: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: attenuation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -206,8 +211,8 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_attenuation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_attenuation")
+    fileprivate static let method_get_attenuation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_attenuation")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -219,13 +224,14 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_attenuation() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_attenuation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_directionality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_directionality")
+    fileprivate static let method_set_directionality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_directionality")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -237,6 +243,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_directionality(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -250,8 +257,8 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_directionality: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_directionality")
+    fileprivate static let method_get_directionality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_directionality")
         return withUnsafePointer(to: &GPUParticlesAttractor3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -263,6 +270,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_directionality() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_directionality, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

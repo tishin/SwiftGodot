@@ -23,11 +23,11 @@ import Musl
 /// 
 /// Base class for ``Texture2DArray``, ``Cubemap`` and ``CubemapArray``. Cannot be used directly, but contains all the functions necessary for accessing the derived resource types. See also ``Texture3D``.
 open class ImageTextureLayered: TextureLayered {
-    fileprivate static var className = StringName("ImageTextureLayered")
+    private static var className = StringName("ImageTextureLayered")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_create_from_images: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_images")
+    fileprivate static let method_create_from_images: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_images")
         return withUnsafePointer(to: &ImageTextureLayered.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2785773503)!
@@ -41,7 +41,8 @@ open class ImageTextureLayered: TextureLayered {
     /// 
     /// Each ``Image`` represents one `layer`.
     /// 
-    public final func createFromImages(_ images: ObjectCollection<Image>) -> GodotError {
+    public final func createFromImages(_ images: TypedArray<Image?>) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: images.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -56,8 +57,8 @@ open class ImageTextureLayered: TextureLayered {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_update_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_layer")
+    fileprivate static let method_update_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_layer")
         return withUnsafePointer(to: &ImageTextureLayered.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3331733361)!
@@ -76,6 +77,7 @@ open class ImageTextureLayered: TextureLayered {
     /// The update is immediate: it's synchronized with drawing.
     /// 
     public final func updateLayer(image: Image?, layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: layer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in

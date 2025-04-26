@@ -26,7 +26,7 @@ import Musl
 /// **Performance:** Primitive shapes, especially ``CircleShape2D``, are fast to check collisions against. ``ConvexPolygonShape2D`` is slower, and ``ConcavePolygonShape2D`` is the slowest.
 /// 
 open class Shape2D: Resource {
-    fileprivate static var className = StringName("Shape2D")
+    private static var className = StringName("Shape2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -47,8 +47,8 @@ open class Shape2D: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_custom_solver_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_solver_bias")
+    fileprivate static let method_set_custom_solver_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_solver_bias")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -60,6 +60,7 @@ open class Shape2D: Resource {
     
     @inline(__always)
     fileprivate final func set_custom_solver_bias(_ bias: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -73,8 +74,8 @@ open class Shape2D: Resource {
         
     }
     
-    fileprivate static var method_get_custom_solver_bias: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_solver_bias")
+    fileprivate static let method_get_custom_solver_bias: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_solver_bias")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -86,13 +87,14 @@ open class Shape2D: Resource {
     
     @inline(__always)
     fileprivate final func get_custom_solver_bias() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Shape2D.method_get_custom_solver_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_collide: GDExtensionMethodBindPtr = {
-        let methodName = StringName("collide")
+    fileprivate static let method_collide: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("collide")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3709843132)!
@@ -107,6 +109,7 @@ open class Shape2D: Resource {
     /// This method needs the transformation matrix for this shape (`localXform`), the shape to check collisions with (`withShape`), and the transformation matrix of that shape (`shapeXform`).
     /// 
     public final func collide(localXform: Transform2D, withShape: Shape2D?, shapeXform: Transform2D) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: localXform) { pArg0 in
             withUnsafePointer(to: withShape?.handle) { pArg1 in
@@ -127,8 +130,8 @@ open class Shape2D: Resource {
         return _result
     }
     
-    fileprivate static var method_collide_with_motion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("collide_with_motion")
+    fileprivate static let method_collide_with_motion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("collide_with_motion")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2869556801)!
@@ -143,6 +146,7 @@ open class Shape2D: Resource {
     /// This method needs the transformation matrix for this shape (`localXform`), the movement to test on this shape (`localMotion`), the shape to check collisions with (`withShape`), the transformation matrix of that shape (`shapeXform`), and the movement to test onto the other object (`shapeMotion`).
     /// 
     public final func collideWithMotion(localXform: Transform2D, localMotion: Vector2, withShape: Shape2D?, shapeXform: Transform2D, shapeMotion: Vector2) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: localXform) { pArg0 in
             withUnsafePointer(to: localMotion) { pArg1 in
@@ -169,8 +173,8 @@ open class Shape2D: Resource {
         return _result
     }
     
-    fileprivate static var method_collide_and_get_contacts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("collide_and_get_contacts")
+    fileprivate static let method_collide_and_get_contacts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("collide_and_get_contacts")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3056932662)!
@@ -189,6 +193,7 @@ open class Shape2D: Resource {
     /// This method needs the transformation matrix for this shape (`localXform`), the shape to check collisions with (`withShape`), and the transformation matrix of that shape (`shapeXform`).
     /// 
     public final func collideAndGetContacts(localXform: Transform2D, withShape: Shape2D?, shapeXform: Transform2D) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: localXform) { pArg0 in
             withUnsafePointer(to: withShape?.handle) { pArg1 in
@@ -209,8 +214,8 @@ open class Shape2D: Resource {
         return _result
     }
     
-    fileprivate static var method_collide_with_motion_and_get_contacts: GDExtensionMethodBindPtr = {
-        let methodName = StringName("collide_with_motion_and_get_contacts")
+    fileprivate static let method_collide_with_motion_and_get_contacts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("collide_with_motion_and_get_contacts")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3620351573)!
@@ -229,6 +234,7 @@ open class Shape2D: Resource {
     /// This method needs the transformation matrix for this shape (`localXform`), the movement to test on this shape (`localMotion`), the shape to check collisions with (`withShape`), the transformation matrix of that shape (`shapeXform`), and the movement to test onto the other object (`shapeMotion`).
     /// 
     public final func collideWithMotionAndGetContacts(localXform: Transform2D, localMotion: Vector2, withShape: Shape2D?, shapeXform: Transform2D, shapeMotion: Vector2) -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         withUnsafePointer(to: localXform) { pArg0 in
             withUnsafePointer(to: localMotion) { pArg1 in
@@ -255,8 +261,8 @@ open class Shape2D: Resource {
         return _result
     }
     
-    fileprivate static var method_draw: GDExtensionMethodBindPtr = {
-        let methodName = StringName("draw")
+    fileprivate static let method_draw: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("draw")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2948539648)!
@@ -268,6 +274,7 @@ open class Shape2D: Resource {
     
     /// Draws a solid shape onto a ``CanvasItem`` with the ``RenderingServer`` API filled with the specified `color`. The exact drawing method is specific for each shape and cannot be configured.
     public final func draw(canvasItem: RID, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: canvasItem.content) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -284,8 +291,8 @@ open class Shape2D: Resource {
         
     }
     
-    fileprivate static var method_get_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rect")
+    fileprivate static let method_get_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rect")
         return withUnsafePointer(to: &Shape2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -297,6 +304,7 @@ open class Shape2D: Resource {
     
     /// Returns a ``Rect2`` representing the shapes boundary.
     public final func getRect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(Shape2D.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

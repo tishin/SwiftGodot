@@ -26,11 +26,11 @@ import Musl
 /// Unlike its runtime counterpart, ``ImporterMesh`` contains mesh data before various import steps, such as lod and shadow mesh generation, have taken place. Modify surface data by calling ``clear()``, followed by ``addSurface(primitive:arrays:blendShapes:lods:material:name:flags:)`` for each surface.
 /// 
 open class ImporterMesh: Resource {
-    fileprivate static var className = StringName("ImporterMesh")
+    private static var className = StringName("ImporterMesh")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_add_blend_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_blend_shape")
+    fileprivate static let method_add_blend_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_blend_shape")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -42,6 +42,7 @@ open class ImporterMesh: Resource {
     
     /// Adds name for a blend shape that will be added with ``addSurface(primitive:arrays:blendShapes:lods:material:name:flags:)``. Must be called before surface is added.
     public final func addBlendShape(name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -56,8 +57,8 @@ open class ImporterMesh: Resource {
         
     }
     
-    fileprivate static var method_get_blend_shape_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_shape_count")
+    fileprivate static let method_get_blend_shape_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_shape_count")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -69,13 +70,14 @@ open class ImporterMesh: Resource {
     
     /// Returns the number of blend shapes that the mesh holds.
     public final func getBlendShapeCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_blend_shape_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_shape_name")
+    fileprivate static let method_get_blend_shape_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_shape_name")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -87,6 +89,7 @@ open class ImporterMesh: Resource {
     
     /// Returns the name of the blend shape at this index.
     public final func getBlendShapeName(blendShapeIdx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: blendShapeIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -101,8 +104,8 @@ open class ImporterMesh: Resource {
         return _result.description
     }
     
-    fileprivate static var method_set_blend_shape_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_shape_mode")
+    fileprivate static let method_set_blend_shape_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_shape_mode")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 227983991)!
@@ -114,6 +117,7 @@ open class ImporterMesh: Resource {
     
     /// Sets the blend shape mode to one of ``Mesh.BlendShapeMode``.
     public final func setBlendShapeMode(_ mode: Mesh.BlendShapeMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -127,8 +131,8 @@ open class ImporterMesh: Resource {
         
     }
     
-    fileprivate static var method_get_blend_shape_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_shape_mode")
+    fileprivate static let method_get_blend_shape_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_shape_mode")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 836485024)!
@@ -140,13 +144,14 @@ open class ImporterMesh: Resource {
     
     /// Returns the blend shape mode for this Mesh.
     public final func getBlendShapeMode() -> Mesh.BlendShapeMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Mesh.BlendShapeMode (rawValue: _result)!
     }
     
-    fileprivate static var method_add_surface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_surface")
+    fileprivate static let method_add_surface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_surface")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740448849)!
@@ -166,11 +171,12 @@ open class ImporterMesh: Resource {
     /// 
     /// The `lods` argument is a dictionary with float keys and ``PackedInt32Array`` values. Each entry in the dictionary represents an LOD level of the surface, where the value is the ``Mesh/ArrayType/index`` array to use for the LOD level and the key is roughly proportional to the distance at which the LOD stats being used. I.e., increasing the key of an LOD also increases the distance that the objects has to be from the camera before the LOD is used.
     /// 
-    /// The `flags` argument is the bitwise or of, as required: One value of ``Mesh.ArrayCustomFormat`` left shifted by `ARRAY_FORMAT_CUSTOMn_SHIFT` for each custom channel in use, ``Mesh/ArrayFormat/flagUseDynamicUpdate``, ``Mesh/ArrayFormat/flagUse8BoneWeights``, or ``Mesh/ArrayFormat/flagUsesEmptyVertexArray``.
+    /// The `flags` argument is the bitwise OR of, as required: One value of ``Mesh.ArrayCustomFormat`` left shifted by `ARRAY_FORMAT_CUSTOMn_SHIFT` for each custom channel in use, ``Mesh/ArrayFormat/flagUseDynamicUpdate``, ``Mesh/ArrayFormat/flagUse8BoneWeights``, or ``Mesh/ArrayFormat/flagUsesEmptyVertexArray``.
     /// 
     /// > Note: When using indices, it is recommended to only use points, lines, or triangles.
     /// 
-    public final func addSurface(primitive: Mesh.PrimitiveType, arrays: GArray, blendShapes: VariantCollection<GArray> = VariantCollection<GArray> (), lods: GDictionary = GDictionary (), material: Material? = nil, name: String = "", flags: UInt = 0) {
+    public final func addSurface(primitive: Mesh.PrimitiveType, arrays: VariantArray, blendShapes: TypedArray<VariantArray> = TypedArray<VariantArray> (), lods: VariantDictionary = VariantDictionary (), material: Material? = nil, name: String = "", flags: UInt = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: primitive.rawValue) { pArg0 in
             withUnsafePointer(to: arrays.content) { pArg1 in
                 withUnsafePointer(to: blendShapes.array.content) { pArg2 in
@@ -203,8 +209,8 @@ open class ImporterMesh: Resource {
         
     }
     
-    fileprivate static var method_get_surface_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_count")
+    fileprivate static let method_get_surface_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_count")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -216,13 +222,14 @@ open class ImporterMesh: Resource {
     
     /// Returns the number of surfaces that the mesh holds.
     public final func getSurfaceCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_surface_primitive_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_primitive_type")
+    fileprivate static let method_get_surface_primitive_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_primitive_type")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3552571330)!
@@ -234,6 +241,7 @@ open class ImporterMesh: Resource {
     
     /// Returns the primitive type of the requested surface (see ``addSurface(primitive:arrays:blendShapes:lods:material:name:flags:)``).
     public final func getSurfacePrimitiveType(surfaceIdx: Int32) -> Mesh.PrimitiveType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -248,8 +256,8 @@ open class ImporterMesh: Resource {
         return Mesh.PrimitiveType (rawValue: _result)!
     }
     
-    fileprivate static var method_get_surface_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_name")
+    fileprivate static let method_get_surface_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_name")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -261,6 +269,7 @@ open class ImporterMesh: Resource {
     
     /// Gets the name assigned to this surface.
     public final func getSurfaceName(surfaceIdx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -275,8 +284,8 @@ open class ImporterMesh: Resource {
         return _result.description
     }
     
-    fileprivate static var method_get_surface_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_arrays")
+    fileprivate static let method_get_surface_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_arrays")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
@@ -287,8 +296,9 @@ open class ImporterMesh: Resource {
     }()
     
     /// Returns the arrays for the vertices, normals, UVs, etc. that make up the requested surface. See ``addSurface(primitive:arrays:blendShapes:lods:material:name:flags:)``.
-    public final func getSurfaceArrays(surfaceIdx: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public final func getSurfaceArrays(surfaceIdx: Int32) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -302,8 +312,8 @@ open class ImporterMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_get_surface_blend_shape_arrays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_blend_shape_arrays")
+    fileprivate static let method_get_surface_blend_shape_arrays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_blend_shape_arrays")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2345056839)!
@@ -314,8 +324,9 @@ open class ImporterMesh: Resource {
     }()
     
     /// Returns a single set of blend shape arrays for the requested blend shape index for a surface.
-    public final func getSurfaceBlendShapeArrays(surfaceIdx: Int32, blendShapeIdx: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public final func getSurfaceBlendShapeArrays(surfaceIdx: Int32, blendShapeIdx: Int32) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: blendShapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -332,8 +343,8 @@ open class ImporterMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_get_surface_lod_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_lod_count")
+    fileprivate static let method_get_surface_lod_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_lod_count")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -345,6 +356,7 @@ open class ImporterMesh: Resource {
     
     /// Returns the number of lods that the mesh holds on a given surface.
     public final func getSurfaceLodCount(surfaceIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -359,8 +371,8 @@ open class ImporterMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_get_surface_lod_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_lod_size")
+    fileprivate static let method_get_surface_lod_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_lod_size")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -372,6 +384,7 @@ open class ImporterMesh: Resource {
     
     /// Returns the screen ratio which activates a lod for a surface.
     public final func getSurfaceLodSize(surfaceIdx: Int32, lodIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: lodIdx) { pArg1 in
@@ -389,8 +402,8 @@ open class ImporterMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_get_surface_lod_indices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_lod_indices")
+    fileprivate static let method_get_surface_lod_indices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_lod_indices")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265128013)!
@@ -402,6 +415,7 @@ open class ImporterMesh: Resource {
     
     /// Returns the index buffer of a lod for a surface.
     public final func getSurfaceLodIndices(surfaceIdx: Int32, lodIdx: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: lodIdx) { pArg1 in
@@ -419,8 +433,8 @@ open class ImporterMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_get_surface_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_material")
+    fileprivate static let method_get_surface_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_material")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2897466400)!
@@ -432,6 +446,7 @@ open class ImporterMesh: Resource {
     
     /// Returns a ``Material`` in a given surface. Surface is rendered using this material.
     public final func getSurfaceMaterial(surfaceIdx: Int32) -> Material? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -443,11 +458,11 @@ open class ImporterMesh: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_surface_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surface_format")
+    fileprivate static let method_get_surface_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surface_format")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -459,6 +474,7 @@ open class ImporterMesh: Resource {
     
     /// Returns the format of the surface that the mesh holds.
     public final func getSurfaceFormat(surfaceIdx: Int32) -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -473,8 +489,8 @@ open class ImporterMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_set_surface_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_surface_name")
+    fileprivate static let method_set_surface_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_surface_name")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -486,6 +502,7 @@ open class ImporterMesh: Resource {
     
     /// Sets a name for a given surface.
     public final func setSurfaceName(surfaceIdx: Int32, name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             let name = GString(name)
             withUnsafePointer(to: name.content) { pArg1 in
@@ -503,8 +520,8 @@ open class ImporterMesh: Resource {
         
     }
     
-    fileprivate static var method_set_surface_material: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_surface_material")
+    fileprivate static let method_set_surface_material: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_surface_material")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3671737478)!
@@ -516,6 +533,7 @@ open class ImporterMesh: Resource {
     
     /// Sets a ``Material`` for a given surface. Surface will be rendered using this material.
     public final func setSurfaceMaterial(surfaceIdx: Int32, material: Material?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -532,8 +550,8 @@ open class ImporterMesh: Resource {
         
     }
     
-    fileprivate static var method_generate_lods: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_lods")
+    fileprivate static let method_generate_lods: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_lods")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2491878677)!
@@ -545,13 +563,16 @@ open class ImporterMesh: Resource {
     
     /// Generates all lods for this ImporterMesh.
     /// 
-    /// `normalMergeAngle` and `normalSplitAngle` are in degrees and used in the same way as the importer settings in `lods`. As a good default, use 25 and 60 respectively.
+    /// `normalMergeAngle` is in degrees and used in the same way as the importer settings in `lods`.
+    /// 
+    /// `normalSplitAngle` is not used and only remains for compatibility with older versions of the API.
     /// 
     /// The number of generated lods can be accessed using ``getSurfaceLodCount(surfaceIdx:)``, and each LOD is available in ``getSurfaceLodSize(surfaceIdx:lodIdx:)`` and ``getSurfaceLodIndices(surfaceIdx:lodIdx:)``.
     /// 
-    /// `boneTransformArray` is an ``GArray`` which can be either empty or contain ``Transform3D``s which, for each of the mesh's bone IDs, will apply mesh skinning when generating the LOD mesh variations. This is usually used to account for discrepancies in scale between the mesh itself and its skinning data.
+    /// `boneTransformArray` is an ``VariantArray`` which can be either empty or contain ``Transform3D``s which, for each of the mesh's bone IDs, will apply mesh skinning when generating the LOD mesh variations. This is usually used to account for discrepancies in scale between the mesh itself and its skinning data.
     /// 
-    public final func generateLods(normalMergeAngle: Double, normalSplitAngle: Double, boneTransformArray: GArray) {
+    public final func generateLods(normalMergeAngle: Double, normalSplitAngle: Double, boneTransformArray: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normalMergeAngle) { pArg0 in
             withUnsafePointer(to: normalSplitAngle) { pArg1 in
                 withUnsafePointer(to: boneTransformArray.content) { pArg2 in
@@ -571,8 +592,8 @@ open class ImporterMesh: Resource {
         
     }
     
-    fileprivate static var method_get_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh")
+    fileprivate static let method_get_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1457573577)!
@@ -589,6 +610,7 @@ open class ImporterMesh: Resource {
     /// If not yet cached and `baseMesh` is provided, `baseMesh` will be used and mutated.
     /// 
     public final func getMesh(baseMesh: ArrayMesh? = nil) -> ArrayMesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: baseMesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -600,11 +622,11 @@ open class ImporterMesh: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -616,12 +638,13 @@ open class ImporterMesh: Resource {
     
     /// Removes all surfaces and blend shapes from this ``ImporterMesh``.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ImporterMesh.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_lightmap_size_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_lightmap_size_hint")
+    fileprivate static let method_set_lightmap_size_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_lightmap_size_hint")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -633,6 +656,7 @@ open class ImporterMesh: Resource {
     
     /// Sets the size hint of this mesh for lightmap-unwrapping in UV-space.
     public final func setLightmapSizeHint(size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -646,8 +670,8 @@ open class ImporterMesh: Resource {
         
     }
     
-    fileprivate static var method_get_lightmap_size_hint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_lightmap_size_hint")
+    fileprivate static let method_get_lightmap_size_hint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_lightmap_size_hint")
         return withUnsafePointer(to: &ImporterMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -659,6 +683,7 @@ open class ImporterMesh: Resource {
     
     /// Returns the size hint of this mesh for lightmap-unwrapping in UV-space.
     public final func getLightmapSizeHint() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(ImporterMesh.method_get_lightmap_size_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -30,7 +30,7 @@ import Musl
 /// To use the peer as part of a WebSocket server refer to ``acceptStream(_:)`` and the online tutorial.
 /// 
 open class WebSocketPeer: PacketPeer {
-    fileprivate static var className = StringName("WebSocketPeer")
+    private static var className = StringName("WebSocketPeer")
     override open class var godotClassName: StringName { className }
     public enum WriteMode: Int64, CaseIterable {
         /// Specifies that WebSockets messages should be transferred as text payload (only valid UTF-8 is allowed).
@@ -116,9 +116,24 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
+    /// The interval (in seconds) at which the peer will automatically send WebSocket "ping" control frames. When set to `0`, no "ping" control frames will be sent.
+    /// 
+    /// > Note: Has no effect in Web exports due to browser restrictions.
+    /// 
+    final public var heartbeatInterval: Double {
+        get {
+            return get_heartbeat_interval ()
+        }
+        
+        set {
+            set_heartbeat_interval (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_connect_to_url: GDExtensionMethodBindPtr = {
-        let methodName = StringName("connect_to_url")
+    fileprivate static let method_connect_to_url: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("connect_to_url")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1966198364)!
@@ -130,9 +145,12 @@ open class WebSocketPeer: PacketPeer {
     
     /// Connects to the given URL. TLS certificates will be verified against the hostname when connecting using the `wss://` protocol. You can pass the optional `tlsClientOptions` parameter to customize the trusted certification authorities, or disable the common name verification. See ``TLSOptions/client(trustedChain:commonNameOverride:)`` and ``TLSOptions/clientUnsafe(trustedChain:)``.
     /// 
+    /// > Note: This method is non-blocking, and will return ``GodotError/ok`` before the connection is established as long as the provided parameters are valid and the peer is not in an invalid state (e.g. already connected). Regularly call ``poll()`` (e.g. during ``Node`` process) and check the result of ``getReadyState()`` to know whether the connection succeeds or fails.
+    /// 
     /// > Note: To avoid mixed content warnings or errors in Web, you may have to use a `url` that starts with `wss://` (secure) instead of `ws://`. When doing so, make sure to use the fully qualified domain name that matches the one defined in the server's TLS certificate. Do not connect directly via the IP address for `wss://` connections, as it won't match with the TLS certificate.
     /// 
     public final func connectToUrl(_ url: String, tlsClientOptions: TLSOptions? = nil) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let url = GString(url)
         withUnsafePointer(to: url.content) { pArg0 in
@@ -151,8 +169,8 @@ open class WebSocketPeer: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_accept_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("accept_stream")
+    fileprivate static let method_accept_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("accept_stream")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 255125695)!
@@ -167,6 +185,7 @@ open class WebSocketPeer: PacketPeer {
     /// > Note: Not supported in Web exports due to browsers' restrictions.
     /// 
     public final func acceptStream(_ stream: StreamPeer?) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -181,8 +200,8 @@ open class WebSocketPeer: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_send: GDExtensionMethodBindPtr = {
-        let methodName = StringName("send")
+    fileprivate static let method_send: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("send")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2780360567)!
@@ -194,6 +213,7 @@ open class WebSocketPeer: PacketPeer {
     
     /// Sends the given `message` using the desired `writeMode`. When sending a ``String``, prefer using ``sendText(message:)``.
     public final func send(message: PackedByteArray, writeMode: WebSocketPeer.WriteMode = .binary) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: writeMode.rawValue) { pArg1 in
@@ -211,8 +231,8 @@ open class WebSocketPeer: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_send_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("send_text")
+    fileprivate static let method_send_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("send_text")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -224,6 +244,7 @@ open class WebSocketPeer: PacketPeer {
     
     /// Sends the given `message` using WebSocket text mode. Prefer this method over ``PacketPeer/putPacket(buffer:)`` when interacting with third-party text-based API (e.g. when using ``JSON`` formatted messages).
     public final func sendText(message: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let message = GString(message)
         withUnsafePointer(to: message.content) { pArg0 in
@@ -239,8 +260,8 @@ open class WebSocketPeer: PacketPeer {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_was_string_packet: GDExtensionMethodBindPtr = {
-        let methodName = StringName("was_string_packet")
+    fileprivate static let method_was_string_packet: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("was_string_packet")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -252,13 +273,14 @@ open class WebSocketPeer: PacketPeer {
     
     /// Returns `true` if the last received packet was sent as a text payload. See ``WebSocketPeer/WriteMode``.
     public final func wasStringPacket() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(WebSocketPeer.method_was_string_packet, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_poll: GDExtensionMethodBindPtr = {
-        let methodName = StringName("poll")
+    fileprivate static let method_poll: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("poll")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -270,12 +292,13 @@ open class WebSocketPeer: PacketPeer {
     
     /// Updates the connection state and receive incoming packets. Call this function regularly to keep it in a clean state.
     public final func poll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(WebSocketPeer.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_close: GDExtensionMethodBindPtr = {
-        let methodName = StringName("close")
+    fileprivate static let method_close: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("close")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1047156615)!
@@ -292,6 +315,7 @@ open class WebSocketPeer: PacketPeer {
     /// > Note: The Web export might not support all status codes. Please refer to browser-specific documentation for more details.
     /// 
     public final func close(code: Int32 = 1000, reason: String = "") {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: code) { pArg0 in
             let reason = GString(reason)
             withUnsafePointer(to: reason.content) { pArg1 in
@@ -309,8 +333,8 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_connected_host: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connected_host")
+    fileprivate static let method_get_connected_host: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connected_host")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -325,13 +349,14 @@ open class WebSocketPeer: PacketPeer {
     /// > Note: Not available in the Web export.
     /// 
     public final func getConnectedHost() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_connected_host, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_connected_port: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_connected_port")
+    fileprivate static let method_get_connected_port: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_connected_port")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -346,13 +371,14 @@ open class WebSocketPeer: PacketPeer {
     /// > Note: Not available in the Web export.
     /// 
     public final func getConnectedPort() -> UInt16 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt16 = 0
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_connected_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_selected_protocol: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected_protocol")
+    fileprivate static let method_get_selected_protocol: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected_protocol")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -364,13 +390,14 @@ open class WebSocketPeer: PacketPeer {
     
     /// Returns the selected WebSocket sub-protocol for this connection or an empty string if the sub-protocol has not been selected yet.
     public final func getSelectedProtocol() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_selected_protocol, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_requested_url: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_requested_url")
+    fileprivate static let method_get_requested_url: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_requested_url")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -382,13 +409,14 @@ open class WebSocketPeer: PacketPeer {
     
     /// Returns the URL requested by this peer. The URL is derived from the `url` passed to ``connectToUrl(_:tlsClientOptions:)`` or from the HTTP headers when acting as server (i.e. when using ``acceptStream(_:)``).
     public final func getRequestedUrl() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_requested_url, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_no_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_no_delay")
+    fileprivate static let method_set_no_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_no_delay")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -398,11 +426,12 @@ open class WebSocketPeer: PacketPeer {
         
     }()
     
-    /// Disable Nagle's algorithm on the underling TCP socket (default). See ``StreamPeerTCP/setNoDelay(enabled:)`` for more information.
+    /// Disable Nagle's algorithm on the underlying TCP socket (default). See ``StreamPeerTCP/setNoDelay(enabled:)`` for more information.
     /// 
     /// > Note: Not available in the Web export.
     /// 
     public final func setNoDelay(enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -416,8 +445,8 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_current_outbound_buffered_amount: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_current_outbound_buffered_amount")
+    fileprivate static let method_get_current_outbound_buffered_amount: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_current_outbound_buffered_amount")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -429,13 +458,14 @@ open class WebSocketPeer: PacketPeer {
     
     /// Returns the current amount of data in the outbound websocket buffer. > Note: Web exports use WebSocket.bufferedAmount, while other platforms use an internal buffer.
     public final func getCurrentOutboundBufferedAmount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_current_outbound_buffered_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_ready_state: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ready_state")
+    fileprivate static let method_get_ready_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ready_state")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 346482985)!
@@ -447,13 +477,14 @@ open class WebSocketPeer: PacketPeer {
     
     /// Returns the ready state of the connection. See ``WebSocketPeer/State``.
     public final func getReadyState() -> WebSocketPeer.State {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_ready_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return WebSocketPeer.State (rawValue: _result)!
     }
     
-    fileprivate static var method_get_close_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_close_code")
+    fileprivate static let method_get_close_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_close_code")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -465,13 +496,14 @@ open class WebSocketPeer: PacketPeer {
     
     /// Returns the received WebSocket close frame status code, or `-1` when the connection was not cleanly closed. Only call this method when ``getReadyState()`` returns ``State/closed``.
     public final func getCloseCode() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_close_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_close_reason: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_close_reason")
+    fileprivate static let method_get_close_reason: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_close_reason")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -483,13 +515,14 @@ open class WebSocketPeer: PacketPeer {
     
     /// Returns the received WebSocket close frame status reason string. Only call this method when ``getReadyState()`` returns ``State/closed``.
     public final func getCloseReason() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_close_reason, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_supported_protocols: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_supported_protocols")
+    fileprivate static let method_get_supported_protocols: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_supported_protocols")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -501,13 +534,14 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_supported_protocols() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_supported_protocols, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_supported_protocols: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_supported_protocols")
+    fileprivate static let method_set_supported_protocols: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_supported_protocols")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4015028928)!
@@ -519,6 +553,7 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_supported_protocols(_ protocols: PackedStringArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -532,8 +567,8 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_handshake_headers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_handshake_headers")
+    fileprivate static let method_get_handshake_headers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_handshake_headers")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -545,13 +580,14 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_handshake_headers() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_handshake_headers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_handshake_headers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_handshake_headers")
+    fileprivate static let method_set_handshake_headers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_handshake_headers")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4015028928)!
@@ -563,6 +599,7 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_handshake_headers(_ protocols: PackedStringArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -576,8 +613,8 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_inbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_inbound_buffer_size")
+    fileprivate static let method_get_inbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_inbound_buffer_size")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -589,13 +626,14 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_inbound_buffer_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_inbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_inbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_inbound_buffer_size")
+    fileprivate static let method_set_inbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_inbound_buffer_size")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -607,6 +645,7 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_inbound_buffer_size(_ bufferSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -620,8 +659,8 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_outbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_outbound_buffer_size")
+    fileprivate static let method_get_outbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_outbound_buffer_size")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -633,13 +672,14 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_outbound_buffer_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_outbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_outbound_buffer_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_outbound_buffer_size")
+    fileprivate static let method_set_outbound_buffer_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_outbound_buffer_size")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -651,6 +691,7 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_outbound_buffer_size(_ bufferSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -664,8 +705,8 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_set_max_queued_packets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_queued_packets")
+    fileprivate static let method_set_max_queued_packets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_queued_packets")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -677,6 +718,7 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func set_max_queued_packets(_ bufferSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -690,8 +732,8 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    fileprivate static var method_get_max_queued_packets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_queued_packets")
+    fileprivate static let method_get_max_queued_packets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_queued_packets")
         return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -703,8 +745,55 @@ open class WebSocketPeer: PacketPeer {
     
     @inline(__always)
     fileprivate final func get_max_queued_packets() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(WebSocketPeer.method_get_max_queued_packets, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_heartbeat_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heartbeat_interval")
+        return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_heartbeat_interval(_ interval: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: interval) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_heartbeat_interval, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_heartbeat_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heartbeat_interval")
+        return withUnsafePointer(to: &WebSocketPeer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_heartbeat_interval() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_heartbeat_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     

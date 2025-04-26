@@ -30,14 +30,14 @@ import Musl
 /// - ``busRenamed``
 open class AudioServer: Object {
     /// The shared instance of this class
-    public static var shared: AudioServer = {
-        return withUnsafePointer (to: &AudioServer.godotClassName.content) { ptr in
-            AudioServer (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: AudioServer {
+        return withUnsafePointer(to: &AudioServer.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("AudioServer")
+    private static var className = StringName("AudioServer")
     override open class var godotClassName: StringName { className }
     public enum SpeakerMode: Int64, CaseIterable {
         /// Two or fewer speakers were detected.
@@ -121,8 +121,8 @@ open class AudioServer: Object {
     }
     
     /* Methods */
-    fileprivate static var method_set_bus_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_count")
+    fileprivate static let method_set_bus_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_count")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -147,8 +147,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_bus_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_count")
+    fileprivate static let method_get_bus_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_count")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -165,8 +165,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_remove_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_bus")
+    fileprivate static let method_remove_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_bus")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -191,8 +191,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_add_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_bus")
+    fileprivate static let method_add_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_bus")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -217,8 +217,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_move_bus: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_bus")
+    fileprivate static let method_move_bus: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_bus")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -246,8 +246,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_set_bus_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_name")
+    fileprivate static let method_set_bus_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_name")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -276,8 +276,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_bus_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_name")
+    fileprivate static let method_get_bus_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_name")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -303,8 +303,8 @@ open class AudioServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_get_bus_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_index")
+    fileprivate static let method_get_bus_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_index")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2458036349)!
@@ -330,8 +330,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_bus_channels: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_channels")
+    fileprivate static let method_get_bus_channels: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_channels")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -357,8 +357,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_bus_volume_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_volume_db")
+    fileprivate static let method_set_bus_volume_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_volume_db")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -368,7 +368,7 @@ open class AudioServer: Object {
         
     }()
     
-    /// Sets the volume of the bus at index `busIdx` to `volumeDb`.
+    /// Sets the volume in decibels of the bus at index `busIdx` to `volumeDb`.
     public static func setBusVolumeDb(busIdx: Int32, volumeDb: Double) {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: volumeDb) { pArg1 in
@@ -386,8 +386,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_bus_volume_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_volume_db")
+    fileprivate static let method_get_bus_volume_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_volume_db")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -413,8 +413,70 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_bus_send: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_send")
+    fileprivate static let method_set_bus_volume_linear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_volume_linear")
+        return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the volume as a linear value of the bus at index `busIdx` to `volumeLinear`.
+    /// 
+    /// > Note: Using this method is equivalent to calling ``setBusVolumeDb(busIdx:volumeDb:)`` with the result of ``@GlobalScope.linear_to_db`` on a value.
+    /// 
+    public static func setBusVolumeLinear(busIdx: Int32, volumeLinear: Double) {
+        withUnsafePointer(to: busIdx) { pArg0 in
+            withUnsafePointer(to: volumeLinear) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_set_bus_volume_linear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_bus_volume_linear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_volume_linear")
+        return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the volume of the bus at index `busIdx` as a linear value.
+    /// 
+    /// > Note: The returned value is equivalent to the result of ``@GlobalScope.db_to_linear`` on the result of ``getBusVolumeDb(busIdx:)``.
+    /// 
+    public static func getBusVolumeLinear(busIdx: Int32) -> Double {
+        var _result: Double = 0.0
+        withUnsafePointer(to: busIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_get_bus_volume_linear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_set_bus_send: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_send")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -442,8 +504,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_bus_send: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_send")
+    fileprivate static let method_get_bus_send: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_send")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -469,8 +531,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_bus_solo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_solo")
+    fileprivate static let method_set_bus_solo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_solo")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -498,8 +560,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_is_bus_solo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_bus_solo")
+    fileprivate static let method_is_bus_solo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_bus_solo")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -525,8 +587,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_bus_mute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_mute")
+    fileprivate static let method_set_bus_mute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_mute")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -554,8 +616,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_is_bus_mute: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_bus_mute")
+    fileprivate static let method_is_bus_mute: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_bus_mute")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -581,8 +643,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_bus_bypass_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_bypass_effects")
+    fileprivate static let method_set_bus_bypass_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_bypass_effects")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -610,8 +672,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_is_bus_bypassing_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_bus_bypassing_effects")
+    fileprivate static let method_is_bus_bypassing_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_bus_bypassing_effects")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -637,8 +699,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_add_bus_effect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_bus_effect")
+    fileprivate static let method_add_bus_effect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_bus_effect")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4068819785)!
@@ -669,8 +731,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_remove_bus_effect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_bus_effect")
+    fileprivate static let method_remove_bus_effect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_bus_effect")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -698,8 +760,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_bus_effect_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_effect_count")
+    fileprivate static let method_get_bus_effect_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_effect_count")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
@@ -725,8 +787,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_bus_effect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_effect")
+    fileprivate static let method_get_bus_effect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_effect")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 726064442)!
@@ -752,11 +814,11 @@ open class AudioServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_bus_effect_instance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_effect_instance")
+    fileprivate static let method_get_bus_effect_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_effect_instance")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1829771234)!
@@ -785,11 +847,11 @@ open class AudioServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_swap_bus_effects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("swap_bus_effects")
+    fileprivate static let method_swap_bus_effects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("swap_bus_effects")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1649997291)!
@@ -820,8 +882,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_set_bus_effect_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_effect_enabled")
+    fileprivate static let method_set_bus_effect_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_effect_enabled")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1383440665)!
@@ -852,8 +914,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_is_bus_effect_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_bus_effect_enabled")
+    fileprivate static let method_is_bus_effect_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_bus_effect_enabled")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
@@ -882,8 +944,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_bus_peak_volume_left_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_peak_volume_left_db")
+    fileprivate static let method_get_bus_peak_volume_left_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_peak_volume_left_db")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -912,8 +974,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_bus_peak_volume_right_db: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_bus_peak_volume_right_db")
+    fileprivate static let method_get_bus_peak_volume_right_db: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bus_peak_volume_right_db")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -942,8 +1004,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_set_playback_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_playback_speed_scale")
+    fileprivate static let method_set_playback_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_playback_speed_scale")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -968,8 +1030,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_playback_speed_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_playback_speed_scale")
+    fileprivate static let method_get_playback_speed_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_playback_speed_scale")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -986,8 +1048,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_lock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("lock")
+    fileprivate static let method_lock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("lock")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1006,8 +1068,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_unlock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unlock")
+    fileprivate static let method_unlock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unlock")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1023,8 +1085,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_speaker_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_speaker_mode")
+    fileprivate static let method_get_speaker_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_speaker_mode")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2549190337)!
@@ -1041,8 +1103,8 @@ open class AudioServer: Object {
         return AudioServer.SpeakerMode (rawValue: _result)!
     }
     
-    fileprivate static var method_get_mix_rate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mix_rate")
+    fileprivate static let method_get_mix_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mix_rate")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1059,8 +1121,44 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_output_device_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_device_list")
+    fileprivate static let method_get_input_mix_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_mix_rate")
+        return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the sample rate at the input of the ``AudioServer``.
+    public static func getInputMixRate() -> Double {
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(method_get_input_mix_rate, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_driver_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_driver_name")
+        return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the name of the current audio driver. The default usually depends on the operating system, but may be overridden via the `--audio-driver` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>. `--headless` also automatically sets the audio driver to `Dummy`. See also ``ProjectSettings/audio/driver/driver``.
+    public static func getDriverName() -> String {
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(method_get_driver_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        return _result.description
+    }
+    
+    fileprivate static let method_get_output_device_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_device_list")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -1077,8 +1175,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_output_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_device")
+    fileprivate static let method_get_output_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_device")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -1095,8 +1193,8 @@ open class AudioServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_set_output_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_output_device")
+    fileprivate static let method_set_output_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_output_device")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1122,8 +1220,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_get_time_to_next_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_to_next_mix")
+    fileprivate static let method_get_time_to_next_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_to_next_mix")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1140,8 +1238,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_time_since_last_mix: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_since_last_mix")
+    fileprivate static let method_get_time_since_last_mix: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_since_last_mix")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1158,8 +1256,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_output_latency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_output_latency")
+    fileprivate static let method_get_output_latency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_output_latency")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1179,8 +1277,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_input_device_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_device_list")
+    fileprivate static let method_get_input_device_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_device_list")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2981934095)!
@@ -1200,8 +1298,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_get_input_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_input_device")
+    fileprivate static let method_get_input_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_input_device")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -1218,8 +1316,8 @@ open class AudioServer: Object {
         return _result.description
     }
     
-    fileprivate static var method_set_input_device: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_device")
+    fileprivate static let method_set_input_device: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_device")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1245,8 +1343,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_set_bus_layout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_bus_layout")
+    fileprivate static let method_set_bus_layout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_bus_layout")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3319058824)!
@@ -1271,8 +1369,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_generate_bus_layout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_bus_layout")
+    fileprivate static let method_generate_bus_layout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_bus_layout")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3769973890)!
@@ -1286,11 +1384,11 @@ open class AudioServer: Object {
     public static func generateBusLayout() -> AudioBusLayout? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(method_generate_bus_layout, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_enable_tagging_used_audio_streams: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_tagging_used_audio_streams")
+    fileprivate static let method_set_enable_tagging_used_audio_streams: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_tagging_used_audio_streams")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1318,8 +1416,8 @@ open class AudioServer: Object {
         
     }
     
-    fileprivate static var method_is_stream_registered_as_sample: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_stream_registered_as_sample")
+    fileprivate static let method_is_stream_registered_as_sample: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_stream_registered_as_sample")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 500225754)!
@@ -1348,8 +1446,8 @@ open class AudioServer: Object {
         return _result
     }
     
-    fileprivate static var method_register_stream_as_sample: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_stream_as_sample")
+    fileprivate static let method_register_stream_as_sample: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_stream_as_sample")
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2210767741)!

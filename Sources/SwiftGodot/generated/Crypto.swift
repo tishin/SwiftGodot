@@ -26,11 +26,11 @@ import Musl
 /// Currently, this includes asymmetric key encryption/decryption, signing/verification, and generating cryptographically secure random bytes, RSA keys, HMAC digests, and self-signed ``X509Certificate``s.
 /// 
 open class Crypto: RefCounted {
-    fileprivate static var className = StringName("Crypto")
+    private static var className = StringName("Crypto")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_generate_random_bytes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_random_bytes")
+    fileprivate static let method_generate_random_bytes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_random_bytes")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 47165747)!
@@ -42,6 +42,7 @@ open class Crypto: RefCounted {
     
     /// Generates a ``PackedByteArray`` of cryptographically secure random bytes with given `size`.
     public final func generateRandomBytes(size: Int32) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -56,8 +57,8 @@ open class Crypto: RefCounted {
         return _result
     }
     
-    fileprivate static var method_generate_rsa: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_rsa")
+    fileprivate static let method_generate_rsa: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_rsa")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1237515462)!
@@ -69,6 +70,7 @@ open class Crypto: RefCounted {
     
     /// Generates an RSA ``CryptoKey`` that can be used for creating self-signed certificates and passed to ``StreamPeerTLS/acceptStream(_:serverOptions:)``.
     public final func generateRsa(size: Int32) -> CryptoKey? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -80,11 +82,11 @@ open class Crypto: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_generate_self_signed_certificate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("generate_self_signed_certificate")
+    fileprivate static let method_generate_self_signed_certificate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("generate_self_signed_certificate")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 492266173)!
@@ -99,6 +101,7 @@ open class Crypto: RefCounted {
     /// A small example to generate an RSA key and an X509 self-signed certificate.
     /// 
     public final func generateSelfSignedCertificate(key: CryptoKey?, issuerName: String = "CN=myserver,O=myorganisation,C=IT", notBefore: String = "20140101000000", notAfter: String = "20340101000000") -> X509Certificate? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: key?.handle) { pArg0 in
             let issuerName = GString(issuerName)
@@ -122,11 +125,11 @@ open class Crypto: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_sign: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sign")
+    fileprivate static let method_sign: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sign")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1673662703)!
@@ -138,6 +141,7 @@ open class Crypto: RefCounted {
     
     /// Sign a given `hash` of type `hashType` with the provided private `key`.
     public final func sign(hashType: HashingContext.HashType, hash: PackedByteArray, key: CryptoKey?) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: hashType.rawValue) { pArg0 in
             withUnsafePointer(to: hash.content) { pArg1 in
@@ -158,8 +162,8 @@ open class Crypto: RefCounted {
         return _result
     }
     
-    fileprivate static var method_verify: GDExtensionMethodBindPtr = {
-        let methodName = StringName("verify")
+    fileprivate static let method_verify: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("verify")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2805902225)!
@@ -171,6 +175,7 @@ open class Crypto: RefCounted {
     
     /// Verify that a given `signature` for `hash` of type `hashType` against the provided public `key`.
     public final func verify(hashType: HashingContext.HashType, hash: PackedByteArray, signature: PackedByteArray, key: CryptoKey?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: hashType.rawValue) { pArg0 in
             withUnsafePointer(to: hash.content) { pArg1 in
@@ -194,8 +199,8 @@ open class Crypto: RefCounted {
         return _result
     }
     
-    fileprivate static var method_encrypt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("encrypt")
+    fileprivate static let method_encrypt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("encrypt")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2361793670)!
@@ -210,6 +215,7 @@ open class Crypto: RefCounted {
     /// > Note: The maximum size of accepted plaintext is limited by the key size.
     /// 
     public final func encrypt(key: CryptoKey?, plaintext: PackedByteArray) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: key?.handle) { pArg0 in
             withUnsafePointer(to: plaintext.content) { pArg1 in
@@ -227,8 +233,8 @@ open class Crypto: RefCounted {
         return _result
     }
     
-    fileprivate static var method_decrypt: GDExtensionMethodBindPtr = {
-        let methodName = StringName("decrypt")
+    fileprivate static let method_decrypt: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("decrypt")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2361793670)!
@@ -243,6 +249,7 @@ open class Crypto: RefCounted {
     /// > Note: The maximum size of accepted ciphertext is limited by the key size.
     /// 
     public final func decrypt(key: CryptoKey?, ciphertext: PackedByteArray) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: key?.handle) { pArg0 in
             withUnsafePointer(to: ciphertext.content) { pArg1 in
@@ -260,8 +267,8 @@ open class Crypto: RefCounted {
         return _result
     }
     
-    fileprivate static var method_hmac_digest: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hmac_digest")
+    fileprivate static let method_hmac_digest: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hmac_digest")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2368951203)!
@@ -276,6 +283,7 @@ open class Crypto: RefCounted {
     /// Currently, only ``HashingContext/HashType/sha256`` and ``HashingContext/HashType/sha1`` are supported.
     /// 
     public final func hmacDigest(hashType: HashingContext.HashType, key: PackedByteArray, msg: PackedByteArray) -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         withUnsafePointer(to: hashType.rawValue) { pArg0 in
             withUnsafePointer(to: key.content) { pArg1 in
@@ -296,8 +304,8 @@ open class Crypto: RefCounted {
         return _result
     }
     
-    fileprivate static var method_constant_time_compare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("constant_time_compare")
+    fileprivate static let method_constant_time_compare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("constant_time_compare")
         return withUnsafePointer(to: &Crypto.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1024142237)!
@@ -312,6 +320,7 @@ open class Crypto: RefCounted {
     /// See <a href="https://paragonie.com/blog/2015/11/preventing-timing-attacks-on-string-comparison-with-double-hmac-strategy">this blog post</a> for more information.
     /// 
     public final func constantTimeCompare(trusted: PackedByteArray, received: PackedByteArray) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: trusted.content) { pArg0 in
             withUnsafePointer(to: received.content) { pArg1 in

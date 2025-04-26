@@ -23,83 +23,301 @@ import Musl
 /// 
 /// This class is intended to be overridden by video decoder extensions with custom implementations of ``VideoStream``.
 open class VideoStreamPlayback: Resource {
-    fileprivate static var className = StringName("VideoStreamPlayback")
+    private static var className = StringName("VideoStreamPlayback")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    /// Stops playback. May be called multiple times before ``_play()``, or in response to ``VideoStreamPlayer/stop()``. ``_isPlaying()`` should return false once stopped.
+    fileprivate static let method__stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_stop")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Stops playback. May be called multiple times before ``_play()``, or in response to ``VideoStreamPlayer/stop()``. ``_isPlaying()`` should return `false` once stopped.
     @_documentation(visibility: public)
     open func _stop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
     
-    /// Called in response to ``VideoStreamPlayer/autoplay`` or ``VideoStreamPlayer/play()``. Note that manual playback may also invoke ``_stop()`` multiple times before this method is called. ``_isPlaying()`` should return true once playing.
+    fileprivate static let method__play: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_play")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Called in response to ``VideoStreamPlayer/autoplay`` or ``VideoStreamPlayer/play()``. Note that manual playback may also invoke ``_stop()`` multiple times before this method is called. ``_isPlaying()`` should return `true` once playing.
     @_documentation(visibility: public)
     open func _play() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__play, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__is_playing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_playing")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the playback state, as determined by calls to ``_play()`` and ``_stop()``.
     @_documentation(visibility: public)
     open func _isPlaying() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__set_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_paused")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
     
     /// Set the paused status of video playback. ``_isPaused()`` must return `paused`. Called in response to the ``VideoStreamPlayer/paused`` setter.
     @_documentation(visibility: public)
     open func _setPaused(_ paused: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: paused) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__set_paused, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__is_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_paused")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the paused status, as set by ``_setPaused(_:)``.
     @_documentation(visibility: public)
     open func _isPaused() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__is_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_length")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the video duration in seconds, if known, or 0 if unknown.
     @_documentation(visibility: public)
     open func _getLength() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_playback_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_playback_position")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Return the current playback timestamp. Called in response to the ``VideoStreamPlayer/streamPosition`` getter.
     @_documentation(visibility: public)
     open func _getPlaybackPosition() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_playback_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__seek: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_seek")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
     
     /// Seeks to `time` seconds. Called in response to the ``VideoStreamPlayer/streamPosition`` setter.
     @_documentation(visibility: public)
     open func _seek(time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: time) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__seek, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__set_audio_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_audio_track")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
     
     /// Select the audio track `idx`. Called when playback starts, and in response to the ``VideoStreamPlayer/audioTrack`` setter.
     @_documentation(visibility: public)
     open func _setAudioTrack(idx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: idx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__set_audio_track, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_texture")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
+            }
+            
+        }
+        
+    }()
     
     /// Allocates a ``Texture2D`` in which decoded video frames will be drawn.
     @_documentation(visibility: public)
     open func _getTexture() -> Texture2D? {
-        return Texture2D ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    /// Ticks video playback for `delta` seconds. Called every frame as long as ``_isPaused()`` and ``_isPlaying()`` return true.
+    fileprivate static let method__update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_update")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Ticks video playback for `delta` seconds. Called every frame as long as both ``_isPaused()`` and ``_isPlaying()`` return `true`.
     @_documentation(visibility: public)
     open func _update(delta: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: delta) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__update, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_channels: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_channels")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the number of audio channels.
     @_documentation(visibility: public)
     open func _getChannels() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_channels, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_mix_rate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_mix_rate")
+        return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the audio sample rate used for mixing.
     @_documentation(visibility: public)
     open func _getMixRate() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_mix_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
-    fileprivate static var method_mix_audio: GDExtensionMethodBindPtr = {
-        let methodName = StringName("mix_audio")
+    fileprivate static let method_mix_audio: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("mix_audio")
         return withUnsafePointer(to: &VideoStreamPlayback.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 93876830)!
@@ -111,6 +329,7 @@ open class VideoStreamPlayback: Resource {
     
     /// Render `numFrames` audio frames (of ``_getChannels()`` floats each) from `buffer`, starting from index `offset` in the array. Returns the number of audio frames rendered, or -1 on error.
     public final func mixAudio(numFrames: Int32, buffer: PackedFloat32Array = PackedFloat32Array(), offset: Int32 = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: numFrames) { pArg0 in
             withUnsafePointer(to: buffer.content) { pArg1 in
@@ -131,7 +350,7 @@ open class VideoStreamPlayback: Resource {
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_channels":
@@ -171,90 +390,103 @@ open class VideoStreamPlayback: Resource {
 // Support methods for proxies
 func _VideoStreamPlayback_proxy_get_channels (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._getChannels ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _VideoStreamPlayback_proxy_get_length (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._getLength ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _VideoStreamPlayback_proxy_get_mix_rate (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._getMixRate ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _VideoStreamPlayback_proxy_get_playback_position (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._getPlaybackPosition ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _VideoStreamPlayback_proxy_get_texture (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._getTexture ()
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Texture2D
 }
 
 func _VideoStreamPlayback_proxy_is_paused (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._isPaused ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _VideoStreamPlayback_proxy_is_playing (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._isPlaying ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _VideoStreamPlayback_proxy_play (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     swiftObject._play ()
 }
 
 func _VideoStreamPlayback_proxy_seek (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     swiftObject._seek (time: args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _VideoStreamPlayback_proxy_set_audio_track (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     swiftObject._setAudioTrack (idx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _VideoStreamPlayback_proxy_set_paused (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     swiftObject._setPaused (args [0]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _VideoStreamPlayback_proxy_stop (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     swiftObject._stop ()
 }
 
 func _VideoStreamPlayback_proxy_update (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<VideoStreamPlayback>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     swiftObject._update (delta: args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 

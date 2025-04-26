@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Compares `a` and `b` of ``type`` by ``function``. Returns a boolean scalar. Translates to `if` instruction in shader code.
 open class VisualShaderNodeCompare: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeCompare")
+    private static var className = StringName("VisualShaderNodeCompare")
     override open class var godotClassName: StringName { className }
     public enum ComparisonType: Int64, CaseIterable {
         /// A floating-point scalar.
@@ -64,9 +64,9 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     }
     
     public enum Condition: Int64, CaseIterable {
-        /// The result will be true if all of component in vector satisfy the comparison condition.
+        /// The result will be `true` if all components in the vector satisfy the comparison condition.
         case all = 0 // COND_ALL
-        /// The result will be true if any of component in vector satisfy the comparison condition.
+        /// The result will be `true` if any component in the vector satisfies the comparison condition.
         case any = 1 // COND_ANY
         /// Represents the size of the ``VisualShaderNodeCompare/Condition`` enum.
         case max = 2 // COND_MAX
@@ -112,8 +112,8 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_comparison_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_comparison_type")
+    fileprivate static let method_set_comparison_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_comparison_type")
         return withUnsafePointer(to: &VisualShaderNodeCompare.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 516558320)!
@@ -125,6 +125,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_comparison_type(_ type: VisualShaderNodeCompare.ComparisonType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -138,8 +139,8 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_comparison_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_comparison_type")
+    fileprivate static let method_get_comparison_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_comparison_type")
         return withUnsafePointer(to: &VisualShaderNodeCompare.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3495315961)!
@@ -151,13 +152,14 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_comparison_type() -> VisualShaderNodeCompare.ComparisonType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_comparison_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeCompare.ComparisonType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_function")
+    fileprivate static let method_set_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_function")
         return withUnsafePointer(to: &VisualShaderNodeCompare.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2370951349)!
@@ -169,6 +171,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_function(_ `func`: VisualShaderNodeCompare.Function) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -182,8 +185,8 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_function: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_function")
+    fileprivate static let method_get_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_function")
         return withUnsafePointer(to: &VisualShaderNodeCompare.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4089164265)!
@@ -195,13 +198,14 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_function() -> VisualShaderNodeCompare.Function {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeCompare.Function (rawValue: _result)!
     }
     
-    fileprivate static var method_set_condition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_condition")
+    fileprivate static let method_set_condition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_condition")
         return withUnsafePointer(to: &VisualShaderNodeCompare.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 918742392)!
@@ -213,6 +217,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func set_condition(_ condition: VisualShaderNodeCompare.Condition) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: condition.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -226,8 +231,8 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         
     }
     
-    fileprivate static var method_get_condition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_condition")
+    fileprivate static let method_get_condition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_condition")
         return withUnsafePointer(to: &VisualShaderNodeCompare.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3281078941)!
@@ -239,6 +244,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     
     @inline(__always)
     fileprivate final func get_condition() -> VisualShaderNodeCompare.Condition {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_condition, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeCompare.Condition (rawValue: _result)!

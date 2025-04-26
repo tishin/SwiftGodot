@@ -28,7 +28,7 @@ import Musl
 /// > Note: ``Line2D`` is drawn using a 2D mesh.
 /// 
 open class Line2D: Node2D {
-    fileprivate static var className = StringName("Line2D")
+    private static var className = StringName("Line2D")
     override open class var godotClassName: StringName { className }
     public enum LineJointMode: Int64, CaseIterable {
         /// Makes the polyline's joints pointy, connecting the sides of the two segments by extending them until they intersect. If the rotation of a joint is too big (based on ``sharpLimit``), the joint falls back to ``LineJointMode/bevel`` to prevent very long miters.
@@ -101,7 +101,7 @@ open class Line2D: Node2D {
         
     }
     
-    /// The polyline's width curve. The width of the polyline over its length will be equivalent to the value of the width curve over its domain.
+    /// The polyline's width curve. The width of the polyline over its length will be equivalent to the value of the width curve over its domain. The width curve should be a unit ``Curve``.
     final public var widthCurve: Curve? {
         get {
             return get_curve ()
@@ -237,8 +237,8 @@ open class Line2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_points")
+    fileprivate static let method_set_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_points")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -250,6 +250,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_points(_ points: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: points.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -263,8 +264,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_points")
+    fileprivate static let method_get_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_points")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -276,13 +277,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_points() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(Line2D.method_get_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_point_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_position")
+    fileprivate static let method_set_point_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_position")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 163021252)!
@@ -294,6 +296,7 @@ open class Line2D: Node2D {
     
     /// Overwrites the position of the point at the given `index` with the supplied `position`.
     public final func setPointPosition(index: Int32, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -310,8 +313,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_point_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_position")
+    fileprivate static let method_get_point_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_position")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
@@ -323,6 +326,7 @@ open class Line2D: Node2D {
     
     /// Returns the position of the point at index `index`.
     public final func getPointPosition(index: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -337,8 +341,8 @@ open class Line2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_point_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_count")
+    fileprivate static let method_get_point_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_count")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -350,13 +354,14 @@ open class Line2D: Node2D {
     
     /// Returns the number of points in the polyline.
     public final func getPointCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Line2D.method_get_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_point")
+    fileprivate static let method_add_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_point")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2654014372)!
@@ -371,6 +376,7 @@ open class Line2D: Node2D {
     /// If `index` is given, the new point is inserted before the existing point identified by index `index`. The indices of the points after the new point get increased by 1. The provided `index` must not exceed the number of existing points in the polyline. See ``getPointCount()``.
     /// 
     public final func addPoint(position: Vector2, index: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -387,8 +393,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_remove_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_point")
+    fileprivate static let method_remove_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_point")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -400,6 +406,7 @@ open class Line2D: Node2D {
     
     /// Removes the point at index `index` from the polyline.
     public final func removePoint(index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -413,8 +420,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_clear_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_points")
+    fileprivate static let method_clear_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_points")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -426,12 +433,13 @@ open class Line2D: Node2D {
     
     /// Removes all points from the polyline, making it empty.
     public final func clearPoints() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Line2D.method_clear_points, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_closed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_closed")
+    fileprivate static let method_set_closed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_closed")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -443,6 +451,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_closed(_ closed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: closed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -456,8 +465,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_is_closed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_closed")
+    fileprivate static let method_is_closed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_closed")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -469,13 +478,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_closed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Line2D.method_is_closed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_width")
+    fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_width")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -487,6 +497,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_width(_ width: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -500,8 +511,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_width")
+    fileprivate static let method_get_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_width")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -513,13 +524,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_width() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Line2D.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_curve")
+    fileprivate static let method_set_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_curve")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 270443179)!
@@ -531,6 +543,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_curve(_ curve: Curve?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -544,8 +557,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_curve: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_curve")
+    fileprivate static let method_get_curve: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_curve")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2460114913)!
@@ -557,13 +570,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_curve() -> Curve? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Line2D.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_default_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_color")
+    fileprivate static let method_set_default_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_color")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -575,6 +589,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_default_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -588,8 +603,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_default_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_color")
+    fileprivate static let method_get_default_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_color")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -601,13 +616,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_default_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(Line2D.method_get_default_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_gradient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_gradient")
+    fileprivate static let method_set_gradient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_gradient")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2756054477)!
@@ -619,6 +635,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_gradient(_ color: Gradient?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -632,8 +649,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_gradient: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_gradient")
+    fileprivate static let method_get_gradient: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_gradient")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 132272999)!
@@ -645,13 +662,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_gradient() -> Gradient? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Line2D.method_get_gradient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4051416890)!
@@ -663,6 +681,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -676,8 +695,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
@@ -689,13 +708,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Line2D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_mode")
+    fileprivate static let method_set_texture_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1952559516)!
@@ -707,6 +727,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_texture_mode(_ mode: Line2D.LineTextureMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -720,8 +741,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_texture_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_mode")
+    fileprivate static let method_get_texture_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2341040722)!
@@ -733,13 +754,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_texture_mode() -> Line2D.LineTextureMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Line2D.method_get_texture_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Line2D.LineTextureMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_joint_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_joint_mode")
+    fileprivate static let method_set_joint_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_joint_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 604292979)!
@@ -751,6 +773,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_joint_mode(_ mode: Line2D.LineJointMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -764,8 +787,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_joint_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_joint_mode")
+    fileprivate static let method_get_joint_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_joint_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2546544037)!
@@ -777,13 +800,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_joint_mode() -> Line2D.LineJointMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Line2D.method_get_joint_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Line2D.LineJointMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_begin_cap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_begin_cap_mode")
+    fileprivate static let method_set_begin_cap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_begin_cap_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1669024546)!
@@ -795,6 +819,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_begin_cap_mode(_ mode: Line2D.LineCapMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -808,8 +833,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_begin_cap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_begin_cap_mode")
+    fileprivate static let method_get_begin_cap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_begin_cap_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1107511441)!
@@ -821,13 +846,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_begin_cap_mode() -> Line2D.LineCapMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Line2D.method_get_begin_cap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Line2D.LineCapMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_end_cap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_end_cap_mode")
+    fileprivate static let method_set_end_cap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_end_cap_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1669024546)!
@@ -839,6 +865,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_end_cap_mode(_ mode: Line2D.LineCapMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -852,8 +879,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_end_cap_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_end_cap_mode")
+    fileprivate static let method_get_end_cap_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_end_cap_mode")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1107511441)!
@@ -865,13 +892,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_end_cap_mode() -> Line2D.LineCapMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Line2D.method_get_end_cap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Line2D.LineCapMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_sharp_limit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sharp_limit")
+    fileprivate static let method_set_sharp_limit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sharp_limit")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -883,6 +911,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_sharp_limit(_ limit: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: limit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -896,8 +925,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_sharp_limit: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sharp_limit")
+    fileprivate static let method_get_sharp_limit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sharp_limit")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -909,13 +938,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_sharp_limit() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Line2D.method_get_sharp_limit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_round_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_round_precision")
+    fileprivate static let method_set_round_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_round_precision")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -927,6 +957,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_round_precision(_ precision: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: precision) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -940,8 +971,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_round_precision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_round_precision")
+    fileprivate static let method_get_round_precision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_round_precision")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -953,13 +984,14 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_round_precision() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Line2D.method_get_round_precision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_antialiased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_antialiased")
+    fileprivate static let method_set_antialiased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_antialiased")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -971,6 +1003,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_antialiased(_ antialiased: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: antialiased) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -984,8 +1017,8 @@ open class Line2D: Node2D {
         
     }
     
-    fileprivate static var method_get_antialiased: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_antialiased")
+    fileprivate static let method_get_antialiased: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_antialiased")
         return withUnsafePointer(to: &Line2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -997,6 +1030,7 @@ open class Line2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_antialiased() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Line2D.method_get_antialiased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

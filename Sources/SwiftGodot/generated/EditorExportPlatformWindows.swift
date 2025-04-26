@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The Windows exporter customizes how a Windows build is handled. In the editor's "Export" window, it is created when adding a new "Windows" preset.
 open class EditorExportPlatformWindows: EditorExportPlatformPC {
-    fileprivate static var className = StringName("EditorExportPlatformWindows")
+    private static var className = StringName("EditorExportPlatformWindows")
     override open class var godotClassName: StringName { className }
 }
 

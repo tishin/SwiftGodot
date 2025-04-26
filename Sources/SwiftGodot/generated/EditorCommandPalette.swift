@@ -28,11 +28,11 @@ import Musl
 /// > Note: This class shouldn't be instantiated directly. Instead, access the singleton using ``EditorInterface/getCommandPalette()``.
 /// 
 open class EditorCommandPalette: ConfirmationDialog {
-    fileprivate static var className = StringName("EditorCommandPalette")
+    private static var className = StringName("EditorCommandPalette")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_add_command: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_command")
+    fileprivate static let method_add_command: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_command")
         return withUnsafePointer(to: &EditorCommandPalette.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 864043298)!
@@ -53,6 +53,7 @@ open class EditorCommandPalette: ConfirmationDialog {
     /// - `shortcutText`: ``String`` (Shortcut text of the **Command** if available.)
     /// 
     public final func addCommand(commandName: String, keyName: String, bindedCallable: Callable, shortcutText: String = "None") {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let commandName = GString(commandName)
         withUnsafePointer(to: commandName.content) { pArg0 in
             let keyName = GString(keyName)
@@ -78,8 +79,8 @@ open class EditorCommandPalette: ConfirmationDialog {
         
     }
     
-    fileprivate static var method_remove_command: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_command")
+    fileprivate static let method_remove_command: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_command")
         return withUnsafePointer(to: &EditorCommandPalette.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -94,6 +95,7 @@ open class EditorCommandPalette: ConfirmationDialog {
     /// - `keyName`: ``String`` (Name of the key for a particular **Command**.)
     /// 
     public final func removeCommand(keyName: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let keyName = GString(keyName)
         withUnsafePointer(to: keyName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

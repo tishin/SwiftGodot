@@ -28,11 +28,11 @@ import Musl
 /// > Note: ``Tween/tweenCallback(_:)`` is the only correct way to create ``CallbackTweener``. Any ``CallbackTweener`` created manually will not function correctly.
 /// 
 open class CallbackTweener: Tweener {
-    fileprivate static var className = StringName("CallbackTweener")
+    private static var className = StringName("CallbackTweener")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_set_delay: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_delay")
+    fileprivate static let method_set_delay: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_delay")
         return withUnsafePointer(to: &CallbackTweener.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3008182292)!
@@ -44,9 +44,10 @@ open class CallbackTweener: Tweener {
     
     /// Makes the callback call delayed by given time in seconds.
     /// 
-    /// **Example:**
+    /// **Example:** Call ``Node/queueFree()`` after 2 seconds:
     /// 
     public final func setDelay(_ delay: Double) -> CallbackTweener? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: delay) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -58,7 +59,7 @@ open class CallbackTweener: Tweener {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

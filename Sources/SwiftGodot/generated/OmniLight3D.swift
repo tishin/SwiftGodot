@@ -28,7 +28,7 @@ import Musl
 /// > Note: When using the Mobile or Compatibility rendering methods, omni lights will only correctly affect meshes whose visibility AABB intersects with the light's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, ``GeometryInstance3D/extraCullMargin`` must be increased on the mesh. Otherwise, the light may not be visible on the mesh.
 /// 
 open class OmniLight3D: Light3D {
-    fileprivate static var className = StringName("OmniLight3D")
+    private static var className = StringName("OmniLight3D")
     override open class var godotClassName: StringName { className }
     public enum ShadowMode: Int64, CaseIterable {
         /// Shadows are rendered to a dual-paraboloid texture. Faster than ``ShadowMode/cube``, but lower-quality.
@@ -87,8 +87,8 @@ open class OmniLight3D: Light3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_shadow_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shadow_mode")
+    fileprivate static let method_set_shadow_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shadow_mode")
         return withUnsafePointer(to: &OmniLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 121862228)!
@@ -100,6 +100,7 @@ open class OmniLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func set_shadow_mode(_ mode: OmniLight3D.ShadowMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -113,8 +114,8 @@ open class OmniLight3D: Light3D {
         
     }
     
-    fileprivate static var method_get_shadow_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shadow_mode")
+    fileprivate static let method_get_shadow_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shadow_mode")
         return withUnsafePointer(to: &OmniLight3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4181586331)!
@@ -126,6 +127,7 @@ open class OmniLight3D: Light3D {
     
     @inline(__always)
     fileprivate final func get_shadow_mode() -> OmniLight3D.ShadowMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(OmniLight3D.method_get_shadow_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return OmniLight3D.ShadowMode (rawValue: _result)!

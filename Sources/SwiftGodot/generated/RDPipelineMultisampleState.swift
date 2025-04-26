@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``RDPipelineMultisampleState`` is used to control how multisample or supersample antialiasing is being performed when rendering using ``RenderingDevice``.
 open class RDPipelineMultisampleState: RefCounted {
-    fileprivate static var className = StringName("RDPipelineMultisampleState")
+    private static var className = StringName("RDPipelineMultisampleState")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -89,7 +89,7 @@ open class RDPipelineMultisampleState: RefCounted {
     }
     
     /// The sample mask array. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-samplemask">sample mask Vulkan documentation</a> for more details.
-    final public var sampleMasks: VariantCollection<Int64> {
+    final public var sampleMasks: TypedArray<Int64> {
         get {
             return get_sample_masks ()
         }
@@ -101,8 +101,8 @@ open class RDPipelineMultisampleState: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_sample_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sample_count")
+    fileprivate static let method_set_sample_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sample_count")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3774171498)!
@@ -114,6 +114,7 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_sample_count(_ pMember: RenderingDevice.TextureSamples) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -127,8 +128,8 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    fileprivate static var method_get_sample_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sample_count")
+    fileprivate static let method_get_sample_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sample_count")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 407791724)!
@@ -140,13 +141,14 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_sample_count() -> RenderingDevice.TextureSamples {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_sample_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.TextureSamples (rawValue: _result)!
     }
     
-    fileprivate static var method_set_enable_sample_shading: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_sample_shading")
+    fileprivate static let method_set_enable_sample_shading: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_sample_shading")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -158,6 +160,7 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_sample_shading(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -171,8 +174,8 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_sample_shading: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_sample_shading")
+    fileprivate static let method_get_enable_sample_shading: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_sample_shading")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -184,13 +187,14 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_sample_shading() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_sample_shading, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_min_sample_shading: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_sample_shading")
+    fileprivate static let method_set_min_sample_shading: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_sample_shading")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -202,6 +206,7 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_min_sample_shading(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -215,8 +220,8 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    fileprivate static var method_get_min_sample_shading: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_sample_shading")
+    fileprivate static let method_get_min_sample_shading: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_sample_shading")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -228,13 +233,14 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_min_sample_shading() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_min_sample_shading, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_alpha_to_coverage: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_alpha_to_coverage")
+    fileprivate static let method_set_enable_alpha_to_coverage: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_alpha_to_coverage")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -246,6 +252,7 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_alpha_to_coverage(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -259,8 +266,8 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_alpha_to_coverage: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_alpha_to_coverage")
+    fileprivate static let method_get_enable_alpha_to_coverage: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_alpha_to_coverage")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -272,13 +279,14 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_alpha_to_coverage() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_alpha_to_coverage, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_alpha_to_one: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_alpha_to_one")
+    fileprivate static let method_set_enable_alpha_to_one: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_alpha_to_one")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -290,6 +298,7 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_alpha_to_one(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -303,8 +312,8 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_alpha_to_one: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_alpha_to_one")
+    fileprivate static let method_get_enable_alpha_to_one: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_alpha_to_one")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -316,13 +325,14 @@ open class RDPipelineMultisampleState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_alpha_to_one() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_alpha_to_one, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sample_masks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sample_masks")
+    fileprivate static let method_set_sample_masks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sample_masks")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -333,7 +343,8 @@ open class RDPipelineMultisampleState: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func set_sample_masks(_ masks: VariantCollection<Int64>) {
+    fileprivate final func set_sample_masks(_ masks: TypedArray<Int64>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: masks.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -347,8 +358,8 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    fileprivate static var method_get_sample_masks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sample_masks")
+    fileprivate static let method_get_sample_masks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sample_masks")
         return withUnsafePointer(to: &RDPipelineMultisampleState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -359,10 +370,11 @@ open class RDPipelineMultisampleState: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func get_sample_masks() -> VariantCollection<Int64> {
+    fileprivate final func get_sample_masks() -> TypedArray<Int64> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_sample_masks, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<Int64>(content: _result)
+        return TypedArray<Int64>(takingOver: _result)
     }
     
 }

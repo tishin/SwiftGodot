@@ -30,16 +30,18 @@ import Musl
 /// This object emits the following signals:
 /// 
 /// - ``extensionsReloaded``
+/// - ``extensionLoaded``
+/// - ``extensionUnloading``
 open class GDExtensionManager: Object {
     /// The shared instance of this class
-    public static var shared: GDExtensionManager = {
-        return withUnsafePointer (to: &GDExtensionManager.godotClassName.content) { ptr in
-            GDExtensionManager (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: GDExtensionManager {
+        return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("GDExtensionManager")
+    private static var className = StringName("GDExtensionManager")
     override open class var godotClassName: StringName { className }
     public enum LoadStatus: Int64, CaseIterable {
         /// The extension has loaded successfully.
@@ -55,8 +57,8 @@ open class GDExtensionManager: Object {
     }
     
     /* Methods */
-    fileprivate static var method_load_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_extension")
+    fileprivate static let method_load_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_extension")
         return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4024158731)!
@@ -83,8 +85,8 @@ open class GDExtensionManager: Object {
         return GDExtensionManager.LoadStatus (rawValue: _result)!
     }
     
-    fileprivate static var method_reload_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reload_extension")
+    fileprivate static let method_reload_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reload_extension")
         return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4024158731)!
@@ -114,8 +116,8 @@ open class GDExtensionManager: Object {
         return GDExtensionManager.LoadStatus (rawValue: _result)!
     }
     
-    fileprivate static var method_unload_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("unload_extension")
+    fileprivate static let method_unload_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("unload_extension")
         return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4024158731)!
@@ -142,8 +144,8 @@ open class GDExtensionManager: Object {
         return GDExtensionManager.LoadStatus (rawValue: _result)!
     }
     
-    fileprivate static var method_is_extension_loaded: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_extension_loaded")
+    fileprivate static let method_is_extension_loaded: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_extension_loaded")
         return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -170,8 +172,8 @@ open class GDExtensionManager: Object {
         return _result
     }
     
-    fileprivate static var method_get_loaded_extensions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_loaded_extensions")
+    fileprivate static let method_get_loaded_extensions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_loaded_extensions")
         return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -188,8 +190,8 @@ open class GDExtensionManager: Object {
         return _result
     }
     
-    fileprivate static var method_get_extension: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_extension")
+    fileprivate static let method_get_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_extension")
         return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 49743343)!
@@ -213,7 +215,7 @@ open class GDExtensionManager: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 
@@ -232,6 +234,44 @@ open class GDExtensionManager: Object {
     /// }
     /// ```
     public var extensionsReloaded: SimpleSignal { SimpleSignal (target: self, signalName: "extensions_reloaded") }
+    
+    /// Emitted after the editor has finished loading a new extension.
+    /// 
+    /// > Note: This signal is only emitted in editor builds.
+    /// 
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.extensionLoaded.connect { `extension` in
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var extensionLoaded: SignalWithArguments<GDExtension?> { SignalWithArguments<GDExtension?> (target: self, signalName: "extension_loaded") }
+    
+    /// Emitted before the editor starts unloading an extension.
+    /// 
+    /// > Note: This signal is only emitted in editor builds.
+    /// 
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.extensionUnloading.connect { `extension` in
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var extensionUnloading: SignalWithArguments<GDExtension?> { SignalWithArguments<GDExtension?> (target: self, signalName: "extension_unloading") }
     
 }
 

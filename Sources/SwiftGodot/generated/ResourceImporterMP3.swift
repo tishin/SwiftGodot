@@ -28,7 +28,7 @@ import Musl
 /// MP3 requires more CPU to decode than ``ResourceImporterWAV``. If you need to play a lot of simultaneous sounds, it's recommended to use WAV for those sounds instead, especially if targeting low-end devices.
 /// 
 open class ResourceImporterMP3: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterMP3")
+    private static var className = StringName("ResourceImporterMP3")
     override open class var godotClassName: StringName { className }
 }
 

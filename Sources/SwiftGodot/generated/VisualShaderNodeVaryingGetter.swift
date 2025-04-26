@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Outputs a value of a varying defined in the shader. You need to first create a varying that can be used in the given function, e.g. varying getter in Fragment shader requires a varying with mode set to ``VisualShader/VaryingMode/vertexToFragLight``.
 open class VisualShaderNodeVaryingGetter: VisualShaderNodeVarying {
-    fileprivate static var className = StringName("VisualShaderNodeVaryingGetter")
+    private static var className = StringName("VisualShaderNodeVaryingGetter")
     override open class var godotClassName: StringName { className }
 }
 

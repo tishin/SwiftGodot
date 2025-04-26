@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``RDPipelineDepthStencilState`` controls the way depth and stencil comparisons are performed when sampling those values using ``RenderingDevice``.
 open class RDPipelineDepthStencilState: RefCounted {
-    fileprivate static var className = StringName("RDPipelineDepthStencilState")
+    private static var className = StringName("RDPipelineDepthStencilState")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -40,7 +40,7 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    /// If `true`, writes to the depth buffer whenever the depth test returns true. Only works when enable_depth_test is also true.
+    /// If `true`, writes to the depth buffer whenever the depth test returns `true`. Only works when enable_depth_test is also `true`.
     final public var enableDepthWrite: Bool {
         get {
             return get_enable_depth_write ()
@@ -76,7 +76,7 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    /// The minimum depth that returns true for ``enableDepthRange``.
+    /// The minimum depth that returns `true` for ``enableDepthRange``.
     final public var depthRangeMin: Double {
         get {
             return get_depth_range_min ()
@@ -88,7 +88,7 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    /// The maximum depth that returns true for ``enableDepthRange``.
+    /// The maximum depth that returns `true` for ``enableDepthRange``.
     final public var depthRangeMax: Double {
         get {
             return get_depth_range_max ()
@@ -196,7 +196,7 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    /// The operation to perform on the stencil buffer for back pixels that fail the stencil test
+    /// The operation to perform on the stencil buffer for back pixels that fail the stencil test.
     final public var backOpFail: RenderingDevice.StencilOperation {
         get {
             return get_back_op_fail ()
@@ -281,8 +281,8 @@ open class RDPipelineDepthStencilState: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_enable_depth_test: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_depth_test")
+    fileprivate static let method_set_enable_depth_test: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_depth_test")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -294,6 +294,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_depth_test(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -307,8 +308,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_depth_test: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_depth_test")
+    fileprivate static let method_get_enable_depth_test: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_depth_test")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -320,13 +321,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_depth_test() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_enable_depth_test, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_depth_write: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_depth_write")
+    fileprivate static let method_set_enable_depth_write: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_depth_write")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -338,6 +340,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_depth_write(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -351,8 +354,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_depth_write: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_depth_write")
+    fileprivate static let method_get_enable_depth_write: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_depth_write")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -364,13 +367,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_depth_write() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_enable_depth_write, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth_compare_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_compare_operator")
+    fileprivate static let method_set_depth_compare_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_compare_operator")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2573711505)!
@@ -382,6 +386,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_compare_operator(_ pMember: RenderingDevice.CompareOperator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -395,8 +400,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_compare_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_compare_operator")
+    fileprivate static let method_get_depth_compare_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_compare_operator")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 269730778)!
@@ -408,13 +413,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_compare_operator() -> RenderingDevice.CompareOperator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_depth_compare_operator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.CompareOperator (rawValue: _result)!
     }
     
-    fileprivate static var method_set_enable_depth_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_depth_range")
+    fileprivate static let method_set_enable_depth_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_depth_range")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -426,6 +432,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_depth_range(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -439,8 +446,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_depth_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_depth_range")
+    fileprivate static let method_get_enable_depth_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_depth_range")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -452,13 +459,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_depth_range() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_enable_depth_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth_range_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_range_min")
+    fileprivate static let method_set_depth_range_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_range_min")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -470,6 +478,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_range_min(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -483,8 +492,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_range_min: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_range_min")
+    fileprivate static let method_get_depth_range_min: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_range_min")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -496,13 +505,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_range_min() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_depth_range_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth_range_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_range_max")
+    fileprivate static let method_set_depth_range_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_range_max")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -514,6 +524,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_range_max(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -527,8 +538,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_range_max: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_range_max")
+    fileprivate static let method_get_depth_range_max: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_range_max")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -540,13 +551,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_range_max() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_depth_range_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_enable_stencil: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_stencil")
+    fileprivate static let method_set_enable_stencil: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_stencil")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -558,6 +570,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_stencil(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -571,8 +584,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_stencil: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_stencil")
+    fileprivate static let method_get_enable_stencil: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_stencil")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -584,13 +597,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_stencil() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_enable_stencil, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_front_op_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_op_fail")
+    fileprivate static let method_set_front_op_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_op_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2092799566)!
@@ -602,6 +616,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_op_fail(_ pMember: RenderingDevice.StencilOperation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -615,8 +630,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_op_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_op_fail")
+    fileprivate static let method_get_front_op_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_op_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1714732389)!
@@ -628,13 +643,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_op_fail() -> RenderingDevice.StencilOperation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_front_op_fail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.StencilOperation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_front_op_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_op_pass")
+    fileprivate static let method_set_front_op_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_op_pass")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2092799566)!
@@ -646,6 +662,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_op_pass(_ pMember: RenderingDevice.StencilOperation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -659,8 +676,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_op_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_op_pass")
+    fileprivate static let method_get_front_op_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_op_pass")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1714732389)!
@@ -672,13 +689,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_op_pass() -> RenderingDevice.StencilOperation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_front_op_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.StencilOperation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_front_op_depth_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_op_depth_fail")
+    fileprivate static let method_set_front_op_depth_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_op_depth_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2092799566)!
@@ -690,6 +708,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_op_depth_fail(_ pMember: RenderingDevice.StencilOperation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -703,8 +722,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_op_depth_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_op_depth_fail")
+    fileprivate static let method_get_front_op_depth_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_op_depth_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1714732389)!
@@ -716,13 +735,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_op_depth_fail() -> RenderingDevice.StencilOperation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_front_op_depth_fail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.StencilOperation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_front_op_compare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_op_compare")
+    fileprivate static let method_set_front_op_compare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_op_compare")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2573711505)!
@@ -734,6 +754,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_op_compare(_ pMember: RenderingDevice.CompareOperator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -747,8 +768,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_op_compare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_op_compare")
+    fileprivate static let method_get_front_op_compare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_op_compare")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 269730778)!
@@ -760,13 +781,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_op_compare() -> RenderingDevice.CompareOperator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_front_op_compare, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.CompareOperator (rawValue: _result)!
     }
     
-    fileprivate static var method_set_front_op_compare_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_op_compare_mask")
+    fileprivate static let method_set_front_op_compare_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_op_compare_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -778,6 +800,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_op_compare_mask(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -791,8 +814,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_op_compare_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_op_compare_mask")
+    fileprivate static let method_get_front_op_compare_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_op_compare_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -804,13 +827,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_op_compare_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_front_op_compare_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_front_op_write_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_op_write_mask")
+    fileprivate static let method_set_front_op_write_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_op_write_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -822,6 +846,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_op_write_mask(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -835,8 +860,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_op_write_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_op_write_mask")
+    fileprivate static let method_get_front_op_write_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_op_write_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -848,13 +873,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_op_write_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_front_op_write_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_front_op_reference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_op_reference")
+    fileprivate static let method_set_front_op_reference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_op_reference")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -866,6 +892,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_op_reference(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -879,8 +906,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_op_reference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_op_reference")
+    fileprivate static let method_get_front_op_reference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_op_reference")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -892,13 +919,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_op_reference() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_front_op_reference, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_back_op_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_back_op_fail")
+    fileprivate static let method_set_back_op_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_back_op_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2092799566)!
@@ -910,6 +938,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_back_op_fail(_ pMember: RenderingDevice.StencilOperation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -923,8 +952,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_back_op_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_back_op_fail")
+    fileprivate static let method_get_back_op_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_back_op_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1714732389)!
@@ -936,13 +965,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_back_op_fail() -> RenderingDevice.StencilOperation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_back_op_fail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.StencilOperation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_back_op_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_back_op_pass")
+    fileprivate static let method_set_back_op_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_back_op_pass")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2092799566)!
@@ -954,6 +984,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_back_op_pass(_ pMember: RenderingDevice.StencilOperation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -967,8 +998,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_back_op_pass: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_back_op_pass")
+    fileprivate static let method_get_back_op_pass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_back_op_pass")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1714732389)!
@@ -980,13 +1011,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_back_op_pass() -> RenderingDevice.StencilOperation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_back_op_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.StencilOperation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_back_op_depth_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_back_op_depth_fail")
+    fileprivate static let method_set_back_op_depth_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_back_op_depth_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2092799566)!
@@ -998,6 +1030,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_back_op_depth_fail(_ pMember: RenderingDevice.StencilOperation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1011,8 +1044,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_back_op_depth_fail: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_back_op_depth_fail")
+    fileprivate static let method_get_back_op_depth_fail: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_back_op_depth_fail")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1714732389)!
@@ -1024,13 +1057,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_back_op_depth_fail() -> RenderingDevice.StencilOperation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_back_op_depth_fail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.StencilOperation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_back_op_compare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_back_op_compare")
+    fileprivate static let method_set_back_op_compare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_back_op_compare")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2573711505)!
@@ -1042,6 +1076,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_back_op_compare(_ pMember: RenderingDevice.CompareOperator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1055,8 +1090,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_back_op_compare: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_back_op_compare")
+    fileprivate static let method_get_back_op_compare: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_back_op_compare")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 269730778)!
@@ -1068,13 +1103,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_back_op_compare() -> RenderingDevice.CompareOperator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_back_op_compare, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.CompareOperator (rawValue: _result)!
     }
     
-    fileprivate static var method_set_back_op_compare_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_back_op_compare_mask")
+    fileprivate static let method_set_back_op_compare_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_back_op_compare_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1086,6 +1122,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_back_op_compare_mask(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1099,8 +1136,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_back_op_compare_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_back_op_compare_mask")
+    fileprivate static let method_get_back_op_compare_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_back_op_compare_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1112,13 +1149,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_back_op_compare_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_back_op_compare_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_back_op_write_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_back_op_write_mask")
+    fileprivate static let method_set_back_op_write_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_back_op_write_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1130,6 +1168,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_back_op_write_mask(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1143,8 +1182,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_back_op_write_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_back_op_write_mask")
+    fileprivate static let method_get_back_op_write_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_back_op_write_mask")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1156,13 +1195,14 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_back_op_write_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_back_op_write_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_back_op_reference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_back_op_reference")
+    fileprivate static let method_set_back_op_reference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_back_op_reference")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1174,6 +1214,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_back_op_reference(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1187,8 +1228,8 @@ open class RDPipelineDepthStencilState: RefCounted {
         
     }
     
-    fileprivate static var method_get_back_op_reference: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_back_op_reference")
+    fileprivate static let method_get_back_op_reference: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_back_op_reference")
         return withUnsafePointer(to: &RDPipelineDepthStencilState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1200,6 +1241,7 @@ open class RDPipelineDepthStencilState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_back_op_reference() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineDepthStencilState.method_get_back_op_reference, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

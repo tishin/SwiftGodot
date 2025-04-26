@@ -26,7 +26,7 @@ import Musl
 /// This class is used by a ``ShaderMaterial`` and allows you to write your own custom behavior for rendering visual items or updating particle information. For a detailed explanation and usage, please see the tutorials linked below.
 /// 
 open class Shader: Resource {
-    fileprivate static var className = StringName("Shader")
+    private static var className = StringName("Shader")
     override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// Mode used to draw all 3D objects.
@@ -57,8 +57,8 @@ open class Shader: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mode")
+    fileprivate static let method_get_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mode")
         return withUnsafePointer(to: &Shader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3392948163)!
@@ -70,13 +70,14 @@ open class Shader: Resource {
     
     /// Returns the shader mode for the shader.
     public final func getMode() -> Shader.Mode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Shader.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Shader.Mode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_code")
+    fileprivate static let method_set_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_code")
         return withUnsafePointer(to: &Shader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -88,6 +89,7 @@ open class Shader: Resource {
     
     @inline(__always)
     fileprivate final func set_code(_ code: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let code = GString(code)
         withUnsafePointer(to: code.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -102,8 +104,8 @@ open class Shader: Resource {
         
     }
     
-    fileprivate static var method_get_code: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_code")
+    fileprivate static let method_get_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_code")
         return withUnsafePointer(to: &Shader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -115,16 +117,17 @@ open class Shader: Resource {
     
     @inline(__always)
     fileprivate final func get_code() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Shader.method_get_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_default_texture_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_texture_parameter")
+    fileprivate static let method_set_default_texture_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_texture_parameter")
         return withUnsafePointer(to: &Shader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2750740428)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3850209648)!
             }
             
         }
@@ -137,7 +140,8 @@ open class Shader: Resource {
     /// 
     /// > Note: If the sampler array is used use `index` to access the specified texture.
     /// 
-    public final func setDefaultTextureParameter(name: StringName, texture: Texture2D?, index: Int32 = 0) {
+    public final func setDefaultTextureParameter(name: StringName, texture: Texture?, index: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: index) { pArg2 in
@@ -157,11 +161,11 @@ open class Shader: Resource {
         
     }
     
-    fileprivate static var method_get_default_texture_parameter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_default_texture_parameter")
+    fileprivate static let method_get_default_texture_parameter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_default_texture_parameter")
         return withUnsafePointer(to: &Shader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3090538643)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4213877425)!
             }
             
         }
@@ -174,7 +178,8 @@ open class Shader: Resource {
     /// 
     /// > Note: If the sampler array is used use `index` to access the specified texture.
     /// 
-    public final func getDefaultTextureParameter(name: StringName, index: Int32 = 0) -> Texture2D? {
+    public final func getDefaultTextureParameter(name: StringName, index: Int32 = 0) -> Texture? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
@@ -189,11 +194,11 @@ open class Shader: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_shader_uniform_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shader_uniform_list")
+    fileprivate static let method_get_shader_uniform_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shader_uniform_list")
         return withUnsafePointer(to: &Shader.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1230511656)!
@@ -203,12 +208,13 @@ open class Shader: Resource {
         
     }()
     
-    /// Get the list of shader uniforms that can be assigned to a ``ShaderMaterial``, for use with ``ShaderMaterial/setShaderParameter(param:value:)`` and ``ShaderMaterial/getShaderParameter(param:)``. The parameters returned are contained in dictionaries in a similar format to the ones returned by ``Object/getPropertyList()``.
+    /// Returns the list of shader uniforms that can be assigned to a ``ShaderMaterial``, for use with ``ShaderMaterial/setShaderParameter(param:value:)`` and ``ShaderMaterial/getShaderParameter(param:)``. The parameters returned are contained in dictionaries in a similar format to the ones returned by ``Object/getPropertyList()``.
     /// 
-    /// If argument `getGroups` is true, parameter grouping hints will be provided.
+    /// If argument `getGroups` is `true`, parameter grouping hints are also included in the list.
     /// 
-    public final func getShaderUniformList(getGroups: Bool = false) -> GArray {
-        let _result: GArray = GArray ()
+    public final func getShaderUniformList(getGroups: Bool = false) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: getGroups) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -220,6 +226,24 @@ open class Shader: Resource {
         }
         
         return _result
+    }
+    
+    fileprivate static let method_inspect_native_shader_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("inspect_native_shader_code")
+        return withUnsafePointer(to: &Shader.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Only available when running in the editor. Opens a popup that visualizes the generated shader code, including all variants and internal shader code. See also ``Material/inspectNativeShaderCode()``.
+    public final func inspectNativeShaderCode() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Shader.method_inspect_native_shader_code, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
     
 }

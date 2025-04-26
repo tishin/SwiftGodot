@@ -34,16 +34,16 @@ import Musl
 /// > Note: Particles pushed by a collider that is being moved will not be interpolated, which can result in visible stuttering. This can be alleviated by setting ``GPUParticles3D/fixedFps`` to `0` or a value that matches or exceeds the target framerate.
 /// 
 open class GPUParticlesCollision3D: VisualInstance3D {
-    fileprivate static var className = StringName("GPUParticlesCollision3D")
+    private static var className = StringName("GPUParticlesCollision3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /// The particle rendering layers (``VisualInstance3D/layers``) that will be affected by the collision shape. By default, all particles that have ``ParticleProcessMaterial/collisionMode`` set to ``ParticleProcessMaterial/CollisionMode/rigid`` or ``ParticleProcessMaterial/CollisionMode/hideOnContact`` will be affected by a collision shape.
     /// 
-    /// After configuring particle nodes accordingly, specific layers can be unchecked to prevent certain particles from being affected by attractors. For example, this can be used if you're using an attractor as part of a spell effect but don't want the attractor to affect unrelated weather particles at the same position.
+    /// After configuring particle nodes accordingly, specific layers can be unchecked to prevent certain particles from being affected by colliders. For example, this can be used if you're using a collider as part of a spell effect but don't want the collider to affect unrelated weather particles at the same position.
     /// 
-    /// Particle attraction can also be disabled on a per-process material basis by setting ``ParticleProcessMaterial/attractorInteractionEnabled`` on the ``GPUParticles3D`` node.
+    /// Particle collision can also be disabled on a per-process material basis by setting ``ParticleProcessMaterial/collisionMode`` on the ``GPUParticles3D`` node.
     /// 
     final public var cullMask: UInt32 {
         get {
@@ -57,8 +57,8 @@ open class GPUParticlesCollision3D: VisualInstance3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mask")
+    fileprivate static let method_set_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mask")
         return withUnsafePointer(to: &GPUParticlesCollision3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -70,6 +70,7 @@ open class GPUParticlesCollision3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func set_cull_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -83,8 +84,8 @@ open class GPUParticlesCollision3D: VisualInstance3D {
         
     }
     
-    fileprivate static var method_get_cull_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mask")
+    fileprivate static let method_get_cull_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mask")
         return withUnsafePointer(to: &GPUParticlesCollision3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -96,6 +97,7 @@ open class GPUParticlesCollision3D: VisualInstance3D {
     
     @inline(__always)
     fileprivate final func get_cull_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(GPUParticlesCollision3D.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

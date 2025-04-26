@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The ``VisualInstance3D`` is used to connect a resource to a visual representation. All visual 3D nodes inherit from the ``VisualInstance3D``. In general, you should not access the ``VisualInstance3D`` properties directly as they are accessed and managed by the nodes that inherit from ``VisualInstance3D``. ``VisualInstance3D`` is the node representation of the ``RenderingServer`` instance.
 open class VisualInstance3D: Node3D {
-    fileprivate static var className = StringName("VisualInstance3D")
+    private static var className = StringName("VisualInstance3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -77,14 +77,28 @@ open class VisualInstance3D: Node3D {
     }
     
     /* Methods */
+    fileprivate static let method__get_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_aabb")
+        return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
+            }
+            
+        }
+        
+    }()
+    
     /// 
     @_documentation(visibility: public)
     open func _getAabb() -> AABB {
-        return AABB ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: AABB = AABB ()
+        gi.object_method_bind_ptrcall(VisualInstance3D.method__get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
     
-    fileprivate static var method_set_base: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_base")
+    fileprivate static let method_set_base: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_base")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -96,6 +110,7 @@ open class VisualInstance3D: Node3D {
     
     /// Sets the resource that is instantiated by this ``VisualInstance3D``, which changes how the engine handles the ``VisualInstance3D`` under the hood. Equivalent to ``RenderingServer/instanceSetBase(instance:base:)``.
     public final func setBase(_ base: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: base.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -109,8 +124,8 @@ open class VisualInstance3D: Node3D {
         
     }
     
-    fileprivate static var method_get_base: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_base")
+    fileprivate static let method_get_base: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_base")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -122,13 +137,14 @@ open class VisualInstance3D: Node3D {
     
     /// Returns the RID of the resource associated with this ``VisualInstance3D``. For example, if the Node is a ``MeshInstance3D``, this will return the RID of the associated ``Mesh``.
     public final func getBase() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(VisualInstance3D.method_get_base, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_instance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance")
+    fileprivate static let method_get_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -140,13 +156,14 @@ open class VisualInstance3D: Node3D {
     
     /// Returns the RID of this instance. This RID is the same as the RID returned by ``RenderingServer/instanceCreate()``. This RID is needed if you want to call ``RenderingServer`` functions directly on this ``VisualInstance3D``.
     public final func getInstance() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(VisualInstance3D.method_get_instance, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_layer_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_mask")
+    fileprivate static let method_set_layer_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_mask")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -158,6 +175,7 @@ open class VisualInstance3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_layer_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -171,8 +189,8 @@ open class VisualInstance3D: Node3D {
         
     }
     
-    fileprivate static var method_get_layer_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_mask")
+    fileprivate static let method_get_layer_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_mask")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -184,13 +202,14 @@ open class VisualInstance3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_layer_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(VisualInstance3D.method_get_layer_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_layer_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_mask_value")
+    fileprivate static let method_set_layer_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_mask_value")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -202,6 +221,7 @@ open class VisualInstance3D: Node3D {
     
     /// Based on `value`, enables or disables the specified layer in the ``layers``, given a `layerNumber` between 1 and 20.
     public final func setLayerMaskValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -218,8 +238,8 @@ open class VisualInstance3D: Node3D {
         
     }
     
-    fileprivate static var method_get_layer_mask_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_mask_value")
+    fileprivate static let method_get_layer_mask_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_mask_value")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -231,6 +251,7 @@ open class VisualInstance3D: Node3D {
     
     /// Returns whether or not the specified layer of the ``layers`` is enabled, given a `layerNumber` between 1 and 20.
     public final func getLayerMaskValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -245,8 +266,8 @@ open class VisualInstance3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_set_sorting_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sorting_offset")
+    fileprivate static let method_set_sorting_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sorting_offset")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -258,6 +279,7 @@ open class VisualInstance3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_sorting_offset(_ offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -271,8 +293,8 @@ open class VisualInstance3D: Node3D {
         
     }
     
-    fileprivate static var method_get_sorting_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_sorting_offset")
+    fileprivate static let method_get_sorting_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_sorting_offset")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -284,13 +306,14 @@ open class VisualInstance3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_sorting_offset() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(VisualInstance3D.method_get_sorting_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_sorting_use_aabb_center: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_sorting_use_aabb_center")
+    fileprivate static let method_set_sorting_use_aabb_center: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_sorting_use_aabb_center")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -302,6 +325,7 @@ open class VisualInstance3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_sorting_use_aabb_center(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -315,8 +339,8 @@ open class VisualInstance3D: Node3D {
         
     }
     
-    fileprivate static var method_is_sorting_use_aabb_center: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_sorting_use_aabb_center")
+    fileprivate static let method_is_sorting_use_aabb_center: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_sorting_use_aabb_center")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -328,13 +352,14 @@ open class VisualInstance3D: Node3D {
     
     @inline(__always)
     fileprivate final func is_sorting_use_aabb_center() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(VisualInstance3D.method_is_sorting_use_aabb_center, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_aabb")
+    fileprivate static let method_get_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_aabb")
         return withUnsafePointer(to: &VisualInstance3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -346,12 +371,13 @@ open class VisualInstance3D: Node3D {
     
     /// Returns the ``AABB`` (also known as the bounding box) for this ``VisualInstance3D``.
     public final func getAabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(VisualInstance3D.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_aabb":
@@ -367,7 +393,8 @@ open class VisualInstance3D: Node3D {
 // Support methods for proxies
 func _VisualInstance3D_proxy_get_aabb (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<VisualInstance3D>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? VisualInstance3D else { return }
     let ret = swiftObject._getAabb ()
     retPtr!.storeBytes (of: ret, as: AABB.self)
 }

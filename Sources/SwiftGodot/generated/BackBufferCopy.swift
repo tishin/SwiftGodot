@@ -26,7 +26,7 @@ import Musl
 /// > Note: Since this node inherits from ``Node2D`` (and not ``Control``), anchors and margins won't apply to child ``Control``-derived nodes. This can be problematic when resizing the window. To avoid this, add ``Control``-derived nodes as _siblings_ to the ``BackBufferCopy`` node instead of adding them as children.
 /// 
 open class BackBufferCopy: Node2D {
-    fileprivate static var className = StringName("BackBufferCopy")
+    private static var className = StringName("BackBufferCopy")
     override open class var godotClassName: StringName { className }
     public enum CopyMode: Int64, CaseIterable {
         /// Disables the buffering mode. This means the ``BackBufferCopy`` node will directly use the portion of screen it covers.
@@ -65,8 +65,8 @@ open class BackBufferCopy: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rect")
+    fileprivate static let method_set_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rect")
         return withUnsafePointer(to: &BackBufferCopy.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2046264180)!
@@ -78,6 +78,7 @@ open class BackBufferCopy: Node2D {
     
     @inline(__always)
     fileprivate final func set_rect(_ rect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -91,8 +92,8 @@ open class BackBufferCopy: Node2D {
         
     }
     
-    fileprivate static var method_get_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rect")
+    fileprivate static let method_get_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rect")
         return withUnsafePointer(to: &BackBufferCopy.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
@@ -104,13 +105,14 @@ open class BackBufferCopy: Node2D {
     
     @inline(__always)
     fileprivate final func get_rect() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         gi.object_method_bind_ptrcall(BackBufferCopy.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_copy_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_copy_mode")
+    fileprivate static let method_set_copy_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_copy_mode")
         return withUnsafePointer(to: &BackBufferCopy.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1713538590)!
@@ -122,6 +124,7 @@ open class BackBufferCopy: Node2D {
     
     @inline(__always)
     fileprivate final func set_copy_mode(_ copyMode: BackBufferCopy.CopyMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: copyMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -135,8 +138,8 @@ open class BackBufferCopy: Node2D {
         
     }
     
-    fileprivate static var method_get_copy_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_copy_mode")
+    fileprivate static let method_get_copy_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_copy_mode")
         return withUnsafePointer(to: &BackBufferCopy.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3271169440)!
@@ -148,6 +151,7 @@ open class BackBufferCopy: Node2D {
     
     @inline(__always)
     fileprivate final func get_copy_mode() -> BackBufferCopy.CopyMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BackBufferCopy.method_get_copy_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BackBufferCopy.CopyMode (rawValue: _result)!

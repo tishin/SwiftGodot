@@ -26,7 +26,7 @@ import Musl
 /// As face trackers are turned on they are registered with the ``XRServer``.
 /// 
 open class XRFaceTracker: XRTracker {
-    fileprivate static var className = StringName("XRFaceTracker")
+    private static var className = StringName("XRFaceTracker")
     override open class var godotClassName: StringName { className }
     public enum BlendShapeEntry: Int64, CaseIterable {
         /// Right eye looks outwards.
@@ -335,8 +335,8 @@ open class XRFaceTracker: XRTracker {
     }
     
     /* Methods */
-    fileprivate static var method_get_blend_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_shape")
+    fileprivate static let method_get_blend_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_shape")
         return withUnsafePointer(to: &XRFaceTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 330010046)!
@@ -348,6 +348,7 @@ open class XRFaceTracker: XRTracker {
     
     /// Returns the requested face blend shape weight.
     public final func getBlendShape(_ blendShape: XRFaceTracker.BlendShapeEntry) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: blendShape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -362,8 +363,8 @@ open class XRFaceTracker: XRTracker {
         return _result
     }
     
-    fileprivate static var method_set_blend_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_shape")
+    fileprivate static let method_set_blend_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_shape")
         return withUnsafePointer(to: &XRFaceTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2352588791)!
@@ -375,6 +376,7 @@ open class XRFaceTracker: XRTracker {
     
     /// Sets a face blend shape weight.
     public final func setBlendShape(_ blendShape: XRFaceTracker.BlendShapeEntry, weight: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: blendShape.rawValue) { pArg0 in
             withUnsafePointer(to: weight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -391,8 +393,8 @@ open class XRFaceTracker: XRTracker {
         
     }
     
-    fileprivate static var method_get_blend_shapes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_shapes")
+    fileprivate static let method_get_blend_shapes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_shapes")
         return withUnsafePointer(to: &XRFaceTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675695659)!
@@ -404,13 +406,14 @@ open class XRFaceTracker: XRTracker {
     
     @inline(__always)
     fileprivate final func get_blend_shapes() -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
         gi.object_method_bind_ptrcall(XRFaceTracker.method_get_blend_shapes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_blend_shapes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_shapes")
+    fileprivate static let method_set_blend_shapes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_shapes")
         return withUnsafePointer(to: &XRFaceTracker.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2899603908)!
@@ -422,6 +425,7 @@ open class XRFaceTracker: XRTracker {
     
     @inline(__always)
     fileprivate final func set_blend_shapes(_ weights: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: weights.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

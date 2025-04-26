@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``SpringArm3D`` casts a ray or a shape along its Z axis and moves all its direct children to the collision point, with an optional margin. This is useful for 3rd person cameras that move closer to the player when inside a tight space (you may need to exclude the player's collider from the ``SpringArm3D``'s collision check).
 open class SpringArm3D: Node3D {
-    fileprivate static var className = StringName("SpringArm3D")
+    private static var className = StringName("SpringArm3D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -88,8 +88,8 @@ open class SpringArm3D: Node3D {
     }
     
     /* Methods */
-    fileprivate static var method_get_hit_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hit_length")
+    fileprivate static let method_get_hit_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hit_length")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -101,13 +101,14 @@ open class SpringArm3D: Node3D {
     
     /// Returns the spring arm's current length.
     public final func getHitLength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SpringArm3D.method_get_hit_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_length")
+    fileprivate static let method_set_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_length")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -119,6 +120,7 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_length(_ length: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -132,8 +134,8 @@ open class SpringArm3D: Node3D {
         
     }
     
-    fileprivate static var method_get_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_length")
+    fileprivate static let method_get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_length")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -145,13 +147,14 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SpringArm3D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shape")
+    fileprivate static let method_set_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shape")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1549710052)!
@@ -163,6 +166,7 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_shape(_ shape: Shape3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shape?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -176,8 +180,8 @@ open class SpringArm3D: Node3D {
         
     }
     
-    fileprivate static var method_get_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shape")
+    fileprivate static let method_get_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shape")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3214262478)!
@@ -189,13 +193,14 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_shape() -> Shape3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(SpringArm3D.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_excluded_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_excluded_object")
+    fileprivate static let method_add_excluded_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_excluded_object")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -207,6 +212,7 @@ open class SpringArm3D: Node3D {
     
     /// Adds the ``PhysicsBody3D`` object with the given ``RID`` to the list of ``PhysicsBody3D`` objects excluded from the collision check.
     public final func addExcludedObject(rid: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -220,8 +226,8 @@ open class SpringArm3D: Node3D {
         
     }
     
-    fileprivate static var method_remove_excluded_object: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_excluded_object")
+    fileprivate static let method_remove_excluded_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_excluded_object")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3521089500)!
@@ -233,6 +239,7 @@ open class SpringArm3D: Node3D {
     
     /// Removes the given ``RID`` from the list of ``PhysicsBody3D`` objects excluded from the collision check.
     public final func removeExcludedObject(rid: RID) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -247,8 +254,8 @@ open class SpringArm3D: Node3D {
         return _result
     }
     
-    fileprivate static var method_clear_excluded_objects: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_excluded_objects")
+    fileprivate static let method_clear_excluded_objects: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_excluded_objects")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -260,12 +267,13 @@ open class SpringArm3D: Node3D {
     
     /// Clears the list of ``PhysicsBody3D`` objects excluded from the collision check.
     public final func clearExcludedObjects() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(SpringArm3D.method_clear_excluded_objects, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_mask")
+    fileprivate static let method_set_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_mask")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -277,6 +285,7 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_collision_mask(_ mask: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -290,8 +299,8 @@ open class SpringArm3D: Node3D {
         
     }
     
-    fileprivate static var method_get_collision_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_mask")
+    fileprivate static let method_get_collision_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_mask")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -303,13 +312,14 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_collision_mask() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(SpringArm3D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_margin")
+    fileprivate static let method_set_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_margin")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -321,6 +331,7 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func set_margin(_ margin: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -334,8 +345,8 @@ open class SpringArm3D: Node3D {
         
     }
     
-    fileprivate static var method_get_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_margin")
+    fileprivate static let method_get_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_margin")
         return withUnsafePointer(to: &SpringArm3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -347,6 +358,7 @@ open class SpringArm3D: Node3D {
     
     @inline(__always)
     fileprivate final func get_margin() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(SpringArm3D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

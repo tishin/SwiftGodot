@@ -27,13 +27,15 @@ import Musl
 /// 
 /// To force an update earlier on, call ``updateInternals()``.
 /// 
+/// > Note: For performance and compatibility reasons, the coordinates serialized by ``TileMap`` are limited to 16-bit signed integers, i.e. the range for X and Y coordinates is from `-32768` to `32767`. When saving tile data, tiles outside this range are wrapped.
+/// 
 /// 
 /// 
 /// This object emits the following signals:
 /// 
 /// - ``changed``
 open class TileMap: Node2D {
-    fileprivate static var className = StringName("TileMap")
+    private static var className = StringName("TileMap")
     override open class var godotClassName: StringName { className }
     public enum VisibilityMode: Int64, CaseIterable {
         /// Use the debug settings to determine visibility.
@@ -116,6 +118,17 @@ open class TileMap: Node2D {
     }
     
     /* Methods */
+    fileprivate static let method__use_tile_data_runtime_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_use_tile_data_runtime_update")
+        return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3957903770)!
+            }
+            
+        }
+        
+    }()
+    
     /// Should return `true` if the tile at coordinates `coords` on layer `layer` requires a runtime update.
     /// 
     /// > Warning: Make sure this function only return `true` when needed. Any tile processed at runtime without a need for it will imply a significant performance penalty.
@@ -124,8 +137,34 @@ open class TileMap: Node2D {
     /// 
     @_documentation(visibility: public)
     open func _useTileDataRuntimeUpdate(layer: Int32, coords: Vector2i) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: layer) { pArg0 in
+            withUnsafePointer(to: coords) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(TileMap.method__use_tile_data_runtime_update, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__tile_data_runtime_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_tile_data_runtime_update")
+        return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4223434291)!
+            }
+            
+        }
+        
+    }()
     
     /// Called with a TileData object about to be used internally by the TileMap, allowing its modification at runtime.
     /// 
@@ -137,10 +176,28 @@ open class TileMap: Node2D {
     /// 
     @_documentation(visibility: public)
     open func _tileDataRuntimeUpdate(layer: Int32, coords: Vector2i, tileData: TileData?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: layer) { pArg0 in
+            withUnsafePointer(to: coords) { pArg1 in
+                withUnsafePointer(to: tileData?.handle) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(TileMap.method__tile_data_runtime_update, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_set_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_map")
+    fileprivate static let method_set_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_map")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4040184819)!
@@ -152,6 +209,7 @@ open class TileMap: Node2D {
     
     /// Assigns `map` as a ``NavigationServer2D`` navigation map for the specified TileMap layer `layer`.
     public final func setNavigationMap(layer: Int32, map: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: map.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -168,8 +226,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_map")
+    fileprivate static let method_get_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_map")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 495598643)!
@@ -181,6 +239,7 @@ open class TileMap: Node2D {
     
     /// Returns the ``RID`` of the ``NavigationServer2D`` navigation map assigned to the specified TileMap layer `layer`.
     public final func getNavigationMap(layer: Int32) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -195,8 +254,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_force_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_update")
+    fileprivate static let method_force_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_update")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -208,6 +267,7 @@ open class TileMap: Node2D {
     
     /// Forces the TileMap and the layer `layer` to update.
     public final func forceUpdate(layer: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -221,8 +281,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_set_tileset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_tileset")
+    fileprivate static let method_set_tileset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_tileset")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 774531446)!
@@ -234,6 +294,7 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func set_tileset(_ tileset: TileSet?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: tileset?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -247,8 +308,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_tileset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tileset")
+    fileprivate static let method_get_tileset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tileset")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678226422)!
@@ -260,13 +321,14 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func get_tileset() -> TileSet? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(TileMap.method_get_tileset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_rendering_quadrant_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rendering_quadrant_size")
+    fileprivate static let method_set_rendering_quadrant_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rendering_quadrant_size")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -278,6 +340,7 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func set_rendering_quadrant_size(_ size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -291,8 +354,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_rendering_quadrant_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rendering_quadrant_size")
+    fileprivate static let method_get_rendering_quadrant_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rendering_quadrant_size")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -304,13 +367,14 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func get_rendering_quadrant_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TileMap.method_get_rendering_quadrant_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_layers_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layers_count")
+    fileprivate static let method_get_layers_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layers_count")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -322,13 +386,14 @@ open class TileMap: Node2D {
     
     /// Returns the number of layers in the TileMap.
     public final func getLayersCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(TileMap.method_get_layers_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_layer")
+    fileprivate static let method_add_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_layer")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -340,6 +405,7 @@ open class TileMap: Node2D {
     
     /// Adds a layer at the given position `toPosition` in the array. If `toPosition` is negative, the position is counted from the end, with `-1` adding the layer at the end of the array.
     public final func addLayer(toPosition: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: toPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -353,8 +419,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_move_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_layer")
+    fileprivate static let method_move_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_layer")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -366,6 +432,7 @@ open class TileMap: Node2D {
     
     /// Moves the layer at index `layer` to the given position `toPosition` in the array.
     public final func moveLayer(_ layer: Int32, toPosition: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: toPosition) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -382,8 +449,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_remove_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_layer")
+    fileprivate static let method_remove_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_layer")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -395,6 +462,7 @@ open class TileMap: Node2D {
     
     /// Removes the layer at index `layer`.
     public final func removeLayer(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -408,8 +476,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_set_layer_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_name")
+    fileprivate static let method_set_layer_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_name")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -424,6 +492,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setLayerName(layer: Int32, name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             let name = GString(name)
             withUnsafePointer(to: name.content) { pArg1 in
@@ -441,8 +510,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_layer_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_name")
+    fileprivate static let method_get_layer_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_name")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -457,6 +526,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getLayerName(layer: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -471,8 +541,8 @@ open class TileMap: Node2D {
         return _result.description
     }
     
-    fileprivate static var method_set_layer_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_enabled")
+    fileprivate static let method_set_layer_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_enabled")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -487,6 +557,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setLayerEnabled(layer: Int32, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -503,8 +574,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_is_layer_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_layer_enabled")
+    fileprivate static let method_is_layer_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_layer_enabled")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -519,6 +590,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func isLayerEnabled(layer: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -533,8 +605,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_layer_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_modulate")
+    fileprivate static let method_set_layer_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_modulate")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -549,6 +621,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setLayerModulate(layer: Int32, modulate: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: modulate) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -565,8 +638,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_layer_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_modulate")
+    fileprivate static let method_get_layer_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_modulate")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -581,6 +654,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getLayerModulate(layer: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -595,8 +669,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_layer_y_sort_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_y_sort_enabled")
+    fileprivate static let method_set_layer_y_sort_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_y_sort_enabled")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -613,6 +687,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setLayerYSortEnabled(layer: Int32, ySortEnabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: ySortEnabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -629,8 +704,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_is_layer_y_sort_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_layer_y_sort_enabled")
+    fileprivate static let method_is_layer_y_sort_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_layer_y_sort_enabled")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -645,6 +720,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func isLayerYSortEnabled(layer: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -659,8 +735,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_layer_y_sort_origin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_y_sort_origin")
+    fileprivate static let method_set_layer_y_sort_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_y_sort_origin")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -677,6 +753,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setLayerYSortOrigin(layer: Int32, ySortOrigin: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: ySortOrigin) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -693,8 +770,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_layer_y_sort_origin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_y_sort_origin")
+    fileprivate static let method_get_layer_y_sort_origin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_y_sort_origin")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -709,6 +786,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getLayerYSortOrigin(layer: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -723,8 +801,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_layer_z_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_z_index")
+    fileprivate static let method_set_layer_z_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_z_index")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -739,6 +817,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setLayerZIndex(layer: Int32, zIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: zIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -755,8 +834,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_layer_z_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_z_index")
+    fileprivate static let method_get_layer_z_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_z_index")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -771,6 +850,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getLayerZIndex(layer: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -785,8 +865,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_layer_navigation_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_navigation_enabled")
+    fileprivate static let method_set_layer_navigation_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_navigation_enabled")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -798,6 +878,7 @@ open class TileMap: Node2D {
     
     /// Enables or disables a layer's built-in navigation regions generation. Disable this if you need to bake navigation regions from a TileMap using a ``NavigationRegion2D`` node.
     public final func setLayerNavigationEnabled(layer: Int32, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -814,8 +895,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_is_layer_navigation_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_layer_navigation_enabled")
+    fileprivate static let method_is_layer_navigation_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_layer_navigation_enabled")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -827,6 +908,7 @@ open class TileMap: Node2D {
     
     /// Returns if a layer's built-in navigation regions generation is enabled.
     public final func isLayerNavigationEnabled(layer: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -841,8 +923,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_layer_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_layer_navigation_map")
+    fileprivate static let method_set_layer_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_layer_navigation_map")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4040184819)!
@@ -861,6 +943,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setLayerNavigationMap(layer: Int32, map: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: map.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -877,8 +960,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_layer_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_navigation_map")
+    fileprivate static let method_get_layer_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_navigation_map")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 495598643)!
@@ -897,6 +980,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getLayerNavigationMap(layer: Int32) -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -911,8 +995,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_collision_animatable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_animatable")
+    fileprivate static let method_set_collision_animatable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_animatable")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -924,6 +1008,7 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func set_collision_animatable(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -937,8 +1022,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_is_collision_animatable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_collision_animatable")
+    fileprivate static let method_is_collision_animatable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_collision_animatable")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -950,13 +1035,14 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func is_collision_animatable() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(TileMap.method_is_collision_animatable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_collision_visibility_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_collision_visibility_mode")
+    fileprivate static let method_set_collision_visibility_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_collision_visibility_mode")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3193440636)!
@@ -968,6 +1054,7 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func set_collision_visibility_mode(_ collisionVisibilityMode: TileMap.VisibilityMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: collisionVisibilityMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -981,8 +1068,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_collision_visibility_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_collision_visibility_mode")
+    fileprivate static let method_get_collision_visibility_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_collision_visibility_mode")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1697018252)!
@@ -994,13 +1081,14 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func get_collision_visibility_mode() -> TileMap.VisibilityMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TileMap.method_get_collision_visibility_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TileMap.VisibilityMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_navigation_visibility_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_visibility_mode")
+    fileprivate static let method_set_navigation_visibility_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_visibility_mode")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3193440636)!
@@ -1012,6 +1100,7 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func set_navigation_visibility_mode(_ navigationVisibilityMode: TileMap.VisibilityMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: navigationVisibilityMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1025,8 +1114,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_navigation_visibility_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_visibility_mode")
+    fileprivate static let method_get_navigation_visibility_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_visibility_mode")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1697018252)!
@@ -1038,13 +1127,14 @@ open class TileMap: Node2D {
     
     @inline(__always)
     fileprivate final func get_navigation_visibility_mode() -> TileMap.VisibilityMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(TileMap.method_get_navigation_visibility_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TileMap.VisibilityMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_cell: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cell")
+    fileprivate static let method_set_cell: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cell")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 966713560)!
@@ -1067,6 +1157,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setCell(layer: Int32, coords: Vector2i, sourceId: Int32 = -1, atlasCoords: Vector2i = Vector2i (x: -1, y: -1), alternativeTile: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
                 withUnsafePointer(to: sourceId) { pArg2 in
@@ -1092,8 +1183,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_erase_cell: GDExtensionMethodBindPtr = {
-        let methodName = StringName("erase_cell")
+    fileprivate static let method_erase_cell: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("erase_cell")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2311374912)!
@@ -1108,6 +1199,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func eraseCell(layer: Int32, coords: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1124,8 +1216,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_cell_source_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_source_id")
+    fileprivate static let method_get_cell_source_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_source_id")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 551761942)!
@@ -1142,6 +1234,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getCellSourceId(layer: Int32, coords: Vector2i, useProxies: Bool = false) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
@@ -1162,8 +1255,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_cell_atlas_coords: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_atlas_coords")
+    fileprivate static let method_get_cell_atlas_coords: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_atlas_coords")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1869815066)!
@@ -1180,6 +1273,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getCellAtlasCoords(layer: Int32, coords: Vector2i, useProxies: Bool = false) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
@@ -1200,8 +1294,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_cell_alternative_tile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_alternative_tile")
+    fileprivate static let method_get_cell_alternative_tile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_alternative_tile")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 551761942)!
@@ -1218,6 +1312,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func getCellAlternativeTile(layer: Int32, coords: Vector2i, useProxies: Bool = false) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
@@ -1238,8 +1333,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_cell_tile_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cell_tile_data")
+    fileprivate static let method_get_cell_tile_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cell_tile_data")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2849631287)!
@@ -1256,6 +1351,7 @@ open class TileMap: Node2D {
     /// If `useProxies` is `false`, ignores the ``TileSet``'s tile proxies. See ``TileSet/mapTileProxy(sourceFrom:coordsFrom:alternativeFrom:)``.
     /// 
     public final func getCellTileData(layer: Int32, coords: Vector2i, useProxies: Bool = false) -> TileData? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: coords) { pArg1 in
@@ -1273,11 +1369,113 @@ open class TileMap: Node2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_coords_for_body_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_coords_for_body_rid")
+    fileprivate static let method_is_cell_flipped_h: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_cell_flipped_h")
+        return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2908343862)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the cell on layer `layer` at coordinates `coords` is flipped horizontally. The result is valid only for atlas sources.
+    public final func isCellFlippedH(layer: Int32, coords: Vector2i, useProxies: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: layer) { pArg0 in
+            withUnsafePointer(to: coords) { pArg1 in
+                withUnsafePointer(to: useProxies) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(TileMap.method_is_cell_flipped_h, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_is_cell_flipped_v: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_cell_flipped_v")
+        return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2908343862)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the cell on layer `layer` at coordinates `coords` is flipped vertically. The result is valid only for atlas sources.
+    public final func isCellFlippedV(layer: Int32, coords: Vector2i, useProxies: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: layer) { pArg0 in
+            withUnsafePointer(to: coords) { pArg1 in
+                withUnsafePointer(to: useProxies) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(TileMap.method_is_cell_flipped_v, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_is_cell_transposed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_cell_transposed")
+        return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2908343862)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the cell on layer `layer` at coordinates `coords` is transposed. The result is valid only for atlas sources.
+    public final func isCellTransposed(layer: Int32, coords: Vector2i, useProxies: Bool = false) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: layer) { pArg0 in
+            withUnsafePointer(to: coords) { pArg1 in
+                withUnsafePointer(to: useProxies) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(TileMap.method_is_cell_transposed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_coords_for_body_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_coords_for_body_rid")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 291584212)!
@@ -1289,6 +1487,7 @@ open class TileMap: Node2D {
     
     /// Returns the coordinates of the tile for given physics body RID. Such RID can be retrieved from ``KinematicCollision2D/getColliderRid()``, when colliding with a tile.
     public final func getCoordsForBodyRid(body: RID) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1303,8 +1502,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_layer_for_body_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_layer_for_body_rid")
+    fileprivate static let method_get_layer_for_body_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_layer_for_body_rid")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3917799429)!
@@ -1316,6 +1515,7 @@ open class TileMap: Node2D {
     
     /// Returns the tilemap layer of the tile for given physics body RID. Such RID can be retrieved from ``KinematicCollision2D/getColliderRid()``, when colliding with a tile.
     public final func getLayerForBodyRid(body: RID) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1330,8 +1530,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_pattern: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pattern")
+    fileprivate static let method_get_pattern: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pattern")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2833570986)!
@@ -1345,7 +1545,8 @@ open class TileMap: Node2D {
     /// 
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
-    public final func getPattern(layer: Int32, coordsArray: VariantCollection<Vector2i>) -> TileMapPattern? {
+    public final func getPattern(layer: Int32, coordsArray: TypedArray<Vector2i>) -> TileMapPattern? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: coordsArray.array.content) { pArg1 in
@@ -1360,11 +1561,11 @@ open class TileMap: Node2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_map_pattern: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_pattern")
+    fileprivate static let method_map_pattern: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_pattern")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1864516957)!
@@ -1376,6 +1577,7 @@ open class TileMap: Node2D {
     
     /// Returns for the given coordinate `coordsInPattern` in a ``TileMapPattern`` the corresponding cell coordinates if the pattern was pasted at the `positionInTilemap` coordinates (see ``setPattern(layer:position:pattern:)``). This mapping is required as in half-offset tile shapes, the mapping might not work by calculating `position_in_tile_map + coords_in_pattern`.
     public final func mapPattern(positionInTilemap: Vector2i, coordsInPattern: Vector2i, pattern: TileMapPattern?) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: positionInTilemap) { pArg0 in
             withUnsafePointer(to: coordsInPattern) { pArg1 in
@@ -1396,8 +1598,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_set_pattern: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pattern")
+    fileprivate static let method_set_pattern: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pattern")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1195853946)!
@@ -1412,6 +1614,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func setPattern(layer: Int32, position: Vector2i, pattern: TileMapPattern?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: pattern?.handle) { pArg2 in
@@ -1431,8 +1634,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_set_cells_terrain_connect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cells_terrain_connect")
+    fileprivate static let method_set_cells_terrain_connect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cells_terrain_connect")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3578627656)!
@@ -1444,13 +1647,14 @@ open class TileMap: Node2D {
     
     /// Update all the cells in the `cells` coordinates array so that they use the given `terrain` for the given `terrainSet`. If an updated cell has the same terrain as one of its neighboring cells, this function tries to join the two. This function might update neighboring tiles if needed to create correct terrain transitions.
     /// 
-    /// If `ignoreEmptyTerrains` is true, empty terrains will be ignored when trying to find the best fitting tile for the given terrain constraints.
+    /// If `ignoreEmptyTerrains` is `true`, empty terrains will be ignored when trying to find the best fitting tile for the given terrain constraints.
     /// 
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     /// > Note: To work correctly, this method requires the TileMap's TileSet to have terrains set up with all required terrain combinations. Otherwise, it may produce unexpected results.
     /// 
-    public final func setCellsTerrainConnect(layer: Int32, cells: VariantCollection<Vector2i>, terrainSet: Int32, terrain: Int32, ignoreEmptyTerrains: Bool = true) {
+    public final func setCellsTerrainConnect(layer: Int32, cells: TypedArray<Vector2i>, terrainSet: Int32, terrain: Int32, ignoreEmptyTerrains: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: cells.array.content) { pArg1 in
                 withUnsafePointer(to: terrainSet) { pArg2 in
@@ -1476,8 +1680,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_set_cells_terrain_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cells_terrain_path")
+    fileprivate static let method_set_cells_terrain_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cells_terrain_path")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3578627656)!
@@ -1489,13 +1693,14 @@ open class TileMap: Node2D {
     
     /// Update all the cells in the `path` coordinates array so that they use the given `terrain` for the given `terrainSet`. The function will also connect two successive cell in the path with the same terrain. This function might update neighboring tiles if needed to create correct terrain transitions.
     /// 
-    /// If `ignoreEmptyTerrains` is true, empty terrains will be ignored when trying to find the best fitting tile for the given terrain constraints.
+    /// If `ignoreEmptyTerrains` is `true`, empty terrains will be ignored when trying to find the best fitting tile for the given terrain constraints.
     /// 
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     /// > Note: To work correctly, this method requires the TileMap's TileSet to have terrains set up with all required terrain combinations. Otherwise, it may produce unexpected results.
     /// 
-    public final func setCellsTerrainPath(layer: Int32, path: VariantCollection<Vector2i>, terrainSet: Int32, terrain: Int32, ignoreEmptyTerrains: Bool = true) {
+    public final func setCellsTerrainPath(layer: Int32, path: TypedArray<Vector2i>, terrainSet: Int32, terrain: Int32, ignoreEmptyTerrains: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: path.array.content) { pArg1 in
                 withUnsafePointer(to: terrainSet) { pArg2 in
@@ -1521,8 +1726,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_fix_invalid_tiles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("fix_invalid_tiles")
+    fileprivate static let method_fix_invalid_tiles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("fix_invalid_tiles")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1534,12 +1739,13 @@ open class TileMap: Node2D {
     
     /// Clears cells that do not exist in the tileset.
     public final func fixInvalidTiles() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TileMap.method_fix_invalid_tiles, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_clear_layer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_layer")
+    fileprivate static let method_clear_layer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_layer")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1554,6 +1760,7 @@ open class TileMap: Node2D {
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
     public final func clearLayer(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1567,8 +1774,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1580,12 +1787,13 @@ open class TileMap: Node2D {
     
     /// Clears all cells.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TileMap.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_update_internals: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_internals")
+    fileprivate static let method_update_internals: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_internals")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1602,12 +1810,13 @@ open class TileMap: Node2D {
     /// > Warning: Updating the TileMap is computationally expensive and may impact performance. Try to limit the number of updates and how many tiles they impact.
     /// 
     public final func updateInternals() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(TileMap.method_update_internals, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_notify_runtime_tile_data_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("notify_runtime_tile_data_update")
+    fileprivate static let method_notify_runtime_tile_data_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("notify_runtime_tile_data_update")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1025054187)!
@@ -1626,6 +1835,7 @@ open class TileMap: Node2D {
     /// > Note: This does not trigger a direct update of the TileMap, the update will be done at the end of the frame as usual (unless you call ``updateInternals()``).
     /// 
     public final func notifyRuntimeTileDataUpdate(layer: Int32 = -1) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1639,8 +1849,8 @@ open class TileMap: Node2D {
         
     }
     
-    fileprivate static var method_get_surrounding_cells: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surrounding_cells")
+    fileprivate static let method_get_surrounding_cells: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surrounding_cells")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2673526557)!
@@ -1651,7 +1861,8 @@ open class TileMap: Node2D {
     }()
     
     /// Returns the list of all neighbourings cells to the one at `coords`.
-    public final func getSurroundingCells(coords: Vector2i) -> VariantCollection<Vector2i> {
+    public final func getSurroundingCells(coords: Vector2i) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1663,11 +1874,11 @@ open class TileMap: Node2D {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_get_used_cells: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_used_cells")
+    fileprivate static let method_get_used_cells: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_used_cells")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
@@ -1681,7 +1892,8 @@ open class TileMap: Node2D {
     /// 
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
-    public final func getUsedCells(layer: Int32) -> VariantCollection<Vector2i> {
+    public final func getUsedCells(layer: Int32) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1693,11 +1905,11 @@ open class TileMap: Node2D {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_get_used_cells_by_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_used_cells_by_id")
+    fileprivate static let method_get_used_cells_by_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_used_cells_by_id")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2931012785)!
@@ -1715,7 +1927,8 @@ open class TileMap: Node2D {
     /// 
     /// If `layer` is negative, the layers are accessed from the last one.
     /// 
-    public final func getUsedCellsById(layer: Int32, sourceId: Int32 = -1, atlasCoords: Vector2i = Vector2i (x: -1, y: -1), alternativeTile: Int32 = -1) -> VariantCollection<Vector2i> {
+    public final func getUsedCellsById(layer: Int32, sourceId: Int32 = -1, atlasCoords: Vector2i = Vector2i (x: -1, y: -1), alternativeTile: Int32 = -1) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: sourceId) { pArg1 in
@@ -1736,11 +1949,11 @@ open class TileMap: Node2D {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_get_used_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_used_rect")
+    fileprivate static let method_get_used_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_used_rect")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 410525958)!
@@ -1752,13 +1965,14 @@ open class TileMap: Node2D {
     
     /// Returns a rectangle enclosing the used (non-empty) tiles of the map, including all layers.
     public final func getUsedRect() -> Rect2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
         gi.object_method_bind_ptrcall(TileMap.method_get_used_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_map_to_local: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_to_local")
+    fileprivate static let method_map_to_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_to_local")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 108438297)!
@@ -1773,6 +1987,7 @@ open class TileMap: Node2D {
     /// > Note: This may not correspond to the visual position of the tile, i.e. it ignores the ``TileData/textureOrigin`` property of individual tiles.
     /// 
     public final func mapToLocal(mapPosition: Vector2i) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: mapPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1787,8 +2002,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_local_to_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("local_to_map")
+    fileprivate static let method_local_to_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("local_to_map")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 837806996)!
@@ -1800,6 +2015,7 @@ open class TileMap: Node2D {
     
     /// Returns the map coordinates of the cell containing the given `localPosition`. If `localPosition` is in global coordinates, consider using ``Node2D/toLocal(globalPoint:)`` before passing it to this method. See also ``mapToLocal(mapPosition:)``.
     public final func localToMap(localPosition: Vector2) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: localPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1814,8 +2030,8 @@ open class TileMap: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_neighbor_cell: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_neighbor_cell")
+    fileprivate static let method_get_neighbor_cell: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_neighbor_cell")
         return withUnsafePointer(to: &TileMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 986575103)!
@@ -1827,6 +2043,7 @@ open class TileMap: Node2D {
     
     /// Returns the neighboring cell to the one at coordinates `coords`, identified by the `neighbor` direction. This method takes into account the different layouts a TileMap can take.
     public final func getNeighborCell(coords: Vector2i, neighbor: TileSet.CellNeighbor) -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: neighbor.rawValue) { pArg1 in
@@ -1844,7 +2061,7 @@ open class TileMap: Node2D {
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_tile_data_runtime_update":
@@ -1880,16 +2097,18 @@ open class TileMap: Node2D {
 func _TileMap_proxy_tile_data_runtime_update (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TileMap>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TileMap else { return }
+    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._tileDataRuntimeUpdate (layer: args [0]!.assumingMemoryBound (to: Int32.self).pointee, coords: args [1]!.assumingMemoryBound (to: Vector2i.self).pointee, tileData: lookupLiveObject (handleAddress: resolved_2) as? TileData ?? TileData (nativeHandle: resolved_2))
+    swiftObject._tileDataRuntimeUpdate (layer: args [0]!.assumingMemoryBound (to: Int32.self).pointee, coords: args [1]!.assumingMemoryBound (to: Vector2i.self).pointee, tileData: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? TileData)
 }
 
 func _TileMap_proxy_use_tile_data_runtime_update (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<TileMap>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? TileMap else { return }
     let ret = swiftObject._useTileDataRuntimeUpdate (layer: args [0]!.assumingMemoryBound (to: Int32.self).pointee, coords: args [1]!.assumingMemoryBound (to: Vector2i.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }

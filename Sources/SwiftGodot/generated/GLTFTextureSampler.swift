@@ -19,11 +19,11 @@ import Musl
 #endif
 
 
-/// Represents a GLTF texture sampler
+/// Represents a glTF texture sampler
 /// 
-/// Represents a texture sampler as defined by the base GLTF spec. Texture samplers in GLTF specify how to sample data from the texture's base image, when rendering the texture on an object.
+/// Represents a texture sampler as defined by the base glTF spec. Texture samplers in glTF specify how to sample data from the texture's base image, when rendering the texture on an object.
 open class GLTFTextureSampler: Resource {
-    fileprivate static var className = StringName("GLTFTextureSampler")
+    private static var className = StringName("GLTFTextureSampler")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -77,8 +77,8 @@ open class GLTFTextureSampler: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_get_mag_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mag_filter")
+    fileprivate static let method_get_mag_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mag_filter")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -90,13 +90,14 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func get_mag_filter() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_mag_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_mag_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mag_filter")
+    fileprivate static let method_set_mag_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mag_filter")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -108,6 +109,7 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func set_mag_filter(_ filterMode: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filterMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -121,8 +123,8 @@ open class GLTFTextureSampler: Resource {
         
     }
     
-    fileprivate static var method_get_min_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_min_filter")
+    fileprivate static let method_get_min_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_min_filter")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -134,13 +136,14 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func get_min_filter() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_min_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_min_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_min_filter")
+    fileprivate static let method_set_min_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_min_filter")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -152,6 +155,7 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func set_min_filter(_ filterMode: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filterMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -165,8 +169,8 @@ open class GLTFTextureSampler: Resource {
         
     }
     
-    fileprivate static var method_get_wrap_s: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_wrap_s")
+    fileprivate static let method_get_wrap_s: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_wrap_s")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -178,13 +182,14 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func get_wrap_s() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_wrap_s, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_wrap_s: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_wrap_s")
+    fileprivate static let method_set_wrap_s: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_wrap_s")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -196,6 +201,7 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func set_wrap_s(_ wrapMode: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: wrapMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -209,8 +215,8 @@ open class GLTFTextureSampler: Resource {
         
     }
     
-    fileprivate static var method_get_wrap_t: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_wrap_t")
+    fileprivate static let method_get_wrap_t: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_wrap_t")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -222,13 +228,14 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func get_wrap_t() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_wrap_t, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_wrap_t: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_wrap_t")
+    fileprivate static let method_set_wrap_t: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_wrap_t")
         return withUnsafePointer(to: &GLTFTextureSampler.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -240,6 +247,7 @@ open class GLTFTextureSampler: Resource {
     
     @inline(__always)
     fileprivate final func set_wrap_t(_ wrapMode: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: wrapMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

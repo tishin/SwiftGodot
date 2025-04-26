@@ -27,18 +27,18 @@ import Musl
 /// 
 open class PhysicsServer2DManager: Object {
     /// The shared instance of this class
-    public static var shared: PhysicsServer2DManager = {
-        return withUnsafePointer (to: &PhysicsServer2DManager.godotClassName.content) { ptr in
-            PhysicsServer2DManager (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: PhysicsServer2DManager {
+        return withUnsafePointer(to: &PhysicsServer2DManager.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("PhysicsServer2DManager")
+    private static var className = StringName("PhysicsServer2DManager")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_register_server: GDExtensionMethodBindPtr = {
-        let methodName = StringName("register_server")
+    fileprivate static let method_register_server: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("register_server")
         return withUnsafePointer(to: &PhysicsServer2DManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2137474292)!
@@ -67,8 +67,8 @@ open class PhysicsServer2DManager: Object {
         
     }
     
-    fileprivate static var method_set_default_server: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_default_server")
+    fileprivate static let method_set_default_server: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_default_server")
         return withUnsafePointer(to: &PhysicsServer2DManager.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2956805083)!

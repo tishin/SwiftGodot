@@ -23,7 +23,7 @@ import Musl
 /// 
 /// ``Translation``s are resources that can be loaded and unloaded on demand. They map a collection of strings to their individual translations, and they also provide convenience methods for pluralization.
 open class Translation: Resource {
-    fileprivate static var className = StringName("Translation")
+    private static var className = StringName("Translation")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,20 +41,78 @@ open class Translation: Resource {
     }
     
     /* Methods */
+    fileprivate static let method__get_plural_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_plural_message")
+        return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1970324172)!
+            }
+            
+        }
+        
+    }()
+    
     /// Virtual method to override ``getPluralMessage(srcMessage:srcPluralMessage:n:context:)``.
     @_documentation(visibility: public)
     open func _getPluralMessage(srcMessage: StringName, srcPluralMessage: StringName, n: Int32, context: StringName) -> StringName {
-        return StringName ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: StringName = StringName ()
+        withUnsafePointer(to: srcMessage.content) { pArg0 in
+            withUnsafePointer(to: srcPluralMessage.content) { pArg1 in
+                withUnsafePointer(to: n) { pArg2 in
+                    withUnsafePointer(to: context.content) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(Translation.method__get_plural_message, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_message")
+        return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3639719779)!
+            }
+            
+        }
+        
+    }()
     
     /// Virtual method to override ``getMessage(srcMessage:context:)``.
     @_documentation(visibility: public)
     open func _getMessage(srcMessage: StringName, context: StringName) -> StringName {
-        return StringName ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: StringName = StringName ()
+        withUnsafePointer(to: srcMessage.content) { pArg0 in
+            withUnsafePointer(to: context.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Translation.method__get_message, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
     
-    fileprivate static var method_set_locale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_locale")
+    fileprivate static let method_set_locale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_locale")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -66,6 +124,7 @@ open class Translation: Resource {
     
     @inline(__always)
     fileprivate final func set_locale(_ locale: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let locale = GString(locale)
         withUnsafePointer(to: locale.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -80,8 +139,8 @@ open class Translation: Resource {
         
     }
     
-    fileprivate static var method_get_locale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_locale")
+    fileprivate static let method_get_locale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_locale")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -93,16 +152,17 @@ open class Translation: Resource {
     
     @inline(__always)
     fileprivate final func get_locale() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Translation.method_get_locale, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_add_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_message")
+    fileprivate static let method_add_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_message")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 971803314)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3898530326)!
             }
             
         }
@@ -114,6 +174,7 @@ open class Translation: Resource {
     /// An additional context could be used to specify the translation context or differentiate polysemic words.
     /// 
     public final func addMessage(srcMessage: StringName, xlatedMessage: StringName, context: StringName = StringName ("")) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: srcMessage.content) { pArg0 in
             withUnsafePointer(to: xlatedMessage.content) { pArg1 in
                 withUnsafePointer(to: context.content) { pArg2 in
@@ -133,11 +194,11 @@ open class Translation: Resource {
         
     }
     
-    fileprivate static var method_add_plural_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_plural_message")
+    fileprivate static let method_add_plural_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_plural_message")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 360316719)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2356982266)!
             }
             
         }
@@ -149,6 +210,7 @@ open class Translation: Resource {
     /// An additional context could be used to specify the translation context or differentiate polysemic words.
     /// 
     public final func addPluralMessage(srcMessage: StringName, xlatedMessages: PackedStringArray, context: StringName = StringName ("")) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: srcMessage.content) { pArg0 in
             withUnsafePointer(to: xlatedMessages.content) { pArg1 in
                 withUnsafePointer(to: context.content) { pArg2 in
@@ -168,11 +230,11 @@ open class Translation: Resource {
         
     }
     
-    fileprivate static var method_get_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_message")
+    fileprivate static let method_get_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_message")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 58037827)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1829228469)!
             }
             
         }
@@ -181,6 +243,7 @@ open class Translation: Resource {
     
     /// Returns a message's translation.
     public final func getMessage(srcMessage: StringName, context: StringName = StringName ("")) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: srcMessage.content) { pArg0 in
             withUnsafePointer(to: context.content) { pArg1 in
@@ -198,11 +261,11 @@ open class Translation: Resource {
         return _result
     }
     
-    fileprivate static var method_get_plural_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_plural_message")
+    fileprivate static let method_get_plural_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_plural_message")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1333931916)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 229954002)!
             }
             
         }
@@ -214,6 +277,7 @@ open class Translation: Resource {
     /// The number `n` is the number or quantity of the plural object. It will be used to guide the translation system to fetch the correct plural form for the selected language.
     /// 
     public final func getPluralMessage(srcMessage: StringName, srcPluralMessage: StringName, n: Int32, context: StringName = StringName ("")) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: srcMessage.content) { pArg0 in
             withUnsafePointer(to: srcPluralMessage.content) { pArg1 in
@@ -237,11 +301,11 @@ open class Translation: Resource {
         return _result
     }
     
-    fileprivate static var method_erase_message: GDExtensionMethodBindPtr = {
-        let methodName = StringName("erase_message")
+    fileprivate static let method_erase_message: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("erase_message")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3919944288)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3959009644)!
             }
             
         }
@@ -250,6 +314,7 @@ open class Translation: Resource {
     
     /// Erases a message.
     public final func eraseMessage(srcMessage: StringName, context: StringName = StringName ("")) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: srcMessage.content) { pArg0 in
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -266,8 +331,8 @@ open class Translation: Resource {
         
     }
     
-    fileprivate static var method_get_message_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_message_list")
+    fileprivate static let method_get_message_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_message_list")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -279,13 +344,14 @@ open class Translation: Resource {
     
     /// Returns all the messages (keys).
     public final func getMessageList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Translation.method_get_message_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_translated_message_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_translated_message_list")
+    fileprivate static let method_get_translated_message_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_translated_message_list")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -297,13 +363,14 @@ open class Translation: Resource {
     
     /// Returns all the messages (translated text).
     public final func getTranslatedMessageList() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(Translation.method_get_translated_message_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_message_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_message_count")
+    fileprivate static let method_get_message_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_message_count")
         return withUnsafePointer(to: &Translation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -315,12 +382,13 @@ open class Translation: Resource {
     
     /// Returns the number of existing messages.
     public final func getMessageCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Translation.method_get_message_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_get_message":
@@ -339,7 +407,8 @@ open class Translation: Resource {
 func _Translation_proxy_get_message (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Translation>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Translation else { return }
     let ret = swiftObject._getMessage (srcMessage: StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), context: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // StringName
     ret.content = StringName.zero
@@ -348,7 +417,8 @@ func _Translation_proxy_get_message (instance: UnsafeMutableRawPointer?, args: U
 func _Translation_proxy_get_plural_message (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Translation>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Translation else { return }
     let ret = swiftObject._getPluralMessage (srcMessage: StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), srcPluralMessage: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), n: args [2]!.assumingMemoryBound (to: Int32.self).pointee, context: StringName (content: args [3]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // StringName
     ret.content = StringName.zero

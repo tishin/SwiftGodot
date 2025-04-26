@@ -23,7 +23,7 @@ import Musl
 /// 
 /// The engine supports multiple image formats out of the box (PNG, SVG, JPEG, WebP to name a few), but you can choose to implement support for additional image formats by extending ``ImageFormatLoaderExtension``.
 open class ImageFormatLoader: RefCounted {
-    fileprivate static var className = StringName("ImageFormatLoader")
+    private static var className = StringName("ImageFormatLoader")
     override open class var godotClassName: StringName { className }
     public struct LoaderFlags: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int

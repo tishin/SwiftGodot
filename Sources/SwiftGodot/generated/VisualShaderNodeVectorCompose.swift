@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Creates a `vec2`, `vec3` or `vec4` using scalar values that can be provided from separate inputs.
 open class VisualShaderNodeVectorCompose: VisualShaderNodeVectorBase {
-    fileprivate static var className = StringName("VisualShaderNodeVectorCompose")
+    private static var className = StringName("VisualShaderNodeVectorCompose")
     override open class var godotClassName: StringName { className }
 }
 

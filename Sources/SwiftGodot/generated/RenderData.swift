@@ -26,11 +26,11 @@ import Musl
 /// > Note: This is an internal rendering server object, do not instantiate this from script.
 /// 
 open class RenderData: Object {
-    fileprivate static var className = StringName("RenderData")
+    private static var className = StringName("RenderData")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_get_render_scene_buffers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_scene_buffers")
+    fileprivate static let method_get_render_scene_buffers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_scene_buffers")
         return withUnsafePointer(to: &RenderData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2793216201)!
@@ -42,13 +42,14 @@ open class RenderData: Object {
     
     /// Returns the ``RenderSceneBuffers`` object managing the scene buffers for rendering this viewport.
     public final func getRenderSceneBuffers() -> RenderSceneBuffers? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(RenderData.method_get_render_scene_buffers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_render_scene_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_render_scene_data")
+    fileprivate static let method_get_render_scene_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_render_scene_data")
         return withUnsafePointer(to: &RenderData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1288715698)!
@@ -60,13 +61,14 @@ open class RenderData: Object {
     
     /// Returns the ``RenderSceneData`` object managing this frames scene data.
     public final func getRenderSceneData() -> RenderSceneData? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(RenderData.method_get_render_scene_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_environment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_environment")
+    fileprivate static let method_get_environment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_environment")
         return withUnsafePointer(to: &RenderData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -76,15 +78,16 @@ open class RenderData: Object {
         
     }()
     
-    /// Returns the ``RID`` of the environments object in the ``RenderingServer`` being used to render this viewport.
+    /// Returns the ``RID`` of the environment object in the ``RenderingServer`` being used to render this viewport.
     public final func getEnvironment() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(RenderData.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_camera_attributes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_camera_attributes")
+    fileprivate static let method_get_camera_attributes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_camera_attributes")
         return withUnsafePointer(to: &RenderData.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -96,6 +99,7 @@ open class RenderData: Object {
     
     /// Returns the ``RID`` of the camera attributes object in the ``RenderingServer`` being used to render this viewport.
     public final func getCameraAttributes() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(RenderData.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

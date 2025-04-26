@@ -42,7 +42,7 @@ import Musl
 /// > Note: If none of the font data sources contain glyphs for a character used in a string, the character in question will be replaced with a box displaying its hexadecimal code.
 /// 
 open class FontFile: Font {
-    fileprivate static var className = StringName("FontFile")
+    private static var className = StringName("FontFile")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -167,6 +167,18 @@ open class FontFile: Font {
         
     }
     
+    /// If set to `true`, when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled.
+    final public var keepRoundingRemainders: Bool {
+        get {
+            return get_keep_rounding_remainders ()
+        }
+        
+        set {
+            set_keep_rounding_remainders (newValue)
+        }
+        
+    }
+    
     /// If set to `true`, glyphs of all sizes are rendered using single multichannel signed distance field (MSDF) generated from the dynamic font vector data. Since this approach does not rely on rasterizing the font every time its size changes, this allows for resizing the font in real-time without any performance penalty. Text will also not look grainy for ``Control``s that are scaled down (or for ``Label3D``s viewed from a long distance). As a downside, font hinting is not available with MSDF. The lack of font hinting may result in less crisp and less readable fonts at small sizes.
     /// 
     /// > Note: If using font outlines, ``msdfPixelRange`` must be set to at least _twice_ the size of the largest font outline.
@@ -281,7 +293,7 @@ open class FontFile: Font {
     }
     
     /// Font OpenType feature set override.
-    final public var opentypeFeatureOverrides: GDictionary {
+    final public var opentypeFeatureOverrides: VariantDictionary {
         get {
             return get_opentype_feature_overrides ()
         }
@@ -293,8 +305,8 @@ open class FontFile: Font {
     }
     
     /* Methods */
-    fileprivate static var method_load_bitmap_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_bitmap_font")
+    fileprivate static let method_load_bitmap_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_bitmap_font")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -309,6 +321,7 @@ open class FontFile: Font {
     /// > Warning: This method should only be used in the editor or in cases when you need to load external fonts at run-time, such as fonts located at the `user://` directory.
     /// 
     public final func loadBitmapFont(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -324,8 +337,8 @@ open class FontFile: Font {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_load_dynamic_font: GDExtensionMethodBindPtr = {
-        let methodName = StringName("load_dynamic_font")
+    fileprivate static let method_load_dynamic_font: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("load_dynamic_font")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
@@ -340,6 +353,7 @@ open class FontFile: Font {
     /// > Warning: This method should only be used in the editor or in cases when you need to load external fonts at run-time, such as fonts located at the `user://` directory.
     /// 
     public final func loadDynamicFont(path: String) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
@@ -355,8 +369,8 @@ open class FontFile: Font {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_set_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_data")
+    fileprivate static let method_set_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_data")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2971499966)!
@@ -368,6 +382,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_data(_ data: PackedByteArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -381,8 +396,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_data")
+    fileprivate static let method_get_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_data")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2362200018)!
@@ -394,13 +409,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_data() -> PackedByteArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
         gi.object_method_bind_ptrcall(FontFile.method_get_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_font_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_name")
+    fileprivate static let method_set_font_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_name")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -412,6 +428,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_font_name(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -426,8 +443,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_font_style_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_style_name")
+    fileprivate static let method_set_font_style_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_style_name")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -439,6 +456,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_font_style_name(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -453,8 +471,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_font_style: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_style")
+    fileprivate static let method_set_font_style: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_style")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 918070724)!
@@ -466,6 +484,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_font_style(_ style: TextServer.FontStyle) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: style.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -479,8 +498,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_font_weight: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_weight")
+    fileprivate static let method_set_font_weight: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_weight")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -492,6 +511,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_font_weight(_ weight: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: weight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -505,8 +525,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_font_stretch: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_font_stretch")
+    fileprivate static let method_set_font_stretch: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_font_stretch")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -518,6 +538,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_font_stretch(_ stretch: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: stretch) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -531,8 +552,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_antialiasing")
+    fileprivate static let method_set_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_antialiasing")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1669900)!
@@ -544,6 +565,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_antialiasing(_ antialiasing: TextServer.FontAntialiasing) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: antialiasing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -557,8 +579,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_antialiasing")
+    fileprivate static let method_get_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_antialiasing")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4262718649)!
@@ -570,13 +592,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_antialiasing() -> TextServer.FontAntialiasing {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FontFile.method_get_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.FontAntialiasing (rawValue: _result)!
     }
     
-    fileprivate static var method_set_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disable_embedded_bitmaps")
+    fileprivate static let method_set_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disable_embedded_bitmaps")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -588,6 +611,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_disable_embedded_bitmaps(_ disableEmbeddedBitmaps: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: disableEmbeddedBitmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -601,8 +625,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_disable_embedded_bitmaps")
+    fileprivate static let method_get_disable_embedded_bitmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_disable_embedded_bitmaps")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -614,13 +638,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_disable_embedded_bitmaps() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FontFile.method_get_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_generate_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_generate_mipmaps")
+    fileprivate static let method_set_generate_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_generate_mipmaps")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -632,6 +657,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_generate_mipmaps(_ generateMipmaps: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: generateMipmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -645,8 +671,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_generate_mipmaps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_generate_mipmaps")
+    fileprivate static let method_get_generate_mipmaps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_generate_mipmaps")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -658,13 +684,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_generate_mipmaps() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FontFile.method_get_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_multichannel_signed_distance_field")
+    fileprivate static let method_set_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_multichannel_signed_distance_field")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -676,6 +703,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_multichannel_signed_distance_field(_ msdf: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msdf) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -689,8 +717,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_is_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_multichannel_signed_distance_field")
+    fileprivate static let method_is_multichannel_signed_distance_field: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_multichannel_signed_distance_field")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -702,13 +730,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func is_multichannel_signed_distance_field() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FontFile.method_is_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msdf_pixel_range")
+    fileprivate static let method_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msdf_pixel_range")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -720,6 +749,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_msdf_pixel_range(_ msdfPixelRange: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msdfPixelRange) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -733,8 +763,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msdf_pixel_range")
+    fileprivate static let method_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msdf_pixel_range")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -746,13 +776,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_msdf_pixel_range() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FontFile.method_get_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_msdf_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msdf_size")
+    fileprivate static let method_set_msdf_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msdf_size")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -764,6 +795,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_msdf_size(_ msdfSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: msdfSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -777,8 +809,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_msdf_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msdf_size")
+    fileprivate static let method_get_msdf_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msdf_size")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -790,13 +822,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_msdf_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FontFile.method_get_msdf_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fixed_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fixed_size")
+    fileprivate static let method_set_fixed_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fixed_size")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -808,6 +841,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_fixed_size(_ fixedSize: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fixedSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -821,8 +855,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_fixed_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fixed_size")
+    fileprivate static let method_get_fixed_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fixed_size")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -834,13 +868,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_fixed_size() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FontFile.method_get_fixed_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fixed_size_scale_mode")
+    fileprivate static let method_set_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fixed_size_scale_mode")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1660989956)!
@@ -852,6 +887,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_fixed_size_scale_mode(_ fixedSizeScaleMode: TextServer.FixedSizeScaleMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fixedSizeScaleMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -865,8 +901,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fixed_size_scale_mode")
+    fileprivate static let method_get_fixed_size_scale_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fixed_size_scale_mode")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 753873478)!
@@ -878,13 +914,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_fixed_size_scale_mode() -> TextServer.FixedSizeScaleMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FontFile.method_get_fixed_size_scale_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.FixedSizeScaleMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_allow_system_fallback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_system_fallback")
+    fileprivate static let method_set_allow_system_fallback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_system_fallback")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -896,6 +933,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_allow_system_fallback(_ allowSystemFallback: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allowSystemFallback) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -909,8 +947,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_is_allow_system_fallback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_allow_system_fallback")
+    fileprivate static let method_is_allow_system_fallback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_allow_system_fallback")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -922,13 +960,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func is_allow_system_fallback() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FontFile.method_is_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_force_autohinter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_force_autohinter")
+    fileprivate static let method_set_force_autohinter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_force_autohinter")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -940,6 +979,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_force_autohinter(_ forceAutohinter: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: forceAutohinter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -953,8 +993,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_is_force_autohinter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_force_autohinter")
+    fileprivate static let method_is_force_autohinter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_force_autohinter")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -966,13 +1006,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func is_force_autohinter() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FontFile.method_is_force_autohinter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_hinting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_hinting")
+    fileprivate static let method_set_hinting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_hinting")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1827459492)!
@@ -984,6 +1025,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_hinting(_ hinting: TextServer.Hinting) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hinting.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -997,8 +1039,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_hinting: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_hinting")
+    fileprivate static let method_get_hinting: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_hinting")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3683214614)!
@@ -1010,13 +1052,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_hinting() -> TextServer.Hinting {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FontFile.method_get_hinting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.Hinting (rawValue: _result)!
     }
     
-    fileprivate static var method_set_subpixel_positioning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_subpixel_positioning")
+    fileprivate static let method_set_subpixel_positioning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_subpixel_positioning")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4225742182)!
@@ -1028,6 +1071,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_subpixel_positioning(_ subpixelPositioning: TextServer.SubpixelPositioning) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: subpixelPositioning.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1041,8 +1085,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_subpixel_positioning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subpixel_positioning")
+    fileprivate static let method_get_subpixel_positioning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subpixel_positioning")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1069238588)!
@@ -1054,13 +1098,60 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_subpixel_positioning() -> TextServer.SubpixelPositioning {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FontFile.method_get_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.SubpixelPositioning (rawValue: _result)!
     }
     
-    fileprivate static var method_set_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_oversampling")
+    fileprivate static let method_set_keep_rounding_remainders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_rounding_remainders")
+        return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_keep_rounding_remainders(_ keepRoundingRemainders: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: keepRoundingRemainders) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(FontFile.method_set_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_keep_rounding_remainders: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_keep_rounding_remainders")
+        return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_keep_rounding_remainders() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(FontFile.method_get_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_oversampling")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1072,6 +1163,7 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func set_oversampling(_ oversampling: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: oversampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1085,8 +1177,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_oversampling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_oversampling")
+    fileprivate static let method_get_oversampling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_oversampling")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1098,13 +1190,14 @@ open class FontFile: Font {
     
     @inline(__always)
     fileprivate final func get_oversampling() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FontFile.method_get_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_cache_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_count")
+    fileprivate static let method_get_cache_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_count")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1116,13 +1209,14 @@ open class FontFile: Font {
     
     /// Returns number of the font cache entries.
     public final func getCacheCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FontFile.method_get_cache_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_clear_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_cache")
+    fileprivate static let method_clear_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_cache")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1134,12 +1228,13 @@ open class FontFile: Font {
     
     /// Removes all font cache entries.
     public final func clearCache() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(FontFile.method_clear_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_remove_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_cache")
+    fileprivate static let method_remove_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_cache")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1151,6 +1246,7 @@ open class FontFile: Font {
     
     /// Removes specified font cache entry.
     public final func removeCache(cacheIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1164,8 +1260,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_size_cache_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_size_cache_list")
+    fileprivate static let method_get_size_cache_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_size_cache_list")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 663333327)!
@@ -1176,7 +1272,8 @@ open class FontFile: Font {
     }()
     
     /// Returns list of the font sizes in the cache. Each size is ``Vector2i`` with font size and outline size.
-    public final func getSizeCacheList(cacheIndex: Int32) -> VariantCollection<Vector2i> {
+    public final func getSizeCacheList(cacheIndex: Int32) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1188,11 +1285,11 @@ open class FontFile: Font {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_clear_size_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_size_cache")
+    fileprivate static let method_clear_size_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_size_cache")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1202,8 +1299,9 @@ open class FontFile: Font {
         
     }()
     
-    /// Removes all font sizes from the cache entry
+    /// Removes all font sizes from the cache entry.
     public final func clearSizeCache(cacheIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1217,8 +1315,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_remove_size_cache: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_size_cache")
+    fileprivate static let method_remove_size_cache: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_size_cache")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2311374912)!
@@ -1230,6 +1328,7 @@ open class FontFile: Font {
     
     /// Removes specified font size from the cache entry.
     public final func removeSizeCache(cacheIndex: Int32, size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1246,8 +1345,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_variation_coordinates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_variation_coordinates")
+    fileprivate static let method_set_variation_coordinates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_variation_coordinates")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 64545446)!
@@ -1258,7 +1357,8 @@ open class FontFile: Font {
     }()
     
     /// Sets variation coordinates for the specified font cache entry. See ``Font/getSupportedVariationList()`` for more info.
-    public final func setVariationCoordinates(cacheIndex: Int32, variationCoordinates: GDictionary) {
+    public final func setVariationCoordinates(cacheIndex: Int32, variationCoordinates: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: variationCoordinates.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1275,8 +1375,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_variation_coordinates: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_variation_coordinates")
+    fileprivate static let method_get_variation_coordinates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_variation_coordinates")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3485342025)!
@@ -1287,8 +1387,9 @@ open class FontFile: Font {
     }()
     
     /// Returns variation coordinates for the specified font cache entry. See ``Font/getSupportedVariationList()`` for more info.
-    public final func getVariationCoordinates(cacheIndex: Int32) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getVariationCoordinates(cacheIndex: Int32) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1302,8 +1403,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_embolden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_embolden")
+    fileprivate static let method_set_embolden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_embolden")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -1315,6 +1416,7 @@ open class FontFile: Font {
     
     /// Sets embolden strength, if is not equal to zero, emboldens the font outlines. Negative values reduce the outline thickness.
     public final func setEmbolden(cacheIndex: Int32, strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: strength) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1331,8 +1433,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_embolden: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_embolden")
+    fileprivate static let method_get_embolden: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_embolden")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -1344,6 +1446,7 @@ open class FontFile: Font {
     
     /// Returns embolden strength, if is not equal to zero, emboldens the font outlines. Negative values reduce the outline thickness.
     public final func getEmbolden(cacheIndex: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1358,8 +1461,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transform")
+    fileprivate static let method_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transform")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 30160968)!
@@ -1371,6 +1474,7 @@ open class FontFile: Font {
     
     /// Sets 2D transform, applied to the font outlines, can be used for slanting, flipping, and rotating glyphs.
     public final func setTransform(cacheIndex: Int32, transform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1387,8 +1491,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transform")
+    fileprivate static let method_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transform")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3836996910)!
@@ -1400,6 +1504,7 @@ open class FontFile: Font {
     
     /// Returns 2D transform, applied to the font outlines, can be used for slanting, flipping and rotating glyphs.
     public final func getTransform(cacheIndex: Int32) -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1414,8 +1519,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_extra_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_extra_spacing")
+    fileprivate static let method_set_extra_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_extra_spacing")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 62942285)!
@@ -1427,6 +1532,7 @@ open class FontFile: Font {
     
     /// Sets the spacing for `spacing` (see ``TextServer.SpacingType``) to `value` in pixels (not relative to the font size).
     public final func setExtraSpacing(cacheIndex: Int32, spacing: TextServer.SpacingType, value: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
                 withUnsafePointer(to: value) { pArg2 in
@@ -1446,8 +1552,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_extra_spacing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_extra_spacing")
+    fileprivate static let method_get_extra_spacing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_extra_spacing")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1924257185)!
@@ -1459,6 +1565,7 @@ open class FontFile: Font {
     
     /// Returns spacing for `spacing` (see ``TextServer.SpacingType``) in pixels (not relative to the font size).
     public final func getExtraSpacing(cacheIndex: Int32, spacing: TextServer.SpacingType) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
@@ -1476,8 +1583,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_extra_baseline_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_extra_baseline_offset")
+    fileprivate static let method_set_extra_baseline_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_extra_baseline_offset")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -1489,6 +1596,7 @@ open class FontFile: Font {
     
     /// Sets extra baseline offset (as a fraction of font height).
     public final func setExtraBaselineOffset(cacheIndex: Int32, baselineOffset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: baselineOffset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1505,8 +1613,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_extra_baseline_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_extra_baseline_offset")
+    fileprivate static let method_get_extra_baseline_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_extra_baseline_offset")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2339986948)!
@@ -1518,6 +1626,7 @@ open class FontFile: Font {
     
     /// Returns extra baseline offset (as a fraction of font height).
     public final func getExtraBaselineOffset(cacheIndex: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1532,8 +1641,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_face_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_face_index")
+    fileprivate static let method_set_face_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_face_index")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -1545,6 +1654,7 @@ open class FontFile: Font {
     
     /// Sets an active face index in the TrueType / OpenType collection.
     public final func setFaceIndex(cacheIndex: Int32, faceIndex: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: faceIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1561,8 +1671,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_face_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_face_index")
+    fileprivate static let method_get_face_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_face_index")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1574,6 +1684,7 @@ open class FontFile: Font {
     
     /// Returns an active face index in the TrueType / OpenType collection.
     public final func getFaceIndex(cacheIndex: Int32) -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1588,8 +1699,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_cache_ascent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cache_ascent")
+    fileprivate static let method_set_cache_ascent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cache_ascent")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1601,6 +1712,7 @@ open class FontFile: Font {
     
     /// Sets the font ascent (number of pixels above the baseline).
     public final func setCacheAscent(cacheIndex: Int32, size: Int32, ascent: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: ascent) { pArg2 in
@@ -1620,8 +1732,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_cache_ascent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_ascent")
+    fileprivate static let method_get_cache_ascent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_ascent")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1633,6 +1745,7 @@ open class FontFile: Font {
     
     /// Returns the font ascent (number of pixels above the baseline).
     public final func getCacheAscent(cacheIndex: Int32, size: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -1650,8 +1763,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_cache_descent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cache_descent")
+    fileprivate static let method_set_cache_descent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cache_descent")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1663,6 +1776,7 @@ open class FontFile: Font {
     
     /// Sets the font descent (number of pixels below the baseline).
     public final func setCacheDescent(cacheIndex: Int32, size: Int32, descent: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: descent) { pArg2 in
@@ -1682,8 +1796,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_cache_descent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_descent")
+    fileprivate static let method_get_cache_descent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_descent")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1695,6 +1809,7 @@ open class FontFile: Font {
     
     /// Returns the font descent (number of pixels below the baseline).
     public final func getCacheDescent(cacheIndex: Int32, size: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -1712,8 +1827,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_cache_underline_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cache_underline_position")
+    fileprivate static let method_set_cache_underline_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cache_underline_position")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1725,6 +1840,7 @@ open class FontFile: Font {
     
     /// Sets pixel offset of the underline below the baseline.
     public final func setCacheUnderlinePosition(cacheIndex: Int32, size: Int32, underlinePosition: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: underlinePosition) { pArg2 in
@@ -1744,8 +1860,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_cache_underline_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_underline_position")
+    fileprivate static let method_get_cache_underline_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_underline_position")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1757,6 +1873,7 @@ open class FontFile: Font {
     
     /// Returns pixel offset of the underline below the baseline.
     public final func getCacheUnderlinePosition(cacheIndex: Int32, size: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -1774,8 +1891,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_cache_underline_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cache_underline_thickness")
+    fileprivate static let method_set_cache_underline_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cache_underline_thickness")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1787,6 +1904,7 @@ open class FontFile: Font {
     
     /// Sets thickness of the underline in pixels.
     public final func setCacheUnderlineThickness(cacheIndex: Int32, size: Int32, underlineThickness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: underlineThickness) { pArg2 in
@@ -1806,8 +1924,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_cache_underline_thickness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_underline_thickness")
+    fileprivate static let method_get_cache_underline_thickness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_underline_thickness")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1819,6 +1937,7 @@ open class FontFile: Font {
     
     /// Returns thickness of the underline in pixels.
     public final func getCacheUnderlineThickness(cacheIndex: Int32, size: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -1836,8 +1955,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_cache_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cache_scale")
+    fileprivate static let method_set_cache_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cache_scale")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1849,6 +1968,7 @@ open class FontFile: Font {
     
     /// Sets scaling factor of the color bitmap font.
     public final func setCacheScale(cacheIndex: Int32, size: Int32, scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: scale) { pArg2 in
@@ -1868,8 +1988,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_cache_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cache_scale")
+    fileprivate static let method_get_cache_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cache_scale")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1881,6 +2001,7 @@ open class FontFile: Font {
     
     /// Returns scaling factor of the color bitmap font.
     public final func getCacheScale(cacheIndex: Int32, size: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -1898,8 +2019,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_get_texture_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_count")
+    fileprivate static let method_get_texture_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_count")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1987661582)!
@@ -1911,6 +2032,7 @@ open class FontFile: Font {
     
     /// Returns number of textures used by font cache entry.
     public final func getTextureCount(cacheIndex: Int32, size: Vector2i) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -1928,8 +2050,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_clear_textures: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_textures")
+    fileprivate static let method_clear_textures: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_textures")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2311374912)!
@@ -1944,6 +2066,7 @@ open class FontFile: Font {
     /// > Note: This function will not remove glyphs associated with the texture, use ``removeGlyph(cacheIndex:size:glyph:)`` to remove them manually.
     /// 
     public final func clearTextures(cacheIndex: Int32, size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1960,8 +2083,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_remove_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_texture")
+    fileprivate static let method_remove_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_texture")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2328951467)!
@@ -1976,6 +2099,7 @@ open class FontFile: Font {
     /// > Note: This function will not remove glyphs associated with the texture. Remove them manually using ``removeGlyph(cacheIndex:size:glyph:)``.
     /// 
     public final func removeTexture(cacheIndex: Int32, size: Vector2i, textureIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
@@ -1995,8 +2119,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_texture_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_image")
+    fileprivate static let method_set_texture_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_image")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4157974066)!
@@ -2008,6 +2132,7 @@ open class FontFile: Font {
     
     /// Sets font cache texture image.
     public final func setTextureImage(cacheIndex: Int32, size: Vector2i, textureIndex: Int32, image: Image?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
@@ -2030,8 +2155,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_texture_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_image")
+    fileprivate static let method_get_texture_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_image")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3878418953)!
@@ -2043,6 +2168,7 @@ open class FontFile: Font {
     
     /// Returns a copy of the font cache texture image.
     public final func getTextureImage(cacheIndex: Int32, size: Vector2i, textureIndex: Int32) -> Image? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2060,11 +2186,11 @@ open class FontFile: Font {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_texture_offsets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_offsets")
+    fileprivate static let method_set_texture_offsets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_offsets")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2849993437)!
@@ -2076,6 +2202,7 @@ open class FontFile: Font {
     
     /// Sets array containing glyph packing data.
     public final func setTextureOffsets(cacheIndex: Int32, size: Vector2i, textureIndex: Int32, offset: PackedInt32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
@@ -2098,8 +2225,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_texture_offsets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_offsets")
+    fileprivate static let method_get_texture_offsets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_offsets")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3703444828)!
@@ -2111,6 +2238,7 @@ open class FontFile: Font {
     
     /// Returns a copy of the array containing glyph packing data.
     public final func getTextureOffsets(cacheIndex: Int32, size: Vector2i, textureIndex: Int32) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2131,8 +2259,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_get_glyph_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glyph_list")
+    fileprivate static let method_get_glyph_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glyph_list")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 681709689)!
@@ -2144,6 +2272,7 @@ open class FontFile: Font {
     
     /// Returns list of rendered glyphs in the cache entry.
     public final func getGlyphList(cacheIndex: Int32, size: Vector2i) -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2161,8 +2290,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_clear_glyphs: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_glyphs")
+    fileprivate static let method_clear_glyphs: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_glyphs")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2311374912)!
@@ -2177,6 +2306,7 @@ open class FontFile: Font {
     /// > Note: This function will not remove textures associated with the glyphs, use ``removeTexture(cacheIndex:size:textureIndex:)`` to remove them manually.
     /// 
     public final func clearGlyphs(cacheIndex: Int32, size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2193,8 +2323,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_remove_glyph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_glyph")
+    fileprivate static let method_remove_glyph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_glyph")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2328951467)!
@@ -2209,6 +2339,7 @@ open class FontFile: Font {
     /// > Note: This function will not remove textures associated with the glyphs, use ``removeTexture(cacheIndex:size:textureIndex:)`` to remove them manually.
     /// 
     public final func removeGlyph(cacheIndex: Int32, size: Vector2i, glyph: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -2228,8 +2359,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_glyph_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glyph_advance")
+    fileprivate static let method_set_glyph_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glyph_advance")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 947991729)!
@@ -2244,6 +2375,7 @@ open class FontFile: Font {
     /// > Note: Advance for glyphs outlines is the same as the base glyph advance and is not saved.
     /// 
     public final func setGlyphAdvance(cacheIndex: Int32, size: Int32, glyph: Int32, advance: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -2266,8 +2398,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_glyph_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glyph_advance")
+    fileprivate static let method_get_glyph_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glyph_advance")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1601573536)!
@@ -2282,6 +2414,7 @@ open class FontFile: Font {
     /// > Note: Advance for glyphs outlines is the same as the base glyph advance and is not saved.
     /// 
     public final func getGlyphAdvance(cacheIndex: Int32, size: Int32, glyph: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2302,8 +2435,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_glyph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glyph_offset")
+    fileprivate static let method_set_glyph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glyph_offset")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 921719850)!
@@ -2315,6 +2448,7 @@ open class FontFile: Font {
     
     /// Sets glyph offset from the baseline.
     public final func setGlyphOffset(cacheIndex: Int32, size: Vector2i, glyph: Int32, offset: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -2337,8 +2471,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_glyph_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glyph_offset")
+    fileprivate static let method_get_glyph_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glyph_offset")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3205412300)!
@@ -2350,6 +2484,7 @@ open class FontFile: Font {
     
     /// Returns glyph offset from the baseline.
     public final func getGlyphOffset(cacheIndex: Int32, size: Vector2i, glyph: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2370,8 +2505,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_glyph_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glyph_size")
+    fileprivate static let method_set_glyph_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glyph_size")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 921719850)!
@@ -2383,6 +2518,7 @@ open class FontFile: Font {
     
     /// Sets glyph size.
     public final func setGlyphSize(cacheIndex: Int32, size: Vector2i, glyph: Int32, glSize: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -2405,8 +2541,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_glyph_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glyph_size")
+    fileprivate static let method_get_glyph_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glyph_size")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3205412300)!
@@ -2418,6 +2554,7 @@ open class FontFile: Font {
     
     /// Returns glyph size.
     public final func getGlyphSize(cacheIndex: Int32, size: Vector2i, glyph: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2438,8 +2575,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_glyph_uv_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glyph_uv_rect")
+    fileprivate static let method_set_glyph_uv_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glyph_uv_rect")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3821620992)!
@@ -2451,6 +2588,7 @@ open class FontFile: Font {
     
     /// Sets rectangle in the cache texture containing the glyph.
     public final func setGlyphUvRect(cacheIndex: Int32, size: Vector2i, glyph: Int32, uvRect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -2473,8 +2611,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_glyph_uv_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glyph_uv_rect")
+    fileprivate static let method_get_glyph_uv_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glyph_uv_rect")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927917900)!
@@ -2486,6 +2624,7 @@ open class FontFile: Font {
     
     /// Returns rectangle in the cache texture containing the glyph.
     public final func getGlyphUvRect(cacheIndex: Int32, size: Vector2i, glyph: Int32) -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2506,8 +2645,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_set_glyph_texture_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_glyph_texture_idx")
+    fileprivate static let method_set_glyph_texture_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_glyph_texture_idx")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 355564111)!
@@ -2519,6 +2658,7 @@ open class FontFile: Font {
     
     /// Sets index of the cache texture containing the glyph.
     public final func setGlyphTextureIdx(cacheIndex: Int32, size: Vector2i, glyph: Int32, textureIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyph) { pArg2 in
@@ -2541,8 +2681,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_glyph_texture_idx: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glyph_texture_idx")
+    fileprivate static let method_get_glyph_texture_idx: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glyph_texture_idx")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1629411054)!
@@ -2554,6 +2694,7 @@ open class FontFile: Font {
     
     /// Returns index of the cache texture containing the glyph.
     public final func getGlyphTextureIdx(cacheIndex: Int32, size: Vector2i, glyph: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2574,8 +2715,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_get_kerning_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_kerning_list")
+    fileprivate static let method_get_kerning_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_kerning_list")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2345056839)!
@@ -2586,7 +2727,8 @@ open class FontFile: Font {
     }()
     
     /// Returns list of the kerning overrides.
-    public final func getKerningList(cacheIndex: Int32, size: Int32) -> VariantCollection<Vector2i> {
+    public final func getKerningList(cacheIndex: Int32, size: Int32) -> TypedArray<Vector2i> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2601,11 +2743,11 @@ open class FontFile: Font {
             
         }
         
-        return VariantCollection<Vector2i>(content: _result)
+        return TypedArray<Vector2i>(takingOver: _result)
     }
     
-    fileprivate static var method_clear_kerning_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear_kerning_map")
+    fileprivate static let method_clear_kerning_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear_kerning_map")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -2617,6 +2759,7 @@ open class FontFile: Font {
     
     /// Removes all kerning overrides.
     public final func clearKerningMap(cacheIndex: Int32, size: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2633,8 +2776,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_remove_kerning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_kerning")
+    fileprivate static let method_remove_kerning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_kerning")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3930204747)!
@@ -2646,6 +2789,7 @@ open class FontFile: Font {
     
     /// Removes kerning override for the pair of glyphs.
     public final func removeKerning(cacheIndex: Int32, size: Int32, glyphPair: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyphPair) { pArg2 in
@@ -2665,8 +2809,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_kerning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_kerning")
+    fileprivate static let method_set_kerning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_kerning")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3182200918)!
@@ -2678,6 +2822,7 @@ open class FontFile: Font {
     
     /// Sets kerning for the pair of glyphs.
     public final func setKerning(cacheIndex: Int32, size: Int32, glyphPair: Vector2i, kerning: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: glyphPair) { pArg2 in
@@ -2700,8 +2845,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_kerning: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_kerning")
+    fileprivate static let method_get_kerning: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_kerning")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611912865)!
@@ -2713,6 +2858,7 @@ open class FontFile: Font {
     
     /// Returns kerning for the pair of glyphs.
     public final func getKerning(cacheIndex: Int32, size: Int32, glyphPair: Vector2i) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
@@ -2733,8 +2879,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_render_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("render_range")
+    fileprivate static let method_render_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("render_range")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 355564111)!
@@ -2745,7 +2891,8 @@ open class FontFile: Font {
     }()
     
     /// Renders the range of characters to the font cache texture.
-    public final func renderRange(cacheIndex: Int32, size: Vector2i, start: Int64, end: Int64) {
+    public final func renderRange(cacheIndex: Int32, size: Vector2i, start: Int32, end: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: start) { pArg2 in
@@ -2768,8 +2915,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_render_glyph: GDExtensionMethodBindPtr = {
-        let methodName = StringName("render_glyph")
+    fileprivate static let method_render_glyph: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("render_glyph")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2328951467)!
@@ -2781,6 +2928,7 @@ open class FontFile: Font {
     
     /// Renders specified glyph to the font cache texture.
     public final func renderGlyph(cacheIndex: Int32, size: Vector2i, index: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: index) { pArg2 in
@@ -2800,8 +2948,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_set_language_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_language_support_override")
+    fileprivate static let method_set_language_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_language_support_override")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678287736)!
@@ -2813,6 +2961,7 @@ open class FontFile: Font {
     
     /// Adds override for ``Font/isLanguageSupported(language:)``.
     public final func setLanguageSupportOverride(language: String, supported: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: supported) { pArg1 in
@@ -2830,8 +2979,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_language_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language_support_override")
+    fileprivate static let method_get_language_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language_support_override")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -2843,6 +2992,7 @@ open class FontFile: Font {
     
     /// Returns `true` if support override is enabled for the `language`.
     public final func getLanguageSupportOverride(language: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
@@ -2858,8 +3008,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_remove_language_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_language_support_override")
+    fileprivate static let method_remove_language_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_language_support_override")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -2871,6 +3021,7 @@ open class FontFile: Font {
     
     /// Remove language support override.
     public final func removeLanguageSupportOverride(language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let language = GString(language)
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2885,8 +3036,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_language_support_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_language_support_overrides")
+    fileprivate static let method_get_language_support_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_language_support_overrides")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -2898,13 +3049,14 @@ open class FontFile: Font {
     
     /// Returns list of language support overrides.
     public final func getLanguageSupportOverrides() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(FontFile.method_get_language_support_overrides, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_script_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_script_support_override")
+    fileprivate static let method_set_script_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_script_support_override")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2678287736)!
@@ -2916,6 +3068,7 @@ open class FontFile: Font {
     
     /// Adds override for ``Font/isScriptSupported(script:)``.
     public final func setScriptSupportOverride(script: String, supported: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let script = GString(script)
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: supported) { pArg1 in
@@ -2933,8 +3086,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_script_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_support_override")
+    fileprivate static let method_get_script_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_support_override")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
@@ -2946,6 +3099,7 @@ open class FontFile: Font {
     
     /// Returns `true` if support override is enabled for the `script`.
     public final func getScriptSupportOverride(script: String) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         let script = GString(script)
         withUnsafePointer(to: script.content) { pArg0 in
@@ -2961,8 +3115,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_remove_script_support_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_script_support_override")
+    fileprivate static let method_remove_script_support_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_script_support_override")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -2974,6 +3128,7 @@ open class FontFile: Font {
     
     /// Removes script support override.
     public final func removeScriptSupportOverride(script: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let script = GString(script)
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2988,8 +3143,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_script_support_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_support_overrides")
+    fileprivate static let method_get_script_support_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_support_overrides")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -3001,13 +3156,14 @@ open class FontFile: Font {
     
     /// Returns list of script support overrides.
     public final func getScriptSupportOverrides() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(FontFile.method_get_script_support_overrides, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_opentype_feature_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_opentype_feature_overrides")
+    fileprivate static let method_set_opentype_feature_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_opentype_feature_overrides")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155329257)!
@@ -3018,7 +3174,8 @@ open class FontFile: Font {
     }()
     
     @inline(__always)
-    fileprivate final func set_opentype_feature_overrides(_ overrides: GDictionary) {
+    fileprivate final func set_opentype_feature_overrides(_ overrides: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: overrides.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3032,8 +3189,8 @@ open class FontFile: Font {
         
     }
     
-    fileprivate static var method_get_opentype_feature_overrides: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_opentype_feature_overrides")
+    fileprivate static let method_get_opentype_feature_overrides: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_opentype_feature_overrides")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -3044,14 +3201,15 @@ open class FontFile: Font {
     }()
     
     @inline(__always)
-    fileprivate final func get_opentype_feature_overrides() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    fileprivate final func get_opentype_feature_overrides() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(FontFile.method_get_opentype_feature_overrides, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_glyph_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_glyph_index")
+    fileprivate static let method_get_glyph_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_glyph_index")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 864943070)!
@@ -3062,7 +3220,8 @@ open class FontFile: Font {
     }()
     
     /// Returns the glyph index of a `char`, optionally modified by the `variationSelector`.
-    public final func getGlyphIndex(size: Int32, char: Int64, variationSelector: Int64) -> Int32 {
+    public final func getGlyphIndex(size: Int32, char: Int32, variationSelector: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: char) { pArg1 in
@@ -3083,8 +3242,8 @@ open class FontFile: Font {
         return _result
     }
     
-    fileprivate static var method_get_char_from_glyph_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_char_from_glyph_index")
+    fileprivate static let method_get_char_from_glyph_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_char_from_glyph_index")
         return withUnsafePointer(to: &FontFile.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -3095,8 +3254,9 @@ open class FontFile: Font {
     }()
     
     /// Returns character code associated with `glyphIndex`, or `0` if `glyphIndex` is invalid. See ``getGlyphIndex(size:char:variationSelector:)``.
-    public final func getCharFromGlyphIndex(size: Int32, glyphIndex: Int32) -> Int64 {
-        var _result: Int64 = 0
+    public final func getCharFromGlyphIndex(size: Int32, glyphIndex: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: glyphIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in

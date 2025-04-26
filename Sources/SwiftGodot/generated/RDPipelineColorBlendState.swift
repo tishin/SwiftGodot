@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDPipelineColorBlendState: RefCounted {
-    fileprivate static var className = StringName("RDPipelineColorBlendState")
+    private static var className = StringName("RDPipelineColorBlendState")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -65,7 +65,7 @@ open class RDPipelineColorBlendState: RefCounted {
     }
     
     /// The attachments that are blended together.
-    final public var attachments: ObjectCollection<RDPipelineColorBlendStateAttachment> {
+    final public var attachments: TypedArray<RDPipelineColorBlendStateAttachment?> {
         get {
             return get_attachments ()
         }
@@ -77,8 +77,8 @@ open class RDPipelineColorBlendState: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_enable_logic_op: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_logic_op")
+    fileprivate static let method_set_enable_logic_op: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_logic_op")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -90,6 +90,7 @@ open class RDPipelineColorBlendState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_logic_op(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -103,8 +104,8 @@ open class RDPipelineColorBlendState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_logic_op: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_logic_op")
+    fileprivate static let method_get_enable_logic_op: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_logic_op")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -116,13 +117,14 @@ open class RDPipelineColorBlendState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_logic_op() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_enable_logic_op, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_logic_op: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_logic_op")
+    fileprivate static let method_set_logic_op: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_logic_op")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3610841058)!
@@ -134,6 +136,7 @@ open class RDPipelineColorBlendState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_logic_op(_ pMember: RenderingDevice.LogicOperation) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -147,8 +150,8 @@ open class RDPipelineColorBlendState: RefCounted {
         
     }
     
-    fileprivate static var method_get_logic_op: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_logic_op")
+    fileprivate static let method_get_logic_op: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_logic_op")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 988254690)!
@@ -160,13 +163,14 @@ open class RDPipelineColorBlendState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_logic_op() -> RenderingDevice.LogicOperation {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_logic_op, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.LogicOperation (rawValue: _result)!
     }
     
-    fileprivate static var method_set_blend_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_constant")
+    fileprivate static let method_set_blend_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_constant")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -178,6 +182,7 @@ open class RDPipelineColorBlendState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_blend_constant(_ pMember: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -191,8 +196,8 @@ open class RDPipelineColorBlendState: RefCounted {
         
     }
     
-    fileprivate static var method_get_blend_constant: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_constant")
+    fileprivate static let method_get_blend_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_constant")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -204,13 +209,14 @@ open class RDPipelineColorBlendState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_blend_constant() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_blend_constant, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_attachments")
+    fileprivate static let method_set_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_attachments")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -221,7 +227,8 @@ open class RDPipelineColorBlendState: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func set_attachments(_ attachments: ObjectCollection<RDPipelineColorBlendStateAttachment>) {
+    fileprivate final func set_attachments(_ attachments: TypedArray<RDPipelineColorBlendStateAttachment?>) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: attachments.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -235,8 +242,8 @@ open class RDPipelineColorBlendState: RefCounted {
         
     }
     
-    fileprivate static var method_get_attachments: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_attachments")
+    fileprivate static let method_get_attachments: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_attachments")
         return withUnsafePointer(to: &RDPipelineColorBlendState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -247,10 +254,11 @@ open class RDPipelineColorBlendState: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func get_attachments() -> ObjectCollection<RDPipelineColorBlendStateAttachment> {
+    fileprivate final func get_attachments() -> TypedArray<RDPipelineColorBlendStateAttachment?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return ObjectCollection<RDPipelineColorBlendStateAttachment>(content: _result)
+        return TypedArray<RDPipelineColorBlendStateAttachment?>(takingOver: _result)
     }
     
 }

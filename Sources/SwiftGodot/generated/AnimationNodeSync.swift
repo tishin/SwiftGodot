@@ -23,7 +23,7 @@ import Musl
 /// 
 /// An animation node used to combine, mix, or blend two or more animations together while keeping them synchronized within an ``AnimationTree``.
 open class AnimationNodeSync: AnimationNode {
-    fileprivate static var className = StringName("AnimationNodeSync")
+    private static var className = StringName("AnimationNodeSync")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class AnimationNodeSync: AnimationNode {
     }
     
     /* Methods */
-    fileprivate static var method_set_use_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_sync")
+    fileprivate static let method_set_use_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_sync")
         return withUnsafePointer(to: &AnimationNodeSync.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -57,6 +57,7 @@ open class AnimationNodeSync: AnimationNode {
     
     @inline(__always)
     fileprivate final func set_use_sync(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -70,8 +71,8 @@ open class AnimationNodeSync: AnimationNode {
         
     }
     
-    fileprivate static var method_is_using_sync: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_sync")
+    fileprivate static let method_is_using_sync: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_sync")
         return withUnsafePointer(to: &AnimationNodeSync.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -83,6 +84,7 @@ open class AnimationNodeSync: AnimationNode {
     
     @inline(__always)
     fileprivate final func is_using_sync() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(AnimationNodeSync.method_is_using_sync, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

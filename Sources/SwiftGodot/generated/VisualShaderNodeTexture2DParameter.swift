@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Translated to `uniform sampler2D` in the shader language.
 open class VisualShaderNodeTexture2DParameter: VisualShaderNodeTextureParameter {
-    fileprivate static var className = StringName("VisualShaderNodeTexture2DParameter")
+    private static var className = StringName("VisualShaderNodeTexture2DParameter")
     override open class var godotClassName: StringName { className }
 }
 

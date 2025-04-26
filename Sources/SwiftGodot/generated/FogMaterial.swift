@@ -26,7 +26,7 @@ import Musl
 /// If you need more advanced effects, use a custom <a href="https://docs.godotengine.org/en//tutorials/shaders/shader_reference/fog_shader.html">fog shader</a>.
 /// 
 open class FogMaterial: Material {
-    fileprivate static var className = StringName("FogMaterial")
+    private static var className = StringName("FogMaterial")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -107,8 +107,8 @@ open class FogMaterial: Material {
     }
     
     /* Methods */
-    fileprivate static var method_set_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_density")
+    fileprivate static let method_set_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_density")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -120,6 +120,7 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_density(_ density: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: density) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -133,8 +134,8 @@ open class FogMaterial: Material {
         
     }
     
-    fileprivate static var method_get_density: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_density")
+    fileprivate static let method_get_density: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_density")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -146,13 +147,14 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_density() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FogMaterial.method_get_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_albedo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_albedo")
+    fileprivate static let method_set_albedo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_albedo")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -164,6 +166,7 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_albedo(_ albedo: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: albedo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -177,8 +180,8 @@ open class FogMaterial: Material {
         
     }
     
-    fileprivate static var method_get_albedo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_albedo")
+    fileprivate static let method_get_albedo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_albedo")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -190,13 +193,14 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_albedo() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(FogMaterial.method_get_albedo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_emission: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emission")
+    fileprivate static let method_set_emission: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emission")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -208,6 +212,7 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_emission(_ emission: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: emission) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -221,8 +226,8 @@ open class FogMaterial: Material {
         
     }
     
-    fileprivate static var method_get_emission: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_emission")
+    fileprivate static let method_get_emission: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_emission")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -234,13 +239,14 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_emission() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(FogMaterial.method_get_emission, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_height_falloff: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_height_falloff")
+    fileprivate static let method_set_height_falloff: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_height_falloff")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -252,6 +258,7 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_height_falloff(_ heightFalloff: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: heightFalloff) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -265,8 +272,8 @@ open class FogMaterial: Material {
         
     }
     
-    fileprivate static var method_get_height_falloff: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_height_falloff")
+    fileprivate static let method_get_height_falloff: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_height_falloff")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -278,13 +285,14 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_height_falloff() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FogMaterial.method_get_height_falloff, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_edge_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_edge_fade")
+    fileprivate static let method_set_edge_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_edge_fade")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -296,6 +304,7 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_edge_fade(_ edgeFade: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: edgeFade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -309,8 +318,8 @@ open class FogMaterial: Material {
         
     }
     
-    fileprivate static var method_get_edge_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_edge_fade")
+    fileprivate static let method_get_edge_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_edge_fade")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -322,13 +331,14 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_edge_fade() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(FogMaterial.method_get_edge_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_density_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_density_texture")
+    fileprivate static let method_set_density_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_density_texture")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1188404210)!
@@ -340,6 +350,7 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func set_density_texture(_ densityTexture: Texture3D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: densityTexture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -353,8 +364,8 @@ open class FogMaterial: Material {
         
     }
     
-    fileprivate static var method_get_density_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_density_texture")
+    fileprivate static let method_get_density_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_density_texture")
         return withUnsafePointer(to: &FogMaterial.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373985333)!
@@ -366,9 +377,10 @@ open class FogMaterial: Material {
     
     @inline(__always)
     fileprivate final func get_density_texture() -> Texture3D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(FogMaterial.method_get_density_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

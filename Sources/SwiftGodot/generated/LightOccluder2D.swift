@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Occludes light cast by a Light2D, casting shadows. The LightOccluder2D must be provided with an ``OccluderPolygon2D`` in order for the shadow to be computed.
 open class LightOccluder2D: Node2D {
-    fileprivate static var className = StringName("LightOccluder2D")
+    private static var className = StringName("LightOccluder2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -65,8 +65,8 @@ open class LightOccluder2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_occluder_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_occluder_polygon")
+    fileprivate static let method_set_occluder_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_occluder_polygon")
         return withUnsafePointer(to: &LightOccluder2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3258315893)!
@@ -78,6 +78,7 @@ open class LightOccluder2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_occluder_polygon(_ polygon: OccluderPolygon2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -91,8 +92,8 @@ open class LightOccluder2D: Node2D {
         
     }
     
-    fileprivate static var method_get_occluder_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_occluder_polygon")
+    fileprivate static let method_get_occluder_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_occluder_polygon")
         return withUnsafePointer(to: &LightOccluder2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3962317075)!
@@ -104,13 +105,14 @@ open class LightOccluder2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_occluder_polygon() -> OccluderPolygon2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(LightOccluder2D.method_get_occluder_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_occluder_light_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_occluder_light_mask")
+    fileprivate static let method_set_occluder_light_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_occluder_light_mask")
         return withUnsafePointer(to: &LightOccluder2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -122,6 +124,7 @@ open class LightOccluder2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_occluder_light_mask(_ mask: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -135,8 +138,8 @@ open class LightOccluder2D: Node2D {
         
     }
     
-    fileprivate static var method_get_occluder_light_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_occluder_light_mask")
+    fileprivate static let method_get_occluder_light_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_occluder_light_mask")
         return withUnsafePointer(to: &LightOccluder2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -148,13 +151,14 @@ open class LightOccluder2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_occluder_light_mask() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(LightOccluder2D.method_get_occluder_light_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_as_sdf_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_as_sdf_collision")
+    fileprivate static let method_set_as_sdf_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_as_sdf_collision")
         return withUnsafePointer(to: &LightOccluder2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -166,6 +170,7 @@ open class LightOccluder2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_as_sdf_collision(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -179,8 +184,8 @@ open class LightOccluder2D: Node2D {
         
     }
     
-    fileprivate static var method_is_set_as_sdf_collision: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_set_as_sdf_collision")
+    fileprivate static let method_is_set_as_sdf_collision: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_set_as_sdf_collision")
         return withUnsafePointer(to: &LightOccluder2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -192,6 +197,7 @@ open class LightOccluder2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_set_as_sdf_collision() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(LightOccluder2D.method_is_set_as_sdf_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

@@ -26,258 +26,1126 @@ import Musl
 /// Intended for use with GDExtension to create custom implementations of ``PhysicsDirectBodyState2D``.
 /// 
 open class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
-    fileprivate static var className = StringName("PhysicsDirectBodyState2DExtension")
+    private static var className = StringName("PhysicsDirectBodyState2DExtension")
     override open class var godotClassName: StringName { className }
     /* Methods */
+    fileprivate static let method__get_total_gravity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_total_gravity")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
+            }
+            
+        }
+        
+    }()
+    
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/totalGravity`` and its respective getter.
     @_documentation(visibility: public)
     open func _getTotalGravity() -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_total_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_total_linear_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_total_linear_damp")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/totalLinearDamp`` and its respective getter.
     @_documentation(visibility: public)
     open func _getTotalLinearDamp() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_total_linear_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_total_angular_damp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_total_angular_damp")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/totalAngularDamp`` and its respective getter.
     @_documentation(visibility: public)
     open func _getTotalAngularDamp() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_total_angular_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_center_of_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_center_of_mass")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/centerOfMass`` and its respective getter.
     @_documentation(visibility: public)
     open func _getCenterOfMass() -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_center_of_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_center_of_mass_local: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_center_of_mass_local")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/centerOfMassLocal`` and its respective getter.
     @_documentation(visibility: public)
     open func _getCenterOfMassLocal() -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_center_of_mass_local, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_inverse_mass: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_inverse_mass")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/inverseMass`` and its respective getter.
     @_documentation(visibility: public)
     open func _getInverseMass() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_inverse_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_inverse_inertia: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_inverse_inertia")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/inverseInertia`` and its respective getter.
     @_documentation(visibility: public)
     open func _getInverseInertia() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_inverse_inertia, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__set_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_linear_velocity")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/linearVelocity`` and its respective setter.
     @_documentation(visibility: public)
     open func _setLinearVelocity(_ velocity: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: velocity) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__set_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_linear_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_linear_velocity")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/linearVelocity`` and its respective getter.
     @_documentation(visibility: public)
     open func _getLinearVelocity() -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__set_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_angular_velocity")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/angularVelocity`` and its respective setter.
     @_documentation(visibility: public)
     open func _setAngularVelocity(_ velocity: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: velocity) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__set_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_angular_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_angular_velocity")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/angularVelocity`` and its respective getter.
     @_documentation(visibility: public)
     open func _getAngularVelocity() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_transform")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2761652528)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/transform`` and its respective setter.
     @_documentation(visibility: public)
     open func _setTransform(_ transform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: transform) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_transform")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3814499831)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/transform`` and its respective getter.
     @_documentation(visibility: public)
     open func _getTransform() -> Transform2D {
-        return Transform2D ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Transform2D = Transform2D ()
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_velocity_at_local_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_velocity_at_local_position")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2656412154)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getVelocityAtLocalPosition(_:)``.
     @_documentation(visibility: public)
     open func _getVelocityAtLocalPosition(_ localPosition: Vector2) -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        withUnsafePointer(to: localPosition) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_velocity_at_local_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__apply_central_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_apply_central_impulse")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/applyCentralImpulse(_:)``.
     @_documentation(visibility: public)
     open func _applyCentralImpulse(_ impulse: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: impulse) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__apply_central_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__apply_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_apply_impulse")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3108078480)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/applyImpulse(_:position:)``.
     @_documentation(visibility: public)
     open func _applyImpulse(_ impulse: Vector2, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: impulse) { pArg0 in
+            withUnsafePointer(to: position) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__apply_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__apply_torque_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_apply_torque_impulse")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/applyTorqueImpulse(_:)``.
     @_documentation(visibility: public)
     open func _applyTorqueImpulse(_ impulse: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: impulse) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__apply_torque_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__apply_central_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_apply_central_force")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/applyCentralForce(_:)``.
     @_documentation(visibility: public)
     open func _applyCentralForce(_ force: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: force) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__apply_central_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__apply_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_apply_force")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3108078480)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/applyForce(_:position:)``.
     @_documentation(visibility: public)
     open func _applyForce(_ force: Vector2, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: force) { pArg0 in
+            withUnsafePointer(to: position) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__apply_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__apply_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_apply_torque")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/applyTorque(_:)``.
     @_documentation(visibility: public)
     open func _applyTorque(_ torque: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: torque) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__apply_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__add_constant_central_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_add_constant_central_force")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/addConstantCentralForce(_:)``.
     @_documentation(visibility: public)
     open func _addConstantCentralForce(_ force: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: force) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__add_constant_central_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__add_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_add_constant_force")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3108078480)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/addConstantForce(_:position:)``.
     @_documentation(visibility: public)
     open func _addConstantForce(_ force: Vector2, position: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: force) { pArg0 in
+            withUnsafePointer(to: position) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__add_constant_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__add_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_add_constant_torque")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/addConstantTorque(_:)``.
     @_documentation(visibility: public)
     open func _addConstantTorque(_ torque: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: torque) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__add_constant_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__set_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_constant_force")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 743155724)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/setConstantForce(_:)``.
     @_documentation(visibility: public)
     open func _setConstantForce(_ force: Vector2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: force) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__set_constant_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_constant_force: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_constant_force")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3341600327)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getConstantForce()``.
     @_documentation(visibility: public)
     open func _getConstantForce() -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_constant_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__set_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_constant_torque")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/setConstantTorque(_:)``.
     @_documentation(visibility: public)
     open func _setConstantTorque(_ torque: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: torque) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__set_constant_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_constant_torque: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_constant_torque")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getConstantTorque()``.
     @_documentation(visibility: public)
     open func _getConstantTorque() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_constant_torque, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__set_sleep_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_sleep_state")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/sleeping`` and its respective setter.
     @_documentation(visibility: public)
     open func _setSleepState(enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enabled) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__set_sleep_state, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__is_sleeping: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_sleeping")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/sleeping`` and its respective getter.
     @_documentation(visibility: public)
     open func _isSleeping() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__is_sleeping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_contact_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_count")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactCount()``.
     @_documentation(visibility: public)
     open func _getContactCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__get_contact_local_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_local_position")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactLocalPosition(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactLocalPosition(contactIdx: Int32) -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_local_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_local_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_local_normal")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactLocalNormal(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactLocalNormal(contactIdx: Int32) -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_local_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_local_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_local_shape")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactLocalShape(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactLocalShape(contactIdx: Int32) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_local_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_local_velocity_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_local_velocity_at_position")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactLocalVelocityAtPosition(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactLocalVelocityAtPosition(contactIdx: Int32) -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_local_velocity_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_collider: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_collider")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 495598643)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactCollider(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactCollider(contactIdx: Int32) -> RID {
-        return RID ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: RID = RID ()
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_collider, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_collider_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_collider_position")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactColliderPosition(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactColliderPosition(contactIdx: Int32) -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_collider_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_collider_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_collider_id")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactColliderId(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactColliderId(contactIdx: Int32) -> UInt {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: UInt = 0
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_collider_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_collider_object: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_collider_object")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3332903315)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactColliderObject(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactColliderObject(contactIdx: Int32) -> Object? {
-        return Object ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_collider_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
+    
+    fileprivate static let method__get_contact_collider_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_collider_shape")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactColliderShape(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactColliderShape(contactIdx: Int32) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_collider_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_collider_velocity_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_collider_velocity_at_position")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactColliderVelocityAtPosition(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactColliderVelocityAtPosition(contactIdx: Int32) -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_collider_velocity_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_contact_impulse: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_contact_impulse")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2299179447)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getContactImpulse(contactIdx:)``.
     @_documentation(visibility: public)
     open func _getContactImpulse(contactIdx: Int32) -> Vector2 {
-        return Vector2 ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Vector2 = Vector2 ()
+        withUnsafePointer(to: contactIdx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_contact_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_step")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/step`` and its respective getter.
     @_documentation(visibility: public)
     open func _getStep() -> Double {
-        return 0.0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__integrate_forces: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_integrate_forces")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/integrateForces()``.
     @_documentation(visibility: public)
     open func _integrateForces() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__integrate_forces, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__get_space_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_space_state")
+        return withUnsafePointer(to: &PhysicsDirectBodyState2DExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2506717822)!
+            }
+            
+        }
+        
+    }()
     
     /// Overridable version of ``PhysicsDirectBodyState2D/getSpaceState()``.
     @_documentation(visibility: public)
     open func _getSpaceState() -> PhysicsDirectSpaceState2D? {
-        return PhysicsDirectSpaceState2D ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState2DExtension.method__get_space_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_add_constant_central_force":
@@ -380,97 +1248,111 @@ open class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
 func _PhysicsDirectBodyState2DExtension_proxy_add_constant_central_force (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._addConstantCentralForce (args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_add_constant_force (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._addConstantForce (args [0]!.assumingMemoryBound (to: Vector2.self).pointee, position: args [1]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_add_constant_torque (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._addConstantTorque (args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_apply_central_force (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._applyCentralForce (args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_apply_central_impulse (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._applyCentralImpulse (args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_apply_force (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._applyForce (args [0]!.assumingMemoryBound (to: Vector2.self).pointee, position: args [1]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_apply_impulse (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._applyImpulse (args [0]!.assumingMemoryBound (to: Vector2.self).pointee, position: args [1]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_apply_torque (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._applyTorque (args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_apply_torque_impulse (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._applyTorqueImpulse (args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_angular_velocity (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getAngularVelocity ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_center_of_mass (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getCenterOfMass ()
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_center_of_mass_local (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getCenterOfMassLocal ()
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_constant_force (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getConstantForce ()
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_constant_torque (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getConstantTorque ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
@@ -478,7 +1360,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_constant_torque (instance: Uns
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactCollider (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // RID
     ret.content = RID.zero
@@ -487,7 +1370,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider (instance: Un
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_id (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactColliderId (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: UInt.self)
 }
@@ -495,7 +1379,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_id (instance:
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_object (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactColliderObject (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Object
 }
@@ -503,7 +1388,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_object (insta
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_position (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactColliderPosition (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
@@ -511,7 +1397,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_position (ins
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_shape (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactColliderShape (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -519,14 +1406,16 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_shape (instan
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_collider_velocity_at_position (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactColliderVelocityAtPosition (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -534,7 +1423,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_count (instance: Unsaf
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_impulse (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactImpulse (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
@@ -542,7 +1432,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_impulse (instance: Uns
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_local_normal (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactLocalNormal (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
@@ -550,7 +1441,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_local_normal (instance
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_local_position (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactLocalPosition (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
@@ -558,7 +1450,8 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_local_position (instan
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_local_shape (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactLocalShape (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -566,70 +1459,80 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_contact_local_shape (instance:
 func _PhysicsDirectBodyState2DExtension_proxy_get_contact_local_velocity_at_position (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getContactLocalVelocityAtPosition (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_inverse_inertia (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getInverseInertia ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_inverse_mass (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getInverseMass ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_linear_velocity (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getLinearVelocity ()
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_space_state (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getSpaceState ()
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // PhysicsDirectSpaceState2D
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_step (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getStep ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_total_angular_damp (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getTotalAngularDamp ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_total_gravity (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getTotalGravity ()
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_total_linear_damp (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getTotalLinearDamp ()
     retPtr!.storeBytes (of: ret, as: Double.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_get_transform (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getTransform ()
     retPtr!.storeBytes (of: ret, as: Transform2D.self)
 }
@@ -637,20 +1540,23 @@ func _PhysicsDirectBodyState2DExtension_proxy_get_transform (instance: UnsafeMut
 func _PhysicsDirectBodyState2DExtension_proxy_get_velocity_at_local_position (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._getVelocityAtLocalPosition (args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Vector2.self)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_integrate_forces (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._integrateForces ()
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_is_sleeping (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     let ret = swiftObject._isSleeping ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -658,42 +1564,48 @@ func _PhysicsDirectBodyState2DExtension_proxy_is_sleeping (instance: UnsafeMutab
 func _PhysicsDirectBodyState2DExtension_proxy_set_angular_velocity (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._setAngularVelocity (args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_set_constant_force (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._setConstantForce (args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_set_constant_torque (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._setConstantTorque (args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_set_linear_velocity (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._setLinearVelocity (args [0]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_set_sleep_state (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._setSleepState (enabled: args [0]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _PhysicsDirectBodyState2DExtension_proxy_set_transform (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<PhysicsDirectBodyState2DExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? PhysicsDirectBodyState2DExtension else { return }
     swiftObject._setTransform (args [0]!.assumingMemoryBound (to: Transform2D.self).pointee)
 }
 

@@ -20,7 +20,7 @@ import Musl
 
 
 open class GLTFDocumentExtensionConvertImporterMesh: GLTFDocumentExtension {
-    fileprivate static var className = StringName("GLTFDocumentExtensionConvertImporterMesh")
+    private static var className = StringName("GLTFDocumentExtensionConvertImporterMesh")
     override open class var godotClassName: StringName { className }
 }
 

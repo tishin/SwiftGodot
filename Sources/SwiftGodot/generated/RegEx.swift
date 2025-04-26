@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A regular expression (or regex) is a compact language that can be used to recognize strings that follow a specific pattern, such as URLs, email addresses, complete sentences, etc. For example, a regex of `ab[0-9]` would find any string that is `ab` followed by any number from `0` to `9`. For a more in-depth look, you can easily find various tutorials and detailed explanations on the Internet.
 /// 
-/// To begin, the RegEx object needs to be compiled with the search pattern using ``compile(pattern:)`` before it can be used.
+/// To begin, the RegEx object needs to be compiled with the search pattern using ``compile(pattern:showError:)`` before it can be used.
 /// 
 /// The search pattern must be escaped first for GDScript before it is escaped for the expression. For example, `compile("\\d+")` would be read by RegEx as `\d+`. Similarly, `compile("\"(?:\\\\.|[^\"])*\"")` would be read as `"(?:\\.|[^"])*"`. In GDScript, you can also use raw string literals (r-strings). For example, `compile(r'"(?:\\.|[^"])*"')` would be read the same.
 /// 
@@ -35,46 +35,49 @@ import Musl
 /// 
 /// If you need to process multiple results, ``searchAll(subject:offset:end:)`` generates a list of all non-overlapping results. This can be combined with a `for` loop for convenience.
 /// 
-/// **Example of splitting a string using a RegEx:**
+/// **Example:** Split a string using a RegEx:
 /// 
 /// > Note: Godot's regex implementation is based on the <a href="https://www.pcre.org/">PCRE2</a> library. You can view the full pattern reference <a href="https://www.pcre.org/current/doc/html/pcre2pattern.html">here</a>.
 /// 
 /// **Tip:** You can use <a href="https://regexr.com/">Regexr</a> to test regular expressions online.
 /// 
 open class RegEx: RefCounted {
-    fileprivate static var className = StringName("RegEx")
+    private static var className = StringName("RegEx")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_create_from_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_string")
+    fileprivate static let method_create_from_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_string")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2150300909)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4249111514)!
             }
             
         }
         
     }()
     
-    /// Creates and compiles a new ``RegEx`` object.
-    public static func createFromString(pattern: String) -> RegEx? {
+    /// Creates and compiles a new ``RegEx`` object. See also ``compile(pattern:showError:)``.
+    public static func createFromString(pattern: String, showError: Bool = true) -> RegEx? {
         var _result = UnsafeRawPointer (bitPattern: 0)
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
-            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
-                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_create_from_string, nil, pArgs, &_result)
+            withUnsafePointer(to: showError) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_create_from_string, nil, pArgs, &_result)
+                    }
+                    
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -86,29 +89,34 @@ open class RegEx: RefCounted {
     
     /// This method resets the state of the object, as if it was freshly created. Namely, it unassigns the regular expression of this object.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(RegEx.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_compile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compile")
+    fileprivate static let method_compile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compile")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 166001499)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3565188097)!
             }
             
         }
         
     }()
     
-    /// Compiles and assign the search pattern to use. Returns ``GodotError/ok`` if the compilation is successful. If an error is encountered, details are printed to standard output and an error is returned.
-    public final func compile(pattern: String) -> GodotError {
+    /// Compiles and assign the search pattern to use. Returns ``GodotError/ok`` if the compilation is successful. If compilation fails, returns ``GodotError/failed`` and when `showError` is `true`, details are printed to standard output.
+    public final func compile(pattern: String, showError: Bool = true) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
-            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
-                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RegEx.method_compile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+            withUnsafePointer(to: showError) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(RegEx.method_compile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
                 }
                 
             }
@@ -118,8 +126,8 @@ open class RegEx: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("search")
+    fileprivate static let method_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("search")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3365977994)!
@@ -134,6 +142,7 @@ open class RegEx: RefCounted {
     /// The region to search within can be specified with `offset` and `end`. This is useful when searching for another match in the same `subject` by calling this method again after a previous success. Note that setting these parameters differs from passing over a shortened string. For example, the start anchor `^` is not affected by `offset`, and the character before `offset` will be checked for the word boundary `\b`.
     /// 
     public final func search(subject: String, offset: Int32 = 0, end: Int32 = -1) -> RegExMatch? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let subject = GString(subject)
         withUnsafePointer(to: subject.content) { pArg0 in
@@ -152,11 +161,11 @@ open class RegEx: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_search_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("search_all")
+    fileprivate static let method_search_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("search_all")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 849021363)!
@@ -170,7 +179,8 @@ open class RegEx: RefCounted {
     /// 
     /// The region to search within can be specified with `offset` and `end`. This is useful when searching for another match in the same `subject` by calling this method again after a previous success. Note that setting these parameters differs from passing over a shortened string. For example, the start anchor `^` is not affected by `offset`, and the character before `offset` will be checked for the word boundary `\b`.
     /// 
-    public final func searchAll(subject: String, offset: Int32 = 0, end: Int32 = -1) -> ObjectCollection<RegExMatch> {
+    public final func searchAll(subject: String, offset: Int32 = 0, end: Int32 = -1) -> TypedArray<RegExMatch?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         let subject = GString(subject)
         withUnsafePointer(to: subject.content) { pArg0 in
@@ -189,11 +199,11 @@ open class RegEx: RefCounted {
             
         }
         
-        return ObjectCollection<RegExMatch>(content: _result)
+        return TypedArray<RegExMatch?>(takingOver: _result)
     }
     
-    fileprivate static var method_sub: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sub")
+    fileprivate static let method_sub: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sub")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 54019702)!
@@ -208,6 +218,7 @@ open class RegEx: RefCounted {
     /// The region to search within can be specified with `offset` and `end`. This is useful when searching for another match in the same `subject` by calling this method again after a previous success. Note that setting these parameters differs from passing over a shortened string. For example, the start anchor `^` is not affected by `offset`, and the character before `offset` will be checked for the word boundary `\b`.
     /// 
     public final func sub(subject: String, replacement: String, all: Bool = false, offset: Int32 = 0, end: Int32 = -1) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let subject = GString(subject)
         withUnsafePointer(to: subject.content) { pArg0 in
@@ -236,8 +247,8 @@ open class RegEx: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_is_valid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_valid")
+    fileprivate static let method_is_valid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_valid")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -249,13 +260,14 @@ open class RegEx: RefCounted {
     
     /// Returns whether this object has a valid search pattern assigned.
     public final func isValid() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RegEx.method_is_valid, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_pattern: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pattern")
+    fileprivate static let method_get_pattern: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pattern")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -267,13 +279,14 @@ open class RegEx: RefCounted {
     
     /// Returns the original search pattern that was compiled.
     public final func getPattern() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RegEx.method_get_pattern, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_group_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_group_count")
+    fileprivate static let method_get_group_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_group_count")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -285,13 +298,14 @@ open class RegEx: RefCounted {
     
     /// Returns the number of capturing groups in compiled pattern.
     public final func getGroupCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RegEx.method_get_group_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_names: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_names")
+    fileprivate static let method_get_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_names")
         return withUnsafePointer(to: &RegEx.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -303,6 +317,7 @@ open class RegEx: RefCounted {
     
     /// Returns an array of names of named capturing groups in the compiled pattern. They are ordered by appearance.
     public final func getNames() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(RegEx.method_get_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Performs a lookup operation on the texture provided as a uniform for the shader.
 open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
-    fileprivate static var className = StringName("VisualShaderNodeTextureParameter")
+    private static var className = StringName("VisualShaderNodeTextureParameter")
     override open class var godotClassName: StringName { className }
     public enum TextureType: Int64, CaseIterable {
         /// No hints are added to the uniform declaration.
@@ -168,8 +168,8 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     }
     
     /* Methods */
-    fileprivate static var method_set_texture_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_type")
+    fileprivate static let method_set_texture_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_type")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2227296876)!
@@ -181,6 +181,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_texture_type(_ type: VisualShaderNodeTextureParameter.TextureType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -194,8 +195,8 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_texture_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_type")
+    fileprivate static let method_get_texture_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_type")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 367922070)!
@@ -207,13 +208,14 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_texture_type() -> VisualShaderNodeTextureParameter.TextureType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeTextureParameter.TextureType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_color_default: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_color_default")
+    fileprivate static let method_set_color_default: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_color_default")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4217624432)!
@@ -225,6 +227,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_color_default(_ color: VisualShaderNodeTextureParameter.ColorDefault) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -238,8 +241,8 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_color_default: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_color_default")
+    fileprivate static let method_get_color_default: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_color_default")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3837060134)!
@@ -251,13 +254,14 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_color_default() -> VisualShaderNodeTextureParameter.ColorDefault {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_color_default, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeTextureParameter.ColorDefault (rawValue: _result)!
     }
     
-    fileprivate static var method_set_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_filter")
+    fileprivate static let method_set_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_filter")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2147684752)!
@@ -269,6 +273,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_texture_filter(_ filter: VisualShaderNodeTextureParameter.TextureFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -282,8 +287,8 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_filter")
+    fileprivate static let method_get_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_filter")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4184490817)!
@@ -295,13 +300,14 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_texture_filter() -> VisualShaderNodeTextureParameter.TextureFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeTextureParameter.TextureFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_repeat")
+    fileprivate static let method_set_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_repeat")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2036143070)!
@@ -313,6 +319,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_texture_repeat(_ `repeat`: VisualShaderNodeTextureParameter.TextureRepeat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `repeat`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -326,8 +333,8 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_texture_repeat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_repeat")
+    fileprivate static let method_get_texture_repeat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_repeat")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1690132794)!
@@ -339,13 +346,14 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_texture_repeat() -> VisualShaderNodeTextureParameter.TextureRepeat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeTextureParameter.TextureRepeat (rawValue: _result)!
     }
     
-    fileprivate static var method_set_texture_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_source")
+    fileprivate static let method_set_texture_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_source")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1212687372)!
@@ -357,6 +365,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func set_texture_source(_ source: VisualShaderNodeTextureParameter.TextureSource) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -370,8 +379,8 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    fileprivate static var method_get_texture_source: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_source")
+    fileprivate static let method_get_texture_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_source")
         return withUnsafePointer(to: &VisualShaderNodeTextureParameter.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2039092262)!
@@ -383,6 +392,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     
     @inline(__always)
     fileprivate final func get_texture_source() -> VisualShaderNodeTextureParameter.TextureSource {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return VisualShaderNodeTextureParameter.TextureSource (rawValue: _result)!

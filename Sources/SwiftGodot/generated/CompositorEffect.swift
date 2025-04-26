@@ -21,9 +21,9 @@ import Musl
 
 /// This resource allows for creating a custom rendering effect.
 /// 
-/// This resource defines a custom rendering effect that can be applied to ``Viewport``s through the viewports' ``Environment``. You can implement a callback that is called during rendering at a given stage of the rendering pipeline and allows you to insert additional passes. Note that this callback happens on the rendering thread.
+/// This resource defines a custom rendering effect that can be applied to ``Viewport``s through the viewports' ``Environment``. You can implement a callback that is called during rendering at a given stage of the rendering pipeline and allows you to insert additional passes. Note that this callback happens on the rendering thread. CompositorEffect is an abstract base class and must be extended to implement specific rendering logic.
 open class CompositorEffect: Resource {
-    fileprivate static var className = StringName("CompositorEffect")
+    private static var className = StringName("CompositorEffect")
     override open class var godotClassName: StringName { className }
     public enum EffectCallbackType: Int64, CaseIterable {
         /// The callback is called before our opaque rendering pass, but after depth prepass (if applicable).
@@ -34,7 +34,7 @@ open class CompositorEffect: Resource {
         case postSky = 2 // EFFECT_CALLBACK_TYPE_POST_SKY
         /// The callback is called before our transparent rendering pass, but after our sky is rendered and we've created our back buffers.
         case preTransparent = 3 // EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT
-        /// The callback is called after our transparent rendering pass, but before any build in post effects and output to our render target.
+        /// The callback is called after our transparent rendering pass, but before any built-in post-processing effects and output to our render target.
         case postTransparent = 4 // EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
         /// Represents the size of the ``CompositorEffect/EffectCallbackType`` enum.
         case max = 5 // EFFECT_CALLBACK_TYPE_MAX
@@ -116,6 +116,8 @@ open class CompositorEffect: Resource {
     /// 
     /// > Note: In ``_renderCallback(effectCallbackType:renderData:)``, to access the roughness buffer use:
     /// 
+    /// The raw normal and roughness buffer is stored in an optimized format, different than the one available in Spatial shaders. When sampling the buffer, a conversion function must be applied. Use this function, copied from <a href="https://github.com/godotengine/godot/blob/da5f39889f155658cef7f7ec3cc1abb94e17d815/servers/rendering/renderer_rd/shaders/forward_clustered/scene_forward_clustered_inc.glsl#L334-L341">here</a>:
+    /// 
     final public var needsNormalRoughness: Bool {
         get {
             return get_needs_normal_roughness ()
@@ -140,13 +142,39 @@ open class CompositorEffect: Resource {
     }
     
     /* Methods */
+    fileprivate static let method__render_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_render_callback")
+        return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2153422729)!
+            }
+            
+        }
+        
+    }()
+    
     /// Implement this function with your custom rendering code. `effectCallbackType` should always match the effect callback type you've specified in ``effectCallbackType``. `renderData` provides access to the rendering state, it is only valid during rendering and should not be stored.
     @_documentation(visibility: public)
     open func _renderCallback(effectCallbackType: Int32, renderData: RenderData?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: effectCallbackType) { pArg0 in
+            withUnsafePointer(to: renderData?.handle) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(CompositorEffect.method__render_callback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enabled")
+    fileprivate static let method_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enabled")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -158,6 +186,7 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func set_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -171,8 +200,8 @@ open class CompositorEffect: Resource {
         
     }
     
-    fileprivate static var method_get_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enabled")
+    fileprivate static let method_get_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enabled")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -184,13 +213,14 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func get_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CompositorEffect.method_get_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_effect_callback_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_effect_callback_type")
+    fileprivate static let method_set_effect_callback_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_effect_callback_type")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1390728419)!
@@ -202,6 +232,7 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func set_effect_callback_type(_ effectCallbackType: CompositorEffect.EffectCallbackType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: effectCallbackType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -215,8 +246,8 @@ open class CompositorEffect: Resource {
         
     }
     
-    fileprivate static var method_get_effect_callback_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_effect_callback_type")
+    fileprivate static let method_get_effect_callback_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_effect_callback_type")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1221912590)!
@@ -228,13 +259,14 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func get_effect_callback_type() -> CompositorEffect.EffectCallbackType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(CompositorEffect.method_get_effect_callback_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return CompositorEffect.EffectCallbackType (rawValue: _result)!
     }
     
-    fileprivate static var method_set_access_resolved_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_access_resolved_color")
+    fileprivate static let method_set_access_resolved_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_access_resolved_color")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -246,6 +278,7 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func set_access_resolved_color(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -259,8 +292,8 @@ open class CompositorEffect: Resource {
         
     }
     
-    fileprivate static var method_get_access_resolved_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_access_resolved_color")
+    fileprivate static let method_get_access_resolved_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_access_resolved_color")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -272,13 +305,14 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func get_access_resolved_color() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CompositorEffect.method_get_access_resolved_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_access_resolved_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_access_resolved_depth")
+    fileprivate static let method_set_access_resolved_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_access_resolved_depth")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -290,6 +324,7 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func set_access_resolved_depth(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -303,8 +338,8 @@ open class CompositorEffect: Resource {
         
     }
     
-    fileprivate static var method_get_access_resolved_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_access_resolved_depth")
+    fileprivate static let method_get_access_resolved_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_access_resolved_depth")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -316,13 +351,14 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func get_access_resolved_depth() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CompositorEffect.method_get_access_resolved_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_needs_motion_vectors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_needs_motion_vectors")
+    fileprivate static let method_set_needs_motion_vectors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_needs_motion_vectors")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -334,6 +370,7 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func set_needs_motion_vectors(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -347,8 +384,8 @@ open class CompositorEffect: Resource {
         
     }
     
-    fileprivate static var method_get_needs_motion_vectors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_needs_motion_vectors")
+    fileprivate static let method_get_needs_motion_vectors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_needs_motion_vectors")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -360,13 +397,14 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func get_needs_motion_vectors() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_motion_vectors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_needs_normal_roughness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_needs_normal_roughness")
+    fileprivate static let method_set_needs_normal_roughness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_needs_normal_roughness")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -378,6 +416,7 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func set_needs_normal_roughness(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -391,8 +430,8 @@ open class CompositorEffect: Resource {
         
     }
     
-    fileprivate static var method_get_needs_normal_roughness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_needs_normal_roughness")
+    fileprivate static let method_get_needs_normal_roughness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_needs_normal_roughness")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -404,13 +443,14 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func get_needs_normal_roughness() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_normal_roughness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_needs_separate_specular: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_needs_separate_specular")
+    fileprivate static let method_set_needs_separate_specular: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_needs_separate_specular")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -422,6 +462,7 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func set_needs_separate_specular(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -435,8 +476,8 @@ open class CompositorEffect: Resource {
         
     }
     
-    fileprivate static var method_get_needs_separate_specular: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_needs_separate_specular")
+    fileprivate static let method_get_needs_separate_specular: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_needs_separate_specular")
         return withUnsafePointer(to: &CompositorEffect.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -448,12 +489,13 @@ open class CompositorEffect: Resource {
     
     @inline(__always)
     fileprivate final func get_needs_separate_specular() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_separate_specular, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_render_callback":
@@ -470,9 +512,10 @@ open class CompositorEffect: Resource {
 func _CompositorEffect_proxy_render_callback (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<CompositorEffect>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? CompositorEffect else { return }
+    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._renderCallback (effectCallbackType: args [0]!.assumingMemoryBound (to: Int32.self).pointee, renderData: lookupLiveObject (handleAddress: resolved_1) as? RenderData ?? RenderData (nativeHandle: resolved_1))
+    swiftObject._renderCallback (effectCallbackType: args [0]!.assumingMemoryBound (to: Int32.self).pointee, renderData: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? RenderData)
 }
 

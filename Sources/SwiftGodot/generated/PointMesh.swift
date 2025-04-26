@@ -28,7 +28,7 @@ import Musl
 /// When using PointMeshes, properties that normally alter vertices will be ignored, including billboard mode, grow, and cull face.
 /// 
 open class PointMesh: PrimitiveMesh {
-    fileprivate static var className = StringName("PointMesh")
+    private static var className = StringName("PointMesh")
     override open class var godotClassName: StringName { className }
 }
 

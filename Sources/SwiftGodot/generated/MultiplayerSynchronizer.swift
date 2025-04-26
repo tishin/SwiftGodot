@@ -39,7 +39,7 @@ import Musl
 /// - ``deltaSynchronized``
 /// - ``visibilityChanged``
 open class MultiplayerSynchronizer: Node {
-    fileprivate static var className = StringName("MultiplayerSynchronizer")
+    private static var className = StringName("MultiplayerSynchronizer")
     override open class var godotClassName: StringName { className }
     public enum VisibilityUpdateMode: Int64, CaseIterable {
         /// Visibility filters are updated during process frames (see ``Node/notificationInternalProcess``).
@@ -68,7 +68,7 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    /// Time interval between synchronizations. When set to `0.0` (the default), synchronizations happen every network process frame.
+    /// Time interval between synchronizations. Used when the replication is set to ``SceneReplicationConfig/ReplicationMode/always``. If set to `0.0` (the default), synchronizations happen every network process frame.
     final public var replicationInterval: Double {
         get {
             return get_replication_interval ()
@@ -80,7 +80,7 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    /// Time interval between delta synchronizations. When set to `0.0` (the default), delta synchronizations happen every network process frame.
+    /// Time interval between delta synchronizations. Used when the replication is set to ``SceneReplicationConfig/ReplicationMode/onChange``. If set to `0.0` (the default), delta synchronizations happen every network process frame.
     final public var deltaInterval: Double {
         get {
             return get_delta_interval ()
@@ -129,8 +129,8 @@ open class MultiplayerSynchronizer: Node {
     }
     
     /* Methods */
-    fileprivate static var method_set_root_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_root_path")
+    fileprivate static let method_set_root_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_root_path")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1348162250)!
@@ -142,6 +142,7 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func set_root_path(_ path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -155,8 +156,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_get_root_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_root_path")
+    fileprivate static let method_get_root_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_root_path")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -168,13 +169,14 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func get_root_path() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_root_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_replication_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_replication_interval")
+    fileprivate static let method_set_replication_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_replication_interval")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -186,6 +188,7 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func set_replication_interval(_ milliseconds: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: milliseconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -199,8 +202,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_get_replication_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_replication_interval")
+    fileprivate static let method_get_replication_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_replication_interval")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -212,13 +215,14 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func get_replication_interval() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_replication_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_delta_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_delta_interval")
+    fileprivate static let method_set_delta_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_delta_interval")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -230,6 +234,7 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func set_delta_interval(_ milliseconds: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: milliseconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -243,8 +248,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_get_delta_interval: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_delta_interval")
+    fileprivate static let method_get_delta_interval: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_delta_interval")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -256,13 +261,14 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func get_delta_interval() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_delta_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_replication_config: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_replication_config")
+    fileprivate static let method_set_replication_config: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_replication_config")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3889206742)!
@@ -274,6 +280,7 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func set_replication_config(_ config: SceneReplicationConfig?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: config?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -287,8 +294,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_get_replication_config: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_replication_config")
+    fileprivate static let method_get_replication_config: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_replication_config")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3200254614)!
@@ -300,13 +307,14 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func get_replication_config() -> SceneReplicationConfig? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_replication_config, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_visibility_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_update_mode")
+    fileprivate static let method_set_visibility_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_update_mode")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3494860300)!
@@ -318,6 +326,7 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func set_visibility_update_mode(_ mode: MultiplayerSynchronizer.VisibilityUpdateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -331,8 +340,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_get_visibility_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visibility_update_mode")
+    fileprivate static let method_get_visibility_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visibility_update_mode")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3352241418)!
@@ -344,13 +353,14 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func get_visibility_update_mode() -> MultiplayerSynchronizer.VisibilityUpdateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_visibility_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MultiplayerSynchronizer.VisibilityUpdateMode (rawValue: _result)!
     }
     
-    fileprivate static var method_update_visibility: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_visibility")
+    fileprivate static let method_update_visibility: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_visibility")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1995695955)!
@@ -362,6 +372,7 @@ open class MultiplayerSynchronizer: Node {
     
     /// Updates the visibility of `forPeer` according to visibility filters. If `forPeer` is `0` (the default), all peers' visibilties are updated.
     public final func updateVisibility(forPeer: Int32 = 0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: forPeer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -375,8 +386,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_set_visibility_public: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_public")
+    fileprivate static let method_set_visibility_public: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_public")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -388,6 +399,7 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func set_visibility_public(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -401,8 +413,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_is_visibility_public: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_visibility_public")
+    fileprivate static let method_is_visibility_public: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_visibility_public")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -414,13 +426,14 @@ open class MultiplayerSynchronizer: Node {
     
     @inline(__always)
     fileprivate final func is_visibility_public() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_is_visibility_public, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_add_visibility_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_visibility_filter")
+    fileprivate static let method_add_visibility_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_visibility_filter")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -435,6 +448,7 @@ open class MultiplayerSynchronizer: Node {
     /// `filter` should take a peer ID integer and return a [bool].
     /// 
     public final func addVisibilityFilter(_ filter: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filter.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -448,8 +462,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_remove_visibility_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_visibility_filter")
+    fileprivate static let method_remove_visibility_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_visibility_filter")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -461,6 +475,7 @@ open class MultiplayerSynchronizer: Node {
     
     /// Removes a peer visibility filter from this synchronizer.
     public final func removeVisibilityFilter(_ filter: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: filter.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -474,8 +489,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_set_visibility_for: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visibility_for")
+    fileprivate static let method_set_visibility_for: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visibility_for")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -487,6 +502,7 @@ open class MultiplayerSynchronizer: Node {
     
     /// Sets the visibility of `peer` to `visible`. If `peer` is `0`, the value of ``publicVisibility`` will be updated instead.
     public final func setVisibilityFor(peer: Int32, visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: peer) { pArg0 in
             withUnsafePointer(to: visible) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -503,8 +519,8 @@ open class MultiplayerSynchronizer: Node {
         
     }
     
-    fileprivate static var method_get_visibility_for: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visibility_for")
+    fileprivate static let method_get_visibility_for: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visibility_for")
         return withUnsafePointer(to: &MultiplayerSynchronizer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -516,6 +532,7 @@ open class MultiplayerSynchronizer: Node {
     
     /// Queries the current visibility for peer `peer`.
     public final func getVisibilityFor(peer: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: peer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

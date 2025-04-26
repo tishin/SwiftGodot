@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDPipelineRasterizationState: RefCounted {
-    fileprivate static var className = StringName("RDPipelineRasterizationState")
+    private static var className = StringName("RDPipelineRasterizationState")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -161,8 +161,8 @@ open class RDPipelineRasterizationState: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_set_enable_depth_clamp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enable_depth_clamp")
+    fileprivate static let method_set_enable_depth_clamp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enable_depth_clamp")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -174,6 +174,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_enable_depth_clamp(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -187,8 +188,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_enable_depth_clamp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enable_depth_clamp")
+    fileprivate static let method_get_enable_depth_clamp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enable_depth_clamp")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -200,13 +201,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_enable_depth_clamp() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_enable_depth_clamp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_discard_primitives: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_discard_primitives")
+    fileprivate static let method_set_discard_primitives: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_discard_primitives")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -218,6 +220,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_discard_primitives(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -231,8 +234,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_discard_primitives: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_discard_primitives")
+    fileprivate static let method_get_discard_primitives: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_discard_primitives")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -244,13 +247,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_discard_primitives() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_discard_primitives, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_wireframe: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_wireframe")
+    fileprivate static let method_set_wireframe: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_wireframe")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -262,6 +266,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_wireframe(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -275,8 +280,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_wireframe: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_wireframe")
+    fileprivate static let method_get_wireframe: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_wireframe")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -288,13 +293,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_wireframe() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_wireframe, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cull_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mode")
+    fileprivate static let method_set_cull_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mode")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2662586502)!
@@ -306,6 +312,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_cull_mode(_ pMember: RenderingDevice.PolygonCullMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -319,8 +326,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_cull_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mode")
+    fileprivate static let method_get_cull_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mode")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2192484313)!
@@ -332,13 +339,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_cull_mode() -> RenderingDevice.PolygonCullMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_cull_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.PolygonCullMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_front_face: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_front_face")
+    fileprivate static let method_set_front_face: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_front_face")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2637251213)!
@@ -350,6 +358,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_front_face(_ pMember: RenderingDevice.PolygonFrontFace) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -363,8 +372,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_front_face: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_front_face")
+    fileprivate static let method_get_front_face: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_front_face")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 708793786)!
@@ -376,13 +385,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_front_face() -> RenderingDevice.PolygonFrontFace {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_front_face, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return RenderingDevice.PolygonFrontFace (rawValue: _result)!
     }
     
-    fileprivate static var method_set_depth_bias_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_bias_enabled")
+    fileprivate static let method_set_depth_bias_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_bias_enabled")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -394,6 +404,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_bias_enabled(_ pMember: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -407,8 +418,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_bias_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_bias_enabled")
+    fileprivate static let method_get_depth_bias_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_bias_enabled")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -420,13 +431,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_bias_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth_bias_constant_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_bias_constant_factor")
+    fileprivate static let method_set_depth_bias_constant_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_bias_constant_factor")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -438,6 +450,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_bias_constant_factor(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -451,8 +464,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_bias_constant_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_bias_constant_factor")
+    fileprivate static let method_get_depth_bias_constant_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_bias_constant_factor")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -464,13 +477,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_bias_constant_factor() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_constant_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth_bias_clamp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_bias_clamp")
+    fileprivate static let method_set_depth_bias_clamp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_bias_clamp")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -482,6 +496,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_bias_clamp(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -495,8 +510,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_bias_clamp: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_bias_clamp")
+    fileprivate static let method_get_depth_bias_clamp: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_bias_clamp")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -508,13 +523,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_bias_clamp() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_clamp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth_bias_slope_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_bias_slope_factor")
+    fileprivate static let method_set_depth_bias_slope_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_bias_slope_factor")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -526,6 +542,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_depth_bias_slope_factor(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -539,8 +556,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_depth_bias_slope_factor: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_bias_slope_factor")
+    fileprivate static let method_get_depth_bias_slope_factor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_bias_slope_factor")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -552,13 +569,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_depth_bias_slope_factor() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_slope_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_line_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_line_width")
+    fileprivate static let method_set_line_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_line_width")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -570,6 +588,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_line_width(_ pMember: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -583,8 +602,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_line_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_width")
+    fileprivate static let method_get_line_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_width")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -596,13 +615,14 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_line_width() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_line_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_patch_control_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_patch_control_points")
+    fileprivate static let method_set_patch_control_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_patch_control_points")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -614,6 +634,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func set_patch_control_points(_ pMember: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -627,8 +648,8 @@ open class RDPipelineRasterizationState: RefCounted {
         
     }
     
-    fileprivate static var method_get_patch_control_points: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_patch_control_points")
+    fileprivate static let method_get_patch_control_points: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_patch_control_points")
         return withUnsafePointer(to: &RDPipelineRasterizationState.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -640,6 +661,7 @@ open class RDPipelineRasterizationState: RefCounted {
     
     @inline(__always)
     fileprivate final func get_patch_control_points() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_patch_control_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

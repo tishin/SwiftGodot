@@ -28,7 +28,7 @@ import Musl
 /// If the amount is less than `0.0`, the animation connected to "in" port is blended with the inverted animation connected to "add" port.
 /// 
 open class AnimationNodeAdd2: AnimationNodeSync {
-    fileprivate static var className = StringName("AnimationNodeAdd2")
+    private static var className = StringName("AnimationNodeAdd2")
     override open class var godotClassName: StringName { className }
 }
 

@@ -23,12 +23,12 @@ import Musl
 /// 
 /// An audio effect that can be used to adjust the intensity of stereo panning.
 open class AudioEffectStereoEnhance: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectStereoEnhance")
+    private static var className = StringName("AudioEffectStereoEnhance")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
-    /// Values greater than 1.0 increase intensity of any panning on audio passing through this effect, whereas values less than 1.0 will decrease the panning intensity. A value of 0.0 will downmix audio to mono.
+    /// Amplifies the difference between stereo channels, increasing or decreasing existing panning. A value of 0.0 will downmix stereo to mono. Does not affect a mono signal.
     final public var panPullout: Double {
         get {
             return get_pan_pullout ()
@@ -40,6 +40,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
         
     }
     
+    /// Widens sound stage through phase shifting in conjunction with ``surround``. Just delays the right channel if ``surround`` is 0.
     final public var timePulloutMs: Double {
         get {
             return get_time_pullout ()
@@ -51,6 +52,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
         
     }
     
+    /// Widens sound stage through phase shifting in conjunction with ``timePulloutMs``. Just pans sound to the left channel if ``timePulloutMs`` is 0.
     final public var surround: Double {
         get {
             return get_surround ()
@@ -63,8 +65,8 @@ open class AudioEffectStereoEnhance: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_pan_pullout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pan_pullout")
+    fileprivate static let method_set_pan_pullout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pan_pullout")
         return withUnsafePointer(to: &AudioEffectStereoEnhance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -76,6 +78,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_pan_pullout(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -89,8 +92,8 @@ open class AudioEffectStereoEnhance: AudioEffect {
         
     }
     
-    fileprivate static var method_get_pan_pullout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_pan_pullout")
+    fileprivate static let method_get_pan_pullout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_pan_pullout")
         return withUnsafePointer(to: &AudioEffectStereoEnhance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -102,13 +105,14 @@ open class AudioEffectStereoEnhance: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_pan_pullout() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_pan_pullout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_time_pullout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_time_pullout")
+    fileprivate static let method_set_time_pullout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_time_pullout")
         return withUnsafePointer(to: &AudioEffectStereoEnhance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -120,6 +124,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_time_pullout(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -133,8 +138,8 @@ open class AudioEffectStereoEnhance: AudioEffect {
         
     }
     
-    fileprivate static var method_get_time_pullout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_time_pullout")
+    fileprivate static let method_get_time_pullout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_time_pullout")
         return withUnsafePointer(to: &AudioEffectStereoEnhance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -146,13 +151,14 @@ open class AudioEffectStereoEnhance: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_time_pullout() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_time_pullout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_surround: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_surround")
+    fileprivate static let method_set_surround: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_surround")
         return withUnsafePointer(to: &AudioEffectStereoEnhance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -164,6 +170,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_surround(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -177,8 +184,8 @@ open class AudioEffectStereoEnhance: AudioEffect {
         
     }
     
-    fileprivate static var method_get_surround: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_surround")
+    fileprivate static let method_get_surround: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_surround")
         return withUnsafePointer(to: &AudioEffectStereoEnhance.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -190,6 +197,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_surround() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_surround, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

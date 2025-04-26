@@ -28,7 +28,7 @@ import Musl
 /// > Note: For 3D position/rotation/scale, using the dedicated ``TrackType/position3d``, ``TrackType/rotation3d`` and ``TrackType/scale3d`` track types instead of ``TrackType/value`` is recommended for performance reasons.
 /// 
 open class Animation: Resource {
-    fileprivate static var className = StringName("Animation")
+    private static var className = StringName("Animation")
     override open class var godotClassName: StringName { className }
     public enum TrackType: Int64, CaseIterable {
         /// Value tracks set values in node properties, but only those which can be interpolated. For 3D position/rotation/scale, using the dedicated ``TrackType/position3d``, ``TrackType/rotation3d`` and ``TrackType/scale3d`` track types instead of ``TrackType/value`` is recommended for performance reasons.
@@ -148,9 +148,17 @@ open class Animation: Resource {
         
     }
     
+    /// Returns `true` if the capture track is included. This is a cached readonly value for performance.
+    final public var captureIncluded: Bool {
+        get {
+            return is_capture_included ()
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_add_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_track")
+    fileprivate static let method_add_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_track")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3843682357)!
@@ -162,6 +170,7 @@ open class Animation: Resource {
     
     /// Adds a track to the Animation.
     public final func addTrack(type: Animation.TrackType, atPosition: Int32 = -1) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: atPosition) { pArg1 in
@@ -179,8 +188,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_remove_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_track")
+    fileprivate static let method_remove_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_track")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -192,6 +201,7 @@ open class Animation: Resource {
     
     /// Removes a track by specifying the track index.
     public final func removeTrack(trackIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -205,8 +215,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_get_track_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_track_count")
+    fileprivate static let method_get_track_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_track_count")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -218,13 +228,14 @@ open class Animation: Resource {
     
     /// Returns the amount of tracks in the animation.
     public final func getTrackCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Animation.method_get_track_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_track_get_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_type")
+    fileprivate static let method_track_get_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_type")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3445944217)!
@@ -236,6 +247,7 @@ open class Animation: Resource {
     
     /// Gets the type of a track.
     public final func trackGetType(trackIdx: Int32) -> Animation.TrackType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -250,8 +262,8 @@ open class Animation: Resource {
         return Animation.TrackType (rawValue: _result)!
     }
     
-    fileprivate static var method_track_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_path")
+    fileprivate static let method_track_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_path")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 408788394)!
@@ -263,6 +275,7 @@ open class Animation: Resource {
     
     /// Gets the path of a track. For more information on the path format, see ``trackSetPath(trackIdx:path:)``.
     public final func trackGetPath(trackIdx: Int32) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -277,8 +290,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_set_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_path")
+    fileprivate static let method_track_set_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_path")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2761262315)!
@@ -288,11 +301,12 @@ open class Animation: Resource {
         
     }()
     
-    /// Sets the path of a track. Paths must be valid scene-tree paths to a node and must be specified starting from the parent node of the node that will reproduce the animation. Tracks that control properties or bones must append their name after the path, separated by `":"`.
+    /// Sets the path of a track. Paths must be valid scene-tree paths to a node and must be specified starting from the ``AnimationMixer/rootNode`` that will reproduce the animation. Tracks that control properties or bones must append their name after the path, separated by `":"`.
     /// 
     /// For example, `"character/skeleton:ankle"` or `"character/mesh:transform/local"`.
     /// 
     public final func trackSetPath(trackIdx: Int32, path: NodePath) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -309,8 +323,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_find_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_track")
+    fileprivate static let method_find_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_track")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 245376003)!
@@ -322,6 +336,7 @@ open class Animation: Resource {
     
     /// Returns the index of the specified track. If the track is not found, return -1.
     public final func findTrack(path: NodePath, type: Animation.TrackType) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: type.rawValue) { pArg1 in
@@ -339,8 +354,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_move_up: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_move_up")
+    fileprivate static let method_track_move_up: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_move_up")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -352,6 +367,7 @@ open class Animation: Resource {
     
     /// Moves a track up.
     public final func trackMoveUp(trackIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -365,8 +381,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_move_down: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_move_down")
+    fileprivate static let method_track_move_down: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_move_down")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -378,6 +394,7 @@ open class Animation: Resource {
     
     /// Moves a track down.
     public final func trackMoveDown(trackIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -391,8 +408,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_move_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_move_to")
+    fileprivate static let method_track_move_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_move_to")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -404,6 +421,7 @@ open class Animation: Resource {
     
     /// Changes the index position of track `trackIdx` to the one defined in `toIdx`.
     public final func trackMoveTo(trackIdx: Int32, toIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: toIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -420,8 +438,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_swap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_swap")
+    fileprivate static let method_track_swap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_swap")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -433,6 +451,7 @@ open class Animation: Resource {
     
     /// Swaps the track `trackIdx`'s index position with the track `withIdx`.
     public final func trackSwap(trackIdx: Int32, withIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: withIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -449,8 +468,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_set_imported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_imported")
+    fileprivate static let method_track_set_imported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_imported")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -462,6 +481,7 @@ open class Animation: Resource {
     
     /// Sets the given track as imported or not.
     public final func trackSetImported(trackIdx: Int32, imported: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: imported) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -478,8 +498,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_is_imported: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_is_imported")
+    fileprivate static let method_track_is_imported: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_is_imported")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -491,6 +511,7 @@ open class Animation: Resource {
     
     /// Returns `true` if the given track is imported. Else, return `false`.
     public final func trackIsImported(trackIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -505,8 +526,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_enabled")
+    fileprivate static let method_track_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_enabled")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -518,6 +539,7 @@ open class Animation: Resource {
     
     /// Enables/disables the given track. Tracks are enabled by default.
     public final func trackSetEnabled(trackIdx: Int32, enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -534,8 +556,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_is_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_is_enabled")
+    fileprivate static let method_track_is_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_is_enabled")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -547,6 +569,7 @@ open class Animation: Resource {
     
     /// Returns `true` if the track at index `trackIdx` is enabled.
     public final func trackIsEnabled(trackIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -561,8 +584,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_position_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("position_track_insert_key")
+    fileprivate static let method_position_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("position_track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2540608232)!
@@ -574,6 +597,7 @@ open class Animation: Resource {
     
     /// Inserts a key in a given 3D position track. Returns the key index.
     public final func positionTrackInsertKey(trackIdx: Int32, time: Double, position: Vector3) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -594,8 +618,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_rotation_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rotation_track_insert_key")
+    fileprivate static let method_rotation_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rotation_track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4165004800)!
@@ -607,6 +631,7 @@ open class Animation: Resource {
     
     /// Inserts a key in a given 3D rotation track. Returns the key index.
     public final func rotationTrackInsertKey(trackIdx: Int32, time: Double, rotation: Quaternion) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -627,8 +652,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_scale_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scale_track_insert_key")
+    fileprivate static let method_scale_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scale_track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2540608232)!
@@ -640,6 +665,7 @@ open class Animation: Resource {
     
     /// Inserts a key in a given 3D scale track. Returns the key index.
     public final func scaleTrackInsertKey(trackIdx: Int32, time: Double, scale: Vector3) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -660,8 +686,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_blend_shape_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("blend_shape_track_insert_key")
+    fileprivate static let method_blend_shape_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("blend_shape_track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1534913637)!
@@ -673,6 +699,7 @@ open class Animation: Resource {
     
     /// Inserts a key in a given blend shape track. Returns the key index.
     public final func blendShapeTrackInsertKey(trackIdx: Int32, time: Double, amount: Double) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -693,8 +720,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_position_track_interpolate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("position_track_interpolate")
+    fileprivate static let method_position_track_interpolate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("position_track_interpolate")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3530011197)!
@@ -706,6 +733,7 @@ open class Animation: Resource {
     
     /// Returns the interpolated position value at the given time (in seconds). The `trackIdx` must be the index of a 3D position track.
     public final func positionTrackInterpolate(trackIdx: Int32, timeSec: Double, backward: Bool = false) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: timeSec) { pArg1 in
@@ -726,8 +754,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_rotation_track_interpolate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rotation_track_interpolate")
+    fileprivate static let method_rotation_track_interpolate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rotation_track_interpolate")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2915876792)!
@@ -739,6 +767,7 @@ open class Animation: Resource {
     
     /// Returns the interpolated rotation value at the given time (in seconds). The `trackIdx` must be the index of a 3D rotation track.
     public final func rotationTrackInterpolate(trackIdx: Int32, timeSec: Double, backward: Bool = false) -> Quaternion {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: timeSec) { pArg1 in
@@ -759,8 +788,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_scale_track_interpolate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("scale_track_interpolate")
+    fileprivate static let method_scale_track_interpolate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("scale_track_interpolate")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3530011197)!
@@ -772,6 +801,7 @@ open class Animation: Resource {
     
     /// Returns the interpolated scale value at the given time (in seconds). The `trackIdx` must be the index of a 3D scale track.
     public final func scaleTrackInterpolate(trackIdx: Int32, timeSec: Double, backward: Bool = false) -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: timeSec) { pArg1 in
@@ -792,8 +822,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_blend_shape_track_interpolate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("blend_shape_track_interpolate")
+    fileprivate static let method_blend_shape_track_interpolate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("blend_shape_track_interpolate")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2482365182)!
@@ -805,6 +835,7 @@ open class Animation: Resource {
     
     /// Returns the interpolated blend shape value at the given time (in seconds). The `trackIdx` must be the index of a blend shape track.
     public final func blendShapeTrackInterpolate(trackIdx: Int32, timeSec: Double, backward: Bool = false) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: timeSec) { pArg1 in
@@ -825,8 +856,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_insert_key")
+    fileprivate static let method_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 808952278)!
@@ -838,6 +869,7 @@ open class Animation: Resource {
     
     /// Inserts a generic key in a given track. Returns the key index.
     public final func trackInsertKey(trackIdx: Int32, time: Double, key: Variant?, transition: Double = 1) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -861,8 +893,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_remove_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_remove_key")
+    fileprivate static let method_track_remove_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_remove_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -874,6 +906,7 @@ open class Animation: Resource {
     
     /// Removes a key by index in a given track.
     public final func trackRemoveKey(trackIdx: Int32, keyIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -890,8 +923,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_remove_key_at_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_remove_key_at_time")
+    fileprivate static let method_track_remove_key_at_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_remove_key_at_time")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1602489585)!
@@ -903,6 +936,7 @@ open class Animation: Resource {
     
     /// Removes a key at `time` in a given track.
     public final func trackRemoveKeyAtTime(trackIdx: Int32, time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -919,8 +953,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_set_key_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_key_value")
+    fileprivate static let method_track_set_key_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_key_value")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2060538656)!
@@ -932,6 +966,7 @@ open class Animation: Resource {
     
     /// Sets the value of an existing key.
     public final func trackSetKeyValue(trackIdx: Int32, key: Int32, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: key) { pArg1 in
                 withUnsafePointer(to: value.content) { pArg2 in
@@ -951,8 +986,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_set_key_transition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_key_transition")
+    fileprivate static let method_track_set_key_transition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_key_transition")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -964,6 +999,7 @@ open class Animation: Resource {
     
     /// Sets the transition curve (easing) for a specific key (see the built-in math function ``@GlobalScope.ease``).
     public final func trackSetKeyTransition(trackIdx: Int32, keyIdx: Int32, transition: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: transition) { pArg2 in
@@ -983,8 +1019,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_set_key_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_key_time")
+    fileprivate static let method_track_set_key_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_key_time")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -996,6 +1032,7 @@ open class Animation: Resource {
     
     /// Sets the time of an existing key.
     public final func trackSetKeyTime(trackIdx: Int32, keyIdx: Int32, time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: time) { pArg2 in
@@ -1015,8 +1052,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_get_key_transition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_key_transition")
+    fileprivate static let method_track_get_key_transition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_key_transition")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1028,6 +1065,7 @@ open class Animation: Resource {
     
     /// Returns the transition curve (easing) for a specific key (see the built-in math function ``@GlobalScope.ease``).
     public final func trackGetKeyTransition(trackIdx: Int32, keyIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1045,8 +1083,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_get_key_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_key_count")
+    fileprivate static let method_track_get_key_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_key_count")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -1058,6 +1096,7 @@ open class Animation: Resource {
     
     /// Returns the number of keys in a given track.
     public final func trackGetKeyCount(trackIdx: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1072,8 +1111,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_get_key_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_key_value")
+    fileprivate static let method_track_get_key_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_key_value")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 678354945)!
@@ -1085,6 +1124,7 @@ open class Animation: Resource {
     
     /// Returns the value of a given key in a given track.
     public final func trackGetKeyValue(trackIdx: Int32, keyIdx: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1102,8 +1142,8 @@ open class Animation: Resource {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_track_get_key_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_key_time")
+    fileprivate static let method_track_get_key_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_key_time")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1115,6 +1155,7 @@ open class Animation: Resource {
     
     /// Returns the time at which the key is located.
     public final func trackGetKeyTime(trackIdx: Int32, keyIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1132,8 +1173,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_find_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_find_key")
+    fileprivate static let method_track_find_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_find_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4230953007)!
@@ -1152,6 +1193,7 @@ open class Animation: Resource {
     /// For example, in case `findMode` is ``FindMode/nearest``, if there is no key in the current position just after seeked, the first key found is retrieved by searching before the position, but if `backward` is `true`, the first key found is retrieved after the position.
     /// 
     public final func trackFindKey(trackIdx: Int32, time: Double, findMode: Animation.FindMode = .nearest, limit: Bool = false, backward: Bool = false) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -1178,8 +1220,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_set_interpolation_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_interpolation_type")
+    fileprivate static let method_track_set_interpolation_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_interpolation_type")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4112932513)!
@@ -1191,6 +1233,7 @@ open class Animation: Resource {
     
     /// Sets the interpolation type of a given track.
     public final func trackSetInterpolationType(trackIdx: Int32, interpolation: Animation.InterpolationType) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: interpolation.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1207,8 +1250,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_get_interpolation_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_interpolation_type")
+    fileprivate static let method_track_get_interpolation_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_interpolation_type")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1530756894)!
@@ -1220,6 +1263,7 @@ open class Animation: Resource {
     
     /// Returns the interpolation type of a given track.
     public final func trackGetInterpolationType(trackIdx: Int32) -> Animation.InterpolationType {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1234,8 +1278,8 @@ open class Animation: Resource {
         return Animation.InterpolationType (rawValue: _result)!
     }
     
-    fileprivate static var method_track_set_interpolation_loop_wrap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_set_interpolation_loop_wrap")
+    fileprivate static let method_track_set_interpolation_loop_wrap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_set_interpolation_loop_wrap")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1247,6 +1291,7 @@ open class Animation: Resource {
     
     /// If `true`, the track at `trackIdx` wraps the interpolation loop.
     public final func trackSetInterpolationLoopWrap(trackIdx: Int32, interpolation: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: interpolation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1263,8 +1308,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_track_get_interpolation_loop_wrap: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_get_interpolation_loop_wrap")
+    fileprivate static let method_track_get_interpolation_loop_wrap: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_get_interpolation_loop_wrap")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1276,6 +1321,7 @@ open class Animation: Resource {
     
     /// Returns `true` if the track at `trackIdx` wraps the interpolation loop. New tracks wrap the interpolation loop by default.
     public final func trackGetInterpolationLoopWrap(trackIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1290,8 +1336,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_track_is_compressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("track_is_compressed")
+    fileprivate static let method_track_is_compressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("track_is_compressed")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1303,6 +1349,7 @@ open class Animation: Resource {
     
     /// Returns `true` if the track is compressed, `false` otherwise. See also ``compress(pageSize:fps:splitTolerance:)``.
     public final func trackIsCompressed(trackIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1317,8 +1364,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_value_track_set_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("value_track_set_update_mode")
+    fileprivate static let method_value_track_set_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("value_track_set_update_mode")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2854058312)!
@@ -1330,6 +1377,7 @@ open class Animation: Resource {
     
     /// Sets the update mode (see ``Animation/UpdateMode``) of a value track.
     public final func valueTrackSetUpdateMode(trackIdx: Int32, mode: Animation.UpdateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1346,8 +1394,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_value_track_get_update_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("value_track_get_update_mode")
+    fileprivate static let method_value_track_get_update_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("value_track_get_update_mode")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1440326473)!
@@ -1359,6 +1407,7 @@ open class Animation: Resource {
     
     /// Returns the update mode of a value track.
     public final func valueTrackGetUpdateMode(trackIdx: Int32) -> Animation.UpdateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1373,8 +1422,8 @@ open class Animation: Resource {
         return Animation.UpdateMode (rawValue: _result)!
     }
     
-    fileprivate static var method_value_track_interpolate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("value_track_interpolate")
+    fileprivate static let method_value_track_interpolate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("value_track_interpolate")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 747269075)!
@@ -1389,6 +1438,7 @@ open class Animation: Resource {
     /// A `backward` mainly affects the direction of key retrieval of the track with ``UpdateMode/discrete`` converted by ``AnimationMixer/AnimationCallbackModeDiscrete/forceContinuous`` to match the result with ``trackFindKey(trackIdx:time:findMode:limit:backward:)``.
     /// 
     public final func valueTrackInterpolate(trackIdx: Int32, timeSec: Double, backward: Bool = false) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: timeSec) { pArg1 in
@@ -1409,8 +1459,8 @@ open class Animation: Resource {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_method_track_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("method_track_get_name")
+    fileprivate static let method_method_track_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("method_track_get_name")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 351665558)!
@@ -1422,6 +1472,7 @@ open class Animation: Resource {
     
     /// Returns the method name of a method track.
     public final func methodTrackGetName(trackIdx: Int32, keyIdx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1439,8 +1490,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_method_track_get_params: GDExtensionMethodBindPtr = {
-        let methodName = StringName("method_track_get_params")
+    fileprivate static let method_method_track_get_params: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("method_track_get_params")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2345056839)!
@@ -1451,8 +1502,9 @@ open class Animation: Resource {
     }()
     
     /// Returns the arguments values to be called on a method track for a given key in a given track.
-    public final func methodTrackGetParams(trackIdx: Int32, keyIdx: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public final func methodTrackGetParams(trackIdx: Int32, keyIdx: Int32) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1469,8 +1521,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_bezier_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_insert_key")
+    fileprivate static let method_bezier_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3656773645)!
@@ -1485,6 +1537,7 @@ open class Animation: Resource {
     /// `inHandle` is the left-side weight of the added Bezier curve point, `outHandle` is the right-side one, while `value` is the actual value at this point.
     /// 
     public final func bezierTrackInsertKey(trackIdx: Int32, time: Double, value: Double, inHandle: Vector2 = Vector2 (x: 0, y: 0), outHandle: Vector2 = Vector2 (x: 0, y: 0)) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -1511,8 +1564,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_bezier_track_set_key_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_set_key_value")
+    fileprivate static let method_bezier_track_set_key_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_set_key_value")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1524,6 +1577,7 @@ open class Animation: Resource {
     
     /// Sets the value of the key identified by `keyIdx` to the given value. The `trackIdx` must be the index of a Bezier Track.
     public final func bezierTrackSetKeyValue(trackIdx: Int32, keyIdx: Int32, value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: value) { pArg2 in
@@ -1543,8 +1597,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_bezier_track_set_key_in_handle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_set_key_in_handle")
+    fileprivate static let method_bezier_track_set_key_in_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_set_key_in_handle")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1719223284)!
@@ -1556,6 +1610,7 @@ open class Animation: Resource {
     
     /// Sets the in handle of the key identified by `keyIdx` to value `inHandle`. The `trackIdx` must be the index of a Bezier Track.
     public final func bezierTrackSetKeyInHandle(trackIdx: Int32, keyIdx: Int32, inHandle: Vector2, balancedValueTimeRatio: Double = 1.0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: inHandle) { pArg2 in
@@ -1578,8 +1633,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_bezier_track_set_key_out_handle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_set_key_out_handle")
+    fileprivate static let method_bezier_track_set_key_out_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_set_key_out_handle")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1719223284)!
@@ -1591,6 +1646,7 @@ open class Animation: Resource {
     
     /// Sets the out handle of the key identified by `keyIdx` to value `outHandle`. The `trackIdx` must be the index of a Bezier Track.
     public final func bezierTrackSetKeyOutHandle(trackIdx: Int32, keyIdx: Int32, outHandle: Vector2, balancedValueTimeRatio: Double = 1.0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: outHandle) { pArg2 in
@@ -1613,8 +1669,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_bezier_track_get_key_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_get_key_value")
+    fileprivate static let method_bezier_track_get_key_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_get_key_value")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1626,6 +1682,7 @@ open class Animation: Resource {
     
     /// Returns the value of the key identified by `keyIdx`. The `trackIdx` must be the index of a Bezier Track.
     public final func bezierTrackGetKeyValue(trackIdx: Int32, keyIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1643,8 +1700,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_bezier_track_get_key_in_handle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_get_key_in_handle")
+    fileprivate static let method_bezier_track_get_key_in_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_get_key_in_handle")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3016396712)!
@@ -1656,6 +1713,7 @@ open class Animation: Resource {
     
     /// Returns the in handle of the key identified by `keyIdx`. The `trackIdx` must be the index of a Bezier Track.
     public final func bezierTrackGetKeyInHandle(trackIdx: Int32, keyIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1673,8 +1731,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_bezier_track_get_key_out_handle: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_get_key_out_handle")
+    fileprivate static let method_bezier_track_get_key_out_handle: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_get_key_out_handle")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3016396712)!
@@ -1686,6 +1744,7 @@ open class Animation: Resource {
     
     /// Returns the out handle of the key identified by `keyIdx`. The `trackIdx` must be the index of a Bezier Track.
     public final func bezierTrackGetKeyOutHandle(trackIdx: Int32, keyIdx: Int32) -> Vector2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1703,8 +1762,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_bezier_track_interpolate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bezier_track_interpolate")
+    fileprivate static let method_bezier_track_interpolate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bezier_track_interpolate")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1900462983)!
@@ -1716,6 +1775,7 @@ open class Animation: Resource {
     
     /// Returns the interpolated value at the given `time` (in seconds). The `trackIdx` must be the index of a Bezier Track.
     public final func bezierTrackInterpolate(trackIdx: Int32, time: Double) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -1733,8 +1793,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_audio_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_insert_key")
+    fileprivate static let method_audio_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4021027286)!
@@ -1749,6 +1809,7 @@ open class Animation: Resource {
     /// `stream` is the ``AudioStream`` resource to play. `startOffset` is the number of seconds cut off at the beginning of the audio stream, while `endOffset` is at the ending.
     /// 
     public final func audioTrackInsertKey(trackIdx: Int32, time: Double, stream: Resource?, startOffset: Double = 0, endOffset: Double = 0) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -1775,8 +1836,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_audio_track_set_key_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_set_key_stream")
+    fileprivate static let method_audio_track_set_key_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_set_key_stream")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3886397084)!
@@ -1788,6 +1849,7 @@ open class Animation: Resource {
     
     /// Sets the stream of the key identified by `keyIdx` to value `stream`. The `trackIdx` must be the index of an Audio Track.
     public final func audioTrackSetKeyStream(trackIdx: Int32, keyIdx: Int32, stream: Resource?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: stream?.handle) { pArg2 in
@@ -1807,8 +1869,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_audio_track_set_key_start_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_set_key_start_offset")
+    fileprivate static let method_audio_track_set_key_start_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_set_key_start_offset")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1820,6 +1882,7 @@ open class Animation: Resource {
     
     /// Sets the start offset of the key identified by `keyIdx` to value `offset`. The `trackIdx` must be the index of an Audio Track.
     public final func audioTrackSetKeyStartOffset(trackIdx: Int32, keyIdx: Int32, offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: offset) { pArg2 in
@@ -1839,8 +1902,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_audio_track_set_key_end_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_set_key_end_offset")
+    fileprivate static let method_audio_track_set_key_end_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_set_key_end_offset")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3506521499)!
@@ -1852,6 +1915,7 @@ open class Animation: Resource {
     
     /// Sets the end offset of the key identified by `keyIdx` to value `offset`. The `trackIdx` must be the index of an Audio Track.
     public final func audioTrackSetKeyEndOffset(trackIdx: Int32, keyIdx: Int32, offset: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: offset) { pArg2 in
@@ -1871,8 +1935,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_audio_track_get_key_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_get_key_stream")
+    fileprivate static let method_audio_track_get_key_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_get_key_stream")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 635277205)!
@@ -1884,6 +1948,7 @@ open class Animation: Resource {
     
     /// Returns the audio stream of the key identified by `keyIdx`. The `trackIdx` must be the index of an Audio Track.
     public final func audioTrackGetKeyStream(trackIdx: Int32, keyIdx: Int32) -> Resource? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1898,11 +1963,11 @@ open class Animation: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_audio_track_get_key_start_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_get_key_start_offset")
+    fileprivate static let method_audio_track_get_key_start_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_get_key_start_offset")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1917,6 +1982,7 @@ open class Animation: Resource {
     /// Start offset is the number of seconds cut off at the beginning of the audio stream.
     /// 
     public final func audioTrackGetKeyStartOffset(trackIdx: Int32, keyIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1934,8 +2000,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_audio_track_get_key_end_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_get_key_end_offset")
+    fileprivate static let method_audio_track_get_key_end_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_get_key_end_offset")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -1950,6 +2016,7 @@ open class Animation: Resource {
     /// End offset is the number of seconds cut off at the ending of the audio stream.
     /// 
     public final func audioTrackGetKeyEndOffset(trackIdx: Int32, keyIdx: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -1967,8 +2034,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_audio_track_set_use_blend: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_set_use_blend")
+    fileprivate static let method_audio_track_set_use_blend: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_set_use_blend")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1980,6 +2047,7 @@ open class Animation: Resource {
     
     /// Sets whether the track will be blended with other animations. If `true`, the audio playback volume changes depending on the blend value.
     public final func audioTrackSetUseBlend(trackIdx: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1996,8 +2064,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_audio_track_is_use_blend: GDExtensionMethodBindPtr = {
-        let methodName = StringName("audio_track_is_use_blend")
+    fileprivate static let method_audio_track_is_use_blend: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("audio_track_is_use_blend")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -2009,6 +2077,7 @@ open class Animation: Resource {
     
     /// Returns `true` if the track at `trackIdx` will be blended with other animations.
     public final func audioTrackIsUseBlend(trackIdx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2023,8 +2092,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_animation_track_insert_key: GDExtensionMethodBindPtr = {
-        let methodName = StringName("animation_track_insert_key")
+    fileprivate static let method_animation_track_insert_key: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("animation_track_insert_key")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 158676774)!
@@ -2036,6 +2105,7 @@ open class Animation: Resource {
     
     /// Inserts a key with value `animation` at the given `time` (in seconds). The `trackIdx` must be the index of an Animation Track.
     public final func animationTrackInsertKey(trackIdx: Int32, time: Double, animation: StringName) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: time) { pArg1 in
@@ -2056,8 +2126,8 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_animation_track_set_key_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("animation_track_set_key_animation")
+    fileprivate static let method_animation_track_set_key_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("animation_track_set_key_animation")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 117615382)!
@@ -2069,6 +2139,7 @@ open class Animation: Resource {
     
     /// Sets the key identified by `keyIdx` to value `animation`. The `trackIdx` must be the index of an Animation Track.
     public final func animationTrackSetKeyAnimation(trackIdx: Int32, keyIdx: Int32, animation: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: animation.content) { pArg2 in
@@ -2088,8 +2159,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_animation_track_get_key_animation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("animation_track_get_key_animation")
+    fileprivate static let method_animation_track_get_key_animation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("animation_track_get_key_animation")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 351665558)!
@@ -2101,6 +2172,7 @@ open class Animation: Resource {
     
     /// Returns the animation name at the key identified by `keyIdx`. The `trackIdx` must be the index of an Animation Track.
     public final func animationTrackGetKeyAnimation(trackIdx: Int32, keyIdx: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
@@ -2118,8 +2190,282 @@ open class Animation: Resource {
         return _result
     }
     
-    fileprivate static var method_set_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_length")
+    fileprivate static let method_add_marker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_marker")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4135858297)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Adds a marker to this Animation.
+    public final func addMarker(name: StringName, time: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: time) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Animation.method_add_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_remove_marker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_marker")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Removes the marker with the given name from this Animation.
+    public final func removeMarker(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Animation.method_remove_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_has_marker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_marker")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if this Animation contains a marker with the given name.
+    public final func hasMarker(name: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Animation.method_has_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_marker_at_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_marker_at_time")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4079494655)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the name of the marker located at the given time.
+    public final func getMarkerAtTime(_ time: Double) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: StringName = StringName ()
+        withUnsafePointer(to: time) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Animation.method_get_marker_at_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_next_marker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_next_marker")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4079494655)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the closest marker that comes after the given time. If no such marker exists, an empty string is returned.
+    public final func getNextMarker(time: Double) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: StringName = StringName ()
+        withUnsafePointer(to: time) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Animation.method_get_next_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_prev_marker: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_prev_marker")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4079494655)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the closest marker that comes before the given time. If no such marker exists, an empty string is returned.
+    public final func getPrevMarker(time: Double) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: StringName = StringName ()
+        withUnsafePointer(to: time) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Animation.method_get_prev_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_marker_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_marker_time")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2349060816)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the given marker's time.
+    public final func getMarkerTime(name: StringName) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Animation.method_get_marker_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_get_marker_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_marker_names")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns every marker in this Animation, sorted ascending by time.
+    public final func getMarkerNames() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(Animation.method_get_marker_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
+    }
+    
+    fileprivate static let method_get_marker_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_marker_color")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3742943038)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the given marker's color.
+    public final func getMarkerColor(name: StringName) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Color = Color ()
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Animation.method_get_marker_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_set_marker_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_marker_color")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4260178595)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the given marker's color.
+    public final func setMarkerColor(name: StringName, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: color) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(Animation.method_set_marker_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_set_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_length")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2131,6 +2477,7 @@ open class Animation: Resource {
     
     @inline(__always)
     fileprivate final func set_length(_ timeSec: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: timeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2144,8 +2491,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_get_length: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_length")
+    fileprivate static let method_get_length: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_length")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2157,13 +2504,14 @@ open class Animation: Resource {
     
     @inline(__always)
     fileprivate final func get_length() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Animation.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_loop_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_loop_mode")
+    fileprivate static let method_set_loop_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_loop_mode")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3155355575)!
@@ -2175,6 +2523,7 @@ open class Animation: Resource {
     
     @inline(__always)
     fileprivate final func set_loop_mode(_ loopMode: Animation.LoopMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: loopMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2188,8 +2537,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_get_loop_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_loop_mode")
+    fileprivate static let method_get_loop_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_loop_mode")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1988889481)!
@@ -2201,13 +2550,14 @@ open class Animation: Resource {
     
     @inline(__always)
     fileprivate final func get_loop_mode() -> Animation.LoopMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Animation.method_get_loop_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Animation.LoopMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_step")
+    fileprivate static let method_set_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_step")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2219,6 +2569,7 @@ open class Animation: Resource {
     
     @inline(__always)
     fileprivate final func set_step(_ sizeSec: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sizeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2232,8 +2583,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_get_step: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_step")
+    fileprivate static let method_get_step: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_step")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2245,13 +2596,14 @@ open class Animation: Resource {
     
     @inline(__always)
     fileprivate final func get_step() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Animation.method_get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2263,12 +2615,13 @@ open class Animation: Resource {
     
     /// Clear the animation (clear all tracks and reset all).
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Animation.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_copy_track: GDExtensionMethodBindPtr = {
-        let methodName = StringName("copy_track")
+    fileprivate static let method_copy_track: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("copy_track")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 148001024)!
@@ -2280,6 +2633,7 @@ open class Animation: Resource {
     
     /// Adds a new track to `toAnimation` that is a copy of the given track from this animation.
     public final func copyTrack(trackIdx: Int32, toAnimation: Animation?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: toAnimation?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2296,8 +2650,41 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_compress: GDExtensionMethodBindPtr = {
-        let methodName = StringName("compress")
+    fileprivate static let method_optimize: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("optimize")
+        return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3303583852)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Optimize the animation and all its tracks in-place. This will preserve only as many keys as are necessary to keep the animation within the specified bounds.
+    public final func optimize(allowedVelocityErr: Double = 0.01, allowedAngularErr: Double = 0.01, precision: Int32 = 3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: allowedVelocityErr) { pArg0 in
+            withUnsafePointer(to: allowedAngularErr) { pArg1 in
+                withUnsafePointer(to: precision) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(Animation.method_optimize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_compress: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("compress")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3608408117)!
@@ -2312,6 +2699,7 @@ open class Animation: Resource {
     /// > Note: Compressed tracks have various limitations (such as not being editable from the editor), so only use compressed animations if you actually need them.
     /// 
     public final func compress(pageSize: UInt32 = 8192, fps: UInt32 = 120, splitTolerance: Double = 4.0) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pageSize) { pArg0 in
             withUnsafePointer(to: fps) { pArg1 in
                 withUnsafePointer(to: splitTolerance) { pArg2 in
@@ -2331,8 +2719,8 @@ open class Animation: Resource {
         
     }
     
-    fileprivate static var method_is_capture_included: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_capture_included")
+    fileprivate static let method_is_capture_included: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_capture_included")
         return withUnsafePointer(to: &Animation.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2342,7 +2730,9 @@ open class Animation: Resource {
         
     }()
     
-    public final func isCaptureIncluded() -> Bool {
+    @inline(__always)
+    fileprivate final func is_capture_included() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Animation.method_is_capture_included, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

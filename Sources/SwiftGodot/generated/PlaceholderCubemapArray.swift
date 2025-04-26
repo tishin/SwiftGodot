@@ -30,7 +30,7 @@ import Musl
 /// > Note: This class is not intended for rendering or for use in shaders. Operations like calculating UV are not guaranteed to work.
 /// 
 open class PlaceholderCubemapArray: PlaceholderTextureLayered {
-    fileprivate static var className = StringName("PlaceholderCubemapArray")
+    private static var className = StringName("PlaceholderCubemapArray")
     override open class var godotClassName: StringName { className }
 }
 

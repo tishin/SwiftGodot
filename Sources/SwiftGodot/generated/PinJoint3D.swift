@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A physics joint that attaches two 3D physics bodies at a single point, allowing them to freely rotate. For example, a ``RigidBody3D`` can be attached to a ``StaticBody3D`` to create a pendulum or a seesaw.
 open class PinJoint3D: Joint3D {
-    fileprivate static var className = StringName("PinJoint3D")
+    private static var className = StringName("PinJoint3D")
     override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// The force with which the pinned objects stay in positional relation to each other. The higher, the stronger.
@@ -35,8 +35,8 @@ open class PinJoint3D: Joint3D {
     }
     
     /* Methods */
-    fileprivate static var method_set_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_param")
+    fileprivate static let method_set_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_param")
         return withUnsafePointer(to: &PinJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2059913726)!
@@ -48,6 +48,7 @@ open class PinJoint3D: Joint3D {
     
     /// Sets the value of the specified parameter.
     public final func setParam(_ param: PinJoint3D.Param, value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -64,8 +65,8 @@ open class PinJoint3D: Joint3D {
         
     }
     
-    fileprivate static var method_get_param: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_param")
+    fileprivate static let method_get_param: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_param")
         return withUnsafePointer(to: &PinJoint3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1758438771)!
@@ -77,6 +78,7 @@ open class PinJoint3D: Joint3D {
     
     /// Returns the value of the specified parameter.
     public final func getParam(_ param: PinJoint3D.Param) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

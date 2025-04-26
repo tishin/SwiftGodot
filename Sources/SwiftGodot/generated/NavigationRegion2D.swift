@@ -42,7 +42,7 @@ import Musl
 /// - ``navigationPolygonChanged``
 /// - ``bakeFinished``
 open class NavigationRegion2D: Node2D {
-    fileprivate static var className = StringName("NavigationRegion2D")
+    private static var className = StringName("NavigationRegion2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -120,8 +120,8 @@ open class NavigationRegion2D: Node2D {
     }
     
     /* Methods */
-    fileprivate static var method_get_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rid")
+    fileprivate static let method_get_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rid")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -133,13 +133,14 @@ open class NavigationRegion2D: Node2D {
     
     /// Returns the ``RID`` of this region on the ``NavigationServer2D``. Combined with ``NavigationServer2D/mapGetClosestPointOwner(map:toPoint:)`` can be used to identify the ``NavigationRegion2D`` closest to a point on the merged navigation map.
     public final func getRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_navigation_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_polygon")
+    fileprivate static let method_set_navigation_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_polygon")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1515040758)!
@@ -151,6 +152,7 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_navigation_polygon(_ navigationPolygon: NavigationPolygon?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: navigationPolygon?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -164,8 +166,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_get_navigation_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_polygon")
+    fileprivate static let method_get_navigation_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_polygon")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1046532237)!
@@ -177,13 +179,14 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_navigation_polygon() -> NavigationPolygon? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enabled")
+    fileprivate static let method_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enabled")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -195,6 +198,7 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -208,8 +212,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_is_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_enabled")
+    fileprivate static let method_is_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_enabled")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -221,13 +225,14 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func is_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_map")
+    fileprivate static let method_set_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_map")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -239,6 +244,7 @@ open class NavigationRegion2D: Node2D {
     
     /// Sets the ``RID`` of the navigation map this region should use. By default the region will automatically join the ``World2D`` default navigation map so this function is only required to override the default map.
     public final func setNavigationMap(_ navigationMap: RID) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: navigationMap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -252,8 +258,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_get_navigation_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_map")
+    fileprivate static let method_get_navigation_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_map")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -265,13 +271,14 @@ open class NavigationRegion2D: Node2D {
     
     /// Returns the current navigation map ``RID`` used by this region.
     public final func getNavigationMap() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_use_edge_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_edge_connections")
+    fileprivate static let method_set_use_edge_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_edge_connections")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -283,6 +290,7 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_use_edge_connections(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -296,8 +304,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_get_use_edge_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_use_edge_connections")
+    fileprivate static let method_get_use_edge_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_use_edge_connections")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -309,13 +317,14 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_use_edge_connections() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_use_edge_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_layers")
+    fileprivate static let method_set_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_layers")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -327,6 +336,7 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_navigation_layers(_ navigationLayers: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: navigationLayers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -340,8 +350,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_get_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_layers")
+    fileprivate static let method_get_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_layers")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -353,13 +363,14 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_navigation_layers() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_navigation_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_navigation_layer_value")
+    fileprivate static let method_set_navigation_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_navigation_layer_value")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -371,6 +382,7 @@ open class NavigationRegion2D: Node2D {
     
     /// Based on `value`, enables or disables the specified layer in the ``navigationLayers`` bitmask, given a `layerNumber` between 1 and 32.
     public final func setNavigationLayerValue(layerNumber: Int32, value: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -387,8 +399,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_get_navigation_layer_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_navigation_layer_value")
+    fileprivate static let method_get_navigation_layer_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_navigation_layer_value")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -400,6 +412,7 @@ open class NavigationRegion2D: Node2D {
     
     /// Returns whether or not the specified layer of the ``navigationLayers`` bitmask is enabled, given a `layerNumber` between 1 and 32.
     public final func getNavigationLayerValue(layerNumber: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -414,8 +427,8 @@ open class NavigationRegion2D: Node2D {
         return _result
     }
     
-    fileprivate static var method_get_region_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_region_rid")
+    fileprivate static let method_get_region_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_region_rid")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2944877500)!
@@ -427,13 +440,14 @@ open class NavigationRegion2D: Node2D {
     
     /// Returns the ``RID`` of this region on the ``NavigationServer2D``.
     public final func getRegionRid() -> RID {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_region_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_enter_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_enter_cost")
+    fileprivate static let method_set_enter_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_enter_cost")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -445,6 +459,7 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_enter_cost(_ enterCost: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enterCost) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -458,8 +473,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_get_enter_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_enter_cost")
+    fileprivate static let method_get_enter_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_enter_cost")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -471,13 +486,14 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_enter_cost() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_enter_cost, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_travel_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_travel_cost")
+    fileprivate static let method_set_travel_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_travel_cost")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -489,6 +505,7 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func set_travel_cost(_ travelCost: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: travelCost) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -502,8 +519,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_get_travel_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_travel_cost")
+    fileprivate static let method_get_travel_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_travel_cost")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -515,13 +532,14 @@ open class NavigationRegion2D: Node2D {
     
     @inline(__always)
     fileprivate final func get_travel_cost() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_travel_cost, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_bake_navigation_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bake_navigation_polygon")
+    fileprivate static let method_bake_navigation_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake_navigation_polygon")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3216645846)!
@@ -533,6 +551,7 @@ open class NavigationRegion2D: Node2D {
     
     /// Bakes the ``NavigationPolygon``. If `onThread` is set to `true` (default), the baking is done on a separate thread.
     public final func bakeNavigationPolygon(onThread: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: onThread) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -546,8 +565,8 @@ open class NavigationRegion2D: Node2D {
         
     }
     
-    fileprivate static var method_is_baking: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_baking")
+    fileprivate static let method_is_baking: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_baking")
         return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -559,8 +578,28 @@ open class NavigationRegion2D: Node2D {
     
     /// Returns `true` when the ``NavigationPolygon`` is being baked on a background thread.
     public final func isBaking() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(NavigationRegion2D.method_is_baking, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_bounds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_bounds")
+        return withUnsafePointer(to: &NavigationRegion2D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1639390495)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the axis-aligned rectangle for the region's transformed navigation mesh.
+    public final func getBounds() -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Rect2 = Rect2 ()
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_bounds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     

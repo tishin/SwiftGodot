@@ -27,7 +27,7 @@ import Musl
 /// 
 /// Used internally as ``Camera3D``'s projection matrix.
 /// 
-public struct Projection: Equatable, Hashable {
+public struct Projection: _GodotBridgeableBuiltin, Equatable, Hashable {
     /// The projection matrix's X vector (column 0). Equivalent to array index `0`.
     public var x: Vector4
     /// The projection matrix's Y vector (column 1). Equivalent to array index `1`.
@@ -51,20 +51,23 @@ public struct Projection: Equatable, Hashable {
         case bottom = 5 // PLANE_BOTTOM
     }
     
-    static var constructor0: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_PROJECTION, 0)!
-    
-    /// Constructs a default-initialized ``Projection`` set to ``identity``.
-    public init () {
+    /// A ``Projection`` with no transformation defined. When applied to other data structures, no transformation is performed.
+    public static var identity: Projection { Projection (xAxis: Vector4 (x: 1, y: 0, z: 0, w: 0), yAxis: Vector4 (x: 0, y: 1, z: 0, w: 0), zAxis: Vector4 (x: 0, y: 0, z: 1, w: 0), wAxis: Vector4 (x: 0, y: 0, z: 0, w: 1)) }
+    /// A ``Projection`` with all values initialized to 0. When applied to other data structures, they will be zeroed.
+    public static var zero: Projection { Projection (xAxis: Vector4 (x: 0, y: 0, z: 0, w: 0), yAxis: Vector4 (x: 0, y: 0, z: 0, w: 0), zAxis: Vector4 (x: 0, y: 0, z: 0, w: 0), wAxis: Vector4 (x: 0, y: 0, z: 0, w: 0)) }
+    /// Constructs a default-initialized ``Projection`` identical to ``identity``.
+    /// 
+    /// > Note: In C#, this constructs a ``Projection`` identical to ``zero``.
+    /// 
+    public init() {
         self.x = Vector4 (x: 1, y: 0, z: 0, w: 0)
         self.y = Vector4 (x: 0, y: 1, z: 0, w: 0)
         self.z = Vector4 (x: 0, y: 0, z: 1, w: 0)
         self.w = Vector4 (x: 0, y: 0, z: 0, w: 1)
     }
     
-    static var constructor1: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_PROJECTION, 1)!
-    
     /// Constructs a ``Projection`` as a copy of the given ``Projection``.
-    public init (from: Projection) {
+    public init(from: Projection) {
         self.x = Vector4 ()
         self.y = Vector4 ()
         self.z = Vector4 ()
@@ -72,7 +75,7 @@ public struct Projection: Equatable, Hashable {
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    Projection.constructor1(&self, pArgs)
+                    GodotInterfaceForProjection.constructor1(&self, pArgs)
                 }
                 
             }
@@ -80,11 +83,9 @@ public struct Projection: Equatable, Hashable {
         }
         
     }
-    
-    static var constructor2: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_PROJECTION, 2)!
     
     /// Constructs a Projection as a copy of the given ``Transform3D``.
-    public init (from: Transform3D) {
+    public init(from: Transform3D) {
         self.x = Vector4 ()
         self.y = Vector4 ()
         self.z = Vector4 ()
@@ -92,7 +93,7 @@ public struct Projection: Equatable, Hashable {
         withUnsafePointer(to: from) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    Projection.constructor2(&self, pArgs)
+                    GodotInterfaceForProjection.constructor2(&self, pArgs)
                 }
                 
             }
@@ -101,10 +102,8 @@ public struct Projection: Equatable, Hashable {
         
     }
     
-    static var constructor3: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_PROJECTION, 3)!
-    
     /// Constructs a Projection from four ``Vector4`` values (matrix columns).
-    public init (xAxis: Vector4, yAxis: Vector4, zAxis: Vector4, wAxis: Vector4) {
+    public init(xAxis: Vector4, yAxis: Vector4, zAxis: Vector4, wAxis: Vector4) {
         self.x = xAxis
         self.y = yAxis
         self.z = zAxis
@@ -114,18 +113,13 @@ public struct Projection: Equatable, Hashable {
     
     /* Methods */
     
-    static var method_create_depth_correction: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_depth_correction")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 1228516048)!
-    }()
-    
     /// Creates a new ``Projection`` that projects positions from a depth range of `-1` to `1` to one that ranges from `0` to `1`, and flips the projected positions vertically, according to `flipY`.
-    public static func createDepthCorrection(flipY: Bool)-> Projection {
+    public static func createDepthCorrection(flipY: Bool) -> Projection {
         var result: Projection = Projection()
         withUnsafePointer(to: flipY) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    Projection.method_create_depth_correction(nil, pArgs, &result, 1)
+                    GodotInterfaceForProjection.method_create_depth_correction(nil, pArgs, &result, 1)
                 }
                 
             }
@@ -135,18 +129,13 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_light_atlas_rect: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_light_atlas_rect")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2654950662)!
-    }()
-    
     /// Creates a new ``Projection`` that projects positions into the given ``Rect2``.
-    public static func createLightAtlasRect(_ rect: Rect2)-> Projection {
+    public static func createLightAtlasRect(_ rect: Rect2) -> Projection {
         var result: Projection = Projection()
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    Projection.method_create_light_atlas_rect(nil, pArgs, &result, 1)
+                    GodotInterfaceForProjection.method_create_light_atlas_rect(nil, pArgs, &result, 1)
                 }
                 
             }
@@ -155,17 +144,12 @@ public struct Projection: Equatable, Hashable {
         
         return result
     }
-    
-    static var method_create_perspective: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_perspective")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 390915442)!
-    }()
     
     /// Creates a new ``Projection`` that projects positions using a perspective projection with the given Y-axis field of view (in degrees), X:Y aspect ratio, and clipping planes.
     /// 
     /// `flipFov` determines whether the projection's field of view is flipped over its diagonal.
     /// 
-    public static func createPerspective(fovy: Double, aspect: Double, zNear: Double, zFar: Double, flipFov: Bool = false)-> Projection {
+    public static func createPerspective(fovy: Double, aspect: Double, zNear: Double, zFar: Double, flipFov: Bool = false) -> Projection {
         var result: Projection = Projection()
         let fovy = Double(fovy)
         withUnsafePointer(to: fovy) { pArg0 in
@@ -178,7 +162,7 @@ public struct Projection: Equatable, Hashable {
                         withUnsafePointer(to: flipFov) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    Projection.method_create_perspective(nil, pArgs, &result, 5)
+                                    GodotInterfaceForProjection.method_create_perspective(nil, pArgs, &result, 5)
                                 }
                                 
                             }
@@ -196,18 +180,13 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_perspective_hmd: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_perspective_hmd")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2857674800)!
-    }()
-    
     /// Creates a new ``Projection`` that projects positions using a perspective projection with the given Y-axis field of view (in degrees), X:Y aspect ratio, and clipping distances. The projection is adjusted for a head-mounted display with the given distance between eyes and distance to a point that can be focused on.
     /// 
     /// `eye` creates the projection for the left eye when set to 1, or the right eye when set to 2.
     /// 
     /// `flipFov` determines whether the projection's field of view is flipped over its diagonal.
     /// 
-    public static func createPerspectiveHmd(fovy: Double, aspect: Double, zNear: Double, zFar: Double, flipFov: Bool, eye: Int64, intraocularDist: Double, convergenceDist: Double)-> Projection {
+    public static func createPerspectiveHmd(fovy: Double, aspect: Double, zNear: Double, zFar: Double, flipFov: Bool, eye: Int64, intraocularDist: Double, convergenceDist: Double) -> Projection {
         var result: Projection = Projection()
         let fovy = Double(fovy)
         withUnsafePointer(to: fovy) { pArg0 in
@@ -225,7 +204,7 @@ public struct Projection: Equatable, Hashable {
                                     withUnsafePointer(to: convergenceDist) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                Projection.method_create_perspective_hmd(nil, pArgs, &result, 8)
+                                                GodotInterfaceForProjection.method_create_perspective_hmd(nil, pArgs, &result, 8)
                                             }
                                             
                                         }
@@ -249,16 +228,11 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_for_hmd: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_for_hmd")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4184144994)!
-    }()
-    
     /// Creates a new ``Projection`` for projecting positions onto a head-mounted display with the given X:Y aspect ratio, distance between eyes, display width, distance to lens, oversampling factor, and depth clipping planes.
     /// 
     /// `eye` creates the projection for the left eye when set to 1, or the right eye when set to 2.
     /// 
-    public static func createForHmd(eye: Int64, aspect: Double, intraocularDist: Double, displayWidth: Double, displayToLens: Double, oversample: Double, zNear: Double, zFar: Double)-> Projection {
+    public static func createForHmd(eye: Int64, aspect: Double, intraocularDist: Double, displayWidth: Double, displayToLens: Double, oversample: Double, zNear: Double, zFar: Double) -> Projection {
         var result: Projection = Projection()
         withUnsafePointer(to: eye) { pArg0 in
             let aspect = Double(aspect)
@@ -277,7 +251,7 @@ public struct Projection: Equatable, Hashable {
                                     withUnsafePointer(to: zFar) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                Projection.method_create_for_hmd(nil, pArgs, &result, 8)
+                                                GodotInterfaceForProjection.method_create_for_hmd(nil, pArgs, &result, 8)
                                             }
                                             
                                         }
@@ -301,13 +275,8 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_orthogonal: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_orthogonal")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3707929169)!
-    }()
-    
     /// Creates a new ``Projection`` that projects positions using an orthogonal projection with the given clipping planes.
-    public static func createOrthogonal(left: Double, right: Double, bottom: Double, top: Double, zNear: Double, zFar: Double)-> Projection {
+    public static func createOrthogonal(left: Double, right: Double, bottom: Double, top: Double, zNear: Double, zFar: Double) -> Projection {
         var result: Projection = Projection()
         let left = Double(left)
         withUnsafePointer(to: left) { pArg0 in
@@ -323,7 +292,7 @@ public struct Projection: Equatable, Hashable {
                             withUnsafePointer(to: zFar) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        Projection.method_create_orthogonal(nil, pArgs, &result, 6)
+                                        GodotInterfaceForProjection.method_create_orthogonal(nil, pArgs, &result, 6)
                                     }
                                     
                                 }
@@ -343,16 +312,11 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_orthogonal_aspect: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_orthogonal_aspect")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 390915442)!
-    }()
-    
     /// Creates a new ``Projection`` that projects positions using an orthogonal projection with the given size, X:Y aspect ratio, and clipping planes.
     /// 
     /// `flipFov` determines whether the projection's field of view is flipped over its diagonal.
     /// 
-    public static func createOrthogonalAspect(size: Double, aspect: Double, zNear: Double, zFar: Double, flipFov: Bool = false)-> Projection {
+    public static func createOrthogonalAspect(size: Double, aspect: Double, zNear: Double, zFar: Double, flipFov: Bool = false) -> Projection {
         var result: Projection = Projection()
         let size = Double(size)
         withUnsafePointer(to: size) { pArg0 in
@@ -365,7 +329,7 @@ public struct Projection: Equatable, Hashable {
                         withUnsafePointer(to: flipFov) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    Projection.method_create_orthogonal_aspect(nil, pArgs, &result, 5)
+                                    GodotInterfaceForProjection.method_create_orthogonal_aspect(nil, pArgs, &result, 5)
                                 }
                                 
                             }
@@ -383,13 +347,8 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_frustum: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_frustum")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3707929169)!
-    }()
-    
     /// Creates a new ``Projection`` that projects positions in a frustum with the given clipping planes.
-    public static func createFrustum(left: Double, right: Double, bottom: Double, top: Double, zNear: Double, zFar: Double)-> Projection {
+    public static func createFrustum(left: Double, right: Double, bottom: Double, top: Double, zNear: Double, zFar: Double) -> Projection {
         var result: Projection = Projection()
         let left = Double(left)
         withUnsafePointer(to: left) { pArg0 in
@@ -405,7 +364,7 @@ public struct Projection: Equatable, Hashable {
                             withUnsafePointer(to: zFar) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        Projection.method_create_frustum(nil, pArgs, &result, 6)
+                                        GodotInterfaceForProjection.method_create_frustum(nil, pArgs, &result, 6)
                                     }
                                     
                                 }
@@ -425,16 +384,11 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_frustum_aspect: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_frustum_aspect")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 1535076251)!
-    }()
-    
     /// Creates a new ``Projection`` that projects positions in a frustum with the given size, X:Y aspect ratio, offset, and clipping planes.
     /// 
     /// `flipFov` determines whether the projection's field of view is flipped over its diagonal.
     /// 
-    public static func createFrustumAspect(size: Double, aspect: Double, offset: Vector2, zNear: Double, zFar: Double, flipFov: Bool = false)-> Projection {
+    public static func createFrustumAspect(size: Double, aspect: Double, offset: Vector2, zNear: Double, zFar: Double, flipFov: Bool = false) -> Projection {
         var result: Projection = Projection()
         let size = Double(size)
         withUnsafePointer(to: size) { pArg0 in
@@ -448,7 +402,7 @@ public struct Projection: Equatable, Hashable {
                             withUnsafePointer(to: flipFov) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        Projection.method_create_frustum_aspect(nil, pArgs, &result, 6)
+                                        GodotInterfaceForProjection.method_create_frustum_aspect(nil, pArgs, &result, 6)
                                     }
                                     
                                 }
@@ -468,18 +422,13 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_create_fit_aabb: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("create_fit_aabb")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2264694907)!
-    }()
-    
     /// Creates a new ``Projection`` that scales a given projection to fit around a given ``AABB`` in projection space.
-    public static func createFitAabb(_ aabb: AABB)-> Projection {
+    public static func createFitAabb(_ aabb: AABB) -> Projection {
         var result: Projection = Projection()
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    Projection.method_create_fit_aabb(nil, pArgs, &result, 1)
+                    GodotInterfaceForProjection.method_create_fit_aabb(nil, pArgs, &result, 1)
                 }
                 
             }
@@ -489,34 +438,24 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_determinant: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("determinant")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
-    }()
-    
     /// Returns a scalar value that is the signed factor by which areas are scaled by this matrix. If the sign is negative, the matrix flips the orientation of the area.
     /// 
     /// The determinant can be used to calculate the invertibility of a matrix or solve linear systems of equations involving the matrix, among other applications.
     /// 
-    public func determinant()-> Double {
+    public func determinant() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_determinant(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_determinant(ptr, nil, &result, 0)
         }
         return result
     }
-    
-    static var method_perspective_znear_adjusted: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("perspective_znear_adjusted")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3584785443)!
-    }()
     
     /// Returns a ``Projection`` with the near clipping distance adjusted to be `newZnear`.
     /// 
     /// > Note: The original ``Projection`` must be a perspective projection.
     /// 
-    public func perspectiveZnearAdjusted(newZnear: Double)-> Projection {
+    public func perspectiveZnearAdjusted(newZnear: Double) -> Projection {
         var result: Projection = Projection()
         let newZnear = Double(newZnear)
         withUnsafePointer(to: newZnear) { pArg0 in
@@ -524,7 +463,7 @@ public struct Projection: Equatable, Hashable {
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Projection.method_perspective_znear_adjusted(ptr, pArgs, &result, 1)
+                       GodotInterfaceForProjection.method_perspective_znear_adjusted(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -535,23 +474,18 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_get_projection_plane: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_projection_plane")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 1551184160)!
-    }()
-    
     /// Returns the clipping plane of this ``Projection`` whose index is given by `plane`.
     /// 
     /// `plane` should be equal to one of ``Planes/near``, ``Planes/far``, ``Planes/left``, ``Planes/top``, ``Planes/right``, or ``Planes/bottom``.
     /// 
-    public func getProjectionPlane(_ plane: Int64)-> Plane {
+    public func getProjectionPlane(_ plane: Int64) -> Plane {
         var result: Plane = Plane()
         withUnsafePointer(to: plane) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Projection.method_get_projection_plane(ptr, pArgs, &result, 1)
+                       GodotInterfaceForProjection.method_get_projection_plane(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -562,35 +496,25 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_flipped_y: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("flipped_y")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4212530932)!
-    }()
-    
     /// Returns a copy of this ``Projection`` with the signs of the values of the Y column flipped.
-    public func flippedY()-> Projection {
+    public func flippedY() -> Projection {
         var result: Projection = Projection()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_flipped_y(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_flipped_y(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_jitter_offseted: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("jitter_offseted")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2448438599)!
-    }()
-    
     /// Returns a ``Projection`` with the X and Y values from the given ``Vector2`` added to the first and second values of the final column respectively.
-    public func jitterOffseted(offset: Vector2)-> Projection {
+    public func jitterOffseted(offset: Vector2) -> Projection {
         var result: Projection = Projection()
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Projection.method_jitter_offseted(ptr, pArgs, &result, 1)
+                       GodotInterfaceForProjection.method_jitter_offseted(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -601,13 +525,11 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_get_fovy: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_fovy")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3514207532)!
-    }()
-    
     /// Returns the vertical field of view of the projection (in degrees) associated with the given horizontal field of view (in degrees) and aspect ratio.
-    public static func getFovy(fovx: Double, aspect: Double)-> Double {
+    /// 
+    /// > Note: Unlike most methods of ``Projection``, `aspect` is expected to be 1 divided by the X:Y aspect ratio.
+    /// 
+    public static func getFovy(fovx: Double, aspect: Double) -> Double {
         var result: Double = Double()
         let fovx = Double(fovx)
         withUnsafePointer(to: fovx) { pArg0 in
@@ -615,7 +537,7 @@ public struct Projection: Equatable, Hashable {
             withUnsafePointer(to: aspect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        Projection.method_get_fovy(nil, pArgs, &result, 2)
+                        GodotInterfaceForProjection.method_get_fovy(nil, pArgs, &result, 2)
                     }
                     
                 }
@@ -627,140 +549,95 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_get_z_far: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_z_far")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
-    }()
-    
     /// Returns the distance for this ``Projection`` beyond which positions are clipped.
-    public func getZFar()-> Double {
+    public func getZFar() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_get_z_far(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_get_z_far(ptr, nil, &result, 0)
         }
         return result
     }
-    
-    static var method_get_z_near: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_z_near")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
-    }()
     
     /// Returns the distance for this ``Projection`` before which positions are clipped.
-    public func getZNear()-> Double {
+    public func getZNear() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_get_z_near(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_get_z_near(ptr, nil, &result, 0)
         }
         return result
     }
-    
-    static var method_get_aspect: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_aspect")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
-    }()
     
     /// Returns the X:Y aspect ratio of this ``Projection``'s viewport.
-    public func getAspect()-> Double {
+    public func getAspect() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_get_aspect(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_get_aspect(ptr, nil, &result, 0)
         }
         return result
     }
-    
-    static var method_get_fov: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_fov")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
-    }()
     
     /// Returns the horizontal field of view of the projection (in degrees).
-    public func getFov()-> Double {
+    public func getFov() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_get_fov(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_get_fov(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_is_orthogonal: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("is_orthogonal")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3918633141)!
-    }()
-    
     /// Returns `true` if this ``Projection`` performs an orthogonal projection.
-    public func isOrthogonal()-> Bool {
+    public func isOrthogonal() -> Bool {
         var result: Bool = Bool()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_is_orthogonal(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_is_orthogonal(ptr, nil, &result, 0)
         }
         return result
     }
-    
-    static var method_get_viewport_half_extents: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_viewport_half_extents")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2428350749)!
-    }()
     
     /// Returns the dimensions of the viewport plane that this ``Projection`` projects positions onto, divided by two.
-    public func getViewportHalfExtents()-> Vector2 {
+    public func getViewportHalfExtents() -> Vector2 {
         var result: Vector2 = Vector2()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_get_viewport_half_extents(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_get_viewport_half_extents(ptr, nil, &result, 0)
         }
         return result
     }
-    
-    static var method_get_far_plane_half_extents: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_far_plane_half_extents")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2428350749)!
-    }()
     
     /// Returns the dimensions of the far clipping plane of the projection, divided by two.
-    public func getFarPlaneHalfExtents()-> Vector2 {
+    public func getFarPlaneHalfExtents() -> Vector2 {
         var result: Vector2 = Vector2()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_get_far_plane_half_extents(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_get_far_plane_half_extents(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_inverse: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("inverse")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4212530932)!
-    }()
-    
     /// Returns a ``Projection`` that performs the inverse of this ``Projection``'s projective transformation.
-    public func inverse()-> Projection {
+    public func inverse() -> Projection {
         var result: Projection = Projection()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_inverse(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_inverse(ptr, nil, &result, 0)
         }
         return result
     }
     
-    static var method_get_pixels_per_meter: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_pixels_per_meter")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4103005248)!
-    }()
-    
     /// Returns the number of pixels with the given pixel width displayed per meter, after this ``Projection`` is applied.
-    public func getPixelsPerMeter(forPixelWidth: Int64)-> Int64 {
+    public func getPixelsPerMeter(forPixelWidth: Int64) -> Int64 {
         var result: Int64 = Int64()
         withUnsafePointer(to: forPixelWidth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     var mutSelfCopy = self
                     withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-                       Projection.method_get_pixels_per_meter(ptr, pArgs, &result, 1)
+                       GodotInterfaceForProjection.method_get_pixels_per_meter(ptr, pArgs, &result, 1)
                     }
                 }
                 
@@ -771,93 +648,68 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var method_get_lod_multiplier: GDExtensionPtrBuiltInMethod = {
-        let name = StringName ("get_lod_multiplier")
-        return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
-    }()
-    
     /// Returns the factor by which the visible level of detail is scaled by this ``Projection``.
-    public func getLodMultiplier()-> Double {
+    public func getLodMultiplier() -> Double {
         var result: Double = Double()
         var mutSelfCopy = self
         withUnsafeMutablePointer (to: &mutSelfCopy) { ptr in
-           Projection.method_get_lod_multiplier(ptr, nil, &result, 0)
+           GodotInterfaceForProjection.method_get_lod_multiplier(ptr, nil, &result, 0)
         }
         return result
     }
     
-    private static var indexed_getter: GDExtensionPtrIndexedGetter = {
-        return gi.variant_get_ptr_indexed_getter (GDEXTENSION_VARIANT_TYPE_PROJECTION)!
-    }()
-    
-    private static var indexed_setter: GDExtensionPtrIndexedSetter = {
-        return gi.variant_get_ptr_indexed_setter (GDEXTENSION_VARIANT_TYPE_PROJECTION)!
-    }()
-    
-     public subscript (index: Int64) -> Vector4 {
+    public subscript(index: Int64) -> Vector4 {
         mutating get {
-            var result = Vector4 ()
-            Self.indexed_getter (&self, index, &result)
+            var result = Vector4()
+            GodotInterfaceForProjection.indexed_getter (&self, index, &result)
             return result
         }
         
         set {
             var value = newValue
-            Self.indexed_setter (&self, index, &value)
+            GodotInterfaceForProjection.indexed_setter (&self, index, &value)
         }
         
     }
     
-    static var operator_3: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_VECTOR4)!
-    }()
-    
     /// Projects (multiplies) the given ``Vector4`` by this ``Projection`` matrix.
-    public static func * (lhs: Projection, rhs: Vector4) -> Vector4  {
+    public static func *(lhs: Projection, rhs: Vector4) -> Vector4  {
         var result: Vector4 = Vector4()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Projection.operator_3(pArg0, pArg1, &result)
+                GodotInterfaceForProjection.operator_3(pArg0, pArg1, &result)
             }
             
         }
         
         return result
     }
-    
-    static var operator_4: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_EQUAL, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_PROJECTION)!
-    }()
     
     /// Returns `true` if the projections are equal.
     /// 
     /// > Note: Due to floating-point precision errors, this may return `false`, even if the projections are virtually equal. An `is_equal_approx` method may be added in a future version of Godot.
     /// 
-    public static func == (lhs: Projection, rhs: Projection) -> Bool  {
+    public static func ==(lhs: Projection, rhs: Projection) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Projection.operator_4(pArg0, pArg1, &result)
+                GodotInterfaceForProjection.operator_4(pArg0, pArg1, &result)
             }
             
         }
         
         return result
     }
-    
-    static var operator_5: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_NOT_EQUAL, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_PROJECTION)!
-    }()
     
     /// Returns `true` if the projections are not equal.
     /// 
     /// > Note: Due to floating-point precision errors, this may return `true`, even if the projections are virtually equal. An `is_equal_approx` method may be added in a future version of Godot.
     /// 
-    public static func != (lhs: Projection, rhs: Projection) -> Bool  {
+    public static func !=(lhs: Projection, rhs: Projection) -> Bool  {
         var result: Bool = Bool()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Projection.operator_5(pArg0, pArg1, &result)
+                GodotInterfaceForProjection.operator_5(pArg0, pArg1, &result)
             }
             
         }
@@ -865,16 +717,12 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    static var operator_6: GDExtensionPtrOperatorEvaluator = {
-        return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_PROJECTION)!
-    }()
-    
     /// Returns a ``Projection`` that applies the combined transformations of this ``Projection`` and `right`.
-    public static func * (lhs: Projection, rhs: Projection) -> Projection  {
+    public static func *(lhs: Projection, rhs: Projection) -> Projection  {
         var result: Projection = Projection()
         withUnsafePointer(to: lhs) { pArg0 in
             withUnsafePointer(to: rhs) { pArg1 in
-                Projection.operator_6(pArg0, pArg1, &result)
+                GodotInterfaceForProjection.operator_6(pArg0, pArg1, &result)
             }
             
         }
@@ -882,21 +730,327 @@ public struct Projection: Equatable, Hashable {
         return result
     }
     
-    /// The index value of the projection's near clipping plane.
-    public static let planeNear = 0
-    /// The index value of the projection's far clipping plane.
-    public static let planeFar = 1
-    /// The index value of the projection's left clipping plane.
-    public static let planeLeft = 2
-    /// The index value of the projection's top clipping plane.
-    public static let planeTop = 3
-    /// The index value of the projection's right clipping plane.
-    public static let planeRight = 4
-    /// The index value of the projection bottom clipping plane.
-    public static let planeBottom = 5
-    /// A ``Projection`` with no transformation defined. When applied to other data structures, no transformation is performed.
-    public static let identity = Projection (xAxis: Vector4 (x: 1, y: 0, z: 0, w: 0), yAxis: Vector4 (x: 0, y: 1, z: 0, w: 0), zAxis: Vector4 (x: 0, y: 0, z: 1, w: 0), wAxis: Vector4 (x: 0, y: 0, z: 0, w: 1))
-    /// A ``Projection`` with all values initialized to 0. When applied to other data structures, they will be zeroed.
-    public static let zero = Projection (xAxis: Vector4 (x: 0, y: 0, z: 0, w: 0), yAxis: Vector4 (x: 0, y: 0, z: 0, w: 0), zAxis: Vector4 (x: 0, y: 0, z: 0, w: 0), wAxis: Vector4 (x: 0, y: 0, z: 0, w: 0))
+    /// Wrap ``Projection`` into a ``Variant``
+    @inline(__always)
+    @inlinable
+    public func toVariant() -> Variant {
+        Variant(self)
+    }
+    
+    /// Wrap ``Projection`` into a ``Variant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toVariant() -> Variant? {
+        Variant(self)
+    }
+    
+    /// Wrap ``Projection`` into a ``FastVariant``
+    @inline(__always)
+    @inlinable
+    public func toFastVariant() -> FastVariant {
+        FastVariant(self)
+    }
+    
+    /// Wrap ``Projection`` into a ``FastVariant?``
+    @inline(__always)
+    @inlinable
+    @_disfavoredOverload
+    public func toFastVariant() -> FastVariant? {
+        FastVariant(self)
+    }
+    
+    /// Extract ``Projection`` from a ``Variant``. Throws `VariantConversionError` if it's not possible.
+    @inline(__always)
+    @inlinable
+    public static func fromVariantOrThrow(_ variant: Variant) throws(VariantConversionError) -> Self {                
+        guard let value = Self(variant) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    @inline(__always)
+    @inlinable
+    public static func fromFastVariantOrThrow(_ variant: borrowing FastVariant) throws(VariantConversionError) -> Self {                
+        guard let value = Self(variant) else {
+            throw .unexpectedContent(parsing: self, from: variant)
+        }
+        return value                
+    }
+    
+    /// Initialze ``Projection`` from ``Variant``. Fails if `variant` doesn't contain ``Projection``
+    @inline(__always)                
+    public init?(_ variant: Variant) {
+        guard Self._variantType == variant.gtype else { return nil }
+        self.init()
+        
+        withUnsafeMutablePointer(to: &self) { pPayload in
+            variant.constructType(into: pPayload, constructor: GodotInterfaceForProjection.selfFromVariant)                        
+        }
+    }
+    
+    /// Initialze ``Projection`` from ``Variant``. Fails if `variant` doesn't contain ``Projection`` or is `nil`
+    @inline(__always)
+    @inlinable
+    public init?(_ variant: Variant?) {
+        guard let variant else { return nil }
+        self.init(variant)
+    }
+    
+    /// Initialze ``Projection`` from ``FastVariant``. Fails if `variant` doesn't contain ``Projection``
+    @inline(__always)                
+    public init?(_ variant: borrowing FastVariant) {
+        guard Self._variantType == variant.gtype else { return nil }
+        self.init()
+        
+        withUnsafeMutablePointer(to: &self) { pPayload in
+            variant.constructType(into: pPayload, constructor: GodotInterfaceForProjection.selfFromVariant)                        
+        }
+    }
+    
+    /// Initialze ``Projection`` from ``FastVariant``. Fails if `variant` doesn't contain ``Projection`` or is `nil`
+    @inline(__always)
+    @inlinable
+    public init?(_ variant: borrowing FastVariant?) {
+        switch variant {
+        case .some(let variant):
+            self.init(variant)
+        case .none:
+            return nil
+        }
+    }
+    
+    /// Internal API. For indicating that Godot `Array` of ``Projection`` has type `Array[Projection]`
+    @inline(__always)
+    @inlinable
+    public static var _variantType: Variant.GType {
+        .projection 
+    }
+}
+
+public extension Variant {
+    /// Initialize ``Variant`` by wrapping ``Projection?``, fails if it's `nil`
+    @inline(__always)
+    @inlinable
+    convenience init?(_ from: Projection?) {
+        guard let from else {
+            return nil
+        }
+        self.init(from)
+    }
+    
+    /// Initialize ``Variant`` by wrapping ``Projection``
+    @inline(__always)
+    convenience init(_ from: Projection) {
+        self.init(payload: from, constructor: GodotInterfaceForProjection.variantFromSelf)
+    }
+    
+}
+
+public extension FastVariant {
+    /// Initialize ``FastVariant`` by wrapping ``Projection?``, fails if it's `nil`
+    @inline(__always)
+    @inlinable
+    init?(_ from: Projection?) {
+        guard let from else {
+            return nil
+        }
+        self.init(from)
+    }
+    
+    /// Initialize ``FastVariant`` by wrapping ``Projection``
+    @inline(__always)
+    init(_ from: Projection) {
+        self.init(payload: from, constructor: GodotInterfaceForProjection.variantFromSelf)
+    }
+    
+}
+
+/// Static storage for keeping pointers to Godot implementation wrapped by Projection
+enum GodotInterfaceForProjection {
+    // MARK: - Constructors
+    static let constructor0: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_PROJECTION, 0)!
+    }()
+    
+    static let constructor1: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_PROJECTION, 1)!
+    }()
+    
+    static let constructor2: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_PROJECTION, 2)!
+    }()
+    
+    static let constructor3: GDExtensionPtrConstructor = {
+        gi.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_PROJECTION, 3)!
+    }()
+    
+    // MARK: - Methods
+    static let method_create_depth_correction: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_depth_correction")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 1228516048)!
+    }()
+    
+    static let method_create_light_atlas_rect: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_light_atlas_rect")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2654950662)!
+    }()
+    
+    static let method_create_perspective: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_perspective")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 390915442)!
+    }()
+    
+    static let method_create_perspective_hmd: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_perspective_hmd")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2857674800)!
+    }()
+    
+    static let method_create_for_hmd: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_for_hmd")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4184144994)!
+    }()
+    
+    static let method_create_orthogonal: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_orthogonal")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3707929169)!
+    }()
+    
+    static let method_create_orthogonal_aspect: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_orthogonal_aspect")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 390915442)!
+    }()
+    
+    static let method_create_frustum: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_frustum")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3707929169)!
+    }()
+    
+    static let method_create_frustum_aspect: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_frustum_aspect")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 1535076251)!
+    }()
+    
+    static let method_create_fit_aabb: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("create_fit_aabb")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2264694907)!
+    }()
+    
+    static let method_determinant: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("determinant")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
+    }()
+    
+    static let method_perspective_znear_adjusted: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("perspective_znear_adjusted")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3584785443)!
+    }()
+    
+    static let method_get_projection_plane: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_projection_plane")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 1551184160)!
+    }()
+    
+    static let method_flipped_y: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("flipped_y")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4212530932)!
+    }()
+    
+    static let method_jitter_offseted: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("jitter_offseted")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2448438599)!
+    }()
+    
+    static let method_get_fovy: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_fovy")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3514207532)!
+    }()
+    
+    static let method_get_z_far: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_z_far")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
+    }()
+    
+    static let method_get_z_near: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_z_near")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
+    }()
+    
+    static let method_get_aspect: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_aspect")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
+    }()
+    
+    static let method_get_fov: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_fov")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
+    }()
+    
+    static let method_is_orthogonal: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("is_orthogonal")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 3918633141)!
+    }()
+    
+    static let method_get_viewport_half_extents: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_viewport_half_extents")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2428350749)!
+    }()
+    
+    static let method_get_far_plane_half_extents: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_far_plane_half_extents")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 2428350749)!
+    }()
+    
+    static let method_inverse: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("inverse")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4212530932)!
+    }()
+    
+    static let method_get_pixels_per_meter: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_pixels_per_meter")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 4103005248)!
+    }()
+    
+    static let method_get_lod_multiplier: GDExtensionPtrBuiltInMethod = {
+        var name = FastStringName("get_lod_multiplier")
+        return gi.variant_get_ptr_builtin_method(GDEXTENSION_VARIANT_TYPE_PROJECTION, &name.content, 466405837)!
+    }()
+    
+    static let indexed_getter: GDExtensionPtrIndexedGetter = {
+        return gi.variant_get_ptr_indexed_getter (GDEXTENSION_VARIANT_TYPE_PROJECTION)!
+    }()
+    
+    static let indexed_setter: GDExtensionPtrIndexedSetter = {
+        return gi.variant_get_ptr_indexed_setter (GDEXTENSION_VARIANT_TYPE_PROJECTION)!
+    }()
+    
+    // MARK: - Operators
+    static let operator_3: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_VECTOR4)!
+    }()
+    
+    static let operator_4: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_EQUAL, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_PROJECTION)!
+    }()
+    
+    static let operator_5: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_NOT_EQUAL, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_PROJECTION)!
+    }()
+    
+    static let operator_6: GDExtensionPtrOperatorEvaluator = {
+        return gi.variant_get_ptr_operator_evaluator(GDEXTENSION_VARIANT_OP_MULTIPLY, GDEXTENSION_VARIANT_TYPE_PROJECTION, GDEXTENSION_VARIANT_TYPE_PROJECTION)!
+    }()
+    
+    // MARK: - Variant conversion
+    static let variantFromSelf: GDExtensionVariantFromTypeConstructorFunc = {
+        gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_PROJECTION)!
+    }()
+    
+    static let selfFromVariant: GDExtensionTypeFromVariantConstructorFunc = {
+        gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_PROJECTION)!
+    }()
+    
+    
 }
 

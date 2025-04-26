@@ -21,7 +21,7 @@ import Musl
 
 /// Playback class used for ``AudioStreamPlaylist``.
 open class AudioStreamPlaybackPlaylist: AudioStreamPlayback {
-    fileprivate static var className = StringName("AudioStreamPlaybackPlaylist")
+    private static var className = StringName("AudioStreamPlaybackPlaylist")
     override open class var godotClassName: StringName { className }
 }
 

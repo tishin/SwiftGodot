@@ -23,11 +23,11 @@ import Musl
 /// 
 /// Provides direct access to a physics space in the ``PhysicsServer3D``. It's used mainly to do queries against objects and areas residing in a given space.
 open class PhysicsDirectSpaceState3D: Object {
-    fileprivate static var className = StringName("PhysicsDirectSpaceState3D")
+    private static var className = StringName("PhysicsDirectSpaceState3D")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_intersect_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("intersect_point")
+    fileprivate static let method_intersect_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("intersect_point")
         return withUnsafePointer(to: &PhysicsDirectSpaceState3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 975173756)!
@@ -49,7 +49,8 @@ open class PhysicsDirectSpaceState3D: Object {
     /// 
     /// The number of intersections can be limited with the `maxResults` parameter, to reduce the processing time.
     /// 
-    public final func intersectPoint(parameters: PhysicsPointQueryParameters3D?, maxResults: Int32 = 32) -> VariantCollection<GDictionary> {
+    public final func intersectPoint(parameters: PhysicsPointQueryParameters3D?, maxResults: Int32 = 32) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: maxResults) { pArg1 in
@@ -64,11 +65,11 @@ open class PhysicsDirectSpaceState3D: Object {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_intersect_ray: GDExtensionMethodBindPtr = {
-        let methodName = StringName("intersect_ray")
+    fileprivate static let method_intersect_ray: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("intersect_ray")
         return withUnsafePointer(to: &PhysicsDirectSpaceState3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3957970750)!
@@ -98,8 +99,9 @@ open class PhysicsDirectSpaceState3D: Object {
     /// 
     /// If the ray did not intersect anything, then an empty dictionary is returned instead.
     /// 
-    public final func intersectRay(parameters: PhysicsRayQueryParameters3D?) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func intersectRay(parameters: PhysicsRayQueryParameters3D?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -113,8 +115,8 @@ open class PhysicsDirectSpaceState3D: Object {
         return _result
     }
     
-    fileprivate static var method_intersect_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("intersect_shape")
+    fileprivate static let method_intersect_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("intersect_shape")
         return withUnsafePointer(to: &PhysicsDirectSpaceState3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3762137681)!
@@ -138,7 +140,8 @@ open class PhysicsDirectSpaceState3D: Object {
     /// 
     /// > Note: This method does not take into account the `motion` property of the object.
     /// 
-    public final func intersectShape(parameters: PhysicsShapeQueryParameters3D?, maxResults: Int32 = 32) -> VariantCollection<GDictionary> {
+    public final func intersectShape(parameters: PhysicsShapeQueryParameters3D?, maxResults: Int32 = 32) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: maxResults) { pArg1 in
@@ -153,11 +156,11 @@ open class PhysicsDirectSpaceState3D: Object {
             
         }
         
-        return VariantCollection<GDictionary>(content: _result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
-    fileprivate static var method_cast_motion: GDExtensionMethodBindPtr = {
-        let methodName = StringName("cast_motion")
+    fileprivate static let method_cast_motion: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("cast_motion")
         return withUnsafePointer(to: &PhysicsDirectSpaceState3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1778757334)!
@@ -174,6 +177,7 @@ open class PhysicsDirectSpaceState3D: Object {
     /// > Note: Any ``Shape3D``s that the shape is already colliding with e.g. inside of, will be ignored. Use ``collideShape(parameters:maxResults:)`` to determine the ``Shape3D``s that the shape is already colliding with.
     /// 
     public final func castMotion(parameters: PhysicsShapeQueryParameters3D?) -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -188,8 +192,8 @@ open class PhysicsDirectSpaceState3D: Object {
         return _result
     }
     
-    fileprivate static var method_collide_shape: GDExtensionMethodBindPtr = {
-        let methodName = StringName("collide_shape")
+    fileprivate static let method_collide_shape: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("collide_shape")
         return withUnsafePointer(to: &PhysicsDirectSpaceState3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3762137681)!
@@ -205,7 +209,8 @@ open class PhysicsDirectSpaceState3D: Object {
     /// 
     /// > Note: This method does not take into account the `motion` property of the object.
     /// 
-    public final func collideShape(parameters: PhysicsShapeQueryParameters3D?, maxResults: Int32 = 32) -> VariantCollection<Vector3> {
+    public final func collideShape(parameters: PhysicsShapeQueryParameters3D?, maxResults: Int32 = 32) -> TypedArray<Vector3> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: maxResults) { pArg1 in
@@ -220,11 +225,11 @@ open class PhysicsDirectSpaceState3D: Object {
             
         }
         
-        return VariantCollection<Vector3>(content: _result)
+        return TypedArray<Vector3>(takingOver: _result)
     }
     
-    fileprivate static var method_get_rest_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rest_info")
+    fileprivate static let method_get_rest_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rest_info")
         return withUnsafePointer(to: &PhysicsDirectSpaceState3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1376751592)!
@@ -240,7 +245,7 @@ open class PhysicsDirectSpaceState3D: Object {
     /// 
     /// `linear_velocity`: The colliding object's velocity ``Vector3``. If the object is an ``Area3D``, the result is `(0, 0, 0)`.
     /// 
-    /// `normal`: The object's surface normal at the intersection point.
+    /// `normal`: The collision normal of the query shape at the intersection point, pointing away from the intersecting object.
     /// 
     /// `point`: The intersection point.
     /// 
@@ -252,8 +257,9 @@ open class PhysicsDirectSpaceState3D: Object {
     /// 
     /// > Note: This method does not take into account the `motion` property of the object.
     /// 
-    public final func getRestInfo(parameters: PhysicsShapeQueryParameters3D?) -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    public final func getRestInfo(parameters: PhysicsShapeQueryParameters3D?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

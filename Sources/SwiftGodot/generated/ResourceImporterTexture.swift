@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This importer imports ``CompressedTexture2D`` resources. If you need to process the image in scripts in a more convenient way, use ``ResourceImporterImage`` instead. See also ``ResourceImporterLayeredTexture``.
 open class ResourceImporterTexture: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterTexture")
+    private static var className = StringName("ResourceImporterTexture")
     override open class var godotClassName: StringName { className }
 }
 

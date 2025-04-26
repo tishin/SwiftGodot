@@ -26,7 +26,7 @@ import Musl
 /// 
 /// Combines phase-shifted signals with the original signal. The movement of the phase-shifted signals is controlled using a low-frequency oscillator.
 open class AudioEffectPhaser: AudioEffect {
-    fileprivate static var className = StringName("AudioEffectPhaser")
+    private static var className = StringName("AudioEffectPhaser")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -92,8 +92,8 @@ open class AudioEffectPhaser: AudioEffect {
     }
     
     /* Methods */
-    fileprivate static var method_set_range_min_hz: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_range_min_hz")
+    fileprivate static let method_set_range_min_hz: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_range_min_hz")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -105,6 +105,7 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_range_min_hz(_ hz: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -118,8 +119,8 @@ open class AudioEffectPhaser: AudioEffect {
         
     }
     
-    fileprivate static var method_get_range_min_hz: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_range_min_hz")
+    fileprivate static let method_get_range_min_hz: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_range_min_hz")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -131,13 +132,14 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_range_min_hz() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_range_min_hz, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_range_max_hz: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_range_max_hz")
+    fileprivate static let method_set_range_max_hz: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_range_max_hz")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -149,6 +151,7 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_range_max_hz(_ hz: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -162,8 +165,8 @@ open class AudioEffectPhaser: AudioEffect {
         
     }
     
-    fileprivate static var method_get_range_max_hz: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_range_max_hz")
+    fileprivate static let method_get_range_max_hz: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_range_max_hz")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -175,13 +178,14 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_range_max_hz() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_range_max_hz, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rate_hz: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rate_hz")
+    fileprivate static let method_set_rate_hz: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rate_hz")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -193,6 +197,7 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_rate_hz(_ hz: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -206,8 +211,8 @@ open class AudioEffectPhaser: AudioEffect {
         
     }
     
-    fileprivate static var method_get_rate_hz: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rate_hz")
+    fileprivate static let method_get_rate_hz: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rate_hz")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -219,13 +224,14 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_rate_hz() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_rate_hz, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_feedback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_feedback")
+    fileprivate static let method_set_feedback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_feedback")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -237,6 +243,7 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_feedback(_ fbk: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fbk) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -250,8 +257,8 @@ open class AudioEffectPhaser: AudioEffect {
         
     }
     
-    fileprivate static var method_get_feedback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feedback")
+    fileprivate static let method_get_feedback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feedback")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -263,13 +270,14 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_feedback() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_feedback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth")
+    fileprivate static let method_set_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -281,6 +289,7 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func set_depth(_ depth: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -294,8 +303,8 @@ open class AudioEffectPhaser: AudioEffect {
         
     }
     
-    fileprivate static var method_get_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth")
+    fileprivate static let method_get_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth")
         return withUnsafePointer(to: &AudioEffectPhaser.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -307,6 +316,7 @@ open class AudioEffectPhaser: AudioEffect {
     
     @inline(__always)
     fileprivate final func get_depth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

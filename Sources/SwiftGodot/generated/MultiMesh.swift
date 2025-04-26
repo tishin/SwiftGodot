@@ -34,13 +34,20 @@ import Musl
 /// > Note: Blend Shapes will be ignored if used in a MultiMesh.
 /// 
 open class MultiMesh: Resource {
-    fileprivate static var className = StringName("MultiMesh")
+    private static var className = StringName("MultiMesh")
     override open class var godotClassName: StringName { className }
     public enum TransformFormat: Int64, CaseIterable {
         /// Use this when using 2D transforms.
         case transform2d = 0 // TRANSFORM_2D
         /// Use this when using 3D transforms.
         case transform3d = 1 // TRANSFORM_3D
+    }
+    
+    public enum PhysicsInterpolationQuality: Int64, CaseIterable {
+        /// Always interpolate using Basis lerping, which can produce warping artifacts in some situations.
+        case fast = 0 // INTERP_QUALITY_FAST
+        /// Attempt to interpolate using Basis slerping (spherical linear interpolation) where possible, otherwise fall back to lerping.
+        case high = 1 // INTERP_QUALITY_HIGH
     }
     
     
@@ -147,9 +154,26 @@ open class MultiMesh: Resource {
         
     }
     
+    /// Choose whether to use an interpolation method that favors speed or quality.
+    /// 
+    /// When using low physics tick rates (typically below 20) or high rates of object rotation, you may get better results from the high quality setting.
+    /// 
+    /// > Note: Fast quality does not equate to low quality. Except in the special cases mentioned above, the quality should be comparable to high quality.
+    /// 
+    final public var physicsInterpolationQuality: MultiMesh.PhysicsInterpolationQuality {
+        get {
+            return get_physics_interpolation_quality ()
+        }
+        
+        set {
+            set_physics_interpolation_quality (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_set_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_mesh")
+    fileprivate static let method_set_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_mesh")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 194775623)!
@@ -161,6 +185,7 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_mesh(_ mesh: Mesh?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -174,8 +199,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_mesh")
+    fileprivate static let method_get_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_mesh")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1808005922)!
@@ -187,13 +212,14 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_mesh() -> Mesh? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(MultiMesh.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_use_colors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_colors")
+    fileprivate static let method_set_use_colors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_colors")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -205,6 +231,7 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_use_colors(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -218,8 +245,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_is_using_colors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_colors")
+    fileprivate static let method_is_using_colors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_colors")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -231,13 +258,14 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func is_using_colors() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MultiMesh.method_is_using_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_use_custom_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_use_custom_data")
+    fileprivate static let method_set_use_custom_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_use_custom_data")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -249,6 +277,7 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_use_custom_data(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -262,8 +291,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_is_using_custom_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_using_custom_data")
+    fileprivate static let method_is_using_custom_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_using_custom_data")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -275,13 +304,14 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func is_using_custom_data() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(MultiMesh.method_is_using_custom_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transform_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transform_format")
+    fileprivate static let method_set_transform_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transform_format")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2404750322)!
@@ -293,6 +323,7 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_transform_format(_ format: MultiMesh.TransformFormat) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -306,8 +337,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_transform_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transform_format")
+    fileprivate static let method_get_transform_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transform_format")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2444156481)!
@@ -319,13 +350,14 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_transform_format() -> MultiMesh.TransformFormat {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(MultiMesh.method_get_transform_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return MultiMesh.TransformFormat (rawValue: _result)!
     }
     
-    fileprivate static var method_set_instance_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_instance_count")
+    fileprivate static let method_set_instance_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_instance_count")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -337,6 +369,7 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_instance_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -350,8 +383,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_instance_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_count")
+    fileprivate static let method_get_instance_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_count")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -363,13 +396,14 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_instance_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_visible_instance_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_visible_instance_count")
+    fileprivate static let method_set_visible_instance_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_visible_instance_count")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -381,6 +415,7 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_visible_instance_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -394,8 +429,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_visible_instance_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_visible_instance_count")
+    fileprivate static let method_get_visible_instance_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_visible_instance_count")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -407,13 +442,60 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_visible_instance_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(MultiMesh.method_get_visible_instance_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_instance_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_instance_transform")
+    fileprivate static let method_set_physics_interpolation_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_interpolation_quality")
+        return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1819488408)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_physics_interpolation_quality(_ quality: MultiMesh.PhysicsInterpolationQuality) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: quality.rawValue) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_physics_interpolation_quality, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_physics_interpolation_quality: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_interpolation_quality")
+        return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1465701882)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func get_physics_interpolation_quality() -> MultiMesh.PhysicsInterpolationQuality {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_physics_interpolation_quality, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return MultiMesh.PhysicsInterpolationQuality (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_instance_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_instance_transform")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3616898986)!
@@ -425,6 +507,7 @@ open class MultiMesh: Resource {
     
     /// Sets the ``Transform3D`` for a specific instance.
     public final func setInstanceTransform(instance: Int32, transform: Transform3D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -441,8 +524,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_set_instance_transform_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_instance_transform_2d")
+    fileprivate static let method_set_instance_transform_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_instance_transform_2d")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 30160968)!
@@ -454,6 +537,7 @@ open class MultiMesh: Resource {
     
     /// Sets the ``Transform2D`` for a specific instance.
     public final func setInstanceTransform2d(instance: Int32, transform: Transform2D) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -470,8 +554,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_instance_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_transform")
+    fileprivate static let method_get_instance_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_transform")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965739696)!
@@ -483,6 +567,7 @@ open class MultiMesh: Resource {
     
     /// Returns the ``Transform3D`` of a specific instance.
     public final func getInstanceTransform(instance: Int32) -> Transform3D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -497,8 +582,8 @@ open class MultiMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_get_instance_transform_2d: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_transform_2d")
+    fileprivate static let method_get_instance_transform_2d: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_transform_2d")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3836996910)!
@@ -510,6 +595,7 @@ open class MultiMesh: Resource {
     
     /// Returns the ``Transform2D`` of a specific instance.
     public final func getInstanceTransform2d(instance: Int32) -> Transform2D {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -524,8 +610,8 @@ open class MultiMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_set_instance_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_instance_color")
+    fileprivate static let method_set_instance_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_instance_color")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -537,9 +623,12 @@ open class MultiMesh: Resource {
     
     /// Sets the color of a specific instance by _multiplying_ the mesh's existing vertex colors. This allows for different color tinting per instance.
     /// 
+    /// > Note: Each component is stored in 32 bits in the Forward+ and Mobile rendering methods, but is packed into 16 bits in the Compatibility rendering method.
+    /// 
     /// For the color to take effect, ensure that ``useColors`` is `true` on the ``MultiMesh`` and ``BaseMaterial3D/vertexColorUseAsAlbedo`` is `true` on the material. If you intend to set an absolute color instead of tinting, make sure the material's albedo color is set to pure white (`Color(1, 1, 1)`).
     /// 
     public final func setInstanceColor(instance: Int32, color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -556,8 +645,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_instance_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_color")
+    fileprivate static let method_get_instance_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_color")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -569,6 +658,7 @@ open class MultiMesh: Resource {
     
     /// Gets a specific instance's color multiplier.
     public final func getInstanceColor(instance: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -583,8 +673,8 @@ open class MultiMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_set_instance_custom_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_instance_custom_data")
+    fileprivate static let method_set_instance_custom_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_instance_custom_data")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -596,11 +686,14 @@ open class MultiMesh: Resource {
     
     /// Sets custom data for a specific instance. `customData` is a ``Color`` type only to contain 4 floating-point numbers.
     /// 
+    /// > Note: Each number is stored in 32 bits in the Forward+ and Mobile rendering methods, but is packed into 16 bits in the Compatibility rendering method.
+    /// 
     /// For the custom data to be used, ensure that ``useCustomData`` is `true`.
     /// 
     /// This custom instance data has to be manually accessed in your custom shader using `INSTANCE_CUSTOM`.
     /// 
     public final func setInstanceCustomData(instance: Int32, customData: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: customData) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -617,8 +710,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_instance_custom_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_instance_custom_data")
+    fileprivate static let method_get_instance_custom_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_instance_custom_data")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -630,6 +723,7 @@ open class MultiMesh: Resource {
     
     /// Returns the custom data that has been set for a specific instance.
     public final func getInstanceCustomData(instance: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -644,8 +738,38 @@ open class MultiMesh: Resource {
         return _result
     }
     
-    fileprivate static var method_set_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_custom_aabb")
+    fileprivate static let method_reset_instance_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset_instance_physics_interpolation")
+        return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
+            }
+            
+        }
+        
+    }()
+    
+    /// When using _physics interpolation_, this function allows you to prevent interpolation on an instance in the current physics tick.
+    /// 
+    /// This allows you to move instances instantaneously, and should usually be used when initially placing an instance such as a bullet to prevent graphical glitches.
+    /// 
+    public final func resetInstancePhysicsInterpolation(instance: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: instance) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(MultiMesh.method_reset_instance_physics_interpolation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_set_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_custom_aabb")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 259215842)!
@@ -657,6 +781,7 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_custom_aabb(_ aabb: AABB) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -670,8 +795,8 @@ open class MultiMesh: Resource {
         
     }
     
-    fileprivate static var method_get_custom_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_custom_aabb")
+    fileprivate static let method_get_custom_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_custom_aabb")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -683,13 +808,14 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_custom_aabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(MultiMesh.method_get_custom_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_aabb: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_aabb")
+    fileprivate static let method_get_aabb: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_aabb")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1068685055)!
@@ -701,13 +827,14 @@ open class MultiMesh: Resource {
     
     /// Returns the visibility axis-aligned bounding box in local space.
     public final func getAabb() -> AABB {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
         gi.object_method_bind_ptrcall(MultiMesh.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_buffer")
+    fileprivate static let method_get_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_buffer")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 675695659)!
@@ -719,13 +846,14 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func get_buffer() -> PackedFloat32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
         gi.object_method_bind_ptrcall(MultiMesh.method_get_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_set_buffer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_buffer")
+    fileprivate static let method_set_buffer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_buffer")
         return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2899603908)!
@@ -737,10 +865,46 @@ open class MultiMesh: Resource {
     
     @inline(__always)
     fileprivate final func set_buffer(_ buffer: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
                     gi.object_method_bind_ptrcall(MultiMesh.method_set_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_set_buffer_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_buffer_interpolated")
+        return withUnsafePointer(to: &MultiMesh.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3514430332)!
+            }
+            
+        }
+        
+    }()
+    
+    /// An alternative to setting the ``buffer`` property, which can be used with _physics interpolation_. This method takes two arrays, and can set the data for the current and previous tick in one go. The renderer will automatically interpolate the data at each frame.
+    /// 
+    /// This is useful for situations where the order of instances may change from physics tick to tick, such as particle systems.
+    /// 
+    /// When the order of instances is coherent, the simpler alternative of setting ``buffer`` can still be used with interpolation.
+    /// 
+    public final func setBufferInterpolated(bufferCurr: PackedFloat32Array, bufferPrev: PackedFloat32Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: bufferCurr.content) { pArg0 in
+            withUnsafePointer(to: bufferPrev.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(MultiMesh.method_set_buffer_interpolated, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
                 }
                 
             }

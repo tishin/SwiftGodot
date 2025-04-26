@@ -653,13 +653,13 @@ public enum Key: Int64, CaseIterable {
     case hyper = 4194371 // KEY_HYPER
     /// Help key.
     case help = 4194373 // KEY_HELP
-    /// Media back key. Not to be confused with the Back button on an Android device.
+    /// Back key.
     case back = 4194376 // KEY_BACK
-    /// Media forward key.
+    /// Forward key.
     case forward = 4194377 // KEY_FORWARD
     /// Media stop key.
     case stop = 4194378 // KEY_STOP
-    /// Media refresh key.
+    /// Refresh key.
     case refresh = 4194379 // KEY_REFRESH
     /// Volume down key.
     case volumedown = 4194380 // KEY_VOLUMEDOWN
@@ -735,35 +735,35 @@ public enum Key: Int64, CaseIterable {
     case unknown = 8388607 // KEY_UNKNOWN
     /// Space key.
     case space = 32 // KEY_SPACE
-    /// ! key.
+    /// Exclamation mark (`!`) key.
     case exclam = 33 // KEY_EXCLAM
-    /// " key.
+    /// Double quotation mark (`"`) key.
     case quotedbl = 34 // KEY_QUOTEDBL
-    /// # key.
+    /// Number sign or _hash_ (`#`) key.
     case numbersign = 35 // KEY_NUMBERSIGN
-    /// $ key.
+    /// Dollar sign (`$`) key.
     case dollar = 36 // KEY_DOLLAR
-    /// % key.
+    /// Percent sign (`%`) key.
     case percent = 37 // KEY_PERCENT
-    /// & key.
+    /// Ampersand (`&`) key.
     case ampersand = 38 // KEY_AMPERSAND
-    /// ' key.
+    /// Apostrophe (`'`) key.
     case apostrophe = 39 // KEY_APOSTROPHE
-    /// ( key.
+    /// Left parenthesis (`(`) key.
     case parenleft = 40 // KEY_PARENLEFT
-    /// ) key.
+    /// Right parenthesis (`)`) key.
     case parenright = 41 // KEY_PARENRIGHT
-    /// * key.
+    /// Asterisk (`*`) key.
     case asterisk = 42 // KEY_ASTERISK
-    /// + key.
+    /// Plus (`+`) key.
     case plus = 43 // KEY_PLUS
-    /// , key.
+    /// Comma (`,`) key.
     case comma = 44 // KEY_COMMA
-    /// - key.
+    /// Minus (`-`) key.
     case minus = 45 // KEY_MINUS
-    /// . key.
+    /// Period (`.`) key.
     case period = 46 // KEY_PERIOD
-    /// / key.
+    /// Slash (`/`) key.
     case slash = 47 // KEY_SLASH
     /// Number 0 key.
     case key0 = 48 // KEY_0
@@ -785,19 +785,19 @@ public enum Key: Int64, CaseIterable {
     case key8 = 56 // KEY_8
     /// Number 9 key.
     case key9 = 57 // KEY_9
-    /// : key.
+    /// Colon (`:`) key.
     case colon = 58 // KEY_COLON
-    /// ; key.
+    /// Semicolon (`;`) key.
     case semicolon = 59 // KEY_SEMICOLON
-    /// < key.
+    /// Less-than sign (`<`) key.
     case less = 60 // KEY_LESS
-    /// = key.
+    /// Equal sign (`=`) key.
     case equal = 61 // KEY_EQUAL
-    /// > key.
+    /// Greater-than sign (`>`) key.
     case greater = 62 // KEY_GREATER
-    /// ? key.
+    /// Question mark (`?`) key.
     case question = 63 // KEY_QUESTION
-    /// @ key.
+    /// At sign (`@`) key.
     case at = 64 // KEY_AT
     /// A key.
     case a = 65 // KEY_A
@@ -851,29 +851,29 @@ public enum Key: Int64, CaseIterable {
     case y = 89 // KEY_Y
     /// Z key.
     case z = 90 // KEY_Z
-    /// [ key.
+    /// Left bracket (`[lb]`) key.
     case bracketleft = 91 // KEY_BRACKETLEFT
-    /// \ key.
+    /// Backslash (`\`) key.
     case backslash = 92 // KEY_BACKSLASH
-    /// ] key.
+    /// Right bracket (`[rb]`) key.
     case bracketright = 93 // KEY_BRACKETRIGHT
-    /// ^ key.
+    /// Caret (`^`) key.
     case asciicircum = 94 // KEY_ASCIICIRCUM
-    /// _ key.
+    /// Underscore (`_`) key.
     case underscore = 95 // KEY_UNDERSCORE
-    /// ` key.
+    /// Backtick (```) key.
     case quoteleft = 96 // KEY_QUOTELEFT
-    /// { key.
+    /// Left brace (`{`) key.
     case braceleft = 123 // KEY_BRACELEFT
-    /// | key.
+    /// Vertical bar or _pipe_ (`|`) key.
     case bar = 124 // KEY_BAR
-    /// } key.
+    /// Right brace (`}`) key.
     case braceright = 125 // KEY_BRACERIGHT
-    /// ~ key.
+    /// Tilde (`~`) key.
     case asciitilde = 126 // KEY_ASCIITILDE
-    /// ¥ key.
+    /// Yen symbol (`¥`) key.
     case yen = 165 // KEY_YEN
-    /// § key.
+    /// Section sign (`§`) key.
     case section = 167 // KEY_SECTION
 }
 
@@ -886,7 +886,7 @@ public struct KeyModifierMask: OptionSet, CustomDebugStringConvertible {
     /// Key Code mask.
     public static let codeMask = KeyModifierMask (rawValue: 8388607)
     /// Modifier key mask.
-    public static let modifierMask = KeyModifierMask (rawValue: 532676608)
+    public static let modifierMask = KeyModifierMask (rawValue: 2130706432)
     /// Automatically remapped to ``Key/meta`` on macOS and ``Key/ctrl`` on other platforms, this mask is never set in the actual events, and should be used for key mapping only.
     public static let maskCmdOrCtrl = KeyModifierMask (rawValue: 16777216)
     /// Shift key mask.
@@ -1122,9 +1122,7 @@ public enum MIDIMessage: Int64, CaseIterable {
 public enum GodotError: Int64, CaseIterable, Error {
     /// Methods that return ``GodotError`` return ``GodotError/ok`` when no error occurred.
     /// 
-    /// Since ``GodotError/ok`` has value 0, and all other error constants are positive integers, it can also be used in boolean checks.
-    /// 
-    /// **Example:**
+    /// Since ``GodotError/ok`` has value `0`, and all other error constants are positive integers, it can also be used in boolean checks.
     /// 
     /// > Note: Many functions do not return an error code, but will print error messages to standard output.
     /// 
@@ -1300,9 +1298,9 @@ public enum PropertyHint: Int64, CaseIterable {
     case objectId = 22 // PROPERTY_HINT_OBJECT_ID
     /// If a property is ``String``, hints that the property represents a particular type (class). This allows to select a type from the create dialog. The property will store the selected type as a string.
     /// 
-    /// If a property is ``GArray``, hints the editor how to show elements. The `hint_string` must encode nested types using `":"` and `"/"`.
+    /// If a property is ``VariantArray``, hints the editor how to show elements. The `hint_string` must encode nested types using `":"` and `"/"`.
     /// 
-    /// Examples:
+    /// **Examples:**
     /// 
     /// > Note: The trailing colon is required for properly detecting built-in types.
     /// 
@@ -1321,8 +1319,10 @@ public enum PropertyHint: Int64, CaseIterable {
     case intIsObjectid = 29 // PROPERTY_HINT_INT_IS_OBJECTID
     /// Hints that an integer property is a pointer. Used by GDExtension.
     case intIsPointer = 30 // PROPERTY_HINT_INT_IS_POINTER
-    /// Hints that a property is an ``GArray`` with the stored type specified in the hint string.
+    /// Hints that a property is an ``VariantArray`` with the stored type specified in the hint string.
     case arrayType = 31 // PROPERTY_HINT_ARRAY_TYPE
+    /// Hints that a property is a ``VariantDictionary`` with the stored types specified in the hint string.
+    case dictionaryType = 38 // PROPERTY_HINT_DICTIONARY_TYPE
     /// Hints that a string property is a locale code. Editing it will show a locale dialog for picking language and country.
     case localeId = 32 // PROPERTY_HINT_LOCALE_ID
     /// Hints that a dictionary property is string translation map. Dictionary keys are locale codes and, values are translated strings.
@@ -1333,8 +1333,15 @@ public enum PropertyHint: Int64, CaseIterable {
     case hideQuaternionEdit = 35 // PROPERTY_HINT_HIDE_QUATERNION_EDIT
     /// Hints that a string property is a password, and every character is replaced with the secret character.
     case password = 36 // PROPERTY_HINT_PASSWORD
+    /// Hints that a ``Callable`` property should be displayed as a clickable button. When the button is pressed, the callable is called. The hint string specifies the button text and optionally an icon from the `"EditorIcons"` theme type.
+    /// 
+    /// > Note: A ``Callable`` cannot be properly serialized and stored in a file, so it is recommended to use ``PropertyUsageFlags/propertyUsageEditor`` instead of ``PropertyUsageFlags/propertyUsageDefault``.
+    /// 
+    case toolButton = 39 // PROPERTY_HINT_TOOL_BUTTON
+    /// Hints that a property will be changed on its own after setting, such as ``AudioStreamPlayer/playing`` or ``GPUParticles3D/emitting``.
+    case oneshot = 40 // PROPERTY_HINT_ONESHOT
     /// Represents the size of the ``PropertyHint`` enum.
-    case max = 38 // PROPERTY_HINT_MAX
+    case max = 42 // PROPERTY_HINT_MAX
 }
 
 public struct PropertyUsageFlags: OptionSet, CustomDebugStringConvertible {
@@ -1343,9 +1350,9 @@ public struct PropertyUsageFlags: OptionSet, CustomDebugStringConvertible {
         self.rawValue = rawValue
     }
     
-    /// The property is serialized and saved in the scene file (default).
+    /// The property is serialized and saved in the scene file (default for exported properties).
     public static let storage = PropertyUsageFlags (rawValue: 2)
-    /// The property is shown in the ``EditorInspector`` (default).
+    /// The property is shown in the ``EditorInspector`` (default for exported properties).
     public static let editor = PropertyUsageFlags (rawValue: 4)
     /// The property is excluded from the class reference.
     public static let `internal` = PropertyUsageFlags (rawValue: 8)
@@ -1365,7 +1372,7 @@ public struct PropertyUsageFlags: OptionSet, CustomDebugStringConvertible {
     public static let noInstanceState = PropertyUsageFlags (rawValue: 1024)
     /// Editing the property prompts the user for restarting the editor.
     public static let restartIfChanged = PropertyUsageFlags (rawValue: 2048)
-    /// The property is a script variable which should be serialized and saved in the scene file.
+    /// The property is a script variable. ``PropertyUsageFlags/propertyUsageScriptVariable`` can be used to distinguish between exported script variables from built-in variables (which don't have this usage flag). By default, ``PropertyUsageFlags/propertyUsageScriptVariable`` is **not** applied to variables that are created by overriding ``Object/_getPropertyList()`` in a script.
     public static let scriptVariable = PropertyUsageFlags (rawValue: 4096)
     /// The property value of type ``Object`` will be stored even if its value is `null`.
     public static let storeIfNull = PropertyUsageFlags (rawValue: 8192)
@@ -1373,7 +1380,7 @@ public struct PropertyUsageFlags: OptionSet, CustomDebugStringConvertible {
     public static let updateAllIfModified = PropertyUsageFlags (rawValue: 16384)
     /// 
     public static let scriptDefaultValue = PropertyUsageFlags (rawValue: 32768)
-    /// The property is an enum, i.e. it only takes named integer constants from its associated enumeration.
+    /// The property is a variable of enum type, i.e. it only takes named integer constants from its associated enumeration.
     public static let classIsEnum = PropertyUsageFlags (rawValue: 65536)
     /// If property has `nil` as default value, its type will be ``Variant``.
     public static let nilIsVariant = PropertyUsageFlags (rawValue: 131072)
@@ -1465,6 +1472,8 @@ public struct MethodFlags: OptionSet, CustomDebugStringConvertible {
     public static let `static` = MethodFlags (rawValue: 32)
     /// Used internally. Allows to not dump core virtual methods (such as ``Wrapper._notification(code:reverse)``) to the JSON API.
     public static let objectCore = MethodFlags (rawValue: 64)
+    /// Flag for a virtual method that is required.
+    public static let virtualRequired = MethodFlags (rawValue: 128)
     /// Default method flags (normal).
     public static let `default` = MethodFlags (rawValue: 1)
     /// A textual representation of this instance, suitable for debugging
@@ -1477,6 +1486,7 @@ public struct MethodFlags: OptionSet, CustomDebugStringConvertible {
         if self.contains (.vararg) { result += "vararg, " }
         if self.contains (.`static`) { result += "`static`, " }
         if self.contains (.objectCore) { result += "objectCore, " }
+        if self.contains (.virtualRequired) { result += "virtualRequired, " }
         if self.contains (.`default`) { result += "`default`, " }
         if result.hasSuffix (", ") { result.removeLast (2) }
         return result
@@ -1541,9 +1551,9 @@ extension Variant {
         case callable = 25 // TYPE_CALLABLE
         /// Variable is of type ``Signal``.
         case signal = 26 // TYPE_SIGNAL
-        /// Variable is of type ``GDictionary``.
+        /// Variable is of type ``VariantDictionary``.
         case dictionary = 27 // TYPE_DICTIONARY
-        /// Variable is of type ``GArray``.
+        /// Variable is of type ``VariantArray``.
         case array = 28 // TYPE_ARRAY
         /// Variable is of type ``PackedByteArray``.
         case packedByteArray = 29 // TYPE_PACKED_BYTE_ARRAY
@@ -1627,6 +1637,33 @@ extension Variant {
     
 }
 
+enum VariantGodotInterface {
+    static let variantFromBool: GDExtensionVariantFromTypeConstructorFunc = {
+        gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_BOOL)!
+    }()
+    
+    static let boolFromVariant: GDExtensionTypeFromVariantConstructorFunc = {
+        gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_BOOL)!
+    }()
+    
+    static let variantFromInt: GDExtensionVariantFromTypeConstructorFunc = {
+        gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_INT)!
+    }()
+    
+    static let intFromVariant: GDExtensionTypeFromVariantConstructorFunc = {
+        gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_INT)!
+    }()
+    
+    static let variantFromDouble: GDExtensionVariantFromTypeConstructorFunc = {
+        gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_FLOAT)!
+    }()
+    
+    static let doubleFromVariant: GDExtensionTypeFromVariantConstructorFunc = {
+        gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_FLOAT)!
+    }()
+    
+}
+
 var godotFrameworkCtors = [
     "AESContext": AESContext.self, //(nativeHandle:),
     "AStar2D": AStar2D.self, //(nativeHandle:),
@@ -1650,6 +1687,7 @@ var godotFrameworkCtors = [
     "AnimationNodeBlendSpace1D": AnimationNodeBlendSpace1D.self, //(nativeHandle:),
     "AnimationNodeBlendSpace2D": AnimationNodeBlendSpace2D.self, //(nativeHandle:),
     "AnimationNodeBlendTree": AnimationNodeBlendTree.self, //(nativeHandle:),
+    "AnimationNodeExtension": AnimationNodeExtension.self, //(nativeHandle:),
     "AnimationNodeOneShot": AnimationNodeOneShot.self, //(nativeHandle:),
     "AnimationNodeOutput": AnimationNodeOutput.self, //(nativeHandle:),
     "AnimationNodeStateMachine": AnimationNodeStateMachine.self, //(nativeHandle:),
@@ -1785,6 +1823,7 @@ var godotFrameworkCtors = [
     "CollisionPolygon3D": CollisionPolygon3D.self, //(nativeHandle:),
     "CollisionShape2D": CollisionShape2D.self, //(nativeHandle:),
     "CollisionShape3D": CollisionShape3D.self, //(nativeHandle:),
+    "ColorPalette": ColorPalette.self, //(nativeHandle:),
     "ColorPicker": ColorPicker.self, //(nativeHandle:),
     "ColorPickerButton": ColorPickerButton.self, //(nativeHandle:),
     "ColorRect": ColorRect.self, //(nativeHandle:),
@@ -1823,14 +1862,17 @@ var godotFrameworkCtors = [
     "DirectionalLight2D": DirectionalLight2D.self, //(nativeHandle:),
     "DirectionalLight3D": DirectionalLight3D.self, //(nativeHandle:),
     "DisplayServer": DisplayServer.self, //(nativeHandle:),
+    "DisplayServerEmbedded": DisplayServerEmbedded.self, //(nativeHandle:),
     "ENetConnection": ENetConnection.self, //(nativeHandle:),
     "ENetMultiplayerPeer": ENetMultiplayerPeer.self, //(nativeHandle:),
     "ENetPacketPeer": ENetPacketPeer.self, //(nativeHandle:),
     "EditorCommandPalette": EditorCommandPalette.self, //(nativeHandle:),
+    "EditorContextMenuPlugin": EditorContextMenuPlugin.self, //(nativeHandle:),
     "EditorDebuggerPlugin": EditorDebuggerPlugin.self, //(nativeHandle:),
     "EditorDebuggerSession": EditorDebuggerSession.self, //(nativeHandle:),
     "EditorExportPlatform": EditorExportPlatform.self, //(nativeHandle:),
     "EditorExportPlatformAndroid": EditorExportPlatformAndroid.self, //(nativeHandle:),
+    "EditorExportPlatformExtension": EditorExportPlatformExtension.self, //(nativeHandle:),
     "EditorExportPlatformIOS": EditorExportPlatformIOS.self, //(nativeHandle:),
     "EditorExportPlatformLinuxBSD": EditorExportPlatformLinuxBSD.self, //(nativeHandle:),
     "EditorExportPlatformMacOS": EditorExportPlatformMacOS.self, //(nativeHandle:),
@@ -1838,6 +1880,7 @@ var godotFrameworkCtors = [
     "EditorExportPlatformWeb": EditorExportPlatformWeb.self, //(nativeHandle:),
     "EditorExportPlatformWindows": EditorExportPlatformWindows.self, //(nativeHandle:),
     "EditorExportPlugin": EditorExportPlugin.self, //(nativeHandle:),
+    "EditorExportPreset": EditorExportPreset.self, //(nativeHandle:),
     "EditorFeatureProfile": EditorFeatureProfile.self, //(nativeHandle:),
     "EditorFileDialog": EditorFileDialog.self, //(nativeHandle:),
     "EditorFileSystem": EditorFileSystem.self, //(nativeHandle:),
@@ -1870,6 +1913,7 @@ var godotFrameworkCtors = [
     "EditorSettings": EditorSettings.self, //(nativeHandle:),
     "EditorSpinSlider": EditorSpinSlider.self, //(nativeHandle:),
     "EditorSyntaxHighlighter": EditorSyntaxHighlighter.self, //(nativeHandle:),
+    "EditorToaster": EditorToaster.self, //(nativeHandle:),
     "EditorTranslationParserPlugin": EditorTranslationParserPlugin.self, //(nativeHandle:),
     "EditorUndoRedoManager": EditorUndoRedoManager.self, //(nativeHandle:),
     "EditorVCSInterface": EditorVCSInterface.self, //(nativeHandle:),
@@ -1879,6 +1923,7 @@ var godotFrameworkCtors = [
     "EngineProfiler": EngineProfiler.self, //(nativeHandle:),
     "Environment": Environment.self, //(nativeHandle:),
     "Expression": Expression.self, //(nativeHandle:),
+    "ExternalTexture": ExternalTexture.self, //(nativeHandle:),
     "FBXDocument": FBXDocument.self, //(nativeHandle:),
     "FBXState": FBXState.self, //(nativeHandle:),
     "FastNoiseLite": FastNoiseLite.self, //(nativeHandle:),
@@ -1895,6 +1940,7 @@ var godotFrameworkCtors = [
     "GDExtension": GDExtension.self, //(nativeHandle:),
     "GDExtensionManager": GDExtensionManager.self, //(nativeHandle:),
     "GDScript": GDScript.self, //(nativeHandle:),
+    "GDScriptSyntaxHighlighter": GDScriptSyntaxHighlighter.self, //(nativeHandle:),
     "GLTFAccessor": GLTFAccessor.self, //(nativeHandle:),
     "GLTFAnimation": GLTFAnimation.self, //(nativeHandle:),
     "GLTFBufferView": GLTFBufferView.self, //(nativeHandle:),
@@ -1905,6 +1951,7 @@ var godotFrameworkCtors = [
     "GLTFLight": GLTFLight.self, //(nativeHandle:),
     "GLTFMesh": GLTFMesh.self, //(nativeHandle:),
     "GLTFNode": GLTFNode.self, //(nativeHandle:),
+    "GLTFObjectModelProperty": GLTFObjectModelProperty.self, //(nativeHandle:),
     "GLTFPhysicsBody": GLTFPhysicsBody.self, //(nativeHandle:),
     "GLTFPhysicsShape": GLTFPhysicsShape.self, //(nativeHandle:),
     "GLTFSkeleton": GLTFSkeleton.self, //(nativeHandle:),
@@ -1928,6 +1975,7 @@ var godotFrameworkCtors = [
     "Geometry2D": Geometry2D.self, //(nativeHandle:),
     "Geometry3D": Geometry3D.self, //(nativeHandle:),
     "GeometryInstance3D": GeometryInstance3D.self, //(nativeHandle:),
+    "GodotInstance": GodotInstance.self, //(nativeHandle:),
     "Gradient": Gradient.self, //(nativeHandle:),
     "GradientTexture1D": GradientTexture1D.self, //(nativeHandle:),
     "GradientTexture2D": GradientTexture2D.self, //(nativeHandle:),
@@ -1937,6 +1985,7 @@ var godotFrameworkCtors = [
     "GraphNode": GraphNode.self, //(nativeHandle:),
     "GridContainer": GridContainer.self, //(nativeHandle:),
     "GridMap": GridMap.self, //(nativeHandle:),
+    "GridMapEditorPlugin": GridMapEditorPlugin.self, //(nativeHandle:),
     "GrooveJoint2D": GrooveJoint2D.self, //(nativeHandle:),
     "HBoxContainer": HBoxContainer.self, //(nativeHandle:),
     "HFlowContainer": HFlowContainer.self, //(nativeHandle:),
@@ -1987,6 +2036,7 @@ var godotFrameworkCtors = [
     "JSONRPC": JSONRPC.self, //(nativeHandle:),
     "JavaClass": JavaClass.self, //(nativeHandle:),
     "JavaClassWrapper": JavaClassWrapper.self, //(nativeHandle:),
+    "JavaObject": JavaObject.self, //(nativeHandle:),
     "JavaScriptBridge": JavaScriptBridge.self, //(nativeHandle:),
     "JavaScriptObject": JavaScriptObject.self, //(nativeHandle:),
     "Joint2D": Joint2D.self, //(nativeHandle:),
@@ -2007,6 +2057,7 @@ var godotFrameworkCtors = [
     "Line2D": Line2D.self, //(nativeHandle:),
     "LineEdit": LineEdit.self, //(nativeHandle:),
     "LinkButton": LinkButton.self, //(nativeHandle:),
+    "LookAtModifier3D": LookAtModifier3D.self, //(nativeHandle:),
     "MainLoop": MainLoop.self, //(nativeHandle:),
     "MarginContainer": MarginContainer.self, //(nativeHandle:),
     "Marker2D": Marker2D.self, //(nativeHandle:),
@@ -2077,18 +2128,29 @@ var godotFrameworkCtors = [
     "OmniLight3D": OmniLight3D.self, //(nativeHandle:),
     "OpenXRAPIExtension": OpenXRAPIExtension.self, //(nativeHandle:),
     "OpenXRAction": OpenXRAction.self, //(nativeHandle:),
+    "OpenXRActionBindingModifier": OpenXRActionBindingModifier.self, //(nativeHandle:),
     "OpenXRActionMap": OpenXRActionMap.self, //(nativeHandle:),
     "OpenXRActionSet": OpenXRActionSet.self, //(nativeHandle:),
+    "OpenXRAnalogThresholdModifier": OpenXRAnalogThresholdModifier.self, //(nativeHandle:),
+    "OpenXRBindingModifier": OpenXRBindingModifier.self, //(nativeHandle:),
+    "OpenXRBindingModifierEditor": OpenXRBindingModifierEditor.self, //(nativeHandle:),
     "OpenXRCompositionLayer": OpenXRCompositionLayer.self, //(nativeHandle:),
     "OpenXRCompositionLayerCylinder": OpenXRCompositionLayerCylinder.self, //(nativeHandle:),
     "OpenXRCompositionLayerEquirect": OpenXRCompositionLayerEquirect.self, //(nativeHandle:),
     "OpenXRCompositionLayerQuad": OpenXRCompositionLayerQuad.self, //(nativeHandle:),
+    "OpenXRDpadBindingModifier": OpenXRDpadBindingModifier.self, //(nativeHandle:),
     "OpenXRExtensionWrapperExtension": OpenXRExtensionWrapperExtension.self, //(nativeHandle:),
     "OpenXRHand": OpenXRHand.self, //(nativeHandle:),
+    "OpenXRHapticBase": OpenXRHapticBase.self, //(nativeHandle:),
+    "OpenXRHapticVibration": OpenXRHapticVibration.self, //(nativeHandle:),
     "OpenXRIPBinding": OpenXRIPBinding.self, //(nativeHandle:),
+    "OpenXRIPBindingModifier": OpenXRIPBindingModifier.self, //(nativeHandle:),
     "OpenXRInteractionProfile": OpenXRInteractionProfile.self, //(nativeHandle:),
+    "OpenXRInteractionProfileEditor": OpenXRInteractionProfileEditor.self, //(nativeHandle:),
+    "OpenXRInteractionProfileEditorBase": OpenXRInteractionProfileEditorBase.self, //(nativeHandle:),
     "OpenXRInteractionProfileMetadata": OpenXRInteractionProfileMetadata.self, //(nativeHandle:),
     "OpenXRInterface": OpenXRInterface.self, //(nativeHandle:),
+    "OpenXRVisibilityMask": OpenXRVisibilityMask.self, //(nativeHandle:),
     "OptimizedTranslation": OptimizedTranslation.self, //(nativeHandle:),
     "OptionButton": OptionButton.self, //(nativeHandle:),
     "PCKPacker": PCKPacker.self, //(nativeHandle:),
@@ -2211,6 +2273,9 @@ var godotFrameworkCtors = [
     "RenderSceneDataExtension": RenderSceneDataExtension.self, //(nativeHandle:),
     "RenderSceneDataRD": RenderSceneDataRD.self, //(nativeHandle:),
     "RenderingDevice": RenderingDevice.self, //(nativeHandle:),
+    "RenderingNativeSurface": RenderingNativeSurface.self, //(nativeHandle:),
+    "RenderingNativeSurfaceApple": RenderingNativeSurfaceApple.self, //(nativeHandle:),
+    "RenderingNativeSurfaceVulkan": RenderingNativeSurfaceVulkan.self, //(nativeHandle:),
     "RenderingServer": RenderingServer.self, //(nativeHandle:),
     "Resource": Resource.self, //(nativeHandle:),
     "ResourceFormatLoader": ResourceFormatLoader.self, //(nativeHandle:),
@@ -2235,6 +2300,7 @@ var godotFrameworkCtors = [
     "ResourcePreloader": ResourcePreloader.self, //(nativeHandle:),
     "ResourceSaver": ResourceSaver.self, //(nativeHandle:),
     "ResourceUID": ResourceUID.self, //(nativeHandle:),
+    "RetargetModifier3D": RetargetModifier3D.self, //(nativeHandle:),
     "RibbonTrailMesh": RibbonTrailMesh.self, //(nativeHandle:),
     "RichTextEffect": RichTextEffect.self, //(nativeHandle:),
     "RichTextLabel": RichTextLabel.self, //(nativeHandle:),
@@ -2263,6 +2329,7 @@ var godotFrameworkCtors = [
     "Shader": Shader.self, //(nativeHandle:),
     "ShaderGlobalsOverride": ShaderGlobalsOverride.self, //(nativeHandle:),
     "ShaderInclude": ShaderInclude.self, //(nativeHandle:),
+    "ShaderIncludeDB": ShaderIncludeDB.self, //(nativeHandle:),
     "ShaderMaterial": ShaderMaterial.self, //(nativeHandle:),
     "Shape2D": Shape2D.self, //(nativeHandle:),
     "Shape3D": Shape3D.self, //(nativeHandle:),
@@ -2297,6 +2364,11 @@ var godotFrameworkCtors = [
     "SplitContainer": SplitContainer.self, //(nativeHandle:),
     "SpotLight3D": SpotLight3D.self, //(nativeHandle:),
     "SpringArm3D": SpringArm3D.self, //(nativeHandle:),
+    "SpringBoneCollision3D": SpringBoneCollision3D.self, //(nativeHandle:),
+    "SpringBoneCollisionCapsule3D": SpringBoneCollisionCapsule3D.self, //(nativeHandle:),
+    "SpringBoneCollisionPlane3D": SpringBoneCollisionPlane3D.self, //(nativeHandle:),
+    "SpringBoneCollisionSphere3D": SpringBoneCollisionSphere3D.self, //(nativeHandle:),
+    "SpringBoneSimulator3D": SpringBoneSimulator3D.self, //(nativeHandle:),
     "Sprite2D": Sprite2D.self, //(nativeHandle:),
     "Sprite3D": Sprite3D.self, //(nativeHandle:),
     "SpriteBase3D": SpriteBase3D.self, //(nativeHandle:),
@@ -2318,6 +2390,7 @@ var godotFrameworkCtors = [
     "StyleBoxTexture": StyleBoxTexture.self, //(nativeHandle:),
     "SubViewport": SubViewport.self, //(nativeHandle:),
     "SubViewportContainer": SubViewportContainer.self, //(nativeHandle:),
+    "SubtweenTweener": SubtweenTweener.self, //(nativeHandle:),
     "SurfaceTool": SurfaceTool.self, //(nativeHandle:),
     "SyntaxHighlighter": SyntaxHighlighter.self, //(nativeHandle:),
     "SystemFont": SystemFont.self, //(nativeHandle:),
@@ -2364,6 +2437,7 @@ var godotFrameworkCtors = [
     "TorusMesh": TorusMesh.self, //(nativeHandle:),
     "TouchScreenButton": TouchScreenButton.self, //(nativeHandle:),
     "Translation": Translation.self, //(nativeHandle:),
+    "TranslationDomain": TranslationDomain.self, //(nativeHandle:),
     "TranslationServer": TranslationServer.self, //(nativeHandle:),
     "Tree": Tree.self, //(nativeHandle:),
     "TreeItem": TreeItem.self, //(nativeHandle:),

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Stores information about joystick motions. One ``InputEventJoypadMotion`` represents one axis at a time. For gamepad buttons, see ``InputEventJoypadButton``.
 open class InputEventJoypadMotion: InputEvent {
-    fileprivate static var className = StringName("InputEventJoypadMotion")
+    private static var className = StringName("InputEventJoypadMotion")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -53,8 +53,8 @@ open class InputEventJoypadMotion: InputEvent {
     }
     
     /* Methods */
-    fileprivate static var method_set_axis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_axis")
+    fileprivate static let method_set_axis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_axis")
         return withUnsafePointer(to: &InputEventJoypadMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1332685170)!
@@ -66,6 +66,7 @@ open class InputEventJoypadMotion: InputEvent {
     
     @inline(__always)
     fileprivate final func set_axis(_ axis: JoyAxis) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: axis.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -79,8 +80,8 @@ open class InputEventJoypadMotion: InputEvent {
         
     }
     
-    fileprivate static var method_get_axis: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_axis")
+    fileprivate static let method_get_axis: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_axis")
         return withUnsafePointer(to: &InputEventJoypadMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4019121683)!
@@ -92,13 +93,14 @@ open class InputEventJoypadMotion: InputEvent {
     
     @inline(__always)
     fileprivate final func get_axis() -> JoyAxis {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_get_axis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return JoyAxis (rawValue: _result)!
     }
     
-    fileprivate static var method_set_axis_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_axis_value")
+    fileprivate static let method_set_axis_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_axis_value")
         return withUnsafePointer(to: &InputEventJoypadMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -110,6 +112,7 @@ open class InputEventJoypadMotion: InputEvent {
     
     @inline(__always)
     fileprivate final func set_axis_value(_ axisValue: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: axisValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -123,8 +126,8 @@ open class InputEventJoypadMotion: InputEvent {
         
     }
     
-    fileprivate static var method_get_axis_value: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_axis_value")
+    fileprivate static let method_get_axis_value: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_axis_value")
         return withUnsafePointer(to: &InputEventJoypadMotion.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -136,6 +139,7 @@ open class InputEventJoypadMotion: InputEvent {
     
     @inline(__always)
     fileprivate final func get_axis_value() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_get_axis_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

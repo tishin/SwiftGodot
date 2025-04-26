@@ -46,14 +46,14 @@ import Musl
 /// - ``avoidanceDebugChanged``
 open class NavigationServer3D: Object {
     /// The shared instance of this class
-    public static var shared: NavigationServer3D = {
-        return withUnsafePointer (to: &NavigationServer3D.godotClassName.content) { ptr in
-            NavigationServer3D (nativeHandle: gi.global_get_singleton (ptr)!)
+    public static var shared: NavigationServer3D {
+        return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { ptr in
+            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
-    }()
+    }
     
-    fileprivate static var className = StringName("NavigationServer3D")
+    private static var className = StringName("NavigationServer3D")
     override open class var godotClassName: StringName { className }
     public enum ProcessInfo: Int64, CaseIterable {
         /// Constant to get the number of active navigation maps.
@@ -74,11 +74,13 @@ open class NavigationServer3D: Object {
         case edgeConnectionCount = 7 // INFO_EDGE_CONNECTION_COUNT
         /// Constant to get the number of navigation mesh polygon edges that could not be merged but may be still connected by edge proximity or with links.
         case edgeFreeCount = 8 // INFO_EDGE_FREE_COUNT
+        /// Constant to get the number of active navigation obstacles.
+        case obstacleCount = 9 // INFO_OBSTACLE_COUNT
     }
     
     /* Methods */
-    fileprivate static var method_get_maps: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_maps")
+    fileprivate static let method_get_maps: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_maps")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -89,14 +91,14 @@ open class NavigationServer3D: Object {
     }()
     
     /// Returns all created navigation map ``RID``s on the NavigationServer. This returns both 2D and 3D created navigation maps as there is technically no distinction between them.
-    public static func getMaps() -> VariantCollection<RID> {
+    public static func getMaps() -> TypedArray<RID> {
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(method_get_maps, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_map_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_create")
+    fileprivate static let method_map_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_create")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -113,8 +115,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_active")
+    fileprivate static let method_map_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_active")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -142,8 +144,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_is_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_is_active")
+    fileprivate static let method_map_is_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_is_active")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -153,7 +155,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns true if the map is active.
+    /// Returns `true` if the map is active.
     public static func mapIsActive(map: RID) -> Bool {
         var _result: Bool = false
         withUnsafePointer(to: map.content) { pArg0 in
@@ -169,8 +171,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_up: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_up")
+    fileprivate static let method_map_set_up: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_up")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -198,8 +200,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_up: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_up")
+    fileprivate static let method_map_get_up: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_up")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -225,8 +227,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_cell_size")
+    fileprivate static let method_map_set_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_cell_size")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -254,8 +256,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_cell_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_cell_size")
+    fileprivate static let method_map_get_cell_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_cell_size")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -281,8 +283,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_cell_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_cell_height")
+    fileprivate static let method_map_set_cell_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_cell_height")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -310,8 +312,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_cell_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_cell_height")
+    fileprivate static let method_map_get_cell_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_cell_height")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -337,8 +339,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_merge_rasterizer_cell_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_merge_rasterizer_cell_scale")
+    fileprivate static let method_map_set_merge_rasterizer_cell_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_merge_rasterizer_cell_scale")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -366,8 +368,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_merge_rasterizer_cell_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_merge_rasterizer_cell_scale")
+    fileprivate static let method_map_get_merge_rasterizer_cell_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_merge_rasterizer_cell_scale")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -393,8 +395,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_use_edge_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_use_edge_connections")
+    fileprivate static let method_map_set_use_edge_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_use_edge_connections")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -422,8 +424,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_use_edge_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_use_edge_connections")
+    fileprivate static let method_map_get_use_edge_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_use_edge_connections")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -433,7 +435,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns true if the navigation `map` allows navigation regions to use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
+    /// Returns `true` if the navigation `map` allows navigation regions to use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
     public static func mapGetUseEdgeConnections(map: RID) -> Bool {
         var _result: Bool = false
         withUnsafePointer(to: map.content) { pArg0 in
@@ -449,8 +451,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_edge_connection_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_edge_connection_margin")
+    fileprivate static let method_map_set_edge_connection_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_edge_connection_margin")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -478,8 +480,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_edge_connection_margin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_edge_connection_margin")
+    fileprivate static let method_map_get_edge_connection_margin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_edge_connection_margin")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -505,8 +507,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_set_link_connection_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_set_link_connection_radius")
+    fileprivate static let method_map_set_link_connection_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_link_connection_radius")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -534,8 +536,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_link_connection_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_link_connection_radius")
+    fileprivate static let method_map_get_link_connection_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_link_connection_radius")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -561,11 +563,11 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_path")
+    fileprivate static let method_map_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_path")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 1187418690)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 276783190)!
             }
             
         }
@@ -600,8 +602,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_get_closest_point_to_segment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_closest_point_to_segment")
+    fileprivate static let method_map_get_closest_point_to_segment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_closest_point_to_segment")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3830095642)!
@@ -611,7 +613,10 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns the closest point between the navigation surface and the segment.
+    /// Returns the navigation mesh surface point closest to the provided `start` and `end` segment on the navigation `map`.
+    /// 
+    /// If `useCollision` is `true`, a closest point test is only done when the segment intersects with the navigation mesh surface.
+    /// 
     public static func mapGetClosestPointToSegment(map: RID, start: Vector3, end: Vector3, useCollision: Bool = false) -> Vector3 {
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: map.content) { pArg0 in
@@ -636,8 +641,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_get_closest_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_closest_point")
+    fileprivate static let method_map_get_closest_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_closest_point")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2056183332)!
@@ -647,7 +652,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns the point closest to the provided `toPoint` on the navigation mesh surface.
+    /// Returns the navigation mesh surface point closest to the provided `toPoint` on the navigation `map`.
     public static func mapGetClosestPoint(map: RID, toPoint: Vector3) -> Vector3 {
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: map.content) { pArg0 in
@@ -666,8 +671,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_get_closest_point_normal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_closest_point_normal")
+    fileprivate static let method_map_get_closest_point_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_closest_point_normal")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2056183332)!
@@ -677,7 +682,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns the normal for the point returned by ``mapGetClosestPoint(map:toPoint:)``.
+    /// Returns the navigation mesh surface normal closest to the provided `toPoint` on the navigation `map`.
     public static func mapGetClosestPointNormal(map: RID, toPoint: Vector3) -> Vector3 {
         var _result: Vector3 = Vector3 ()
         withUnsafePointer(to: map.content) { pArg0 in
@@ -696,8 +701,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_get_closest_point_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_closest_point_owner")
+    fileprivate static let method_map_get_closest_point_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_closest_point_owner")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 553364610)!
@@ -707,7 +712,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns the owner region RID for the point returned by ``mapGetClosestPoint(map:toPoint:)``.
+    /// Returns the owner region RID for the navigation mesh surface point closest to the provided `toPoint` on the navigation `map`.
     public static func mapGetClosestPointOwner(map: RID, toPoint: Vector3) -> RID {
         let _result: RID = RID ()
         withUnsafePointer(to: map.content) { pArg0 in
@@ -726,8 +731,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_get_links: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_links")
+    fileprivate static let method_map_get_links: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_links")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -738,7 +743,7 @@ open class NavigationServer3D: Object {
     }()
     
     /// Returns all navigation link ``RID``s that are currently assigned to the requested navigation `map`.
-    public static func mapGetLinks(map: RID) -> VariantCollection<RID> {
+    public static func mapGetLinks(map: RID) -> TypedArray<RID> {
         var _result: Int64 = 0
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -750,11 +755,11 @@ open class NavigationServer3D: Object {
             
         }
         
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_map_get_regions: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_regions")
+    fileprivate static let method_map_get_regions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_regions")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -765,7 +770,7 @@ open class NavigationServer3D: Object {
     }()
     
     /// Returns all navigation regions ``RID``s that are currently assigned to the requested navigation `map`.
-    public static func mapGetRegions(map: RID) -> VariantCollection<RID> {
+    public static func mapGetRegions(map: RID) -> TypedArray<RID> {
         var _result: Int64 = 0
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -777,11 +782,11 @@ open class NavigationServer3D: Object {
             
         }
         
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_map_get_agents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_agents")
+    fileprivate static let method_map_get_agents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_agents")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -792,7 +797,7 @@ open class NavigationServer3D: Object {
     }()
     
     /// Returns all navigation agents ``RID``s that are currently assigned to the requested navigation `map`.
-    public static func mapGetAgents(map: RID) -> VariantCollection<RID> {
+    public static func mapGetAgents(map: RID) -> TypedArray<RID> {
         var _result: Int64 = 0
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -804,11 +809,11 @@ open class NavigationServer3D: Object {
             
         }
         
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_map_get_obstacles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_obstacles")
+    fileprivate static let method_map_get_obstacles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_obstacles")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2684255073)!
@@ -819,7 +824,7 @@ open class NavigationServer3D: Object {
     }()
     
     /// Returns all navigation obstacle ``RID``s that are currently assigned to the requested navigation `map`.
-    public static func mapGetObstacles(map: RID) -> VariantCollection<RID> {
+    public static func mapGetObstacles(map: RID) -> TypedArray<RID> {
         var _result: Int64 = 0
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -831,11 +836,11 @@ open class NavigationServer3D: Object {
             
         }
         
-        return VariantCollection<RID>(content: _result)
+        return TypedArray<RID>(takingOver: _result)
     }
     
-    fileprivate static var method_map_force_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_force_update")
+    fileprivate static let method_map_force_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_force_update")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -867,8 +872,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_map_get_iteration_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_iteration_id")
+    fileprivate static let method_map_get_iteration_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_iteration_id")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -897,8 +902,64 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_map_get_random_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("map_get_random_point")
+    fileprivate static let method_map_set_use_async_iterations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_set_use_async_iterations")
+        return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
+            }
+            
+        }
+        
+    }()
+    
+    /// If `enabled` is `true` the `map` synchronization uses an async process that runs on a background thread.
+    public static func mapSetUseAsyncIterations(map: RID, enabled: Bool) {
+        withUnsafePointer(to: map.content) { pArg0 in
+            withUnsafePointer(to: enabled) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_map_set_use_async_iterations, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_map_get_use_async_iterations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_use_async_iterations")
+        return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns `true` if the `map` synchronization uses an async process that runs on a background thread.
+    public static func mapGetUseAsyncIterations(map: RID) -> Bool {
+        var _result: Bool = false
+        withUnsafePointer(to: map.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_map_get_use_async_iterations, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_map_get_random_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("map_get_random_point")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 722801526)!
@@ -935,24 +996,27 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_query_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("query_path")
+    fileprivate static let method_query_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("query_path")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 3415008901)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2146930868)!
             }
             
         }
         
     }()
     
-    /// Queries a path in a given navigation map. Start and target position and other parameters are defined through ``NavigationPathQueryParameters3D``. Updates the provided ``NavigationPathQueryResult3D`` result object with the path among other results requested by the query.
-    public static func queryPath(parameters: NavigationPathQueryParameters3D?, result: NavigationPathQueryResult3D?) {
+    /// Queries a path in a given navigation map. Start and target position and other parameters are defined through ``NavigationPathQueryParameters3D``. Updates the provided ``NavigationPathQueryResult3D`` result object with the path among other results requested by the query. After the process is finished the optional `callback` will be called.
+    public static func queryPath(parameters: NavigationPathQueryParameters3D?, result: NavigationPathQueryResult3D?, callback: Callable = Callable()) {
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: result?.handle) { pArg1 in
-                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
-                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_query_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                withUnsafePointer(to: callback.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(method_query_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        }
+                        
                     }
                     
                 }
@@ -964,8 +1028,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_create")
+    fileprivate static let method_region_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_create")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -982,8 +1046,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_enabled")
+    fileprivate static let method_region_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1011,8 +1075,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_enabled")
+    fileprivate static let method_region_get_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1038,8 +1102,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_use_edge_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_use_edge_connections")
+    fileprivate static let method_region_set_use_edge_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_use_edge_connections")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1067,8 +1131,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_use_edge_connections: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_use_edge_connections")
+    fileprivate static let method_region_get_use_edge_connections: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_use_edge_connections")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1078,7 +1142,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns true if the navigation `region` is set to use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
+    /// Returns `true` if the navigation `region` is set to use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
     public static func regionGetUseEdgeConnections(region: RID) -> Bool {
         var _result: Bool = false
         withUnsafePointer(to: region.content) { pArg0 in
@@ -1094,8 +1158,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_enter_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_enter_cost")
+    fileprivate static let method_region_set_enter_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_enter_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -1123,8 +1187,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_enter_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_enter_cost")
+    fileprivate static let method_region_get_enter_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_enter_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -1150,8 +1214,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_travel_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_travel_cost")
+    fileprivate static let method_region_set_travel_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_travel_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -1179,8 +1243,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_travel_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_travel_cost")
+    fileprivate static let method_region_get_travel_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_travel_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -1206,8 +1270,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_owner_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_owner_id")
+    fileprivate static let method_region_set_owner_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_owner_id")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1235,8 +1299,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_owner_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_owner_id")
+    fileprivate static let method_region_get_owner_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_owner_id")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1262,8 +1326,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_owns_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_owns_point")
+    fileprivate static let method_region_owns_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_owns_point")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2360011153)!
@@ -1297,8 +1361,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_map")
+    fileprivate static let method_region_set_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -1326,8 +1390,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_map")
+    fileprivate static let method_region_get_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -1353,8 +1417,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_navigation_layers")
+    fileprivate static let method_region_set_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_navigation_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1382,8 +1446,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_navigation_layers")
+    fileprivate static let method_region_get_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_navigation_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1409,8 +1473,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_transform")
+    fileprivate static let method_region_set_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_transform")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3935195649)!
@@ -1438,8 +1502,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_transform: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_transform")
+    fileprivate static let method_region_get_transform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_transform")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1128465797)!
@@ -1465,8 +1529,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_set_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_set_navigation_mesh")
+    fileprivate static let method_region_set_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_set_navigation_mesh")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2764952978)!
@@ -1494,8 +1558,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_bake_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_bake_navigation_mesh")
+    fileprivate static let method_region_bake_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_bake_navigation_mesh")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1401173477)!
@@ -1523,8 +1587,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_region_get_connections_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_connections_count")
+    fileprivate static let method_region_get_connections_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_connections_count")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1550,8 +1614,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_get_connection_pathway_start: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_connection_pathway_start")
+    fileprivate static let method_region_get_connection_pathway_start: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_connection_pathway_start")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3440143363)!
@@ -1580,8 +1644,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_get_connection_pathway_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_connection_pathway_end")
+    fileprivate static let method_region_get_connection_pathway_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_connection_pathway_end")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3440143363)!
@@ -1610,8 +1674,107 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_region_get_random_point: GDExtensionMethodBindPtr = {
-        let methodName = StringName("region_get_random_point")
+    fileprivate static let method_region_get_closest_point_to_segment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_closest_point_to_segment")
+        return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3830095642)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the navigation mesh surface point closest to the provided `start` and `end` segment on the navigation `region`.
+    /// 
+    /// If `useCollision` is `true`, a closest point test is only done when the segment intersects with the navigation mesh surface.
+    /// 
+    public static func regionGetClosestPointToSegment(region: RID, start: Vector3, end: Vector3, useCollision: Bool = false) -> Vector3 {
+        var _result: Vector3 = Vector3 ()
+        withUnsafePointer(to: region.content) { pArg0 in
+            withUnsafePointer(to: start) { pArg1 in
+                withUnsafePointer(to: end) { pArg2 in
+                    withUnsafePointer(to: useCollision) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(method_region_get_closest_point_to_segment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_region_get_closest_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_closest_point")
+        return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2056183332)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the navigation mesh surface point closest to the provided `toPoint` on the navigation `region`.
+    public static func regionGetClosestPoint(region: RID, toPoint: Vector3) -> Vector3 {
+        var _result: Vector3 = Vector3 ()
+        withUnsafePointer(to: region.content) { pArg0 in
+            withUnsafePointer(to: toPoint) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_region_get_closest_point, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_region_get_closest_point_normal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_closest_point_normal")
+        return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2056183332)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the navigation mesh surface normal closest to the provided `toPoint` on the navigation `region`.
+    public static func regionGetClosestPointNormal(region: RID, toPoint: Vector3) -> Vector3 {
+        var _result: Vector3 = Vector3 ()
+        withUnsafePointer(to: region.content) { pArg0 in
+            withUnsafePointer(to: toPoint) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(method_region_get_closest_point_normal, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_region_get_random_point: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_random_point")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 722801526)!
@@ -1648,8 +1811,35 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_create")
+    fileprivate static let method_region_get_bounds: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("region_get_bounds")
+        return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 974181306)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the axis-aligned bounding box for the `region`'s transformed navigation mesh.
+    public static func regionGetBounds(region: RID) -> AABB {
+        var _result: AABB = AABB ()
+        withUnsafePointer(to: region.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(method_region_get_bounds, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
+    }
+    
+    fileprivate static let method_link_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_create")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -1666,8 +1856,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_map")
+    fileprivate static let method_link_set_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -1695,8 +1885,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_map")
+    fileprivate static let method_link_get_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -1722,8 +1912,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_enabled")
+    fileprivate static let method_link_set_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1751,8 +1941,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_enabled")
+    fileprivate static let method_link_get_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1778,8 +1968,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_bidirectional: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_bidirectional")
+    fileprivate static let method_link_set_bidirectional: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_bidirectional")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -1807,8 +1997,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_is_bidirectional: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_is_bidirectional")
+    fileprivate static let method_link_is_bidirectional: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_is_bidirectional")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -1834,8 +2024,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_navigation_layers")
+    fileprivate static let method_link_set_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_navigation_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -1863,8 +2053,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_navigation_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_navigation_layers")
+    fileprivate static let method_link_get_navigation_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_navigation_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -1890,8 +2080,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_start_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_start_position")
+    fileprivate static let method_link_set_start_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_start_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -1919,8 +2109,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_start_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_start_position")
+    fileprivate static let method_link_get_start_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_start_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -1946,8 +2136,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_end_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_end_position")
+    fileprivate static let method_link_set_end_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_end_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -1975,8 +2165,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_end_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_end_position")
+    fileprivate static let method_link_get_end_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_end_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -2002,8 +2192,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_enter_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_enter_cost")
+    fileprivate static let method_link_set_enter_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_enter_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2031,8 +2221,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_enter_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_enter_cost")
+    fileprivate static let method_link_get_enter_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_enter_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2058,8 +2248,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_travel_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_travel_cost")
+    fileprivate static let method_link_set_travel_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_travel_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2087,8 +2277,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_travel_cost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_travel_cost")
+    fileprivate static let method_link_get_travel_cost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_travel_cost")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2114,8 +2304,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_link_set_owner_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_set_owner_id")
+    fileprivate static let method_link_set_owner_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_set_owner_id")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -2143,8 +2333,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_link_get_owner_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("link_get_owner_id")
+    fileprivate static let method_link_get_owner_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("link_get_owner_id")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -2170,8 +2360,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_create")
+    fileprivate static let method_agent_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_create")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -2188,8 +2378,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_avoidance_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_avoidance_enabled")
+    fileprivate static let method_agent_set_avoidance_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_avoidance_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -2217,8 +2407,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_avoidance_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_avoidance_enabled")
+    fileprivate static let method_agent_get_avoidance_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_avoidance_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -2244,8 +2434,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_use_3d_avoidance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_use_3d_avoidance")
+    fileprivate static let method_agent_set_use_3d_avoidance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_use_3d_avoidance")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -2278,8 +2468,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_use_3d_avoidance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_use_3d_avoidance")
+    fileprivate static let method_agent_get_use_3d_avoidance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_use_3d_avoidance")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -2305,8 +2495,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_map")
+    fileprivate static let method_agent_set_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -2334,8 +2524,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_map")
+    fileprivate static let method_agent_get_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -2361,8 +2551,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_paused")
+    fileprivate static let method_agent_set_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_paused")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -2372,7 +2562,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// If `paused` is true the specified `agent` will not be processed, e.g. calculate avoidance velocities or receive avoidance callbacks.
+    /// If `paused` is `true` the specified `agent` will not be processed, e.g. calculate avoidance velocities or receive avoidance callbacks.
     public static func agentSetPaused(agent: RID, paused: Bool) {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: paused) { pArg1 in
@@ -2390,8 +2580,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_paused")
+    fileprivate static let method_agent_get_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_paused")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -2417,8 +2607,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_neighbor_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_neighbor_distance")
+    fileprivate static let method_agent_set_neighbor_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_neighbor_distance")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2446,8 +2636,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_neighbor_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_neighbor_distance")
+    fileprivate static let method_agent_get_neighbor_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_neighbor_distance")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2473,8 +2663,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_max_neighbors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_max_neighbors")
+    fileprivate static let method_agent_set_max_neighbors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_max_neighbors")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -2502,8 +2692,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_max_neighbors: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_max_neighbors")
+    fileprivate static let method_agent_get_max_neighbors: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_max_neighbors")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -2529,8 +2719,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_time_horizon_agents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_time_horizon_agents")
+    fileprivate static let method_agent_set_time_horizon_agents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_time_horizon_agents")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2558,8 +2748,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_time_horizon_agents: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_time_horizon_agents")
+    fileprivate static let method_agent_get_time_horizon_agents: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_time_horizon_agents")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2585,8 +2775,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_time_horizon_obstacles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_time_horizon_obstacles")
+    fileprivate static let method_agent_set_time_horizon_obstacles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_time_horizon_obstacles")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2614,8 +2804,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_time_horizon_obstacles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_time_horizon_obstacles")
+    fileprivate static let method_agent_get_time_horizon_obstacles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_time_horizon_obstacles")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2641,8 +2831,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_radius")
+    fileprivate static let method_agent_set_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_radius")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2670,8 +2860,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_radius")
+    fileprivate static let method_agent_get_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_radius")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2697,8 +2887,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_height")
+    fileprivate static let method_agent_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_height")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2726,8 +2916,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_height")
+    fileprivate static let method_agent_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_height")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2753,8 +2943,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_max_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_max_speed")
+    fileprivate static let method_agent_set_max_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_max_speed")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -2782,8 +2972,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_max_speed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_max_speed")
+    fileprivate static let method_agent_get_max_speed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_max_speed")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -2809,8 +2999,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_velocity_forced: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_velocity_forced")
+    fileprivate static let method_agent_set_velocity_forced: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_velocity_forced")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2838,8 +3028,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_set_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_velocity")
+    fileprivate static let method_agent_set_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_velocity")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2867,8 +3057,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_velocity")
+    fileprivate static let method_agent_get_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_velocity")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -2894,8 +3084,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_position")
+    fileprivate static let method_agent_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -2923,8 +3113,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_position")
+    fileprivate static let method_agent_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -2950,8 +3140,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_is_map_changed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_is_map_changed")
+    fileprivate static let method_agent_is_map_changed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_is_map_changed")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -2961,7 +3151,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// Returns true if the map got changed the previous frame.
+    /// Returns `true` if the map got changed the previous frame.
     public static func agentIsMapChanged(agent: RID) -> Bool {
         var _result: Bool = false
         withUnsafePointer(to: agent.content) { pArg0 in
@@ -2977,8 +3167,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_avoidance_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_avoidance_callback")
+    fileprivate static let method_agent_set_avoidance_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_avoidance_callback")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3379118538)!
@@ -3009,8 +3199,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_has_avoidance_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_has_avoidance_callback")
+    fileprivate static let method_agent_has_avoidance_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_has_avoidance_callback")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -3036,8 +3226,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_avoidance_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_avoidance_layers")
+    fileprivate static let method_agent_set_avoidance_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_avoidance_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3065,8 +3255,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_avoidance_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_avoidance_layers")
+    fileprivate static let method_agent_get_avoidance_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_avoidance_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3092,8 +3282,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_avoidance_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_avoidance_mask")
+    fileprivate static let method_agent_set_avoidance_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_avoidance_mask")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3121,8 +3311,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_avoidance_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_avoidance_mask")
+    fileprivate static let method_agent_get_avoidance_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_avoidance_mask")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3148,8 +3338,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_agent_set_avoidance_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_set_avoidance_priority")
+    fileprivate static let method_agent_set_avoidance_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_set_avoidance_priority")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -3180,8 +3370,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_agent_get_avoidance_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("agent_get_avoidance_priority")
+    fileprivate static let method_agent_get_avoidance_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("agent_get_avoidance_priority")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -3207,8 +3397,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_create")
+    fileprivate static let method_obstacle_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_create")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -3225,8 +3415,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_avoidance_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_avoidance_enabled")
+    fileprivate static let method_obstacle_set_avoidance_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_avoidance_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -3254,8 +3444,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_avoidance_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_avoidance_enabled")
+    fileprivate static let method_obstacle_get_avoidance_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_avoidance_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -3281,8 +3471,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_use_3d_avoidance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_use_3d_avoidance")
+    fileprivate static let method_obstacle_set_use_3d_avoidance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_use_3d_avoidance")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -3310,8 +3500,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_use_3d_avoidance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_use_3d_avoidance")
+    fileprivate static let method_obstacle_get_use_3d_avoidance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_use_3d_avoidance")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -3337,8 +3527,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_map")
+    fileprivate static let method_obstacle_set_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 395945892)!
@@ -3366,8 +3556,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_map: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_map")
+    fileprivate static let method_obstacle_get_map: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_map")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3814569979)!
@@ -3393,8 +3583,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_paused")
+    fileprivate static let method_obstacle_set_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_paused")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1265174801)!
@@ -3404,7 +3594,7 @@ open class NavigationServer3D: Object {
         
     }()
     
-    /// If `paused` is true the specified `obstacle` will not be processed, e.g. affect avoidance velocities.
+    /// If `paused` is `true` the specified `obstacle` will not be processed, e.g. affect avoidance velocities.
     public static func obstacleSetPaused(obstacle: RID, paused: Bool) {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: paused) { pArg1 in
@@ -3422,8 +3612,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_paused: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_paused")
+    fileprivate static let method_obstacle_get_paused: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_paused")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4155700596)!
@@ -3449,8 +3639,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_radius")
+    fileprivate static let method_obstacle_set_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_radius")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -3478,8 +3668,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_radius: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_radius")
+    fileprivate static let method_obstacle_get_radius: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_radius")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -3505,8 +3695,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_height")
+    fileprivate static let method_obstacle_set_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_height")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794382983)!
@@ -3534,8 +3724,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_height")
+    fileprivate static let method_obstacle_get_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_height")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 866169185)!
@@ -3561,8 +3751,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_velocity")
+    fileprivate static let method_obstacle_set_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_velocity")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -3590,8 +3780,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_velocity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_velocity")
+    fileprivate static let method_obstacle_get_velocity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_velocity")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -3617,8 +3807,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_position")
+    fileprivate static let method_obstacle_set_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3227306858)!
@@ -3646,8 +3836,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_position")
+    fileprivate static let method_obstacle_get_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_position")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 531438156)!
@@ -3673,8 +3863,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_vertices")
+    fileprivate static let method_obstacle_set_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_vertices")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4030257846)!
@@ -3702,8 +3892,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_vertices: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_vertices")
+    fileprivate static let method_obstacle_get_vertices: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_vertices")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 808965560)!
@@ -3729,8 +3919,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_obstacle_set_avoidance_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_set_avoidance_layers")
+    fileprivate static let method_obstacle_set_avoidance_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_set_avoidance_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3411492887)!
@@ -3758,8 +3948,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_obstacle_get_avoidance_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("obstacle_get_avoidance_layers")
+    fileprivate static let method_obstacle_get_avoidance_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("obstacle_get_avoidance_layers")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2198884583)!
@@ -3785,11 +3975,11 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_parse_source_geometry_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("parse_source_geometry_data")
+    fileprivate static let method_parse_source_geometry_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("parse_source_geometry_data")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 685862123)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3172802542)!
             }
             
         }
@@ -3825,11 +4015,11 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_bake_from_source_geometry_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bake_from_source_geometry_data")
+    fileprivate static let method_bake_from_source_geometry_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake_from_source_geometry_data")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2469318639)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286748856)!
             }
             
         }
@@ -3857,11 +4047,11 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_bake_from_source_geometry_data_async: GDExtensionMethodBindPtr = {
-        let methodName = StringName("bake_from_source_geometry_data_async")
+    fileprivate static let method_bake_from_source_geometry_data_async: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("bake_from_source_geometry_data_async")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
-                gi.classdb_get_method_bind(classPtr, mnamePtr, 2469318639)!
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1286748856)!
             }
             
         }
@@ -3889,8 +4079,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_is_baking_navigation_mesh: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_baking_navigation_mesh")
+    fileprivate static let method_is_baking_navigation_mesh: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_baking_navigation_mesh")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3142026141)!
@@ -3916,8 +4106,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_source_geometry_parser_create: GDExtensionMethodBindPtr = {
-        let methodName = StringName("source_geometry_parser_create")
+    fileprivate static let method_source_geometry_parser_create: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("source_geometry_parser_create")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 529393457)!
@@ -3934,8 +4124,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_source_geometry_parser_set_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("source_geometry_parser_set_callback")
+    fileprivate static let method_source_geometry_parser_set_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("source_geometry_parser_set_callback")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3379118538)!
@@ -3970,8 +4160,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_simplify_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("simplify_path")
+    fileprivate static let method_simplify_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("simplify_path")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2344122170)!
@@ -4003,8 +4193,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_free_rid: GDExtensionMethodBindPtr = {
-        let methodName = StringName("free_rid")
+    fileprivate static let method_free_rid: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("free_rid")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2722037293)!
@@ -4029,8 +4219,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_set_active: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_active")
+    fileprivate static let method_set_active: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_active")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4055,8 +4245,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_set_debug_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_debug_enabled")
+    fileprivate static let method_set_debug_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_debug_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4081,8 +4271,8 @@ open class NavigationServer3D: Object {
         
     }
     
-    fileprivate static var method_get_debug_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_debug_enabled")
+    fileprivate static let method_get_debug_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_debug_enabled")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4099,8 +4289,8 @@ open class NavigationServer3D: Object {
         return _result
     }
     
-    fileprivate static var method_get_process_info: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_info")
+    fileprivate static let method_get_process_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_info")
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1938440894)!

@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Editor facility that helps you draw a 2D polygon used as resource for ``LightOccluder2D``.
 open class OccluderPolygon2D: Resource {
-    fileprivate static var className = StringName("OccluderPolygon2D")
+    private static var className = StringName("OccluderPolygon2D")
     override open class var godotClassName: StringName { className }
     public enum CullMode: Int64, CaseIterable {
         /// Culling is disabled. See ``cullMode``.
@@ -74,8 +74,8 @@ open class OccluderPolygon2D: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_closed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_closed")
+    fileprivate static let method_set_closed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_closed")
         return withUnsafePointer(to: &OccluderPolygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -87,6 +87,7 @@ open class OccluderPolygon2D: Resource {
     
     @inline(__always)
     fileprivate final func set_closed(_ closed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: closed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -100,8 +101,8 @@ open class OccluderPolygon2D: Resource {
         
     }
     
-    fileprivate static var method_is_closed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_closed")
+    fileprivate static let method_is_closed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_closed")
         return withUnsafePointer(to: &OccluderPolygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -113,13 +114,14 @@ open class OccluderPolygon2D: Resource {
     
     @inline(__always)
     fileprivate final func is_closed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(OccluderPolygon2D.method_is_closed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_cull_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mode")
+    fileprivate static let method_set_cull_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mode")
         return withUnsafePointer(to: &OccluderPolygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3500863002)!
@@ -131,6 +133,7 @@ open class OccluderPolygon2D: Resource {
     
     @inline(__always)
     fileprivate final func set_cull_mode(_ cullMode: OccluderPolygon2D.CullMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cullMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -144,8 +147,8 @@ open class OccluderPolygon2D: Resource {
         
     }
     
-    fileprivate static var method_get_cull_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mode")
+    fileprivate static let method_get_cull_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mode")
         return withUnsafePointer(to: &OccluderPolygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 33931036)!
@@ -157,13 +160,14 @@ open class OccluderPolygon2D: Resource {
     
     @inline(__always)
     fileprivate final func get_cull_mode() -> OccluderPolygon2D.CullMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(OccluderPolygon2D.method_get_cull_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return OccluderPolygon2D.CullMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_polygon")
+    fileprivate static let method_set_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_polygon")
         return withUnsafePointer(to: &OccluderPolygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1509147220)!
@@ -175,6 +179,7 @@ open class OccluderPolygon2D: Resource {
     
     @inline(__always)
     fileprivate final func set_polygon(_ polygon: PackedVector2Array) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -188,8 +193,8 @@ open class OccluderPolygon2D: Resource {
         
     }
     
-    fileprivate static var method_get_polygon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_polygon")
+    fileprivate static let method_get_polygon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_polygon")
         return withUnsafePointer(to: &OccluderPolygon2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2961356807)!
@@ -201,6 +206,7 @@ open class OccluderPolygon2D: Resource {
     
     @inline(__always)
     fileprivate final func get_polygon() -> PackedVector2Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
         gi.object_method_bind_ptrcall(OccluderPolygon2D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result

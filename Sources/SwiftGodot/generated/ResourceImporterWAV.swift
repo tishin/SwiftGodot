@@ -21,9 +21,12 @@ import Musl
 
 /// Imports a WAV audio file for playback.
 /// 
-/// WAV is an uncompressed format, which can provide higher quality compared to Ogg Vorbis and MP3. It also has the lowest CPU cost to decode. This means high numbers of WAV sounds can be played at the same time, even on low-end deviceS.
+/// WAV is an uncompressed format, which can provide higher quality compared to Ogg Vorbis and MP3. It also has the lowest CPU cost to decode. This means high numbers of WAV sounds can be played at the same time, even on low-end devices.
+/// 
+/// By default, Godot imports WAV files using the lossy Quite OK Audio compression. You may change this by setting the ``compress/mode`` property.
+/// 
 open class ResourceImporterWAV: ResourceImporter {
-    fileprivate static var className = StringName("ResourceImporterWAV")
+    private static var className = StringName("ResourceImporterWAV")
     override open class var godotClassName: StringName { className }
 }
 

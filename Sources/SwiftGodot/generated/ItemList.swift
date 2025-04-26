@@ -41,7 +41,7 @@ import Musl
 /// - ``multiSelected``
 /// - ``itemActivated``
 open class ItemList: Control {
-    fileprivate static var className = StringName("ItemList")
+    private static var className = StringName("ItemList")
     override open class var godotClassName: StringName { className }
     public enum IconMode: Int64, CaseIterable {
         /// Icon is drawn above the text.
@@ -55,6 +55,8 @@ open class ItemList: Control {
         case single = 0 // SELECT_SINGLE
         /// Allows selecting multiple items by holding [kbd]Ctrl[/kbd] or [kbd]Shift[/kbd].
         case multi = 1 // SELECT_MULTI
+        /// Allows selecting multiple items by toggling them on and off.
+        case toggle = 2 // SELECT_TOGGLE
     }
     
     
@@ -123,6 +125,18 @@ open class ItemList: Control {
         
     }
     
+    /// If `true`, the control will automatically resize the width to fit its content.
+    final public var autoWidth: Bool {
+        get {
+            return has_auto_width ()
+        }
+        
+        set {
+            set_auto_width (newValue)
+        }
+        
+    }
+    
     /// If `true`, the control will automatically resize the height to fit its content.
     final public var autoHeight: Bool {
         get {
@@ -143,6 +157,21 @@ open class ItemList: Control {
         
         set {
             set_text_overrun_behavior (newValue)
+        }
+        
+    }
+    
+    /// If `true`, the control will automatically move items into a new row to fit its content. See also ``HFlowContainer`` for this behavior.
+    /// 
+    /// If `false`, the control will add a horizontal scrollbar to make all items visible.
+    /// 
+    final public var wraparoundItems: Bool {
+        get {
+            return has_wraparound_items ()
+        }
+        
+        set {
+            set_wraparound_items (newValue)
         }
         
     }
@@ -246,8 +275,8 @@ open class ItemList: Control {
     }
     
     /* Methods */
-    fileprivate static var method_add_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_item")
+    fileprivate static let method_add_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_item")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 359861678)!
@@ -261,9 +290,10 @@ open class ItemList: Control {
     /// 
     /// Specify an `icon`, or use `null` as the `icon` for a list item with no icon.
     /// 
-    /// If selectable is `true`, the list item will be selectable.
+    /// If `selectable` is `true`, the list item will be selectable.
     /// 
     public final func addItem(text: String, icon: Texture2D? = nil, selectable: Bool = true) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
@@ -285,8 +315,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_add_icon_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_icon_item")
+    fileprivate static let method_add_icon_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_icon_item")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4256579627)!
@@ -298,6 +328,7 @@ open class ItemList: Control {
     
     /// Adds an item to the item list with no text, only an icon. Returns the index of an added item.
     public final func addIconItem(icon: Texture2D?, selectable: Bool = true) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: icon?.handle) { pArg0 in
             withUnsafePointer(to: selectable) { pArg1 in
@@ -315,8 +346,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_text")
+    fileprivate static let method_set_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_text")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -328,6 +359,7 @@ open class ItemList: Control {
     
     /// Sets text of the item associated with the specified index.
     public final func setItemText(idx: Int32, text: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             let text = GString(text)
             withUnsafePointer(to: text.content) { pArg1 in
@@ -345,8 +377,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_text")
+    fileprivate static let method_get_item_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_text")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -358,6 +390,7 @@ open class ItemList: Control {
     
     /// Returns the text associated with the specified index.
     public final func getItemText(idx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -372,8 +405,8 @@ open class ItemList: Control {
         return _result.description
     }
     
-    fileprivate static var method_set_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon")
+    fileprivate static let method_set_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 666127730)!
@@ -385,6 +418,7 @@ open class ItemList: Control {
     
     /// Sets (or replaces) the icon's ``Texture2D`` associated with the specified index.
     public final func setItemIcon(idx: Int32, icon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -401,8 +435,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_icon")
+    fileprivate static let method_get_item_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_icon")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3536238170)!
@@ -414,6 +448,7 @@ open class ItemList: Control {
     
     /// Returns the icon associated with the specified index.
     public final func getItemIcon(idx: Int32) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -425,11 +460,11 @@ open class ItemList: Control {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_item_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_text_direction")
+    fileprivate static let method_set_item_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_text_direction")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1707680378)!
@@ -441,6 +476,7 @@ open class ItemList: Control {
     
     /// Sets item's text base writing direction.
     public final func setItemTextDirection(idx: Int32, direction: Control.TextDirection) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -457,8 +493,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_text_direction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_text_direction")
+    fileprivate static let method_get_item_text_direction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_text_direction")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4235602388)!
@@ -470,6 +506,7 @@ open class ItemList: Control {
     
     /// Returns item's text base writing direction.
     public final func getItemTextDirection(idx: Int32) -> Control.TextDirection {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -484,8 +521,8 @@ open class ItemList: Control {
         return Control.TextDirection (rawValue: _result)!
     }
     
-    fileprivate static var method_set_item_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_language")
+    fileprivate static let method_set_item_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_language")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -497,6 +534,7 @@ open class ItemList: Control {
     
     /// Sets language code of item's text used for line-breaking and text shaping algorithms, if left empty current locale is used instead.
     public final func setItemLanguage(idx: Int32, language: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             let language = GString(language)
             withUnsafePointer(to: language.content) { pArg1 in
@@ -514,8 +552,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_language: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_language")
+    fileprivate static let method_get_item_language: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_language")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -527,6 +565,7 @@ open class ItemList: Control {
     
     /// Returns item's text language code.
     public final func getItemLanguage(idx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -541,8 +580,69 @@ open class ItemList: Control {
         return _result.description
     }
     
-    fileprivate static var method_set_item_icon_transposed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon_transposed")
+    fileprivate static let method_set_item_auto_translate_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_auto_translate_mode")
+        return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 287402019)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Sets the auto translate mode of the item associated with the specified index.
+    /// 
+    /// Items use ``Node/AutoTranslateMode/inherit`` by default, which uses the same auto translate mode as the ``ItemList`` itself.
+    /// 
+    public final func setItemAutoTranslateMode(idx: Int32, mode: Node.AutoTranslateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: idx) { pArg0 in
+            withUnsafePointer(to: mode.rawValue) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_item_auto_translate_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_auto_translate_mode")
+        return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 906302372)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns item's auto translate mode.
+    public final func getItemAutoTranslateMode(idx: Int32) -> Node.AutoTranslateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: idx) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return Node.AutoTranslateMode (rawValue: _result)!
+    }
+    
+    fileprivate static let method_set_item_icon_transposed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon_transposed")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -554,6 +654,7 @@ open class ItemList: Control {
     
     /// Sets whether the item icon will be drawn transposed.
     public final func setItemIconTransposed(idx: Int32, transposed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: transposed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -570,8 +671,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_is_item_icon_transposed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_icon_transposed")
+    fileprivate static let method_is_item_icon_transposed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_icon_transposed")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -583,6 +684,7 @@ open class ItemList: Control {
     
     /// Returns `true` if the item icon will be drawn transposed, i.e. the X and Y axes are swapped.
     public final func isItemIconTransposed(idx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -597,8 +699,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_icon_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon_region")
+    fileprivate static let method_set_item_icon_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon_region")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1356297692)!
@@ -610,6 +712,7 @@ open class ItemList: Control {
     
     /// Sets the region of item's icon used. The whole icon will be used if the region has no area.
     public final func setItemIconRegion(idx: Int32, rect: Rect2) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -626,8 +729,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_icon_region: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_icon_region")
+    fileprivate static let method_get_item_icon_region: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_icon_region")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3327874267)!
@@ -639,6 +742,7 @@ open class ItemList: Control {
     
     /// Returns the region of item's icon used. The whole icon will be used if the region has no area.
     public final func getItemIconRegion(idx: Int32) -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -653,8 +757,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_icon_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_icon_modulate")
+    fileprivate static let method_set_item_icon_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_icon_modulate")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -666,6 +770,7 @@ open class ItemList: Control {
     
     /// Sets a modulating ``Color`` of the item associated with the specified index.
     public final func setItemIconModulate(idx: Int32, modulate: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: modulate) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -682,8 +787,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_icon_modulate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_icon_modulate")
+    fileprivate static let method_get_item_icon_modulate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_icon_modulate")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -695,6 +800,7 @@ open class ItemList: Control {
     
     /// Returns a ``Color`` modulating item's icon at the specified index.
     public final func getItemIconModulate(idx: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -709,8 +815,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_selectable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_selectable")
+    fileprivate static let method_set_item_selectable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_selectable")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -722,6 +828,7 @@ open class ItemList: Control {
     
     /// Allows or disallows selection of the item associated with the specified index.
     public final func setItemSelectable(idx: Int32, selectable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: selectable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -738,8 +845,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_is_item_selectable: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_selectable")
+    fileprivate static let method_is_item_selectable: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_selectable")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -751,6 +858,7 @@ open class ItemList: Control {
     
     /// Returns `true` if the item at the specified index is selectable.
     public final func isItemSelectable(idx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -765,8 +873,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_disabled")
+    fileprivate static let method_set_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_disabled")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -781,6 +889,7 @@ open class ItemList: Control {
     /// Disabled items cannot be selected and do not trigger activation signals (when double-clicking or pressing [kbd]Enter[/kbd]).
     /// 
     public final func setItemDisabled(idx: Int32, disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -797,8 +906,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_is_item_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_disabled")
+    fileprivate static let method_is_item_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_disabled")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -810,6 +919,7 @@ open class ItemList: Control {
     
     /// Returns `true` if the item at the specified index is disabled.
     public final func isItemDisabled(idx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -824,8 +934,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_metadata")
+    fileprivate static let method_set_item_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_metadata")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2152698145)!
@@ -837,6 +947,7 @@ open class ItemList: Control {
     
     /// Sets a value (of any type) to be stored with the item associated with the specified index.
     public final func setItemMetadata(idx: Int32, metadata: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -853,8 +964,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_metadata: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_metadata")
+    fileprivate static let method_get_item_metadata: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_metadata")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4227898402)!
@@ -866,6 +977,7 @@ open class ItemList: Control {
     
     /// Returns the metadata value of the specified index.
     public final func getItemMetadata(idx: Int32) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -880,8 +992,8 @@ open class ItemList: Control {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_item_custom_bg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_custom_bg_color")
+    fileprivate static let method_set_item_custom_bg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_custom_bg_color")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -893,6 +1005,7 @@ open class ItemList: Control {
     
     /// Sets the background color of the item specified by `idx` index to the specified ``Color``.
     public final func setItemCustomBgColor(idx: Int32, customBgColor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: customBgColor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -909,8 +1022,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_custom_bg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_custom_bg_color")
+    fileprivate static let method_get_item_custom_bg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_custom_bg_color")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -922,6 +1035,7 @@ open class ItemList: Control {
     
     /// Returns the custom background color of the item specified by `idx` index.
     public final func getItemCustomBgColor(idx: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -936,8 +1050,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_custom_fg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_custom_fg_color")
+    fileprivate static let method_set_item_custom_fg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_custom_fg_color")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2878471219)!
@@ -949,6 +1063,7 @@ open class ItemList: Control {
     
     /// Sets the foreground color of the item specified by `idx` index to the specified ``Color``.
     public final func setItemCustomFgColor(idx: Int32, customFgColor: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: customFgColor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -965,8 +1080,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_custom_fg_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_custom_fg_color")
+    fileprivate static let method_get_item_custom_fg_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_custom_fg_color")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3457211756)!
@@ -978,6 +1093,7 @@ open class ItemList: Control {
     
     /// Returns the custom foreground color of the item specified by `idx` index.
     public final func getItemCustomFgColor(idx: Int32) -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -992,8 +1108,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_get_item_rect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_rect")
+    fileprivate static let method_get_item_rect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_rect")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 159227807)!
@@ -1008,6 +1124,7 @@ open class ItemList: Control {
     /// > Note: The returned value is unreliable if called right after modifying the ``ItemList``, before it redraws in the next frame.
     /// 
     public final func getItemRect(idx: Int32, expand: Bool = true) -> Rect2 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: expand) { pArg1 in
@@ -1025,8 +1142,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_tooltip_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_tooltip_enabled")
+    fileprivate static let method_set_item_tooltip_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_tooltip_enabled")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 300928843)!
@@ -1038,6 +1155,7 @@ open class ItemList: Control {
     
     /// Sets whether the tooltip hint is enabled for specified item index.
     public final func setItemTooltipEnabled(idx: Int32, enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1054,8 +1172,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_is_item_tooltip_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_item_tooltip_enabled")
+    fileprivate static let method_is_item_tooltip_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_item_tooltip_enabled")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1067,6 +1185,7 @@ open class ItemList: Control {
     
     /// Returns `true` if the tooltip is enabled for specified item index.
     public final func isItemTooltipEnabled(idx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1081,8 +1200,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_set_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_tooltip")
+    fileprivate static let method_set_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_tooltip")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 501894301)!
@@ -1094,6 +1213,7 @@ open class ItemList: Control {
     
     /// Sets the tooltip hint for the item associated with the specified index.
     public final func setItemTooltip(idx: Int32, tooltip: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             let tooltip = GString(tooltip)
             withUnsafePointer(to: tooltip.content) { pArg1 in
@@ -1111,8 +1231,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_tooltip")
+    fileprivate static let method_get_item_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_tooltip")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
@@ -1124,6 +1244,7 @@ open class ItemList: Control {
     
     /// Returns the tooltip hint associated with the specified index.
     public final func getItemTooltip(idx: Int32) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1138,8 +1259,8 @@ open class ItemList: Control {
         return _result.description
     }
     
-    fileprivate static var method_select: GDExtensionMethodBindPtr = {
-        let methodName = StringName("select")
+    fileprivate static let method_select: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("select")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 972357352)!
@@ -1154,6 +1275,7 @@ open class ItemList: Control {
     /// > Note: This method does not trigger the item selection signal.
     /// 
     public final func select(idx: Int32, single: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: single) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1170,8 +1292,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_deselect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("deselect")
+    fileprivate static let method_deselect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("deselect")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1183,6 +1305,7 @@ open class ItemList: Control {
     
     /// Ensures the item associated with the specified index is not selected.
     public final func deselect(idx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1196,8 +1319,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_deselect_all: GDExtensionMethodBindPtr = {
-        let methodName = StringName("deselect_all")
+    fileprivate static let method_deselect_all: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("deselect_all")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1209,12 +1332,13 @@ open class ItemList: Control {
     
     /// Ensures there are no items selected.
     public final func deselectAll() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ItemList.method_deselect_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_selected")
+    fileprivate static let method_is_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_selected")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1116898809)!
@@ -1226,6 +1350,7 @@ open class ItemList: Control {
     
     /// Returns `true` if the item at the specified index is currently selected.
     public final func isSelected(idx: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1240,8 +1365,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_get_selected_items: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_selected_items")
+    fileprivate static let method_get_selected_items: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_selected_items")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 969006518)!
@@ -1253,13 +1378,14 @@ open class ItemList: Control {
     
     /// Returns an array with the indexes of the selected items.
     public final func getSelectedItems() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(ItemList.method_get_selected_items, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_move_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_item")
+    fileprivate static let method_move_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_item")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -1271,6 +1397,7 @@ open class ItemList: Control {
     
     /// Moves item from index `fromIdx` to `toIdx`.
     public final func moveItem(fromIdx: Int32, toIdx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromIdx) { pArg0 in
             withUnsafePointer(to: toIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1287,8 +1414,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_set_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_item_count")
+    fileprivate static let method_set_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_item_count")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1300,6 +1427,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_item_count(_ count: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1313,8 +1441,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_item_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_count")
+    fileprivate static let method_get_item_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_count")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1326,13 +1454,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_item_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ItemList.method_get_item_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_remove_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_item")
+    fileprivate static let method_remove_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_item")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1344,6 +1473,7 @@ open class ItemList: Control {
     
     /// Removes the item specified by `idx` index from the list.
     public final func removeItem(idx: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1357,8 +1487,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_clear: GDExtensionMethodBindPtr = {
-        let methodName = StringName("clear")
+    fileprivate static let method_clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("clear")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1370,12 +1500,13 @@ open class ItemList: Control {
     
     /// Removes all items from the list.
     public final func clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ItemList.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_sort_items_by_text: GDExtensionMethodBindPtr = {
-        let methodName = StringName("sort_items_by_text")
+    fileprivate static let method_sort_items_by_text: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("sort_items_by_text")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1387,12 +1518,13 @@ open class ItemList: Control {
     
     /// Sorts items in the list by their text.
     public final func sortItemsByText() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ItemList.method_sort_items_by_text, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_fixed_column_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fixed_column_width")
+    fileprivate static let method_set_fixed_column_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fixed_column_width")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1404,6 +1536,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_fixed_column_width(_ width: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1417,8 +1550,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_fixed_column_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fixed_column_width")
+    fileprivate static let method_get_fixed_column_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fixed_column_width")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1430,13 +1563,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_fixed_column_width() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ItemList.method_get_fixed_column_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_same_column_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_same_column_width")
+    fileprivate static let method_set_same_column_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_same_column_width")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1448,6 +1582,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_same_column_width(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1461,8 +1596,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_is_same_column_width: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_same_column_width")
+    fileprivate static let method_is_same_column_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_same_column_width")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1474,13 +1609,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func is_same_column_width() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ItemList.method_is_same_column_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_text_lines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_text_lines")
+    fileprivate static let method_set_max_text_lines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_text_lines")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1492,6 +1628,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_max_text_lines(_ lines: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lines) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1505,8 +1642,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_max_text_lines: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_text_lines")
+    fileprivate static let method_get_max_text_lines: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_text_lines")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1518,13 +1655,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_max_text_lines() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ItemList.method_get_max_text_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_max_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_columns")
+    fileprivate static let method_set_max_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_columns")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1536,6 +1674,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_max_columns(_ amount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1549,8 +1688,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_max_columns: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_columns")
+    fileprivate static let method_get_max_columns: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_columns")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1562,13 +1701,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_max_columns() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(ItemList.method_get_max_columns, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_select_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_select_mode")
+    fileprivate static let method_set_select_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_select_mode")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 928267388)!
@@ -1580,6 +1720,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_select_mode(_ mode: ItemList.SelectMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1593,8 +1734,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_select_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_select_mode")
+    fileprivate static let method_get_select_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_select_mode")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1191945842)!
@@ -1606,13 +1747,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_select_mode() -> ItemList.SelectMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ItemList.method_get_select_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ItemList.SelectMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_icon_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_icon_mode")
+    fileprivate static let method_set_icon_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_icon_mode")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2025053633)!
@@ -1624,6 +1766,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_icon_mode(_ mode: ItemList.IconMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1637,8 +1780,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_icon_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_icon_mode")
+    fileprivate static let method_get_icon_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_icon_mode")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3353929232)!
@@ -1650,13 +1793,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_icon_mode() -> ItemList.IconMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ItemList.method_get_icon_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return ItemList.IconMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_fixed_icon_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_fixed_icon_size")
+    fileprivate static let method_set_fixed_icon_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_fixed_icon_size")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -1668,6 +1812,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_fixed_icon_size(_ size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1681,8 +1826,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_fixed_icon_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_fixed_icon_size")
+    fileprivate static let method_get_fixed_icon_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_fixed_icon_size")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3690982128)!
@@ -1694,13 +1839,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_fixed_icon_size() -> Vector2i {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
         gi.object_method_bind_ptrcall(ItemList.method_get_fixed_icon_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_icon_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_icon_scale")
+    fileprivate static let method_set_icon_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_icon_scale")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1712,6 +1858,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_icon_scale(_ scale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1725,8 +1872,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_icon_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_icon_scale")
+    fileprivate static let method_get_icon_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_icon_scale")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1738,13 +1885,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_icon_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(ItemList.method_get_icon_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_rmb_select: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_rmb_select")
+    fileprivate static let method_set_allow_rmb_select: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_rmb_select")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1756,6 +1904,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_allow_rmb_select(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1769,8 +1918,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_allow_rmb_select: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_rmb_select")
+    fileprivate static let method_get_allow_rmb_select: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_rmb_select")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1782,13 +1931,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_allow_rmb_select() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ItemList.method_get_allow_rmb_select, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_reselect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_reselect")
+    fileprivate static let method_set_allow_reselect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_reselect")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1800,6 +1950,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_allow_reselect(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1813,8 +1964,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_allow_reselect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_reselect")
+    fileprivate static let method_get_allow_reselect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_reselect")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1826,13 +1977,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_allow_reselect() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ItemList.method_get_allow_reselect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_allow_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_allow_search")
+    fileprivate static let method_set_allow_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_allow_search")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1844,6 +1996,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_allow_search(_ allow: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1857,8 +2010,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_allow_search: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_allow_search")
+    fileprivate static let method_get_allow_search: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_allow_search")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1870,13 +2023,60 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_allow_search() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ItemList.method_get_allow_search, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_auto_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auto_height")
+    fileprivate static let method_set_auto_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_width")
+        return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_auto_width(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ItemList.method_set_auto_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_has_auto_width: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_auto_width")
+        return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func has_auto_width() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ItemList.method_has_auto_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_set_auto_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_height")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1888,6 +2088,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_auto_height(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1901,8 +2102,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_has_auto_height: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_auto_height")
+    fileprivate static let method_has_auto_height: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_auto_height")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1914,13 +2115,14 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func has_auto_height() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ItemList.method_has_auto_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_anything_selected: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_anything_selected")
+    fileprivate static let method_is_anything_selected: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_anything_selected")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
@@ -1932,13 +2134,14 @@ open class ItemList: Control {
     
     /// Returns `true` if one or more items are selected.
     public final func isAnythingSelected() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(ItemList.method_is_anything_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_item_at_position: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_item_at_position")
+    fileprivate static let method_get_item_at_position: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_item_at_position")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2300324924)!
@@ -1955,6 +2158,7 @@ open class ItemList: Control {
     /// > Note: The returned value is unreliable if called right after modifying the ``ItemList``, before it redraws in the next frame.
     /// 
     public final func getItemAtPosition(_ position: Vector2, exact: Bool = false) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: exact) { pArg1 in
@@ -1972,8 +2176,8 @@ open class ItemList: Control {
         return _result
     }
     
-    fileprivate static var method_ensure_current_is_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("ensure_current_is_visible")
+    fileprivate static let method_ensure_current_is_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("ensure_current_is_visible")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1985,12 +2189,13 @@ open class ItemList: Control {
     
     /// Ensure current selection is visible, adjusting the scroll position as necessary.
     public final func ensureCurrentIsVisible() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ItemList.method_ensure_current_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_v_scroll_bar")
+    fileprivate static let method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_v_scroll_bar")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2630340773)!
@@ -2005,13 +2210,36 @@ open class ItemList: Control {
     /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``CanvasItem/visible`` property.
     /// 
     public final func getVScrollBar() -> VScrollBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(ItemList.method_get_v_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_text_overrun_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_text_overrun_behavior")
+    fileprivate static let method_get_h_scroll_bar: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_h_scroll_bar")
+        return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4004517983)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns the horizontal scrollbar.
+    /// 
+    /// > Warning: This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their ``CanvasItem/visible`` property.
+    /// 
+    public final func getHScrollBar() -> HScrollBar? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(ItemList.method_get_h_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+    }
+    
+    fileprivate static let method_set_text_overrun_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_text_overrun_behavior")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1008890932)!
@@ -2023,6 +2251,7 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func set_text_overrun_behavior(_ overrunBehavior: TextServer.OverrunBehavior) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: overrunBehavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2036,8 +2265,8 @@ open class ItemList: Control {
         
     }
     
-    fileprivate static var method_get_text_overrun_behavior: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_text_overrun_behavior")
+    fileprivate static let method_get_text_overrun_behavior: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_text_overrun_behavior")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3779142101)!
@@ -2049,13 +2278,60 @@ open class ItemList: Control {
     
     @inline(__always)
     fileprivate final func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ItemList.method_get_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return TextServer.OverrunBehavior (rawValue: _result)!
     }
     
-    fileprivate static var method_force_update_list_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("force_update_list_size")
+    fileprivate static let method_set_wraparound_items: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_wraparound_items")
+        return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func set_wraparound_items(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ItemList.method_set_wraparound_items, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_has_wraparound_items: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_wraparound_items")
+        return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
+    
+    @inline(__always)
+    fileprivate final func has_wraparound_items() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ItemList.method_has_wraparound_items, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_force_update_list_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("force_update_list_size")
         return withUnsafePointer(to: &ItemList.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2067,12 +2343,13 @@ open class ItemList: Control {
     
     /// Forces an update to the list size based on its items. This happens automatically whenever size of the items, or other relevant settings like ``autoHeight``, change. The method can be used to trigger the update ahead of next drawing pass.
     public final func forceUpdateListSize() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(ItemList.method_force_update_list_size, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
     // Signals 
-    /// Triggered when specified item has been selected.
+    /// Emitted when specified item has been selected. Only applicable in single selection mode.
     /// 
     /// ``allowReselect`` must be enabled to reselect an item.
     /// 
@@ -2091,7 +2368,10 @@ open class ItemList: Control {
     /// ```
     public var itemSelected: SignalWithArguments<Int64> { SignalWithArguments<Int64> (target: self, signalName: "item_selected") }
     
-    /// Triggered when any mouse click is issued within the rect of the list but on empty space.
+    /// Emitted when any mouse click is issued within the rect of the list but on empty space.
+    /// 
+    /// `atPosition` is the click position in this control's local coordinate system.
+    /// 
     ///
     /// To connect to this signal, reference this property and call the
     /// 
@@ -2107,9 +2387,9 @@ open class ItemList: Control {
     /// ```
     public var emptyClicked: SignalWithArguments<Vector2, Int64> { SignalWithArguments<Vector2, Int64> (target: self, signalName: "empty_clicked") }
     
-    /// Triggered when specified list item has been clicked with any mouse button.
+    /// Emitted when specified list item has been clicked with any mouse button.
     /// 
-    /// The click position is also provided to allow appropriate popup of context menus at the correct location.
+    /// `atPosition` is the click position in this control's local coordinate system.
     /// 
     ///
     /// To connect to this signal, reference this property and call the
@@ -2126,7 +2406,7 @@ open class ItemList: Control {
     /// ```
     public var itemClicked: SignalWithArguments<Int64, Vector2, Int64> { SignalWithArguments<Int64, Vector2, Int64> (target: self, signalName: "item_clicked") }
     
-    /// Triggered when a multiple selection is altered on a list allowing multiple selection.
+    /// Emitted when a multiple selection is altered on a list allowing multiple selection.
     ///
     /// To connect to this signal, reference this property and call the
     /// 
@@ -2142,7 +2422,7 @@ open class ItemList: Control {
     /// ```
     public var multiSelected: SignalWithArguments<Int64, Bool> { SignalWithArguments<Int64, Bool> (target: self, signalName: "multi_selected") }
     
-    /// Triggered when specified list item is activated via double-clicking or by pressing [kbd]Enter[/kbd].
+    /// Emitted when specified list item is activated via double-clicking or by pressing [kbd]Enter[/kbd].
     ///
     /// To connect to this signal, reference this property and call the
     /// 

@@ -36,7 +36,7 @@ import Musl
 /// - ``sceneSaved``
 /// - ``projectSettingsChanged``
 open class EditorPlugin: Node {
-    fileprivate static var className = StringName("EditorPlugin")
+    private static var className = StringName("EditorPlugin")
     override open class var godotClassName: StringName { className }
     public enum CustomControlContainer: Int64, CaseIterable {
         /// Main editor toolbar, next to play buttons.
@@ -96,24 +96,77 @@ open class EditorPlugin: Node {
     }
     
     /* Methods */
-    /// Called when there is a root node in the current edited scene, ``_handles(object:)`` is implemented and an ``InputEvent`` happens in the 2D viewport. Intercepts the ``InputEvent``, if `return true` ``EditorPlugin`` consumes the `event`, otherwise forwards `event` to other Editor classes.
+    fileprivate static let method__forward_canvas_gui_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_forward_canvas_gui_input")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1062211774)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Called when there is a root node in the current edited scene, ``_handles(object:)`` is implemented, and an ``InputEvent`` happens in the 2D viewport. If this method returns `true`, `event` is intercepted by this ``EditorPlugin``, otherwise `event` is forwarded to other Editor classes.
     /// 
-    /// **Example:**
-    /// 
-    /// Must `return false` in order to forward the ``InputEvent`` to other Editor classes.
-    /// 
-    /// **Example:**
+    /// This method must return `false` in order to forward the ``InputEvent`` to other Editor classes.
     /// 
     @_documentation(visibility: public)
     open func _forwardCanvasGuiInput(event: InputEvent?) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: event?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__forward_canvas_gui_input, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__forward_canvas_draw_over_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_forward_canvas_draw_over_viewport")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
+            }
+            
+        }
+        
+    }()
     
     /// Called by the engine when the 2D editor's viewport is updated. Use the `overlay` ``Control`` for drawing. You can update the viewport manually by calling ``updateOverlays()``.
     /// 
     @_documentation(visibility: public)
     open func _forwardCanvasDrawOverViewport(viewportControl: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: viewportControl?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__forward_canvas_draw_over_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__forward_canvas_force_draw_over_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_forward_canvas_force_draw_over_viewport")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
+            }
+            
+        }
+        
+    }()
     
     /// This method is the same as ``_forwardCanvasDrawOverViewport(viewportControl:)``, except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
     /// 
@@ -121,26 +174,94 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _forwardCanvasForceDrawOverViewport(viewportControl: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: viewportControl?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__forward_canvas_force_draw_over_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__forward_3d_gui_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_forward_3d_gui_input")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1018736637)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when there is a root node in the current edited scene, ``_handles(object:)`` is implemented, and an ``InputEvent`` happens in the 3D viewport. The return value decides whether the ``InputEvent`` is consumed or forwarded to other ``EditorPlugin``s. See ``EditorPlugin/AfterGUIInput`` for options.
     /// 
-    /// **Example:**
-    /// 
-    /// Must `return EditorPlugin.AFTER_GUI_INPUT_PASS` in order to forward the ``InputEvent`` to other Editor classes.
-    /// 
-    /// **Example:**
+    /// This method must return ``AfterGUIInput/pass`` in order to forward the ``InputEvent`` to other Editor classes.
     /// 
     @_documentation(visibility: public)
     open func _forward3dGuiInput(viewportCamera: Camera3D?, event: InputEvent?) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: viewportCamera?.handle) { pArg0 in
+            withUnsafePointer(to: event?.handle) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorPlugin.method__forward_3d_gui_input, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__forward_3d_draw_over_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_forward_3d_draw_over_viewport")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
+            }
+            
+        }
+        
+    }()
     
     /// Called by the engine when the 3D editor's viewport is updated. Use the `overlay` ``Control`` for drawing. You can update the viewport manually by calling ``updateOverlays()``.
     /// 
     @_documentation(visibility: public)
     open func _forward3dDrawOverViewport(viewportControl: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: viewportControl?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__forward_3d_draw_over_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__forward_3d_force_draw_over_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_forward_3d_force_draw_over_viewport")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
+            }
+            
+        }
+        
+    }()
     
     /// This method is the same as ``_forward3dDrawOverViewport(viewportControl:)``, except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
     /// 
@@ -148,7 +269,30 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _forward3dForceDrawOverViewport(viewportControl: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: viewportControl?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__forward_3d_force_draw_over_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_plugin_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_plugin_name")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method in your plugin to provide the name of the plugin when displayed in the Godot editor.
     /// 
@@ -156,8 +300,22 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _getPluginName() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(EditorPlugin.method__get_plugin_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_plugin_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_plugin_icon")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3635182373)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method in your plugin to return a ``Texture2D`` in order to give it an icon.
     /// 
@@ -167,8 +325,22 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _getPluginIcon() -> Texture2D? {
-        return Texture2D ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorPlugin.method__get_plugin_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
+    
+    fileprivate static let method__has_main_screen: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_has_main_screen")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns `true` if this is a main screen editor plugin (it goes in the workspace selector together with **2D**, **3D**, **Script** and **AssetLib**).
     /// 
@@ -178,8 +350,22 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _hasMainScreen() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(EditorPlugin.method__has_main_screen, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__make_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_make_visible")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
     
     /// This function will be called when the editor is requested to become visible. It is used for plugins that edit a specific object type.
     /// 
@@ -187,7 +373,30 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _makeVisible(_ visible: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: visible) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__make_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__edit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_edit")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3975164845)!
+            }
+            
+        }
+        
+    }()
     
     /// This function is used for plugins that edit specific object types (nodes or resources). It requests the editor to edit the given object.
     /// 
@@ -195,7 +404,30 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _edit(object: Object?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: object?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__edit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__handles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_handles")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 397768994)!
+            }
+            
+        }
+        
+    }()
     
     /// Implement this function if your plugin edits a specific type of object (Resource or Node). If you return `true`, then you will get the functions ``_edit(object:)`` and ``_makeVisible(_:)`` called when the editor requests them. If you have declared the methods ``_forwardCanvasGuiInput(event:)`` and ``_forward3dGuiInput(viewportCamera:event:)`` these will be called too.
     /// 
@@ -203,8 +435,31 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _handles(object: Object?) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        withUnsafePointer(to: object?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__handles, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_state")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to provide a state data you want to be saved, like view position, grid settings, folding, etc. This is used when saving the scene (so state is kept when opening it again) and for switching tabs (so state can be restored when the tab returns). This data is automatically saved for each scene in an `editstate` file in the editor metadata folder. If you want to store global (scene-independent) editor data for your plugin, you can use ``_getWindowLayout(configuration:)`` instead.
     /// 
@@ -215,22 +470,73 @@ open class EditorPlugin: Node {
     /// > Note: You must implement ``_getPluginName()`` for the state to be stored and restored correctly.
     /// 
     @_documentation(visibility: public)
-    open func _getState() -> GDictionary {
-        return GDictionary ()
+    open func _getState() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        gi.object_method_bind_ptrcall(EditorPlugin.method__get_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__set_state: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_state")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4155329257)!
+            }
+            
+        }
+        
+    }()
     
     /// Restore the state saved by ``_getState()``. This method is called when the current scene tab is changed in the editor.
     /// 
     /// > Note: Your plugin must implement ``_getPluginName()``, otherwise it will not be recognized and this method will not be called.
     /// 
     @_documentation(visibility: public)
-    open func _setState(_ state: GDictionary) {
+    open func _setState(_ state: VariantDictionary) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: state.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__set_state, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__clear: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_clear")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Clear all the state and reset the object being edited to zero. This ensures your plugin does not keep editing a currently existing node, or a node from the wrong scene.
     @_documentation(visibility: public)
     open func _clear() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(EditorPlugin.method__clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__get_unsaved_status: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_unsaved_status")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to provide a custom message that lists unsaved changes. The editor will call this method when exiting or when closing a scene, and display the returned string in a confirmation dialog. Return empty string if the plugin has no unsaved changes.
     /// 
@@ -242,13 +548,51 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _getUnsavedStatus(forScene: String) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        let forScene = GString(forScene)
+        withUnsafePointer(to: forScene.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__get_unsaved_status, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__save_external_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_save_external_data")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// This method is called after the editor saves the project or when it's closed. It asks the plugin to save edited external scenes/resources.
     @_documentation(visibility: public)
     open func _saveExternalData() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(EditorPlugin.method__save_external_data, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__apply_changes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_apply_changes")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// This method is called when the editor is about to save the project, switch to another tab, etc. It asks the plugin to apply any pending state changes to ensure consistency.
     /// 
@@ -256,19 +600,70 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _applyChanges() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(EditorPlugin.method__apply_changes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__get_breakpoints: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_breakpoints")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// This is for editors that edit script-based objects. You can return a list of breakpoints in the format (`script:line`), for example: `res://path_to_script.gd:25`.
     @_documentation(visibility: public)
     open func _getBreakpoints() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(EditorPlugin.method__get_breakpoints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__set_window_layout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_set_window_layout")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 853519107)!
+            }
+            
+        }
+        
+    }()
     
     /// Restore the plugin GUI layout and data saved by ``_getWindowLayout(configuration:)``. This method is called for every plugin on editor startup. Use the provided `configuration` file to read your saved data.
     /// 
     @_documentation(visibility: public)
     open func _setWindowLayout(configuration: ConfigFile?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: configuration?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__set_window_layout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_window_layout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_window_layout")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 853519107)!
+            }
+            
+        }
+        
+    }()
     
     /// Override this method to provide the GUI layout of the plugin or any other data you want to be stored. This is used to save the project's editor layout when ``queueSaveLayout()`` is called or the editor layout was changed (for example changing the position of a dock). The data is stored in the `editor_layout.cfg` file in the editor metadata directory.
     /// 
@@ -276,7 +671,30 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _getWindowLayout(configuration: ConfigFile?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: configuration?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method__get_window_layout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__build: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_build")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
+            }
+            
+        }
+        
+    }()
     
     /// This method is called when the editor is about to run the project. The plugin can then perform required operations before the project runs.
     /// 
@@ -284,21 +702,52 @@ open class EditorPlugin: Node {
     /// 
     @_documentation(visibility: public)
     open func _build() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(EditorPlugin.method__build, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__enable_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_enable_plugin")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called by the engine when the user enables the ``EditorPlugin`` in the Plugin tab of the project settings window.
     @_documentation(visibility: public)
     open func _enablePlugin() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(EditorPlugin.method__enable_plugin, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__disable_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_disable_plugin")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called by the engine when the user disables the ``EditorPlugin`` in the Plugin tab of the project settings window.
     @_documentation(visibility: public)
     open func _disablePlugin() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(EditorPlugin.method__disable_plugin, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
     
-    fileprivate static var method_add_control_to_container: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_control_to_container")
+    fileprivate static let method_add_control_to_container: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_control_to_container")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3092750152)!
@@ -315,6 +764,7 @@ open class EditorPlugin: Node {
     /// When your plugin is deactivated, make sure to remove your custom control with ``removeControlFromContainer(_:control:)`` and free it with ``Node/queueFree()``.
     /// 
     public final func addControlToContainer(_ container: EditorPlugin.CustomControlContainer, control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: container.rawValue) { pArg0 in
             withUnsafePointer(to: control?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -331,8 +781,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_control_to_bottom_panel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_control_to_bottom_panel")
+    fileprivate static let method_add_control_to_bottom_panel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_control_to_bottom_panel")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 111032269)!
@@ -342,11 +792,12 @@ open class EditorPlugin: Node {
         
     }()
     
-    /// Adds a control to the bottom panel (together with Output, Debug, Animation, etc). Returns a reference to the button added. It's up to you to hide/show the button when needed. When your plugin is deactivated, make sure to remove your custom control with ``removeControlFromBottomPanel(control:)`` and free it with ``Node/queueFree()``.
+    /// Adds a control to the bottom panel (together with Output, Debug, Animation, etc.). Returns a reference to the button added. It's up to you to hide/show the button when needed. When your plugin is deactivated, make sure to remove your custom control with ``removeControlFromBottomPanel(control:)`` and free it with ``Node/queueFree()``.
     /// 
     /// Optionally, you can specify a shortcut parameter. When pressed, this shortcut will toggle the bottom panel's visibility. See the default editor bottom panel shortcuts in the Editor Settings for inspiration. Per convention, they all use [kbd]Alt[/kbd] modifier.
     /// 
     public final func addControlToBottomPanel(control: Control?, title: String, shortcut: Shortcut? = nil) -> Button? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: control?.handle) { pArg0 in
             let title = GString(title)
@@ -365,11 +816,11 @@ open class EditorPlugin: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_control_to_dock: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_control_to_dock")
+    fileprivate static let method_add_control_to_dock: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_control_to_dock")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2994930786)!
@@ -388,6 +839,7 @@ open class EditorPlugin: Node {
     /// Optionally, you can specify a shortcut parameter. When pressed, this shortcut will toggle the dock's visibility once it's moved to the bottom panel (this shortcut does not affect the dock otherwise). See the default editor bottom panel shortcuts in the Editor Settings for inspiration. Per convention, they all use [kbd]Alt[/kbd] modifier.
     /// 
     public final func addControlToDock(slot: EditorPlugin.DockSlot, control: Control?, shortcut: Shortcut? = nil) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: slot.rawValue) { pArg0 in
             withUnsafePointer(to: control?.handle) { pArg1 in
                 withUnsafePointer(to: shortcut?.handle) { pArg2 in
@@ -407,8 +859,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_control_from_docks: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_control_from_docks")
+    fileprivate static let method_remove_control_from_docks: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_control_from_docks")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
@@ -420,6 +872,7 @@ open class EditorPlugin: Node {
     
     /// Removes the control from the dock. You have to manually ``Node/queueFree()`` the control.
     public final func removeControlFromDocks(control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -433,8 +886,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_control_from_bottom_panel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_control_from_bottom_panel")
+    fileprivate static let method_remove_control_from_bottom_panel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_control_from_bottom_panel")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
@@ -446,6 +899,7 @@ open class EditorPlugin: Node {
     
     /// Removes the control from the bottom panel. You have to manually ``Node/queueFree()`` the control.
     public final func removeControlFromBottomPanel(control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -459,8 +913,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_control_from_container: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_control_from_container")
+    fileprivate static let method_remove_control_from_container: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_control_from_container")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3092750152)!
@@ -472,6 +926,7 @@ open class EditorPlugin: Node {
     
     /// Removes the control from the specified container. You have to manually ``Node/queueFree()`` the control.
     public final func removeControlFromContainer(_ container: EditorPlugin.CustomControlContainer, control: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: container.rawValue) { pArg0 in
             withUnsafePointer(to: control?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -488,8 +943,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_set_dock_tab_icon: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_dock_tab_icon")
+    fileprivate static let method_set_dock_tab_icon: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_dock_tab_icon")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3450529724)!
@@ -501,6 +956,7 @@ open class EditorPlugin: Node {
     
     /// Sets the tab icon for the given control in a dock slot. Setting to `null` removes the icon.
     public final func setDockTabIcon(control: Control?, icon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -517,8 +973,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_tool_menu_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_tool_menu_item")
+    fileprivate static let method_add_tool_menu_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_tool_menu_item")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2137474292)!
@@ -530,6 +986,7 @@ open class EditorPlugin: Node {
     
     /// Adds a custom menu item to **Project > Tools** named `name`. When clicked, the provided `callable` will be called.
     public final func addToolMenuItem(name: String, callable: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: callable.content) { pArg1 in
@@ -547,8 +1004,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_tool_submenu_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_tool_submenu_item")
+    fileprivate static let method_add_tool_submenu_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_tool_submenu_item")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1019428915)!
@@ -560,6 +1017,7 @@ open class EditorPlugin: Node {
     
     /// Adds a custom ``PopupMenu`` submenu under **Project > Tools >** `name`. Use ``removeToolMenuItem(name:)`` on plugin clean up to remove the menu.
     public final func addToolSubmenuItem(name: String, submenu: PopupMenu?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: submenu?.handle) { pArg1 in
@@ -577,8 +1035,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_tool_menu_item: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_tool_menu_item")
+    fileprivate static let method_remove_tool_menu_item: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_tool_menu_item")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -590,6 +1048,7 @@ open class EditorPlugin: Node {
     
     /// Removes a menu `name` from **Project > Tools**.
     public final func removeToolMenuItem(name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -604,8 +1063,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_get_export_as_menu: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_export_as_menu")
+    fileprivate static let method_get_export_as_menu: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_export_as_menu")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1775878644)!
@@ -617,13 +1076,14 @@ open class EditorPlugin: Node {
     
     /// Returns the ``PopupMenu`` under **Scene > Export As...**.
     public final func getExportAsMenu() -> PopupMenu? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorPlugin.method_get_export_as_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_custom_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_custom_type")
+    fileprivate static let method_add_custom_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_custom_type")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1986814599)!
@@ -633,7 +1093,7 @@ open class EditorPlugin: Node {
         
     }()
     
-    /// Adds a custom type, which will appear in the list of nodes or resources. An icon can be optionally passed.
+    /// Adds a custom type, which will appear in the list of nodes or resources.
     /// 
     /// When a given node or resource is selected, the base type will be instantiated (e.g. "Node3D", "Control", "Resource"), then the script will be loaded and set to this object.
     /// 
@@ -646,6 +1106,7 @@ open class EditorPlugin: Node {
     /// > Note: Custom types added this way are not true classes. They are just a helper to create a node with specific script.
     /// 
     public final func addCustomType(_ type: String, base: String, script: Script?, icon: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let type = GString(type)
         withUnsafePointer(to: type.content) { pArg0 in
             let base = GString(base)
@@ -670,8 +1131,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_custom_type: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_custom_type")
+    fileprivate static let method_remove_custom_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_custom_type")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -683,6 +1144,7 @@ open class EditorPlugin: Node {
     
     /// Removes a custom type added by ``addCustomType(_:base:script:icon:)``.
     public final func removeCustomType(_ type: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let type = GString(type)
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -697,8 +1159,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_autoload_singleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_autoload_singleton")
+    fileprivate static let method_add_autoload_singleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_autoload_singleton")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3186203200)!
@@ -710,6 +1172,7 @@ open class EditorPlugin: Node {
     
     /// Adds a script at `path` to the Autoload list as `name`.
     public final func addAutoloadSingleton(name: String, path: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             let path = GString(path)
@@ -728,8 +1191,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_autoload_singleton: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_autoload_singleton")
+    fileprivate static let method_remove_autoload_singleton: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_autoload_singleton")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -741,6 +1204,7 @@ open class EditorPlugin: Node {
     
     /// Removes an Autoload `name` from the list.
     public final func removeAutoloadSingleton(name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -755,8 +1219,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_update_overlays: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_overlays")
+    fileprivate static let method_update_overlays: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_overlays")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -768,13 +1232,14 @@ open class EditorPlugin: Node {
     
     /// Updates the overlays of the 2D and 3D editor viewport. Causes methods ``_forwardCanvasDrawOverViewport(viewportControl:)``, ``_forwardCanvasForceDrawOverViewport(viewportControl:)``, ``_forward3dDrawOverViewport(viewportControl:)`` and ``_forward3dForceDrawOverViewport(viewportControl:)`` to be called.
     public final func updateOverlays() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(EditorPlugin.method_update_overlays, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_make_bottom_panel_item_visible: GDExtensionMethodBindPtr = {
-        let methodName = StringName("make_bottom_panel_item_visible")
+    fileprivate static let method_make_bottom_panel_item_visible: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("make_bottom_panel_item_visible")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1496901182)!
@@ -786,6 +1251,7 @@ open class EditorPlugin: Node {
     
     /// Makes a specific item in the bottom panel visible.
     public final func makeBottomPanelItemVisible(item: Control?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: item?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -799,8 +1265,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_hide_bottom_panel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("hide_bottom_panel")
+    fileprivate static let method_hide_bottom_panel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("hide_bottom_panel")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -812,12 +1278,13 @@ open class EditorPlugin: Node {
     
     /// Minimizes the bottom panel.
     public final func hideBottomPanel() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorPlugin.method_hide_bottom_panel, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_undo_redo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_undo_redo")
+    fileprivate static let method_get_undo_redo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_undo_redo")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 773492341)!
@@ -829,13 +1296,14 @@ open class EditorPlugin: Node {
     
     /// Gets the undo/redo object. Most actions in the editor can be undoable, so use this object to make sure this happens when it's worth it.
     public final func getUndoRedo() -> EditorUndoRedoManager? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorPlugin.method_get_undo_redo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_undo_redo_inspector_hook_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_undo_redo_inspector_hook_callback")
+    fileprivate static let method_add_undo_redo_inspector_hook_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_undo_redo_inspector_hook_callback")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -850,6 +1318,7 @@ open class EditorPlugin: Node {
     /// The callback should have 4 arguments: ``Object`` `undo_redo`, ``Object`` `modified_object`, ``String`` `property` and ``Variant`` `new_value`. They are, respectively, the ``UndoRedo`` object used by the inspector, the currently modified object, the name of the modified property and the new value the property is about to take.
     /// 
     public final func addUndoRedoInspectorHookCallback(callable: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -863,8 +1332,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_undo_redo_inspector_hook_callback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_undo_redo_inspector_hook_callback")
+    fileprivate static let method_remove_undo_redo_inspector_hook_callback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_undo_redo_inspector_hook_callback")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1611583062)!
@@ -876,6 +1345,7 @@ open class EditorPlugin: Node {
     
     /// Removes a callback previously added by ``addUndoRedoInspectorHookCallback(callable:)``.
     public final func removeUndoRedoInspectorHookCallback(callable: Callable) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -889,8 +1359,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_queue_save_layout: GDExtensionMethodBindPtr = {
-        let methodName = StringName("queue_save_layout")
+    fileprivate static let method_queue_save_layout: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("queue_save_layout")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -902,12 +1372,13 @@ open class EditorPlugin: Node {
     
     /// Queue save the project's editor layout.
     public final func queueSaveLayout() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorPlugin.method_queue_save_layout, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_add_translation_parser_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_translation_parser_plugin")
+    fileprivate static let method_add_translation_parser_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_translation_parser_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3116463128)!
@@ -919,6 +1390,7 @@ open class EditorPlugin: Node {
     
     /// Registers a custom translation parser plugin for extracting translatable strings from custom files.
     public final func addTranslationParserPlugin(parser: EditorTranslationParserPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parser?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -932,8 +1404,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_translation_parser_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_translation_parser_plugin")
+    fileprivate static let method_remove_translation_parser_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_translation_parser_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3116463128)!
@@ -945,6 +1417,7 @@ open class EditorPlugin: Node {
     
     /// Removes a custom translation parser plugin registered by ``addTranslationParserPlugin(parser:)``.
     public final func removeTranslationParserPlugin(parser: EditorTranslationParserPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: parser?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -958,8 +1431,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_import_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_import_plugin")
+    fileprivate static let method_add_import_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_import_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3113975762)!
@@ -978,6 +1451,7 @@ open class EditorPlugin: Node {
     /// See ``addInspectorPlugin(_:)`` for an example of how to register a plugin.
     /// 
     public final func addImportPlugin(importer: EditorImportPlugin?, firstPriority: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: importer?.handle) { pArg0 in
             withUnsafePointer(to: firstPriority) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -994,8 +1468,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_import_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_import_plugin")
+    fileprivate static let method_remove_import_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_import_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2312482773)!
@@ -1007,6 +1481,7 @@ open class EditorPlugin: Node {
     
     /// Removes an import plugin registered by ``addImportPlugin(importer:firstPriority:)``.
     public final func removeImportPlugin(importer: EditorImportPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: importer?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1020,8 +1495,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_scene_format_importer_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_scene_format_importer_plugin")
+    fileprivate static let method_add_scene_format_importer_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_scene_format_importer_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2764104752)!
@@ -1036,6 +1511,7 @@ open class EditorPlugin: Node {
     /// If `firstPriority` is `true`, the new import plugin is inserted first in the list and takes precedence over pre-existing plugins.
     /// 
     public final func addSceneFormatImporterPlugin(sceneFormatImporter: EditorSceneFormatImporter?, firstPriority: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sceneFormatImporter?.handle) { pArg0 in
             withUnsafePointer(to: firstPriority) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1052,8 +1528,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_scene_format_importer_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_scene_format_importer_plugin")
+    fileprivate static let method_remove_scene_format_importer_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_scene_format_importer_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2637776123)!
@@ -1065,6 +1541,7 @@ open class EditorPlugin: Node {
     
     /// Removes a scene format importer registered by ``addSceneFormatImporterPlugin(sceneFormatImporter:firstPriority:)``.
     public final func removeSceneFormatImporterPlugin(sceneFormatImporter: EditorSceneFormatImporter?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sceneFormatImporter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1078,8 +1555,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_scene_post_import_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_scene_post_import_plugin")
+    fileprivate static let method_add_scene_post_import_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_scene_post_import_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3492436322)!
@@ -1094,6 +1571,7 @@ open class EditorPlugin: Node {
     /// If `firstPriority` is `true`, the new import plugin is inserted first in the list and takes precedence over pre-existing plugins.
     /// 
     public final func addScenePostImportPlugin(sceneImportPlugin: EditorScenePostImportPlugin?, firstPriority: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sceneImportPlugin?.handle) { pArg0 in
             withUnsafePointer(to: firstPriority) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1110,8 +1588,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_scene_post_import_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_scene_post_import_plugin")
+    fileprivate static let method_remove_scene_post_import_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_scene_post_import_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3045178206)!
@@ -1123,6 +1601,7 @@ open class EditorPlugin: Node {
     
     /// Remove the ``EditorScenePostImportPlugin``, added with ``addScenePostImportPlugin(sceneImportPlugin:firstPriority:)``.
     public final func removeScenePostImportPlugin(sceneImportPlugin: EditorScenePostImportPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sceneImportPlugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1136,8 +1615,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_export_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_export_plugin")
+    fileprivate static let method_add_export_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_export_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4095952207)!
@@ -1152,6 +1631,7 @@ open class EditorPlugin: Node {
     /// See ``addInspectorPlugin(_:)`` for an example of how to register a plugin.
     /// 
     public final func addExportPlugin(_ plugin: EditorExportPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1165,8 +1645,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_export_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_export_plugin")
+    fileprivate static let method_remove_export_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_export_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4095952207)!
@@ -1178,6 +1658,7 @@ open class EditorPlugin: Node {
     
     /// Removes an export plugin registered by ``addExportPlugin(_:)``.
     public final func removeExportPlugin(_ plugin: EditorExportPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1191,8 +1672,62 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_node_3d_gizmo_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_node_3d_gizmo_plugin")
+    fileprivate static let method_add_export_platform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_export_platform")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3431312373)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Registers a new ``EditorExportPlatform``. Export platforms provides functionality of exporting to the specific platform.
+    public final func addExportPlatform(_ platform: EditorExportPlatform?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: platform?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method_add_export_platform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_remove_export_platform: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_export_platform")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3431312373)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Removes an export platform registered by ``addExportPlatform(_:)``.
+    public final func removeExportPlatform(_ platform: EditorExportPlatform?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: platform?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method_remove_export_platform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_add_node_3d_gizmo_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_node_3d_gizmo_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1541015022)!
@@ -1207,6 +1742,7 @@ open class EditorPlugin: Node {
     /// See ``addInspectorPlugin(_:)`` for an example of how to register a plugin.
     /// 
     public final func addNode3dGizmoPlugin(_ plugin: EditorNode3DGizmoPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1220,8 +1756,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_node_3d_gizmo_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_node_3d_gizmo_plugin")
+    fileprivate static let method_remove_node_3d_gizmo_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_node_3d_gizmo_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1541015022)!
@@ -1233,6 +1769,7 @@ open class EditorPlugin: Node {
     
     /// Removes a gizmo plugin registered by ``addNode3dGizmoPlugin(_:)``.
     public final func removeNode3dGizmoPlugin(_ plugin: EditorNode3DGizmoPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1246,8 +1783,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_inspector_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_inspector_plugin")
+    fileprivate static let method_add_inspector_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_inspector_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 546395733)!
@@ -1262,6 +1799,7 @@ open class EditorPlugin: Node {
     /// > Note: Always use ``removeInspectorPlugin(_:)`` to remove the registered ``EditorInspectorPlugin`` when your ``EditorPlugin`` is disabled to prevent leaks and an unexpected behavior.
     /// 
     public final func addInspectorPlugin(_ plugin: EditorInspectorPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1275,8 +1813,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_inspector_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_inspector_plugin")
+    fileprivate static let method_remove_inspector_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_inspector_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 546395733)!
@@ -1286,8 +1824,9 @@ open class EditorPlugin: Node {
         
     }()
     
-    /// Removes an inspector plugin registered by ``addImportPlugin(importer:firstPriority:)``
+    /// Removes an inspector plugin registered by ``addInspectorPlugin(_:)``.
     public final func removeInspectorPlugin(_ plugin: EditorInspectorPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1301,8 +1840,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_add_resource_conversion_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_resource_conversion_plugin")
+    fileprivate static let method_add_resource_conversion_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_resource_conversion_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2124849111)!
@@ -1317,6 +1856,7 @@ open class EditorPlugin: Node {
     /// See ``EditorResourceConversionPlugin`` for an example of how to create a resource conversion plugin.
     /// 
     public final func addResourceConversionPlugin(_ plugin: EditorResourceConversionPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1330,8 +1870,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_resource_conversion_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_resource_conversion_plugin")
+    fileprivate static let method_remove_resource_conversion_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_resource_conversion_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2124849111)!
@@ -1343,6 +1883,7 @@ open class EditorPlugin: Node {
     
     /// Removes a resource conversion plugin registered by ``addResourceConversionPlugin(_:)``.
     public final func removeResourceConversionPlugin(_ plugin: EditorResourceConversionPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1356,8 +1897,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_set_input_event_forwarding_always_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_input_event_forwarding_always_enabled")
+    fileprivate static let method_set_input_event_forwarding_always_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_input_event_forwarding_always_enabled")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1369,12 +1910,13 @@ open class EditorPlugin: Node {
     
     /// Use this method if you always want to receive inputs from 3D view screen inside ``_forward3dGuiInput(viewportCamera:event:)``. It might be especially usable if your plugin will want to use raycast in the scene.
     public final func setInputEventForwardingAlwaysEnabled() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorPlugin.method_set_input_event_forwarding_always_enabled, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_force_draw_over_forwarding_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_force_draw_over_forwarding_enabled")
+    fileprivate static let method_set_force_draw_over_forwarding_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_force_draw_over_forwarding_enabled")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1386,12 +1928,73 @@ open class EditorPlugin: Node {
     
     /// Enables calling of ``_forwardCanvasForceDrawOverViewport(viewportControl:)`` for the 2D editor and ``_forward3dForceDrawOverViewport(viewportControl:)`` for the 3D editor when their viewports are updated. You need to call this method only once and it will work permanently for this plugin.
     public final func setForceDrawOverForwardingEnabled() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(EditorPlugin.method_set_force_draw_over_forwarding_enabled, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_editor_interface: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_interface")
+    fileprivate static let method_add_context_menu_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_context_menu_plugin")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1904221872)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Adds a plugin to the context menu. `slot` is the context menu where the plugin will be added.
+    /// 
+    /// See ``EditorContextMenuPlugin.ContextMenuSlot`` for available context menus. A plugin instance can belong only to a single context menu slot.
+    /// 
+    public final func addContextMenuPlugin(slot: EditorContextMenuPlugin.ContextMenuSlot, plugin: EditorContextMenuPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: slot.rawValue) { pArg0 in
+            withUnsafePointer(to: plugin?.handle) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(EditorPlugin.method_add_context_menu_plugin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_remove_context_menu_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_context_menu_plugin")
+        return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2281511854)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Removes the specified context menu plugin.
+    public final func removeContextMenuPlugin(_ plugin: EditorContextMenuPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: plugin?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(EditorPlugin.method_remove_context_menu_plugin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_get_editor_interface: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_interface")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4223731786)!
@@ -1403,13 +2006,14 @@ open class EditorPlugin: Node {
     
     /// Returns the ``EditorInterface`` singleton instance.
     public final func getEditorInterface() -> EditorInterface? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorPlugin.method_get_editor_interface, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_script_create_dialog: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_script_create_dialog")
+    fileprivate static let method_get_script_create_dialog: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_script_create_dialog")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3121871482)!
@@ -1426,13 +2030,14 @@ open class EditorPlugin: Node {
     /// > Warning: Removing and freeing this node will render a part of the editor useless and may cause a crash.
     /// 
     public final func getScriptCreateDialog() -> ScriptCreateDialog? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(EditorPlugin.method_get_script_create_dialog, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_debugger_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_debugger_plugin")
+    fileprivate static let method_add_debugger_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_debugger_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3749880309)!
@@ -1444,6 +2049,7 @@ open class EditorPlugin: Node {
     
     /// Adds a ``Script`` as debugger plugin to the Debugger. The script must extend ``EditorDebuggerPlugin``.
     public final func addDebuggerPlugin(script: EditorDebuggerPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: script?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1457,8 +2063,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_remove_debugger_plugin: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_debugger_plugin")
+    fileprivate static let method_remove_debugger_plugin: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_debugger_plugin")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3749880309)!
@@ -1470,6 +2076,7 @@ open class EditorPlugin: Node {
     
     /// Removes the debugger plugin with given script from the Debugger.
     public final func removeDebuggerPlugin(script: EditorDebuggerPlugin?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: script?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1483,8 +2090,8 @@ open class EditorPlugin: Node {
         
     }
     
-    fileprivate static var method_get_plugin_version: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_plugin_version")
+    fileprivate static let method_get_plugin_version: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_plugin_version")
         return withUnsafePointer(to: &EditorPlugin.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1496,12 +2103,13 @@ open class EditorPlugin: Node {
     
     /// Provide the version of the plugin declared in the `plugin.cfg` config file.
     public final func getPluginVersion() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(EditorPlugin.method_get_plugin_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_apply_changes":
@@ -1660,104 +2268,117 @@ open class EditorPlugin: Node {
 // Support methods for proxies
 func _EditorPlugin_proxy_apply_changes (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     swiftObject._applyChanges ()
 }
 
 func _EditorPlugin_proxy_build (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     let ret = swiftObject._build ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _EditorPlugin_proxy_clear (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     swiftObject._clear ()
 }
 
 func _EditorPlugin_proxy_disable_plugin (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     swiftObject._disablePlugin ()
 }
 
 func _EditorPlugin_proxy_edit (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._edit (object: lookupLiveObject (handleAddress: resolved_0) as? Object ?? Object (nativeHandle: resolved_0))
+    swiftObject._edit (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
 }
 
 func _EditorPlugin_proxy_enable_plugin (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     swiftObject._enablePlugin ()
 }
 
 func _EditorPlugin_proxy_forward_3d_draw_over_viewport (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._forward3dDrawOverViewport (viewportControl: lookupLiveObject (handleAddress: resolved_0) as? Control ?? Control (nativeHandle: resolved_0))
+    swiftObject._forward3dDrawOverViewport (viewportControl: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Control)
 }
 
 func _EditorPlugin_proxy_forward_3d_force_draw_over_viewport (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._forward3dForceDrawOverViewport (viewportControl: lookupLiveObject (handleAddress: resolved_0) as? Control ?? Control (nativeHandle: resolved_0))
+    swiftObject._forward3dForceDrawOverViewport (viewportControl: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Control)
 }
 
 func _EditorPlugin_proxy_forward_3d_gui_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._forward3dGuiInput (viewportCamera: lookupLiveObject (handleAddress: resolved_0) as? Camera3D ?? Camera3D (nativeHandle: resolved_0), event: lookupLiveObject (handleAddress: resolved_1) as? InputEvent ?? InputEvent (nativeHandle: resolved_1))
+    let ret = swiftObject._forward3dGuiInput (viewportCamera: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Camera3D, event: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? InputEvent)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _EditorPlugin_proxy_forward_canvas_draw_over_viewport (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._forwardCanvasDrawOverViewport (viewportControl: lookupLiveObject (handleAddress: resolved_0) as? Control ?? Control (nativeHandle: resolved_0))
+    swiftObject._forwardCanvasDrawOverViewport (viewportControl: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Control)
 }
 
 func _EditorPlugin_proxy_forward_canvas_force_draw_over_viewport (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._forwardCanvasForceDrawOverViewport (viewportControl: lookupLiveObject (handleAddress: resolved_0) as? Control ?? Control (nativeHandle: resolved_0))
+    swiftObject._forwardCanvasForceDrawOverViewport (viewportControl: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Control)
 }
 
 func _EditorPlugin_proxy_forward_canvas_gui_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._forwardCanvasGuiInput (event: lookupLiveObject (handleAddress: resolved_0) as? InputEvent ?? InputEvent (nativeHandle: resolved_0))
+    let ret = swiftObject._forwardCanvasGuiInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _EditorPlugin_proxy_get_breakpoints (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     let ret = swiftObject._getBreakpoints ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -1765,14 +2386,16 @@ func _EditorPlugin_proxy_get_breakpoints (instance: UnsafeMutableRawPointer?, ar
 
 func _EditorPlugin_proxy_get_plugin_icon (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     let ret = swiftObject._getPluginIcon ()
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Texture2D
 }
 
 func _EditorPlugin_proxy_get_plugin_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     let ret = GString (swiftObject._getPluginName ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -1780,16 +2403,18 @@ func _EditorPlugin_proxy_get_plugin_name (instance: UnsafeMutableRawPointer?, ar
 
 func _EditorPlugin_proxy_get_state (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     let ret = swiftObject._getState ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _EditorPlugin_proxy_get_unsaved_status (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     let ret = GString (swiftObject._getUnsavedStatus (forScene: GString.stringFromGStringPtr (ptr: args [0]!) ?? ""))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -1798,25 +2423,28 @@ func _EditorPlugin_proxy_get_unsaved_status (instance: UnsafeMutableRawPointer?,
 func _EditorPlugin_proxy_get_window_layout (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._getWindowLayout (configuration: lookupLiveObject (handleAddress: resolved_0) as? ConfigFile ?? ConfigFile (nativeHandle: resolved_0))
+    swiftObject._getWindowLayout (configuration: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? ConfigFile)
 }
 
 func _EditorPlugin_proxy_handles (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._handles (object: lookupLiveObject (handleAddress: resolved_0) as? Object ?? Object (nativeHandle: resolved_0))
+    let ret = swiftObject._handles (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _EditorPlugin_proxy_has_main_screen (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     let ret = swiftObject._hasMainScreen ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -1824,29 +2452,33 @@ func _EditorPlugin_proxy_has_main_screen (instance: UnsafeMutableRawPointer?, ar
 func _EditorPlugin_proxy_make_visible (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     swiftObject._makeVisible (args [0]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorPlugin_proxy_save_external_data (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
     swiftObject._saveExternalData ()
 }
 
 func _EditorPlugin_proxy_set_state (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    swiftObject._setState (GDictionary (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee))
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    swiftObject._setState (VariantDictionary (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee))
 }
 
 func _EditorPlugin_proxy_set_window_layout (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<EditorPlugin>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? EditorPlugin else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._setWindowLayout (configuration: lookupLiveObject (handleAddress: resolved_0) as? ConfigFile ?? ConfigFile (nativeHandle: resolved_0))
+    swiftObject._setWindowLayout (configuration: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? ConfigFile)
 }
 

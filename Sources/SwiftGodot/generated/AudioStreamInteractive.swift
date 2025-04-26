@@ -21,12 +21,12 @@ import Musl
 
 /// Audio stream that can playback music interactively, combining clips and a transition table.
 /// 
-/// This is an audio stream that can playback music interactively, combining clips and a transition table. Clips must be added first, and the transition rules via the ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``. Additionally, this stream export a property parameter to control the playback via ``AudioStreamPlayer``, ``AudioStreamPlayer2D``, or ``AudioStreamPlayer3D``.
+/// This is an audio stream that can playback music interactively, combining clips and a transition table. Clips must be added first, and then the transition rules via the ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``. Additionally, this stream exports a property parameter to control the playback via ``AudioStreamPlayer``, ``AudioStreamPlayer2D``, or ``AudioStreamPlayer3D``.
 /// 
 /// The way this is used is by filling a number of clips, then configuring the transition table. From there, clips are selected for playback and the music will smoothly go from the current to the new one while using the corresponding transition rule defined in the transition table.
 /// 
 open class AudioStreamInteractive: AudioStream {
-    fileprivate static var className = StringName("AudioStreamInteractive")
+    private static var className = StringName("AudioStreamInteractive")
     override open class var godotClassName: StringName { className }
     public enum TransitionFromTime: Int64, CaseIterable {
         /// Start transition as soon as possible, don't wait for any specific time position.
@@ -74,18 +74,6 @@ open class AudioStreamInteractive: AudioStream {
     
     /* Properties */
     
-    /// Index of the initial clip, which will be played first when this stream is played.
-    final public var initialClip: Int32 {
-        get {
-            return get_initial_clip ()
-        }
-        
-        set {
-            set_initial_clip (newValue)
-        }
-        
-    }
-    
     /// Amount of clips contained in this interactive player.
     final public var clipCount: Int32 {
         get {
@@ -98,9 +86,21 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
+    /// Index of the initial clip, which will be played first when this stream is played.
+    final public var initialClip: Int32 {
+        get {
+            return get_initial_clip ()
+        }
+        
+        set {
+            set_initial_clip (newValue)
+        }
+        
+    }
+    
     /* Methods */
-    fileprivate static var method_set_clip_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_count")
+    fileprivate static let method_set_clip_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_count")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -112,6 +112,7 @@ open class AudioStreamInteractive: AudioStream {
     
     @inline(__always)
     fileprivate final func set_clip_count(_ clipCount: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clipCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -125,8 +126,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_get_clip_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clip_count")
+    fileprivate static let method_get_clip_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clip_count")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -138,13 +139,14 @@ open class AudioStreamInteractive: AudioStream {
     
     @inline(__always)
     fileprivate final func get_clip_count() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_initial_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_initial_clip")
+    fileprivate static let method_set_initial_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_initial_clip")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -156,6 +158,7 @@ open class AudioStreamInteractive: AudioStream {
     
     @inline(__always)
     fileprivate final func set_initial_clip(_ clipIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -169,8 +172,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_get_initial_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_initial_clip")
+    fileprivate static let method_get_initial_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_initial_clip")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -182,13 +185,14 @@ open class AudioStreamInteractive: AudioStream {
     
     @inline(__always)
     fileprivate final func get_initial_clip() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_initial_clip, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_clip_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_name")
+    fileprivate static let method_set_clip_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_name")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3780747571)!
@@ -200,6 +204,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Set the name of the current clip (for easier identification).
     public final func setClipName(clipIndex: Int32, name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -216,8 +221,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_get_clip_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clip_name")
+    fileprivate static let method_get_clip_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clip_name")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 659327637)!
@@ -229,6 +234,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the name of a clip.
     public final func getClipName(clipIndex: Int32) -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -243,8 +249,8 @@ open class AudioStreamInteractive: AudioStream {
         return _result
     }
     
-    fileprivate static var method_set_clip_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_stream")
+    fileprivate static let method_set_clip_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_stream")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 111075094)!
@@ -256,6 +262,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Set the ``AudioStream`` associated with the current clip.
     public final func setClipStream(clipIndex: Int32, stream: AudioStream?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: stream?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -272,8 +279,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_get_clip_stream: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clip_stream")
+    fileprivate static let method_get_clip_stream: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clip_stream")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2739380747)!
@@ -285,6 +292,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the ``AudioStream`` associated with a clip.
     public final func getClipStream(clipIndex: Int32) -> AudioStream? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -296,11 +304,11 @@ open class AudioStreamInteractive: AudioStream {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_clip_auto_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_auto_advance")
+    fileprivate static let method_set_clip_auto_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_auto_advance")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 57217598)!
@@ -312,6 +320,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Set whether a clip will auto-advance by changing the auto-advance mode.
     public final func setClipAutoAdvance(clipIndex: Int32, mode: AudioStreamInteractive.AutoAdvanceMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -328,8 +337,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_get_clip_auto_advance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clip_auto_advance")
+    fileprivate static let method_get_clip_auto_advance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clip_auto_advance")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1778634807)!
@@ -341,6 +350,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return whether a clip has auto-advance enabled. See ``setClipAutoAdvance(clipIndex:mode:)``.
     public final func getClipAutoAdvance(clipIndex: Int32) -> AudioStreamInteractive.AutoAdvanceMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -355,8 +365,8 @@ open class AudioStreamInteractive: AudioStream {
         return AudioStreamInteractive.AutoAdvanceMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_clip_auto_advance_next_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clip_auto_advance_next_clip")
+    fileprivate static let method_set_clip_auto_advance_next_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clip_auto_advance_next_clip")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -368,6 +378,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Set the index of the next clip towards which this clip will auto advance to when finished. If the clip being played loops, then auto-advance will be ignored.
     public final func setClipAutoAdvanceNextClip(clipIndex: Int32, autoAdvanceNextClip: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: autoAdvanceNextClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -384,8 +395,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_get_clip_auto_advance_next_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clip_auto_advance_next_clip")
+    fileprivate static let method_get_clip_auto_advance_next_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clip_auto_advance_next_clip")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
@@ -397,6 +408,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the clip towards which the clip referenced by `clipIndex` will auto-advance to.
     public final func getClipAutoAdvanceNextClip(clipIndex: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -411,8 +423,8 @@ open class AudioStreamInteractive: AudioStream {
         return _result
     }
     
-    fileprivate static var method_add_transition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_transition")
+    fileprivate static let method_add_transition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_transition")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1630280552)!
@@ -439,6 +451,7 @@ open class AudioStreamInteractive: AudioStream {
     /// * If `holdPrevious` is used, then this clip will be remembered. This can be used together with ``AutoAdvanceMode/returnToHold`` to return to this clip after another is done playing.
     /// 
     public final func addTransition(fromClip: Int32, toClip: Int32, fromTime: AudioStreamInteractive.TransitionFromTime, toTime: AudioStreamInteractive.TransitionToTime, fadeMode: AudioStreamInteractive.FadeMode, fadeBeats: Double, useFillerClip: Bool = false, fillerClip: Int32 = -1, holdPrevious: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: fromTime.rawValue) { pArg2 in
@@ -476,8 +489,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_has_transition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_transition")
+    fileprivate static let method_has_transition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_transition")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
@@ -487,8 +500,9 @@ open class AudioStreamInteractive: AudioStream {
         
     }()
     
-    /// Return true if a given transition exists (was added via ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
+    /// Returns `true` if a given transition exists (was added via ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func hasTransition(fromClip: Int32, toClip: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
@@ -506,8 +520,8 @@ open class AudioStreamInteractive: AudioStream {
         return _result
     }
     
-    fileprivate static var method_erase_transition: GDExtensionMethodBindPtr = {
-        let methodName = StringName("erase_transition")
+    fileprivate static let method_erase_transition: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("erase_transition")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3937882851)!
@@ -519,6 +533,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Erase a transition by providing `fromClip` and `toClip` clip indices. ``clipAny`` can be used for either argument or both.
     public final func eraseTransition(fromClip: Int32, toClip: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -535,8 +550,8 @@ open class AudioStreamInteractive: AudioStream {
         
     }
     
-    fileprivate static var method_get_transition_list: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transition_list")
+    fileprivate static let method_get_transition_list: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transition_list")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1930428628)!
@@ -548,13 +563,14 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the list of transitions (from, to interleaved).
     public final func getTransitionList() -> PackedInt32Array {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
         gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_transition_from_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transition_from_time")
+    fileprivate static let method_get_transition_from_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transition_from_time")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3453338158)!
@@ -566,6 +582,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the source time position for a transition (see ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func getTransitionFromTime(fromClip: Int32, toClip: Int32) -> AudioStreamInteractive.TransitionFromTime {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
@@ -583,8 +600,8 @@ open class AudioStreamInteractive: AudioStream {
         return AudioStreamInteractive.TransitionFromTime (rawValue: _result)!
     }
     
-    fileprivate static var method_get_transition_to_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transition_to_time")
+    fileprivate static let method_get_transition_to_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transition_to_time")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1369651373)!
@@ -596,6 +613,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the destination time position for a transition (see ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func getTransitionToTime(fromClip: Int32, toClip: Int32) -> AudioStreamInteractive.TransitionToTime {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
@@ -613,8 +631,8 @@ open class AudioStreamInteractive: AudioStream {
         return AudioStreamInteractive.TransitionToTime (rawValue: _result)!
     }
     
-    fileprivate static var method_get_transition_fade_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transition_fade_mode")
+    fileprivate static let method_get_transition_fade_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transition_fade_mode")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4065396087)!
@@ -626,6 +644,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the mode for a transition (see ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func getTransitionFadeMode(fromClip: Int32, toClip: Int32) -> AudioStreamInteractive.FadeMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
@@ -643,8 +662,8 @@ open class AudioStreamInteractive: AudioStream {
         return AudioStreamInteractive.FadeMode (rawValue: _result)!
     }
     
-    fileprivate static var method_get_transition_fade_beats: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transition_fade_beats")
+    fileprivate static let method_get_transition_fade_beats: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transition_fade_beats")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3085491603)!
@@ -656,6 +675,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the time (in beats) for a transition (see ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func getTransitionFadeBeats(fromClip: Int32, toClip: Int32) -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
@@ -673,8 +693,8 @@ open class AudioStreamInteractive: AudioStream {
         return _result
     }
     
-    fileprivate static var method_is_transition_using_filler_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_transition_using_filler_clip")
+    fileprivate static let method_is_transition_using_filler_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_transition_using_filler_clip")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
@@ -686,6 +706,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return whether a transition uses the _filler clip_ functionality (see ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func isTransitionUsingFillerClip(fromClip: Int32, toClip: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
@@ -703,8 +724,8 @@ open class AudioStreamInteractive: AudioStream {
         return _result
     }
     
-    fileprivate static var method_get_transition_filler_clip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transition_filler_clip")
+    fileprivate static let method_get_transition_filler_clip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transition_filler_clip")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3175239445)!
@@ -716,6 +737,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return the filler clip for a transition (see ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func getTransitionFillerClip(fromClip: Int32, toClip: Int32) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in
@@ -733,8 +755,8 @@ open class AudioStreamInteractive: AudioStream {
         return _result
     }
     
-    fileprivate static var method_is_transition_holding_previous: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_transition_holding_previous")
+    fileprivate static let method_is_transition_holding_previous: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_transition_holding_previous")
         return withUnsafePointer(to: &AudioStreamInteractive.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2522259332)!
@@ -746,6 +768,7 @@ open class AudioStreamInteractive: AudioStream {
     
     /// Return whether a transition uses the _hold previous_ functionality (see ``addTransition(fromClip:toClip:fromTime:toTime:fadeMode:fadeBeats:useFillerClip:fillerClip:holdPrevious:)``).
     public final func isTransitionHoldingPrevious(fromClip: Int32, toClip: Int32) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: fromClip) { pArg0 in
             withUnsafePointer(to: toClip) { pArg1 in

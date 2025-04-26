@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This class serves as a default material with a wide variety of rendering features and properties without the need to write shader code. See the tutorial below for details.
 open class BaseMaterial3D: Material {
-    fileprivate static var className = StringName("BaseMaterial3D")
+    private static var className = StringName("BaseMaterial3D")
     override open class var godotClassName: StringName { className }
     public enum TextureParam: Int64, CaseIterable {
         /// Texture specifying per-pixel color.
@@ -110,7 +110,7 @@ open class BaseMaterial3D: Material {
         case unshaded = 0 // SHADING_MODE_UNSHADED
         /// The object will be shaded per pixel. Useful for realistic shading effects.
         case perPixel = 1 // SHADING_MODE_PER_PIXEL
-        /// The object will be shaded per vertex. Useful when you want cheaper shaders and do not care about visual quality. Not implemented yet (this mode will act like ``ShadingMode/perPixel``).
+        /// The object will be shaded per vertex. Useful when you want cheaper shaders and do not care about visual quality.
         case perVertex = 2 // SHADING_MODE_PER_VERTEX
         /// Represents the size of the ``BaseMaterial3D/ShadingMode`` enum.
         case max = 3 // SHADING_MODE_MAX
@@ -420,9 +420,6 @@ open class BaseMaterial3D: Material {
     }
     
     /// Sets whether the shading takes place, per-pixel, per-vertex or unshaded. Per-vertex lighting is faster, making it the best choice for mobile applications, however it looks considerably worse than per-pixel. Unshaded rendering is the fastest, but disables all interactions with lights.
-    /// 
-    /// > Note: Setting the shading mode vertex shading currently has no effect, as vertex shading is not implemented yet.
-    /// 
     final public var shadingMode: BaseMaterial3D.ShadingMode {
         get {
             return get_shading_mode ()
@@ -897,7 +894,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    /// If `true`, anisotropy is enabled. Anisotropy changes the shape of the specular blob and aligns it to tangent space. This is useful for brushed aluminium and hair reflections.
+    /// If `true`, anisotropy is enabled. Anisotropy changes the shape of the specular blob and aligns it to tangent space. This is useful for brushed aluminum and hair reflections.
     /// 
     /// > Note: Mesh tangents are needed for anisotropy to work. If the mesh does not contain tangents, the anisotropy effect will appear broken.
     /// 
@@ -1274,6 +1271,9 @@ open class BaseMaterial3D: Material {
     }
     
     /// If `true`, the refraction effect is enabled. Distorts transparency based on light from behind the object.
+    /// 
+    /// > Note: Refraction is implemented using the screen texture. Only opaque materials will appear in the refraction, since transparent materials do not appear in the screen texture.
+    /// 
     final public var refractionEnabled: Bool {
         get {
             return get_feature (BaseMaterial3D.Feature (rawValue: 10)!)
@@ -1578,8 +1578,6 @@ open class BaseMaterial3D: Material {
     
     /// Controls how the object faces the camera. See ``BaseMaterial3D/BillboardMode``.
     /// 
-    /// > Note: When billboarding is enabled and the material also casts shadows, billboards will face **the** camera in the scene when rendering shadows. In scenes with multiple cameras, the intended shadow cannot be determined and this will result in undefined behavior. See <a href="https://github.com/godotengine/godot/pull/72638">GitHub Pull Request #72638</a> for details.
-    /// 
     /// > Note: Billboard mode is not suitable for VR because the left-right vector of the camera is not horizontal when the screen is attached to your head instead of on the table. See <a href="https://github.com/godotengine/godot/issues/41567">GitHub issue #41567</a> for details.
     /// 
     final public var billboardMode: BaseMaterial3D.BillboardMode {
@@ -1643,7 +1641,7 @@ open class BaseMaterial3D: Material {
     
     /// If `true`, enables the vertex grow setting. This can be used to create mesh-based outlines using a second material pass and its ``cullMode`` set to ``CullMode/front``. See also ``growAmount``.
     /// 
-    /// > Note: Vertex growth cannot create new vertices, which means that visible gaps may occur in sharp corners. This can be alleviated by designing the mesh to use smooth normals exclusively using <a href="https://wiki.polycount.com/wiki/Face_weighted_normals">face weighted normals</a> in the 3D authoring software. In this case, grow will be able to join every outline together, just like in the original mesh.
+    /// > Note: Vertex growth cannot create new vertices, which means that visible gaps may occur in sharp corners. This can be alleviated by designing the mesh to use smooth normals exclusively using <a href="http://wiki.polycount.com/wiki/Face_weighted_normals">face weighted normals</a> in the 3D authoring software. In this case, grow will be able to join every outline together, just like in the original mesh.
     /// 
     final public var grow: Bool {
         get {
@@ -1810,8 +1808,8 @@ open class BaseMaterial3D: Material {
     }
     
     /* Methods */
-    fileprivate static var method_set_albedo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_albedo")
+    fileprivate static let method_set_albedo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_albedo")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -1823,6 +1821,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_albedo(_ albedo: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: albedo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1836,8 +1835,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_albedo: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_albedo")
+    fileprivate static let method_get_albedo: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_albedo")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -1849,13 +1848,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_albedo() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_albedo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transparency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transparency")
+    fileprivate static let method_set_transparency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transparency")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3435651667)!
@@ -1867,6 +1867,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_transparency(_ transparency: BaseMaterial3D.Transparency) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: transparency.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1880,8 +1881,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_transparency: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transparency")
+    fileprivate static let method_get_transparency: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transparency")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 990903061)!
@@ -1893,13 +1894,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_transparency() -> BaseMaterial3D.Transparency {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transparency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.Transparency (rawValue: _result)!
     }
     
-    fileprivate static var method_set_alpha_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_antialiasing")
+    fileprivate static let method_set_alpha_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_antialiasing")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3212649852)!
@@ -1911,6 +1913,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_alpha_antialiasing(_ alphaAa: BaseMaterial3D.AlphaAntiAliasing) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alphaAa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1924,8 +1927,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_alpha_antialiasing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_antialiasing")
+    fileprivate static let method_get_alpha_antialiasing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_antialiasing")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2889939400)!
@@ -1937,13 +1940,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_alpha_antialiasing() -> BaseMaterial3D.AlphaAntiAliasing {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.AlphaAntiAliasing (rawValue: _result)!
     }
     
-    fileprivate static var method_set_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_antialiasing_edge")
+    fileprivate static let method_set_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_antialiasing_edge")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -1955,6 +1959,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_alpha_antialiasing_edge(_ edge: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: edge) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1968,8 +1973,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_antialiasing_edge")
+    fileprivate static let method_get_alpha_antialiasing_edge: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_antialiasing_edge")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1981,13 +1986,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_alpha_antialiasing_edge() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_antialiasing_edge, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shading_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shading_mode")
+    fileprivate static let method_set_shading_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shading_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3368750322)!
@@ -1999,6 +2005,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_shading_mode(_ shadingMode: BaseMaterial3D.ShadingMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shadingMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2012,8 +2019,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_shading_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shading_mode")
+    fileprivate static let method_get_shading_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shading_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2132070559)!
@@ -2025,13 +2032,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_shading_mode() -> BaseMaterial3D.ShadingMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_shading_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.ShadingMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_specular: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_specular")
+    fileprivate static let method_set_specular: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_specular")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2043,6 +2051,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_specular(_ specular: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: specular) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2056,8 +2065,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_specular: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_specular")
+    fileprivate static let method_get_specular: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_specular")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2069,13 +2078,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_specular() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_specular, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_metallic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_metallic")
+    fileprivate static let method_set_metallic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_metallic")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2087,6 +2097,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_metallic(_ metallic: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: metallic) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2100,8 +2111,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_metallic: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_metallic")
+    fileprivate static let method_get_metallic: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_metallic")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2113,13 +2124,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_metallic() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_metallic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_roughness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_roughness")
+    fileprivate static let method_set_roughness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_roughness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2131,6 +2143,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_roughness(_ roughness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: roughness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2144,8 +2157,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_roughness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_roughness")
+    fileprivate static let method_get_roughness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_roughness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2157,13 +2170,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_roughness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_roughness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_emission: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emission")
+    fileprivate static let method_set_emission: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emission")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -2175,6 +2189,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_emission(_ emission: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: emission) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2188,8 +2203,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_emission: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_emission")
+    fileprivate static let method_get_emission: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_emission")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -2201,13 +2216,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_emission() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_emission_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emission_energy_multiplier")
+    fileprivate static let method_set_emission_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emission_energy_multiplier")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2219,6 +2235,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_emission_energy_multiplier(_ emissionEnergyMultiplier: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: emissionEnergyMultiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2232,8 +2249,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_emission_energy_multiplier: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_emission_energy_multiplier")
+    fileprivate static let method_get_emission_energy_multiplier: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_emission_energy_multiplier")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2245,13 +2262,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_emission_energy_multiplier() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_emission_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emission_intensity")
+    fileprivate static let method_set_emission_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emission_intensity")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2263,6 +2281,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_emission_intensity(_ emissionEnergyMultiplier: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: emissionEnergyMultiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2276,8 +2295,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_emission_intensity: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_emission_intensity")
+    fileprivate static let method_get_emission_intensity: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_emission_intensity")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2289,13 +2308,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_emission_intensity() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_normal_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_normal_scale")
+    fileprivate static let method_set_normal_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_normal_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2307,6 +2327,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_normal_scale(_ normalScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: normalScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2320,8 +2341,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_normal_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_normal_scale")
+    fileprivate static let method_get_normal_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_normal_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2333,13 +2354,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_normal_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_normal_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rim: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rim")
+    fileprivate static let method_set_rim: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rim")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2351,6 +2373,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_rim(_ rim: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rim) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2364,8 +2387,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_rim: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rim")
+    fileprivate static let method_get_rim: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rim")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2377,13 +2400,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_rim() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_rim, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_rim_tint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_rim_tint")
+    fileprivate static let method_set_rim_tint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_rim_tint")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2395,6 +2419,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_rim_tint(_ rimTint: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: rimTint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2408,8 +2433,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_rim_tint: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_rim_tint")
+    fileprivate static let method_get_rim_tint: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rim_tint")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2421,13 +2446,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_rim_tint() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_rim_tint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_clearcoat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clearcoat")
+    fileprivate static let method_set_clearcoat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clearcoat")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2439,6 +2465,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_clearcoat(_ clearcoat: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clearcoat) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2452,8 +2479,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_clearcoat: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clearcoat")
+    fileprivate static let method_get_clearcoat: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clearcoat")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2465,13 +2492,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_clearcoat() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_clearcoat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_clearcoat_roughness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_clearcoat_roughness")
+    fileprivate static let method_set_clearcoat_roughness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_clearcoat_roughness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2483,6 +2511,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_clearcoat_roughness(_ clearcoatRoughness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: clearcoatRoughness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2496,8 +2525,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_clearcoat_roughness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_clearcoat_roughness")
+    fileprivate static let method_get_clearcoat_roughness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_clearcoat_roughness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2509,13 +2538,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_clearcoat_roughness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_clearcoat_roughness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_anisotropy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_anisotropy")
+    fileprivate static let method_set_anisotropy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_anisotropy")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2527,6 +2557,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_anisotropy(_ anisotropy: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: anisotropy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2540,8 +2571,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_anisotropy: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_anisotropy")
+    fileprivate static let method_get_anisotropy: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_anisotropy")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2553,13 +2584,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_anisotropy() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_anisotropy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_heightmap_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_heightmap_scale")
+    fileprivate static let method_set_heightmap_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightmap_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2571,6 +2603,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_heightmap_scale(_ heightmapScale: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: heightmapScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2584,8 +2617,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_heightmap_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_heightmap_scale")
+    fileprivate static let method_get_heightmap_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heightmap_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2597,13 +2630,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_heightmap_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_subsurface_scattering_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_subsurface_scattering_strength")
+    fileprivate static let method_set_subsurface_scattering_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_subsurface_scattering_strength")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2615,6 +2649,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_subsurface_scattering_strength(_ strength: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2628,8 +2663,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_subsurface_scattering_strength: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subsurface_scattering_strength")
+    fileprivate static let method_get_subsurface_scattering_strength: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subsurface_scattering_strength")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2641,13 +2676,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_subsurface_scattering_strength() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_subsurface_scattering_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transmittance_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transmittance_color")
+    fileprivate static let method_set_transmittance_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transmittance_color")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -2659,6 +2695,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_transmittance_color(_ color: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2672,8 +2709,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_transmittance_color: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transmittance_color")
+    fileprivate static let method_get_transmittance_color: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transmittance_color")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -2685,13 +2722,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_transmittance_color() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transmittance_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transmittance_depth")
+    fileprivate static let method_set_transmittance_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transmittance_depth")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2703,6 +2741,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_transmittance_depth(_ depth: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2716,8 +2755,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_transmittance_depth: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transmittance_depth")
+    fileprivate static let method_get_transmittance_depth: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transmittance_depth")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2729,13 +2768,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_transmittance_depth() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_transmittance_boost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_transmittance_boost")
+    fileprivate static let method_set_transmittance_boost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_transmittance_boost")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2747,6 +2787,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_transmittance_boost(_ boost: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: boost) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2760,8 +2801,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_transmittance_boost: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_transmittance_boost")
+    fileprivate static let method_get_transmittance_boost: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_transmittance_boost")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2773,13 +2814,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_transmittance_boost() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_boost, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_backlight: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_backlight")
+    fileprivate static let method_set_backlight: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_backlight")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920490490)!
@@ -2791,6 +2833,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_backlight(_ backlight: Color) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: backlight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2804,8 +2847,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_backlight: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_backlight")
+    fileprivate static let method_get_backlight: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_backlight")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3444240500)!
@@ -2817,13 +2860,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_backlight() -> Color {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_backlight, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_refraction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_refraction")
+    fileprivate static let method_set_refraction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_refraction")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2835,6 +2879,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_refraction(_ refraction: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: refraction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2848,8 +2893,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_refraction: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_refraction")
+    fileprivate static let method_get_refraction: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_refraction")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2861,13 +2906,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_refraction() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_refraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_point_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_point_size")
+    fileprivate static let method_set_point_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_point_size")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -2879,6 +2925,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_point_size(_ pointSize: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pointSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2892,8 +2939,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_point_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_point_size")
+    fileprivate static let method_get_point_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_point_size")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -2905,13 +2952,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_point_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_point_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_detail_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_detail_uv")
+    fileprivate static let method_set_detail_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_detail_uv")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 456801921)!
@@ -2923,6 +2971,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_detail_uv(_ detailUv: BaseMaterial3D.DetailUV) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: detailUv.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2936,8 +2985,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_detail_uv: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_detail_uv")
+    fileprivate static let method_get_detail_uv: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_detail_uv")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2306920512)!
@@ -2949,13 +2998,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_detail_uv() -> BaseMaterial3D.DetailUV {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_detail_uv, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.DetailUV (rawValue: _result)!
     }
     
-    fileprivate static var method_set_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_blend_mode")
+    fileprivate static let method_set_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_blend_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2830186259)!
@@ -2967,6 +3017,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_blend_mode(_ blendMode: BaseMaterial3D.BlendMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: blendMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2980,8 +3031,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_blend_mode")
+    fileprivate static let method_get_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_blend_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4022690962)!
@@ -2993,13 +3044,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_blend_mode() -> BaseMaterial3D.BlendMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.BlendMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_depth_draw_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_depth_draw_mode")
+    fileprivate static let method_set_depth_draw_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_depth_draw_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1456584748)!
@@ -3011,6 +3063,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_depth_draw_mode(_ depthDrawMode: BaseMaterial3D.DepthDrawMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: depthDrawMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3024,8 +3077,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_depth_draw_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_depth_draw_mode")
+    fileprivate static let method_get_depth_draw_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_depth_draw_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2578197639)!
@@ -3037,13 +3090,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_depth_draw_mode() -> BaseMaterial3D.DepthDrawMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_depth_draw_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.DepthDrawMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_cull_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_cull_mode")
+    fileprivate static let method_set_cull_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_cull_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2338909218)!
@@ -3055,6 +3109,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_cull_mode(_ cullMode: BaseMaterial3D.CullMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: cullMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3068,8 +3123,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_cull_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_cull_mode")
+    fileprivate static let method_get_cull_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_cull_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1941499586)!
@@ -3081,13 +3136,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_cull_mode() -> BaseMaterial3D.CullMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_cull_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.CullMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_diffuse_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_diffuse_mode")
+    fileprivate static let method_set_diffuse_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_diffuse_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1045299638)!
@@ -3099,6 +3155,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_diffuse_mode(_ diffuseMode: BaseMaterial3D.DiffuseMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: diffuseMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3112,8 +3169,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_diffuse_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_diffuse_mode")
+    fileprivate static let method_get_diffuse_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_diffuse_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3973617136)!
@@ -3125,13 +3182,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_diffuse_mode() -> BaseMaterial3D.DiffuseMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_diffuse_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.DiffuseMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_specular_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_specular_mode")
+    fileprivate static let method_set_specular_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_specular_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 584737147)!
@@ -3143,6 +3201,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_specular_mode(_ specularMode: BaseMaterial3D.SpecularMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: specularMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3156,8 +3215,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_specular_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_specular_mode")
+    fileprivate static let method_get_specular_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_specular_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2569953298)!
@@ -3169,13 +3228,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_specular_mode() -> BaseMaterial3D.SpecularMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_specular_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.SpecularMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_flag")
+    fileprivate static let method_set_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_flag")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3070159527)!
@@ -3188,6 +3248,7 @@ open class BaseMaterial3D: Material {
     @inline(__always)
     /// If `true`, enables the specified flag. Flags are optional behavior that can be turned on and off. Only one flag can be enabled at a time with this function, the flag enumerators cannot be bit-masked together to enable or disable multiple flags at once. Flags can also be enabled by setting the corresponding member to `true`. See ``BaseMaterial3D/Flags`` enumerator for options.
     fileprivate final func set_flag(_ flag: BaseMaterial3D.Flags, _ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3204,8 +3265,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_flag: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_flag")
+    fileprivate static let method_get_flag: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_flag")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410065)!
@@ -3218,6 +3279,7 @@ open class BaseMaterial3D: Material {
     @inline(__always)
     /// Returns `true`, if the specified flag is enabled. See ``BaseMaterial3D/Flags`` enumerator for options.
     fileprivate final func get_flag(_ flag: BaseMaterial3D.Flags) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3232,8 +3294,8 @@ open class BaseMaterial3D: Material {
         return _result
     }
     
-    fileprivate static var method_set_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture_filter")
+    fileprivate static let method_set_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture_filter")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 22904437)!
@@ -3245,6 +3307,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_texture_filter(_ mode: BaseMaterial3D.TextureFilter) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3258,8 +3321,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_texture_filter: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture_filter")
+    fileprivate static let method_get_texture_filter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture_filter")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3289213076)!
@@ -3271,13 +3334,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_texture_filter() -> BaseMaterial3D.TextureFilter {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.TextureFilter (rawValue: _result)!
     }
     
-    fileprivate static var method_set_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_feature")
+    fileprivate static let method_set_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_feature")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2819288693)!
@@ -3290,6 +3354,7 @@ open class BaseMaterial3D: Material {
     @inline(__always)
     /// If `true`, enables the specified ``BaseMaterial3D/Feature``. Many features that are available in ``BaseMaterial3D``s need to be enabled before use. This way the cost for using the feature is only incurred when specified. Features can also be enabled by setting the corresponding member to `true`.
     fileprivate final func set_feature(_ feature: BaseMaterial3D.Feature, _ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3306,8 +3371,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_feature: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_feature")
+    fileprivate static let method_get_feature: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_feature")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1965241794)!
@@ -3320,6 +3385,7 @@ open class BaseMaterial3D: Material {
     @inline(__always)
     /// Returns `true`, if the specified ``BaseMaterial3D/Feature`` is enabled.
     fileprivate final func get_feature(_ feature: BaseMaterial3D.Feature) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3334,8 +3400,8 @@ open class BaseMaterial3D: Material {
         return _result
     }
     
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 464208135)!
@@ -3348,6 +3414,7 @@ open class BaseMaterial3D: Material {
     @inline(__always)
     /// Sets the texture for the slot specified by `param`. See ``BaseMaterial3D/TextureParam`` for available slots.
     fileprivate final func set_texture(_ param: BaseMaterial3D.TextureParam, _ texture: Texture2D?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3364,8 +3431,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 329605813)!
@@ -3378,6 +3445,7 @@ open class BaseMaterial3D: Material {
     @inline(__always)
     /// Returns the ``Texture2D`` associated with the specified ``BaseMaterial3D/TextureParam``.
     fileprivate final func get_texture(_ param: BaseMaterial3D.TextureParam) -> Texture2D? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3389,11 +3457,11 @@ open class BaseMaterial3D: Material {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_detail_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_detail_blend_mode")
+    fileprivate static let method_set_detail_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_detail_blend_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2830186259)!
@@ -3405,6 +3473,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_detail_blend_mode(_ detailBlendMode: BaseMaterial3D.BlendMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: detailBlendMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3418,8 +3487,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_detail_blend_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_detail_blend_mode")
+    fileprivate static let method_get_detail_blend_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_detail_blend_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4022690962)!
@@ -3431,13 +3500,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_detail_blend_mode() -> BaseMaterial3D.BlendMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_detail_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.BlendMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_uv1_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv1_scale")
+    fileprivate static let method_set_uv1_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv1_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -3449,6 +3519,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_uv1_scale(_ scale: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3462,8 +3533,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_uv1_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv1_scale")
+    fileprivate static let method_get_uv1_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv1_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -3475,13 +3546,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_uv1_scale() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_uv1_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv1_offset")
+    fileprivate static let method_set_uv1_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv1_offset")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -3493,6 +3565,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_uv1_offset(_ offset: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3506,8 +3579,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_uv1_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv1_offset")
+    fileprivate static let method_get_uv1_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv1_offset")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -3519,13 +3592,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_uv1_offset() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_uv1_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv1_triplanar_blend_sharpness")
+    fileprivate static let method_set_uv1_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv1_triplanar_blend_sharpness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3537,6 +3611,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_uv1_triplanar_blend_sharpness(_ sharpness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3550,8 +3625,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_uv1_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv1_triplanar_blend_sharpness")
+    fileprivate static let method_get_uv1_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv1_triplanar_blend_sharpness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3563,13 +3638,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_uv1_triplanar_blend_sharpness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_triplanar_blend_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_uv2_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv2_scale")
+    fileprivate static let method_set_uv2_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv2_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -3581,6 +3657,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_uv2_scale(_ scale: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3594,8 +3671,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_uv2_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv2_scale")
+    fileprivate static let method_get_uv2_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv2_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -3607,13 +3684,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_uv2_scale() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_uv2_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv2_offset")
+    fileprivate static let method_set_uv2_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv2_offset")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3460891852)!
@@ -3625,6 +3703,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_uv2_offset(_ offset: Vector3) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3638,8 +3717,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_uv2_offset: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv2_offset")
+    fileprivate static let method_get_uv2_offset: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv2_offset")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3360562783)!
@@ -3651,13 +3730,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_uv2_offset() -> Vector3 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_uv2_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_uv2_triplanar_blend_sharpness")
+    fileprivate static let method_set_uv2_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_uv2_triplanar_blend_sharpness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -3669,6 +3749,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_uv2_triplanar_blend_sharpness(_ sharpness: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3682,8 +3763,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_uv2_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_uv2_triplanar_blend_sharpness")
+    fileprivate static let method_get_uv2_triplanar_blend_sharpness: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_uv2_triplanar_blend_sharpness")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -3695,13 +3776,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_uv2_triplanar_blend_sharpness() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_triplanar_blend_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_billboard_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_billboard_mode")
+    fileprivate static let method_set_billboard_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_billboard_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4202036497)!
@@ -3713,6 +3795,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_billboard_mode(_ mode: BaseMaterial3D.BillboardMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3726,8 +3809,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_billboard_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_billboard_mode")
+    fileprivate static let method_get_billboard_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_billboard_mode")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1283840139)!
@@ -3739,13 +3822,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_billboard_mode() -> BaseMaterial3D.BillboardMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_billboard_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.BillboardMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_particles_anim_h_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_particles_anim_h_frames")
+    fileprivate static let method_set_particles_anim_h_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_particles_anim_h_frames")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3757,6 +3841,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_particles_anim_h_frames(_ frames: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3770,8 +3855,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_particles_anim_h_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_particles_anim_h_frames")
+    fileprivate static let method_get_particles_anim_h_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_particles_anim_h_frames")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3783,13 +3868,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_particles_anim_h_frames() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_h_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_particles_anim_v_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_particles_anim_v_frames")
+    fileprivate static let method_set_particles_anim_v_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_particles_anim_v_frames")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3801,6 +3887,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_particles_anim_v_frames(_ frames: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3814,8 +3901,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_particles_anim_v_frames: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_particles_anim_v_frames")
+    fileprivate static let method_get_particles_anim_v_frames: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_particles_anim_v_frames")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3827,13 +3914,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_particles_anim_v_frames() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_v_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_particles_anim_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_particles_anim_loop")
+    fileprivate static let method_set_particles_anim_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_particles_anim_loop")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3845,6 +3933,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_particles_anim_loop(_ loop: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3858,8 +3947,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_particles_anim_loop: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_particles_anim_loop")
+    fileprivate static let method_get_particles_anim_loop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_particles_anim_loop")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3871,13 +3960,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_particles_anim_loop() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_heightmap_deep_parallax: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_heightmap_deep_parallax")
+    fileprivate static let method_set_heightmap_deep_parallax: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightmap_deep_parallax")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3889,6 +3979,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_heightmap_deep_parallax(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3902,8 +3993,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_is_heightmap_deep_parallax_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_heightmap_deep_parallax_enabled")
+    fileprivate static let method_is_heightmap_deep_parallax_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_heightmap_deep_parallax_enabled")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3915,13 +4006,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func is_heightmap_deep_parallax_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_heightmap_deep_parallax_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_heightmap_deep_parallax_min_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_heightmap_deep_parallax_min_layers")
+    fileprivate static let method_set_heightmap_deep_parallax_min_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightmap_deep_parallax_min_layers")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3933,6 +4025,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_heightmap_deep_parallax_min_layers(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3946,8 +4039,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_heightmap_deep_parallax_min_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_heightmap_deep_parallax_min_layers")
+    fileprivate static let method_get_heightmap_deep_parallax_min_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heightmap_deep_parallax_min_layers")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3959,13 +4052,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_heightmap_deep_parallax_min_layers() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_min_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_heightmap_deep_parallax_max_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_heightmap_deep_parallax_max_layers")
+    fileprivate static let method_set_heightmap_deep_parallax_max_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightmap_deep_parallax_max_layers")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3977,6 +4071,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_heightmap_deep_parallax_max_layers(_ layer: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3990,8 +4085,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_heightmap_deep_parallax_max_layers: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_heightmap_deep_parallax_max_layers")
+    fileprivate static let method_get_heightmap_deep_parallax_max_layers: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heightmap_deep_parallax_max_layers")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -4003,13 +4098,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_heightmap_deep_parallax_max_layers() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_max_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_heightmap_deep_parallax_flip_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_heightmap_deep_parallax_flip_tangent")
+    fileprivate static let method_set_heightmap_deep_parallax_flip_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightmap_deep_parallax_flip_tangent")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4021,6 +4117,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_heightmap_deep_parallax_flip_tangent(_ flip: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4034,8 +4131,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_heightmap_deep_parallax_flip_tangent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_heightmap_deep_parallax_flip_tangent")
+    fileprivate static let method_get_heightmap_deep_parallax_flip_tangent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heightmap_deep_parallax_flip_tangent")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4047,13 +4144,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_heightmap_deep_parallax_flip_tangent() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_flip_tangent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_heightmap_deep_parallax_flip_binormal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_heightmap_deep_parallax_flip_binormal")
+    fileprivate static let method_set_heightmap_deep_parallax_flip_binormal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_heightmap_deep_parallax_flip_binormal")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4065,6 +4163,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_heightmap_deep_parallax_flip_binormal(_ flip: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4078,8 +4177,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_heightmap_deep_parallax_flip_binormal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_heightmap_deep_parallax_flip_binormal")
+    fileprivate static let method_get_heightmap_deep_parallax_flip_binormal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_heightmap_deep_parallax_flip_binormal")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4091,13 +4190,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_heightmap_deep_parallax_flip_binormal() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_flip_binormal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_grow: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_grow")
+    fileprivate static let method_set_grow: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_grow")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4109,6 +4209,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_grow(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4122,8 +4223,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_grow: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_grow")
+    fileprivate static let method_get_grow: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_grow")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4135,13 +4236,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_grow() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_grow, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_emission_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_emission_operator")
+    fileprivate static let method_set_emission_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_emission_operator")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3825128922)!
@@ -4153,6 +4255,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_emission_operator(_ `operator`: BaseMaterial3D.EmissionOperator) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: `operator`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4166,8 +4269,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_emission_operator: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_emission_operator")
+    fileprivate static let method_get_emission_operator: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_emission_operator")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 974205018)!
@@ -4179,13 +4282,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_emission_operator() -> BaseMaterial3D.EmissionOperator {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_operator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.EmissionOperator (rawValue: _result)!
     }
     
-    fileprivate static var method_set_ao_light_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ao_light_affect")
+    fileprivate static let method_set_ao_light_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ao_light_affect")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4197,6 +4301,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_ao_light_affect(_ amount: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4210,8 +4315,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_ao_light_affect: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ao_light_affect")
+    fileprivate static let method_get_ao_light_affect: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ao_light_affect")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4223,13 +4328,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_ao_light_affect() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_ao_light_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_scissor_threshold")
+    fileprivate static let method_set_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_scissor_threshold")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4241,6 +4347,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_alpha_scissor_threshold(_ threshold: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4254,8 +4361,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_scissor_threshold")
+    fileprivate static let method_get_alpha_scissor_threshold: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_scissor_threshold")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4267,13 +4374,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_alpha_scissor_threshold() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_scissor_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_alpha_hash_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alpha_hash_scale")
+    fileprivate static let method_set_alpha_hash_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alpha_hash_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4285,6 +4393,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_alpha_hash_scale(_ threshold: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4298,8 +4407,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_alpha_hash_scale: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alpha_hash_scale")
+    fileprivate static let method_get_alpha_hash_scale: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alpha_hash_scale")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4311,13 +4420,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_alpha_hash_scale() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_hash_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_grow_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_grow_enabled")
+    fileprivate static let method_set_grow_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_grow_enabled")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4329,6 +4439,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_grow_enabled(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4342,8 +4453,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_is_grow_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_grow_enabled")
+    fileprivate static let method_is_grow_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_grow_enabled")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4355,13 +4466,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func is_grow_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_grow_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_metallic_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_metallic_texture_channel")
+    fileprivate static let method_set_metallic_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_metallic_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 744167988)!
@@ -4373,6 +4485,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_metallic_texture_channel(_ channel: BaseMaterial3D.TextureChannel) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4386,8 +4499,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_metallic_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_metallic_texture_channel")
+    fileprivate static let method_get_metallic_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_metallic_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 568133867)!
@@ -4399,13 +4512,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_metallic_texture_channel() -> BaseMaterial3D.TextureChannel {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_metallic_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
-    fileprivate static var method_set_roughness_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_roughness_texture_channel")
+    fileprivate static let method_set_roughness_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_roughness_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 744167988)!
@@ -4417,6 +4531,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_roughness_texture_channel(_ channel: BaseMaterial3D.TextureChannel) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4430,8 +4545,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_roughness_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_roughness_texture_channel")
+    fileprivate static let method_get_roughness_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_roughness_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 568133867)!
@@ -4443,13 +4558,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_roughness_texture_channel() -> BaseMaterial3D.TextureChannel {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_roughness_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
-    fileprivate static var method_set_ao_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_ao_texture_channel")
+    fileprivate static let method_set_ao_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_ao_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 744167988)!
@@ -4461,6 +4577,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_ao_texture_channel(_ channel: BaseMaterial3D.TextureChannel) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4474,8 +4591,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_ao_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_ao_texture_channel")
+    fileprivate static let method_get_ao_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_ao_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 568133867)!
@@ -4487,13 +4604,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_ao_texture_channel() -> BaseMaterial3D.TextureChannel {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_ao_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
-    fileprivate static var method_set_refraction_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_refraction_texture_channel")
+    fileprivate static let method_set_refraction_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_refraction_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 744167988)!
@@ -4505,6 +4623,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_refraction_texture_channel(_ channel: BaseMaterial3D.TextureChannel) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4518,8 +4637,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_refraction_texture_channel: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_refraction_texture_channel")
+    fileprivate static let method_get_refraction_texture_channel: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_refraction_texture_channel")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 568133867)!
@@ -4531,13 +4650,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_refraction_texture_channel() -> BaseMaterial3D.TextureChannel {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_refraction_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
-    fileprivate static var method_set_proximity_fade_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_proximity_fade_enabled")
+    fileprivate static let method_set_proximity_fade_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_proximity_fade_enabled")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -4549,6 +4669,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_proximity_fade_enabled(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4562,8 +4683,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_is_proximity_fade_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_proximity_fade_enabled")
+    fileprivate static let method_is_proximity_fade_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_proximity_fade_enabled")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -4575,13 +4696,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func is_proximity_fade_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_proximity_fade_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_proximity_fade_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_proximity_fade_distance")
+    fileprivate static let method_set_proximity_fade_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_proximity_fade_distance")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4593,6 +4715,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_proximity_fade_distance(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4606,8 +4729,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_proximity_fade_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_proximity_fade_distance")
+    fileprivate static let method_get_proximity_fade_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_proximity_fade_distance")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4619,13 +4742,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_proximity_fade_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_proximity_fade_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msdf_pixel_range")
+    fileprivate static let method_set_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msdf_pixel_range")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4637,6 +4761,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_msdf_pixel_range(_ range: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: range) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4650,8 +4775,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msdf_pixel_range")
+    fileprivate static let method_get_msdf_pixel_range: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msdf_pixel_range")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4663,13 +4788,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_msdf_pixel_range() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_msdf_outline_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_msdf_outline_size")
+    fileprivate static let method_set_msdf_outline_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_msdf_outline_size")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4681,6 +4807,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_msdf_outline_size(_ size: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4694,8 +4821,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_msdf_outline_size: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_msdf_outline_size")
+    fileprivate static let method_get_msdf_outline_size: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_msdf_outline_size")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4707,13 +4834,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_msdf_outline_size() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_msdf_outline_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_distance_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_distance_fade")
+    fileprivate static let method_set_distance_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_distance_fade")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1379478617)!
@@ -4725,6 +4853,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_distance_fade(_ mode: BaseMaterial3D.DistanceFadeMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4738,8 +4867,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_distance_fade: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_distance_fade")
+    fileprivate static let method_get_distance_fade: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_distance_fade")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2694575734)!
@@ -4751,13 +4880,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_distance_fade() -> BaseMaterial3D.DistanceFadeMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseMaterial3D.DistanceFadeMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_distance_fade_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_distance_fade_max_distance")
+    fileprivate static let method_set_distance_fade_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_distance_fade_max_distance")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4769,6 +4899,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_distance_fade_max_distance(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4782,8 +4913,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_distance_fade_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_distance_fade_max_distance")
+    fileprivate static let method_get_distance_fade_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_distance_fade_max_distance")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4795,13 +4926,14 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_distance_fade_max_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_distance_fade_min_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_distance_fade_min_distance")
+    fileprivate static let method_set_distance_fade_min_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_distance_fade_min_distance")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -4813,6 +4945,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func set_distance_fade_min_distance(_ distance: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -4826,8 +4959,8 @@ open class BaseMaterial3D: Material {
         
     }
     
-    fileprivate static var method_get_distance_fade_min_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_distance_fade_min_distance")
+    fileprivate static let method_get_distance_fade_min_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_distance_fade_min_distance")
         return withUnsafePointer(to: &BaseMaterial3D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -4839,6 +4972,7 @@ open class BaseMaterial3D: Material {
     
     @inline(__always)
     fileprivate final func get_distance_fade_min_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade_min_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

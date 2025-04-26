@@ -20,7 +20,7 @@ import Musl
 
 
 open class ScriptLanguageExtension: ScriptLanguage {
-    fileprivate static var className = StringName("ScriptLanguageExtension")
+    private static var className = StringName("ScriptLanguageExtension")
     override open class var godotClassName: StringName { className }
     public enum LookupResultType: Int64, CaseIterable {
         /// 
@@ -42,7 +42,11 @@ open class ScriptLanguageExtension: ScriptLanguage {
         /// 
         case classAnnotation = 8 // LOOKUP_RESULT_CLASS_ANNOTATION
         /// 
-        case max = 9 // LOOKUP_RESULT_MAX
+        case localConstant = 9 // LOOKUP_RESULT_LOCAL_CONSTANT
+        /// 
+        case localVariable = 10 // LOOKUP_RESULT_LOCAL_VARIABLE
+        /// 
+        case max = 11 // LOOKUP_RESULT_MAX
     }
     
     public enum CodeCompletionLocation: Int64, CaseIterable {
@@ -82,336 +86,1509 @@ open class ScriptLanguageExtension: ScriptLanguage {
     }
     
     /* Methods */
+    fileprivate static let method__get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_name")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
+    
     /// 
     @_documentation(visibility: public)
     open func _getName() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__init: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_init")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _init() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__init, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__get_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_type")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getType() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__get_extension: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_extension")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getExtension() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_extension, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__finish: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_finish")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _finish() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__finish, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__get_reserved_words: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_reserved_words")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getReservedWords() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_reserved_words, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__is_control_flow_keyword: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_control_flow_keyword")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _isControlFlowKeyword(_ keyword: String) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        let keyword = GString(keyword)
+        withUnsafePointer(to: keyword.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__is_control_flow_keyword, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_comment_delimiters: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_comment_delimiters")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getCommentDelimiters() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_comment_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__get_doc_comment_delimiters: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_doc_comment_delimiters")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getDocCommentDelimiters() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_doc_comment_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__get_string_delimiters: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_string_delimiters")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getStringDelimiters() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_string_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__make_template: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_make_template")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3583744548)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _makeTemplate(_ template: String, className: String, baseClassName: String) -> Script? {
-        return Script ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        let template = GString(template)
+        withUnsafePointer(to: template.content) { pArg0 in
+            let className = GString(className)
+            withUnsafePointer(to: className.content) { pArg1 in
+                let baseClassName = GString(baseClassName)
+                withUnsafePointer(to: baseClassName.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__make_template, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
+    
+    fileprivate static let method__get_built_in_templates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_built_in_templates")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3147814860)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _getBuiltInTemplates(object: StringName) -> VariantCollection<GDictionary> {
-        return VariantCollection<GDictionary>()
+    open func _getBuiltInTemplates(object: StringName) -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        withUnsafePointer(to: object.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_built_in_templates, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
+    
+    fileprivate static let method__is_using_templates: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_is_using_templates")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _isUsingTemplates() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__is_using_templates, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__validate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_validate")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1697887509)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _validate(script: String, path: String, validateFunctions: Bool, validateErrors: Bool, validateWarnings: Bool, validateSafeLines: Bool) -> GDictionary {
-        return GDictionary ()
+    open func _validate(script: String, path: String, validateFunctions: Bool, validateErrors: Bool, validateWarnings: Bool, validateSafeLines: Bool) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        let script = GString(script)
+        withUnsafePointer(to: script.content) { pArg0 in
+            let path = GString(path)
+            withUnsafePointer(to: path.content) { pArg1 in
+                withUnsafePointer(to: validateFunctions) { pArg2 in
+                    withUnsafePointer(to: validateErrors) { pArg3 in
+                        withUnsafePointer(to: validateWarnings) { pArg4 in
+                            withUnsafePointer(to: validateSafeLines) { pArg5 in
+                                withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
+                                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
+                                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__validate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__validate_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_validate_path")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3135753539)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _validatePath(_ path: String) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__validate_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__create_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_create_script")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1981248198)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _createScript() -> Object? {
-        return Object ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result = UnsafeRawPointer (bitPattern: 0)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__create_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
+    
+    fileprivate static let method__has_named_classes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_has_named_classes")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _hasNamedClasses() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__has_named_classes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__supports_builtin_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_supports_builtin_mode")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _supportsBuiltinMode() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__supports_builtin_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__supports_documentation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_supports_documentation")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _supportsDocumentation() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__supports_documentation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__can_inherit_from_file: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_can_inherit_from_file")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _canInheritFromFile() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__can_inherit_from_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__find_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_find_function")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2878152881)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the line where the function is defined in the code, or `-1` if the function is not present.
     @_documentation(visibility: public)
     open func _findFunction(_ function: String, code: String) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        let function = GString(function)
+        withUnsafePointer(to: function.content) { pArg0 in
+            let code = GString(code)
+            withUnsafePointer(to: code.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__find_function, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__make_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_make_function")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1243061914)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _makeFunction(className: String, functionName: String, functionArgs: PackedStringArray) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        let className = GString(className)
+        withUnsafePointer(to: className.content) { pArg0 in
+            let functionName = GString(functionName)
+            withUnsafePointer(to: functionName.content) { pArg1 in
+                withUnsafePointer(to: functionArgs.content) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__make_function, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__can_make_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_can_make_function")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _canMakeFunction() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__can_make_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__open_in_external_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_open_in_external_editor")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 552845695)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _openInExternalEditor(script: Script?, line: Int32, column: Int32) -> GodotError {
-        return .ok
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        withUnsafePointer(to: script?.handle) { pArg0 in
+            withUnsafePointer(to: line) { pArg1 in
+                withUnsafePointer(to: column) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__open_in_external_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return GodotError (rawValue: _result)!
     }
+    
+    fileprivate static let method__overrides_external_editor: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_overrides_external_editor")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2240911060)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _overridesExternalEditor() -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__overrides_external_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__preferred_file_name_casing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_preferred_file_name_casing")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2969522789)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _preferredFileNameCasing() -> ScriptLanguage.ScriptNameCasing {
-        return ScriptLanguage.ScriptNameCasing(rawValue: 0)!
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0 // to avoid packed enums on the stack
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__preferred_file_name_casing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return ScriptLanguage.ScriptNameCasing (rawValue: _result)!
     }
+    
+    fileprivate static let method__complete_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_complete_code")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 950756616)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _completeCode(_ code: String, path: String, owner: Object?) -> GDictionary {
-        return GDictionary ()
+    open func _completeCode(_ code: String, path: String, owner: Object?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        let code = GString(code)
+        withUnsafePointer(to: code.content) { pArg0 in
+            let path = GString(path)
+            withUnsafePointer(to: path.content) { pArg1 in
+                withUnsafePointer(to: owner?.handle) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__complete_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__lookup_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_lookup_code")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3143837309)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _lookupCode(_ code: String, symbol: String, path: String, owner: Object?) -> GDictionary {
-        return GDictionary ()
+    open func _lookupCode(_ code: String, symbol: String, path: String, owner: Object?) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        let code = GString(code)
+        withUnsafePointer(to: code.content) { pArg0 in
+            let symbol = GString(symbol)
+            withUnsafePointer(to: symbol.content) { pArg1 in
+                let path = GString(path)
+                withUnsafePointer(to: path.content) { pArg2 in
+                    withUnsafePointer(to: owner?.handle) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__lookup_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__auto_indent_code: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_auto_indent_code")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2531480354)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _autoIndentCode(_ code: String, fromLine: Int32, toLine: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        let code = GString(code)
+        withUnsafePointer(to: code.content) { pArg0 in
+            withUnsafePointer(to: fromLine) { pArg1 in
+                withUnsafePointer(to: toLine) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__auto_indent_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__add_global_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_add_global_constant")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _addGlobalConstant(name: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: value.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__add_global_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__add_named_global_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_add_named_global_constant")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _addNamedGlobalConstant(name: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: value.content) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__add_named_global_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__remove_named_global_constant: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_remove_named_global_constant")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _removeNamedGlobalConstant(name: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: name.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__remove_named_global_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__thread_enter: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_thread_enter")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _threadEnter() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__thread_enter, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__thread_exit: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_thread_exit")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _threadExit() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__thread_exit, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__debug_get_error: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_error")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _debugGetError() -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result.description
     }
+    
+    fileprivate static let method__debug_get_stack_level_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_stack_level_count")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _debugGetStackLevelCount() -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
     }
+    
+    fileprivate static let method__debug_get_stack_level_line: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_stack_level_line")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 923996154)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _debugGetStackLevelLine(level: Int32) -> Int32 {
-        return 0
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int32 = 0
+        withUnsafePointer(to: level) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__debug_get_stack_level_function: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_stack_level_function")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _debugGetStackLevelFunction(level: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: level) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_function, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__debug_get_stack_level_source: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_stack_level_source")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 844755477)!
+            }
+            
+        }
+        
+    }()
     
     /// Returns the source associated with a given debug stack position.
     @_documentation(visibility: public)
     open func _debugGetStackLevelSource(level: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: level) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_source, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__debug_get_stack_level_locals: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_stack_level_locals")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 335235777)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _debugGetStackLevelLocals(level: Int32, maxSubitems: Int32, maxDepth: Int32) -> GDictionary {
-        return GDictionary ()
+    open func _debugGetStackLevelLocals(level: Int32, maxSubitems: Int32, maxDepth: Int32) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        withUnsafePointer(to: level) { pArg0 in
+            withUnsafePointer(to: maxSubitems) { pArg1 in
+                withUnsafePointer(to: maxDepth) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_locals, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__debug_get_stack_level_members: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_stack_level_members")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 335235777)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _debugGetStackLevelMembers(level: Int32, maxSubitems: Int32, maxDepth: Int32) -> GDictionary {
-        return GDictionary ()
+    open func _debugGetStackLevelMembers(level: Int32, maxSubitems: Int32, maxDepth: Int32) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        withUnsafePointer(to: level) { pArg0 in
+            withUnsafePointer(to: maxSubitems) { pArg1 in
+                withUnsafePointer(to: maxDepth) { pArg2 in
+                    withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
+                        pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_members, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__debug_get_stack_level_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_stack_level_instance")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3744713108)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _debugGetStackLevelInstance(level: Int32) -> OpaquePointer? {
-        return nil
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: OpaquePointer? = nil
+        withUnsafePointer(to: level) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_instance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__debug_get_globals: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_globals")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 4123630098)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _debugGetGlobals(maxSubitems: Int32, maxDepth: Int32) -> GDictionary {
-        return GDictionary ()
+    open func _debugGetGlobals(maxSubitems: Int32, maxDepth: Int32) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        withUnsafePointer(to: maxSubitems) { pArg0 in
+            withUnsafePointer(to: maxDepth) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_globals, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__debug_parse_stack_level_expression: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_parse_stack_level_expression")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1135811067)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _debugParseStackLevelExpression(level: Int32, expression: String, maxSubitems: Int32, maxDepth: Int32) -> String {
-        return String ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result = GString ()
+        withUnsafePointer(to: level) { pArg0 in
+            let expression = GString(expression)
+            withUnsafePointer(to: expression.content) { pArg1 in
+                withUnsafePointer(to: maxSubitems) { pArg2 in
+                    withUnsafePointer(to: maxDepth) { pArg3 in
+                        withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
+                            pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
+                                gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_parse_stack_level_expression, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return _result.description
     }
+    
+    fileprivate static let method__debug_get_current_stack_info: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_debug_get_current_stack_info")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2915620761)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _debugGetCurrentStackInfo() -> VariantCollection<GDictionary> {
-        return VariantCollection<GDictionary>()
+    open func _debugGetCurrentStackInfo() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_current_stack_info, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
+    
+    fileprivate static let method__reload_all_scripts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_reload_all_scripts")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _reloadAllScripts() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_all_scripts, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__reload_scripts: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_reload_scripts")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3156113851)!
+            }
+            
+        }
+        
+    }()
+    
+    /// 
+    @_documentation(visibility: public)
+    open func _reloadScripts(_ scripts: VariantArray, softReload: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: scripts.content) { pArg0 in
+            withUnsafePointer(to: softReload) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_scripts, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method__reload_tool_script: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_reload_tool_script")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1957307671)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _reloadToolScript(_ script: Script?, softReload: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: script?.handle) { pArg0 in
+            withUnsafePointer(to: softReload) { pArg1 in
+                withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
+                    pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_tool_script, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__get_recognized_extensions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_recognized_extensions")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _getRecognizedExtensions() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__get_public_functions: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_public_functions")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _getPublicFunctions() -> VariantCollection<GDictionary> {
-        return VariantCollection<GDictionary>()
+    open func _getPublicFunctions() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_functions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
+    
+    fileprivate static let method__get_public_constants: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_public_constants")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _getPublicConstants() -> GDictionary {
-        return GDictionary ()
+    open func _getPublicConstants() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_constants, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__get_public_annotations: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_public_annotations")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _getPublicAnnotations() -> VariantCollection<GDictionary> {
-        return VariantCollection<GDictionary>()
+    open func _getPublicAnnotations() -> TypedArray<VariantDictionary> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Int64 = 0
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_annotations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return TypedArray<VariantDictionary>(takingOver: _result)
     }
+    
+    fileprivate static let method__profiling_start: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_profiling_start")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _profilingStart() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_start, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__profiling_stop: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_profiling_stop")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _profilingStop() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__profiling_set_save_native_calls: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_profiling_set_save_native_calls")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _profilingSetSaveNativeCalls(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: enable) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_set_save_native_calls, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__frame: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_frame")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _frame() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__frame, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__handles_global_class_type: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_handles_global_class_type")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3927539163)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
     open func _handlesGlobalClassType(_ type: String) -> Bool {
-        return false
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Bool = false
+        let type = GString(type)
+        withUnsafePointer(to: type.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__handles_global_class_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
+    
+    fileprivate static let method__get_global_class_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_global_class_name")
+        return withUnsafePointer(to: &ScriptLanguageExtension.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2248993622)!
+            }
+            
+        }
+        
+    }()
     
     /// 
     @_documentation(visibility: public)
-    open func _getGlobalClassName(path: String) -> GDictionary {
-        return GDictionary ()
+    open func _getGlobalClassName(path: String) -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: VariantDictionary = VariantDictionary ()
+        let path = GString(path)
+        withUnsafePointer(to: path.content) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_global_class_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                }
+                
+            }
+            
+        }
+        
+        return _result
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_add_global_constant":
@@ -512,6 +1689,8 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 return _ScriptLanguageExtension_proxy_profiling_stop
             case "_reload_all_scripts":
                 return _ScriptLanguageExtension_proxy_reload_all_scripts
+            case "_reload_scripts":
+                return _ScriptLanguageExtension_proxy_reload_scripts
             case "_reload_tool_script":
                 return _ScriptLanguageExtension_proxy_reload_tool_script
             case "_remove_named_global_constant":
@@ -540,21 +1719,24 @@ open class ScriptLanguageExtension: ScriptLanguage {
 func _ScriptLanguageExtension_proxy_add_global_constant (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._addGlobalConstant (name: StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), value: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
 }
 
 func _ScriptLanguageExtension_proxy_add_named_global_constant (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._addNamedGlobalConstant (name: StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), value: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
 }
 
 func _ScriptLanguageExtension_proxy_auto_indent_code (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._autoIndentCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", fromLine: args [1]!.assumingMemoryBound (to: Int32.self).pointee, toLine: args [2]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -562,14 +1744,16 @@ func _ScriptLanguageExtension_proxy_auto_indent_code (instance: UnsafeMutableRaw
 
 func _ScriptLanguageExtension_proxy_can_inherit_from_file (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._canInheritFromFile ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _ScriptLanguageExtension_proxy_can_make_function (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._canMakeFunction ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -577,31 +1761,35 @@ func _ScriptLanguageExtension_proxy_can_make_function (instance: UnsafeMutableRa
 func _ScriptLanguageExtension_proxy_complete_code (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
+    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._completeCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", owner: lookupLiveObject (handleAddress: resolved_2) as? Object ?? Object (nativeHandle: resolved_2))
+    let ret = swiftObject._completeCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", owner: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Object)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_create_script (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._createScript ()
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Object
 }
 
 func _ScriptLanguageExtension_proxy_debug_get_current_stack_info (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._debugGetCurrentStackInfo ()
     retPtr!.storeBytes (of: ret.array.content, as: type (of: ret.array.content)) // typedarray::Dictionary
 }
 
 func _ScriptLanguageExtension_proxy_debug_get_error (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._debugGetError ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -610,15 +1798,17 @@ func _ScriptLanguageExtension_proxy_debug_get_error (instance: UnsafeMutableRawP
 func _ScriptLanguageExtension_proxy_debug_get_globals (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._debugGetGlobals (maxSubitems: args [0]!.assumingMemoryBound (to: Int32.self).pointee, maxDepth: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_debug_get_stack_level_count (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._debugGetStackLevelCount ()
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -626,7 +1816,8 @@ func _ScriptLanguageExtension_proxy_debug_get_stack_level_count (instance: Unsaf
 func _ScriptLanguageExtension_proxy_debug_get_stack_level_function (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._debugGetStackLevelFunction (level: args [0]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -635,7 +1826,8 @@ func _ScriptLanguageExtension_proxy_debug_get_stack_level_function (instance: Un
 func _ScriptLanguageExtension_proxy_debug_get_stack_level_instance (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._debugGetStackLevelInstance (level: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: OpaquePointer?.self)
 }
@@ -643,7 +1835,8 @@ func _ScriptLanguageExtension_proxy_debug_get_stack_level_instance (instance: Un
 func _ScriptLanguageExtension_proxy_debug_get_stack_level_line (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._debugGetStackLevelLine (level: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
@@ -651,25 +1844,28 @@ func _ScriptLanguageExtension_proxy_debug_get_stack_level_line (instance: Unsafe
 func _ScriptLanguageExtension_proxy_debug_get_stack_level_locals (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._debugGetStackLevelLocals (level: args [0]!.assumingMemoryBound (to: Int32.self).pointee, maxSubitems: args [1]!.assumingMemoryBound (to: Int32.self).pointee, maxDepth: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_debug_get_stack_level_members (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._debugGetStackLevelMembers (level: args [0]!.assumingMemoryBound (to: Int32.self).pointee, maxSubitems: args [1]!.assumingMemoryBound (to: Int32.self).pointee, maxDepth: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_debug_get_stack_level_source (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._debugGetStackLevelSource (level: args [0]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -678,7 +1874,8 @@ func _ScriptLanguageExtension_proxy_debug_get_stack_level_source (instance: Unsa
 func _ScriptLanguageExtension_proxy_debug_parse_stack_level_expression (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._debugParseStackLevelExpression (level: args [0]!.assumingMemoryBound (to: Int32.self).pointee, expression: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", maxSubitems: args [2]!.assumingMemoryBound (to: Int32.self).pointee, maxDepth: args [3]!.assumingMemoryBound (to: Int32.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -687,34 +1884,39 @@ func _ScriptLanguageExtension_proxy_debug_parse_stack_level_expression (instance
 func _ScriptLanguageExtension_proxy_find_function (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._findFunction (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", code: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 
 func _ScriptLanguageExtension_proxy_finish (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._finish ()
 }
 
 func _ScriptLanguageExtension_proxy_frame (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._frame ()
 }
 
 func _ScriptLanguageExtension_proxy_get_built_in_templates (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getBuiltInTemplates (object: StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: ret.array.content, as: type (of: ret.array.content)) // typedarray::Dictionary
 }
 
 func _ScriptLanguageExtension_proxy_get_comment_delimiters (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getCommentDelimiters ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -722,7 +1924,8 @@ func _ScriptLanguageExtension_proxy_get_comment_delimiters (instance: UnsafeMuta
 
 func _ScriptLanguageExtension_proxy_get_doc_comment_delimiters (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getDocCommentDelimiters ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -730,7 +1933,8 @@ func _ScriptLanguageExtension_proxy_get_doc_comment_delimiters (instance: Unsafe
 
 func _ScriptLanguageExtension_proxy_get_extension (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._getExtension ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -739,15 +1943,17 @@ func _ScriptLanguageExtension_proxy_get_extension (instance: UnsafeMutableRawPoi
 func _ScriptLanguageExtension_proxy_get_global_class_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getGlobalClassName (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_get_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._getName ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -755,29 +1961,33 @@ func _ScriptLanguageExtension_proxy_get_name (instance: UnsafeMutableRawPointer?
 
 func _ScriptLanguageExtension_proxy_get_public_annotations (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getPublicAnnotations ()
     retPtr!.storeBytes (of: ret.array.content, as: type (of: ret.array.content)) // typedarray::Dictionary
 }
 
 func _ScriptLanguageExtension_proxy_get_public_constants (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getPublicConstants ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_get_public_functions (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getPublicFunctions ()
     retPtr!.storeBytes (of: ret.array.content, as: type (of: ret.array.content)) // typedarray::Dictionary
 }
 
 func _ScriptLanguageExtension_proxy_get_recognized_extensions (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getRecognizedExtensions ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -785,7 +1995,8 @@ func _ScriptLanguageExtension_proxy_get_recognized_extensions (instance: UnsafeM
 
 func _ScriptLanguageExtension_proxy_get_reserved_words (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getReservedWords ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -793,7 +2004,8 @@ func _ScriptLanguageExtension_proxy_get_reserved_words (instance: UnsafeMutableR
 
 func _ScriptLanguageExtension_proxy_get_string_delimiters (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._getStringDelimiters ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -801,7 +2013,8 @@ func _ScriptLanguageExtension_proxy_get_string_delimiters (instance: UnsafeMutab
 
 func _ScriptLanguageExtension_proxy_get_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._getType ())
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -810,35 +2023,40 @@ func _ScriptLanguageExtension_proxy_get_type (instance: UnsafeMutableRawPointer?
 func _ScriptLanguageExtension_proxy_handles_global_class_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._handlesGlobalClassType (GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _ScriptLanguageExtension_proxy_has_named_classes (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._hasNamedClasses ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _ScriptLanguageExtension_proxy_init (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._init ()
 }
 
 func _ScriptLanguageExtension_proxy_is_control_flow_keyword (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._isControlFlowKeyword (GString.stringFromGStringPtr (ptr: args [0]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _ScriptLanguageExtension_proxy_is_using_templates (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._isUsingTemplates ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
@@ -846,18 +2064,20 @@ func _ScriptLanguageExtension_proxy_is_using_templates (instance: UnsafeMutableR
 func _ScriptLanguageExtension_proxy_lookup_code (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_3 = args [3]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
+    let resolved_3 = args [3]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._lookupCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", symbol: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", owner: lookupLiveObject (handleAddress: resolved_3) as? Object ?? Object (nativeHandle: resolved_3))
+    let ret = swiftObject._lookupCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", symbol: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", owner: resolved_3 == nil ? nil : lookupObject (nativeHandle: resolved_3!, ownsRef: false) as? Object)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_make_function (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._makeFunction (className: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", functionName: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", functionArgs: PackedStringArray (content: args [2]!.assumingMemoryBound (to: (Int64, Int64).self).pointee)))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
@@ -866,7 +2086,8 @@ func _ScriptLanguageExtension_proxy_make_function (instance: UnsafeMutableRawPoi
 func _ScriptLanguageExtension_proxy_make_template (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._makeTemplate (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", className: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", baseClassName: GString.stringFromGStringPtr (ptr: args [2]!) ?? "")
     retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Script
 }
@@ -874,23 +2095,26 @@ func _ScriptLanguageExtension_proxy_make_template (instance: UnsafeMutableRawPoi
 func _ScriptLanguageExtension_proxy_open_in_external_editor (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    let ret = swiftObject._openInExternalEditor (script: lookupLiveObject (handleAddress: resolved_0) as? Script ?? Script (nativeHandle: resolved_0), line: args [1]!.assumingMemoryBound (to: Int32.self).pointee, column: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
+    let ret = swiftObject._openInExternalEditor (script: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, line: args [1]!.assumingMemoryBound (to: Int32.self).pointee, column: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
 func _ScriptLanguageExtension_proxy_overrides_external_editor (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._overridesExternalEditor ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _ScriptLanguageExtension_proxy_preferred_file_name_casing (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._preferredFileNameCasing ()
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
@@ -898,83 +2122,103 @@ func _ScriptLanguageExtension_proxy_preferred_file_name_casing (instance: Unsafe
 func _ScriptLanguageExtension_proxy_profiling_set_save_native_calls (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._profilingSetSaveNativeCalls (enable: args [0]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _ScriptLanguageExtension_proxy_profiling_start (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._profilingStart ()
 }
 
 func _ScriptLanguageExtension_proxy_profiling_stop (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._profilingStop ()
 }
 
 func _ScriptLanguageExtension_proxy_reload_all_scripts (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._reloadAllScripts ()
+}
+
+func _ScriptLanguageExtension_proxy_reload_scripts (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
+    guard let instance else { return }
+    guard let args else { return }
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
+    swiftObject._reloadScripts (VariantArray (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee), softReload: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _ScriptLanguageExtension_proxy_reload_tool_script (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._reloadToolScript (lookupLiveObject (handleAddress: resolved_0) as? Script ?? Script (nativeHandle: resolved_0), softReload: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
+    swiftObject._reloadToolScript (resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, softReload: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _ScriptLanguageExtension_proxy_remove_named_global_constant (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._removeNamedGlobalConstant (name: StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee))
 }
 
 func _ScriptLanguageExtension_proxy_supports_builtin_mode (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._supportsBuiltinMode ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _ScriptLanguageExtension_proxy_supports_documentation (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._supportsDocumentation ()
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
 func _ScriptLanguageExtension_proxy_thread_enter (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._threadEnter ()
 }
 
 func _ScriptLanguageExtension_proxy_thread_exit (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     swiftObject._threadExit ()
 }
 
 func _ScriptLanguageExtension_proxy_validate (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._validate (script: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", validateFunctions: args [2]!.assumingMemoryBound (to: Bool.self).pointee, validateErrors: args [3]!.assumingMemoryBound (to: Bool.self).pointee, validateWarnings: args [4]!.assumingMemoryBound (to: Bool.self).pointee, validateSafeLines: args [5]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
-    ret.content = GDictionary.zero
+    ret.content = VariantDictionary.zero
 }
 
 func _ScriptLanguageExtension_proxy_validate_path (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<ScriptLanguageExtension>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = GString (swiftObject._validatePath (GString.stringFromGStringPtr (ptr: args [0]!) ?? ""))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero

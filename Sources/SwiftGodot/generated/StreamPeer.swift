@@ -26,7 +26,7 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class StreamPeer: RefCounted {
-    fileprivate static var className = StringName("StreamPeer")
+    private static var className = StringName("StreamPeer")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -44,8 +44,8 @@ open class StreamPeer: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_put_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_data")
+    fileprivate static let method_put_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_data")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 680677267)!
@@ -57,6 +57,7 @@ open class StreamPeer: RefCounted {
     
     /// Sends a chunk of data through the connection, blocking if necessary until the data is done sending. This function returns an ``GodotError`` code.
     public final func putData(_ data: PackedByteArray) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -71,8 +72,8 @@ open class StreamPeer: RefCounted {
         return GodotError (rawValue: _result)!
     }
     
-    fileprivate static var method_put_partial_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_partial_data")
+    fileprivate static let method_put_partial_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_partial_data")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2934048347)!
@@ -83,8 +84,9 @@ open class StreamPeer: RefCounted {
     }()
     
     /// Sends a chunk of data through the connection. If all the data could not be sent at once, only part of it will. This function returns two values, an ``GodotError`` code and an integer, describing how much data was actually sent.
-    public final func putPartialData(_ data: PackedByteArray) -> GArray {
-        let _result: GArray = GArray ()
+    public final func putPartialData(_ data: PackedByteArray) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -98,8 +100,8 @@ open class StreamPeer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_data")
+    fileprivate static let method_get_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_data")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1171824711)!
@@ -110,8 +112,9 @@ open class StreamPeer: RefCounted {
     }()
     
     /// Returns a chunk data with the received bytes. The number of bytes to be received can be requested in the `bytes` argument. If not enough bytes are available, the function will block until the desired amount is received. This function returns two values, an ``GodotError`` code and a data array.
-    public final func getData(bytes: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public final func getData(bytes: Int32) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -125,8 +128,8 @@ open class StreamPeer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_partial_data: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_partial_data")
+    fileprivate static let method_get_partial_data: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_partial_data")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1171824711)!
@@ -137,8 +140,9 @@ open class StreamPeer: RefCounted {
     }()
     
     /// Returns a chunk data with the received bytes. The number of bytes to be received can be requested in the "bytes" argument. If not enough bytes are available, the function will return how many were actually received. This function returns two values, an ``GodotError`` code, and a data array.
-    public final func getPartialData(bytes: Int32) -> GArray {
-        let _result: GArray = GArray ()
+    public final func getPartialData(bytes: Int32) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -152,8 +156,8 @@ open class StreamPeer: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_available_bytes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_available_bytes")
+    fileprivate static let method_get_available_bytes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_available_bytes")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -165,13 +169,14 @@ open class StreamPeer: RefCounted {
     
     /// Returns the number of bytes this ``StreamPeer`` has available.
     public final func getAvailableBytes() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_available_bytes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_big_endian: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_big_endian")
+    fileprivate static let method_set_big_endian: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_big_endian")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -183,6 +188,7 @@ open class StreamPeer: RefCounted {
     
     @inline(__always)
     fileprivate final func set_big_endian(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -196,8 +202,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_is_big_endian_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_big_endian_enabled")
+    fileprivate static let method_is_big_endian_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_big_endian_enabled")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -209,13 +215,14 @@ open class StreamPeer: RefCounted {
     
     @inline(__always)
     fileprivate final func is_big_endian_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(StreamPeer.method_is_big_endian_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_put_8: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_8")
+    fileprivate static let method_put_8: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_8")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -227,6 +234,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts a signed byte into the stream.
     public final func put8(value: Int8) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -240,8 +248,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_u8: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_u8")
+    fileprivate static let method_put_u8: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_u8")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -253,6 +261,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts an unsigned byte into the stream.
     public final func putU8(value: UInt8) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -266,8 +275,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_16: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_16")
+    fileprivate static let method_put_16: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_16")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -279,6 +288,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts a signed 16-bit value into the stream.
     public final func put16(value: Int16) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -292,8 +302,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_u16: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_u16")
+    fileprivate static let method_put_u16: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_u16")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -305,6 +315,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts an unsigned 16-bit value into the stream.
     public final func putU16(value: UInt16) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -318,8 +329,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_32: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_32")
+    fileprivate static let method_put_32: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_32")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -331,6 +342,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts a signed 32-bit value into the stream.
     public final func put32(value: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -344,8 +356,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_u32: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_u32")
+    fileprivate static let method_put_u32: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_u32")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -357,6 +369,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts an unsigned 32-bit value into the stream.
     public final func putU32(value: UInt32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -370,8 +383,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_64")
+    fileprivate static let method_put_64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_64")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -383,6 +396,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts a signed 64-bit value into the stream.
     public final func put64(value: Int) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -396,8 +410,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_u64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_u64")
+    fileprivate static let method_put_u64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_u64")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -409,6 +423,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts an unsigned 64-bit value into the stream.
     public final func putU64(value: UInt) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -422,8 +437,35 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_float: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_float")
+    fileprivate static let method_put_half: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_half")
+        return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Puts a half-precision float into the stream.
+    public final func putHalf(value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: value) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_half, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    fileprivate static let method_put_float: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_float")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -435,6 +477,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts a single-precision float into the stream.
     public final func putFloat(value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -448,8 +491,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_double: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_double")
+    fileprivate static let method_put_double: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_double")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -461,6 +504,7 @@ open class StreamPeer: RefCounted {
     
     /// Puts a double-precision float into the stream.
     public final func putDouble(value: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -474,8 +518,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_string")
+    fileprivate static let method_put_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_string")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -490,6 +534,7 @@ open class StreamPeer: RefCounted {
     /// > Note: To put an ASCII string without prepending its size, you can use ``putData(_:)``:
     /// 
     public final func putString(value: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let value = GString(value)
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -504,8 +549,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_utf8_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_utf8_string")
+    fileprivate static let method_put_utf8_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_utf8_string")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -520,6 +565,7 @@ open class StreamPeer: RefCounted {
     /// > Note: To put a UTF-8 string without prepending its size, you can use ``putData(_:)``:
     /// 
     public final func putUtf8String(value: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let value = GString(value)
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -534,8 +580,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_put_var: GDExtensionMethodBindPtr = {
-        let methodName = StringName("put_var")
+    fileprivate static let method_put_var: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("put_var")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 738511890)!
@@ -550,6 +596,7 @@ open class StreamPeer: RefCounted {
     /// Internally, this uses the same encoding mechanism as the ``@GlobalScope.var_to_bytes`` method.
     /// 
     public final func putVar(value: Variant?, fullObjects: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: fullObjects) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -566,8 +613,8 @@ open class StreamPeer: RefCounted {
         
     }
     
-    fileprivate static var method_get_8: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_8")
+    fileprivate static let method_get_8: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_8")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -579,13 +626,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets a signed byte from the stream.
     public final func get8() -> Int8 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int8 = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_8, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_u8: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_u8")
+    fileprivate static let method_get_u8: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_u8")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -597,13 +645,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets an unsigned byte from the stream.
     public final func getU8() -> UInt8 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt8 = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_u8, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_16: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_16")
+    fileprivate static let method_get_16: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_16")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -615,13 +664,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets a signed 16-bit value from the stream.
     public final func get16() -> Int16 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int16 = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_16, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_u16: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_u16")
+    fileprivate static let method_get_u16: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_u16")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -633,13 +683,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets an unsigned 16-bit value from the stream.
     public final func getU16() -> UInt16 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt16 = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_u16, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_32: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_32")
+    fileprivate static let method_get_32: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_32")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -651,13 +702,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets a signed 32-bit value from the stream.
     public final func get32() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_32, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_u32: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_u32")
+    fileprivate static let method_get_u32: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_u32")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -669,13 +721,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets an unsigned 32-bit value from the stream.
     public final func getU32() -> UInt32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_u32, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_64")
+    fileprivate static let method_get_64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_64")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -687,13 +740,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets a signed 64-bit value from the stream.
     public final func get64() -> Int {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_64, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_u64: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_u64")
+    fileprivate static let method_get_u64: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_u64")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2455072627)!
@@ -705,13 +759,33 @@ open class StreamPeer: RefCounted {
     
     /// Gets an unsigned 64-bit value from the stream.
     public final func getU64() -> UInt {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_u64, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_float: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_float")
+    fileprivate static let method_get_half: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_half")
+        return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Gets a half-precision float from the stream.
+    public final func getHalf() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Double = 0.0
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_half, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return _result
+    }
+    
+    fileprivate static let method_get_float: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_float")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -723,13 +797,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets a single-precision float from the stream.
     public final func getFloat() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_float, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_double: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_double")
+    fileprivate static let method_get_double: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_double")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 191475506)!
@@ -741,13 +816,14 @@ open class StreamPeer: RefCounted {
     
     /// Gets a double-precision float from the stream.
     public final func getDouble() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(StreamPeer.method_get_double, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_string")
+    fileprivate static let method_get_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_string")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2309358862)!
@@ -759,6 +835,7 @@ open class StreamPeer: RefCounted {
     
     /// Gets an ASCII string with byte-length `bytes` from the stream. If `bytes` is negative (default) the length will be read from the stream using the reverse process of ``putString(value:)``.
     public final func getString(bytes: Int32 = -1) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -773,8 +850,8 @@ open class StreamPeer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_get_utf8_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_utf8_string")
+    fileprivate static let method_get_utf8_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_utf8_string")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2309358862)!
@@ -786,6 +863,7 @@ open class StreamPeer: RefCounted {
     
     /// Gets a UTF-8 string with byte-length `bytes` from the stream (this decodes the string sent as UTF-8). If `bytes` is negative (default) the length will be read from the stream using the reverse process of ``putUtf8String(value:)``.
     public final func getUtf8String(bytes: Int32 = -1) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -800,8 +878,8 @@ open class StreamPeer: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_get_var: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_var")
+    fileprivate static let method_get_var: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_var")
         return withUnsafePointer(to: &StreamPeer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3442865206)!
@@ -818,6 +896,7 @@ open class StreamPeer: RefCounted {
     /// > Warning: Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.
     /// 
     public final func getVar(allowObjects: Bool = false) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         withUnsafePointer(to: allowObjects) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

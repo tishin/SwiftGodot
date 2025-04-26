@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A container that arranges its child controls horizontally or vertically and wraps them around at the borders. This is similar to how text in a book wraps around when no more words can fit on a line.
 open class FlowContainer: Container {
-    fileprivate static var className = StringName("FlowContainer")
+    private static var className = StringName("FlowContainer")
     override open class var godotClassName: StringName { className }
     public enum AlignmentMode: Int64, CaseIterable {
         /// The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
@@ -103,8 +103,8 @@ open class FlowContainer: Container {
     }
     
     /* Methods */
-    fileprivate static var method_get_line_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_line_count")
+    fileprivate static let method_get_line_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_line_count")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -116,13 +116,14 @@ open class FlowContainer: Container {
     
     /// Returns the current line count.
     public final func getLineCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(FlowContainer.method_get_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_alignment")
+    fileprivate static let method_set_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_alignment")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 575250951)!
@@ -134,6 +135,7 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func set_alignment(_ alignment: FlowContainer.AlignmentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -147,8 +149,8 @@ open class FlowContainer: Container {
         
     }
     
-    fileprivate static var method_get_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_alignment")
+    fileprivate static let method_get_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_alignment")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3749743559)!
@@ -160,13 +162,14 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func get_alignment() -> FlowContainer.AlignmentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FlowContainer.method_get_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FlowContainer.AlignmentMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_last_wrap_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_last_wrap_alignment")
+    fileprivate static let method_set_last_wrap_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_last_wrap_alignment")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2899697495)!
@@ -178,6 +181,7 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func set_last_wrap_alignment(_ lastWrapAlignment: FlowContainer.LastWrapAlignmentMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: lastWrapAlignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -191,8 +195,8 @@ open class FlowContainer: Container {
         
     }
     
-    fileprivate static var method_get_last_wrap_alignment: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_wrap_alignment")
+    fileprivate static let method_get_last_wrap_alignment: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_wrap_alignment")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3743456014)!
@@ -204,13 +208,14 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func get_last_wrap_alignment() -> FlowContainer.LastWrapAlignmentMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(FlowContainer.method_get_last_wrap_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return FlowContainer.LastWrapAlignmentMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_vertical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_vertical")
+    fileprivate static let method_set_vertical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_vertical")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -222,6 +227,7 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func set_vertical(_ vertical: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: vertical) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -235,8 +241,8 @@ open class FlowContainer: Container {
         
     }
     
-    fileprivate static var method_is_vertical: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_vertical")
+    fileprivate static let method_is_vertical: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_vertical")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -248,13 +254,14 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func is_vertical() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FlowContainer.method_is_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_reverse_fill: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_reverse_fill")
+    fileprivate static let method_set_reverse_fill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_reverse_fill")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -266,6 +273,7 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func set_reverse_fill(_ reverseFill: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: reverseFill) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -279,8 +287,8 @@ open class FlowContainer: Container {
         
     }
     
-    fileprivate static var method_is_reverse_fill: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_reverse_fill")
+    fileprivate static let method_is_reverse_fill: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_reverse_fill")
         return withUnsafePointer(to: &FlowContainer.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -292,6 +300,7 @@ open class FlowContainer: Container {
     
     @inline(__always)
     fileprivate final func is_reverse_fill() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(FlowContainer.method_is_reverse_fill, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result

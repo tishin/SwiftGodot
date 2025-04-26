@@ -36,11 +36,11 @@ import Musl
 /// > Note: The maximum texture size is 16384×16384 pixels due to graphics hardware limitations.
 /// 
 open class ImageTexture: Texture2D {
-    fileprivate static var className = StringName("ImageTexture")
+    private static var className = StringName("ImageTexture")
     override open class var godotClassName: StringName { className }
     /* Methods */
-    fileprivate static var method_create_from_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_from_image")
+    fileprivate static let method_create_from_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_from_image")
         return withUnsafePointer(to: &ImageTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2775144163)!
@@ -63,11 +63,11 @@ open class ImageTexture: Texture2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_format: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_format")
+    fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_format")
         return withUnsafePointer(to: &ImageTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3847873762)!
@@ -79,13 +79,14 @@ open class ImageTexture: Texture2D {
     
     /// Returns the format of the texture, one of ``Image.Format``.
     public final func getFormat() -> Image.Format {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(ImageTexture.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
-    fileprivate static var method_set_image: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_image")
+    fileprivate static let method_set_image: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_image")
         return withUnsafePointer(to: &ImageTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 532598488)!
@@ -100,6 +101,7 @@ open class ImageTexture: Texture2D {
     /// If you want to update the image, but don't need to change its parameters (format, size), use ``update(image:)`` instead for better performance.
     /// 
     public final func setImage(_ image: Image?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -113,8 +115,8 @@ open class ImageTexture: Texture2D {
         
     }
     
-    fileprivate static var method_update: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update")
+    fileprivate static let method_update: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update")
         return withUnsafePointer(to: &ImageTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 532598488)!
@@ -131,6 +133,7 @@ open class ImageTexture: Texture2D {
     /// Use this method over ``setImage(_:)`` if you need to update the texture frequently, which is faster than allocating additional memory for a new texture each time.
     /// 
     public final func update(image: Image?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -144,8 +147,8 @@ open class ImageTexture: Texture2D {
         
     }
     
-    fileprivate static var method_set_size_override: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_size_override")
+    fileprivate static let method_set_size_override: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_size_override")
         return withUnsafePointer(to: &ImageTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1130785943)!
@@ -157,6 +160,7 @@ open class ImageTexture: Texture2D {
     
     /// Resizes the texture to the specified dimensions.
     public final func setSizeOverride(size: Vector2i) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in

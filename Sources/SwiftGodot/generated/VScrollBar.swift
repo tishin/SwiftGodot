@@ -23,7 +23,7 @@ import Musl
 /// 
 /// A vertical scrollbar, typically used to navigate through content that extends beyond the visible height of a control. It is a ``Range``-based control and goes from top (min) to bottom (max). Note that this direction is the opposite of ``VSlider``'s.
 open class VScrollBar: ScrollBar {
-    fileprivate static var className = StringName("VScrollBar")
+    private static var className = StringName("VScrollBar")
     override open class var godotClassName: StringName { className }
 }
 

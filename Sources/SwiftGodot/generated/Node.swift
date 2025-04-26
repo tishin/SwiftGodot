@@ -59,8 +59,9 @@ import Musl
 /// - ``childOrderChanged``
 /// - ``replacingBy``
 /// - ``editorDescriptionChanged``
+/// - ``editorStateChanged``
 open class Node: Object {
-    fileprivate static var className = StringName("Node")
+    private static var className = StringName("Node")
     override open class var godotClassName: StringName { className }
     public enum ProcessMode: Int64, CaseIterable {
         /// Inherits ``processMode`` from the node's parent. This is the default for any newly created node.
@@ -124,7 +125,7 @@ open class Node: Object {
         case groups = 2 // DUPLICATE_GROUPS
         /// Duplicate the node's script (also overriding the duplicated children's scripts, if combined with ``DuplicateFlags/useInstantiation``).
         case scripts = 4 // DUPLICATE_SCRIPTS
-        /// Duplicate using ``PackedScene/instantiate(editState:)``. If the node comes from a scene saved on disk, re-uses ``PackedScene/instantiate(editState:)`` as the base for the duplicated node and its children.
+        /// Duplicate using ``PackedScene/instantiate(editState:)``. If the node comes from a scene saved on disk, reuses ``PackedScene/instantiate(editState:)`` as the base for the duplicated node and its children.
         case useInstantiation = 8 // DUPLICATE_USE_INSTANTIATION
     }
     
@@ -243,7 +244,7 @@ open class Node: Object {
     public static let notificationWmCloseRequest = 1006
     /// Notification received from the OS when a go back request is sent (e.g. pressing the "Back" button on Android).
     /// 
-    /// Implemented only on iOS.
+    /// Implemented only on Android.
     /// 
     public static let notificationWmGoBackRequest = 1007
     /// Notification received when the window is resized.
@@ -257,6 +258,8 @@ open class Node: Object {
     public static let notificationVpMouseEnter = 1010
     /// Notification received when the mouse cursor leaves the ``Viewport``'s visible area, that is not occluded behind other ``Control``s or ``Window``s, provided its ``Viewport/guiDisableInput`` is `false` and regardless if it's currently focused or not.
     public static let notificationVpMouseExit = 1011
+    /// Notification received when the window is moved.
+    public static let notificationWmPositionChanged = 1012
     /// Notification received from the OS when the application is exceeding its allocated memory.
     /// 
     /// Implemented only on iOS.
@@ -351,9 +354,9 @@ open class Node: Object {
         
     }
     
-    /// The owner of this node. The owner must be an ancestor of this node. When packing the owner node in a ``PackedScene``, all the nodes it owns are also saved with it.
+    /// The owner of this node. The owner must be an ancestor of this node. When packing the owner node in a ``PackedScene``, all the nodes it owns are also saved with it. See also ``uniqueNameInOwner``.
     /// 
-    /// > Note: In the editor, nodes not owned by the scene root are usually not displayed in the Scene dock, and will **not** be saved. To prevent this, remember to set the owner after calling ``addChild(node:forceReadableName:`internal`:)``. See also (see ``uniqueNameInOwner``)
+    /// > Note: In the editor, nodes not owned by the scene root are usually not displayed in the Scene dock, and will **not** be saved. To prevent this, remember to set the owner after calling ``addChild(node:forceReadableName:`internal`:)``.
     /// 
     final public var owner: Node? {
         get {
@@ -389,7 +392,7 @@ open class Node: Object {
         
     }
     
-    /// The node's execution order of the process callbacks (``_process(delta:)``, ``_physicsProcess(delta:)``, and internal processing). Nodes whose priority value is _lower_ call their process callbacks first, regardless of tree order.
+    /// The node's execution order of the process callbacks (``_process(delta:)``, ``notificationProcess``, and ``notificationInternalProcess``). Nodes whose priority value is _lower_ call their process callbacks first, regardless of tree order.
     final public var processPriority: Int32 {
         get {
             return get_process_priority ()
@@ -401,7 +404,7 @@ open class Node: Object {
         
     }
     
-    /// Similar to ``processPriority`` but for ``notificationPhysicsProcess``, ``_physicsProcess(delta:)`` or the internal version.
+    /// Similar to ``processPriority`` but for ``notificationPhysicsProcess``, ``_physicsProcess(delta:)``, or ``notificationInternalPhysicsProcess``.
     final public var processPhysicsPriority: Int32 {
         get {
             return get_physics_process_priority ()
@@ -499,29 +502,94 @@ open class Node: Object {
     }
     
     /* Methods */
+    fileprivate static let method__process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_process")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called during the processing step of the main loop. Processing happens at every frame and as fast as possible, so the `delta` time since the previous frame is not constant. `delta` is in seconds.
     /// 
     /// It is only called if processing is enabled, which is done automatically if this method is overridden, and can be toggled with ``setProcess(enable:)``.
+    /// 
+    /// Processing happens in order of ``processPriority``, lower priority values are called first. Nodes with the same priority are processed in tree order, or top to bottom as seen in the editor (also known as pre-order traversal).
     /// 
     /// Corresponds to the ``notificationProcess`` notification in ``Wrapper._notification(code:reverse)``.
     /// 
     /// > Note: This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
     /// 
+    /// > Note: `delta` will be larger than expected if running at a framerate lower than ``Engine/physicsTicksPerSecond`` / ``Engine/maxPhysicsStepsPerFrame`` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both ``_process(delta:)`` and ``_physicsProcess(delta:)``. As a result, avoid using `delta` for time measurements in real-world seconds. Use the ``Time`` singleton's methods for this purpose instead, such as ``Time/getTicksUsec()``.
+    /// 
     @_documentation(visibility: public)
     open func _process(delta: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: delta) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Node.method__process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    /// Called during the physics processing step of the main loop. Physics processing means that the frame rate is synced to the physics, i.e. the `delta` variable should be constant. `delta` is in seconds.
+    fileprivate static let method__physics_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_physics_process")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Called during the physics processing step of the main loop. Physics processing means that the frame rate is synced to the physics, i.e. the `delta` parameter will _generally_ be constant (see exceptions below). `delta` is in seconds.
     /// 
     /// It is only called if physics processing is enabled, which is done automatically if this method is overridden, and can be toggled with ``setPhysicsProcess(enable:)``.
+    /// 
+    /// Processing happens in order of ``processPhysicsPriority``, lower priority values are called first. Nodes with the same priority are processed in tree order, or top to bottom as seen in the editor (also known as pre-order traversal).
     /// 
     /// Corresponds to the ``notificationPhysicsProcess`` notification in ``Wrapper._notification(code:reverse)``.
     /// 
     /// > Note: This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
     /// 
+    /// > Note: `delta` will be larger than expected if running at a framerate lower than ``Engine/physicsTicksPerSecond`` / ``Engine/maxPhysicsStepsPerFrame`` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both ``_process(delta:)`` and ``_physicsProcess(delta:)``. As a result, avoid using `delta` for time measurements in real-world seconds. Use the ``Time`` singleton's methods for this purpose instead, such as ``Time/getTicksUsec()``.
+    /// 
     @_documentation(visibility: public)
     open func _physicsProcess(delta: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: delta) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Node.method__physics_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__enter_tree: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_enter_tree")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the node enters the ``SceneTree`` (e.g. upon instantiating, scene changing, or after calling ``addChild(node:forceReadableName:`internal`:)`` in a script). If the node has children, its ``_enterTree()`` callback will be called first, and then that of the children.
     /// 
@@ -529,7 +597,21 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _enterTree() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Node.method__enter_tree, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__exit_tree: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_exit_tree")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the node is about to leave the ``SceneTree`` (e.g. upon freeing, scene changing, or after calling ``removeChild(node:)`` in a script). If the node has children, its ``_exitTree()`` callback will be called last, after all its children have left the tree.
     /// 
@@ -537,7 +619,21 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _exitTree() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Node.method__exit_tree, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__ready: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_ready")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the node is "ready", i.e. when both the node and its children have entered the scene tree. If the node has children, their ``_ready()`` callbacks get triggered first, and the parent node will receive the ready notification afterwards.
     /// 
@@ -549,7 +645,21 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _ready() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Node.method__ready, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__get_configuration_warnings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_get_configuration_warnings")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
+            }
+            
+        }
+        
+    }()
     
     /// The elements in the array returned from this method are displayed as warnings in the Scene dock if the script that overrides it is a `tool` script.
     /// 
@@ -559,8 +669,22 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _getConfigurationWarnings() -> PackedStringArray {
-        return PackedStringArray ()
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: PackedStringArray = PackedStringArray ()
+        gi.object_method_bind_ptrcall(Node.method__get_configuration_warnings, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        return _result
     }
+    
+    fileprivate static let method__input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_input")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3754044979)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when there is an input event. The input event propagates up through the node tree until a node consumes it.
     /// 
@@ -574,7 +698,30 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _input(event: InputEvent) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: event.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Node.method__input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__shortcut_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_shortcut_input")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3754044979)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when an ``InputEventKey``, ``InputEventShortcut``, or ``InputEventJoypadButton`` hasn't been consumed by ``_input(event:)`` or any GUI ``Control`` item. It is called before ``_unhandledKeyInput(event:)`` and ``_unhandledInput(event:)``. The input event propagates up through the node tree until a node consumes it.
     /// 
@@ -588,7 +735,30 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _shortcutInput(event: InputEvent?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: event?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Node.method__shortcut_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__unhandled_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_unhandled_input")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3754044979)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when an ``InputEvent`` hasn't been consumed by ``_input(event:)`` or any GUI ``Control`` item. It is called after ``_shortcutInput(event:)`` and after ``_unhandledKeyInput(event:)``. The input event propagates up through the node tree until a node consumes it.
     /// 
@@ -602,7 +772,30 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _unhandledInput(event: InputEvent?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: event?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Node.method__unhandled_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
+    
+    fileprivate static let method__unhandled_key_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_unhandled_key_input")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3754044979)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when an ``InputEventKey`` hasn't been consumed by ``_input(event:)`` or any GUI ``Control`` item. It is called after ``_shortcutInput(event:)`` but before ``_unhandledInput(event:)``. The input event propagates up through the node tree until a node consumes it.
     /// 
@@ -618,10 +811,22 @@ open class Node: Object {
     /// 
     @_documentation(visibility: public)
     open func _unhandledKeyInput(event: InputEvent?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: event?.handle) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(Node.method__unhandled_key_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_print_orphan_nodes: GDExtensionMethodBindPtr = {
-        let methodName = StringName("print_orphan_nodes")
+    fileprivate static let method_print_orphan_nodes: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("print_orphan_nodes")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -640,8 +845,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_add_sibling: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_sibling")
+    fileprivate static let method_add_sibling: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_sibling")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2570952461)!
@@ -660,6 +865,7 @@ open class Node: Object {
     /// > Note: If this node is internal, the added sibling will be internal too (see ``addChild(node:forceReadableName:`internal`:)``'s `internal` parameter).
     /// 
     public final func addSibling(_ sibling: Node?, forceReadableName: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: sibling?.handle) { pArg0 in
             withUnsafePointer(to: forceReadableName) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -676,8 +882,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_set_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_name")
+    fileprivate static let method_set_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_name")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -689,6 +895,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_name(_ name: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -703,8 +910,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_name: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_name")
+    fileprivate static let method_get_name: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_name")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2002593661)!
@@ -716,13 +923,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_name() -> StringName {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
         gi.object_method_bind_ptrcall(Node.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_add_child: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_child")
+    fileprivate static let method_add_child: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_child")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3863233950)!
@@ -745,6 +953,7 @@ open class Node: Object {
     /// > Note: If you want a child to be persisted to a ``PackedScene``, you must set ``owner`` in addition to calling ``addChild(node:forceReadableName:`internal`:)``. This is typically relevant for <a href="https://docs.godotengine.org/en//tutorials/plugins/running_code_in_the_editor.html">tool scripts</a> and <a href="https://docs.godotengine.org/en//tutorials/plugins/editor/index.html">editor plugins</a>. If ``addChild(node:forceReadableName:`internal`:)`` is called without setting ``owner``, the newly added ``Node`` will not be visible in the scene tree, though it will be visible in the 2D/3D view.
     /// 
     public final func addChild(node: Node?, forceReadableName: Bool = false, `internal`: Node.InternalMode = .disabled) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: forceReadableName) { pArg1 in
                 withUnsafePointer(to: `internal`.rawValue) { pArg2 in
@@ -764,8 +973,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_remove_child: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_child")
+    fileprivate static let method_remove_child: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_child")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -780,6 +989,7 @@ open class Node: Object {
     /// > Note: When this node is inside the tree, this method sets the ``owner`` of the removed `node` (or its descendants) to `null`, if their ``owner`` is no longer an ancestor (see ``isAncestorOf(node:)``).
     /// 
     public final func removeChild(node: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -793,8 +1003,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_reparent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reparent")
+    fileprivate static let method_reparent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reparent")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3685795103)!
@@ -809,6 +1019,7 @@ open class Node: Object {
     /// If `keepGlobalTransform` is `true`, the node's global transform will be preserved if supported. ``Node2D``, ``Node3D`` and ``Control`` support this argument (but ``Control`` keeps only position).
     /// 
     public final func reparent(newParent: Node?, keepGlobalTransform: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: newParent?.handle) { pArg0 in
             withUnsafePointer(to: keepGlobalTransform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -825,8 +1036,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_child_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_child_count")
+    fileprivate static let method_get_child_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_child_count")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 894402480)!
@@ -841,6 +1052,7 @@ open class Node: Object {
     /// If `includeInternal` is `false`, internal children are not counted (see ``addChild(node:forceReadableName:`internal`:)``'s `internal` parameter).
     /// 
     public final func getChildCount(includeInternal: Bool = false) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: includeInternal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -855,8 +1067,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_get_children: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_children")
+    fileprivate static let method_get_children: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_children")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 873284517)!
@@ -866,11 +1078,12 @@ open class Node: Object {
         
     }()
     
-    /// Returns all children of this node inside an ``GArray``.
+    /// Returns all children of this node inside an ``VariantArray``.
     /// 
     /// If `includeInternal` is `false`, excludes internal children from the returned array (see ``addChild(node:forceReadableName:`internal`:)``'s `internal` parameter).
     /// 
-    public final func getChildren(includeInternal: Bool = false) -> ObjectCollection<Node> {
+    public final func getChildren(includeInternal: Bool = false) -> TypedArray<Node?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         withUnsafePointer(to: includeInternal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -882,11 +1095,11 @@ open class Node: Object {
             
         }
         
-        return ObjectCollection<Node>(content: _result)
+        return TypedArray<Node?>(takingOver: _result)
     }
     
-    fileprivate static var method_get_child: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_child")
+    fileprivate static let method_get_child: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_child")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 541253412)!
@@ -903,6 +1116,7 @@ open class Node: Object {
     /// > Note: To fetch a node by ``NodePath``, use ``getNode(path:)``.
     /// 
     public final func getChild(idx: Int32, includeInternal: Bool = false) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: includeInternal) { pArg1 in
@@ -917,11 +1131,11 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_has_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_node")
+    fileprivate static let method_has_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_node")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 861721659)!
@@ -933,6 +1147,7 @@ open class Node: Object {
     
     /// Returns `true` if the `path` points to a valid node. See also ``getNode(path:)``.
     public final func hasNode(path: NodePath) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -947,8 +1162,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_get_node: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node")
+    fileprivate static let method_get_node: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2734337346)!
@@ -967,6 +1182,7 @@ open class Node: Object {
     /// The following calls will return a valid node:
     /// 
     public final func getNode(path: NodePath) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -978,11 +1194,11 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_node_or_null: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_or_null")
+    fileprivate static let method_get_node_or_null: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_or_null")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2734337346)!
@@ -994,6 +1210,7 @@ open class Node: Object {
     
     /// Fetches a node by ``NodePath``. Similar to ``getNode(path:)``, but does not generate an error if `path` does not point to a valid node.
     public final func getNodeOrNull(path: NodePath) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1005,11 +1222,11 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_parent")
+    fileprivate static let method_get_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_parent")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3160264692)!
@@ -1021,13 +1238,14 @@ open class Node: Object {
     
     /// Returns this node's parent node, or `null` if the node doesn't have a parent.
     public final func getParent() -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_get_parent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_find_child: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_child")
+    fileprivate static let method_find_child: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_child")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2008217037)!
@@ -1048,6 +1266,7 @@ open class Node: Object {
     /// > Note: To find all descendant nodes matching a pattern or a class type, see ``findChildren(pattern:type:recursive:owned:)``.
     /// 
     public final func findChild(pattern: String, recursive: Bool = true, owned: Bool = true) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
@@ -1066,11 +1285,11 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_find_children: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_children")
+    fileprivate static let method_find_children: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_children")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2560337219)!
@@ -1080,7 +1299,7 @@ open class Node: Object {
         
     }()
     
-    /// Finds all descendants of this node whose names match `pattern`, returning an empty ``GArray`` if no match is found. The matching is done against node names, _not_ their paths, through ``GString/match()``. As such, it is case-sensitive, `"*"` matches zero or more characters, and `"?"` matches any single character.
+    /// Finds all descendants of this node whose names match `pattern`, returning an empty ``VariantArray`` if no match is found. The matching is done against node names, _not_ their paths, through ``GString/match()``. As such, it is case-sensitive, `"*"` matches zero or more characters, and `"?"` matches any single character.
     /// 
     /// If `type` is not empty, only ancestors inheriting from `type` are included (see ``Object/isClass(_:)``).
     /// 
@@ -1092,7 +1311,8 @@ open class Node: Object {
     /// 
     /// > Note: To find a single descendant node matching a pattern, see ``findChild(pattern:recursive:owned:)``.
     /// 
-    public final func findChildren(pattern: String, type: String = "", recursive: Bool = true, owned: Bool = true) -> ObjectCollection<Node> {
+    public final func findChildren(pattern: String, type: String = "", recursive: Bool = true, owned: Bool = true) -> TypedArray<Node?> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
@@ -1115,11 +1335,11 @@ open class Node: Object {
             
         }
         
-        return ObjectCollection<Node>(content: _result)
+        return TypedArray<Node?>(takingOver: _result)
     }
     
-    fileprivate static var method_find_parent: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_parent")
+    fileprivate static let method_find_parent: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_parent")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1140089439)!
@@ -1134,6 +1354,7 @@ open class Node: Object {
     /// > Note: As this method walks upwards in the scene tree, it can be slow in large, deeply nested nodes. Consider storing a reference to the found node in a variable. Alternatively, use ``getNode(path:)`` with unique names (see ``uniqueNameInOwner``).
     /// 
     public final func findParent(pattern: String) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
@@ -1146,11 +1367,11 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_has_node_and_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("has_node_and_resource")
+    fileprivate static let method_has_node_and_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("has_node_and_resource")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 861721659)!
@@ -1162,6 +1383,7 @@ open class Node: Object {
     
     /// Returns `true` if `path` points to a valid node and its subnames point to a valid ``Resource``, e.g. `Area2D/CollisionShape2D:shape`. Properties that are not ``Resource`` types (such as nodes or other ``Variant`` types) are not considered. See also ``getNodeAndResource(path:)``.
     public final func hasNodeAndResource(path: NodePath) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1176,8 +1398,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_get_node_and_resource: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_node_and_resource")
+    fileprivate static let method_get_node_and_resource: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_node_and_resource")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 502563882)!
@@ -1187,7 +1409,7 @@ open class Node: Object {
         
     }()
     
-    /// Fetches a node and its most nested resource as specified by the ``NodePath``'s subname. Returns an ``GArray`` of size `3` where:
+    /// Fetches a node and its most nested resource as specified by the ``NodePath``'s subname. Returns an ``VariantArray`` of size `3` where:
     /// 
     /// - Element `0` is the ``Node``, or `null` if not found;
     /// 
@@ -1197,8 +1419,9 @@ open class Node: Object {
     /// 
     /// **Example:** Assume that the child's ``Sprite2D/texture`` has been assigned a ``AtlasTexture``:
     /// 
-    public final func getNodeAndResource(path: NodePath) -> GArray {
-        let _result: GArray = GArray ()
+    public final func getNodeAndResource(path: NodePath) -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1212,8 +1435,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_is_inside_tree: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_inside_tree")
+    fileprivate static let method_is_inside_tree: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_inside_tree")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1225,13 +1448,14 @@ open class Node: Object {
     
     /// Returns `true` if this node is currently inside a ``SceneTree``. See also ``getTree()``.
     public final func isInsideTree() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_inside_tree, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_part_of_edited_scene: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_part_of_edited_scene")
+    fileprivate static let method_is_part_of_edited_scene: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_part_of_edited_scene")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1243,13 +1467,14 @@ open class Node: Object {
     
     /// Returns `true` if the node is part of the scene currently opened in the editor.
     public final func isPartOfEditedScene() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_part_of_edited_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_ancestor_of: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_ancestor_of")
+    fileprivate static let method_is_ancestor_of: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_ancestor_of")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3093956946)!
@@ -1261,6 +1486,7 @@ open class Node: Object {
     
     /// Returns `true` if the given `node` is a direct or indirect child of this node.
     public final func isAncestorOf(node: Node?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1275,8 +1501,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_is_greater_than: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_greater_than")
+    fileprivate static let method_is_greater_than: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_greater_than")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3093956946)!
@@ -1288,6 +1514,7 @@ open class Node: Object {
     
     /// Returns `true` if the given `node` occurs later in the scene hierarchy than this node. A node occurring later is usually processed last.
     public final func isGreaterThan(node: Node?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1302,8 +1529,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_get_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path")
+    fileprivate static let method_get_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4075236667)!
@@ -1315,13 +1542,14 @@ open class Node: Object {
     
     /// Returns the node's absolute path, relative to the ``SceneTree/root``. If the node is not inside the scene tree, this method fails and returns an empty ``NodePath``.
     public final func getPath() -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         gi.object_method_bind_ptrcall(Node.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_path_to: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_path_to")
+    fileprivate static let method_get_path_to: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_path_to")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 498846349)!
@@ -1338,6 +1566,7 @@ open class Node: Object {
     /// > Note: If you get a relative path which starts from a unique node, the path may be longer than a normal relative path, due to the addition of the unique node's name.
     /// 
     public final func getPathTo(node: Node?, useUniquePath: Bool = false) -> NodePath {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: useUniquePath) { pArg1 in
@@ -1355,8 +1584,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_add_to_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_to_group")
+    fileprivate static let method_add_to_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_to_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3683006648)!
@@ -1375,6 +1604,7 @@ open class Node: Object {
     /// > Note: ``SceneTree``'s group methods will _not_ work on this node if not inside the tree (see ``isInsideTree()``).
     /// 
     public final func addToGroup(_ group: StringName, persistent: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: persistent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1391,8 +1621,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_remove_from_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_from_group")
+    fileprivate static let method_remove_from_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_from_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3304788590)!
@@ -1404,6 +1634,7 @@ open class Node: Object {
     
     /// Removes the node from the given `group`. Does nothing if the node is not in the `group`. See also notes in the description, and the ``SceneTree``'s group methods.
     public final func removeFromGroup(_ group: StringName) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1417,8 +1648,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_in_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_in_group")
+    fileprivate static let method_is_in_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_in_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2619796661)!
@@ -1430,6 +1661,7 @@ open class Node: Object {
     
     /// Returns `true` if this node has been added to the given `group`. See ``addToGroup(_:persistent:)`` and ``removeFromGroup(_:)``. See also notes in the description, and the ``SceneTree``'s group methods.
     public final func isInGroup(_ group: StringName) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1444,8 +1676,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_move_child: GDExtensionMethodBindPtr = {
-        let methodName = StringName("move_child")
+    fileprivate static let method_move_child: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("move_child")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3315886247)!
@@ -1460,6 +1692,7 @@ open class Node: Object {
     /// > Note: The processing order of several engine callbacks (``_ready()``, ``_process(delta:)``, etc.) and notifications sent through ``propagateNotification(what:)`` is affected by tree order. ``CanvasItem`` nodes are also rendered in tree order. See also ``processPriority``.
     /// 
     public final func moveChild(childNode: Node?, toIndex: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: childNode?.handle) { pArg0 in
             withUnsafePointer(to: toIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -1476,8 +1709,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_groups: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_groups")
+    fileprivate static let method_get_groups: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_groups")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -1487,20 +1720,21 @@ open class Node: Object {
         
     }()
     
-    /// Returns an ``GArray`` of group names that the node has been added to.
+    /// Returns an ``VariantArray`` of group names that the node has been added to.
     /// 
     /// > Note: To improve performance, the order of group names is _not_ guaranteed and may vary between project runs. Therefore, do not rely on the group order.
     /// 
     /// > Note: This method may also return some group names starting with an underscore (`_`). These are internally used by the engine. To avoid conflicts, do not use custom groups starting with underscores. To exclude internal groups, see the following code snippet:
     /// 
-    public final func getGroups() -> VariantCollection<StringName> {
+    public final func getGroups() -> TypedArray<StringName> {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
         gi.object_method_bind_ptrcall(Node.method_get_groups, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        return VariantCollection<StringName>(content: _result)
+        return TypedArray<StringName>(takingOver: _result)
     }
     
-    fileprivate static var method_set_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_owner")
+    fileprivate static let method_set_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_owner")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1078189570)!
@@ -1512,6 +1746,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_owner(_ owner: Node?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: owner?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1525,8 +1760,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_owner")
+    fileprivate static let method_get_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_owner")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3160264692)!
@@ -1538,13 +1773,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_owner() -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_get_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_index: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_index")
+    fileprivate static let method_get_index: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_index")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 894402480)!
@@ -1559,6 +1795,7 @@ open class Node: Object {
     /// If `includeInternal` is `false`, returns the index ignoring internal children. The first, non-internal child will have an index of `0` (see ``addChild(node:forceReadableName:`internal`:)``'s `internal` parameter).
     /// 
     public final func getIndex(includeInternal: Bool = false) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: includeInternal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1573,8 +1810,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_print_tree: GDExtensionMethodBindPtr = {
-        let methodName = StringName("print_tree")
+    fileprivate static let method_print_tree: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("print_tree")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1589,12 +1826,13 @@ open class Node: Object {
     /// May print, for example:
     /// 
     public final func printTree() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Node.method_print_tree, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_print_tree_pretty: GDExtensionMethodBindPtr = {
-        let methodName = StringName("print_tree_pretty")
+    fileprivate static let method_print_tree_pretty: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("print_tree_pretty")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -1609,12 +1847,13 @@ open class Node: Object {
     /// May print, for example:
     /// 
     public final func printTreePretty() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Node.method_print_tree_pretty, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_get_tree_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tree_string")
+    fileprivate static let method_get_tree_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tree_string")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -1629,13 +1868,14 @@ open class Node: Object {
     /// May print, for example:
     /// 
     public final func getTreeString() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Node.method_get_tree_string, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_tree_string_pretty: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tree_string_pretty")
+    fileprivate static let method_get_tree_string_pretty: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tree_string_pretty")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2841200299)!
@@ -1650,13 +1890,14 @@ open class Node: Object {
     /// May print, for example:
     /// 
     public final func getTreeStringPretty() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Node.method_get_tree_string_pretty, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_scene_file_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scene_file_path")
+    fileprivate static let method_set_scene_file_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scene_file_path")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -1668,6 +1909,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_scene_file_path(_ sceneFilePath: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let sceneFilePath = GString(sceneFilePath)
         withUnsafePointer(to: sceneFilePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -1682,8 +1924,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_scene_file_path: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scene_file_path")
+    fileprivate static let method_get_scene_file_path: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_file_path")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -1695,13 +1937,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_scene_file_path() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Node.method_get_scene_file_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_propagate_notification: GDExtensionMethodBindPtr = {
-        let methodName = StringName("propagate_notification")
+    fileprivate static let method_propagate_notification: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("propagate_notification")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1713,6 +1956,7 @@ open class Node: Object {
     
     /// Calls ``Object/notification(what:reversed:)`` with `what` on this node and all of its children, recursively.
     public final func propagateNotification(what: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: what) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1726,8 +1970,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_propagate_call: GDExtensionMethodBindPtr = {
-        let methodName = StringName("propagate_call")
+    fileprivate static let method_propagate_call: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("propagate_call")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1871007965)!
@@ -1741,7 +1985,8 @@ open class Node: Object {
     /// 
     /// If `parentFirst` is `true`, the method is called on this node first, then on all of its children. If `false`, the children's methods are called first.
     /// 
-    public final func propagateCall(method: StringName, args: GArray = GArray (), parentFirst: Bool = false) {
+    public final func propagateCall(method: StringName, args: VariantArray = VariantArray (), parentFirst: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: args.content) { pArg1 in
                 withUnsafePointer(to: parentFirst) { pArg2 in
@@ -1761,8 +2006,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_set_physics_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_process")
+    fileprivate static let method_set_physics_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_process")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1777,6 +2022,7 @@ open class Node: Object {
     /// > Note: If ``_physicsProcess(delta:)`` is overridden, this will be automatically enabled before ``_ready()`` is called.
     /// 
     public final func setPhysicsProcess(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1790,8 +2036,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_physics_process_delta_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_process_delta_time")
+    fileprivate static let method_get_physics_process_delta_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_process_delta_time")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1802,14 +2048,18 @@ open class Node: Object {
     }()
     
     /// Returns the time elapsed (in seconds) since the last physics callback. This value is identical to ``_physicsProcess(delta:)``'s `delta` parameter, and is often consistent at run-time, unless ``Engine/physicsTicksPerSecond`` is changed. See also ``notificationPhysicsProcess``.
+    /// 
+    /// > Note: The returned value will be larger than expected if running at a framerate lower than ``Engine/physicsTicksPerSecond`` / ``Engine/maxPhysicsStepsPerFrame`` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both ``_process(delta:)`` and ``_physicsProcess(delta:)``. As a result, avoid using `delta` for time measurements in real-world seconds. Use the ``Time`` singleton's methods for this purpose instead, such as ``Time/getTicksUsec()``.
+    /// 
     public final func getPhysicsProcessDeltaTime() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node.method_get_physics_process_delta_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_physics_processing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_physics_processing")
+    fileprivate static let method_is_physics_processing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_physics_processing")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1821,13 +2071,14 @@ open class Node: Object {
     
     /// Returns `true` if physics processing is enabled (see ``setPhysicsProcess(enable:)``).
     public final func isPhysicsProcessing() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_physics_processing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_process_delta_time: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_delta_time")
+    fileprivate static let method_get_process_delta_time: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_delta_time")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -1838,14 +2089,18 @@ open class Node: Object {
     }()
     
     /// Returns the time elapsed (in seconds) since the last process callback. This value is identical to ``_process(delta:)``'s `delta` parameter, and may vary from frame to frame. See also ``notificationProcess``.
+    /// 
+    /// > Note: The returned value will be larger than expected if running at a framerate lower than ``Engine/physicsTicksPerSecond`` / ``Engine/maxPhysicsStepsPerFrame`` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both ``_process(delta:)`` and ``_physicsProcess(delta:)``. As a result, avoid using `delta` for time measurements in real-world seconds. Use the ``Time`` singleton's methods for this purpose instead, such as ``Time/getTicksUsec()``.
+    /// 
     public final func getProcessDeltaTime() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(Node.method_get_process_delta_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process")
+    fileprivate static let method_set_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1862,6 +2117,7 @@ open class Node: Object {
     /// > Note: This method only affects the ``_process(delta:)`` callback, i.e. it has no effect on other callbacks like ``_physicsProcess(delta:)``. If you want to disable all processing for the node, set ``processMode`` to ``ProcessMode/disabled``.
     /// 
     public final func setProcess(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1875,8 +2131,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_set_process_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_priority")
+    fileprivate static let method_set_process_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_priority")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1888,6 +2144,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_process_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1901,8 +2158,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_process_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_priority")
+    fileprivate static let method_get_process_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_priority")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1914,13 +2171,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_process_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Node.method_get_process_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_physics_process_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_process_priority")
+    fileprivate static let method_set_physics_process_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_process_priority")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -1932,6 +2190,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_physics_process_priority(_ priority: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -1945,8 +2204,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_physics_process_priority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_process_priority")
+    fileprivate static let method_get_physics_process_priority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_process_priority")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -1958,13 +2217,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_physics_process_priority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Node.method_get_physics_process_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_processing: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_processing")
+    fileprivate static let method_is_processing: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_processing")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -1976,13 +2236,14 @@ open class Node: Object {
     
     /// Returns `true` if processing is enabled (see ``setProcess(enable:)``).
     public final func isProcessing() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_processing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_input")
+    fileprivate static let method_set_process_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -1997,6 +2258,7 @@ open class Node: Object {
     /// > Note: If ``_input(event:)`` is overridden, this will be automatically enabled before ``_ready()`` is called. Input processing is also already enabled for GUI controls, such as ``Button`` and ``TextEdit``.
     /// 
     public final func setProcessInput(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2010,8 +2272,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_processing_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_processing_input")
+    fileprivate static let method_is_processing_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_processing_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2023,13 +2285,14 @@ open class Node: Object {
     
     /// Returns `true` if the node is processing input (see ``setProcessInput(enable:)``).
     public final func isProcessingInput() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_processing_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_shortcut_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_shortcut_input")
+    fileprivate static let method_set_process_shortcut_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_shortcut_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2044,6 +2307,7 @@ open class Node: Object {
     /// > Note: If ``_shortcutInput(event:)`` is overridden, this will be automatically enabled before ``_ready()`` is called.
     /// 
     public final func setProcessShortcutInput(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2057,8 +2321,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_processing_shortcut_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_processing_shortcut_input")
+    fileprivate static let method_is_processing_shortcut_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_processing_shortcut_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2070,13 +2334,14 @@ open class Node: Object {
     
     /// Returns `true` if the node is processing shortcuts (see ``setProcessShortcutInput(enable:)``).
     public final func isProcessingShortcutInput() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_processing_shortcut_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_unhandled_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_unhandled_input")
+    fileprivate static let method_set_process_unhandled_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_unhandled_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2091,6 +2356,7 @@ open class Node: Object {
     /// > Note: If ``_unhandledInput(event:)`` is overridden, this will be automatically enabled before ``_ready()`` is called. Unhandled input processing is also already enabled for GUI controls, such as ``Button`` and ``TextEdit``.
     /// 
     public final func setProcessUnhandledInput(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2104,8 +2370,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_processing_unhandled_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_processing_unhandled_input")
+    fileprivate static let method_is_processing_unhandled_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_processing_unhandled_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2117,13 +2383,14 @@ open class Node: Object {
     
     /// Returns `true` if the node is processing unhandled input (see ``setProcessUnhandledInput(enable:)``).
     public final func isProcessingUnhandledInput() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_processing_unhandled_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_unhandled_key_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_unhandled_key_input")
+    fileprivate static let method_set_process_unhandled_key_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_unhandled_key_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2138,6 +2405,7 @@ open class Node: Object {
     /// > Note: If ``_unhandledKeyInput(event:)`` is overridden, this will be automatically enabled before ``_ready()`` is called.
     /// 
     public final func setProcessUnhandledKeyInput(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2151,8 +2419,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_processing_unhandled_key_input: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_processing_unhandled_key_input")
+    fileprivate static let method_is_processing_unhandled_key_input: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_processing_unhandled_key_input")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2164,13 +2432,14 @@ open class Node: Object {
     
     /// Returns `true` if the node is processing unhandled key input (see ``setProcessUnhandledKeyInput(enable:)``).
     public final func isProcessingUnhandledKeyInput() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_processing_unhandled_key_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_mode")
+    fileprivate static let method_set_process_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_mode")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1841290486)!
@@ -2182,6 +2451,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_process_mode(_ mode: Node.ProcessMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2195,8 +2465,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_process_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_mode")
+    fileprivate static let method_get_process_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_mode")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 739966102)!
@@ -2208,13 +2478,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_process_mode() -> Node.ProcessMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Node.method_get_process_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Node.ProcessMode (rawValue: _result)!
     }
     
-    fileprivate static var method_can_process: GDExtensionMethodBindPtr = {
-        let methodName = StringName("can_process")
+    fileprivate static let method_can_process: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("can_process")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2239,13 +2510,14 @@ open class Node: Object {
     /// If the node is not inside the tree, returns `false` no matter the value of ``processMode``.
     /// 
     public final func canProcess() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_can_process, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_thread_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_thread_group")
+    fileprivate static let method_set_process_thread_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_thread_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2275442745)!
@@ -2257,6 +2529,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_process_thread_group(_ mode: Node.ProcessThreadGroup) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2270,8 +2543,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_process_thread_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_thread_group")
+    fileprivate static let method_get_process_thread_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_thread_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1866404740)!
@@ -2283,13 +2556,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_process_thread_group() -> Node.ProcessThreadGroup {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Node.method_get_process_thread_group, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Node.ProcessThreadGroup (rawValue: _result)!
     }
     
-    fileprivate static var method_set_process_thread_messages: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_thread_messages")
+    fileprivate static let method_set_process_thread_messages: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_thread_messages")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1357280998)!
@@ -2301,6 +2575,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_process_thread_messages(_ flags: Node.ProcessThreadMessages) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2314,8 +2589,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_process_thread_messages: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_thread_messages")
+    fileprivate static let method_get_process_thread_messages: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_thread_messages")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4228993612)!
@@ -2327,13 +2602,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_process_thread_messages() -> Node.ProcessThreadMessages {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Node.ProcessThreadMessages = Node.ProcessThreadMessages ()
         gi.object_method_bind_ptrcall(Node.method_get_process_thread_messages, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_thread_group_order: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_thread_group_order")
+    fileprivate static let method_set_process_thread_group_order: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_thread_group_order")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -2345,6 +2621,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_process_thread_group_order(_ order: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: order) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2358,8 +2635,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_process_thread_group_order: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_process_thread_group_order")
+    fileprivate static let method_get_process_thread_group_order: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_process_thread_group_order")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -2371,13 +2648,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_process_thread_group_order() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Node.method_get_process_thread_group_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_display_folded: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_display_folded")
+    fileprivate static let method_set_display_folded: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_display_folded")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2389,6 +2667,7 @@ open class Node: Object {
     
     /// If set to `true`, the node appears folded in the Scene dock. As a result, all of its children are hidden. This method is intended to be used in editor plugins and tools, but it also works in release builds. See also ``isDisplayedFolded()``.
     public final func setDisplayFolded(fold: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: fold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2402,8 +2681,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_displayed_folded: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_displayed_folded")
+    fileprivate static let method_is_displayed_folded: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_displayed_folded")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2415,13 +2694,14 @@ open class Node: Object {
     
     /// Returns `true` if the node is folded (collapsed) in the Scene dock. This method is intended to be used in editor plugins and tools. See also ``setDisplayFolded(fold:)``.
     public final func isDisplayedFolded() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_displayed_folded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_process_internal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_process_internal")
+    fileprivate static let method_set_process_internal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_process_internal")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2436,6 +2716,7 @@ open class Node: Object {
     /// > Warning: Built-in nodes rely on internal processing for their internal logic. Disabling it is unsafe and may lead to unexpected behavior. Use this method if you know what you are doing.
     /// 
     public final func setProcessInternal(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2449,8 +2730,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_processing_internal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_processing_internal")
+    fileprivate static let method_is_processing_internal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_processing_internal")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2462,13 +2743,14 @@ open class Node: Object {
     
     /// Returns `true` if internal processing is enabled (see ``setProcessInternal(enable:)``).
     public final func isProcessingInternal() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_processing_internal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_physics_process_internal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_process_internal")
+    fileprivate static let method_set_physics_process_internal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_process_internal")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2483,6 +2765,7 @@ open class Node: Object {
     /// > Warning: Built-in nodes rely on internal processing for their internal logic. Disabling it is unsafe and may lead to unexpected behavior. Use this method if you know what you are doing.
     /// 
     public final func setPhysicsProcessInternal(enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2496,8 +2779,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_physics_processing_internal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_physics_processing_internal")
+    fileprivate static let method_is_physics_processing_internal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_physics_processing_internal")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2509,13 +2792,14 @@ open class Node: Object {
     
     /// Returns `true` if internal physics processing is enabled (see ``setPhysicsProcessInternal(enable:)``).
     public final func isPhysicsProcessingInternal() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_physics_processing_internal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_physics_interpolation_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_physics_interpolation_mode")
+    fileprivate static let method_set_physics_interpolation_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_physics_interpolation_mode")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3202404928)!
@@ -2527,6 +2811,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_physics_interpolation_mode(_ mode: Node.PhysicsInterpolationMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2540,8 +2825,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_physics_interpolation_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_physics_interpolation_mode")
+    fileprivate static let method_get_physics_interpolation_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_physics_interpolation_mode")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2920385216)!
@@ -2553,13 +2838,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_physics_interpolation_mode() -> Node.PhysicsInterpolationMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Node.method_get_physics_interpolation_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Node.PhysicsInterpolationMode (rawValue: _result)!
     }
     
-    fileprivate static var method_is_physics_interpolated: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_physics_interpolated")
+    fileprivate static let method_is_physics_interpolated: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_physics_interpolated")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2574,13 +2860,14 @@ open class Node: Object {
     /// > Note: Interpolation will only be active if both the flag is set **and** physics interpolation is enabled within the ``SceneTree``. This can be tested using ``isPhysicsInterpolatedAndEnabled()``.
     /// 
     public final func isPhysicsInterpolated() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_physics_interpolated, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_physics_interpolated_and_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_physics_interpolated_and_enabled")
+    fileprivate static let method_is_physics_interpolated_and_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_physics_interpolated_and_enabled")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2597,13 +2884,14 @@ open class Node: Object {
     /// See ``SceneTree/physicsInterpolation`` and ``ProjectSettings/physics/common/physicsInterpolation``.
     /// 
     public final func isPhysicsInterpolatedAndEnabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_physics_interpolated_and_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_reset_physics_interpolation: GDExtensionMethodBindPtr = {
-        let methodName = StringName("reset_physics_interpolation")
+    fileprivate static let method_reset_physics_interpolation: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("reset_physics_interpolation")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2622,12 +2910,13 @@ open class Node: Object {
     /// > Note: This function should be called **after** moving the node, rather than before.
     /// 
     public final func resetPhysicsInterpolation() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Node.method_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_set_auto_translate_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_auto_translate_mode")
+    fileprivate static let method_set_auto_translate_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_auto_translate_mode")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 776149714)!
@@ -2639,6 +2928,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_auto_translate_mode(_ mode: Node.AutoTranslateMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2652,8 +2942,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_auto_translate_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_auto_translate_mode")
+    fileprivate static let method_get_auto_translate_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_auto_translate_mode")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2498906432)!
@@ -2665,13 +2955,35 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_auto_translate_mode() -> Node.AutoTranslateMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(Node.method_get_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return Node.AutoTranslateMode (rawValue: _result)!
     }
     
-    fileprivate static var method_get_window: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_window")
+    fileprivate static let method_set_translation_domain_inherited: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_translation_domain_inherited")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Makes this node inherit the translation domain from its parent node. If this node has no parent, the main translation domain will be used.
+    /// 
+    /// This is the default behavior for all nodes. Calling ``Object/setTranslationDomain(_:)`` disables this behavior.
+    /// 
+    public final func setTranslationDomainInherited() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(Node.method_set_translation_domain_inherited, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
+    }
+    
+    fileprivate static let method_get_window: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_window")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1757182445)!
@@ -2683,13 +2995,14 @@ open class Node: Object {
     
     /// Returns the ``Window`` that contains this node. If the node is in the main window, this is equivalent to getting the root node (`get_tree().get_root()`).
     public final func getWindow() -> Window? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_get_window, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_last_exclusive_window: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_last_exclusive_window")
+    fileprivate static let method_get_last_exclusive_window: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_last_exclusive_window")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1757182445)!
@@ -2701,13 +3014,14 @@ open class Node: Object {
     
     /// Returns the ``Window`` that contains this node, or the last exclusive child in a chain of windows starting with the one that contains this node.
     public final func getLastExclusiveWindow() -> Window? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_get_last_exclusive_window, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_tree: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_tree")
+    fileprivate static let method_get_tree: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_tree")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2958820483)!
@@ -2719,13 +3033,14 @@ open class Node: Object {
     
     /// Returns the ``SceneTree`` that contains this node. If this node is not inside the tree, generates an error and returns `null`. See also ``isInsideTree()``.
     public final func getTree() -> SceneTree? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_get_tree, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_create_tween: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_tween")
+    fileprivate static let method_create_tween: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_tween")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3426978995)!
@@ -2744,13 +3059,14 @@ open class Node: Object {
     /// > Note: The method can still be used when the node is not inside ``SceneTree``. It can fail in an unlikely case of using a custom ``MainLoop``.
     /// 
     public final func createTween() -> Tween? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_create_tween, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_duplicate: GDExtensionMethodBindPtr = {
-        let methodName = StringName("duplicate")
+    fileprivate static let method_duplicate: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("duplicate")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3511555459)!
@@ -2760,11 +3076,12 @@ open class Node: Object {
         
     }()
     
-    /// Duplicates the node, returning a new node with all of its properties, signals and groups copied from the original. The behavior can be tweaked through the `flags` (see ``Node/DuplicateFlags``).
+    /// Duplicates the node, returning a new node with all of its properties, signals, groups, and children copied from the original. The behavior can be tweaked through the `flags` (see ``Node/DuplicateFlags``).
     /// 
     /// > Note: For nodes with a ``Script`` attached, if ``Object/_init()`` has been defined with required parameters, the duplicated node will not have a ``Script``.
     /// 
     public final func duplicate(flags: Int32 = 15) -> Node? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: flags) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2776,11 +3093,11 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_replace_by: GDExtensionMethodBindPtr = {
-        let methodName = StringName("replace_by")
+    fileprivate static let method_replace_by: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("replace_by")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2570952461)!
@@ -2797,6 +3114,7 @@ open class Node: Object {
     /// > Warning: The replaced node is removed from the tree, but it is **not** deleted. To prevent memory leaks, store a reference to the node in a variable, or use ``Object/free()``.
     /// 
     public final func replaceBy(node: Node?, keepGroups: Bool = false) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: keepGroups) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2813,8 +3131,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_set_scene_instance_load_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_scene_instance_load_placeholder")
+    fileprivate static let method_set_scene_instance_load_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_scene_instance_load_placeholder")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -2826,6 +3144,7 @@ open class Node: Object {
     
     /// If set to `true`, the node becomes a ``InstancePlaceholder`` when packed and instantiated from a ``PackedScene``. See also ``getSceneInstanceLoadPlaceholder()``.
     public final func setSceneInstanceLoadPlaceholder(_ loadPlaceholder: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: loadPlaceholder) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2839,8 +3158,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_scene_instance_load_placeholder: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_scene_instance_load_placeholder")
+    fileprivate static let method_get_scene_instance_load_placeholder: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_scene_instance_load_placeholder")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2852,13 +3171,14 @@ open class Node: Object {
     
     /// Returns `true` if this node is an instance load placeholder. See ``InstancePlaceholder`` and ``setSceneInstanceLoadPlaceholder(_:)``.
     public final func getSceneInstanceLoadPlaceholder() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_get_scene_instance_load_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_editable_instance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_editable_instance")
+    fileprivate static let method_set_editable_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_editable_instance")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2731852923)!
@@ -2870,6 +3190,7 @@ open class Node: Object {
     
     /// Set to `true` to allow all nodes owned by `node` to be available, and editable, in the Scene dock, even if their ``owner`` is not the scene root. This method is intended to be used in editor plugins and tools, but it also works in release builds. See also ``isEditableInstance(node:)``.
     public final func setEditableInstance(node: Node?, isEditable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: isEditable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -2886,8 +3207,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_editable_instance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_editable_instance")
+    fileprivate static let method_is_editable_instance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_editable_instance")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3093956946)!
@@ -2899,6 +3220,7 @@ open class Node: Object {
     
     /// Returns `true` if `node` has editable children enabled relative to this node. This method is intended to be used in editor plugins and tools. See also ``setEditableInstance(node:isEditable:)``.
     public final func isEditableInstance(node: Node?) -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -2913,8 +3235,8 @@ open class Node: Object {
         return _result
     }
     
-    fileprivate static var method_get_viewport: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_viewport")
+    fileprivate static let method_get_viewport: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_viewport")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3596683776)!
@@ -2926,13 +3248,14 @@ open class Node: Object {
     
     /// Returns the node's closest ``Viewport`` ancestor, if the node is inside the tree. Otherwise, returns `null`.
     public final func getViewport() -> Viewport? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_get_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_queue_free: GDExtensionMethodBindPtr = {
-        let methodName = StringName("queue_free")
+    fileprivate static let method_queue_free: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("queue_free")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2949,12 +3272,13 @@ open class Node: Object {
     /// > Note: The node will only be freed after all other deferred calls are finished. Using this method is not always the same as calling ``Object/free()`` through ``Object/callDeferred(method:)``.
     /// 
     public final func queueFree() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Node.method_queue_free, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_request_ready: GDExtensionMethodBindPtr = {
-        let methodName = StringName("request_ready")
+    fileprivate static let method_request_ready: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("request_ready")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -2969,12 +3293,13 @@ open class Node: Object {
     /// > Note: This method only affects the current node. If the node's children also need to request ready, this method needs to be called for each one of them. When the node and its children enter the tree again, the order of ``_ready()`` callbacks will be the same as normal.
     /// 
     public final func requestReady() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Node.method_request_ready, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_is_node_ready: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_node_ready")
+    fileprivate static let method_is_node_ready: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_node_ready")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -2989,13 +3314,14 @@ open class Node: Object {
     /// ``requestReady()`` resets it back to `false`.
     /// 
     public final func isNodeReady() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_node_ready, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_multiplayer_authority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_multiplayer_authority")
+    fileprivate static let method_set_multiplayer_authority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_multiplayer_authority")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 972357352)!
@@ -3012,6 +3338,7 @@ open class Node: Object {
     /// > Warning: This does **not** automatically replicate the new authority to other peers. It is the developer's responsibility to do so. You may replicate the new authority's information using ``MultiplayerSpawner/spawnFunction``, an RPC, or a ``MultiplayerSynchronizer``. Furthermore, the parent's authority does **not** propagate to newly added children.
     /// 
     public final func setMultiplayerAuthority(id: Int32, recursive: Bool = true) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: recursive) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3028,8 +3355,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_multiplayer_authority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_multiplayer_authority")
+    fileprivate static let method_get_multiplayer_authority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_multiplayer_authority")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -3041,13 +3368,14 @@ open class Node: Object {
     
     /// Returns the peer ID of the multiplayer authority for this node. See ``setMultiplayerAuthority(id:recursive:)``.
     public final func getMultiplayerAuthority() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(Node.method_get_multiplayer_authority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_is_multiplayer_authority: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_multiplayer_authority")
+    fileprivate static let method_is_multiplayer_authority: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_multiplayer_authority")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3059,13 +3387,14 @@ open class Node: Object {
     
     /// Returns `true` if the local system is the multiplayer authority of this node.
     public final func isMultiplayerAuthority() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_multiplayer_authority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_multiplayer: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_multiplayer")
+    fileprivate static let method_get_multiplayer: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_multiplayer")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 406750475)!
@@ -3077,13 +3406,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_multiplayer() -> MultiplayerAPI? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(Node.method_get_multiplayer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_rpc_config: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rpc_config")
+    fileprivate static let method_rpc_config: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rpc_config")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -3093,7 +3423,7 @@ open class Node: Object {
         
     }()
     
-    /// Changes the RPC configuration for the given `method`. `config` should either be `null` to disable the feature (as by default), or a ``GDictionary`` containing the following entries:
+    /// Changes the RPC configuration for the given `method`. `config` should either be `null` to disable the feature (as by default), or a ``VariantDictionary`` containing the following entries:
     /// 
     /// - `rpc_mode`: see ``MultiplayerAPI.RPCMode``;
     /// 
@@ -3106,6 +3436,7 @@ open class Node: Object {
     /// > Note: In GDScript, this method corresponds to the [annotation @GDScript.@rpc] annotation, with various parameters passed (`@rpc(any)`, `@rpc(authority)`...). See also the <a href="https://docs.godotengine.org/en//tutorials/networking/high_level_multiplayer.html">high-level multiplayer</a> tutorial.
     /// 
     public final func rpcConfig(method: StringName, config: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: config.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3122,8 +3453,27 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_set_editor_description: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_editor_description")
+    fileprivate static let method_get_rpc_config: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_rpc_config")
+        return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 1214101251)!
+            }
+            
+        }
+        
+    }()
+    
+    /// Returns a ``VariantDictionary`` mapping method names to their RPC configuration defined for this node using ``rpcConfig(method:config:)``.
+    public final func getRpcConfig() -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        var _result: Variant.ContentType = Variant.zero
+        gi.object_method_bind_ptrcall(Node.method_get_rpc_config, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        return Variant(takingOver: _result)
+    }
+    
+    fileprivate static let method_set_editor_description: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_editor_description")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 83702148)!
@@ -3135,6 +3485,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_editor_description(_ editorDescription: String) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let editorDescription = GString(editorDescription)
         withUnsafePointer(to: editorDescription.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3149,8 +3500,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_get_editor_description: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_editor_description")
+    fileprivate static let method_get_editor_description: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_editor_description")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -3162,13 +3513,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func get_editor_description() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(Node.method_get_editor_description, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_set_unique_name_in_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_unique_name_in_owner")
+    fileprivate static let method_set_unique_name_in_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_unique_name_in_owner")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -3180,6 +3532,7 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func set_unique_name_in_owner(_ enable: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3193,8 +3546,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_is_unique_name_in_owner: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_unique_name_in_owner")
+    fileprivate static let method_is_unique_name_in_owner: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_unique_name_in_owner")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -3206,13 +3559,14 @@ open class Node: Object {
     
     @inline(__always)
     fileprivate final func is_unique_name_in_owner() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(Node.method_is_unique_name_in_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_atr: GDExtensionMethodBindPtr = {
-        let methodName = StringName("atr")
+    fileprivate static let method_atr: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("atr")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3344478075)!
@@ -3231,6 +3585,7 @@ open class Node: Object {
     /// For detailed examples, see <a href="https://docs.godotengine.org/en//tutorials/i18n/internationalizing_games.html">Internationalizing games</a>.
     /// 
     public final func atr(message: String, context: StringName = StringName ("")) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let message = GString(message)
         withUnsafePointer(to: message.content) { pArg0 in
@@ -3249,8 +3604,8 @@ open class Node: Object {
         return _result.description
     }
     
-    fileprivate static var method_atr_n: GDExtensionMethodBindPtr = {
-        let methodName = StringName("atr_n")
+    fileprivate static let method_atr_n: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("atr_n")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 259354841)!
@@ -3273,6 +3628,7 @@ open class Node: Object {
     /// > Note: Negative and float numbers may not properly apply to some countable subjects. It's recommended to handle these cases with ``atr(message:context:)``.
     /// 
     public final func atrN(message: String, pluralMessage: StringName, n: Int32, context: StringName = StringName ("")) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         let message = GString(message)
         withUnsafePointer(to: message.content) { pArg0 in
@@ -3297,8 +3653,8 @@ open class Node: Object {
         return _result.description
     }
     
-    fileprivate static var method_rpc: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rpc")
+    fileprivate static let method_rpc: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rpc")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 4047867050)!
@@ -3315,8 +3671,9 @@ open class Node: Object {
     /// > Note: You can only safely use RPCs on clients after you received the [signal MultiplayerAPI.connected_to_server] signal from the ``MultiplayerAPI``. You also need to keep track of the connection state, either by the ``MultiplayerAPI`` signals like [signal MultiplayerAPI.server_disconnected] or by checking (`get_multiplayer().peer.get_connection_status() == CONNECTION_CONNECTED`).
     /// 
     public final func rpc(method: StringName, _ arguments: Variant?...) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let method = Variant(method)
+        let method = method.toVariant()
         withUnsafePointer(to: method.content) { pArg0 in
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3366,8 +3723,8 @@ open class Node: Object {
         return GodotError(rawValue: Int64(errorCode))!                
     }
     
-    fileprivate static var method_rpc_id: GDExtensionMethodBindPtr = {
-        let methodName = StringName("rpc_id")
+    fileprivate static let method_rpc_id: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("rpc_id")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 361499283)!
@@ -3382,10 +3739,11 @@ open class Node: Object {
     /// May return ``GodotError/ok`` if the call is successful, ``GodotError/errInvalidParameter`` if the arguments passed in the `method` do not match, ``GodotError/errUnconfigured`` if the node's ``multiplayer`` cannot be fetched (such as when the node is not inside the tree), ``GodotError/errConnectionError`` if ``multiplayer``'s connection is not available.
     /// 
     public final func rpcId(peerId: Int64, method: StringName, _ arguments: Variant?...) -> GodotError {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let peerId = Variant(peerId)
+        let peerId = peerId.toVariant()
         withUnsafePointer(to: peerId.content) { pArg0 in
-            let method = Variant(method)
+            let method = method.toVariant()
             withUnsafePointer(to: method.content) { pArg1 in
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3438,8 +3796,8 @@ open class Node: Object {
         return GodotError(rawValue: Int64(errorCode))!                
     }
     
-    fileprivate static var method_update_configuration_warnings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("update_configuration_warnings")
+    fileprivate static let method_update_configuration_warnings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("update_configuration_warnings")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -3451,12 +3809,13 @@ open class Node: Object {
     
     /// Refreshes the warnings displayed for this node in the Scene dock. Use ``_getConfigurationWarnings()`` to customize the warning messages to display.
     public final func updateConfigurationWarnings() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(Node.method_update_configuration_warnings, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }
     
-    fileprivate static var method_call_deferred_thread_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("call_deferred_thread_group")
+    fileprivate static let method_call_deferred_thread_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("call_deferred_thread_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3400424181)!
@@ -3468,8 +3827,9 @@ open class Node: Object {
     
     /// This function is similar to ``Object/callDeferred(method:)`` except that the call will take place when the node thread group is processed. If the node thread group processes in sub-threads, then the call will be done on that thread, right before ``notificationProcess`` or ``notificationPhysicsProcess``, the ``_process(delta:)`` or ``_physicsProcess(delta:)`` or their internal versions are called.
     public final func callDeferredThreadGroup(method: StringName, _ arguments: Variant?...) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let method = Variant(method)
+        let method = method.toVariant()
         withUnsafePointer(to: method.content) { pArg0 in
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3511,8 +3871,8 @@ open class Node: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_deferred_thread_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_deferred_thread_group")
+    fileprivate static let method_set_deferred_thread_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_deferred_thread_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -3524,6 +3884,7 @@ open class Node: Object {
     
     /// Similar to ``callDeferredThreadGroup(method:)``, but for setting properties.
     public final func setDeferredThreadGroup(property: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3540,8 +3901,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_notify_deferred_thread_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("notify_deferred_thread_group")
+    fileprivate static let method_notify_deferred_thread_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("notify_deferred_thread_group")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3553,6 +3914,7 @@ open class Node: Object {
     
     /// Similar to ``callDeferredThreadGroup(method:)``, but for notifications.
     public final func notifyDeferredThreadGroup(what: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: what) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3566,8 +3928,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_call_thread_safe: GDExtensionMethodBindPtr = {
-        let methodName = StringName("call_thread_safe")
+    fileprivate static let method_call_thread_safe: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("call_thread_safe")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3400424181)!
@@ -3579,8 +3941,9 @@ open class Node: Object {
     
     /// This function ensures that the calling of this function will succeed, no matter whether it's being done from a thread or not. If called from a thread that is not allowed to call the function, the call will become deferred. Otherwise, the call will go through directly.
     public final func callThreadSafe(method: StringName, _ arguments: Variant?...) -> Variant? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        let method = Variant(method)
+        let method = method.toVariant()
         withUnsafePointer(to: method.content) { pArg0 in
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -3622,8 +3985,8 @@ open class Node: Object {
         return Variant(takingOver: _result)
     }
     
-    fileprivate static var method_set_thread_safe: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_thread_safe")
+    fileprivate static let method_set_thread_safe: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_thread_safe")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3776071444)!
@@ -3635,6 +3998,7 @@ open class Node: Object {
     
     /// Similar to ``callThreadSafe(method:)``, but for setting properties.
     public final func setThreadSafe(property: StringName, value: Variant?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -3651,8 +4015,8 @@ open class Node: Object {
         
     }
     
-    fileprivate static var method_notify_thread_safe: GDExtensionMethodBindPtr = {
-        let methodName = StringName("notify_thread_safe")
+    fileprivate static let method_notify_thread_safe: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("notify_thread_safe")
         return withUnsafePointer(to: &Node.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1286410249)!
@@ -3664,6 +4028,7 @@ open class Node: Object {
     
     /// Similar to ``callThreadSafe(method:)``, but for notifications.
     public final func notifyThreadSafe(what: Int32) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: what) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -3677,7 +4042,7 @@ open class Node: Object {
         
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_enter_tree":
@@ -3885,24 +4250,43 @@ open class Node: Object {
     /// ```
     public var editorDescriptionChanged: SignalWithArguments<Node?> { SignalWithArguments<Node?> (target: self, signalName: "editor_description_changed") }
     
+    /// Emitted when an attribute of the node that is relevant to the editor is changed. Only emitted in the editor.
+    ///
+    /// To connect to this signal, reference this property and call the
+    /// 
+    /// `connect` method with the method you want to invoke
+    /// 
+    /// 
+    /// 
+    /// Example:
+    /// ```swift
+    /// obj.editorStateChanged.connect {
+    ///    print ("caught signal")
+    /// }
+    /// ```
+    public var editorStateChanged: SimpleSignal { SimpleSignal (target: self, signalName: "editor_state_changed") }
+    
 }
 
 // Support methods for proxies
 func _Node_proxy_enter_tree (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
     swiftObject._enterTree ()
 }
 
 func _Node_proxy_exit_tree (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
     swiftObject._exitTree ()
 }
 
 func _Node_proxy_get_configuration_warnings (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
     let ret = swiftObject._getConfigurationWarnings ()
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
@@ -3911,56 +4295,63 @@ func _Node_proxy_get_configuration_warnings (instance: UnsafeMutableRawPointer?,
 func _Node_proxy_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._input (event: lookupLiveObject (handleAddress: resolved_0) as? InputEvent ?? lookupObject (nativeHandle: resolved_0)!)
+    swiftObject._input (event: lookupObject (nativeHandle: resolved_0!, ownsRef: false) as! InputEvent)
 }
 
 func _Node_proxy_physics_process (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
     swiftObject._physicsProcess (delta: args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _Node_proxy_process (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
     swiftObject._process (delta: args [0]!.assumingMemoryBound (to: Double.self).pointee)
 }
 
 func _Node_proxy_ready (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
     swiftObject._ready ()
 }
 
 func _Node_proxy_shortcut_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._shortcutInput (event: lookupLiveObject (handleAddress: resolved_0) as? InputEvent ?? lookupObject (nativeHandle: resolved_0)!)
+    swiftObject._shortcutInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
 }
 
 func _Node_proxy_unhandled_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._unhandledInput (event: lookupLiveObject (handleAddress: resolved_0) as? InputEvent ?? lookupObject (nativeHandle: resolved_0)!)
+    swiftObject._unhandledInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
 }
 
 func _Node_proxy_unhandled_key_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<Node>.fromOpaque(instance).takeUnretainedValue()
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer.self)
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? Node else { return }
+    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
     
-    swiftObject._unhandledKeyInput (event: lookupLiveObject (handleAddress: resolved_0) as? InputEvent ?? lookupObject (nativeHandle: resolved_0)!)
+    swiftObject._unhandledKeyInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
 }
 

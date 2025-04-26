@@ -28,13 +28,13 @@ import Musl
 /// The action map therefore needs to be loaded at startup and can't be changed afterwards. This resource is a container for the entire action map.
 /// 
 open class OpenXRActionMap: Resource {
-    fileprivate static var className = StringName("OpenXRActionMap")
+    private static var className = StringName("OpenXRActionMap")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
     
     /// Collection of ``OpenXRActionSet``s that are part of this action map.
-    final public var actionSets: GArray {
+    final public var actionSets: VariantArray {
         get {
             return get_action_sets ()
         }
@@ -46,7 +46,7 @@ open class OpenXRActionMap: Resource {
     }
     
     /// Collection of ``OpenXRInteractionProfile``s that are part of this action map.
-    final public var interactionProfiles: GArray {
+    final public var interactionProfiles: VariantArray {
         get {
             return get_interaction_profiles ()
         }
@@ -58,8 +58,8 @@ open class OpenXRActionMap: Resource {
     }
     
     /* Methods */
-    fileprivate static var method_set_action_sets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_action_sets")
+    fileprivate static let method_set_action_sets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_action_sets")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -70,7 +70,8 @@ open class OpenXRActionMap: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func set_action_sets(_ actionSets: GArray) {
+    fileprivate final func set_action_sets(_ actionSets: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: actionSets.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -84,8 +85,8 @@ open class OpenXRActionMap: Resource {
         
     }
     
-    fileprivate static var method_get_action_sets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_sets")
+    fileprivate static let method_get_action_sets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_sets")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -96,14 +97,15 @@ open class OpenXRActionMap: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func get_action_sets() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_action_sets() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(OpenXRActionMap.method_get_action_sets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_action_set_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_set_count")
+    fileprivate static let method_get_action_set_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_set_count")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -115,13 +117,14 @@ open class OpenXRActionMap: Resource {
     
     /// Retrieve the number of actions sets in our action map.
     public final func getActionSetCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(OpenXRActionMap.method_get_action_set_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_find_action_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_action_set")
+    fileprivate static let method_find_action_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_action_set")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1888809267)!
@@ -133,6 +136,7 @@ open class OpenXRActionMap: Resource {
     
     /// Retrieve an action set by name.
     public final func findActionSet(name: String) -> OpenXRActionSet? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -145,11 +149,11 @@ open class OpenXRActionMap: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_action_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_set")
+    fileprivate static let method_get_action_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_set")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1789580336)!
@@ -161,6 +165,7 @@ open class OpenXRActionMap: Resource {
     
     /// Retrieve the action set at this index.
     public final func getActionSet(idx: Int32) -> OpenXRActionSet? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -172,11 +177,11 @@ open class OpenXRActionMap: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_action_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_action_set")
+    fileprivate static let method_add_action_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_action_set")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2093310581)!
@@ -188,6 +193,7 @@ open class OpenXRActionMap: Resource {
     
     /// Add an action set.
     public final func addActionSet(_ actionSet: OpenXRActionSet?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: actionSet?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -201,8 +207,8 @@ open class OpenXRActionMap: Resource {
         
     }
     
-    fileprivate static var method_remove_action_set: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_action_set")
+    fileprivate static let method_remove_action_set: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_action_set")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2093310581)!
@@ -214,6 +220,7 @@ open class OpenXRActionMap: Resource {
     
     /// Remove an action set.
     public final func removeActionSet(_ actionSet: OpenXRActionSet?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: actionSet?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -227,8 +234,8 @@ open class OpenXRActionMap: Resource {
         
     }
     
-    fileprivate static var method_set_interaction_profiles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_interaction_profiles")
+    fileprivate static let method_set_interaction_profiles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_interaction_profiles")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 381264803)!
@@ -239,7 +246,8 @@ open class OpenXRActionMap: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func set_interaction_profiles(_ interactionProfiles: GArray) {
+    fileprivate final func set_interaction_profiles(_ interactionProfiles: VariantArray) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: interactionProfiles.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -253,8 +261,8 @@ open class OpenXRActionMap: Resource {
         
     }
     
-    fileprivate static var method_get_interaction_profiles: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interaction_profiles")
+    fileprivate static let method_get_interaction_profiles: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interaction_profiles")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3995934104)!
@@ -265,14 +273,15 @@ open class OpenXRActionMap: Resource {
     }()
     
     @inline(__always)
-    fileprivate final func get_interaction_profiles() -> GArray {
-        let _result: GArray = GArray ()
+    fileprivate final func get_interaction_profiles() -> VariantArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantArray = VariantArray ()
         gi.object_method_bind_ptrcall(OpenXRActionMap.method_get_interaction_profiles, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_interaction_profile_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interaction_profile_count")
+    fileprivate static let method_get_interaction_profile_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interaction_profile_count")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -284,13 +293,14 @@ open class OpenXRActionMap: Resource {
     
     /// Retrieve the number of interaction profiles in our action map.
     public final func getInteractionProfileCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(OpenXRActionMap.method_get_interaction_profile_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_find_interaction_profile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("find_interaction_profile")
+    fileprivate static let method_find_interaction_profile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("find_interaction_profile")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3095875538)!
@@ -302,6 +312,7 @@ open class OpenXRActionMap: Resource {
     
     /// Find an interaction profile by its name (path).
     public final func findInteractionProfile(name: String) -> OpenXRInteractionProfile? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
@@ -314,11 +325,11 @@ open class OpenXRActionMap: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_get_interaction_profile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_interaction_profile")
+    fileprivate static let method_get_interaction_profile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_interaction_profile")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2546151210)!
@@ -330,6 +341,7 @@ open class OpenXRActionMap: Resource {
     
     /// Get the interaction profile at this index.
     public final func getInteractionProfile(idx: Int32) -> OpenXRInteractionProfile? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -341,11 +353,11 @@ open class OpenXRActionMap: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_add_interaction_profile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("add_interaction_profile")
+    fileprivate static let method_add_interaction_profile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("add_interaction_profile")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2697953512)!
@@ -357,6 +369,7 @@ open class OpenXRActionMap: Resource {
     
     /// Add an interaction profile.
     public final func addInteractionProfile(_ interactionProfile: OpenXRInteractionProfile?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: interactionProfile?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -370,8 +383,8 @@ open class OpenXRActionMap: Resource {
         
     }
     
-    fileprivate static var method_remove_interaction_profile: GDExtensionMethodBindPtr = {
-        let methodName = StringName("remove_interaction_profile")
+    fileprivate static let method_remove_interaction_profile: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("remove_interaction_profile")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2697953512)!
@@ -383,6 +396,7 @@ open class OpenXRActionMap: Resource {
     
     /// Remove an interaction profile.
     public final func removeInteractionProfile(_ interactionProfile: OpenXRInteractionProfile?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: interactionProfile?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -396,8 +410,8 @@ open class OpenXRActionMap: Resource {
         
     }
     
-    fileprivate static var method_create_default_action_sets: GDExtensionMethodBindPtr = {
-        let methodName = StringName("create_default_action_sets")
+    fileprivate static let method_create_default_action_sets: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("create_default_action_sets")
         return withUnsafePointer(to: &OpenXRActionMap.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
@@ -409,6 +423,7 @@ open class OpenXRActionMap: Resource {
     
     /// Setup this action set with our default actions.
     public final func createDefaultActionSets() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         gi.object_method_bind_ptrcall(OpenXRActionMap.method_create_default_action_sets, UnsafeMutableRawPointer(mutating: handle), nil, nil)
         
     }

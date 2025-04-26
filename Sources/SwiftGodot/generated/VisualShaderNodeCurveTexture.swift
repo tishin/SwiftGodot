@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Comes with a built-in editor for texture's curves.
 open class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
-    fileprivate static var className = StringName("VisualShaderNodeCurveTexture")
+    private static var className = StringName("VisualShaderNodeCurveTexture")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -41,8 +41,8 @@ open class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
     }
     
     /* Methods */
-    fileprivate static var method_set_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_texture")
+    fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_texture")
         return withUnsafePointer(to: &VisualShaderNodeCurveTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 181872837)!
@@ -54,6 +54,7 @@ open class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func set_texture(_ texture: CurveTexture?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -67,8 +68,8 @@ open class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
         
     }
     
-    fileprivate static var method_get_texture: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_texture")
+    fileprivate static let method_get_texture: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_texture")
         return withUnsafePointer(to: &VisualShaderNodeCurveTexture.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2800800579)!
@@ -80,9 +81,10 @@ open class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
     
     @inline(__always)
     fileprivate final func get_texture() -> CurveTexture? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(VisualShaderNodeCurveTexture.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

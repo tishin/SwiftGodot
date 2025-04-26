@@ -23,7 +23,7 @@ import Musl
 /// 
 /// Contains the results of a single ``RegEx`` match returned by ``RegEx/search(subject:offset:end:)`` and ``RegEx/searchAll(subject:offset:end:)``. It can be used to find the position and range of the match and its capturing groups, and it can extract its substring for you.
 open class RegExMatch: RefCounted {
-    fileprivate static var className = StringName("RegExMatch")
+    private static var className = StringName("RegExMatch")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -37,14 +37,14 @@ open class RegExMatch: RefCounted {
     }
     
     /// A dictionary of named groups and its corresponding group number. Only groups that were matched are included. If multiple groups have the same name, that name would refer to the first matching one.
-    final public var names: GDictionary {
+    final public var names: VariantDictionary {
         get {
             return get_names ()
         }
         
     }
     
-    /// An ``GArray`` of the match and its capturing groups.
+    /// An ``VariantArray`` of the match and its capturing groups.
     final public var strings: PackedStringArray {
         get {
             return get_strings ()
@@ -53,8 +53,8 @@ open class RegExMatch: RefCounted {
     }
     
     /* Methods */
-    fileprivate static var method_get_subject: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_subject")
+    fileprivate static let method_get_subject: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_subject")
         return withUnsafePointer(to: &RegExMatch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 201670096)!
@@ -66,13 +66,14 @@ open class RegExMatch: RefCounted {
     
     @inline(__always)
     fileprivate final func get_subject() -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         gi.object_method_bind_ptrcall(RegExMatch.method_get_subject, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result.description
     }
     
-    fileprivate static var method_get_group_count: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_group_count")
+    fileprivate static let method_get_group_count: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_group_count")
         return withUnsafePointer(to: &RegExMatch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3905245786)!
@@ -84,13 +85,14 @@ open class RegExMatch: RefCounted {
     
     /// Returns the number of capturing groups.
     public final func getGroupCount() -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         gi.object_method_bind_ptrcall(RegExMatch.method_get_group_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_names: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_names")
+    fileprivate static let method_get_names: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_names")
         return withUnsafePointer(to: &RegExMatch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3102165223)!
@@ -101,14 +103,15 @@ open class RegExMatch: RefCounted {
     }()
     
     @inline(__always)
-    fileprivate final func get_names() -> GDictionary {
-        let _result: GDictionary = GDictionary ()
+    fileprivate final func get_names() -> VariantDictionary {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        let _result: VariantDictionary = VariantDictionary ()
         gi.object_method_bind_ptrcall(RegExMatch.method_get_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_strings: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_strings")
+    fileprivate static let method_get_strings: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_strings")
         return withUnsafePointer(to: &RegExMatch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1139954409)!
@@ -120,13 +123,14 @@ open class RegExMatch: RefCounted {
     
     @inline(__always)
     fileprivate final func get_strings() -> PackedStringArray {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
         gi.object_method_bind_ptrcall(RegExMatch.method_get_strings, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
         return _result
     }
     
-    fileprivate static var method_get_string: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_string")
+    fileprivate static let method_get_string: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_string")
         return withUnsafePointer(to: &RegExMatch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 687115856)!
@@ -141,6 +145,7 @@ open class RegExMatch: RefCounted {
     /// Returns an empty string if the group did not match or doesn't exist.
     /// 
     public final func getString(name: Variant?) -> String {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -155,8 +160,8 @@ open class RegExMatch: RefCounted {
         return _result.description
     }
     
-    fileprivate static var method_get_start: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_start")
+    fileprivate static let method_get_start: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_start")
         return withUnsafePointer(to: &RegExMatch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 490464691)!
@@ -171,6 +176,7 @@ open class RegExMatch: RefCounted {
     /// Returns -1 if the group did not match or doesn't exist.
     /// 
     public final func getStart(name: Variant?) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -185,8 +191,8 @@ open class RegExMatch: RefCounted {
         return _result
     }
     
-    fileprivate static var method_get_end: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_end")
+    fileprivate static let method_get_end: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_end")
         return withUnsafePointer(to: &RegExMatch.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 490464691)!
@@ -201,6 +207,7 @@ open class RegExMatch: RefCounted {
     /// Returns -1 if the group did not match or doesn't exist.
     /// 
     public final func getEnd(name: Variant?) -> Int32 {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in

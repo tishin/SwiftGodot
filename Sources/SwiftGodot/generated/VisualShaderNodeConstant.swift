@@ -23,7 +23,7 @@ import Musl
 /// 
 /// This is an abstract class. See the derived types for descriptions of the possible values.
 open class VisualShaderNodeConstant: VisualShaderNode {
-    fileprivate static var className = StringName("VisualShaderNodeConstant")
+    private static var className = StringName("VisualShaderNodeConstant")
     override open class var godotClassName: StringName { className }
 }
 

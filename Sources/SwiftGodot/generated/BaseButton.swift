@@ -31,7 +31,7 @@ import Musl
 /// - ``buttonDown``
 /// - ``toggled``
 open class BaseButton: Control {
-    fileprivate static var className = StringName("BaseButton")
+    private static var className = StringName("BaseButton")
     override open class var godotClassName: StringName { className }
     public enum DrawMode: Int64, CaseIterable {
         /// The normal state (i.e. not pressed, not hovered, not toggled and enabled) of buttons.
@@ -82,7 +82,7 @@ open class BaseButton: Control {
     
     /// If `true`, the button's state is pressed. Means the button is pressed down or toggled (if ``toggleMode`` is active). Only works if ``toggleMode`` is `true`.
     /// 
-    /// > Note: Setting ``buttonPressed`` will result in [signal toggled] to be emitted. If you want to change the pressed state without emitting that signal, use ``setPressedNoSignal(pressed:)``.
+    /// > Note: Changing the value of ``buttonPressed`` will result in [signal toggled] to be emitted. If you want to change the pressed state without emitting that signal, use ``setPressedNoSignal(pressed:)``.
     /// 
     final public var buttonPressed: Bool {
         get {
@@ -177,6 +177,9 @@ open class BaseButton: Control {
     }
     
     /// If `true`, the button will add information about its shortcut in the tooltip.
+    /// 
+    /// > Note: This property does nothing when the tooltip control is customized using ``Control/_makeCustomTooltip(forText:)``.
+    /// 
     final public var shortcutInTooltip: Bool {
         get {
             return is_shortcut_in_tooltip_enabled ()
@@ -189,18 +192,55 @@ open class BaseButton: Control {
     }
     
     /* Methods */
+    fileprivate static let method__pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_pressed")
+        return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 3218959716)!
+            }
+            
+        }
+        
+    }()
+    
     /// Called when the button is pressed. If you need to know the button's pressed state (and ``toggleMode`` is active), use ``_toggled(toggledOn:)`` instead.
     @_documentation(visibility: public)
     open func _pressed() {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        gi.object_method_bind_ptrcall(BaseButton.method__pressed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        
     }
+    
+    fileprivate static let method__toggled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("_toggled")
+        return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
+            withUnsafePointer(to: &methodName.content) { mnamePtr in
+                gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
+            }
+            
+        }
+        
+    }()
     
     /// Called when the button is toggled (only if ``toggleMode`` is active).
     @_documentation(visibility: public)
     open func _toggled(toggledOn: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
+        withUnsafePointer(to: toggledOn) { pArg0 in
+            withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
+                pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
+                    gi.object_method_bind_ptrcall(BaseButton.method__toggled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     
-    fileprivate static var method_set_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressed")
+    fileprivate static let method_set_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressed")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -212,6 +252,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_pressed(_ pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -225,8 +266,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_is_pressed: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_pressed")
+    fileprivate static let method_is_pressed: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_pressed")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -238,13 +279,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func is_pressed() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseButton.method_is_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_pressed_no_signal: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_pressed_no_signal")
+    fileprivate static let method_set_pressed_no_signal: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_pressed_no_signal")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -259,6 +301,7 @@ open class BaseButton: Control {
     /// > Note: This method doesn't unpress other buttons in ``buttonGroup``.
     /// 
     public final func setPressedNoSignal(pressed: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -272,8 +315,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_is_hovered: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_hovered")
+    fileprivate static let method_is_hovered: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_hovered")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -285,13 +328,14 @@ open class BaseButton: Control {
     
     /// Returns `true` if the mouse has entered the button and has not left it yet.
     public final func isHovered() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseButton.method_is_hovered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_toggle_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_toggle_mode")
+    fileprivate static let method_set_toggle_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_toggle_mode")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -303,6 +347,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_toggle_mode(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -316,8 +361,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_is_toggle_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_toggle_mode")
+    fileprivate static let method_is_toggle_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_toggle_mode")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -329,13 +374,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func is_toggle_mode() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseButton.method_is_toggle_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shortcut_in_tooltip: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shortcut_in_tooltip")
+    fileprivate static let method_set_shortcut_in_tooltip: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shortcut_in_tooltip")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -347,6 +393,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_shortcut_in_tooltip(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -360,8 +407,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_is_shortcut_in_tooltip_enabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shortcut_in_tooltip_enabled")
+    fileprivate static let method_is_shortcut_in_tooltip_enabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shortcut_in_tooltip_enabled")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -373,13 +420,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func is_shortcut_in_tooltip_enabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseButton.method_is_shortcut_in_tooltip_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_disabled")
+    fileprivate static let method_set_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_disabled")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -391,6 +439,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_disabled(_ disabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -404,8 +453,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_is_disabled: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_disabled")
+    fileprivate static let method_is_disabled: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_disabled")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -417,13 +466,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func is_disabled() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseButton.method_is_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_action_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_action_mode")
+    fileprivate static let method_set_action_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_action_mode")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1985162088)!
@@ -435,6 +485,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_action_mode(_ mode: BaseButton.ActionMode) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -448,8 +499,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_get_action_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_action_mode")
+    fileprivate static let method_get_action_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_action_mode")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2589712189)!
@@ -461,13 +512,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func get_action_mode() -> BaseButton.ActionMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseButton.method_get_action_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseButton.ActionMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_button_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_button_mask")
+    fileprivate static let method_set_button_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_button_mask")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3950145251)!
@@ -479,6 +531,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_button_mask(_ mask: MouseButtonMask) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: mask.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -492,8 +545,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_get_button_mask: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_button_mask")
+    fileprivate static let method_get_button_mask: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_button_mask")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2512161324)!
@@ -505,13 +558,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func get_button_mask() -> MouseButtonMask {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: MouseButtonMask = MouseButtonMask ()
         gi.object_method_bind_ptrcall(BaseButton.method_get_button_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_get_draw_mode: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_draw_mode")
+    fileprivate static let method_get_draw_mode: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_draw_mode")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2492721305)!
@@ -523,13 +577,14 @@ open class BaseButton: Control {
     
     /// Returns the visual state used to draw the button. This is useful mainly when implementing your own draw code by either overriding _draw() or connecting to "draw" signal. The visual state of the button is defined by the ``BaseButton/DrawMode`` enum.
     public final func getDrawMode() -> BaseButton.DrawMode {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
         gi.object_method_bind_ptrcall(BaseButton.method_get_draw_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return BaseButton.DrawMode (rawValue: _result)!
     }
     
-    fileprivate static var method_set_keep_pressed_outside: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_keep_pressed_outside")
+    fileprivate static let method_set_keep_pressed_outside: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_keep_pressed_outside")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -541,6 +596,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_keep_pressed_outside(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -554,8 +610,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_is_keep_pressed_outside: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_keep_pressed_outside")
+    fileprivate static let method_is_keep_pressed_outside: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_keep_pressed_outside")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -567,13 +623,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func is_keep_pressed_outside() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseButton.method_is_keep_pressed_outside, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shortcut_feedback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shortcut_feedback")
+    fileprivate static let method_set_shortcut_feedback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shortcut_feedback")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 2586408642)!
@@ -585,6 +642,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_shortcut_feedback(_ enabled: Bool) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -598,8 +656,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_is_shortcut_feedback: GDExtensionMethodBindPtr = {
-        let methodName = StringName("is_shortcut_feedback")
+    fileprivate static let method_is_shortcut_feedback: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("is_shortcut_feedback")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 36873697)!
@@ -611,13 +669,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func is_shortcut_feedback() -> Bool {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
         gi.object_method_bind_ptrcall(BaseButton.method_is_shortcut_feedback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
     }
     
-    fileprivate static var method_set_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_shortcut")
+    fileprivate static let method_set_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_shortcut")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 857163497)!
@@ -629,6 +688,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_shortcut(_ shortcut: Shortcut?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: shortcut?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -642,8 +702,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_get_shortcut: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_shortcut")
+    fileprivate static let method_get_shortcut: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_shortcut")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 3415666916)!
@@ -655,13 +715,14 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func get_shortcut() -> Shortcut? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(BaseButton.method_get_shortcut, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    fileprivate static var method_set_button_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_button_group")
+    fileprivate static let method_set_button_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_button_group")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1794463739)!
@@ -673,6 +734,7 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func set_button_group(_ buttonGroup: ButtonGroup?) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: buttonGroup?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -686,8 +748,8 @@ open class BaseButton: Control {
         
     }
     
-    fileprivate static var method_get_button_group: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_button_group")
+    fileprivate static let method_get_button_group: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_button_group")
         return withUnsafePointer(to: &BaseButton.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 281644053)!
@@ -699,12 +761,13 @@ open class BaseButton: Control {
     
     @inline(__always)
     fileprivate final func get_button_group() -> ButtonGroup? {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result = UnsafeRawPointer (bitPattern: 0)
         gi.object_method_bind_ptrcall(BaseButton.method_get_button_group, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result)!
+        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
     }
     
-    override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual? {
+    override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
         guard implementedOverrides().contains(name) else { return nil }
         switch name.description {
             case "_pressed":
@@ -790,14 +853,16 @@ open class BaseButton: Control {
 // Support methods for proxies
 func _BaseButton_proxy_pressed (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
-    let swiftObject = Unmanaged<BaseButton>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? BaseButton else { return }
     swiftObject._pressed ()
 }
 
 func _BaseButton_proxy_toggled (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
     guard let instance else { return }
     guard let args else { return }
-    let swiftObject = Unmanaged<BaseButton>.fromOpaque(instance).takeUnretainedValue()
+    let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
+    guard let swiftObject = reference.value as? BaseButton else { return }
     swiftObject._toggled (toggledOn: args [0]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 

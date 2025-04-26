@@ -26,7 +26,7 @@ import Musl
 /// > Note: ``DirectionalLight2D`` does not support light cull masks (but it supports shadow cull masks). It will always light up 2D nodes, regardless of the 2D node's ``CanvasItem/lightMask``.
 /// 
 open class DirectionalLight2D: Light2D {
-    fileprivate static var className = StringName("DirectionalLight2D")
+    private static var className = StringName("DirectionalLight2D")
     override open class var godotClassName: StringName { className }
     
     /* Properties */
@@ -56,8 +56,8 @@ open class DirectionalLight2D: Light2D {
     }
     
     /* Methods */
-    fileprivate static var method_set_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("set_max_distance")
+    fileprivate static let method_set_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("set_max_distance")
         return withUnsafePointer(to: &DirectionalLight2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 373806689)!
@@ -69,6 +69,7 @@ open class DirectionalLight2D: Light2D {
     
     @inline(__always)
     fileprivate final func set_max_distance(_ pixels: Double) {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -82,8 +83,8 @@ open class DirectionalLight2D: Light2D {
         
     }
     
-    fileprivate static var method_get_max_distance: GDExtensionMethodBindPtr = {
-        let methodName = StringName("get_max_distance")
+    fileprivate static let method_get_max_distance: GDExtensionMethodBindPtr = {
+        var methodName = FastStringName("get_max_distance")
         return withUnsafePointer(to: &DirectionalLight2D.godotClassName.content) { classPtr in
             withUnsafePointer(to: &methodName.content) { mnamePtr in
                 gi.classdb_get_method_bind(classPtr, mnamePtr, 1740695150)!
@@ -95,6 +96,7 @@ open class DirectionalLight2D: Light2D {
     
     @inline(__always)
     fileprivate final func get_max_distance() -> Double {
+        if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
         gi.object_method_bind_ptrcall(DirectionalLight2D.method_get_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
         return _result
